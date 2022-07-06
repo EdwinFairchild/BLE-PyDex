@@ -1,3 +1,4 @@
-# BLE-Dex
+# BLE-PyDex
 Bluetooth Low Energy Device Exporer
- #WIP come back soon
+
+This is a work in progress. Contributers are welcome.
