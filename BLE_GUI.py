@@ -14,13 +14,13 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(1871, 1019)
+        MainWindow.resize(1761, 927)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(MainWindow.sizePolicy().hasHeightForWidth())
         MainWindow.setSizePolicy(sizePolicy)
-        MainWindow.setMinimumSize(QtCore.QSize(1791, 1019))
+        MainWindow.setMinimumSize(QtCore.QSize(1640, 0))
         MainWindow.setMaximumSize(QtCore.QSize(1900, 1019))
         MainWindow.setStyleSheet("background-color: rgb(28, 28, 28);\n"
 "border:none;")
@@ -334,7 +334,7 @@ class Ui_MainWindow(object):
         self.mainframe_explore.setFrameShadow(QtWidgets.QFrame.Raised)
         self.mainframe_explore.setObjectName("mainframe_explore")
         self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.mainframe_explore)
-        self.verticalLayout_2.setContentsMargins(20, 0, 20, -1)
+        self.verticalLayout_2.setContentsMargins(15, 0, 20, -1)
         self.verticalLayout_2.setSpacing(0)
         self.verticalLayout_2.setObjectName("verticalLayout_2")
         self.frame = QtWidgets.QFrame(self.mainframe_explore)
@@ -349,7 +349,7 @@ class Ui_MainWindow(object):
         self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame.setObjectName("frame")
         self.servicesTreeWidget = QtWidgets.QTreeWidget(self.frame)
-        self.servicesTreeWidget.setGeometry(QtCore.QRect(930, 60, 631, 381))
+        self.servicesTreeWidget.setGeometry(QtCore.QRect(840, 30, 611, 361))
         font = QtGui.QFont()
         font.setPointSize(15)
         font.setBold(False)
@@ -367,7 +367,7 @@ class Ui_MainWindow(object):
         self.servicesTreeWidget.headerItem().setText(0, "1")
         self.servicesTreeWidget.header().setVisible(False)
         self.frame_2 = QtWidgets.QFrame(self.frame)
-        self.frame_2.setGeometry(QtCore.QRect(30, 460, 531, 221))
+        self.frame_2.setGeometry(QtCore.QRect(20, 410, 531, 221))
         self.frame_2.setStyleSheet("\n"
 "border-radius:10px;\n"
 "background-color: rgb(28, 28, 28);\n"
@@ -437,15 +437,165 @@ class Ui_MainWindow(object):
 "")
         self.btnLabelName.setObjectName("btnLabelName")
         self.appFrame_2 = QtWidgets.QFrame(self.frame)
-        self.appFrame_2.setGeometry(QtCore.QRect(29, 60, 881, 381))
+        self.appFrame_2.setGeometry(QtCore.QRect(20, 30, 801, 361))
         self.appFrame_2.setMinimumSize(QtCore.QSize(0, 0))
         self.appFrame_2.setMaximumSize(QtCore.QSize(1000000, 100000))
         self.appFrame_2.setStyleSheet("background-color: rgb(27, 27, 27);")
         self.appFrame_2.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.appFrame_2.setFrameShadow(QtWidgets.QFrame.Raised)
         self.appFrame_2.setObjectName("appFrame_2")
+        self.btnExplore = QtWidgets.QPushButton(self.appFrame_2)
+        self.btnExplore.setGeometry(QtCore.QRect(510, 290, 121, 41))
+        self.btnExplore.setMinimumSize(QtCore.QSize(0, 40))
+        font = QtGui.QFont()
+        font.setPointSize(11)
+        self.btnExplore.setFont(font)
+        self.btnExplore.setStyleSheet("QPushButton{\n"
+"    color: rgb(0, 0, 0);\n"
+"    background-color: rgb(180, 180, 180);\n"
+"    border:none;\n"
+"border-radius:10px;\n"
+"\n"
+"}\n"
+"\n"
+"QPushButton:hover{\n"
+"    color: rgb(255, 255, 255);\n"
+"    background-color: rgb(170, 77, 77);\n"
+"\n"
+"}\n"
+"\n"
+"QPushButton:pressed{\n"
+"    \n"
+"        color: rgb(255, 255, 255);\n"
+"    background-color: rgb(170, 27, 27);\n"
+"}")
+        self.btnExplore.setObjectName("btnExplore")
+        self.scaneSliderFrame_2 = QtWidgets.QFrame(self.appFrame_2)
+        self.scaneSliderFrame_2.setGeometry(QtCore.QRect(50, 20, 271, 51))
+        self.scaneSliderFrame_2.setStyleSheet("border:none;")
+        self.scaneSliderFrame_2.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.scaneSliderFrame_2.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.scaneSliderFrame_2.setObjectName("scaneSliderFrame_2")
+        self.timeoutSlider_2 = QtWidgets.QSlider(self.scaneSliderFrame_2)
+        self.timeoutSlider_2.setGeometry(QtCore.QRect(10, 30, 161, 20))
+        self.timeoutSlider_2.setStyleSheet("")
+        self.timeoutSlider_2.setMaximum(30)
+        self.timeoutSlider_2.setPageStep(1)
+        self.timeoutSlider_2.setProperty("value", 5)
+        self.timeoutSlider_2.setOrientation(QtCore.Qt.Horizontal)
+        self.timeoutSlider_2.setObjectName("timeoutSlider_2")
+        self.label_10 = QtWidgets.QLabel(self.scaneSliderFrame_2)
+        self.label_10.setGeometry(QtCore.QRect(10, 10, 131, 17))
+        font = QtGui.QFont()
+        font.setPointSize(11)
+        self.label_10.setFont(font)
+        self.label_10.setStyleSheet("\n"
+"color: rgb(255, 255, 255);")
+        self.label_10.setObjectName("label_10")
+        self.timeoutLabel_2 = QtWidgets.QLabel(self.scaneSliderFrame_2)
+        self.timeoutLabel_2.setGeometry(QtCore.QRect(150, 10, 41, 17))
+        font = QtGui.QFont()
+        font.setPointSize(11)
+        self.timeoutLabel_2.setFont(font)
+        self.timeoutLabel_2.setStyleSheet("\n"
+"color: rgb(255, 255, 255);")
+        self.timeoutLabel_2.setObjectName("timeoutLabel_2")
+        self.btnScan = QtWidgets.QPushButton(self.scaneSliderFrame_2)
+        self.btnScan.setGeometry(QtCore.QRect(180, 10, 81, 41))
+        self.btnScan.setMinimumSize(QtCore.QSize(0, 40))
+        self.btnScan.setMaximumSize(QtCore.QSize(1000, 16777215))
+        font = QtGui.QFont()
+        font.setPointSize(11)
+        self.btnScan.setFont(font)
+        self.btnScan.setStyleSheet("QPushButton{\n"
+"    color: rgb(0, 0, 0);\n"
+"    background-color: rgb(180, 180, 180);\n"
+"    border:none;\n"
+"border-radius:10px;\n"
+"\n"
+"}\n"
+"\n"
+"QPushButton:hover{\n"
+"    color: rgb(255, 255, 255);\n"
+"    background-color: rgb(170, 77, 77);\n"
+"\n"
+"}\n"
+"\n"
+"QPushButton:pressed{\n"
+"    \n"
+"        color: rgb(255, 255, 255);\n"
+"    background-color: rgb(170, 27, 27);\n"
+"}")
+        self.btnScan.setObjectName("btnScan")
+        self.label_6 = QtWidgets.QLabel(self.appFrame_2)
+        self.label_6.setGeometry(QtCore.QRect(400, 30, 301, 25))
+        self.label_6.setMinimumSize(QtCore.QSize(0, 25))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        font.setBold(False)
+        font.setWeight(50)
+        self.label_6.setFont(font)
+        self.label_6.setStyleSheet("color: rgb(255, 255, 255);\n"
+"border-radius:10px;\n"
+"    background-color: rgb(170, 77, 77);")
+        self.label_6.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_6.setObjectName("label_6")
+        self.list_discover_address_2 = QtWidgets.QListWidget(self.appFrame_2)
+        self.list_discover_address_2.setGeometry(QtCore.QRect(360, 31, 401, 250))
+        self.list_discover_address_2.setMinimumSize(QtCore.QSize(0, 250))
+        self.list_discover_address_2.setMaximumSize(QtCore.QSize(550, 1000))
+        font = QtGui.QFont()
+        font.setFamily("Monospace")
+        font.setPointSize(13)
+        font.setBold(False)
+        font.setWeight(50)
+        self.list_discover_address_2.setFont(font)
+        self.list_discover_address_2.setStyleSheet("border-color: rgb(0, 0, 0);\n"
+"border-radius:10px;\n"
+"background-color: rgb(50, 50, 50);\n"
+"color: rgb(255, 255, 255);")
+        self.list_discover_address_2.setObjectName("list_discover_address_2")
+        self.textEdit = QtWidgets.QTextEdit(self.appFrame_2)
+        self.textEdit.setGeometry(QtCore.QRect(210, 120, 131, 31))
+        self.textEdit.setStyleSheet("background-color: rgb(30, 30, 30);")
+        self.textEdit.setObjectName("textEdit")
+        self.radioButton = QtWidgets.QRadioButton(self.appFrame_2)
+        self.radioButton.setGeometry(QtCore.QRect(50, 120, 141, 31))
+        self.radioButton.setObjectName("radioButton")
+        self.radioButton_2 = QtWidgets.QRadioButton(self.appFrame_2)
+        self.radioButton_2.setGeometry(QtCore.QRect(50, 160, 141, 31))
+        self.radioButton_2.setObjectName("radioButton_2")
+        self.textEdit_2 = QtWidgets.QTextEdit(self.appFrame_2)
+        self.textEdit_2.setGeometry(QtCore.QRect(210, 160, 131, 31))
+        self.textEdit_2.setStyleSheet("background-color: rgb(30, 30, 30);")
+        self.textEdit_2.setObjectName("textEdit_2")
+        self.radioButton_3 = QtWidgets.QRadioButton(self.appFrame_2)
+        self.radioButton_3.setGeometry(QtCore.QRect(50, 80, 112, 31))
+        self.radioButton_3.setObjectName("radioButton_3")
+        self.frame_6 = QtWidgets.QFrame(self.appFrame_2)
+        self.frame_6.setGeometry(QtCore.QRect(50, 220, 301, 71))
+        self.frame_6.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_6.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_6.setObjectName("frame_6")
+        self.timeoutSlider_3 = QtWidgets.QSlider(self.frame_6)
+        self.timeoutSlider_3.setGeometry(QtCore.QRect(20, 30, 261, 20))
+        self.timeoutSlider_3.setStyleSheet("")
+        self.timeoutSlider_3.setMaximum(30)
+        self.timeoutSlider_3.setPageStep(1)
+        self.timeoutSlider_3.setProperty("value", 5)
+        self.timeoutSlider_3.setOrientation(QtCore.Qt.Horizontal)
+        self.timeoutSlider_3.setObjectName("timeoutSlider_3")
+        self.label_3 = QtWidgets.QLabel(self.frame_6)
+        self.label_3.setGeometry(QtCore.QRect(20, 10, 191, 17))
+        self.label_3.setObjectName("label_3")
+        self.checkBox = QtWidgets.QCheckBox(self.frame_6)
+        self.checkBox.setGeometry(QtCore.QRect(20, 50, 92, 21))
+        self.checkBox.setObjectName("checkBox")
+        self.lblConnectionTime = QtWidgets.QLabel(self.frame_6)
+        self.lblConnectionTime.setGeometry(QtCore.QRect(210, 10, 67, 17))
+        self.lblConnectionTime.setObjectName("lblConnectionTime")
         self.btnConnect = QtWidgets.QPushButton(self.appFrame_2)
-        self.btnConnect.setGeometry(QtCore.QRect(730, 300, 121, 41))
+        self.btnConnect.setGeometry(QtCore.QRect(640, 290, 121, 41))
         self.btnConnect.setMinimumSize(QtCore.QSize(0, 40))
         font = QtGui.QFont()
         font.setPointSize(11)
@@ -470,132 +620,7 @@ class Ui_MainWindow(object):
 "    background-color: rgb(170, 27, 27);\n"
 "}")
         self.btnConnect.setObjectName("btnConnect")
-        self.btnScan_3 = QtWidgets.QPushButton(self.appFrame_2)
-        self.btnScan_3.setGeometry(QtCore.QRect(290, 30, 81, 41))
-        self.btnScan_3.setMinimumSize(QtCore.QSize(0, 40))
-        self.btnScan_3.setMaximumSize(QtCore.QSize(1000, 16777215))
-        font = QtGui.QFont()
-        font.setPointSize(11)
-        self.btnScan_3.setFont(font)
-        self.btnScan_3.setStyleSheet("QPushButton{\n"
-"    color: rgb(0, 0, 0);\n"
-"    background-color: rgb(180, 180, 180);\n"
-"    border:none;\n"
-"border-radius:10px;\n"
-"\n"
-"}\n"
-"\n"
-"QPushButton:hover{\n"
-"    color: rgb(255, 255, 255);\n"
-"    background-color: rgb(170, 77, 77);\n"
-"\n"
-"}\n"
-"\n"
-"QPushButton:pressed{\n"
-"    \n"
-"        color: rgb(255, 255, 255);\n"
-"    background-color: rgb(170, 27, 27);\n"
-"}")
-        self.btnScan_3.setObjectName("btnScan_3")
-        self.scaneSliderFrame_2 = QtWidgets.QFrame(self.appFrame_2)
-        self.scaneSliderFrame_2.setGeometry(QtCore.QRect(50, 20, 231, 51))
-        self.scaneSliderFrame_2.setStyleSheet("border:none;")
-        self.scaneSliderFrame_2.setFrameShape(QtWidgets.QFrame.StyledPanel)
-        self.scaneSliderFrame_2.setFrameShadow(QtWidgets.QFrame.Raised)
-        self.scaneSliderFrame_2.setObjectName("scaneSliderFrame_2")
-        self.timeoutSlider_2 = QtWidgets.QSlider(self.scaneSliderFrame_2)
-        self.timeoutSlider_2.setGeometry(QtCore.QRect(10, 30, 211, 20))
-        self.timeoutSlider_2.setStyleSheet("")
-        self.timeoutSlider_2.setMaximum(30)
-        self.timeoutSlider_2.setPageStep(1)
-        self.timeoutSlider_2.setProperty("value", 5)
-        self.timeoutSlider_2.setOrientation(QtCore.Qt.Horizontal)
-        self.timeoutSlider_2.setObjectName("timeoutSlider_2")
-        self.label_10 = QtWidgets.QLabel(self.scaneSliderFrame_2)
-        self.label_10.setGeometry(QtCore.QRect(10, 10, 131, 17))
-        font = QtGui.QFont()
-        font.setPointSize(11)
-        self.label_10.setFont(font)
-        self.label_10.setStyleSheet("\n"
-"color: rgb(255, 255, 255);")
-        self.label_10.setObjectName("label_10")
-        self.timeoutLabel_2 = QtWidgets.QLabel(self.scaneSliderFrame_2)
-        self.timeoutLabel_2.setGeometry(QtCore.QRect(150, 10, 41, 17))
-        font = QtGui.QFont()
-        font.setPointSize(11)
-        self.timeoutLabel_2.setFont(font)
-        self.timeoutLabel_2.setStyleSheet("\n"
-"color: rgb(255, 255, 255);")
-        self.timeoutLabel_2.setObjectName("timeoutLabel_2")
-        self.label_6 = QtWidgets.QLabel(self.appFrame_2)
-        self.label_6.setGeometry(QtCore.QRect(430, 20, 301, 25))
-        self.label_6.setMinimumSize(QtCore.QSize(0, 25))
-        font = QtGui.QFont()
-        font.setPointSize(12)
-        font.setBold(False)
-        font.setWeight(50)
-        self.label_6.setFont(font)
-        self.label_6.setStyleSheet("color: rgb(255, 255, 255);\n"
-"border-radius:10px;\n"
-"    background-color: rgb(170, 77, 77);")
-        self.label_6.setAlignment(QtCore.Qt.AlignCenter)
-        self.label_6.setObjectName("label_6")
-        self.list_discover_address_2 = QtWidgets.QListWidget(self.appFrame_2)
-        self.list_discover_address_2.setGeometry(QtCore.QRect(400, 20, 451, 261))
-        self.list_discover_address_2.setMinimumSize(QtCore.QSize(0, 250))
-        self.list_discover_address_2.setMaximumSize(QtCore.QSize(550, 1000))
-        font = QtGui.QFont()
-        font.setFamily("Monospace")
-        font.setPointSize(13)
-        font.setBold(False)
-        font.setWeight(50)
-        self.list_discover_address_2.setFont(font)
-        self.list_discover_address_2.setStyleSheet("border-color: rgb(0, 0, 0);\n"
-"border-radius:10px;\n"
-"background-color: rgb(50, 50, 50);\n"
-"color: rgb(255, 255, 255);")
-        self.list_discover_address_2.setObjectName("list_discover_address_2")
-        self.textEdit = QtWidgets.QTextEdit(self.appFrame_2)
-        self.textEdit.setGeometry(QtCore.QRect(210, 120, 161, 31))
-        self.textEdit.setStyleSheet("background-color: rgb(30, 30, 30);")
-        self.textEdit.setObjectName("textEdit")
-        self.radioButton = QtWidgets.QRadioButton(self.appFrame_2)
-        self.radioButton.setGeometry(QtCore.QRect(50, 120, 141, 31))
-        self.radioButton.setObjectName("radioButton")
-        self.radioButton_2 = QtWidgets.QRadioButton(self.appFrame_2)
-        self.radioButton_2.setGeometry(QtCore.QRect(50, 160, 141, 31))
-        self.radioButton_2.setObjectName("radioButton_2")
-        self.textEdit_2 = QtWidgets.QTextEdit(self.appFrame_2)
-        self.textEdit_2.setGeometry(QtCore.QRect(210, 160, 161, 31))
-        self.textEdit_2.setStyleSheet("background-color: rgb(30, 30, 30);")
-        self.textEdit_2.setObjectName("textEdit_2")
-        self.radioButton_3 = QtWidgets.QRadioButton(self.appFrame_2)
-        self.radioButton_3.setGeometry(QtCore.QRect(50, 80, 112, 31))
-        self.radioButton_3.setObjectName("radioButton_3")
-        self.frame_6 = QtWidgets.QFrame(self.appFrame_2)
-        self.frame_6.setGeometry(QtCore.QRect(410, 290, 301, 71))
-        self.frame_6.setFrameShape(QtWidgets.QFrame.StyledPanel)
-        self.frame_6.setFrameShadow(QtWidgets.QFrame.Raised)
-        self.frame_6.setObjectName("frame_6")
-        self.timeoutSlider_3 = QtWidgets.QSlider(self.frame_6)
-        self.timeoutSlider_3.setGeometry(QtCore.QRect(20, 30, 261, 20))
-        self.timeoutSlider_3.setStyleSheet("")
-        self.timeoutSlider_3.setMaximum(30)
-        self.timeoutSlider_3.setPageStep(1)
-        self.timeoutSlider_3.setProperty("value", 5)
-        self.timeoutSlider_3.setOrientation(QtCore.Qt.Horizontal)
-        self.timeoutSlider_3.setObjectName("timeoutSlider_3")
-        self.label_3 = QtWidgets.QLabel(self.frame_6)
-        self.label_3.setGeometry(QtCore.QRect(20, 10, 191, 17))
-        self.label_3.setObjectName("label_3")
-        self.checkBox = QtWidgets.QCheckBox(self.frame_6)
-        self.checkBox.setGeometry(QtCore.QRect(20, 50, 92, 21))
-        self.checkBox.setObjectName("checkBox")
-        self.lblConnectionTime = QtWidgets.QLabel(self.frame_6)
-        self.lblConnectionTime.setGeometry(QtCore.QRect(210, 10, 67, 17))
-        self.lblConnectionTime.setObjectName("lblConnectionTime")
-        self.btnConnect.raise_()
-        self.btnScan_3.raise_()
+        self.btnExplore.raise_()
         self.scaneSliderFrame_2.raise_()
         self.list_discover_address_2.raise_()
         self.label_6.raise_()
@@ -605,11 +630,12 @@ class Ui_MainWindow(object):
         self.textEdit_2.raise_()
         self.radioButton_3.raise_()
         self.frame_6.raise_()
+        self.btnConnect.raise_()
         self.lblLatestVal = QtWidgets.QLabel(self.frame)
-        self.lblLatestVal.setGeometry(QtCore.QRect(620, 540, 191, 31))
+        self.lblLatestVal.setGeometry(QtCore.QRect(630, 550, 191, 31))
         self.lblLatestVal.setObjectName("lblLatestVal")
         self.btnNotify = QtWidgets.QPushButton(self.frame)
-        self.btnNotify.setGeometry(QtCore.QRect(430, 700, 121, 41))
+        self.btnNotify.setGeometry(QtCore.QRect(430, 640, 121, 41))
         self.btnNotify.setStyleSheet("QPushButton{\n"
 "    color: rgb(0, 0, 0);\n"
 "    background-color: rgb(180, 180, 180);\n"
@@ -631,7 +657,7 @@ class Ui_MainWindow(object):
 "}")
         self.btnNotify.setObjectName("btnNotify")
         self.btnReadChar = QtWidgets.QPushButton(self.frame)
-        self.btnReadChar.setGeometry(QtCore.QRect(300, 700, 121, 41))
+        self.btnReadChar.setGeometry(QtCore.QRect(300, 640, 121, 41))
         self.btnReadChar.setStyleSheet("QPushButton{\n"
 "    color: rgb(0, 0, 0);\n"
 "    background-color: rgb(180, 180, 180);\n"
@@ -653,7 +679,7 @@ class Ui_MainWindow(object):
 "}")
         self.btnReadChar.setObjectName("btnReadChar")
         self.btnWriteChar = QtWidgets.QPushButton(self.frame)
-        self.btnWriteChar.setGeometry(QtCore.QRect(170, 700, 121, 41))
+        self.btnWriteChar.setGeometry(QtCore.QRect(170, 640, 121, 41))
         self.btnWriteChar.setStyleSheet("QPushButton{\n"
 "    color: rgb(0, 0, 0);\n"
 "    background-color: rgb(180, 180, 180);\n"
@@ -675,13 +701,13 @@ class Ui_MainWindow(object):
 "}")
         self.btnWriteChar.setObjectName("btnWriteChar")
         self.label_4 = QtWidgets.QLabel(self.frame)
-        self.label_4.setGeometry(QtCore.QRect(620, 520, 67, 17))
+        self.label_4.setGeometry(QtCore.QRect(630, 530, 67, 17))
         self.label_4.setObjectName("label_4")
         self.label_8 = QtWidgets.QLabel(self.frame)
-        self.label_8.setGeometry(QtCore.QRect(610, 630, 91, 17))
+        self.label_8.setGeometry(QtCore.QRect(620, 640, 91, 17))
         self.label_8.setObjectName("label_8")
         self.lblCharVal = QtWidgets.QLabel(self.frame)
-        self.lblCharVal.setGeometry(QtCore.QRect(610, 650, 191, 17))
+        self.lblCharVal.setGeometry(QtCore.QRect(620, 660, 191, 17))
         self.lblCharVal.setObjectName("lblCharVal")
         self.frame_2.raise_()
         self.servicesTreeWidget.raise_()
@@ -723,6 +749,7 @@ class Ui_MainWindow(object):
         self.textBrowser_2.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
         self.textBrowser_2.setObjectName("textBrowser_2")
         self.horizontalLayout_2.addWidget(self.textBrowser_2)
+        self.horizontalLayout_2.setStretch(0, 1)
         self.verticalLayout_2.addLayout(self.horizontalLayout_2)
         self.verticalLayout_2.setStretch(0, 1)
         self.horizontalLayout_4.addWidget(self.mainframe_explore)
@@ -778,10 +805,10 @@ class Ui_MainWindow(object):
         self.btnLabelPermissions.setText(_translate("MainWindow", "N/A"))
         self.label_7.setText(_translate("MainWindow", "Name :"))
         self.btnLabelName.setText(_translate("MainWindow", "N/A"))
-        self.btnConnect.setText(_translate("MainWindow", "Connect"))
-        self.btnScan_3.setText(_translate("MainWindow", "Scan"))
+        self.btnExplore.setText(_translate("MainWindow", "Explore"))
         self.label_10.setText(_translate("MainWindow", "Scan timeout ( s ) :"))
         self.timeoutLabel_2.setText(_translate("MainWindow", "5"))
+        self.btnScan.setText(_translate("MainWindow", "Scan"))
         self.label_6.setText(_translate("MainWindow", "  Address                               Name"))
         self.radioButton.setText(_translate("MainWindow", "Scan for address"))
         self.radioButton_2.setText(_translate("MainWindow", "Scan for address :"))
@@ -789,6 +816,7 @@ class Ui_MainWindow(object):
         self.label_3.setText(_translate("MainWindow", "Connection duration (min):"))
         self.checkBox.setText(_translate("MainWindow", "Forever"))
         self.lblConnectionTime.setText(_translate("MainWindow", "5"))
+        self.btnConnect.setText(_translate("MainWindow", "Connect"))
         self.lblLatestVal.setText(_translate("MainWindow", "Latest val: "))
         self.btnNotify.setText(_translate("MainWindow", "Enable Notify"))
         self.btnReadChar.setText(_translate("MainWindow", "Read"))

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1871</width>
-    <height>1019</height>
+    <width>1761</width>
+    <height>927</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -18,8 +18,8 @@
   </property>
   <property name="minimumSize">
    <size>
-    <width>1791</width>
-    <height>1019</height>
+    <width>1640</width>
+    <height>0</height>
    </size>
   </property>
   <property name="maximumSize">
@@ -728,7 +728,7 @@ border-radius:10px;</string>
                   <number>0</number>
                  </property>
                  <property name="leftMargin">
-                  <number>20</number>
+                  <number>15</number>
                  </property>
                  <property name="topMargin">
                   <number>0</number>
@@ -766,10 +766,10 @@ border-radius:10px;
                    <widget class="QTreeWidget" name="servicesTreeWidget">
                     <property name="geometry">
                      <rect>
-                      <x>930</x>
-                      <y>60</y>
-                      <width>631</width>
-                      <height>381</height>
+                      <x>840</x>
+                      <y>30</y>
+                      <width>611</width>
+                      <height>361</height>
                      </rect>
                     </property>
                     <property name="font">
@@ -807,8 +807,8 @@ color: rgb(255, 255, 255);</string>
                    <widget class="QFrame" name="frame_2">
                     <property name="geometry">
                      <rect>
-                      <x>30</x>
-                      <y>460</y>
+                      <x>20</x>
+                      <y>410</y>
                       <width>531</width>
                       <height>221</height>
                      </rect>
@@ -994,10 +994,10 @@ padding-top: 0px;
                    <widget class="QFrame" name="appFrame_2">
                     <property name="geometry">
                      <rect>
-                      <x>29</x>
-                      <y>60</y>
-                      <width>881</width>
-                      <height>381</height>
+                      <x>20</x>
+                      <y>30</y>
+                      <width>801</width>
+                      <height>361</height>
                      </rect>
                     </property>
                     <property name="minimumSize">
@@ -1021,11 +1021,11 @@ padding-top: 0px;
                     <property name="frameShadow">
                      <enum>QFrame::Raised</enum>
                     </property>
-                    <widget class="QPushButton" name="btnConnect">
+                    <widget class="QPushButton" name="btnExplore">
                      <property name="geometry">
                       <rect>
-                       <x>730</x>
-                       <y>300</y>
+                       <x>510</x>
+                       <y>290</y>
                        <width>121</width>
                        <height>41</height>
                       </rect>
@@ -1063,58 +1063,7 @@ QPushButton:pressed{
 }</string>
                      </property>
                      <property name="text">
-                      <string>Connect</string>
-                     </property>
-                    </widget>
-                    <widget class="QPushButton" name="btnScan_3">
-                     <property name="geometry">
-                      <rect>
-                       <x>290</x>
-                       <y>30</y>
-                       <width>81</width>
-                       <height>41</height>
-                      </rect>
-                     </property>
-                     <property name="minimumSize">
-                      <size>
-                       <width>0</width>
-                       <height>40</height>
-                      </size>
-                     </property>
-                     <property name="maximumSize">
-                      <size>
-                       <width>1000</width>
-                       <height>16777215</height>
-                      </size>
-                     </property>
-                     <property name="font">
-                      <font>
-                       <pointsize>11</pointsize>
-                      </font>
-                     </property>
-                     <property name="styleSheet">
-                      <string notr="true">QPushButton{
-	color: rgb(0, 0, 0);
-	background-color: rgb(180, 180, 180);
-	border:none;
-border-radius:10px;
-
-}
-
-QPushButton:hover{
-	color: rgb(255, 255, 255);
-	background-color: rgb(170, 77, 77);
-
-}
-
-QPushButton:pressed{
-	
-		color: rgb(255, 255, 255);
-	background-color: rgb(170, 27, 27);
-}</string>
-                     </property>
-                     <property name="text">
-                      <string>Scan</string>
+                      <string>Explore</string>
                      </property>
                     </widget>
                     <widget class="QFrame" name="scaneSliderFrame_2">
@@ -1122,7 +1071,7 @@ QPushButton:pressed{
                       <rect>
                        <x>50</x>
                        <y>20</y>
-                       <width>231</width>
+                       <width>271</width>
                        <height>51</height>
                       </rect>
                      </property>
@@ -1140,7 +1089,7 @@ QPushButton:pressed{
                        <rect>
                         <x>10</x>
                         <y>30</y>
-                        <width>211</width>
+                        <width>161</width>
                         <height>20</height>
                        </rect>
                       </property>
@@ -1204,12 +1153,63 @@ color: rgb(255, 255, 255);</string>
                        <string>5</string>
                       </property>
                      </widget>
+                     <widget class="QPushButton" name="btnScan">
+                      <property name="geometry">
+                       <rect>
+                        <x>180</x>
+                        <y>10</y>
+                        <width>81</width>
+                        <height>41</height>
+                       </rect>
+                      </property>
+                      <property name="minimumSize">
+                       <size>
+                        <width>0</width>
+                        <height>40</height>
+                       </size>
+                      </property>
+                      <property name="maximumSize">
+                       <size>
+                        <width>1000</width>
+                        <height>16777215</height>
+                       </size>
+                      </property>
+                      <property name="font">
+                       <font>
+                        <pointsize>11</pointsize>
+                       </font>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">QPushButton{
+	color: rgb(0, 0, 0);
+	background-color: rgb(180, 180, 180);
+	border:none;
+border-radius:10px;
+
+}
+
+QPushButton:hover{
+	color: rgb(255, 255, 255);
+	background-color: rgb(170, 77, 77);
+
+}
+
+QPushButton:pressed{
+	
+		color: rgb(255, 255, 255);
+	background-color: rgb(170, 27, 27);
+}</string>
+                      </property>
+                      <property name="text">
+                       <string>Scan</string>
+                      </property>
+                     </widget>
                     </widget>
                     <widget class="QLabel" name="label_6">
                      <property name="geometry">
                       <rect>
-                       <x>430</x>
-                       <y>20</y>
+                       <x>400</x>
+                       <y>30</y>
                        <width>301</width>
                        <height>25</height>
                       </rect>
@@ -1245,10 +1245,10 @@ border-radius:10px;
                     <widget class="QListWidget" name="list_discover_address_2">
                      <property name="geometry">
                       <rect>
-                       <x>400</x>
-                       <y>20</y>
-                       <width>451</width>
-                       <height>261</height>
+                       <x>360</x>
+                       <y>31</y>
+                       <width>401</width>
+                       <height>250</height>
                       </rect>
                      </property>
                      <property name="minimumSize">
@@ -1283,7 +1283,7 @@ color: rgb(255, 255, 255);</string>
                       <rect>
                        <x>210</x>
                        <y>120</y>
-                       <width>161</width>
+                       <width>131</width>
                        <height>31</height>
                       </rect>
                      </property>
@@ -1322,7 +1322,7 @@ color: rgb(255, 255, 255);</string>
                       <rect>
                        <x>210</x>
                        <y>160</y>
-                       <width>161</width>
+                       <width>131</width>
                        <height>31</height>
                       </rect>
                      </property>
@@ -1346,8 +1346,8 @@ color: rgb(255, 255, 255);</string>
                     <widget class="QFrame" name="frame_6">
                      <property name="geometry">
                       <rect>
-                       <x>410</x>
-                       <y>290</y>
+                       <x>50</x>
+                       <y>220</y>
                        <width>301</width>
                        <height>71</height>
                       </rect>
@@ -1423,8 +1423,52 @@ color: rgb(255, 255, 255);</string>
                       </property>
                      </widget>
                     </widget>
-                    <zorder>btnConnect</zorder>
-                    <zorder>btnScan_3</zorder>
+                    <widget class="QPushButton" name="btnConnect">
+                     <property name="geometry">
+                      <rect>
+                       <x>640</x>
+                       <y>290</y>
+                       <width>121</width>
+                       <height>41</height>
+                      </rect>
+                     </property>
+                     <property name="minimumSize">
+                      <size>
+                       <width>0</width>
+                       <height>40</height>
+                      </size>
+                     </property>
+                     <property name="font">
+                      <font>
+                       <pointsize>11</pointsize>
+                      </font>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true">QPushButton{
+	color: rgb(0, 0, 0);
+	background-color: rgb(180, 180, 180);
+	border:none;
+border-radius:10px;
+
+}
+
+QPushButton:hover{
+	color: rgb(255, 255, 255);
+	background-color: rgb(170, 77, 77);
+
+}
+
+QPushButton:pressed{
+	
+		color: rgb(255, 255, 255);
+	background-color: rgb(170, 27, 27);
+}</string>
+                     </property>
+                     <property name="text">
+                      <string>Connect</string>
+                     </property>
+                    </widget>
+                    <zorder>btnExplore</zorder>
                     <zorder>scaneSliderFrame_2</zorder>
                     <zorder>list_discover_address_2</zorder>
                     <zorder>label_6</zorder>
@@ -1434,12 +1478,13 @@ color: rgb(255, 255, 255);</string>
                     <zorder>textEdit_2</zorder>
                     <zorder>radioButton_3</zorder>
                     <zorder>frame_6</zorder>
+                    <zorder>btnConnect</zorder>
                    </widget>
                    <widget class="QLabel" name="lblLatestVal">
                     <property name="geometry">
                      <rect>
-                      <x>620</x>
-                      <y>540</y>
+                      <x>630</x>
+                      <y>550</y>
                       <width>191</width>
                       <height>31</height>
                      </rect>
@@ -1452,7 +1497,7 @@ color: rgb(255, 255, 255);</string>
                     <property name="geometry">
                      <rect>
                       <x>430</x>
-                      <y>700</y>
+                      <y>640</y>
                       <width>121</width>
                       <height>41</height>
                      </rect>
@@ -1486,7 +1531,7 @@ QPushButton:pressed{
                     <property name="geometry">
                      <rect>
                       <x>300</x>
-                      <y>700</y>
+                      <y>640</y>
                       <width>121</width>
                       <height>41</height>
                      </rect>
@@ -1520,7 +1565,7 @@ QPushButton:pressed{
                     <property name="geometry">
                      <rect>
                       <x>170</x>
-                      <y>700</y>
+                      <y>640</y>
                       <width>121</width>
                       <height>41</height>
                      </rect>
@@ -1553,8 +1598,8 @@ QPushButton:pressed{
                    <widget class="QLabel" name="label_4">
                     <property name="geometry">
                      <rect>
-                      <x>620</x>
-                      <y>520</y>
+                      <x>630</x>
+                      <y>530</y>
                       <width>67</width>
                       <height>17</height>
                      </rect>
@@ -1566,8 +1611,8 @@ QPushButton:pressed{
                    <widget class="QLabel" name="label_8">
                     <property name="geometry">
                      <rect>
-                      <x>610</x>
-                      <y>630</y>
+                      <x>620</x>
+                      <y>640</y>
                       <width>91</width>
                       <height>17</height>
                      </rect>
@@ -1579,8 +1624,8 @@ QPushButton:pressed{
                    <widget class="QLabel" name="lblCharVal">
                     <property name="geometry">
                      <rect>
-                      <x>610</x>
-                      <y>650</y>
+                      <x>620</x>
+                      <y>660</y>
                       <width>191</width>
                       <height>17</height>
                      </rect>
@@ -1602,7 +1647,7 @@ QPushButton:pressed{
                   </widget>
                  </item>
                  <item>
-                  <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="0,0,0,0">
+                  <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="1,0,0,0">
                    <item>
                     <spacer name="horizontalSpacer_4">
                      <property name="orientation">
