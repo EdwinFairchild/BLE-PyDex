@@ -95,7 +95,8 @@ class BLE_DiscoverServices(QThread):
                                 self.discovered_services.emit([f"\t\t[Descriptor] {descriptor}) | Error: {e}",2])
                                 #print(f"\t\t[Descriptor] {descriptor}) | Error: {e}")
                 
-                #await client.disconnect()
+                await client.disconnect()
+                print(f"Cleint conenction state : {client.is_connected}")
         except Exception as e:
             print("Opps ,That device is not explorable, at least not by you.")
         
@@ -152,3 +153,12 @@ class BLE_Connect(QThread):
             await client.connect()
             print(str(client.is_connected))
         return self.client
+
+def print_speed(speed: float, current: float):
+    print(f"\tMCU->PC speed: {speed:.2f} B/s, "
+         f"{(speed / 1024):.4f} KB/s, "
+         f"{(speed / 1024 / 1024):.4f} MB/s, "
+         f"Current: {(current / 1024 / 1024):.4f} MB/s"
+         )
+
+
