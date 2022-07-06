@@ -1,4 +1,5 @@
-# BLE-PyDex
-Bluetooth Low Energy Device Exporer
+# BLE-PyDex | Bluetooth Low Energy Device Exporer
 
-This is a work in progress. Contributers are welcome.
+This is a work in progress. I am not a python developer so this is "hacky" at best, specifically 
+the Asyncio related code. contributers are welcome.
+
