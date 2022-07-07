@@ -14,13 +14,13 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(1550, 815)
+        MainWindow.resize(1550, 793)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(MainWindow.sizePolicy().hasHeightForWidth())
         MainWindow.setSizePolicy(sizePolicy)
-        MainWindow.setMinimumSize(QtCore.QSize(0, 0))
+        MainWindow.setMinimumSize(QtCore.QSize(1550, 793))
         MainWindow.setMaximumSize(QtCore.QSize(1900, 1019))
         MainWindow.setStyleSheet("background-color: rgb(28, 28, 28);\n"
 "border:none;")
@@ -352,7 +352,7 @@ class Ui_MainWindow(object):
         self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame.setObjectName("frame")
         self.servicesTreeWidget = QtWidgets.QTreeWidget(self.frame)
-        self.servicesTreeWidget.setGeometry(QtCore.QRect(770, 30, 481, 341))
+        self.servicesTreeWidget.setGeometry(QtCore.QRect(770, 20, 481, 341))
         font = QtGui.QFont()
         font.setPointSize(15)
         font.setBold(False)
@@ -370,7 +370,7 @@ class Ui_MainWindow(object):
         self.servicesTreeWidget.headerItem().setText(0, "1")
         self.servicesTreeWidget.header().setVisible(False)
         self.frame_2 = QtWidgets.QFrame(self.frame)
-        self.frame_2.setGeometry(QtCore.QRect(10, 390, 531, 191))
+        self.frame_2.setGeometry(QtCore.QRect(10, 380, 531, 191))
         self.frame_2.setStyleSheet("\n"
 "border-radius:10px;\n"
 "background-color: rgb(28, 28, 28);\n"
@@ -405,21 +405,24 @@ class Ui_MainWindow(object):
         font = QtGui.QFont()
         font.setPointSize(13)
         self.btnLabelType.setFont(font)
-        self.btnLabelType.setStyleSheet("color: rgb(255, 255, 255);")
+        self.btnLabelType.setStyleSheet("color: rgb(255, 255, 255);\n"
+"text-align: left;")
         self.btnLabelType.setObjectName("btnLabelType")
         self.btnLabelUUID = QtWidgets.QPushButton(self.frame_2)
         self.btnLabelUUID.setGeometry(QtCore.QRect(80, 100, 401, 16))
         font = QtGui.QFont()
         font.setPointSize(13)
         self.btnLabelUUID.setFont(font)
-        self.btnLabelUUID.setStyleSheet("color: rgb(255, 255, 255);")
+        self.btnLabelUUID.setStyleSheet("color: rgb(255, 255, 255);\n"
+"text-align: left;")
         self.btnLabelUUID.setObjectName("btnLabelUUID")
         self.btnLabelPermissions = QtWidgets.QPushButton(self.frame_2)
         self.btnLabelPermissions.setGeometry(QtCore.QRect(130, 130, 381, 21))
         font = QtGui.QFont()
         font.setPointSize(13)
         self.btnLabelPermissions.setFont(font)
-        self.btnLabelPermissions.setStyleSheet("color: rgb(255, 255, 255);")
+        self.btnLabelPermissions.setStyleSheet("color: rgb(255, 255, 255);\n"
+"text-align: left;")
         self.btnLabelPermissions.setObjectName("btnLabelPermissions")
         self.label_7 = QtWidgets.QLabel(self.frame_2)
         self.label_7.setGeometry(QtCore.QRect(20, 30, 61, 21))
@@ -433,10 +436,11 @@ class Ui_MainWindow(object):
         font = QtGui.QFont()
         font.setPointSize(13)
         self.btnLabelName.setFont(font)
-        self.btnLabelName.setStyleSheet("color: rgb(255, 255, 255);")
+        self.btnLabelName.setStyleSheet("color: rgb(255, 255, 255);\n"
+"text-align: left;")
         self.btnLabelName.setObjectName("btnLabelName")
         self.appFrame_2 = QtWidgets.QFrame(self.frame)
-        self.appFrame_2.setGeometry(QtCore.QRect(10, 30, 741, 341))
+        self.appFrame_2.setGeometry(QtCore.QRect(10, 20, 741, 341))
         self.appFrame_2.setMinimumSize(QtCore.QSize(0, 0))
         self.appFrame_2.setMaximumSize(QtCore.QSize(1000000, 100000))
         self.appFrame_2.setStyleSheet("background-color: rgb(35, 35, 35);")
@@ -740,7 +744,7 @@ class Ui_MainWindow(object):
         self.lblLatestVal.setStyleSheet("color: rgb(255, 255, 255);")
         self.lblLatestVal.setObjectName("lblLatestVal")
         self.btnNotify = QtWidgets.QPushButton(self.frame)
-        self.btnNotify.setGeometry(QtCore.QRect(420, 590, 121, 30))
+        self.btnNotify.setGeometry(QtCore.QRect(420, 580, 121, 30))
         self.btnNotify.setMinimumSize(QtCore.QSize(0, 30))
         self.btnNotify.setMaximumSize(QtCore.QSize(16777215, 30))
         self.btnNotify.setStyleSheet("QPushButton{\n"
@@ -764,7 +768,7 @@ class Ui_MainWindow(object):
 "}")
         self.btnNotify.setObjectName("btnNotify")
         self.btnReadChar = QtWidgets.QPushButton(self.frame)
-        self.btnReadChar.setGeometry(QtCore.QRect(290, 590, 121, 30))
+        self.btnReadChar.setGeometry(QtCore.QRect(290, 580, 121, 30))
         self.btnReadChar.setMinimumSize(QtCore.QSize(0, 30))
         self.btnReadChar.setMaximumSize(QtCore.QSize(16777215, 30))
         self.btnReadChar.setStyleSheet("QPushButton{\n"
@@ -788,7 +792,7 @@ class Ui_MainWindow(object):
 "}")
         self.btnReadChar.setObjectName("btnReadChar")
         self.btnWriteChar = QtWidgets.QPushButton(self.frame)
-        self.btnWriteChar.setGeometry(QtCore.QRect(160, 590, 121, 30))
+        self.btnWriteChar.setGeometry(QtCore.QRect(160, 580, 121, 30))
         self.btnWriteChar.setMinimumSize(QtCore.QSize(0, 30))
         self.btnWriteChar.setMaximumSize(QtCore.QSize(16777215, 30))
         self.btnWriteChar.setStyleSheet("QPushButton{\n"
