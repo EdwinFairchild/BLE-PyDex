@@ -42,6 +42,7 @@ class MainInterface(QMainWindow):
     menuClosed =False
     animationDone = True
     client = "NONOE"
+    bleLoop = None
    
 
     def __init__(self):
@@ -118,18 +119,13 @@ class MainInterface(QMainWindow):
         return super().eventFilter(source, event)
     #------------------------------------------------------------------------
     def btnNotifyCallBack(self):
-        # TODO : enables notify
-        #self.charNotify = ble_ctl.BLE_EnableNotify()
-        self.charNotify = ble_ctl.BleakLoop()
-        self.charNotify.ble_address = self.connected_address
+        #Add the currently selected char to notify list
+        # self.charNotify = ble_ctl.BleakLoop()
+        # self.charNotify.ble_address = self.selected_address
         #self.charNotify.client = self.client
-        self.charNotify.char_uuid = self.ui.btnLabelUUID.text()
-        self.charNotify.char_uuid2 = "85fc5681-31d9-4185-87c6-339924d1c5be"
-        self.charNotify.gotNotification.connect(self.gotCharNotif)
-        self.charNotify.gotNotification2.connect(self.gotCharNotif2)
-        self.charNotify.notifyChar[self.ui.btnLabelUUID.text()] = self.charNotify.notification_handler
-        self.charNotify.notifyChar["85fc5681-31d9-4185-87c6-339924d1c5be"] = self.charNotify.notification_handler
-        self.charNotify.start()
+        self.bleLoop.notifyChar[self.ui.btnLabelUUID.text()] = self.bleLoop.notification_handler
+        self.bleLoop.notifyChar["85fc5681-31d9-4185-87c6-339924d1c5be"] = self.bleLoop.notification_handler
+        self.bleLoop.start()
 
     def btnReadCharcallback(self):
            #read char from gatt
@@ -164,12 +160,19 @@ class MainInterface(QMainWindow):
         cp.setText(str)
     #------------------------------------------------------------------------
     def treeWidgetItemPressed(self):
+        #get text of seleced item
         value = self.ui.servicesTreeWidget.currentItem()
         dataList = value.text(0).split(":")
         dataListLen = len(dataList)
+        # get UUID
         self.ui.btnLabelType.setText(dataList[0])
         lblUUID = dataList[1].split("(")
         lblUUID[0].strip()
+        #get Handle
+        lblHandle = dataList[2].removesuffix(")")
+        lblHandle = lblHandle.strip()
+        self.ui.btnLabelHandle.setText(lblHandle)
+        #get permissions
         lblPermissions = "N/A"
         self.ui.btnLabelUUID.setText(lblUUID[0].strip())
         if "read" in value.text(0):
@@ -235,6 +238,7 @@ class MainInterface(QMainWindow):
 
     #------------------------------------------------------------------------
     def btnConnectCallback(self):
+        # Establish and maintain Bleak connection
         if self.selected_address != None : 
             self.bleLoop = ble_ctl.BleakLoop()
             self.bleLoop.ble_address = self.selected_address

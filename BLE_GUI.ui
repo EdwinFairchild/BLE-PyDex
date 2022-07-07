@@ -774,7 +774,7 @@ border-radius:10px;
                     </property>
                     <property name="font">
                      <font>
-                      <pointsize>15</pointsize>
+                      <pointsize>11</pointsize>
                       <weight>50</weight>
                       <bold>false</bold>
                      </font>
@@ -866,7 +866,7 @@ background-color: rgb(28, 28, 28);
                      <property name="geometry">
                       <rect>
                        <x>20</x>
-                       <y>130</y>
+                       <y>160</y>
                        <width>121</width>
                        <height>21</height>
                       </rect>
@@ -930,7 +930,7 @@ padding-top: 0px;
                      <property name="geometry">
                       <rect>
                        <x>130</x>
-                       <y>130</y>
+                       <y>160</y>
                        <width>381</width>
                        <height>21</height>
                       </rect>
@@ -984,6 +984,46 @@ padding-top: 0px;
                       <string notr="true">text-align: left;
 
 padding-top: 0px;
+</string>
+                     </property>
+                     <property name="text">
+                      <string>N/A</string>
+                     </property>
+                    </widget>
+                    <widget class="QLabel" name="label_16">
+                     <property name="geometry">
+                      <rect>
+                       <x>20</x>
+                       <y>130</y>
+                       <width>121</width>
+                       <height>21</height>
+                      </rect>
+                     </property>
+                     <property name="font">
+                      <font>
+                       <pointsize>13</pointsize>
+                      </font>
+                     </property>
+                     <property name="text">
+                      <string>Handle :</string>
+                     </property>
+                    </widget>
+                    <widget class="QPushButton" name="btnLabelHandle">
+                     <property name="geometry">
+                      <rect>
+                       <x>90</x>
+                       <y>130</y>
+                       <width>381</width>
+                       <height>21</height>
+                      </rect>
+                     </property>
+                     <property name="font">
+                      <font>
+                       <pointsize>13</pointsize>
+                      </font>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true">text-align: left;
 </string>
                      </property>
                      <property name="text">
