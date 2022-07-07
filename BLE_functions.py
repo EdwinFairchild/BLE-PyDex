@@ -43,10 +43,10 @@ class BLE_DiscoverDevices(QThread):#############################################
 
 
 class BLE_DiscoverServices(QThread):
-    ble_address= "NONE"
+    ble_address= None
     scan_timeout=60
     discovered_services = pyqtSignal(list)
-    client = "NONE"
+    client = None
     def run(self):
         asyncio.run(self.BLE_discoverServices(self.client))
     #------------------------------------------------------------------------
@@ -95,16 +95,16 @@ class BLE_DiscoverServices(QThread):
                                 self.discovered_services.emit([f"\t\t[Descriptor] {descriptor}) | Error: {e}",2])
                                 #print(f"\t\t[Descriptor] {descriptor}) | Error: {e}")
                 
-                await client.disconnect()
+                
                 print(f"Cleint conenction state : {client.is_connected}")
         except Exception as e:
             print("Opps ,That device is not explorable, at least not by you.")
         
  
 class BLE_EnableNotify(QThread):
-    ble_address= "NONE"
-    char_uuid = "NONE"
-    client = "NONE"
+    ble_address= None
+    char_uuid = None
+    client = None
     gotNotification = pyqtSignal(str)
     def run(self):
         asyncio.run(self.enableNotify(self.client))
@@ -112,21 +112,25 @@ class BLE_EnableNotify(QThread):
     async def enableNotify(self, client : BleakClient):
         async with  client:
             #here set a lable to notifying enabled or something
-
+            # Ask server to start sending
+            await client.write_gatt_char("85fc5681-31d9-4185-87c6-339924d1c5be", bytes('1', 'utf-8'))
             await client.start_notify(self.char_uuid, self.notification_handler)
-            await asyncio.sleep(60.0)
+            while True:
+                await asyncio.sleep(1.0)
+                chardata = await client.read_gatt_char("85fc567e-31d9-4185-87c6-339924d1c5be")
+                print(str(chardata))
             #await client.stop_notify(self.char_uuid)
     def notification_handler(self,sender, data):
         """Simple notification handler which prints the data received."""
-       # print("{0}: {1}".format(sender, data))
+        print("{0}: {1}".format(sender, data))
         self.gotNotification.emit(str(data))
 
 class BLE_ReadChar(QThread):
-    ble_address= "NONE"
+    ble_address= None
     scan_timeout=5
-    charToRead = "NONE"
+    charToRead = None
     charReadData = pyqtSignal(str)
-    client = "NONE"
+    client = None
     def run(self):
         asyncio.run(self.BLE_ReadChar(self.client))
     #------------------------------------------------------------------------
@@ -141,8 +145,8 @@ class BLE_ReadChar(QThread):
 
 
 class BLE_Connect(QThread):
-    ble_address= "NONE"
-    client = "None"
+    ble_address= None
+    client = None
     def run(self):
         asyncio.run(self.connect(self.ble_address, self.client))
 
@@ -161,4 +165,44 @@ def print_speed(speed: float, current: float):
          f"Current: {(current / 1024 / 1024):.4f} MB/s"
          )
 
+class BleakLoop(QThread):
+    ble_address= None
+    char_uuid = None
+    client = None
+    gotNotification = pyqtSignal(str)
+    errorMsg = pyqtSignal(str)
+    def run(self):
+        asyncio.run(self.bleakLoop())
+    #-------------------------------------------------------------------------
+    def handle_disconnect(_: BleakClient):
+        # cancelling all tasks effectively ends the program
+        for task in asyncio.all_tasks():
+            task.cancel()
+    #-------------------------------------------------------------------------
+    def notification_handler(self,sender, data):
+        """Simple notification handler which prints the data received."""
+        print("{0}: {1}".format(sender, data))
+        self.gotNotification.emit(str(data))
+    #-------------------------------------------------------------------------
+    async def bleakLoop(self):
+        async with BleakClient(self.ble_address, disconnected_callback= self.handle_disconnect) as client:
+            #here set a lable to notifying enabled or something
+            # Ask server to start sending
+            await client.write_gatt_char("85fc5681-31d9-4185-87c6-339924d1c5be", bytes('1', 'utf-8'))
+            await client.start_notify(self.char_uuid, self.notification_handler)
+            while True:
+                await asyncio.sleep(1.0)
+                #cycle through  dictionary of characters to read.
 
+                #if that specific chararacteristic is not "stream" enabled
+                #then just read once and remove from dictionary
+
+                #other wise read it 
+
+                #check if there are new characteristics that need to be registered with 'notify'
+                chardata = await client.read_gatt_char("85fc567e-31d9-4185-87c6-339924d1c5be")
+                print(str(chardata))
+''' TODO : start mechanism to register new Notify charateristics : use signals and slots 
+make a signal that will pass the UUID and the callback function. 
+callback funtion should be generic for all of them, and it should read the "sender"
+argument passed to know what char sent the BLE_EnableNotify '''

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1871</width>
-    <height>1019</height>
+    <width>1550</width>
+    <height>793</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -18,8 +18,8 @@
   </property>
   <property name="minimumSize">
    <size>
-    <width>1791</width>
-    <height>1019</height>
+    <width>1550</width>
+    <height>793</height>
    </size>
   </property>
   <property name="maximumSize">
@@ -78,7 +78,7 @@ border:none;</string>
          <property name="minimumSize">
           <size>
            <width>0</width>
-           <height>900</height>
+           <height>0</height>
           </size>
          </property>
          <property name="maximumSize">
@@ -361,8 +361,7 @@ QPushButton:pressed{
               </font>
              </property>
              <property name="styleSheet">
-              <string notr="true">text-align: left;
-padding-left: 20px;</string>
+              <string notr="true">color: rgb(255, 255, 255);</string>
              </property>
              <property name="text">
               <string>    Edwin Amaya</string>
@@ -379,15 +378,16 @@ padding-left: 20px;</string>
              </property>
              <property name="styleSheet">
               <string notr="true">QPushButton{
-text-align: left;
-padding-left: 15px;
-border-radius:5px;
+	color: rgb(255, 255, 255);
 background-color: rgb(19, 19, 19);
+	border:none;
+border-radius:10px;
+
 }
 
 QPushButton:hover{
 	color: rgb(255, 255, 255);
-	background-color: rgb(170, 77, 57);
+	background-color: rgb(170, 77, 77);
 
 }
 
@@ -447,6 +447,9 @@ background-color: rgb(70, 70, 70);</string>
                <width>141</width>
                <height>17</height>
               </rect>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">color: rgb(255, 255, 255);</string>
              </property>
              <property name="text">
               <string>Project completion</string>
@@ -557,6 +560,9 @@ text-align: right;</string>
                <height>17</height>
               </rect>
              </property>
+             <property name="styleSheet">
+              <string notr="true">color: rgb(255, 255, 255);</string>
+             </property>
              <property name="text">
               <string>BLE Xplorer 2022</string>
              </property>
@@ -581,6 +587,9 @@ text-align: right;</string>
           <enum>QFrame::Raised</enum>
          </property>
          <layout class="QHBoxLayout" name="horizontalLayout_5" stretch="0">
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
           <item>
            <widget class="SlidingStackedWidget" name="stackedWidget">
             <property name="minimumSize">
@@ -728,7 +737,7 @@ border-radius:10px;</string>
                   <number>0</number>
                  </property>
                  <property name="leftMargin">
-                  <number>20</number>
+                  <number>15</number>
                  </property>
                  <property name="topMargin">
                   <number>0</number>
@@ -766,10 +775,10 @@ border-radius:10px;
                    <widget class="QTreeWidget" name="servicesTreeWidget">
                     <property name="geometry">
                      <rect>
-                      <x>930</x>
-                      <y>60</y>
-                      <width>631</width>
-                      <height>381</height>
+                      <x>770</x>
+                      <y>20</y>
+                      <width>481</width>
+                      <height>341</height>
                      </rect>
                     </property>
                     <property name="font">
@@ -807,10 +816,10 @@ color: rgb(255, 255, 255);</string>
                    <widget class="QFrame" name="frame_2">
                     <property name="geometry">
                      <rect>
-                      <x>30</x>
-                      <y>460</y>
+                      <x>10</x>
+                      <y>380</y>
                       <width>531</width>
-                      <height>221</height>
+                      <height>191</height>
                      </rect>
                     </property>
                     <property name="styleSheet">
@@ -840,6 +849,9 @@ background-color: rgb(28, 28, 28);
                        <pointsize>13</pointsize>
                       </font>
                      </property>
+                     <property name="styleSheet">
+                      <string notr="true">color: rgb(255, 255, 255);</string>
+                     </property>
                      <property name="text">
                       <string>Type  :</string>
                      </property>
@@ -858,6 +870,9 @@ background-color: rgb(28, 28, 28);
                        <pointsize>13</pointsize>
                       </font>
                      </property>
+                     <property name="styleSheet">
+                      <string notr="true">color: rgb(255, 255, 255);</string>
+                     </property>
                      <property name="text">
                       <string>UUID :</string>
                      </property>
@@ -875,6 +890,9 @@ background-color: rgb(28, 28, 28);
                       <font>
                        <pointsize>13</pointsize>
                       </font>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true">color: rgb(255, 255, 255);</string>
                      </property>
                      <property name="text">
                       <string>Permissons :</string>
@@ -895,10 +913,8 @@ background-color: rgb(28, 28, 28);
                       </font>
                      </property>
                      <property name="styleSheet">
-                      <string notr="true">text-align: left;
-
-padding-top: 0px;
-</string>
+                      <string notr="true">color: rgb(255, 255, 255);
+text-align: left;</string>
                      </property>
                      <property name="text">
                       <string>N/A</string>
@@ -919,8 +935,8 @@ padding-top: 0px;
                       </font>
                      </property>
                      <property name="styleSheet">
-                      <string notr="true">text-align: left;
-</string>
+                      <string notr="true">color: rgb(255, 255, 255);
+text-align: left;</string>
                      </property>
                      <property name="text">
                       <string>N/A</string>
@@ -941,8 +957,8 @@ padding-top: 0px;
                       </font>
                      </property>
                      <property name="styleSheet">
-                      <string notr="true">text-align: left;
-</string>
+                      <string notr="true">color: rgb(255, 255, 255);
+text-align: left;</string>
                      </property>
                      <property name="text">
                       <string>N/A</string>
@@ -961,6 +977,9 @@ padding-top: 0px;
                       <font>
                        <pointsize>13</pointsize>
                       </font>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true">color: rgb(255, 255, 255);</string>
                      </property>
                      <property name="text">
                       <string>Name :</string>
@@ -981,10 +1000,8 @@ padding-top: 0px;
                       </font>
                      </property>
                      <property name="styleSheet">
-                      <string notr="true">text-align: left;
-
-padding-top: 0px;
-</string>
+                      <string notr="true">color: rgb(255, 255, 255);
+text-align: left;</string>
                      </property>
                      <property name="text">
                       <string>N/A</string>
@@ -994,10 +1011,10 @@ padding-top: 0px;
                    <widget class="QFrame" name="appFrame_2">
                     <property name="geometry">
                      <rect>
-                      <x>29</x>
-                      <y>60</y>
-                      <width>881</width>
-                      <height>381</height>
+                      <x>10</x>
+                      <y>20</y>
+                      <width>741</width>
+                      <height>341</height>
                      </rect>
                     </property>
                     <property name="minimumSize">
@@ -1013,7 +1030,7 @@ padding-top: 0px;
                      </size>
                     </property>
                     <property name="styleSheet">
-                     <string notr="true">background-color: rgb(27, 27, 27);</string>
+                     <string notr="true">background-color: rgb(35, 35, 35);</string>
                     </property>
                     <property name="frameShape">
                      <enum>QFrame::StyledPanel</enum>
@@ -1021,70 +1038,25 @@ padding-top: 0px;
                     <property name="frameShadow">
                      <enum>QFrame::Raised</enum>
                     </property>
-                    <widget class="QPushButton" name="btnConnect">
+                    <widget class="QPushButton" name="btnExplore">
                      <property name="geometry">
                       <rect>
-                       <x>730</x>
-                       <y>300</y>
+                       <x>470</x>
+                       <y>280</y>
                        <width>121</width>
-                       <height>41</height>
+                       <height>30</height>
                       </rect>
                      </property>
                      <property name="minimumSize">
                       <size>
                        <width>0</width>
-                       <height>40</height>
-                      </size>
-                     </property>
-                     <property name="font">
-                      <font>
-                       <pointsize>11</pointsize>
-                      </font>
-                     </property>
-                     <property name="styleSheet">
-                      <string notr="true">QPushButton{
-	color: rgb(0, 0, 0);
-	background-color: rgb(180, 180, 180);
-	border:none;
-border-radius:10px;
-
-}
-
-QPushButton:hover{
-	color: rgb(255, 255, 255);
-	background-color: rgb(170, 77, 77);
-
-}
-
-QPushButton:pressed{
-	
-		color: rgb(255, 255, 255);
-	background-color: rgb(170, 27, 27);
-}</string>
-                     </property>
-                     <property name="text">
-                      <string>Connect</string>
-                     </property>
-                    </widget>
-                    <widget class="QPushButton" name="btnScan_3">
-                     <property name="geometry">
-                      <rect>
-                       <x>290</x>
-                       <y>30</y>
-                       <width>81</width>
-                       <height>41</height>
-                      </rect>
-                     </property>
-                     <property name="minimumSize">
-                      <size>
-                       <width>0</width>
-                       <height>40</height>
+                       <height>30</height>
                       </size>
                      </property>
                      <property name="maximumSize">
                       <size>
-                       <width>1000</width>
-                       <height>16777215</height>
+                       <width>16777215</width>
+                       <height>30</height>
                       </size>
                      </property>
                      <property name="font">
@@ -1114,15 +1086,15 @@ QPushButton:pressed{
 }</string>
                      </property>
                      <property name="text">
-                      <string>Scan</string>
+                      <string>Explore</string>
                      </property>
                     </widget>
                     <widget class="QFrame" name="scaneSliderFrame_2">
                      <property name="geometry">
                       <rect>
-                       <x>50</x>
-                       <y>20</y>
-                       <width>231</width>
+                       <x>10</x>
+                       <y>10</y>
+                       <width>291</width>
                        <height>51</height>
                       </rect>
                      </property>
@@ -1140,7 +1112,7 @@ QPushButton:pressed{
                        <rect>
                         <x>10</x>
                         <y>30</y>
-                        <width>211</width>
+                        <width>161</width>
                         <height>20</height>
                        </rect>
                       </property>
@@ -1208,9 +1180,9 @@ color: rgb(255, 255, 255);</string>
                     <widget class="QLabel" name="label_6">
                      <property name="geometry">
                       <rect>
-                       <x>430</x>
+                       <x>320</x>
                        <y>20</y>
-                       <width>301</width>
+                       <width>401</width>
                        <height>25</height>
                       </rect>
                      </property>
@@ -1230,7 +1202,8 @@ color: rgb(255, 255, 255);</string>
                      <property name="styleSheet">
                       <string notr="true">color: rgb(255, 255, 255);
 border-radius:10px;
-	background-color: rgb(170, 77, 77);</string>
+background-color: rgb(50, 50, 50);
+	</string>
                      </property>
                      <property name="text">
                       <string>  Address                               Name</string>
@@ -1245,10 +1218,10 @@ border-radius:10px;
                     <widget class="QListWidget" name="list_discover_address_2">
                      <property name="geometry">
                       <rect>
-                       <x>400</x>
-                       <y>20</y>
-                       <width>451</width>
-                       <height>261</height>
+                       <x>320</x>
+                       <y>21</y>
+                       <width>401</width>
+                       <height>250</height>
                       </rect>
                      </property>
                      <property name="minimumSize">
@@ -1266,7 +1239,7 @@ border-radius:10px;
                      <property name="font">
                       <font>
                        <family>Monospace</family>
-                       <pointsize>13</pointsize>
+                       <pointsize>11</pointsize>
                        <weight>50</weight>
                        <bold>false</bold>
                       </font>
@@ -1281,37 +1254,103 @@ color: rgb(255, 255, 255);</string>
                     <widget class="QTextEdit" name="textEdit">
                      <property name="geometry">
                       <rect>
-                       <x>210</x>
-                       <y>120</y>
-                       <width>161</width>
-                       <height>31</height>
+                       <x>160</x>
+                       <y>100</y>
+                       <width>141</width>
+                       <height>21</height>
                       </rect>
                      </property>
+                     <property name="font">
+                      <font>
+                       <pointsize>10</pointsize>
+                      </font>
+                     </property>
                      <property name="styleSheet">
-                      <string notr="true">background-color: rgb(30, 30, 30);</string>
+                      <string notr="true">background-color: rgb(30, 30, 30);
+color: rgb(255, 255, 255);
+border: 1px solid gray;</string>
+                     </property>
+                     <property name="verticalScrollBarPolicy">
+                      <enum>Qt::ScrollBarAlwaysOff</enum>
                      </property>
                     </widget>
                     <widget class="QRadioButton" name="radioButton">
                      <property name="geometry">
                       <rect>
-                       <x>50</x>
-                       <y>120</y>
-                       <width>141</width>
-                       <height>31</height>
+                       <x>20</x>
+                       <y>90</y>
+                       <width>131</width>
+                       <height>41</height>
                       </rect>
                      </property>
+                     <property name="font">
+                      <font>
+                       <weight>50</weight>
+                       <bold>false</bold>
+                      </font>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true">QRadioButton {
+   
+    color:                  white;
+}
+
+QRadioButton::indicator {
+    width:                  10px;
+    height:                 10px;
+    border-radius:          5px;
+}
+
+QRadioButton::indicator:checked {
+    background-color:       blue;
+  
+}
+
+QRadioButton::indicator:unchecked {
+    background-color:       gray;
+
+}</string>
+                     </property>
                      <property name="text">
-                      <string>Scan for address</string>
+                      <string>Scan for address :</string>
                      </property>
                     </widget>
                     <widget class="QRadioButton" name="radioButton_2">
                      <property name="geometry">
                       <rect>
-                       <x>50</x>
-                       <y>160</y>
-                       <width>141</width>
-                       <height>31</height>
+                       <x>20</x>
+                       <y>130</y>
+                       <width>131</width>
+                       <height>41</height>
                       </rect>
+                     </property>
+                     <property name="font">
+                      <font>
+                       <weight>50</weight>
+                       <bold>false</bold>
+                      </font>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true">QRadioButton {
+   
+    color:                  white;
+}
+
+QRadioButton::indicator {
+    width:                  10px;
+    height:                 10px;
+    border-radius:          5px;
+}
+
+QRadioButton::indicator:checked {
+    background-color:       blue;
+
+}
+
+QRadioButton::indicator:unchecked {
+    background-color:       gray;
+
+}</string>
                      </property>
                      <property name="text">
                       <string>Scan for address :</string>
@@ -1320,35 +1359,80 @@ color: rgb(255, 255, 255);</string>
                     <widget class="QTextEdit" name="textEdit_2">
                      <property name="geometry">
                       <rect>
-                       <x>210</x>
-                       <y>160</y>
-                       <width>161</width>
-                       <height>31</height>
+                       <x>160</x>
+                       <y>140</y>
+                       <width>141</width>
+                       <height>21</height>
                       </rect>
                      </property>
+                     <property name="font">
+                      <font>
+                       <pointsize>10</pointsize>
+                      </font>
+                     </property>
                      <property name="styleSheet">
-                      <string notr="true">background-color: rgb(30, 30, 30);</string>
+                      <string notr="true">background-color: rgb(30, 30, 30);
+color: rgb(255, 255, 255);
+border-color: rgb(255, 255, 255);
+border: 1px solid gray;</string>
+                     </property>
+                     <property name="verticalScrollBarPolicy">
+                      <enum>Qt::ScrollBarAlwaysOff</enum>
                      </property>
                     </widget>
                     <widget class="QRadioButton" name="radioButton_3">
                      <property name="geometry">
                       <rect>
-                       <x>50</x>
-                       <y>80</y>
+                       <x>20</x>
+                       <y>60</y>
                        <width>112</width>
                        <height>31</height>
                       </rect>
                      </property>
+                     <property name="font">
+                      <font>
+                       <weight>50</weight>
+                       <bold>false</bold>
+                      </font>
+                     </property>
+                     <property name="autoFillBackground">
+                      <bool>false</bool>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true">QRadioButton {
+   
+    color:                  white;
+}
+
+QRadioButton::indicator {
+    width:                  10px;
+    height:                 10px;
+    border-radius:          5px;
+}
+
+QRadioButton::indicator:checked {
+    background-color:       blue;
+ 
+}
+
+QRadioButton::indicator:unchecked {
+    background-color:       gray;
+ 
+}</string>
+                     </property>
                      <property name="text">
                       <string>Scan for all</string>
+                     </property>
+                     <property name="checked">
+                      <bool>true</bool>
                      </property>
                     </widget>
                     <widget class="QFrame" name="frame_6">
                      <property name="geometry">
                       <rect>
-                       <x>410</x>
-                       <y>290</y>
-                       <width>301</width>
+                       <x>50</x>
+                       <y>220</y>
+                       <width>261</width>
                        <height>71</height>
                       </rect>
                      </property>
@@ -1358,73 +1442,191 @@ color: rgb(255, 255, 255);</string>
                      <property name="frameShadow">
                       <enum>QFrame::Raised</enum>
                      </property>
-                     <widget class="QSlider" name="timeoutSlider_3">
-                      <property name="geometry">
-                       <rect>
-                        <x>20</x>
-                        <y>30</y>
-                        <width>261</width>
-                        <height>20</height>
-                       </rect>
-                      </property>
-                      <property name="styleSheet">
-                       <string notr="true"/>
-                      </property>
-                      <property name="maximum">
-                       <number>30</number>
-                      </property>
-                      <property name="pageStep">
-                       <number>1</number>
-                      </property>
-                      <property name="value">
-                       <number>5</number>
-                      </property>
-                      <property name="orientation">
-                       <enum>Qt::Horizontal</enum>
-                      </property>
-                     </widget>
-                     <widget class="QLabel" name="label_3">
-                      <property name="geometry">
-                       <rect>
-                        <x>20</x>
-                        <y>10</y>
-                        <width>191</width>
-                        <height>17</height>
-                       </rect>
-                      </property>
-                      <property name="text">
-                       <string>Connection duration (min):</string>
-                      </property>
-                     </widget>
-                     <widget class="QCheckBox" name="checkBox">
-                      <property name="geometry">
-                       <rect>
-                        <x>20</x>
-                        <y>50</y>
-                        <width>92</width>
-                        <height>21</height>
-                       </rect>
-                      </property>
-                      <property name="text">
-                       <string>Forever</string>
-                      </property>
-                     </widget>
                      <widget class="QLabel" name="lblConnectionTime">
                       <property name="geometry">
                        <rect>
-                        <x>210</x>
-                        <y>10</y>
+                        <x>180</x>
+                        <y>0</y>
                         <width>67</width>
                         <height>17</height>
                        </rect>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">color: rgb(255, 255, 255);</string>
                       </property>
                       <property name="text">
                        <string>5</string>
                       </property>
                      </widget>
                     </widget>
-                    <zorder>btnConnect</zorder>
-                    <zorder>btnScan_3</zorder>
+                    <widget class="QPushButton" name="btnConnect">
+                     <property name="geometry">
+                      <rect>
+                       <x>600</x>
+                       <y>280</y>
+                       <width>121</width>
+                       <height>30</height>
+                      </rect>
+                     </property>
+                     <property name="minimumSize">
+                      <size>
+                       <width>0</width>
+                       <height>30</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>16777215</width>
+                       <height>30</height>
+                      </size>
+                     </property>
+                     <property name="font">
+                      <font>
+                       <pointsize>11</pointsize>
+                      </font>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true">QPushButton{
+	color: rgb(0, 0, 0);
+	background-color: rgb(180, 180, 180);
+	border:none;
+border-radius:10px;
+
+}
+
+QPushButton:hover{
+	color: rgb(255, 255, 255);
+	background-color: rgb(170, 77, 77);
+
+}
+
+QPushButton:pressed{
+	
+		color: rgb(255, 255, 255);
+	background-color: rgb(170, 27, 27);
+}</string>
+                     </property>
+                     <property name="text">
+                      <string>Connect</string>
+                     </property>
+                    </widget>
+                    <widget class="QCheckBox" name="checkBox">
+                     <property name="geometry">
+                      <rect>
+                       <x>40</x>
+                       <y>260</y>
+                       <width>92</width>
+                       <height>21</height>
+                      </rect>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true">color: rgb(255, 255, 255);</string>
+                     </property>
+                     <property name="text">
+                      <string>Forever</string>
+                     </property>
+                    </widget>
+                    <widget class="QLabel" name="label_3">
+                     <property name="geometry">
+                      <rect>
+                       <x>40</x>
+                       <y>220</y>
+                       <width>191</width>
+                       <height>17</height>
+                      </rect>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true">color: rgb(255, 255, 255);</string>
+                     </property>
+                     <property name="text">
+                      <string>Connection duration (min):</string>
+                     </property>
+                    </widget>
+                    <widget class="QSlider" name="timeoutSlider_3">
+                     <property name="geometry">
+                      <rect>
+                       <x>40</x>
+                       <y>240</y>
+                       <width>261</width>
+                       <height>20</height>
+                      </rect>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true">QSlider::handle:horizontal {
+    height: 4px;
+    width: 3px;
+	
+	background-color: rgb(72, 72,72);
+    margin: 0 -2px; /* expand outside the groove */
+border-radius:2px;
+}
+</string>
+                     </property>
+                     <property name="maximum">
+                      <number>30</number>
+                     </property>
+                     <property name="pageStep">
+                      <number>1</number>
+                     </property>
+                     <property name="value">
+                      <number>5</number>
+                     </property>
+                     <property name="orientation">
+                      <enum>Qt::Horizontal</enum>
+                     </property>
+                    </widget>
+                    <widget class="QPushButton" name="btnScan">
+                     <property name="geometry">
+                      <rect>
+                       <x>210</x>
+                       <y>20</y>
+                       <width>81</width>
+                       <height>31</height>
+                      </rect>
+                     </property>
+                     <property name="minimumSize">
+                      <size>
+                       <width>0</width>
+                       <height>30</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>1000</width>
+                       <height>16777215</height>
+                      </size>
+                     </property>
+                     <property name="font">
+                      <font>
+                       <pointsize>11</pointsize>
+                      </font>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true">QPushButton{
+	color: rgb(0, 0, 0);
+	background-color: rgb(180, 180, 180);
+	border:none;
+border-radius:10px;
+
+}
+
+QPushButton:hover{
+	color: rgb(255, 255, 255);
+	background-color: rgb(170, 77, 77);
+
+}
+
+QPushButton:pressed{
+	
+		color: rgb(255, 255, 255);
+	background-color: rgb(170, 27, 27);
+}</string>
+                     </property>
+                     <property name="text">
+                      <string>Scan</string>
+                     </property>
+                    </widget>
+                    <zorder>btnExplore</zorder>
                     <zorder>scaneSliderFrame_2</zorder>
                     <zorder>list_discover_address_2</zorder>
                     <zorder>label_6</zorder>
@@ -1434,15 +1636,23 @@ color: rgb(255, 255, 255);</string>
                     <zorder>textEdit_2</zorder>
                     <zorder>radioButton_3</zorder>
                     <zorder>frame_6</zorder>
+                    <zorder>btnConnect</zorder>
+                    <zorder>checkBox</zorder>
+                    <zorder>label_3</zorder>
+                    <zorder>timeoutSlider_3</zorder>
+                    <zorder>btnScan</zorder>
                    </widget>
                    <widget class="QLabel" name="lblLatestVal">
                     <property name="geometry">
                      <rect>
-                      <x>620</x>
-                      <y>540</y>
+                      <x>590</x>
+                      <y>420</y>
                       <width>191</width>
                       <height>31</height>
                      </rect>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">color: rgb(255, 255, 255);</string>
                     </property>
                     <property name="text">
                      <string>Latest val: </string>
@@ -1451,11 +1661,23 @@ color: rgb(255, 255, 255);</string>
                    <widget class="QPushButton" name="btnNotify">
                     <property name="geometry">
                      <rect>
-                      <x>430</x>
-                      <y>700</y>
+                      <x>420</x>
+                      <y>580</y>
                       <width>121</width>
-                      <height>41</height>
+                      <height>30</height>
                      </rect>
+                    </property>
+                    <property name="minimumSize">
+                     <size>
+                      <width>0</width>
+                      <height>30</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>16777215</width>
+                      <height>30</height>
+                     </size>
                     </property>
                     <property name="styleSheet">
                      <string notr="true">QPushButton{
@@ -1485,11 +1707,23 @@ QPushButton:pressed{
                    <widget class="QPushButton" name="btnReadChar">
                     <property name="geometry">
                      <rect>
-                      <x>300</x>
-                      <y>700</y>
+                      <x>290</x>
+                      <y>580</y>
                       <width>121</width>
-                      <height>41</height>
+                      <height>30</height>
                      </rect>
+                    </property>
+                    <property name="minimumSize">
+                     <size>
+                      <width>0</width>
+                      <height>30</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>16777215</width>
+                      <height>30</height>
+                     </size>
                     </property>
                     <property name="styleSheet">
                      <string notr="true">QPushButton{
@@ -1519,11 +1753,23 @@ QPushButton:pressed{
                    <widget class="QPushButton" name="btnWriteChar">
                     <property name="geometry">
                      <rect>
-                      <x>170</x>
-                      <y>700</y>
+                      <x>160</x>
+                      <y>580</y>
                       <width>121</width>
-                      <height>41</height>
+                      <height>30</height>
                      </rect>
+                    </property>
+                    <property name="minimumSize">
+                     <size>
+                      <width>0</width>
+                      <height>30</height>
+                     </size>
+                    </property>
+                    <property name="maximumSize">
+                     <size>
+                      <width>16777215</width>
+                      <height>30</height>
+                     </size>
                     </property>
                     <property name="styleSheet">
                      <string notr="true">QPushButton{
@@ -1553,11 +1799,14 @@ QPushButton:pressed{
                    <widget class="QLabel" name="label_4">
                     <property name="geometry">
                      <rect>
-                      <x>620</x>
-                      <y>520</y>
+                      <x>590</x>
+                      <y>400</y>
                       <width>67</width>
                       <height>17</height>
                      </rect>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">color: rgb(255, 255, 255);</string>
                     </property>
                     <property name="text">
                      <string>Notify:</string>
@@ -1566,11 +1815,14 @@ QPushButton:pressed{
                    <widget class="QLabel" name="label_8">
                     <property name="geometry">
                      <rect>
-                      <x>610</x>
-                      <y>630</y>
+                      <x>580</x>
+                      <y>470</y>
                       <width>91</width>
                       <height>17</height>
                      </rect>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">color: rgb(255, 255, 255);</string>
                     </property>
                     <property name="text">
                      <string>Other Char</string>
@@ -1579,11 +1831,14 @@ QPushButton:pressed{
                    <widget class="QLabel" name="lblCharVal">
                     <property name="geometry">
                      <rect>
-                      <x>610</x>
-                      <y>650</y>
+                      <x>580</x>
+                      <y>490</y>
                       <width>191</width>
                       <height>17</height>
                      </rect>
+                    </property>
+                    <property name="styleSheet">
+                     <string notr="true">color: rgb(255, 255, 255);</string>
                     </property>
                     <property name="text">
                      <string>TextLabel</string>
@@ -1602,7 +1857,7 @@ QPushButton:pressed{
                   </widget>
                  </item>
                  <item>
-                  <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="0,0,0,0">
+                  <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="1,0,0,0">
                    <item>
                     <spacer name="horizontalSpacer_4">
                      <property name="orientation">

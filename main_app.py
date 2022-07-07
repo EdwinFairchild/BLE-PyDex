@@ -25,16 +25,17 @@ ADDRESS = (
     if platform.system() != "Darwin"
     else "B9EA5233-37EF-4DD6-87A8-2A875E821C46"  # <--- Change to your device's address here if you are using macOS
 )
+CHARACTERISTIC_UUID = "85fc567e-31d9-4185-87c6-339924d1c5be"
 class MainInterface(QMainWindow):
     # TODO : this is a mess of variables , must learn better python
     currentIndex=1
     mystate=False
-    selected_address = "NONE"
-    connected_address = "NONE"
+    selected_address = None
+    connected_address = None
     menuPinned = False
     ui =0
-    toplevel = "NONE"
-    child = "NONE"
+    toplevel = None
+    child = None
     sideBarWidthMax = 210
     sideBarWidthMin = 73
     iconOffset = 5
@@ -49,17 +50,19 @@ class MainInterface(QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
         
-        # connect  callbacks/signals->slots
-        self.ui.btnScan_3.clicked.connect(self.btnBleScan_2)
-        self.ui.btnReadChar.clicked.connect(self.btnReadCharcallback)
+        # connect  signals->slots
+        
         # Menu button callbacks
         self.ui.btnMenu.clicked.connect(self.btnMenuCallBack)
         self.ui.btnMenuExplore.clicked.connect(self.btnMenuExploreCallBack)
         self.ui.btnMenuGattMaker.clicked.connect(self.btnMenuGattMakerCallBack)
         self.ui.btnMenuClient.clicked.connect(self.btnMenuClientCallBack)
         
-        
+        # interface button callbacks
+        self.ui.btnScan.clicked.connect(self.btnBleScan_2)
+        self.ui.btnReadChar.clicked.connect(self.btnReadCharcallback)
         self.ui.list_discover_address_2.itemPressed.connect(self.discoveredList2ItemPressed)
+        self.ui.btnExplore.clicked.connect(self.btnExploreCallback)
         self.ui.btnConnect.clicked.connect(self.btnConnectCallback)
         self.ui.servicesTreeWidget.itemPressed.connect(self.treeWidgetItemPressed)
         self.ui.btnLabelType.clicked.connect(self.btnLabelTypeCopy)
@@ -105,7 +108,7 @@ class MainInterface(QMainWindow):
         # button list used for changing style sheet
         self.buttonList=[self.ui.btnMenu ,self.ui.btnMenuGattMaker,self.ui.btnMenuClient,self.ui.btnMenuExplore]
     #------------------------------------------------------------------------
-        #global event filter handler
+    #global event filter handler
     def eventFilter(self, source, event):
         
         if event.type() == QtCore.QEvent.Enter and source == self.ui.sideBar:
@@ -115,7 +118,7 @@ class MainInterface(QMainWindow):
         return super().eventFilter(source, event)
     #------------------------------------------------------------------------
     def btnNotifyCallBack(self):
-        # TODO : 
+        # TODO : enables notify
         self.charNotify = ble_ctl.BLE_EnableNotify()
         self.charNotify.ble_address = self.connected_address
         self.charNotify.client = self.client
@@ -123,12 +126,6 @@ class MainInterface(QMainWindow):
         self.charNotify.gotNotification.connect(self.gotCharNotif)
         self.charNotify.start()
 
-        #read char from gatt
-        # self.gettreadChar = ble_ctl.BLE_ReadChar()
-        # self.gettreadChar.ble_address = self.connected_address
-        # self.gettreadChar.charToRead = self.ui.btnLabelUUID.text()
-        # self.gettreadChar.charReadData.connect(self.gattReadCallBAck)
-        # self.gettreadChar.start()
     def btnReadCharcallback(self):
            #read char from gatt
         self.gettreadChar = ble_ctl.BLE_ReadChar()
@@ -204,14 +201,18 @@ class MainInterface(QMainWindow):
         self.BLE_DiscoverDevices.start()
         #self.worker.finished.connect(self.blescannerFinished)
     #------------------------------------------------------------------------
+    def errMsg(self,err):
+        print(err)
+    
+    #------------------------------------------------------------------------
     def bleScannerSlot(self,device):
         self.ui.list_discover_address_2.addItem(f" "+ device[0:17] + " | " + device[18:] + " " )
     #------------------------------------------------------------------------ 
     def blescannerFinished(self):
             pass
     #------------------------------------------------------------------------
-    def btnConnectCallback(self):
-        if(self.selected_address != "NONE"):
+    def btnExploreCallback(self):
+        if(self.selected_address != None):
             self.client = BleakClient(self.selected_address)
             self.ui.servicesTreeWidget.clear()
             self.BLE_DiscoverServices = ble_ctl.BLE_DiscoverServices()
@@ -219,11 +220,22 @@ class MainInterface(QMainWindow):
             self.BLE_DiscoverServices.ble_address = self.selected_address
             self.BLE_DiscoverServices.discovered_services.connect(self.bleDiscoverslot)
             self.BLE_DiscoverServices.start()
-            self.connected_address = self.selected_address
-            print("Read services from : " + self.connected_address)
+            
+            #print("Read services from : " + self.selected_address)
             #todos can time out
         else:
            print("Opps ,You need to select a device address!")
+
+    #------------------------------------------------------------------------
+    def btnConnectCallback(self):
+        if self.selected_address != None : 
+            self.bleLoop = ble_ctl.BleakLoop()
+            self.bleLoop.ble_address = self.selected_address
+            self.bleLoop.errorMsg.connect(self.errMsg)
+            self.connected_address = self.selected_address
+        else:
+            print("You have to select a device from explore list")
+
 
     #------------------------------------------------------------------------
     def bleDiscoverslot(self,data ):
@@ -236,10 +248,10 @@ class MainInterface(QMainWindow):
         if level == 0:
             self.toplevel = QTreeWidgetItem([str(item)])
             self.ui.servicesTreeWidget.addTopLevelItem(self.toplevel)
-        elif level == 1 and self.toplevel != "NONE":
+        elif level == 1 and self.toplevel != None:
             self.child = QTreeWidgetItem([str(item)])
             self.toplevel.addChild(self.child)
-        elif level == 2 and self.child != "NONE":
+        elif level == 2 and self.child != None:
             subchild = QTreeWidgetItem([str(item)])
             self.child.addChild(subchild)
 
@@ -370,8 +382,8 @@ if __name__ == '__main__':
     from asyncqt import QEventLoop
 
     app = qtw.QApplication(sys.argv)
-    loop = QEventLoop(app)
-    asyncio.set_event_loop(loop)
+    # loop = QEventLoop(app)
+    # asyncio.set_event_loop(loop)
     interface = MainInterface()
     interface.show()
     #`loop.run_forever()
