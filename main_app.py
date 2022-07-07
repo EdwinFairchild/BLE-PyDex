@@ -119,11 +119,14 @@ class MainInterface(QMainWindow):
     #------------------------------------------------------------------------
     def btnNotifyCallBack(self):
         # TODO : enables notify
-        self.charNotify = ble_ctl.BLE_EnableNotify()
+        #self.charNotify = ble_ctl.BLE_EnableNotify()
+        self.charNotify = ble_ctl.BleakLoop()
         self.charNotify.ble_address = self.connected_address
         self.charNotify.client = self.client
         self.charNotify.char_uuid = self.ui.btnLabelUUID.text()
+        self.charNotify.char_uuid2 = "85fc5681-31d9-4185-87c6-339924d1c5be"
         self.charNotify.gotNotification.connect(self.gotCharNotif)
+        self.charNotify.gotNotification2.connect(self.gotCharNotif2)
         self.charNotify.start()
 
     def btnReadCharcallback(self):
@@ -141,6 +144,8 @@ class MainInterface(QMainWindow):
     #------------------------------------------------------------------------
     def gotCharNotif(self,data):
         self.ui.lblLatestVal.setText(data)
+    def gotCharNotif2(self,data):
+        self.ui.lblLatestVal2.setText(data)
     #------------------------| Clip board copying related functions |----------------------------
     def btnLabelTypeCopy(self):
         self.copyToClipBoard(self.ui.btnLabelType.text())
@@ -221,7 +226,7 @@ class MainInterface(QMainWindow):
             self.BLE_DiscoverServices.discovered_services.connect(self.bleDiscoverslot)
             self.BLE_DiscoverServices.start()
             
-            print("Read services from : " + self.connected_address)
+            print("Read services from : " + self.selected_address)
             #todos can time out
         else:
            print("Opps ,You need to select a device address!")

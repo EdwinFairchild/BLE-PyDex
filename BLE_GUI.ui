@@ -1634,6 +1634,32 @@ QPushButton:pressed{
                      <string>TextLabel</string>
                     </property>
                    </widget>
+                   <widget class="QLabel" name="lblLatestVal2">
+                    <property name="geometry">
+                     <rect>
+                      <x>840</x>
+                      <y>540</y>
+                      <width>191</width>
+                      <height>31</height>
+                     </rect>
+                    </property>
+                    <property name="text">
+                     <string>Latest val: </string>
+                    </property>
+                   </widget>
+                   <widget class="QLabel" name="lblNotify2">
+                    <property name="geometry">
+                     <rect>
+                      <x>840</x>
+                      <y>520</y>
+                      <width>67</width>
+                      <height>17</height>
+                     </rect>
+                    </property>
+                    <property name="text">
+                     <string>Notify:</string>
+                    </property>
+                   </widget>
                    <zorder>frame_2</zorder>
                    <zorder>servicesTreeWidget</zorder>
                    <zorder>appFrame_2</zorder>
@@ -1644,6 +1670,8 @@ QPushButton:pressed{
                    <zorder>label_4</zorder>
                    <zorder>label_8</zorder>
                    <zorder>lblCharVal</zorder>
+                   <zorder>lblLatestVal2</zorder>
+                   <zorder>lblNotify2</zorder>
                   </widget>
                  </item>
                  <item>

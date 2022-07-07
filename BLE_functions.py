@@ -168,8 +168,10 @@ def print_speed(speed: float, current: float):
 class BleakLoop(QThread):
     ble_address= None
     char_uuid = None
+    char_uuid2 = None
     client = None
     gotNotification = pyqtSignal(str)
+    gotNotification2 = pyqtSignal(str)
     errorMsg = pyqtSignal(str)
     def run(self):
         asyncio.run(self.bleakLoop())
@@ -180,9 +182,13 @@ class BleakLoop(QThread):
             task.cancel()
     #-------------------------------------------------------------------------
     def notification_handler(self,sender, data):
-        """Simple notification handler which prints the data received."""
-        print("{0}: {1}".format(sender, data))
+        #print("{0}: {1}".format(sender, data))
+        print("nofitication 1")
         self.gotNotification.emit(str(data))
+    def notification_handler2(self,sender, data):
+        #print("{0}: {1}".format(sender, data))
+        print("nofitication 2")
+        self.gotNotification2.emit(str(data))
     #-------------------------------------------------------------------------
     async def bleakLoop(self):
         async with BleakClient(self.ble_address, disconnected_callback= self.handle_disconnect) as client:
@@ -190,6 +196,7 @@ class BleakLoop(QThread):
             # Ask server to start sending
             await client.write_gatt_char("85fc5681-31d9-4185-87c6-339924d1c5be", bytes('1', 'utf-8'))
             await client.start_notify(self.char_uuid, self.notification_handler)
+            await client.start_notify(self.char_uuid2, self.notification_handler2)
             while True:
                 await asyncio.sleep(1.0)
                 #cycle through  dictionary of characters to read.
