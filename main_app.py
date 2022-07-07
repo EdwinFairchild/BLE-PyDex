@@ -122,11 +122,13 @@ class MainInterface(QMainWindow):
         #self.charNotify = ble_ctl.BLE_EnableNotify()
         self.charNotify = ble_ctl.BleakLoop()
         self.charNotify.ble_address = self.connected_address
-        self.charNotify.client = self.client
+        #self.charNotify.client = self.client
         self.charNotify.char_uuid = self.ui.btnLabelUUID.text()
         self.charNotify.char_uuid2 = "85fc5681-31d9-4185-87c6-339924d1c5be"
         self.charNotify.gotNotification.connect(self.gotCharNotif)
         self.charNotify.gotNotification2.connect(self.gotCharNotif2)
+        self.charNotify.notifyChar[self.ui.btnLabelUUID.text()] = self.charNotify.notification_handler
+        self.charNotify.notifyChar["85fc5681-31d9-4185-87c6-339924d1c5be"] = self.charNotify.notification_handler
         self.charNotify.start()
 
     def btnReadCharcallback(self):

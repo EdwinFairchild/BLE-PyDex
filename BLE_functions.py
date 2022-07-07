@@ -94,7 +94,7 @@ class BLE_DiscoverServices(QThread):
                             except Exception as e:
                                 self.discovered_services.emit([f"\t\t[Descriptor] {descriptor}) | Error: {e}",2])
                                 #print(f"\t\t[Descriptor] {descriptor}) | Error: {e}")
-                
+                await client.disconnect()
                 
                 print(f"Cleint conenction state : {client.is_connected}")
         except Exception as e:
@@ -167,12 +167,12 @@ def print_speed(speed: float, current: float):
 
 class BleakLoop(QThread):
     ble_address= None
-    char_uuid = None
-    char_uuid2 = None
+    notifyChar = {}
     client = None
     gotNotification = pyqtSignal(str)
     gotNotification2 = pyqtSignal(str)
     errorMsg = pyqtSignal(str)
+    notifyCharsAdded = False
     def run(self):
         asyncio.run(self.bleakLoop())
     #-------------------------------------------------------------------------
@@ -182,23 +182,34 @@ class BleakLoop(QThread):
             task.cancel()
     #-------------------------------------------------------------------------
     def notification_handler(self,sender, data):
-        #print("{0}: {1}".format(sender, data))
-        print("nofitication 1")
-        self.gotNotification.emit(str(data))
-    def notification_handler2(self,sender, data):
-        #print("{0}: {1}".format(sender, data))
-        print("nofitication 2")
-        self.gotNotification2.emit(str(data))
+        print("{0}: {1}".format(sender, data))
+
+        if sender == 5384:
+            print(" got 5384")
+            self.gotNotification.emit(str(data))
+        else:
+            self.gotNotification2.emit(str(data))
+
+    async def enableNotify(self, key, client : BleakClient):
+        await client.start_notify(key, self.notification_handler)
     #-------------------------------------------------------------------------
     async def bleakLoop(self):
+        #-------------------------------------------------------------------------
         async with BleakClient(self.ble_address, disconnected_callback= self.handle_disconnect) as client:
+            
             #here set a lable to notifying enabled or something
             # Ask server to start sending
             await client.write_gatt_char("85fc5681-31d9-4185-87c6-339924d1c5be", bytes('1', 'utf-8'))
-            await client.start_notify(self.char_uuid, self.notification_handler)
-            await client.start_notify(self.char_uuid2, self.notification_handler2)
+            #await client.start_notify(self.char_uuid, self.notification_handler)
+            #await client.start_notify(self.char_uuid2, self.notification_handler2)
             while True:
                 await asyncio.sleep(1.0)
+                if self.notifyCharsAdded == False:
+                    print("About to add chars")
+                    for key, value in self.notifyChar.items():
+                        await self.enableNotify(key,client)
+                    self.notifyCharsAdded = True
+
                 #cycle through  dictionary of characters to read.
 
                 #if that specific chararacteristic is not "stream" enabled
