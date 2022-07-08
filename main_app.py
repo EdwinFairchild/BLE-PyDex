@@ -232,7 +232,7 @@ class MainInterface(QMainWindow):
             self.BLE_DiscoverServices.discovered_services.connect(self.bleDiscoverslot)
             self.BLE_DiscoverServices.start()
             
-            print("Read services from : " + self.selected_address)
+            #print("Read services from : " + self.selected_address)
             #todos can time out
         else:
            print("Opps ,You need to select a device address!")
