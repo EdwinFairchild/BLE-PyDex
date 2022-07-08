@@ -119,13 +119,13 @@ class MainInterface(QMainWindow):
         return super().eventFilter(source, event)
     #------------------------------------------------------------------------
     def btnNotifyCallBack(self):
-        #Add the currently selected char to notify list
-        # self.charNotify = ble_ctl.BleakLoop()
-        # self.charNotify.ble_address = self.selected_address
-        #self.charNotify.client = self.client
-        self.bleLoop.notifyChar[self.ui.btnLabelUUID.text()] = self.bleLoop.notification_handler
-        self.bleLoop.notifyChar["85fc5681-31d9-4185-87c6-339924d1c5be"] = self.bleLoop.notification_handler
-        self.bleLoop.start()
+        #Add the currently selected char to notify enabled chars list
+        if "NOTIFY" in self.ui.btnLabelPermissions.text():
+            self.bleLoop.gotNotification.connect(self.gotCharNotif)
+            self.bleLoop.newNotifyCharUUID = self.ui.btnLabelUUID.text()
+            self.bleLoop.notifyCharsAdded = True;
+        else:
+            print("That characteristic does not have Notify enabled")
 
     def btnReadCharcallback(self):
            #read char from gatt
@@ -141,9 +141,9 @@ class MainInterface(QMainWindow):
         self.ui.lblCharVal.setText(data)
     #------------------------------------------------------------------------
     def gotCharNotif(self,data):
-        self.ui.lblLatestVal.setText(data)
-    def gotCharNotif2(self,data):
-        self.ui.lblLatestVal2.setText(data)
+        print("got this data")
+        print(data)
+        #self.ui.lblLatestVal.setText(data)
     #------------------------| Clip board copying related functions |----------------------------
     def btnLabelTypeCopy(self):
         self.copyToClipBoard(self.ui.btnLabelType.text())
@@ -161,8 +161,9 @@ class MainInterface(QMainWindow):
     #------------------------------------------------------------------------
     def treeWidgetItemPressed(self):
         #get text of seleced item
-        value = self.ui.servicesTreeWidget.currentItem()
-        dataList = value.text(0).split(":")
+        treeWidgetItemtext = self.ui.servicesTreeWidget.currentItem()
+        # the 0 in text(0) means which column index. There is only 1 column used
+        dataList = treeWidgetItemtext.text(0).split(":")
         dataListLen = len(dataList)
         # get UUID
         self.ui.btnLabelType.setText(dataList[0])
@@ -175,11 +176,11 @@ class MainInterface(QMainWindow):
         #get permissions
         lblPermissions = "N/A"
         self.ui.btnLabelUUID.setText(lblUUID[0].strip())
-        if "read" in value.text(0):
+        if "read" in treeWidgetItemtext.text(0):
             lblPermissions = "READ"
-        if "write" in value.text(0):
+        if "write" in treeWidgetItemtext.text(0):
             lblPermissions+=" : WRITE"
-        if "notify" in value.text(0):
+        if "notify" in treeWidgetItemtext.text(0):
             lblPermissions+=" : NOTIFY"
         """ TODO : 
             "broadcast",
@@ -244,6 +245,7 @@ class MainInterface(QMainWindow):
             self.bleLoop.ble_address = self.selected_address
             self.bleLoop.errorMsg.connect(self.errMsg)
             self.connected_address = self.selected_address
+            self.bleLoop.start()
         else:
             print("You have to select a device from explore list")
 
