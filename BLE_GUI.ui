@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1761</width>
+    <width>1763</width>
     <height>927</height>
    </rect>
   </property>
@@ -763,54 +763,13 @@ border-radius:10px;
                    <property name="frameShadow">
                     <enum>QFrame::Raised</enum>
                    </property>
-                   <widget class="QTreeWidget" name="servicesTreeWidget">
-                    <property name="geometry">
-                     <rect>
-                      <x>840</x>
-                      <y>30</y>
-                      <width>611</width>
-                      <height>361</height>
-                     </rect>
-                    </property>
-                    <property name="font">
-                     <font>
-                      <pointsize>11</pointsize>
-                      <weight>50</weight>
-                      <bold>false</bold>
-                     </font>
-                    </property>
-                    <property name="styleSheet">
-                     <string notr="true">border-color: rgb(0, 0, 0);
-padding-top: 20px;
-border-radius:10px;
-background-color: rgb(28, 28, 28);
-color: rgb(255, 255, 255);</string>
-                    </property>
-                    <property name="alternatingRowColors">
-                     <bool>false</bool>
-                    </property>
-                    <property name="animated">
-                     <bool>true</bool>
-                    </property>
-                    <property name="wordWrap">
-                     <bool>true</bool>
-                    </property>
-                    <attribute name="headerVisible">
-                     <bool>false</bool>
-                    </attribute>
-                    <column>
-                     <property name="text">
-                      <string notr="true">1</string>
-                     </property>
-                    </column>
-                   </widget>
                    <widget class="QFrame" name="frame_2">
                     <property name="geometry">
                      <rect>
                       <x>20</x>
                       <y>410</y>
                       <width>531</width>
-                      <height>221</height>
+                      <height>261</height>
                      </rect>
                     </property>
                     <property name="styleSheet">
@@ -830,7 +789,7 @@ background-color: rgb(28, 28, 28);
                      <property name="geometry">
                       <rect>
                        <x>20</x>
-                       <y>60</y>
+                       <y>90</y>
                        <width>61</width>
                        <height>21</height>
                       </rect>
@@ -848,7 +807,7 @@ background-color: rgb(28, 28, 28);
                      <property name="geometry">
                       <rect>
                        <x>20</x>
-                       <y>100</y>
+                       <y>130</y>
                        <width>71</width>
                        <height>16</height>
                       </rect>
@@ -866,7 +825,7 @@ background-color: rgb(28, 28, 28);
                      <property name="geometry">
                       <rect>
                        <x>20</x>
-                       <y>160</y>
+                       <y>190</y>
                        <width>121</width>
                        <height>21</height>
                       </rect>
@@ -884,7 +843,7 @@ background-color: rgb(28, 28, 28);
                      <property name="geometry">
                       <rect>
                        <x>80</x>
-                       <y>60</y>
+                       <y>90</y>
                        <width>411</width>
                        <height>25</height>
                       </rect>
@@ -908,7 +867,7 @@ padding-top: 0px;
                      <property name="geometry">
                       <rect>
                        <x>80</x>
-                       <y>100</y>
+                       <y>130</y>
                        <width>401</width>
                        <height>16</height>
                       </rect>
@@ -930,7 +889,7 @@ padding-top: 0px;
                      <property name="geometry">
                       <rect>
                        <x>130</x>
-                       <y>160</y>
+                       <y>190</y>
                        <width>381</width>
                        <height>21</height>
                       </rect>
@@ -952,7 +911,7 @@ padding-top: 0px;
                      <property name="geometry">
                       <rect>
                        <x>20</x>
-                       <y>30</y>
+                       <y>60</y>
                        <width>61</width>
                        <height>21</height>
                       </rect>
@@ -970,7 +929,7 @@ padding-top: 0px;
                      <property name="geometry">
                       <rect>
                        <x>80</x>
-                       <y>30</y>
+                       <y>60</y>
                        <width>411</width>
                        <height>21</height>
                       </rect>
@@ -994,7 +953,7 @@ padding-top: 0px;
                      <property name="geometry">
                       <rect>
                        <x>20</x>
-                       <y>130</y>
+                       <y>160</y>
                        <width>121</width>
                        <height>21</height>
                       </rect>
@@ -1012,7 +971,7 @@ padding-top: 0px;
                      <property name="geometry">
                       <rect>
                        <x>90</x>
-                       <y>130</y>
+                       <y>160</y>
                        <width>381</width>
                        <height>21</height>
                       </rect>
@@ -1028,6 +987,69 @@ padding-top: 0px;
                      </property>
                      <property name="text">
                       <string>N/A</string>
+                     </property>
+                    </widget>
+                    <widget class="QLabel" name="label_17">
+                     <property name="geometry">
+                      <rect>
+                       <x>20</x>
+                       <y>220</y>
+                       <width>121</width>
+                       <height>21</height>
+                      </rect>
+                     </property>
+                     <property name="font">
+                      <font>
+                       <pointsize>13</pointsize>
+                      </font>
+                     </property>
+                     <property name="text">
+                      <string>Value :</string>
+                     </property>
+                    </widget>
+                    <widget class="QPushButton" name="btnLabelValue">
+                     <property name="geometry">
+                      <rect>
+                       <x>90</x>
+                       <y>220</y>
+                       <width>381</width>
+                       <height>21</height>
+                      </rect>
+                     </property>
+                     <property name="font">
+                      <font>
+                       <pointsize>13</pointsize>
+                      </font>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true">text-align: left;
+</string>
+                     </property>
+                     <property name="text">
+                      <string>N/A</string>
+                     </property>
+                    </widget>
+                    <widget class="QLabel" name="label_8">
+                     <property name="geometry">
+                      <rect>
+                       <x>20</x>
+                       <y>10</y>
+                       <width>391</width>
+                       <height>31</height>
+                      </rect>
+                     </property>
+                     <property name="font">
+                      <font>
+                       <pointsize>20</pointsize>
+                       <weight>75</weight>
+                       <bold>true</bold>
+                      </font>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true">color: rgb(48, 48, 48);</string>
+                     </property>
+                     <property name="text">
+                      <string>Details</string>
                      </property>
                     </widget>
                    </widget>
@@ -1248,7 +1270,7 @@ QPushButton:pressed{
                     <widget class="QLabel" name="label_6">
                      <property name="geometry">
                       <rect>
-                       <x>400</x>
+                       <x>360</x>
                        <y>30</y>
                        <width>301</width>
                        <height>25</height>
@@ -1314,8 +1336,11 @@ border-radius:10px;
                      <property name="styleSheet">
                       <string notr="true">border-color: rgb(0, 0, 0);
 border-radius:10px;
-background-color: rgb(50, 50, 50);
+background-color: rgb(38, 38, 38);
 color: rgb(255, 255, 255);</string>
+                     </property>
+                     <property name="modelColumn">
+                      <number>0</number>
                      </property>
                     </widget>
                     <widget class="QTextEdit" name="textEdit">
@@ -1520,24 +1545,11 @@ QPushButton:pressed{
                     <zorder>frame_6</zorder>
                     <zorder>btnConnect</zorder>
                    </widget>
-                   <widget class="QLabel" name="lblLatestVal">
-                    <property name="geometry">
-                     <rect>
-                      <x>630</x>
-                      <y>550</y>
-                      <width>191</width>
-                      <height>31</height>
-                     </rect>
-                    </property>
-                    <property name="text">
-                     <string>Latest val: </string>
-                    </property>
-                   </widget>
                    <widget class="QPushButton" name="btnNotify">
                     <property name="geometry">
                      <rect>
                       <x>430</x>
-                      <y>640</y>
+                      <y>690</y>
                       <width>121</width>
                       <height>41</height>
                      </rect>
@@ -1571,7 +1583,7 @@ QPushButton:pressed{
                     <property name="geometry">
                      <rect>
                       <x>300</x>
-                      <y>640</y>
+                      <y>690</y>
                       <width>121</width>
                       <height>41</height>
                      </rect>
@@ -1605,7 +1617,7 @@ QPushButton:pressed{
                     <property name="geometry">
                      <rect>
                       <x>170</x>
-                      <y>640</y>
+                      <y>690</y>
                       <width>121</width>
                       <height>41</height>
                      </rect>
@@ -1635,83 +1647,172 @@ QPushButton:pressed{
                      <string>Write</string>
                     </property>
                    </widget>
-                   <widget class="QLabel" name="label_4">
+                   <widget class="QFrame" name="frame_7">
                     <property name="geometry">
                      <rect>
-                      <x>630</x>
-                      <y>530</y>
-                      <width>67</width>
-                      <height>17</height>
+                      <x>570</x>
+                      <y>410</y>
+                      <width>881</width>
+                      <height>291</height>
                      </rect>
                     </property>
-                    <property name="text">
-                     <string>Notify:</string>
+                    <property name="styleSheet">
+                     <string notr="true">
+border-radius:10px;
+background-color: rgb(28, 28, 28);
+
+</string>
                     </property>
+                    <property name="frameShape">
+                     <enum>QFrame::StyledPanel</enum>
+                    </property>
+                    <property name="frameShadow">
+                     <enum>QFrame::Raised</enum>
+                    </property>
+                    <widget class="QTableWidget" name="tableWidget">
+                     <property name="geometry">
+                      <rect>
+                       <x>30</x>
+                       <y>50</y>
+                       <width>151</width>
+                       <height>221</height>
+                      </rect>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true">border-color: rgb(0, 0, 0);
+border-radius:10px;
+background-color: rgb(38, 38, 38);
+color: rgb(255, 255, 255);</string>
+                     </property>
+                    </widget>
+                    <widget class="QTableWidget" name="tableWidget_2">
+                     <property name="geometry">
+                      <rect>
+                       <x>210</x>
+                       <y>50</y>
+                       <width>641</width>
+                       <height>221</height>
+                      </rect>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true">border-color: rgb(0, 0, 0);
+border-radius:10px;
+background-color: rgb(38, 38, 38);
+color: rgb(255, 255, 255);</string>
+                     </property>
+                    </widget>
+                    <widget class="QLabel" name="label_4">
+                     <property name="geometry">
+                      <rect>
+                       <x>30</x>
+                       <y>10</y>
+                       <width>391</width>
+                       <height>31</height>
+                      </rect>
+                     </property>
+                     <property name="font">
+                      <font>
+                       <pointsize>20</pointsize>
+                       <weight>75</weight>
+                       <bold>true</bold>
+                      </font>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true">color: rgb(48, 48, 48);</string>
+                     </property>
+                     <property name="text">
+                      <string>Enabled notifications</string>
+                     </property>
+                    </widget>
                    </widget>
-                   <widget class="QLabel" name="label_8">
-                    <property name="geometry">
-                     <rect>
-                      <x>620</x>
-                      <y>640</y>
-                      <width>91</width>
-                      <height>17</height>
-                     </rect>
-                    </property>
-                    <property name="text">
-                     <string>Other Char</string>
-                    </property>
-                   </widget>
-                   <widget class="QLabel" name="lblCharVal">
-                    <property name="geometry">
-                     <rect>
-                      <x>620</x>
-                      <y>660</y>
-                      <width>191</width>
-                      <height>17</height>
-                     </rect>
-                    </property>
-                    <property name="text">
-                     <string>TextLabel</string>
-                    </property>
-                   </widget>
-                   <widget class="QLabel" name="lblLatestVal2">
+                   <widget class="QFrame" name="frame_9">
                     <property name="geometry">
                      <rect>
                       <x>840</x>
-                      <y>540</y>
-                      <width>191</width>
-                      <height>31</height>
+                      <y>30</y>
+                      <width>611</width>
+                      <height>361</height>
                      </rect>
                     </property>
-                    <property name="text">
-                     <string>Latest val: </string>
+                    <property name="styleSheet">
+                     <string notr="true">
+border-radius:10px;
+background-color: rgb(28, 28, 28);
+
+</string>
                     </property>
+                    <property name="frameShape">
+                     <enum>QFrame::StyledPanel</enum>
+                    </property>
+                    <property name="frameShadow">
+                     <enum>QFrame::Raised</enum>
+                    </property>
+                    <widget class="QLabel" name="label_22">
+                     <property name="geometry">
+                      <rect>
+                       <x>30</x>
+                       <y>10</y>
+                       <width>391</width>
+                       <height>31</height>
+                      </rect>
+                     </property>
+                     <property name="font">
+                      <font>
+                       <pointsize>20</pointsize>
+                       <weight>75</weight>
+                       <bold>true</bold>
+                      </font>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true">color: rgb(48, 48, 48);</string>
+                     </property>
+                     <property name="text">
+                      <string>Gatt explorer</string>
+                     </property>
+                    </widget>
+                    <widget class="QTreeWidget" name="servicesTreeWidget">
+                     <property name="geometry">
+                      <rect>
+                       <x>30</x>
+                       <y>50</y>
+                       <width>551</width>
+                       <height>281</height>
+                      </rect>
+                     </property>
+                     <property name="font">
+                      <font>
+                       <pointsize>13</pointsize>
+                       <weight>50</weight>
+                       <bold>false</bold>
+                      </font>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true">border-color: rgb(0, 0, 0);
+padding-top: 20px;
+border-radius:10px;
+background-color: rgb(38, 38, 38);
+color: rgb(255, 255, 255);
+</string>
+                     </property>
+                     <property name="alternatingRowColors">
+                      <bool>false</bool>
+                     </property>
+                     <property name="animated">
+                      <bool>true</bool>
+                     </property>
+                     <property name="wordWrap">
+                      <bool>true</bool>
+                     </property>
+                     <attribute name="headerVisible">
+                      <bool>false</bool>
+                     </attribute>
+                     <column>
+                      <property name="text">
+                       <string notr="true">1</string>
+                      </property>
+                     </column>
+                    </widget>
                    </widget>
-                   <widget class="QLabel" name="lblNotify2">
-                    <property name="geometry">
-                     <rect>
-                      <x>840</x>
-                      <y>520</y>
-                      <width>67</width>
-                      <height>17</height>
-                     </rect>
-                    </property>
-                    <property name="text">
-                     <string>Notify:</string>
-                    </property>
-                   </widget>
-                   <zorder>frame_2</zorder>
-                   <zorder>servicesTreeWidget</zorder>
-                   <zorder>appFrame_2</zorder>
-                   <zorder>lblLatestVal</zorder>
-                   <zorder>btnNotify</zorder>
-                   <zorder>btnReadChar</zorder>
-                   <zorder>btnWriteChar</zorder>
-                   <zorder>label_4</zorder>
-                   <zorder>label_8</zorder>
-                   <zorder>lblCharVal</zorder>
-                   <zorder>lblLatestVal2</zorder>
-                   <zorder>lblNotify2</zorder>
                   </widget>
                  </item>
                  <item>
