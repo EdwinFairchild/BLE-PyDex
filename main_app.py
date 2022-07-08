@@ -16,7 +16,9 @@ import platform
 import sys
 import os
 import time
-import webbrowser
+import atexit
+from asyncqt import QEventLoop
+
 QtWidgets.QApplication.setAttribute(QtCore.Qt.AA_EnableHighDpiScaling, True) #enable highdpi scaling
 QtWidgets.QApplication.setAttribute(QtCore.Qt.AA_UseHighDpiPixmaps, True)
 
@@ -102,12 +104,31 @@ class MainInterface(QMainWindow):
         test.setWidth(25)
         self.ui.btnYoutube.setIconSize(test)
 
+        self.ui.btnConnectedState.setIcon(QIcon('resources/icons/Ble.svg'))
+        test.setHeight(50)
+        test.setWidth(50)
+        self.ui.btnConnectedState.setIconSize(test)
+
         #misc init stuff
         self.ui.servicesTreeWidget.setColumnCount(1)    
         self.ui.sideBar.installEventFilter(self)    
 
         # button list used for changing style sheet
         self.buttonList=[self.ui.btnMenu ,self.ui.btnMenuGattMaker,self.ui.btnMenuClient,self.ui.btnMenuExplore]
+    def setConnectedIconColor(self, color):
+        if color == "blue":
+            self.ui.btnConnectedState.setIcon(QIcon('resources/icons/BleBlue.svg'))
+            test = QSize()
+            test.setHeight(50)
+            test.setWidth(50)
+            self.ui.btnConnectedState.setIconSize(test)
+        else:
+            self.ui.btnConnectedState.setIcon(QIcon('resources/icons/Ble.svg'))
+            test = QSize()
+            test.setHeight(50)
+            test.setWidth(50)
+            self.ui.btnConnectedState.setIconSize(test)
+            
     #------------------------------------------------------------------------
     #global event filter handler
     def eventFilter(self, source, event):
@@ -237,12 +258,19 @@ class MainInterface(QMainWindow):
     #------------------------------------------------------------------------
     def btnConnectCallback(self):
         # Establish and maintain Bleak connection
-        if self.selected_address != None : 
-            self.bleLoop = ble_ctl.BleakLoop()
-            self.bleLoop.ble_address = self.selected_address
-            self.bleLoop.errorMsg.connect(self.errMsg)
-            self.connected_address = self.selected_address
-            self.bleLoop.start()
+        if self.selected_address != None :
+            try: 
+                self.bleLoop = ble_ctl.BleakLoop()
+                self.bleLoop.ble_address = self.selected_address
+                self.bleLoop.errorMsg.connect(self.errMsg)
+                self.connected_address = self.selected_address
+                self.bleLoop.start()
+                self.setConnectedIconColor('blue')
+                self.ui.btnConnect.setText("Disconnect")
+            except Exception as err:
+                print(err)
+                self.setConnectedIconColor('white')
+                self.ui.btnConnect.setText("Connect")
         else:
             print("You have to select a device from explore list")
 
@@ -383,14 +411,20 @@ class MainInterface(QMainWindow):
                 self.anim.setEasingCurve(QEasingCurve.InOutQuart)
                 self.anim.start()
     #------------------------------------------------------------------------
-
+def exitFunc():
+    try:
+        #close any on running tasks
+        for task in asyncio.all_tasks():
+            task.cancel()
+    except Exception as e:
+        pass
+        
 if __name__ == '__main__':
     #todo: compile resurces into python files, not sure if its even necessary at this point
     #pyrcc5 image.qrc -o image_rc.py
     #compile gui
     os.system("pyuic5 -x BLE_GUI.ui -o BLE_GUI.py")
-    from asyncqt import QEventLoop
-
+    atexit.register(exitFunc)
     app = qtw.QApplication(sys.argv)
     # loop = QEventLoop(app)
     # asyncio.set_event_loop(loop)

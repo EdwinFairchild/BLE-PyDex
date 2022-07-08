@@ -113,7 +113,7 @@ class BleakLoop(QThread):
     def run(self):
         asyncio.run(self.bleakLoop())
     #-------------------------------------------------------------------------
-    def handle_disconnect(_: BleakClient):
+    def handle_disconnect(self, _: BleakClient):
         # cancelling all tasks effectively ends the program
         for task in asyncio.all_tasks():
             task.cancel()

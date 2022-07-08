@@ -1296,7 +1296,10 @@ QPushButton:pressed{
                       </rect>
                      </property>
                      <property name="styleSheet">
-                      <string notr="true">background-color: rgb(30, 30, 30);</string>
+                      <string notr="true">background-color: rgb(30, 30, 30);
+color: rgb(255, 255, 255);
+border: 1px solid gray;
+</string>
                      </property>
                     </widget>
                     <widget class="QRadioButton" name="radioButton">
@@ -1307,6 +1310,28 @@ QPushButton:pressed{
                        <width>141</width>
                        <height>31</height>
                       </rect>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true">QRadioButton {
+   
+    color:                  white;
+}
+
+QRadioButton::indicator {
+    width:                  10px;
+    height:                 10px;
+    border-radius:          5px;
+}
+
+QRadioButton::indicator:checked {
+    background-color:       blue;
+
+}
+
+QRadioButton::indicator:unchecked {
+    background-color:       gray;
+
+}</string>
                      </property>
                      <property name="text">
                       <string>Scan for address</string>
@@ -1320,6 +1345,28 @@ QPushButton:pressed{
                        <width>141</width>
                        <height>31</height>
                       </rect>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true">QRadioButton {
+   
+    color:                  white;
+}
+
+QRadioButton::indicator {
+    width:                  10px;
+    height:                 10px;
+    border-radius:          5px;
+}
+
+QRadioButton::indicator:checked {
+    background-color:       blue;
+
+}
+
+QRadioButton::indicator:unchecked {
+    background-color:       gray;
+
+}</string>
                      </property>
                      <property name="text">
                       <string>Scan for address :</string>
@@ -1335,7 +1382,10 @@ QPushButton:pressed{
                       </rect>
                      </property>
                      <property name="styleSheet">
-                      <string notr="true">background-color: rgb(30, 30, 30);</string>
+                      <string notr="true">background-color: rgb(30, 30, 30);
+color: rgb(255, 255, 255);
+border: 1px solid gray;
+</string>
                      </property>
                     </widget>
                     <widget class="QRadioButton" name="radioButton_3">
@@ -1347,8 +1397,33 @@ QPushButton:pressed{
                        <height>31</height>
                       </rect>
                      </property>
+                     <property name="styleSheet">
+                      <string notr="true">QRadioButton {
+   
+    color:                  white;
+}
+
+QRadioButton::indicator {
+    width:                  10px;
+    height:                 10px;
+    border-radius:          5px;
+}
+
+QRadioButton::indicator:checked {
+    background-color:       blue;
+
+}
+
+QRadioButton::indicator:unchecked {
+    background-color:       gray;
+
+}</string>
+                     </property>
                      <property name="text">
                       <string>Scan for all</string>
+                     </property>
+                     <property name="checked">
+                      <bool>true</bool>
                      </property>
                     </widget>
                     <widget class="QFrame" name="frame_6">
@@ -1752,7 +1827,9 @@ background-color: rgb(28, 28, 28);
                      <property name="styleSheet">
                       <string notr="true">border-color: rgb(0, 0, 0);
 border-radius:10px;
-background-color: rgb(38, 38, 38);
+background-color: rgb(28, 28, 28);
+border: 1px solid gray;
+
 color: rgb(255, 255, 255);</string>
                      </property>
                     </widget>
@@ -1768,7 +1845,9 @@ color: rgb(255, 255, 255);</string>
                      <property name="styleSheet">
                       <string notr="true">border-color: rgb(0, 0, 0);
 border-radius:10px;
-background-color: rgb(38, 38, 38);
+background-color: rgb(28, 28, 28);
+border: 1px solid gray;
+
 color: rgb(255, 255, 255);</string>
                      </property>
                     </widget>
@@ -1838,7 +1917,7 @@ background-color: rgb(28, 28, 28);
                       <string notr="true">border-color: rgb(0, 0, 0);
 padding-top: 20px;
 border-radius:10px;
-background-color: rgb(38, 38, 38);
+background-color: rgb(28, 28, 28);
 color: rgb(255, 255, 255);
 </string>
                      </property>
@@ -1871,7 +1950,10 @@ color: rgb(255, 255, 255);
                      </rect>
                     </property>
                     <property name="styleSheet">
-                     <string notr="true">background-color: rgb(30, 30, 30);</string>
+                     <string notr="true">background-color: rgb(30, 30, 30);
+color: rgb(255, 255, 255);
+border: 1px solid gray;
+</string>
                     </property>
                    </widget>
                    <widget class="QFrame" name="frame_8">
@@ -1931,7 +2013,9 @@ background-color: rgb(28, 28, 28);
                      <property name="styleSheet">
                       <string notr="true">border-color: rgb(0, 0, 0);
 border-radius:10px;
-background-color: rgb(38, 38, 38);
+background-color: rgb(28, 28, 28);
+border: 1px solid gray;
+
 color: rgb(255, 255, 255);</string>
                      </property>
                     </widget>
@@ -1947,7 +2031,9 @@ color: rgb(255, 255, 255);</string>
                      <property name="styleSheet">
                       <string notr="true">border-color: rgb(0, 0, 0);
 border-radius:10px;
-background-color: rgb(38, 38, 38);
+background-color: rgb(28, 28, 28);
+border: 1px solid gray;
+
 color: rgb(255, 255, 255);</string>
                      </property>
                     </widget>
@@ -2042,16 +2128,16 @@ p, li { white-space: pre-wrap; }
                    <widget class="QFrame" name="frame_10">
                     <property name="geometry">
                      <rect>
-                      <x>1200</x>
-                      <y>840</y>
-                      <width>251</width>
-                      <height>131</height>
+                      <x>650</x>
+                      <y>690</y>
+                      <width>801</width>
+                      <height>151</height>
                      </rect>
                     </property>
                     <property name="styleSheet">
                      <string notr="true">color: rgb(255, 255, 255);
 border-radius:10px;
-background-color: rgb(83, 186, 255);</string>
+background-color: rgb(28, 28, 28);</string>
                     </property>
                     <property name="frameShape">
                      <enum>QFrame::StyledPanel</enum>
@@ -2059,24 +2145,17 @@ background-color: rgb(83, 186, 255);</string>
                     <property name="frameShadow">
                      <enum>QFrame::Raised</enum>
                     </property>
-                    <widget class="QLabel" name="label_20">
+                    <widget class="QPushButton" name="btnConnectedState">
                      <property name="geometry">
                       <rect>
-                       <x>20</x>
-                       <y>0</y>
-                       <width>181</width>
-                       <height>21</height>
+                       <x>680</x>
+                       <y>30</y>
+                       <width>101</width>
+                       <height>91</height>
                       </rect>
                      </property>
-                     <property name="font">
-                      <font>
-                       <pointsize>13</pointsize>
-                       <weight>75</weight>
-                       <bold>true</bold>
-                      </font>
-                     </property>
                      <property name="text">
-                      <string>Status : Connected</string>
+                      <string/>
                      </property>
                     </widget>
                    </widget>

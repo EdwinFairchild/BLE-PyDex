@@ -554,20 +554,87 @@ class Ui_MainWindow(object):
         self.btnScan.setObjectName("btnScan")
         self.textEdit = QtWidgets.QTextEdit(self.appFrame_2)
         self.textEdit.setGeometry(QtCore.QRect(210, 120, 131, 31))
-        self.textEdit.setStyleSheet("background-color: rgb(30, 30, 30);")
+        self.textEdit.setStyleSheet("background-color: rgb(30, 30, 30);\n"
+"color: rgb(255, 255, 255);\n"
+"border: 1px solid gray;\n"
+"")
         self.textEdit.setObjectName("textEdit")
         self.radioButton = QtWidgets.QRadioButton(self.appFrame_2)
         self.radioButton.setGeometry(QtCore.QRect(50, 120, 141, 31))
+        self.radioButton.setStyleSheet("QRadioButton {\n"
+"   \n"
+"    color:                  white;\n"
+"}\n"
+"\n"
+"QRadioButton::indicator {\n"
+"    width:                  10px;\n"
+"    height:                 10px;\n"
+"    border-radius:          5px;\n"
+"}\n"
+"\n"
+"QRadioButton::indicator:checked {\n"
+"    background-color:       blue;\n"
+"\n"
+"}\n"
+"\n"
+"QRadioButton::indicator:unchecked {\n"
+"    background-color:       gray;\n"
+"\n"
+"}")
         self.radioButton.setObjectName("radioButton")
         self.radioButton_2 = QtWidgets.QRadioButton(self.appFrame_2)
         self.radioButton_2.setGeometry(QtCore.QRect(50, 160, 141, 31))
+        self.radioButton_2.setStyleSheet("QRadioButton {\n"
+"   \n"
+"    color:                  white;\n"
+"}\n"
+"\n"
+"QRadioButton::indicator {\n"
+"    width:                  10px;\n"
+"    height:                 10px;\n"
+"    border-radius:          5px;\n"
+"}\n"
+"\n"
+"QRadioButton::indicator:checked {\n"
+"    background-color:       blue;\n"
+"\n"
+"}\n"
+"\n"
+"QRadioButton::indicator:unchecked {\n"
+"    background-color:       gray;\n"
+"\n"
+"}")
         self.radioButton_2.setObjectName("radioButton_2")
         self.textEdit_2 = QtWidgets.QTextEdit(self.appFrame_2)
         self.textEdit_2.setGeometry(QtCore.QRect(210, 160, 131, 31))
-        self.textEdit_2.setStyleSheet("background-color: rgb(30, 30, 30);")
+        self.textEdit_2.setStyleSheet("background-color: rgb(30, 30, 30);\n"
+"color: rgb(255, 255, 255);\n"
+"border: 1px solid gray;\n"
+"")
         self.textEdit_2.setObjectName("textEdit_2")
         self.radioButton_3 = QtWidgets.QRadioButton(self.appFrame_2)
         self.radioButton_3.setGeometry(QtCore.QRect(50, 80, 112, 31))
+        self.radioButton_3.setStyleSheet("QRadioButton {\n"
+"   \n"
+"    color:                  white;\n"
+"}\n"
+"\n"
+"QRadioButton::indicator {\n"
+"    width:                  10px;\n"
+"    height:                 10px;\n"
+"    border-radius:          5px;\n"
+"}\n"
+"\n"
+"QRadioButton::indicator:checked {\n"
+"    background-color:       blue;\n"
+"\n"
+"}\n"
+"\n"
+"QRadioButton::indicator:unchecked {\n"
+"    background-color:       gray;\n"
+"\n"
+"}")
+        self.radioButton_3.setChecked(True)
         self.radioButton_3.setObjectName("radioButton_3")
         self.frame_6 = QtWidgets.QFrame(self.appFrame_2)
         self.frame_6.setGeometry(QtCore.QRect(50, 220, 301, 71))
@@ -747,14 +814,18 @@ class Ui_MainWindow(object):
         self.listWidget.setGeometry(QtCore.QRect(30, 50, 171, 191))
         self.listWidget.setStyleSheet("border-color: rgb(0, 0, 0);\n"
 "border-radius:10px;\n"
-"background-color: rgb(38, 38, 38);\n"
+"background-color: rgb(28, 28, 28);\n"
+"border: 1px solid gray;\n"
+"\n"
 "color: rgb(255, 255, 255);")
         self.listWidget.setObjectName("listWidget")
         self.listWidget_2 = QtWidgets.QListWidget(self.frame_7)
         self.listWidget_2.setGeometry(QtCore.QRect(210, 50, 201, 191))
         self.listWidget_2.setStyleSheet("border-color: rgb(0, 0, 0);\n"
 "border-radius:10px;\n"
-"background-color: rgb(38, 38, 38);\n"
+"background-color: rgb(28, 28, 28);\n"
+"border: 1px solid gray;\n"
+"\n"
 "color: rgb(255, 255, 255);")
         self.listWidget_2.setObjectName("listWidget_2")
         self.frame_9 = QtWidgets.QFrame(self.frame)
@@ -786,7 +857,7 @@ class Ui_MainWindow(object):
         self.servicesTreeWidget.setStyleSheet("border-color: rgb(0, 0, 0);\n"
 "padding-top: 20px;\n"
 "border-radius:10px;\n"
-"background-color: rgb(38, 38, 38);\n"
+"background-color: rgb(28, 28, 28);\n"
 "color: rgb(255, 255, 255);\n"
 "")
         self.servicesTreeWidget.setAlternatingRowColors(False)
@@ -797,7 +868,10 @@ class Ui_MainWindow(object):
         self.servicesTreeWidget.header().setVisible(False)
         self.textEdit_3 = QtWidgets.QTextEdit(self.frame)
         self.textEdit_3.setGeometry(QtCore.QRect(20, 690, 131, 31))
-        self.textEdit_3.setStyleSheet("background-color: rgb(30, 30, 30);")
+        self.textEdit_3.setStyleSheet("background-color: rgb(30, 30, 30);\n"
+"color: rgb(255, 255, 255);\n"
+"border: 1px solid gray;\n"
+"")
         self.textEdit_3.setObjectName("textEdit_3")
         self.frame_8 = QtWidgets.QFrame(self.frame)
         self.frame_8.setGeometry(QtCore.QRect(1020, 410, 431, 261))
@@ -822,14 +896,18 @@ class Ui_MainWindow(object):
         self.listWidget_5.setGeometry(QtCore.QRect(30, 50, 171, 191))
         self.listWidget_5.setStyleSheet("border-color: rgb(0, 0, 0);\n"
 "border-radius:10px;\n"
-"background-color: rgb(38, 38, 38);\n"
+"background-color: rgb(28, 28, 28);\n"
+"border: 1px solid gray;\n"
+"\n"
 "color: rgb(255, 255, 255);")
         self.listWidget_5.setObjectName("listWidget_5")
         self.listWidget_6 = QtWidgets.QListWidget(self.frame_8)
         self.listWidget_6.setGeometry(QtCore.QRect(210, 50, 201, 191))
         self.listWidget_6.setStyleSheet("border-color: rgb(0, 0, 0);\n"
 "border-radius:10px;\n"
-"background-color: rgb(38, 38, 38);\n"
+"background-color: rgb(28, 28, 28);\n"
+"border: 1px solid gray;\n"
+"\n"
 "color: rgb(255, 255, 255);")
         self.listWidget_6.setObjectName("listWidget_6")
         self.label_5 = QtWidgets.QLabel(self.frame)
@@ -858,21 +936,17 @@ class Ui_MainWindow(object):
         self.textBrowser_2.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
         self.textBrowser_2.setObjectName("textBrowser_2")
         self.frame_10 = QtWidgets.QFrame(self.frame)
-        self.frame_10.setGeometry(QtCore.QRect(820, 820, 621, 151))
+        self.frame_10.setGeometry(QtCore.QRect(650, 690, 801, 151))
         self.frame_10.setStyleSheet("color: rgb(255, 255, 255);\n"
 "border-radius:10px;\n"
-"background-color: rgb(83, 186, 255);")
+"background-color: rgb(28, 28, 28);")
         self.frame_10.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_10.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_10.setObjectName("frame_10")
-        self.label_20 = QtWidgets.QLabel(self.frame_10)
-        self.label_20.setGeometry(QtCore.QRect(230, 10, 181, 31))
-        font = QtGui.QFont()
-        font.setPointSize(15)
-        font.setBold(True)
-        font.setWeight(75)
-        self.label_20.setFont(font)
-        self.label_20.setObjectName("label_20")
+        self.btnConnectedState = QtWidgets.QPushButton(self.frame_10)
+        self.btnConnectedState.setGeometry(QtCore.QRect(680, 30, 101, 91))
+        self.btnConnectedState.setText("")
+        self.btnConnectedState.setObjectName("btnConnectedState")
         self.verticalLayout_2.addWidget(self.frame)
         self.horizontalLayout_4.addWidget(self.mainframe_explore)
         self.stackedWidget.addWidget(self.page_Explore)
@@ -958,7 +1032,6 @@ class Ui_MainWindow(object):
 "</style></head><body style=\" font-family:\'Ubuntu\'; font-size:11pt; font-weight:400; font-style:normal;\">\n"
 "<p align=\"justify\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" color:#909090;\">Explore services and characteristics</span></p>\n"
 "<p align=\"justify\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" color:#909090;\">on connectable devices.</span></p></body></html>"))
-        self.label_20.setText(_translate("MainWindow", "Status : Connected"))
         self.label_2.setText(_translate("MainWindow", "intro page"))
 from slidingstackedwidget import SlidingStackedWidget
 
