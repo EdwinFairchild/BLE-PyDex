@@ -60,9 +60,9 @@ class MainInterface(QMainWindow):
         self.ui.btnMenuClient.clicked.connect(self.btnMenuClientCallBack)
         
         # interface button callbacks
-        self.ui.btnScan.clicked.connect(self.btnBleScan_2)
+        self.ui.btnScan.clicked.connect(self.btnBleScan)
         self.ui.btnReadChar.clicked.connect(self.btnReadCharcallback)
-        self.ui.list_discover_address_2.itemPressed.connect(self.discoveredList2ItemPressed)
+        self.ui.list_discoveredDevices.itemPressed.connect(self.discoveredList2ItemPressed)
         self.ui.btnExplore.clicked.connect(self.btnExploreCallback)
         self.ui.btnConnect.clicked.connect(self.btnConnectCallback)
         self.ui.servicesTreeWidget.itemPressed.connect(self.treeWidgetItemPressed)
@@ -197,15 +197,12 @@ class MainInterface(QMainWindow):
         self.ui.btnLabelPermissions.setText(lblPermissions)
     #------------------------------------------------------------------------
     def discoveredList2ItemPressed(self):
-        value = self.ui.list_discover_address_2.currentItem() 
+        value = self.ui.list_discoveredDevices.currentItem() 
         tmp  = value.text()
         self.selected_address = tmp[1:18]
     #------------------------------------------------------------------------
-    def btnBleScan_2(self):
-        self.ui.list_discover_address_2.clear()
-
-        self.ui.list_discover_address_2.addItem(" " )
-        self.ui.list_discover_address_2.addItem(" " )
+    def btnBleScan(self):
+        self.ui.list_discoveredDevices.clear()
         self.BLE_DiscoverDevices = ble_ctl.BLE_DiscoverDevices()
         self.BLE_DiscoverDevices.scan_timeout = self.ui.timeoutSlider_2.value()
         self.BLE_DiscoverDevices.discovered_devices.connect(self.bleScannerSlot)
@@ -217,7 +214,7 @@ class MainInterface(QMainWindow):
     
     #------------------------------------------------------------------------
     def bleScannerSlot(self,device):
-        self.ui.list_discover_address_2.addItem(f" "+ device[0:17] + " | " + device[18:] + " " )
+        self.ui.list_discoveredDevices.addItem(f" "+ device[0:17] + " | " + device[18:] + " " )
     #------------------------------------------------------------------------ 
     def blescannerFinished(self):
             pass

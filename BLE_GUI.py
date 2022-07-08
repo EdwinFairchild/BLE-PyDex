@@ -14,14 +14,14 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(1763, 927)
+        MainWindow.resize(1756, 927)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setVerticalStretch(1)
         sizePolicy.setHeightForWidth(MainWindow.sizePolicy().hasHeightForWidth())
         MainWindow.setSizePolicy(sizePolicy)
-        MainWindow.setMinimumSize(QtCore.QSize(1640, 0))
-        MainWindow.setMaximumSize(QtCore.QSize(1900, 1019))
+        MainWindow.setMinimumSize(QtCore.QSize(1756, 927))
+        MainWindow.setMaximumSize(QtCore.QSize(1756, 927))
         MainWindow.setStyleSheet("background-color: rgb(28, 28, 28);\n"
 "border:none;")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
@@ -83,6 +83,39 @@ class Ui_MainWindow(object):
         self.btnMenu.setCheckable(False)
         self.btnMenu.setObjectName("btnMenu")
         self.verticalLayout.addWidget(self.btnMenu)
+        self.label_21 = QtWidgets.QLabel(self.sideBar)
+        self.label_21.setMaximumSize(QtCore.QSize(16777215, 1))
+        self.label_21.setStyleSheet("background-color: rgb(81, 81, 81);")
+        self.label_21.setText("")
+        self.label_21.setObjectName("label_21")
+        self.verticalLayout.addWidget(self.label_21)
+        self.btnMenuExplore = QtWidgets.QPushButton(self.sideBar)
+        self.btnMenuExplore.setMinimumSize(QtCore.QSize(0, 35))
+        font = QtGui.QFont()
+        font.setPointSize(13)
+        self.btnMenuExplore.setFont(font)
+        self.btnMenuExplore.setStyleSheet("QPushButton{\n"
+"    \n"
+"    border:none;\n"
+"color: rgb(255, 255, 255);\n"
+"text-align: left;\n"
+"padding-left: 30px;\n"
+"\n"
+"}\n"
+"\n"
+"QPushButton:hover{\n"
+"    color: rgb(0, 106, 255);\n"
+"\n"
+"\n"
+"}\n"
+"\n"
+"QPushButton:pressed{\n"
+"    \n"
+"    color: rgb(255, 255, 255);\n"
+"\n"
+"}")
+        self.btnMenuExplore.setObjectName("btnMenuExplore")
+        self.verticalLayout.addWidget(self.btnMenuExplore)
         self.btnMenuGattMaker = QtWidgets.QPushButton(self.sideBar)
         self.btnMenuGattMaker.setMinimumSize(QtCore.QSize(0, 35))
         font = QtGui.QFont()
@@ -137,33 +170,6 @@ class Ui_MainWindow(object):
 "}")
         self.btnMenuClient.setObjectName("btnMenuClient")
         self.verticalLayout.addWidget(self.btnMenuClient)
-        self.btnMenuExplore = QtWidgets.QPushButton(self.sideBar)
-        self.btnMenuExplore.setMinimumSize(QtCore.QSize(0, 50))
-        font = QtGui.QFont()
-        font.setPointSize(13)
-        self.btnMenuExplore.setFont(font)
-        self.btnMenuExplore.setStyleSheet("QPushButton{\n"
-"    \n"
-"    border:none;\n"
-"color: rgb(255, 255, 255);\n"
-"text-align: left;\n"
-"padding-left: 30px;\n"
-"\n"
-"}\n"
-"\n"
-"QPushButton:hover{\n"
-"    color: rgb(0, 106, 255);\n"
-"\n"
-"\n"
-"}\n"
-"\n"
-"QPushButton:pressed{\n"
-"    \n"
-"    color: rgb(255, 255, 255);\n"
-"\n"
-"}")
-        self.btnMenuExplore.setObjectName("btnMenuExplore")
-        self.verticalLayout.addWidget(self.btnMenuExplore)
         spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.verticalLayout.addItem(spacerItem)
         self.frame_3 = QtWidgets.QFrame(self.sideBar)
@@ -334,7 +340,7 @@ class Ui_MainWindow(object):
         self.mainframe_explore.setFrameShadow(QtWidgets.QFrame.Raised)
         self.mainframe_explore.setObjectName("mainframe_explore")
         self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.mainframe_explore)
-        self.verticalLayout_2.setContentsMargins(15, 0, 20, -1)
+        self.verticalLayout_2.setContentsMargins(15, 0, 20, 0)
         self.verticalLayout_2.setSpacing(0)
         self.verticalLayout_2.setObjectName("verticalLayout_2")
         self.frame = QtWidgets.QFrame(self.mainframe_explore)
@@ -464,8 +470,8 @@ class Ui_MainWindow(object):
         self.appFrame_2.setFrameShadow(QtWidgets.QFrame.Raised)
         self.appFrame_2.setObjectName("appFrame_2")
         self.btnExplore = QtWidgets.QPushButton(self.appFrame_2)
-        self.btnExplore.setGeometry(QtCore.QRect(510, 290, 121, 41))
-        self.btnExplore.setMinimumSize(QtCore.QSize(0, 40))
+        self.btnExplore.setGeometry(QtCore.QRect(510, 290, 121, 30))
+        self.btnExplore.setMinimumSize(QtCore.QSize(0, 30))
         font = QtGui.QFont()
         font.setPointSize(11)
         self.btnExplore.setFont(font)
@@ -490,7 +496,7 @@ class Ui_MainWindow(object):
 "}")
         self.btnExplore.setObjectName("btnExplore")
         self.scaneSliderFrame_2 = QtWidgets.QFrame(self.appFrame_2)
-        self.scaneSliderFrame_2.setGeometry(QtCore.QRect(50, 20, 271, 51))
+        self.scaneSliderFrame_2.setGeometry(QtCore.QRect(50, 20, 291, 51))
         self.scaneSliderFrame_2.setStyleSheet("border:none;")
         self.scaneSliderFrame_2.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.scaneSliderFrame_2.setFrameShadow(QtWidgets.QFrame.Raised)
@@ -520,8 +526,8 @@ class Ui_MainWindow(object):
 "color: rgb(255, 255, 255);")
         self.timeoutLabel_2.setObjectName("timeoutLabel_2")
         self.btnScan = QtWidgets.QPushButton(self.scaneSliderFrame_2)
-        self.btnScan.setGeometry(QtCore.QRect(180, 10, 81, 41))
-        self.btnScan.setMinimumSize(QtCore.QSize(0, 40))
+        self.btnScan.setGeometry(QtCore.QRect(180, 10, 111, 30))
+        self.btnScan.setMinimumSize(QtCore.QSize(0, 30))
         self.btnScan.setMaximumSize(QtCore.QSize(1000, 16777215))
         font = QtGui.QFont()
         font.setPointSize(11)
@@ -546,35 +552,6 @@ class Ui_MainWindow(object):
 "    background-color: rgb(170, 27, 27);\n"
 "}")
         self.btnScan.setObjectName("btnScan")
-        self.label_6 = QtWidgets.QLabel(self.appFrame_2)
-        self.label_6.setGeometry(QtCore.QRect(360, 30, 301, 25))
-        self.label_6.setMinimumSize(QtCore.QSize(0, 25))
-        font = QtGui.QFont()
-        font.setPointSize(12)
-        font.setBold(False)
-        font.setWeight(50)
-        self.label_6.setFont(font)
-        self.label_6.setStyleSheet("color: rgb(255, 255, 255);\n"
-"border-radius:10px;\n"
-"    background-color: rgb(170, 77, 77);")
-        self.label_6.setAlignment(QtCore.Qt.AlignCenter)
-        self.label_6.setObjectName("label_6")
-        self.list_discover_address_2 = QtWidgets.QListWidget(self.appFrame_2)
-        self.list_discover_address_2.setGeometry(QtCore.QRect(360, 31, 401, 250))
-        self.list_discover_address_2.setMinimumSize(QtCore.QSize(0, 250))
-        self.list_discover_address_2.setMaximumSize(QtCore.QSize(550, 1000))
-        font = QtGui.QFont()
-        font.setFamily("Monospace")
-        font.setPointSize(13)
-        font.setBold(False)
-        font.setWeight(50)
-        self.list_discover_address_2.setFont(font)
-        self.list_discover_address_2.setStyleSheet("border-color: rgb(0, 0, 0);\n"
-"border-radius:10px;\n"
-"background-color: rgb(38, 38, 38);\n"
-"color: rgb(255, 255, 255);")
-        self.list_discover_address_2.setModelColumn(0)
-        self.list_discover_address_2.setObjectName("list_discover_address_2")
         self.textEdit = QtWidgets.QTextEdit(self.appFrame_2)
         self.textEdit.setGeometry(QtCore.QRect(210, 120, 131, 31))
         self.textEdit.setStyleSheet("background-color: rgb(30, 30, 30);")
@@ -615,8 +592,8 @@ class Ui_MainWindow(object):
         self.lblConnectionTime.setGeometry(QtCore.QRect(210, 10, 67, 17))
         self.lblConnectionTime.setObjectName("lblConnectionTime")
         self.btnConnect = QtWidgets.QPushButton(self.appFrame_2)
-        self.btnConnect.setGeometry(QtCore.QRect(640, 290, 121, 41))
-        self.btnConnect.setMinimumSize(QtCore.QSize(0, 40))
+        self.btnConnect.setGeometry(QtCore.QRect(640, 290, 121, 30))
+        self.btnConnect.setMinimumSize(QtCore.QSize(0, 30))
         font = QtGui.QFont()
         font.setPointSize(11)
         self.btnConnect.setFont(font)
@@ -640,19 +617,47 @@ class Ui_MainWindow(object):
 "    background-color: rgb(170, 27, 27);\n"
 "}")
         self.btnConnect.setObjectName("btnConnect")
-        self.btnExplore.raise_()
-        self.scaneSliderFrame_2.raise_()
-        self.list_discover_address_2.raise_()
-        self.label_6.raise_()
-        self.textEdit.raise_()
-        self.radioButton.raise_()
-        self.radioButton_2.raise_()
-        self.textEdit_2.raise_()
-        self.radioButton_3.raise_()
-        self.frame_6.raise_()
-        self.btnConnect.raise_()
+        self.frame_11 = QtWidgets.QFrame(self.appFrame_2)
+        self.frame_11.setGeometry(QtCore.QRect(360, 30, 411, 251))
+        self.frame_11.setStyleSheet("border-color: rgb(0, 0, 0);\n"
+"border-radius:10px;\n"
+"background-color: rgb(38, 38, 38);\n"
+"color: rgb(255, 255, 255);")
+        self.frame_11.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_11.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_11.setObjectName("frame_11")
+        self.list_discoveredDevices = QtWidgets.QListWidget(self.frame_11)
+        self.list_discoveredDevices.setGeometry(QtCore.QRect(0, 40, 411, 201))
+        self.list_discoveredDevices.setMinimumSize(QtCore.QSize(0, 0))
+        self.list_discoveredDevices.setMaximumSize(QtCore.QSize(550, 1000))
+        font = QtGui.QFont()
+        font.setFamily("Monospace")
+        font.setPointSize(12)
+        font.setBold(False)
+        font.setWeight(50)
+        self.list_discoveredDevices.setFont(font)
+        self.list_discoveredDevices.setStyleSheet("border-color: rgb(0, 0, 0);\n"
+"border-radius:10px;\n"
+"background-color: rgb(38, 38, 38);\n"
+"color: rgb(255, 255, 255);")
+        self.list_discoveredDevices.setModelColumn(0)
+        self.list_discoveredDevices.setObjectName("list_discoveredDevices")
+        self.label_6 = QtWidgets.QLabel(self.frame_11)
+        self.label_6.setGeometry(QtCore.QRect(50, 10, 311, 25))
+        self.label_6.setMinimumSize(QtCore.QSize(0, 25))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        font.setBold(False)
+        font.setWeight(50)
+        self.label_6.setFont(font)
+        self.label_6.setStyleSheet("color: rgb(255, 255, 255);\n"
+"border-radius:10px;\n"
+"background-color: rgb(27, 27, 27);")
+        self.label_6.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_6.setObjectName("label_6")
         self.btnNotify = QtWidgets.QPushButton(self.frame)
-        self.btnNotify.setGeometry(QtCore.QRect(430, 690, 121, 41))
+        self.btnNotify.setGeometry(QtCore.QRect(430, 690, 121, 30))
+        self.btnNotify.setMinimumSize(QtCore.QSize(0, 30))
         self.btnNotify.setStyleSheet("QPushButton{\n"
 "    color: rgb(0, 0, 0);\n"
 "    background-color: rgb(180, 180, 180);\n"
@@ -674,7 +679,8 @@ class Ui_MainWindow(object):
 "}")
         self.btnNotify.setObjectName("btnNotify")
         self.btnReadChar = QtWidgets.QPushButton(self.frame)
-        self.btnReadChar.setGeometry(QtCore.QRect(300, 690, 121, 41))
+        self.btnReadChar.setGeometry(QtCore.QRect(300, 690, 121, 30))
+        self.btnReadChar.setMinimumSize(QtCore.QSize(0, 30))
         self.btnReadChar.setStyleSheet("QPushButton{\n"
 "    color: rgb(0, 0, 0);\n"
 "    background-color: rgb(180, 180, 180);\n"
@@ -696,7 +702,8 @@ class Ui_MainWindow(object):
 "}")
         self.btnReadChar.setObjectName("btnReadChar")
         self.btnWriteChar = QtWidgets.QPushButton(self.frame)
-        self.btnWriteChar.setGeometry(QtCore.QRect(170, 690, 121, 41))
+        self.btnWriteChar.setGeometry(QtCore.QRect(170, 690, 121, 30))
+        self.btnWriteChar.setMinimumSize(QtCore.QSize(0, 30))
         self.btnWriteChar.setStyleSheet("QPushButton{\n"
 "    color: rgb(0, 0, 0);\n"
 "    background-color: rgb(180, 180, 180);\n"
@@ -718,7 +725,7 @@ class Ui_MainWindow(object):
 "}")
         self.btnWriteChar.setObjectName("btnWriteChar")
         self.frame_7 = QtWidgets.QFrame(self.frame)
-        self.frame_7.setGeometry(QtCore.QRect(570, 410, 881, 291))
+        self.frame_7.setGeometry(QtCore.QRect(570, 410, 431, 261))
         self.frame_7.setStyleSheet("\n"
 "border-radius:10px;\n"
 "background-color: rgb(28, 28, 28);\n"
@@ -727,24 +734,6 @@ class Ui_MainWindow(object):
         self.frame_7.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_7.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_7.setObjectName("frame_7")
-        self.tableWidget = QtWidgets.QTableWidget(self.frame_7)
-        self.tableWidget.setGeometry(QtCore.QRect(30, 50, 151, 221))
-        self.tableWidget.setStyleSheet("border-color: rgb(0, 0, 0);\n"
-"border-radius:10px;\n"
-"background-color: rgb(38, 38, 38);\n"
-"color: rgb(255, 255, 255);")
-        self.tableWidget.setObjectName("tableWidget")
-        self.tableWidget.setColumnCount(0)
-        self.tableWidget.setRowCount(0)
-        self.tableWidget_2 = QtWidgets.QTableWidget(self.frame_7)
-        self.tableWidget_2.setGeometry(QtCore.QRect(210, 50, 641, 221))
-        self.tableWidget_2.setStyleSheet("border-color: rgb(0, 0, 0);\n"
-"border-radius:10px;\n"
-"background-color: rgb(38, 38, 38);\n"
-"color: rgb(255, 255, 255);")
-        self.tableWidget_2.setObjectName("tableWidget_2")
-        self.tableWidget_2.setColumnCount(0)
-        self.tableWidget_2.setRowCount(0)
         self.label_4 = QtWidgets.QLabel(self.frame_7)
         self.label_4.setGeometry(QtCore.QRect(30, 10, 391, 31))
         font = QtGui.QFont()
@@ -754,6 +743,20 @@ class Ui_MainWindow(object):
         self.label_4.setFont(font)
         self.label_4.setStyleSheet("color: rgb(48, 48, 48);")
         self.label_4.setObjectName("label_4")
+        self.listWidget = QtWidgets.QListWidget(self.frame_7)
+        self.listWidget.setGeometry(QtCore.QRect(30, 50, 171, 191))
+        self.listWidget.setStyleSheet("border-color: rgb(0, 0, 0);\n"
+"border-radius:10px;\n"
+"background-color: rgb(38, 38, 38);\n"
+"color: rgb(255, 255, 255);")
+        self.listWidget.setObjectName("listWidget")
+        self.listWidget_2 = QtWidgets.QListWidget(self.frame_7)
+        self.listWidget_2.setGeometry(QtCore.QRect(210, 50, 201, 191))
+        self.listWidget_2.setStyleSheet("border-color: rgb(0, 0, 0);\n"
+"border-radius:10px;\n"
+"background-color: rgb(38, 38, 38);\n"
+"color: rgb(255, 255, 255);")
+        self.listWidget_2.setObjectName("listWidget_2")
         self.frame_9 = QtWidgets.QFrame(self.frame)
         self.frame_9.setGeometry(QtCore.QRect(840, 30, 611, 361))
         self.frame_9.setStyleSheet("\n"
@@ -792,12 +795,45 @@ class Ui_MainWindow(object):
         self.servicesTreeWidget.setObjectName("servicesTreeWidget")
         self.servicesTreeWidget.headerItem().setText(0, "1")
         self.servicesTreeWidget.header().setVisible(False)
-        self.verticalLayout_2.addWidget(self.frame)
-        self.horizontalLayout_2 = QtWidgets.QHBoxLayout()
-        self.horizontalLayout_2.setObjectName("horizontalLayout_2")
-        spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.horizontalLayout_2.addItem(spacerItem2)
-        self.label_5 = QtWidgets.QLabel(self.mainframe_explore)
+        self.textEdit_3 = QtWidgets.QTextEdit(self.frame)
+        self.textEdit_3.setGeometry(QtCore.QRect(20, 690, 131, 31))
+        self.textEdit_3.setStyleSheet("background-color: rgb(30, 30, 30);")
+        self.textEdit_3.setObjectName("textEdit_3")
+        self.frame_8 = QtWidgets.QFrame(self.frame)
+        self.frame_8.setGeometry(QtCore.QRect(1020, 410, 431, 261))
+        self.frame_8.setStyleSheet("\n"
+"border-radius:10px;\n"
+"background-color: rgb(28, 28, 28);\n"
+"\n"
+"")
+        self.frame_8.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_8.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_8.setObjectName("frame_8")
+        self.label_19 = QtWidgets.QLabel(self.frame_8)
+        self.label_19.setGeometry(QtCore.QRect(30, 10, 391, 31))
+        font = QtGui.QFont()
+        font.setPointSize(20)
+        font.setBold(True)
+        font.setWeight(75)
+        self.label_19.setFont(font)
+        self.label_19.setStyleSheet("color: rgb(48, 48, 48);")
+        self.label_19.setObjectName("label_19")
+        self.listWidget_5 = QtWidgets.QListWidget(self.frame_8)
+        self.listWidget_5.setGeometry(QtCore.QRect(30, 50, 171, 191))
+        self.listWidget_5.setStyleSheet("border-color: rgb(0, 0, 0);\n"
+"border-radius:10px;\n"
+"background-color: rgb(38, 38, 38);\n"
+"color: rgb(255, 255, 255);")
+        self.listWidget_5.setObjectName("listWidget_5")
+        self.listWidget_6 = QtWidgets.QListWidget(self.frame_8)
+        self.listWidget_6.setGeometry(QtCore.QRect(210, 50, 201, 191))
+        self.listWidget_6.setStyleSheet("border-color: rgb(0, 0, 0);\n"
+"border-radius:10px;\n"
+"background-color: rgb(38, 38, 38);\n"
+"color: rgb(255, 255, 255);")
+        self.listWidget_6.setObjectName("listWidget_6")
+        self.label_5 = QtWidgets.QLabel(self.frame)
+        self.label_5.setGeometry(QtCore.QRect(17, 745, 297, 100))
         self.label_5.setMaximumSize(QtCore.QSize(16777215, 100))
         font = QtGui.QFont()
         font.setPointSize(60)
@@ -806,8 +842,8 @@ class Ui_MainWindow(object):
         self.label_5.setFont(font)
         self.label_5.setStyleSheet("color: rgb(48, 48, 48);")
         self.label_5.setObjectName("label_5")
-        self.horizontalLayout_2.addWidget(self.label_5)
-        self.label_9 = QtWidgets.QLabel(self.mainframe_explore)
+        self.label_9 = QtWidgets.QLabel(self.frame)
+        self.label_9.setGeometry(QtCore.QRect(320, 745, 34, 100))
         self.label_9.setMaximumSize(QtCore.QSize(16777215, 100))
         font = QtGui.QFont()
         font.setPointSize(90)
@@ -815,16 +851,29 @@ class Ui_MainWindow(object):
         self.label_9.setStyleSheet("color: rgb(89, 89, 89);\n"
 "")
         self.label_9.setObjectName("label_9")
-        self.horizontalLayout_2.addWidget(self.label_9)
-        self.textBrowser_2 = QtWidgets.QTextBrowser(self.mainframe_explore)
+        self.textBrowser_2 = QtWidgets.QTextBrowser(self.frame)
+        self.textBrowser_2.setGeometry(QtCore.QRect(360, 770, 256, 50))
         self.textBrowser_2.setMaximumSize(QtCore.QSize(16777215, 50))
         self.textBrowser_2.setStyleSheet("border:none;")
         self.textBrowser_2.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
         self.textBrowser_2.setObjectName("textBrowser_2")
-        self.horizontalLayout_2.addWidget(self.textBrowser_2)
-        self.horizontalLayout_2.setStretch(0, 1)
-        self.verticalLayout_2.addLayout(self.horizontalLayout_2)
-        self.verticalLayout_2.setStretch(0, 1)
+        self.frame_10 = QtWidgets.QFrame(self.frame)
+        self.frame_10.setGeometry(QtCore.QRect(820, 820, 621, 151))
+        self.frame_10.setStyleSheet("color: rgb(255, 255, 255);\n"
+"border-radius:10px;\n"
+"background-color: rgb(83, 186, 255);")
+        self.frame_10.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_10.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_10.setObjectName("frame_10")
+        self.label_20 = QtWidgets.QLabel(self.frame_10)
+        self.label_20.setGeometry(QtCore.QRect(230, 10, 181, 31))
+        font = QtGui.QFont()
+        font.setPointSize(15)
+        font.setBold(True)
+        font.setWeight(75)
+        self.label_20.setFont(font)
+        self.label_20.setObjectName("label_20")
+        self.verticalLayout_2.addWidget(self.frame)
         self.horizontalLayout_4.addWidget(self.mainframe_explore)
         self.stackedWidget.addWidget(self.page_Explore)
         self.page = QtWidgets.QWidget()
@@ -862,9 +911,9 @@ class Ui_MainWindow(object):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.btnMenu.setText(_translate("MainWindow", "      Pin Menu"))
+        self.btnMenuExplore.setText(_translate("MainWindow", "      Explore"))
         self.btnMenuGattMaker.setText(_translate("MainWindow", "      Gatt Maker"))
         self.btnMenuClient.setText(_translate("MainWindow", "      BLE Client "))
-        self.btnMenuExplore.setText(_translate("MainWindow", "      Explore"))
         self.btnauthor.setText(_translate("MainWindow", "    Edwin Amaya"))
         self.btnRepo.setText(_translate("MainWindow", "Github"))
         self.label_13.setText(_translate("MainWindow", "Project completion"))
@@ -887,7 +936,6 @@ class Ui_MainWindow(object):
         self.label_10.setText(_translate("MainWindow", "Scan timeout ( s ) :"))
         self.timeoutLabel_2.setText(_translate("MainWindow", "5"))
         self.btnScan.setText(_translate("MainWindow", "Scan"))
-        self.label_6.setText(_translate("MainWindow", "  Address                               Name"))
         self.radioButton.setText(_translate("MainWindow", "Scan for address"))
         self.radioButton_2.setText(_translate("MainWindow", "Scan for address :"))
         self.radioButton_3.setText(_translate("MainWindow", "Scan for all"))
@@ -895,11 +943,13 @@ class Ui_MainWindow(object):
         self.checkBox.setText(_translate("MainWindow", "Forever"))
         self.lblConnectionTime.setText(_translate("MainWindow", "5"))
         self.btnConnect.setText(_translate("MainWindow", "Connect"))
+        self.label_6.setText(_translate("MainWindow", "  Address                               Name"))
         self.btnNotify.setText(_translate("MainWindow", "Enable Notify"))
         self.btnReadChar.setText(_translate("MainWindow", "Read"))
         self.btnWriteChar.setText(_translate("MainWindow", "Write"))
         self.label_4.setText(_translate("MainWindow", "Enabled notifications"))
         self.label_22.setText(_translate("MainWindow", "Gatt explorer"))
+        self.label_19.setText(_translate("MainWindow", "Streaming characteristics"))
         self.label_5.setText(_translate("MainWindow", "Explore"))
         self.label_9.setText(_translate("MainWindow", "|"))
         self.textBrowser_2.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
@@ -908,6 +958,7 @@ class Ui_MainWindow(object):
 "</style></head><body style=\" font-family:\'Ubuntu\'; font-size:11pt; font-weight:400; font-style:normal;\">\n"
 "<p align=\"justify\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" color:#909090;\">Explore services and characteristics</span></p>\n"
 "<p align=\"justify\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" color:#909090;\">on connectable devices.</span></p></body></html>"))
+        self.label_20.setText(_translate("MainWindow", "Status : Connected"))
         self.label_2.setText(_translate("MainWindow", "intro page"))
 from slidingstackedwidget import SlidingStackedWidget
 
