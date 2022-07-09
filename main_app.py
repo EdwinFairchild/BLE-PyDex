@@ -22,12 +22,7 @@ from asyncqt import QEventLoop
 QtWidgets.QApplication.setAttribute(QtCore.Qt.AA_EnableHighDpiScaling, True) #enable highdpi scaling
 QtWidgets.QApplication.setAttribute(QtCore.Qt.AA_UseHighDpiPixmaps, True)
 
-ADDRESS = (
-    "00:18:80:04:3F:85"  # <--- Change to your device's address here if you are using Windows or Linux
-    if platform.system() != "Darwin"
-    else "B9EA5233-37EF-4DD6-87A8-2A875E821C46"  # <--- Change to your device's address here if you are using macOS
-)
-CHARACTERISTIC_UUID = "85fc567e-31d9-4185-87c6-339924d1c5be"
+
 class MainInterface(QMainWindow):
     # TODO : this is a mess of variables , must learn better python
     selected_address = None
