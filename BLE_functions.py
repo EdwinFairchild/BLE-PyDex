@@ -11,13 +11,10 @@ from PyQt5.QtWidgets import *
 from enum import Enum, auto
 from typing import Any, Callable, NamedTuple
 
-ADDRESS = (
-    "00:18:80:04:3F:85"
-    if platform.system() != "Darwin"
-    else "B9EA5233-37EF-4DD6-87A8-2A875E821C46"
-)
-CHARACTERISTIC_UUID = "85fc567e-31d9-4185-87c6-339924d1c5be"
-class BLE_DiscoverDevices(QThread):###################################################
+'''******************************************************************************************
+        Scan for devices
+*******************************************************************************************'''
+class BLE_DiscoverDevices(QThread):
     ble_address=0
     scan_timeout=5
     discovered_devices = pyqtSignal(str)
@@ -28,20 +25,13 @@ class BLE_DiscoverDevices(QThread):#############################################
         devices = await ble.discover(timeout = self.scan_timeout)
         for d in devices:
             self.discovered_devices.emit(str(d))
-    #------------------------------------------------------------------------
-#------------------------------------------------------------------------
-    # this method does not use the threadworker class
-    # async def bleScan(self,address):
-    #     device = await BleakScanner.find_device_by_address(address)
-    #     print(str(device))
-    #     print(device)
-    #     self.ui.discoveredList.addItem(str(device))
-    #------------------------------------------------------------------------
-    # def btnScanCalBack(self):
-    #     asyncio.run(self.bleScan(ADDRESS))
-    #------------------------------------------------------------------------
+        #disconnect here? or keep active until user presses explore?
 
-
+'''******************************************************************************************
+        Connects to a connectable device and discover services 
+        and emits singal back to GUI application to handle each
+        discovered service/characteristic
+*******************************************************************************************'''
 class BLE_DiscoverServices(QThread):
     ble_address= None
     scan_timeout=60
@@ -99,17 +89,25 @@ class BLE_DiscoverServices(QThread):
                 print(f"Cleint conenction state : {client.is_connected}")
         except Exception as e:
             print("Opps ,That device is not explorable, at least not by you.")
-        
+'''******************************************************************************************
+        Implements an infinite asyncio loop charged with registering
+        notifications, read/write and signal emition of each event to 
+        GUI application
+*******************************************************************************************'''
 
 class BleakLoop(QThread):
     ble_address= None
-    #dictionary contaning UUID as keys and Handles as Values
-    notifyEnabledChars = {}
     client = None
-    gotNotification = pyqtSignal(list)
     errorMsg = pyqtSignal(str)
+    # used for registering notifys
     notifyCharsAdded = False
     newNotifyCharUUID = None
+    # used forr unregistering notifys
+    notifyRemoveChar = False
+    removeNotifyCharHandle = None
+    # signals
+    gotNotification = pyqtSignal(list)
+    notifyRegisteredState = pyqtSignal(bool)
     def run(self):
         asyncio.run(self.bleakLoop())
     #-------------------------------------------------------------------------
@@ -136,9 +134,21 @@ class BleakLoop(QThread):
                 # if any notify chars have been added register them
                 if self.notifyCharsAdded == True and self.newNotifyCharUUID != None:
                     print("About to add chars")
-                    await client.start_notify(self.newNotifyCharUUID, self.notification_handler)
+                    try:
+                        await client.start_notify(self.newNotifyCharUUID, self.notification_handler)
+                        self.notifyRegisteredState.emit(True)
+                    except Exception as err:
+                        print(err)
                     self.newNotifyCharUUID = None
                     self.notifyCharsAdded = False
+                # if any prviously enabled chars need to removed from notify
+                if self.notifyRemoveChar == True and self.removeNotifyCharHandle != None:
+                    try:
+                        await client.stop_notify(self.removeNotifyCharHandle)
+                        self.notifyRemoveChar = False
+                    except Exception as err:
+                        print("error here was: " )
+                        print(err)
                     
 
                 #cycle through  dictionary of characters to read.

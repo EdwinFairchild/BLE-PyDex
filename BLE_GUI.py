@@ -172,6 +172,11 @@ class Ui_MainWindow(object):
         self.verticalLayout.addWidget(self.btnMenuClient)
         spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.verticalLayout.addItem(spacerItem)
+        self.btnConnectedState = QtWidgets.QPushButton(self.sideBar)
+        self.btnConnectedState.setMinimumSize(QtCore.QSize(50, 50))
+        self.btnConnectedState.setText("")
+        self.btnConnectedState.setObjectName("btnConnectedState")
+        self.verticalLayout.addWidget(self.btnConnectedState)
         self.frame_3 = QtWidgets.QFrame(self.sideBar)
         self.frame_3.setMinimumSize(QtCore.QSize(0, 210))
         self.frame_3.setStyleSheet("")
@@ -234,6 +239,7 @@ class Ui_MainWindow(object):
         self.progressBar.setObjectName("progressBar")
         self.label_13 = QtWidgets.QLabel(self.frame_3)
         self.label_13.setGeometry(QtCore.QRect(20, 130, 141, 17))
+        self.label_13.setStyleSheet("color: rgb(255, 255, 255);")
         self.label_13.setObjectName("label_13")
         self.label_14 = QtWidgets.QLabel(self.frame_3)
         self.label_14.setGeometry(QtCore.QRect(160, 130, 41, 20))
@@ -267,6 +273,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout.addWidget(self.btnInstagram)
         self.label_15 = QtWidgets.QLabel(self.frame_3)
         self.label_15.setGeometry(QtCore.QRect(20, 110, 151, 17))
+        self.label_15.setStyleSheet("color: rgb(255, 255, 255);")
         self.label_15.setObjectName("label_15")
         self.verticalLayout.addWidget(self.frame_3)
         self.horizontalLayout_3.addWidget(self.sideBar)
@@ -369,18 +376,21 @@ class Ui_MainWindow(object):
         font = QtGui.QFont()
         font.setPointSize(13)
         self.label.setFont(font)
+        self.label.setStyleSheet("color: rgb(255, 255, 255);")
         self.label.setObjectName("label")
         self.label_11 = QtWidgets.QLabel(self.frame_2)
         self.label_11.setGeometry(QtCore.QRect(20, 130, 71, 16))
         font = QtGui.QFont()
         font.setPointSize(13)
         self.label_11.setFont(font)
+        self.label_11.setStyleSheet("color: rgb(255, 255, 255);")
         self.label_11.setObjectName("label_11")
         self.label_12 = QtWidgets.QLabel(self.frame_2)
         self.label_12.setGeometry(QtCore.QRect(20, 190, 121, 21))
         font = QtGui.QFont()
         font.setPointSize(13)
         self.label_12.setFont(font)
+        self.label_12.setStyleSheet("color: rgb(255, 255, 255);")
         self.label_12.setObjectName("label_12")
         self.btnLabelType = QtWidgets.QPushButton(self.frame_2)
         self.btnLabelType.setGeometry(QtCore.QRect(80, 90, 411, 25))
@@ -388,7 +398,7 @@ class Ui_MainWindow(object):
         font.setPointSize(13)
         self.btnLabelType.setFont(font)
         self.btnLabelType.setStyleSheet("text-align: left;\n"
-"\n"
+"color: rgb(255, 255, 255);\n"
 "padding-top: 0px;\n"
 "")
         self.btnLabelType.setObjectName("btnLabelType")
@@ -398,7 +408,7 @@ class Ui_MainWindow(object):
         font.setPointSize(13)
         self.btnLabelUUID.setFont(font)
         self.btnLabelUUID.setStyleSheet("text-align: left;\n"
-"")
+"color: rgb(255, 255, 255);")
         self.btnLabelUUID.setObjectName("btnLabelUUID")
         self.btnLabelPermissions = QtWidgets.QPushButton(self.frame_2)
         self.btnLabelPermissions.setGeometry(QtCore.QRect(130, 190, 381, 21))
@@ -406,13 +416,14 @@ class Ui_MainWindow(object):
         font.setPointSize(13)
         self.btnLabelPermissions.setFont(font)
         self.btnLabelPermissions.setStyleSheet("text-align: left;\n"
-"")
+"color: rgb(255, 255, 255);")
         self.btnLabelPermissions.setObjectName("btnLabelPermissions")
         self.label_7 = QtWidgets.QLabel(self.frame_2)
         self.label_7.setGeometry(QtCore.QRect(20, 60, 61, 21))
         font = QtGui.QFont()
         font.setPointSize(13)
         self.label_7.setFont(font)
+        self.label_7.setStyleSheet("color: rgb(255, 255, 255);")
         self.label_7.setObjectName("label_7")
         self.btnLabelName = QtWidgets.QPushButton(self.frame_2)
         self.btnLabelName.setGeometry(QtCore.QRect(80, 60, 411, 21))
@@ -420,7 +431,7 @@ class Ui_MainWindow(object):
         font.setPointSize(13)
         self.btnLabelName.setFont(font)
         self.btnLabelName.setStyleSheet("text-align: left;\n"
-"\n"
+"color: rgb(255, 255, 255);\n"
 "padding-top: 0px;\n"
 "")
         self.btnLabelName.setObjectName("btnLabelName")
@@ -429,6 +440,7 @@ class Ui_MainWindow(object):
         font = QtGui.QFont()
         font.setPointSize(13)
         self.label_16.setFont(font)
+        self.label_16.setStyleSheet("color: rgb(255, 255, 255);")
         self.label_16.setObjectName("label_16")
         self.btnLabelHandle = QtWidgets.QPushButton(self.frame_2)
         self.btnLabelHandle.setGeometry(QtCore.QRect(90, 160, 381, 21))
@@ -436,13 +448,14 @@ class Ui_MainWindow(object):
         font.setPointSize(13)
         self.btnLabelHandle.setFont(font)
         self.btnLabelHandle.setStyleSheet("text-align: left;\n"
-"")
+"color: rgb(255, 255, 255);")
         self.btnLabelHandle.setObjectName("btnLabelHandle")
         self.label_17 = QtWidgets.QLabel(self.frame_2)
         self.label_17.setGeometry(QtCore.QRect(20, 220, 121, 21))
         font = QtGui.QFont()
         font.setPointSize(13)
         self.label_17.setFont(font)
+        self.label_17.setStyleSheet("color: rgb(255, 255, 255);")
         self.label_17.setObjectName("label_17")
         self.btnLabelValue = QtWidgets.QPushButton(self.frame_2)
         self.btnLabelValue.setGeometry(QtCore.QRect(90, 220, 381, 21))
@@ -450,7 +463,7 @@ class Ui_MainWindow(object):
         font.setPointSize(13)
         self.btnLabelValue.setFont(font)
         self.btnLabelValue.setStyleSheet("text-align: left;\n"
-"")
+"color: rgb(255, 255, 255);")
         self.btnLabelValue.setObjectName("btnLabelValue")
         self.label_8 = QtWidgets.QLabel(self.frame_2)
         self.label_8.setGeometry(QtCore.QRect(20, 10, 391, 31))
@@ -651,12 +664,15 @@ class Ui_MainWindow(object):
         self.timeoutSlider_3.setObjectName("timeoutSlider_3")
         self.label_3 = QtWidgets.QLabel(self.frame_6)
         self.label_3.setGeometry(QtCore.QRect(20, 10, 191, 17))
+        self.label_3.setStyleSheet("color: rgb(255, 255, 255);")
         self.label_3.setObjectName("label_3")
         self.checkBox = QtWidgets.QCheckBox(self.frame_6)
         self.checkBox.setGeometry(QtCore.QRect(20, 50, 92, 21))
+        self.checkBox.setStyleSheet("color: rgb(255, 255, 255);")
         self.checkBox.setObjectName("checkBox")
         self.lblConnectionTime = QtWidgets.QLabel(self.frame_6)
         self.lblConnectionTime.setGeometry(QtCore.QRect(210, 10, 67, 17))
+        self.lblConnectionTime.setStyleSheet("color: rgb(255, 255, 255);")
         self.lblConnectionTime.setObjectName("lblConnectionTime")
         self.btnConnect = QtWidgets.QPushButton(self.appFrame_2)
         self.btnConnect.setGeometry(QtCore.QRect(640, 290, 121, 30))
@@ -710,7 +726,7 @@ class Ui_MainWindow(object):
         self.list_discoveredDevices.setModelColumn(0)
         self.list_discoveredDevices.setObjectName("list_discoveredDevices")
         self.label_6 = QtWidgets.QLabel(self.frame_11)
-        self.label_6.setGeometry(QtCore.QRect(50, 10, 311, 25))
+        self.label_6.setGeometry(QtCore.QRect(10, 10, 391, 25))
         self.label_6.setMinimumSize(QtCore.QSize(0, 25))
         font = QtGui.QFont()
         font.setPointSize(12)
@@ -810,24 +826,49 @@ class Ui_MainWindow(object):
         self.label_4.setFont(font)
         self.label_4.setStyleSheet("color: rgb(48, 48, 48);")
         self.label_4.setObjectName("label_4")
-        self.listWidget = QtWidgets.QListWidget(self.frame_7)
-        self.listWidget.setGeometry(QtCore.QRect(30, 50, 171, 191))
-        self.listWidget.setStyleSheet("border-color: rgb(0, 0, 0);\n"
+        self.frame_12 = QtWidgets.QFrame(self.frame_7)
+        self.frame_12.setGeometry(QtCore.QRect(20, 50, 391, 191))
+        self.frame_12.setStyleSheet("background-color: rgb(38, 38, 38);")
+        self.frame_12.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_12.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_12.setObjectName("frame_12")
+        self.list_EnabledNotifyValue = QtWidgets.QListWidget(self.frame_12)
+        self.list_EnabledNotifyValue.setGeometry(QtCore.QRect(200, 50, 171, 121))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.list_EnabledNotifyValue.setFont(font)
+        self.list_EnabledNotifyValue.setStyleSheet("border-color: rgb(0, 0, 0);\n"
 "border-radius:10px;\n"
-"background-color: rgb(28, 28, 28);\n"
-"border: 1px solid gray;\n"
+"background-color: rgb(38, 38, 38);\n"
+"/*border: 1px solid gray;*/\n"
 "\n"
 "color: rgb(255, 255, 255);")
-        self.listWidget.setObjectName("listWidget")
-        self.listWidget_2 = QtWidgets.QListWidget(self.frame_7)
-        self.listWidget_2.setGeometry(QtCore.QRect(210, 50, 201, 191))
-        self.listWidget_2.setStyleSheet("border-color: rgb(0, 0, 0);\n"
+        self.list_EnabledNotifyValue.setObjectName("list_EnabledNotifyValue")
+        self.label_18 = QtWidgets.QLabel(self.frame_12)
+        self.label_18.setGeometry(QtCore.QRect(10, 10, 371, 25))
+        self.label_18.setMinimumSize(QtCore.QSize(0, 25))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        font.setBold(False)
+        font.setWeight(50)
+        self.label_18.setFont(font)
+        self.label_18.setStyleSheet("color: rgb(255, 255, 255);\n"
 "border-radius:10px;\n"
-"background-color: rgb(28, 28, 28);\n"
-"border: 1px solid gray;\n"
+"background-color: rgb(27, 27, 27);")
+        self.label_18.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_18.setObjectName("label_18")
+        self.list_EnabledNotify = QtWidgets.QListWidget(self.frame_12)
+        self.list_EnabledNotify.setGeometry(QtCore.QRect(20, 50, 181, 121))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.list_EnabledNotify.setFont(font)
+        self.list_EnabledNotify.setStyleSheet("border-color: rgb(0, 0, 0);\n"
+"border-radius:10px;\n"
+"background-color: rgb(38, 38, 38);\n"
+"/*border: 1px solid gray;*/\n"
 "\n"
 "color: rgb(255, 255, 255);")
-        self.listWidget_2.setObjectName("listWidget_2")
+        self.list_EnabledNotify.setObjectName("list_EnabledNotify")
         self.frame_9 = QtWidgets.QFrame(self.frame)
         self.frame_9.setGeometry(QtCore.QRect(840, 30, 611, 361))
         self.frame_9.setStyleSheet("\n"
@@ -892,24 +933,15 @@ class Ui_MainWindow(object):
         self.label_19.setFont(font)
         self.label_19.setStyleSheet("color: rgb(48, 48, 48);")
         self.label_19.setObjectName("label_19")
-        self.listWidget_5 = QtWidgets.QListWidget(self.frame_8)
-        self.listWidget_5.setGeometry(QtCore.QRect(30, 50, 171, 191))
-        self.listWidget_5.setStyleSheet("border-color: rgb(0, 0, 0);\n"
+        self.list_Streaming = QtWidgets.QListWidget(self.frame_8)
+        self.list_Streaming.setGeometry(QtCore.QRect(30, 50, 381, 191))
+        self.list_Streaming.setStyleSheet("border-color: rgb(0, 0, 0);\n"
 "border-radius:10px;\n"
 "background-color: rgb(28, 28, 28);\n"
-"border: 1px solid gray;\n"
+"/*border: 1px solid gray;*/\n"
 "\n"
 "color: rgb(255, 255, 255);")
-        self.listWidget_5.setObjectName("listWidget_5")
-        self.listWidget_6 = QtWidgets.QListWidget(self.frame_8)
-        self.listWidget_6.setGeometry(QtCore.QRect(210, 50, 201, 191))
-        self.listWidget_6.setStyleSheet("border-color: rgb(0, 0, 0);\n"
-"border-radius:10px;\n"
-"background-color: rgb(28, 28, 28);\n"
-"border: 1px solid gray;\n"
-"\n"
-"color: rgb(255, 255, 255);")
-        self.listWidget_6.setObjectName("listWidget_6")
+        self.list_Streaming.setObjectName("list_Streaming")
         self.label_5 = QtWidgets.QLabel(self.frame)
         self.label_5.setGeometry(QtCore.QRect(17, 745, 297, 100))
         self.label_5.setMaximumSize(QtCore.QSize(16777215, 100))
@@ -936,17 +968,36 @@ class Ui_MainWindow(object):
         self.textBrowser_2.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
         self.textBrowser_2.setObjectName("textBrowser_2")
         self.frame_10 = QtWidgets.QFrame(self.frame)
-        self.frame_10.setGeometry(QtCore.QRect(650, 690, 801, 151))
+        self.frame_10.setGeometry(QtCore.QRect(650, 780, 801, 61))
         self.frame_10.setStyleSheet("color: rgb(255, 255, 255);\n"
 "border-radius:10px;\n"
 "background-color: rgb(28, 28, 28);")
         self.frame_10.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_10.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_10.setObjectName("frame_10")
-        self.btnConnectedState = QtWidgets.QPushButton(self.frame_10)
-        self.btnConnectedState.setGeometry(QtCore.QRect(680, 30, 101, 91))
-        self.btnConnectedState.setText("")
-        self.btnConnectedState.setObjectName("btnConnectedState")
+        self.btnNotifyRemove = QtWidgets.QPushButton(self.frame)
+        self.btnNotifyRemove.setGeometry(QtCore.QRect(880, 690, 121, 30))
+        self.btnNotifyRemove.setMinimumSize(QtCore.QSize(0, 30))
+        self.btnNotifyRemove.setStyleSheet("QPushButton{\n"
+"    color: rgb(0, 0, 0);\n"
+"    background-color: rgb(180, 180, 180);\n"
+"    border:none;\n"
+"border-radius:10px;\n"
+"\n"
+"}\n"
+"\n"
+"QPushButton:hover{\n"
+"    color: rgb(255, 255, 255);\n"
+"    background-color: rgb(170, 77, 77);\n"
+"\n"
+"}\n"
+"\n"
+"QPushButton:pressed{\n"
+"    \n"
+"        color: rgb(255, 255, 255);\n"
+"    background-color: rgb(170, 27, 27);\n"
+"}")
+        self.btnNotifyRemove.setObjectName("btnNotifyRemove")
         self.verticalLayout_2.addWidget(self.frame)
         self.horizontalLayout_4.addWidget(self.mainframe_explore)
         self.stackedWidget.addWidget(self.page_Explore)
@@ -1022,6 +1073,7 @@ class Ui_MainWindow(object):
         self.btnReadChar.setText(_translate("MainWindow", "Read"))
         self.btnWriteChar.setText(_translate("MainWindow", "Write"))
         self.label_4.setText(_translate("MainWindow", "Enabled notifications"))
+        self.label_18.setText(_translate("MainWindow", "  Handle                               Value"))
         self.label_22.setText(_translate("MainWindow", "Gatt explorer"))
         self.label_19.setText(_translate("MainWindow", "Streaming characteristics"))
         self.label_5.setText(_translate("MainWindow", "Explore"))
@@ -1032,6 +1084,7 @@ class Ui_MainWindow(object):
 "</style></head><body style=\" font-family:\'Ubuntu\'; font-size:11pt; font-weight:400; font-style:normal;\">\n"
 "<p align=\"justify\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" color:#909090;\">Explore services and characteristics</span></p>\n"
 "<p align=\"justify\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" color:#909090;\">on connectable devices.</span></p></body></html>"))
+        self.btnNotifyRemove.setText(_translate("MainWindow", "Remove"))
         self.label_2.setText(_translate("MainWindow", "intro page"))
 from slidingstackedwidget import SlidingStackedWidget
 

@@ -30,23 +30,26 @@ ADDRESS = (
 CHARACTERISTIC_UUID = "85fc567e-31d9-4185-87c6-339924d1c5be"
 class MainInterface(QMainWindow):
     # TODO : this is a mess of variables , must learn better python
-    currentIndex=1
-    mystate=False
     selected_address = None
     connected_address = None
     menuPinned = False
-    ui =0
+    ui = None
+    # used to keep track of tree widget tree items
     toplevel = None
     child = None
+    # side animation configurable limits
     sideBarWidthMax = 210
     sideBarWidthMin = 73
-    iconOffset = 5
-    menuClosed =False
     animationDone = True
-    client = "NONOE"
-    bleLoop = None
-   
 
+    client = None
+    # peristent instance of bleakLoop needs to be kept so the task is not
+    # canceled 
+    bleLoop = None
+
+    # list to manage chars that have notify enabled
+    notifyEnabledCharsDict = {}
+   
     def __init__(self):
         super().__init__()
         # setup gui
@@ -65,6 +68,8 @@ class MainInterface(QMainWindow):
         self.ui.btnScan.clicked.connect(self.btnBleScan)
         self.ui.btnReadChar.clicked.connect(self.btnReadCharcallback)
         self.ui.list_discoveredDevices.itemPressed.connect(self.discoveredList2ItemPressed)
+        self.ui.list_EnabledNotify.itemPressed.connect(self.enabledNotifyListItemPressed)
+        self.ui.list_EnabledNotifyValue.itemPressed.connect(self.enabledNotifyListValueItemPressed)
         self.ui.btnExplore.clicked.connect(self.btnExploreCallback)
         self.ui.btnConnect.clicked.connect(self.btnConnectCallback)
         self.ui.servicesTreeWidget.itemPressed.connect(self.treeWidgetItemPressed)
@@ -72,6 +77,7 @@ class MainInterface(QMainWindow):
         self.ui.btnLabelUUID.clicked.connect(self.btnLabelUUIDCopy)
         self.ui.btnLabelPermissions.clicked.connect(self.btnLabelPermissionsCopy)
         self.ui.btnNotify.clicked.connect(self.btnNotifyCallBack)
+        self.ui.btnNotifyRemove.clicked.connect(self.btnNotifyRemoveCallback)
 
         self.iconDictionary = {self.ui.btnMenu:['resources/icons/Menu.svg','resources/icons/MenuBlue.svg'] ,
                                self.ui.btnMenuGattMaker:['resources/icons/Ble.svg','resources/icons/BleBlue.svg'] , 
@@ -143,28 +149,57 @@ class MainInterface(QMainWindow):
         #Add the currently selected char to notify enabled chars list
         if "NOTIFY" in self.ui.btnLabelPermissions.text():
             self.bleLoop.gotNotification.connect(self.gotCharNotif)
-            self.bleLoop.newNotifyCharUUID = self.ui.btnLabelUUID.text()
             self.bleLoop.notifyCharsAdded = True;
+            self.bleLoop.newNotifyCharUUID = self.ui.btnLabelUUID.text()
+            self.bleLoop.notifyRegisteredState.connect(self.notifyRegisteredStateCallback)
         else:
             print("That characteristic does not have Notify enabled")
+    def btnNotifyRemoveCallback(self):
+        if self.ui.list_EnabledNotify.currentRow() == -1 :
+            pass
+        else:
+            # remove notification from Bleak
+            self.bleLoop.notifyRemoveChar = True
+            item = self.ui.list_EnabledNotify.currentItem()
+            # UUIDs are strings and Handles are ints in Bleak
+            self.bleLoop.removeNotifyCharHandle =int(item.text())
+            # remove from list
+            self.ui.list_EnabledNotify.takeItem(self.ui.list_EnabledNotify.currentRow())
+            self.ui.list_EnabledNotifyValue.takeItem(self.ui.list_EnabledNotify.currentRow())
+    #------------------------------------------------------------------------
+    def notifyRegisteredStateCallback(self, state):
+        if state == True:
+            #add the selected UUID/Handle to the notify list
+            if self.ui.btnLabelHandle.text() in self.notifyEnabledCharsDict:
+                pass
+            else:
+                self.notifyEnabledCharsDict[self.ui.btnLabelHandle.text()] = "N/A"
+                self.ui.list_EnabledNotify.addItem(self.ui.btnLabelHandle.text())
+                self.ui.list_EnabledNotifyValue.addItem("N/A")
+               # self.notifyEnabledCharsDict[self.ui.btnLabelHandle.text()] += ["5555"]
+               # print(str(self.notifyEnabledCharsDict[self.ui.btnLabelHandle.text()][1]))
+               # call function to add this item to list_enabledNotify
 
+    #------------------------------------------------------------------------
     def btnReadCharcallback(self):
            #read char from gatt
         self.gettreadChar = ble_ctl.BLE_ReadChar()
-        self.gettreadChar.client = self.client
+      #  self.gettreadChar.client = self.client
         self.gettreadChar.ble_address = self.connected_address
         self.gettreadChar.charToRead = self.ui.btnLabelUUID.text()
         self.gettreadChar.charReadData.connect(self.gattReadCallBAck)
         self.gettreadChar.start()
-
-
+    #------------------------------------------------------------------------
     def gattReadCallBAck(self,data):
         self.ui.lblCharVal.setText(data)
     #------------------------------------------------------------------------
     def gotCharNotif(self,data):
-        print("got this data")
-        print(data)
-        #self.ui.lblLatestVal.setText(data)
+        item = self.ui.list_EnabledNotify.findItems(str(data[0]), QtCore.Qt.MatchExactly)
+        row =self.ui.list_EnabledNotify.row(item[0])
+        item = self.ui.list_EnabledNotifyValue.item(row)
+        data = str(data[1]).removeprefix("bytearray(b\'\\")
+        data = str(data).removesuffix("\')")
+        item.setText(data)
     #------------------------| Clip board copying related functions |----------------------------
     def btnLabelTypeCopy(self):
         self.copyToClipBoard(self.ui.btnLabelType.text())
@@ -221,6 +256,10 @@ class MainInterface(QMainWindow):
         value = self.ui.list_discoveredDevices.currentItem() 
         tmp  = value.text()
         self.selected_address = tmp[1:18]
+    def enabledNotifyListItemPressed(self):
+        self.ui.list_EnabledNotifyValue.setCurrentRow(self.ui.list_EnabledNotify.currentRow())
+    def enabledNotifyListValueItemPressed(self):
+        self.ui.list_EnabledNotify.setCurrentRow(self.ui.list_EnabledNotifyValue.currentRow())
     #------------------------------------------------------------------------
     def btnBleScan(self):
         self.ui.list_discoveredDevices.clear()
