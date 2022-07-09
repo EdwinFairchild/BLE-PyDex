@@ -34,7 +34,6 @@ class BLE_DiscoverDevices(QThread):
 *******************************************************************************************'''
 class BLE_DiscoverServices(QThread):
     ble_address= None
-    scan_timeout=60
     discovered_services = pyqtSignal(list)
     client = None
     def run(self):
@@ -99,6 +98,9 @@ class BleakLoop(QThread):
     ble_address= None
     client = None
     errorMsg = pyqtSignal(str)
+    # used to trigger service discovery
+    discoverServices = False
+    discovered_services_signal = pyqtSignal(list)
     # used for registering notifys
     notifyCharsAdded = False
     newNotifyCharUUID = None
@@ -127,11 +129,11 @@ class BleakLoop(QThread):
         async with BleakClient(self.ble_address, disconnected_callback= self.handle_disconnect) as client:
             
             
-            await client.write_gatt_char("85fc5681-31d9-4185-87c6-339924d1c5be", bytes('1', 'utf-8'))
+           # await client.write_gatt_char("85fc5681-31d9-4185-87c6-339924d1c5be", bytes('1', 'utf-8'))
     
             while True:
                 await asyncio.sleep(1.0)
-                # if any notify chars have been added register them
+                #--------------- if any notify chars have been added register them
                 if self.notifyCharsAdded == True and self.newNotifyCharUUID != None:
                     print("About to add chars")
                     try:
@@ -141,7 +143,7 @@ class BleakLoop(QThread):
                         print(err)
                     self.newNotifyCharUUID = None
                     self.notifyCharsAdded = False
-                # if any prviously enabled chars need to removed from notify
+                #-------------- if any prviously enabled chars need to removed from notify
                 if self.notifyRemoveChar == True and self.removeNotifyCharHandle != None:
                     try:
                         await client.stop_notify(self.removeNotifyCharHandle)
@@ -149,7 +151,57 @@ class BleakLoop(QThread):
                     except Exception as err:
                         print("error here was: " )
                         print(err)
-                    
+                #-------------- if discoverServices has been triggered
+                if self.discoverServices == True:
+                    try :
+                        
+                        print(f"Connected: {client.is_connected}")
+                        for service in client.services:
+                            #emit top level item
+
+                            self.discovered_services_signal.emit([f"[Service] {service}", 0])
+
+
+                            for char in service.characteristics:
+                                #emit children of top level
+                                if "read" in char.properties:
+                                    try:
+                                        value = bytes(await client.read_gatt_char(char.uuid))
+                                        self.discovered_services_signal.emit([f"\t[Characteristic] {char} ({','.join(char.properties)}), Value: {value}",1])
+                                        # print(
+                                        #     f"\t[Characteristic] {char} ({','.join(char.properties)}), Value: {value}"
+                                        # )
+                                    except Exception as e:
+                                        self.discovered_services_signal.emit([f"\t[Characteristic] {char} ({','.join(char.properties)}), Error: {e}",1])
+                                        # print(
+                                        #     f"\t[Characteristic] {char} ({','.join(char.properties)}), Error: {e}"
+                                        # )
+
+                                else:
+                                    value = None
+                                    self.discovered_services_signal.emit([f"\t[Characteristic] {char} ({','.join(char.properties)}), Value: {value}",1])
+                                    # print(
+                                    #     f"\t[Characteristic] {char} ({','.join(char.properties)}), Value: {value}"
+                                    # )
+
+                                for descriptor in char.descriptors:
+                                    #emit children of children
+                                    try:
+                                        value = bytes(
+                                            await client.read_gatt_descriptor(descriptor.handle)
+                                            
+                                        )
+                                        self.discovered_services_signal.emit([f"\t\t[Descriptor] {descriptor}) | Value: {value}",2])
+                                        # print(f"\t\t[Descriptor] {descriptor}) | Value: {value}")
+                                    except Exception as e:
+                                        print(err)
+                                        #print(f"\t\t[Descriptor] {descriptor}) | Error: {e}")
+                        self.discoverServices = False
+                        
+                        print(f"Cleint conenction state : {client.is_connected}")
+                            
+                    except Exception as e:
+                        print("Opps ,That device is not explorable, at least not by you.")
 
                 #cycle through  dictionary of characters to read.
 

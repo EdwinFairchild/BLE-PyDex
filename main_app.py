@@ -292,7 +292,7 @@ class MainInterface(QMainWindow):
             #print("Read services from : " + self.selected_address)
             #todos can time out
         else:
-           print("Opps ,You need to select a device address!")
+           print("Opps ,You need to select a device from the scan list!")
 
     #------------------------------------------------------------------------
     def btnConnectCallback(self):
@@ -301,6 +301,8 @@ class MainInterface(QMainWindow):
             try: 
                 self.bleLoop = ble_ctl.BleakLoop()
                 self.bleLoop.ble_address = self.selected_address
+                self.bleLoop.discoverServices = True
+                self.bleLoop.discovered_services_signal.connect(self.bleDiscoverslot)
                 self.bleLoop.errorMsg.connect(self.errMsg)
                 self.connected_address = self.selected_address
                 self.bleLoop.start()
