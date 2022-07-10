@@ -98,6 +98,10 @@ class BleakLoop(QThread):
     ble_address= None
     client = None
     errorMsg = pyqtSignal(str)
+    disconnectSignal = pyqtSignal(bool)
+    # disconnected state switch
+    connect = False
+    disconnect_triggered = False
     # used to trigger service discovery
     discoverServices = False
     discovered_services_signal = pyqtSignal(list)
@@ -111,7 +115,13 @@ class BleakLoop(QThread):
     gotNotification = pyqtSignal(list)
     notifyRegisteredState = pyqtSignal(bool)
     def run(self):
+        self.connect =True
         asyncio.run(self.bleakLoop())
+        
+    
+    
+        
+        
     #-------------------------------------------------------------------------
     def handle_disconnect(self, _: BleakClient):
         # cancelling all tasks effectively ends the program
@@ -131,8 +141,21 @@ class BleakLoop(QThread):
             
            # await client.write_gatt_char("85fc5681-31d9-4185-87c6-339924d1c5be", bytes('1', 'utf-8'))
     
-            while True:
+            while self.connect == True:
                 await asyncio.sleep(1.0)
+                # check the flag to disconnect
+                if self.disconnect_triggered == True:
+                    try:
+                        await client.disconnect()
+
+                        self.handle_disconnect(client)
+                        self.disconnect_triggered = False
+                        self.connect = False
+                        self.disconnectSignal.emit(True)
+
+                    except Exception as err:
+                        print("-------> error is :")
+                        print(err)
                 #--------------- if any notify chars have been added register them
                 if self.notifyCharsAdded == True and self.newNotifyCharUUID != None:
                     print("About to add chars")

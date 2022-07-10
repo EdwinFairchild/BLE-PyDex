@@ -1,3 +1,4 @@
+from click import style
 from BLE_GUI import Ui_MainWindow
 import ButtonCallbacks as btnCB
 from PyQt5 import Qt as qtw
@@ -28,7 +29,7 @@ class MainInterface(QMainWindow):
     selected_address = None
     connected_address = None
     menuPinned = False
-    ui = None
+    connected_state = False
     # used to keep track of tree widget tree items
     toplevel = None
     child = None
@@ -141,14 +142,20 @@ class MainInterface(QMainWindow):
         return super().eventFilter(source, event)
     #------------------------------------------------------------------------
     def btnNotifyCallBack(self):
-        #Add the currently selected char to notify enabled chars list
-        if "NOTIFY" in self.ui.btnLabelPermissions.text():
-            self.bleLoop.gotNotification.connect(self.gotCharNotif)
-            self.bleLoop.notifyCharsAdded = True;
-            self.bleLoop.newNotifyCharUUID = self.ui.btnLabelUUID.text()
-            self.bleLoop.notifyRegisteredState.connect(self.notifyRegisteredStateCallback)
+        if self.connected_state == True:
+            
+            #Add the currently selected char to notify enabled chars list
+            if "NOTIFY" in self.ui.btnLabelPermissions.text():
+                self.bleLoop.gotNotification.connect(self.gotCharNotif)
+                self.bleLoop.notifyCharsAdded = True;
+                self.bleLoop.newNotifyCharUUID = self.ui.btnLabelUUID.text()
+                self.bleLoop.notifyRegisteredState.connect(self.notifyRegisteredStateCallback)
+                print("added chat to notify")
+            else:
+                print("That characteristic does not have Notify enabled")
         else:
-            print("That characteristic does not have Notify enabled")
+            print("you are not connected to anything")
+    #------------------------------------------------------------------------
     def btnNotifyRemoveCallback(self):
         if self.ui.list_EnabledNotify.currentRow() == -1 :
             pass
@@ -163,6 +170,7 @@ class MainInterface(QMainWindow):
             self.ui.list_EnabledNotifyValue.takeItem(self.ui.list_EnabledNotify.currentRow())
     #------------------------------------------------------------------------
     def notifyRegisteredStateCallback(self, state):
+        
         if state == True:
             #add the selected UUID/Handle to the notify list
             if self.ui.btnLabelHandle.text() in self.notifyEnabledCharsDict:
@@ -173,7 +181,9 @@ class MainInterface(QMainWindow):
                 self.ui.list_EnabledNotifyValue.addItem("N/A")
                # self.notifyEnabledCharsDict[self.ui.btnLabelHandle.text()] += ["5555"]
                # print(str(self.notifyEnabledCharsDict[self.ui.btnLabelHandle.text()][1]))
-               # call function to add this item to list_enabledNotify
+               # call function to add this item to list_enabledNotifybtnNoti
+        else:
+            print("could not add")
 
     #------------------------------------------------------------------------
     def btnReadCharcallback(self):
@@ -190,6 +200,8 @@ class MainInterface(QMainWindow):
     #------------------------------------------------------------------------
     def gotCharNotif(self,data):
         item = self.ui.list_EnabledNotify.findItems(str(data[0]), QtCore.Qt.MatchExactly)
+        print("item index")
+        print(item[0])
         row =self.ui.list_EnabledNotify.row(item[0])
         item = self.ui.list_EnabledNotifyValue.item(row)
         data = str(data[1]).removeprefix("bytearray(b\'\\")
@@ -292,24 +304,49 @@ class MainInterface(QMainWindow):
     #------------------------------------------------------------------------
     def btnConnectCallback(self):
         # Establish and maintain Bleak connection
-        if self.selected_address != None :
-            try: 
-                self.bleLoop = ble_ctl.BleakLoop()
-                self.bleLoop.ble_address = self.selected_address
-                self.bleLoop.discoverServices = True
-                self.bleLoop.discovered_services_signal.connect(self.bleDiscoverslot)
-                self.bleLoop.errorMsg.connect(self.errMsg)
-                self.connected_address = self.selected_address
-                self.bleLoop.start()
-                self.setConnectedIconColor('blue')
-                self.ui.btnConnect.setText("Disconnect")
-            except Exception as err:
-                print(err)
+        if self.connected_state == False:
+            if self.selected_address != None :
+                try: 
+                    # connection stuff
+                    self.bleLoop = ble_ctl.BleakLoop()
+                    self.bleLoop.ble_address = self.selected_address
+                    self.bleLoop.discoverServices = True
+                    self.bleLoop.discovered_services_signal.connect(self.bleDiscoverslot)
+                    self.bleLoop.errorMsg.connect(self.errMsg)
+                    self.connected_address = self.selected_address
+                    self.bleLoop.start()
+                    self.setAlternateButtonModeColor(self.ui.btnConnect,  170,77,77)
+                    # gui stuff
+                    self.setConnectedIconColor('blue')
+                    self.ui.btnConnect.setText("Disconnect")
+                    self.connected_state = True
+                except Exception as err:
+                    print(err)
+                    self.setConnectedIconColor('white')
+                    self.ui.btnConnect.setText("Connect")
+                    self.connected_state = True
+            else:
+                print("You have to select a device from explore list")
+        else:
+            try:
+                # connection stuff
+                self.setAlternateButtonModeColor(self.ui.btnConnect,180,180,180)
+                self.bleLoop.disconnect_triggered = True
+                self.bleLoop.disconnectSignal.connect(self.disconnectSlot)
+                # gui stuff
                 self.setConnectedIconColor('white')
                 self.ui.btnConnect.setText("Connect")
-        else:
-            print("You have to select a device from explore list")
+                self.connected_state = False
+                #clean up tree wdiget stuff
+                self.ui.servicesTreeWidget.clear()
+                self.ui.list_EnabledNotify.clear()
+                self.ui.list_EnabledNotifyValue.clear()
+                self.notifyEnabledCharsDict = {}
+            except Exception as err:
+                print(err)
 
+    def disconnectSlot(self):
+        self.bleLoop.exit()
 
     #------------------------------------------------------------------------
     def bleDiscoverslot(self,data ):
@@ -369,6 +406,9 @@ class MainInterface(QMainWindow):
                 test.setWidth(20)
                 button.setIconSize(test)
     #------------------------------------------------------------------------
+    def setAlternateButtonModeColor(self, button, red , green , blue):
+        stylesheet = f"QPushButton{{ text-align: center; background-color: rgb({red}, {green}, {blue});  ;border-radius:12px;color: rgb(255, 255, 255);border:none;}}QPushButton:hover{{color: rgb(255, 255, 255);background-color: rgb(170, 77, 77);}}QPushButton:pressed{{color: rgb(255, 255, 255);background-color: rgb(170, 27, 27);}}"
+        button.setStyleSheet(stylesheet)
     def menuAnimate(self, obj, onmouse):
        
         if self.animationDone == True and self.menuPinned == False:
