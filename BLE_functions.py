@@ -95,11 +95,11 @@ class BLE_DiscoverServices(QThread):
 *******************************************************************************************'''
 
 class BleakLoop(QThread):
+    # bleak client stuff
     ble_address= None
     client = None
-    errorMsg = pyqtSignal(str)
-    disconnectSignal = pyqtSignal(bool)
     # disconnected state switch
+    disconnectSignal = pyqtSignal(bool)
     connect = False
     disconnect_triggered = False
     # used to trigger service discovery
@@ -108,11 +108,16 @@ class BleakLoop(QThread):
     # used for registering notifys
     notifyCharsAdded = False
     newNotifyCharUUID = None
-    # used forr unregistering notifys
+    # used for unregistering notifys
     notifyRemoveChar = False
     removeNotifyCharHandle = None
+    # used to tirgger read char 
+    readChar = False
+    readCharUUID = None
     # signals
+    errorMsg = pyqtSignal(str)
     gotNotification = pyqtSignal(list)
+    readCharSignal = pyqtSignal(str)
     notifyRegisteredState = pyqtSignal(bool)
     def run(self):
         self.connect =True
@@ -174,6 +179,14 @@ class BleakLoop(QThread):
                     except Exception as err:
                         print("error here was: " )
                         print(err)
+                #-------------- if a single char needs to be read
+                if self.readChar == True:
+                    try:
+                        chardata = await client.read_gatt_char(self.readCharUUID)
+                        self.readCharSignal.emit(str(chardata))
+                    except Exception as err:
+                        print(err)
+                    self.readChar = False            
                 #-------------- if discoverServices has been triggered
                 if self.discoverServices == True:
                     try :
@@ -236,7 +249,4 @@ class BleakLoop(QThread):
                 #check if there are new characteristics that need to be registered with 'notify'
                 # chardata = await client.read_gatt_char("85fc567e-31d9-4185-87c6-339924d1c5be")
                 # print(str(chardata))
-''' TODO : start mechanism to register new Notify charateristics : use signals and slots 
-make a signal that will pass the UUID and the callback function. 
-callback funtion should be generic for all of them, and it should read the "sender"
-argument passed to know what char sent the BLE_EnableNotify '''
+

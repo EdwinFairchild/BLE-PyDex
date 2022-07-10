@@ -353,6 +353,9 @@ class Ui_MainWindow(object):
         self.frame = QtWidgets.QFrame(self.mainframe_explore)
         self.frame.setMinimumSize(QtCore.QSize(0, 500))
         self.frame.setMaximumSize(QtCore.QSize(1600, 16777215))
+        font = QtGui.QFont()
+        font.setStrikeOut(False)
+        self.frame.setFont(font)
         self.frame.setStyleSheet("QFrame{\n"
 "\n"
 "border-radius:10px;\n"
@@ -362,7 +365,7 @@ class Ui_MainWindow(object):
         self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame.setObjectName("frame")
         self.frame_2 = QtWidgets.QFrame(self.frame)
-        self.frame_2.setGeometry(QtCore.QRect(20, 410, 531, 261))
+        self.frame_2.setGeometry(QtCore.QRect(20, 420, 561, 261))
         self.frame_2.setStyleSheet("\n"
 "border-radius:10px;\n"
 "background-color: rgb(28, 28, 28);\n"
@@ -475,7 +478,7 @@ class Ui_MainWindow(object):
         self.label_8.setStyleSheet("color: rgb(48, 48, 48);")
         self.label_8.setObjectName("label_8")
         self.appFrame_2 = QtWidgets.QFrame(self.frame)
-        self.appFrame_2.setGeometry(QtCore.QRect(20, 30, 801, 361))
+        self.appFrame_2.setGeometry(QtCore.QRect(20, 30, 791, 371))
         self.appFrame_2.setMinimumSize(QtCore.QSize(0, 0))
         self.appFrame_2.setMaximumSize(QtCore.QSize(1000000, 100000))
         self.appFrame_2.setStyleSheet("background-color: rgb(27, 27, 27);")
@@ -483,7 +486,7 @@ class Ui_MainWindow(object):
         self.appFrame_2.setFrameShadow(QtWidgets.QFrame.Raised)
         self.appFrame_2.setObjectName("appFrame_2")
         self.btnExplore = QtWidgets.QPushButton(self.appFrame_2)
-        self.btnExplore.setGeometry(QtCore.QRect(510, 290, 121, 30))
+        self.btnExplore.setGeometry(QtCore.QRect(30, 340, 121, 30))
         self.btnExplore.setMinimumSize(QtCore.QSize(0, 30))
         font = QtGui.QFont()
         font.setPointSize(11)
@@ -509,7 +512,7 @@ class Ui_MainWindow(object):
 "}")
         self.btnExplore.setObjectName("btnExplore")
         self.scaneSliderFrame_2 = QtWidgets.QFrame(self.appFrame_2)
-        self.scaneSliderFrame_2.setGeometry(QtCore.QRect(50, 20, 291, 51))
+        self.scaneSliderFrame_2.setGeometry(QtCore.QRect(40, 150, 291, 51))
         self.scaneSliderFrame_2.setStyleSheet("border:none;")
         self.scaneSliderFrame_2.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.scaneSliderFrame_2.setFrameShadow(QtWidgets.QFrame.Raised)
@@ -539,7 +542,7 @@ class Ui_MainWindow(object):
 "color: rgb(255, 255, 255);")
         self.timeoutLabel_2.setObjectName("timeoutLabel_2")
         self.btnScan = QtWidgets.QPushButton(self.scaneSliderFrame_2)
-        self.btnScan.setGeometry(QtCore.QRect(180, 10, 111, 30))
+        self.btnScan.setGeometry(QtCore.QRect(200, 10, 91, 30))
         self.btnScan.setMinimumSize(QtCore.QSize(0, 30))
         self.btnScan.setMaximumSize(QtCore.QSize(1000, 16777215))
         font = QtGui.QFont()
@@ -566,14 +569,14 @@ class Ui_MainWindow(object):
 "}")
         self.btnScan.setObjectName("btnScan")
         self.textEdit = QtWidgets.QTextEdit(self.appFrame_2)
-        self.textEdit.setGeometry(QtCore.QRect(210, 120, 131, 31))
+        self.textEdit.setGeometry(QtCore.QRect(200, 30, 131, 31))
         self.textEdit.setStyleSheet("background-color: rgb(30, 30, 30);\n"
 "color: rgb(255, 255, 255);\n"
 "border: 1px solid gray;\n"
 "")
         self.textEdit.setObjectName("textEdit")
         self.radioButton = QtWidgets.QRadioButton(self.appFrame_2)
-        self.radioButton.setGeometry(QtCore.QRect(50, 120, 141, 31))
+        self.radioButton.setGeometry(QtCore.QRect(40, 30, 141, 31))
         self.radioButton.setStyleSheet("QRadioButton {\n"
 "   \n"
 "    color:                  white;\n"
@@ -596,7 +599,7 @@ class Ui_MainWindow(object):
 "}")
         self.radioButton.setObjectName("radioButton")
         self.radioButton_2 = QtWidgets.QRadioButton(self.appFrame_2)
-        self.radioButton_2.setGeometry(QtCore.QRect(50, 160, 141, 31))
+        self.radioButton_2.setGeometry(QtCore.QRect(40, 70, 141, 31))
         self.radioButton_2.setStyleSheet("QRadioButton {\n"
 "   \n"
 "    color:                  white;\n"
@@ -619,14 +622,14 @@ class Ui_MainWindow(object):
 "}")
         self.radioButton_2.setObjectName("radioButton_2")
         self.textEdit_2 = QtWidgets.QTextEdit(self.appFrame_2)
-        self.textEdit_2.setGeometry(QtCore.QRect(210, 160, 131, 31))
+        self.textEdit_2.setGeometry(QtCore.QRect(200, 70, 131, 31))
         self.textEdit_2.setStyleSheet("background-color: rgb(30, 30, 30);\n"
 "color: rgb(255, 255, 255);\n"
 "border: 1px solid gray;\n"
 "")
         self.textEdit_2.setObjectName("textEdit_2")
         self.radioButton_3 = QtWidgets.QRadioButton(self.appFrame_2)
-        self.radioButton_3.setGeometry(QtCore.QRect(50, 80, 112, 31))
+        self.radioButton_3.setGeometry(QtCore.QRect(40, 110, 112, 31))
         self.radioButton_3.setStyleSheet("QRadioButton {\n"
 "   \n"
 "    color:                  white;\n"
@@ -650,7 +653,7 @@ class Ui_MainWindow(object):
         self.radioButton_3.setChecked(True)
         self.radioButton_3.setObjectName("radioButton_3")
         self.frame_6 = QtWidgets.QFrame(self.appFrame_2)
-        self.frame_6.setGeometry(QtCore.QRect(50, 220, 301, 71))
+        self.frame_6.setGeometry(QtCore.QRect(30, 210, 311, 111))
         self.frame_6.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_6.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_6.setObjectName("frame_6")
@@ -668,14 +671,36 @@ class Ui_MainWindow(object):
         self.label_3.setObjectName("label_3")
         self.checkBox = QtWidgets.QCheckBox(self.frame_6)
         self.checkBox.setGeometry(QtCore.QRect(20, 50, 92, 21))
-        self.checkBox.setStyleSheet("color: rgb(255, 255, 255);")
+        self.checkBox.setStyleSheet("color: rgb(255, 255, 255);\n"
+"\n"
+"\n"
+"QCheckBox {\n"
+"   \n"
+"    color:                  white;\n"
+"}\n"
+"\n"
+"QCheckBox::indicator {\n"
+"    width:                  10px;\n"
+"    height:                 10px;\n"
+"    border-radius:          5px;\n"
+"}\n"
+"\n"
+"QCheckBox::indicator:checked {\n"
+"    background-color:       blue;\n"
+"\n"
+"}\n"
+"\n"
+"QCheckBox::indicator:unchecked {\n"
+"    background-color:       gray;\n"
+"\n"
+"}")
         self.checkBox.setObjectName("checkBox")
         self.lblConnectionTime = QtWidgets.QLabel(self.frame_6)
         self.lblConnectionTime.setGeometry(QtCore.QRect(210, 10, 67, 17))
         self.lblConnectionTime.setStyleSheet("color: rgb(255, 255, 255);")
         self.lblConnectionTime.setObjectName("lblConnectionTime")
-        self.btnConnect = QtWidgets.QPushButton(self.appFrame_2)
-        self.btnConnect.setGeometry(QtCore.QRect(640, 290, 121, 30))
+        self.btnConnect = QtWidgets.QPushButton(self.frame_6)
+        self.btnConnect.setGeometry(QtCore.QRect(210, 60, 91, 30))
         self.btnConnect.setMinimumSize(QtCore.QSize(0, 30))
         font = QtGui.QFont()
         font.setPointSize(11)
@@ -701,7 +726,7 @@ class Ui_MainWindow(object):
 "}")
         self.btnConnect.setObjectName("btnConnect")
         self.frame_11 = QtWidgets.QFrame(self.appFrame_2)
-        self.frame_11.setGeometry(QtCore.QRect(360, 30, 411, 251))
+        self.frame_11.setGeometry(QtCore.QRect(360, 50, 411, 291))
         self.frame_11.setStyleSheet("border-color: rgb(0, 0, 0);\n"
 "border-radius:10px;\n"
 "background-color: rgb(38, 38, 38);\n"
@@ -710,7 +735,7 @@ class Ui_MainWindow(object):
         self.frame_11.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_11.setObjectName("frame_11")
         self.list_discoveredDevices = QtWidgets.QListWidget(self.frame_11)
-        self.list_discoveredDevices.setGeometry(QtCore.QRect(0, 40, 411, 201))
+        self.list_discoveredDevices.setGeometry(QtCore.QRect(10, 50, 391, 231))
         self.list_discoveredDevices.setMinimumSize(QtCore.QSize(0, 0))
         self.list_discoveredDevices.setMaximumSize(QtCore.QSize(550, 1000))
         font = QtGui.QFont()
@@ -738,8 +763,17 @@ class Ui_MainWindow(object):
 "background-color: rgb(27, 27, 27);")
         self.label_6.setAlignment(QtCore.Qt.AlignCenter)
         self.label_6.setObjectName("label_6")
+        self.label_23 = QtWidgets.QLabel(self.appFrame_2)
+        self.label_23.setGeometry(QtCore.QRect(370, 10, 391, 31))
+        font = QtGui.QFont()
+        font.setPointSize(20)
+        font.setBold(True)
+        font.setWeight(75)
+        self.label_23.setFont(font)
+        self.label_23.setStyleSheet("color: rgb(48, 48, 48);")
+        self.label_23.setObjectName("label_23")
         self.btnNotify = QtWidgets.QPushButton(self.frame)
-        self.btnNotify.setGeometry(QtCore.QRect(430, 690, 121, 30))
+        self.btnNotify.setGeometry(QtCore.QRect(430, 700, 121, 30))
         self.btnNotify.setMinimumSize(QtCore.QSize(0, 30))
         self.btnNotify.setStyleSheet("QPushButton{\n"
 "    color: rgb(0, 0, 0);\n"
@@ -762,7 +796,7 @@ class Ui_MainWindow(object):
 "}")
         self.btnNotify.setObjectName("btnNotify")
         self.btnReadChar = QtWidgets.QPushButton(self.frame)
-        self.btnReadChar.setGeometry(QtCore.QRect(300, 690, 121, 30))
+        self.btnReadChar.setGeometry(QtCore.QRect(300, 700, 121, 30))
         self.btnReadChar.setMinimumSize(QtCore.QSize(0, 30))
         self.btnReadChar.setStyleSheet("QPushButton{\n"
 "    color: rgb(0, 0, 0);\n"
@@ -785,7 +819,7 @@ class Ui_MainWindow(object):
 "}")
         self.btnReadChar.setObjectName("btnReadChar")
         self.btnWriteChar = QtWidgets.QPushButton(self.frame)
-        self.btnWriteChar.setGeometry(QtCore.QRect(170, 690, 121, 30))
+        self.btnWriteChar.setGeometry(QtCore.QRect(170, 700, 121, 30))
         self.btnWriteChar.setMinimumSize(QtCore.QSize(0, 30))
         self.btnWriteChar.setStyleSheet("QPushButton{\n"
 "    color: rgb(0, 0, 0);\n"
@@ -808,7 +842,7 @@ class Ui_MainWindow(object):
 "}")
         self.btnWriteChar.setObjectName("btnWriteChar")
         self.frame_7 = QtWidgets.QFrame(self.frame)
-        self.frame_7.setGeometry(QtCore.QRect(570, 410, 431, 261))
+        self.frame_7.setGeometry(QtCore.QRect(570, 420, 461, 261))
         self.frame_7.setStyleSheet("\n"
 "border-radius:10px;\n"
 "background-color: rgb(28, 28, 28);\n"
@@ -869,53 +903,15 @@ class Ui_MainWindow(object):
 "\n"
 "color: rgb(255, 255, 255);")
         self.list_EnabledNotify.setObjectName("list_EnabledNotify")
-        self.frame_9 = QtWidgets.QFrame(self.frame)
-        self.frame_9.setGeometry(QtCore.QRect(840, 30, 611, 361))
-        self.frame_9.setStyleSheet("\n"
-"border-radius:10px;\n"
-"background-color: rgb(28, 28, 28);\n"
-"\n"
-"")
-        self.frame_9.setFrameShape(QtWidgets.QFrame.StyledPanel)
-        self.frame_9.setFrameShadow(QtWidgets.QFrame.Raised)
-        self.frame_9.setObjectName("frame_9")
-        self.label_22 = QtWidgets.QLabel(self.frame_9)
-        self.label_22.setGeometry(QtCore.QRect(30, 10, 391, 31))
-        font = QtGui.QFont()
-        font.setPointSize(20)
-        font.setBold(True)
-        font.setWeight(75)
-        self.label_22.setFont(font)
-        self.label_22.setStyleSheet("color: rgb(48, 48, 48);")
-        self.label_22.setObjectName("label_22")
-        self.servicesTreeWidget = QtWidgets.QTreeWidget(self.frame_9)
-        self.servicesTreeWidget.setGeometry(QtCore.QRect(30, 50, 551, 281))
-        font = QtGui.QFont()
-        font.setPointSize(13)
-        font.setBold(False)
-        font.setWeight(50)
-        self.servicesTreeWidget.setFont(font)
-        self.servicesTreeWidget.setStyleSheet("border-color: rgb(0, 0, 0);\n"
-"padding-top: 20px;\n"
-"border-radius:10px;\n"
-"background-color: rgb(28, 28, 28);\n"
-"color: rgb(255, 255, 255);\n"
-"")
-        self.servicesTreeWidget.setAlternatingRowColors(False)
-        self.servicesTreeWidget.setAnimated(True)
-        self.servicesTreeWidget.setWordWrap(True)
-        self.servicesTreeWidget.setObjectName("servicesTreeWidget")
-        self.servicesTreeWidget.headerItem().setText(0, "1")
-        self.servicesTreeWidget.header().setVisible(False)
         self.textEdit_3 = QtWidgets.QTextEdit(self.frame)
-        self.textEdit_3.setGeometry(QtCore.QRect(20, 690, 131, 31))
+        self.textEdit_3.setGeometry(QtCore.QRect(20, 700, 131, 31))
         self.textEdit_3.setStyleSheet("background-color: rgb(30, 30, 30);\n"
 "color: rgb(255, 255, 255);\n"
 "border: 1px solid gray;\n"
 "")
         self.textEdit_3.setObjectName("textEdit_3")
         self.frame_8 = QtWidgets.QFrame(self.frame)
-        self.frame_8.setGeometry(QtCore.QRect(1020, 410, 431, 261))
+        self.frame_8.setGeometry(QtCore.QRect(1020, 420, 431, 261))
         self.frame_8.setStyleSheet("\n"
 "border-radius:10px;\n"
 "background-color: rgb(28, 28, 28);\n"
@@ -934,26 +930,39 @@ class Ui_MainWindow(object):
         self.label_19.setStyleSheet("color: rgb(48, 48, 48);")
         self.label_19.setObjectName("label_19")
         self.list_Streaming = QtWidgets.QListWidget(self.frame_8)
-        self.list_Streaming.setGeometry(QtCore.QRect(30, 50, 381, 191))
+        self.list_Streaming.setGeometry(QtCore.QRect(20, 50, 391, 191))
         self.list_Streaming.setStyleSheet("border-color: rgb(0, 0, 0);\n"
 "border-radius:10px;\n"
-"background-color: rgb(28, 28, 28);\n"
+"background-color: rgb(38, 38, 38);\n"
 "/*border: 1px solid gray;*/\n"
 "\n"
 "color: rgb(255, 255, 255);")
         self.list_Streaming.setObjectName("list_Streaming")
+        self.label_20 = QtWidgets.QLabel(self.frame_8)
+        self.label_20.setGeometry(QtCore.QRect(30, 60, 371, 25))
+        self.label_20.setMinimumSize(QtCore.QSize(0, 25))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        font.setBold(False)
+        font.setWeight(50)
+        self.label_20.setFont(font)
+        self.label_20.setStyleSheet("color: rgb(255, 255, 255);\n"
+"border-radius:10px;\n"
+"background-color: rgb(27, 27, 27);")
+        self.label_20.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_20.setObjectName("label_20")
         self.label_5 = QtWidgets.QLabel(self.frame)
-        self.label_5.setGeometry(QtCore.QRect(17, 745, 297, 100))
+        self.label_5.setGeometry(QtCore.QRect(17, 754, 297, 91))
         self.label_5.setMaximumSize(QtCore.QSize(16777215, 100))
         font = QtGui.QFont()
-        font.setPointSize(60)
+        font.setPointSize(50)
         font.setBold(True)
         font.setWeight(75)
         self.label_5.setFont(font)
         self.label_5.setStyleSheet("color: rgb(48, 48, 48);")
         self.label_5.setObjectName("label_5")
         self.label_9 = QtWidgets.QLabel(self.frame)
-        self.label_9.setGeometry(QtCore.QRect(320, 745, 34, 100))
+        self.label_9.setGeometry(QtCore.QRect(270, 770, 34, 71))
         self.label_9.setMaximumSize(QtCore.QSize(16777215, 100))
         font = QtGui.QFont()
         font.setPointSize(90)
@@ -962,22 +971,63 @@ class Ui_MainWindow(object):
 "")
         self.label_9.setObjectName("label_9")
         self.textBrowser_2 = QtWidgets.QTextBrowser(self.frame)
-        self.textBrowser_2.setGeometry(QtCore.QRect(360, 770, 256, 50))
+        self.textBrowser_2.setGeometry(QtCore.QRect(310, 790, 256, 50))
         self.textBrowser_2.setMaximumSize(QtCore.QSize(16777215, 50))
         self.textBrowser_2.setStyleSheet("border:none;")
         self.textBrowser_2.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
         self.textBrowser_2.setObjectName("textBrowser_2")
         self.frame_10 = QtWidgets.QFrame(self.frame)
-        self.frame_10.setGeometry(QtCore.QRect(650, 780, 801, 61))
+        self.frame_10.setGeometry(QtCore.QRect(650, 760, 801, 71))
         self.frame_10.setStyleSheet("color: rgb(255, 255, 255);\n"
 "border-radius:10px;\n"
 "background-color: rgb(28, 28, 28);")
         self.frame_10.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_10.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_10.setObjectName("frame_10")
+        self.frame_9 = QtWidgets.QFrame(self.frame)
+        self.frame_9.setGeometry(QtCore.QRect(800, 30, 651, 371))
+        self.frame_9.setStyleSheet("\n"
+"border-radius:10px;\n"
+"background-color: rgb(27, 27, 27);\n"
+"")
+        self.frame_9.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_9.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_9.setObjectName("frame_9")
+        self.label_22 = QtWidgets.QLabel(self.frame_9)
+        self.label_22.setGeometry(QtCore.QRect(30, 10, 391, 31))
+        font = QtGui.QFont()
+        font.setPointSize(20)
+        font.setBold(True)
+        font.setWeight(75)
+        self.label_22.setFont(font)
+        self.label_22.setStyleSheet("color: rgb(48, 48, 48);")
+        self.label_22.setObjectName("label_22")
+        self.servicesTreeWidget = QtWidgets.QTreeWidget(self.frame_9)
+        self.servicesTreeWidget.setGeometry(QtCore.QRect(20, 50, 611, 291))
+        font = QtGui.QFont()
+        font.setPointSize(13)
+        font.setBold(False)
+        font.setWeight(50)
+        self.servicesTreeWidget.setFont(font)
+        self.servicesTreeWidget.setStyleSheet("border-color: rgb(0, 0, 0);\n"
+"padding-top: 20px;\n"
+"border-radius:10px;\n"
+"background-color: rgb(38, 38, 38);\n"
+"color: rgb(255, 255, 255);\n"
+"")
+        self.servicesTreeWidget.setAlternatingRowColors(False)
+        self.servicesTreeWidget.setAnimated(True)
+        self.servicesTreeWidget.setWordWrap(True)
+        self.servicesTreeWidget.setObjectName("servicesTreeWidget")
+        self.servicesTreeWidget.headerItem().setText(0, "1")
+        self.servicesTreeWidget.header().setVisible(False)
         self.btnNotifyRemove = QtWidgets.QPushButton(self.frame)
-        self.btnNotifyRemove.setGeometry(QtCore.QRect(880, 690, 121, 30))
+        self.btnNotifyRemove.setEnabled(True)
+        self.btnNotifyRemove.setGeometry(QtCore.QRect(560, 700, 121, 30))
         self.btnNotifyRemove.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setStrikeOut(False)
+        self.btnNotifyRemove.setFont(font)
         self.btnNotifyRemove.setStyleSheet("QPushButton{\n"
 "    color: rgb(0, 0, 0);\n"
 "    background-color: rgb(180, 180, 180);\n"
@@ -997,7 +1047,23 @@ class Ui_MainWindow(object):
 "        color: rgb(255, 255, 255);\n"
 "    background-color: rgb(170, 27, 27);\n"
 "}")
+        self.btnNotifyRemove.setCheckable(False)
+        self.btnNotifyRemove.setChecked(False)
         self.btnNotifyRemove.setObjectName("btnNotifyRemove")
+        self.appFrame_2.raise_()
+        self.frame_2.raise_()
+        self.btnNotify.raise_()
+        self.btnReadChar.raise_()
+        self.btnWriteChar.raise_()
+        self.frame_7.raise_()
+        self.textEdit_3.raise_()
+        self.frame_8.raise_()
+        self.label_5.raise_()
+        self.label_9.raise_()
+        self.textBrowser_2.raise_()
+        self.frame_10.raise_()
+        self.frame_9.raise_()
+        self.btnNotifyRemove.raise_()
         self.verticalLayout_2.addWidget(self.frame)
         self.horizontalLayout_4.addWidget(self.mainframe_explore)
         self.stackedWidget.addWidget(self.page_Explore)
@@ -1069,13 +1135,14 @@ class Ui_MainWindow(object):
         self.lblConnectionTime.setText(_translate("MainWindow", "5"))
         self.btnConnect.setText(_translate("MainWindow", "Connect"))
         self.label_6.setText(_translate("MainWindow", "  Address                               Name"))
+        self.label_23.setText(_translate("MainWindow", "Device list"))
         self.btnNotify.setText(_translate("MainWindow", "Enable Notify"))
         self.btnReadChar.setText(_translate("MainWindow", "Read"))
         self.btnWriteChar.setText(_translate("MainWindow", "Write"))
         self.label_4.setText(_translate("MainWindow", "Enabled notifications"))
         self.label_18.setText(_translate("MainWindow", "  Handle                               Value"))
-        self.label_22.setText(_translate("MainWindow", "Gatt explorer"))
         self.label_19.setText(_translate("MainWindow", "Streaming characteristics"))
+        self.label_20.setText(_translate("MainWindow", "  Handle                               Value"))
         self.label_5.setText(_translate("MainWindow", "Explore"))
         self.label_9.setText(_translate("MainWindow", "|"))
         self.textBrowser_2.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
@@ -1084,6 +1151,7 @@ class Ui_MainWindow(object):
 "</style></head><body style=\" font-family:\'Ubuntu\'; font-size:11pt; font-weight:400; font-style:normal;\">\n"
 "<p align=\"justify\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" color:#909090;\">Explore services and characteristics</span></p>\n"
 "<p align=\"justify\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" color:#909090;\">on connectable devices.</span></p></body></html>"))
+        self.label_22.setText(_translate("MainWindow", "Gatt explorer"))
         self.btnNotifyRemove.setText(_translate("MainWindow", "Remove"))
         self.label_2.setText(_translate("MainWindow", "intro page"))
 from slidingstackedwidget import SlidingStackedWidget

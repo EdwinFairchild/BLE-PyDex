@@ -117,6 +117,9 @@ class MainInterface(QMainWindow):
 
         # button list used for changing style sheet
         self.buttonList=[self.ui.btnMenu ,self.ui.btnMenuGattMaker,self.ui.btnMenuClient,self.ui.btnMenuExplore]
+
+        self.ui.btnExplore.hide()
+    #------------------------------------------------------------------------
     def setConnectedIconColor(self, color):
         if color == "blue":
             self.ui.btnConnectedState.setIcon(QIcon('resources/icons/BleBlue.svg'))
@@ -187,16 +190,16 @@ class MainInterface(QMainWindow):
 
     #------------------------------------------------------------------------
     def btnReadCharcallback(self):
+        if self.connected_state == True:
+            self.bleLoop.readChar = True;
+            self.bleLoop.readCharUUID = self.ui.btnLabelUUID.text()
+            self.bleLoop.readCharSignal.connect(self.readCharSignalCallback)
            #read char from gatt
-        self.gettreadChar = ble_ctl.BLE_ReadChar()
-      #  self.gettreadChar.client = self.client
-        self.gettreadChar.ble_address = self.connected_address
-        self.gettreadChar.charToRead = self.ui.btnLabelUUID.text()
-        self.gettreadChar.charReadData.connect(self.gattReadCallBAck)
-        self.gettreadChar.start()
+
+        
     #------------------------------------------------------------------------
-    def gattReadCallBAck(self,data):
-        self.ui.lblCharVal.setText(data)
+    def readCharSignalCallback(self,data):
+        self.ui.btnLabelValue.setText(data)
     #------------------------------------------------------------------------
     def gotCharNotif(self,data):
         item = self.ui.list_EnabledNotify.findItems(str(data[0]), QtCore.Qt.MatchExactly)
@@ -315,7 +318,9 @@ class MainInterface(QMainWindow):
                     self.bleLoop.errorMsg.connect(self.errMsg)
                     self.connected_address = self.selected_address
                     self.bleLoop.start()
-                    self.setAlternateButtonModeColor(self.ui.btnConnect,  170,77,77)
+                    fore = [255,255,255]
+                    back = [170,77,77]
+                    self.setAlternateButtonModeColor(self.ui.btnConnect, fore,back)
                     # gui stuff
                     self.setConnectedIconColor('blue')
                     self.ui.btnConnect.setText("Disconnect")
@@ -330,10 +335,12 @@ class MainInterface(QMainWindow):
         else:
             try:
                 # connection stuff
-                self.setAlternateButtonModeColor(self.ui.btnConnect,180,180,180)
                 self.bleLoop.disconnect_triggered = True
                 self.bleLoop.disconnectSignal.connect(self.disconnectSlot)
                 # gui stuff
+                fore = [0,0,0]
+                back = [180,180,180]
+                self.setAlternateButtonModeColor(self.ui.btnConnect,fore,back)
                 self.setConnectedIconColor('white')
                 self.ui.btnConnect.setText("Connect")
                 self.connected_state = False
@@ -406,11 +413,11 @@ class MainInterface(QMainWindow):
                 test.setWidth(20)
                 button.setIconSize(test)
     #------------------------------------------------------------------------
-    def setAlternateButtonModeColor(self, button, red , green , blue):
-        stylesheet = f"QPushButton{{ text-align: center; background-color: rgb({red}, {green}, {blue});  ;border-radius:12px;color: rgb(255, 255, 255);border:none;}}QPushButton:hover{{color: rgb(255, 255, 255);background-color: rgb(170, 77, 77);}}QPushButton:pressed{{color: rgb(255, 255, 255);background-color: rgb(170, 27, 27);}}"
+    def setAlternateButtonModeColor(self, button, fore, back):
+        stylesheet = f"QPushButton{{ text-align: center; background-color: rgb({back[0]}, {back[1]}, {back[2]});  ;border-radius:12px;color: rgb({fore[0]}, {fore[1]}, {fore[2]});border:none;}}QPushButton:hover{{color: rgb(255, 255, 255);background-color: rgb(170, 77, 77);}}QPushButton:pressed{{color: rgb(255, 255, 255);background-color: rgb(170, 27, 27);}}"
         button.setStyleSheet(stylesheet)
+    #------------------------------------------------------------------------
     def menuAnimate(self, obj, onmouse):
-       
         if self.animationDone == True and self.menuPinned == False:
             self.anim = QPropertyAnimation(self.ui.sideBar,b'maximumWidth')
             self.anim.setStartValue(self.ui.sideBar.width())
