@@ -198,9 +198,10 @@ class MainInterface(QMainWindow):
            #read char from gatt
     #------------------------------------------------------------------------
     def btnWriteCharCallback(self):
-        self.bleLoop.writeCharUUID = self.ui.btnLabelUUID.text()
-        self.bleLoop.writeCharData = self.ui.text_writeChar.toPlainText()
-        self.bleLoop.writeChar = True
+        print(bytes(self.ui.text_writeChar.toPlainText(),'utf-8'))
+        # self.bleLoop.writeCharUUID = self.ui.btnLabelUUID.text()
+        # self.bleLoop.writeCharData = self.ui.text_writeChar.toPlainText()
+        # self.bleLoop.writeChar = True
 
 
         
