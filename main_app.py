@@ -63,6 +63,7 @@ class MainInterface(QMainWindow):
         # interface button callbacks
         self.ui.btnScan.clicked.connect(self.btnBleScan)
         self.ui.btnReadChar.clicked.connect(self.btnReadCharcallback)
+        self.ui.btnWriteChar.clicked.connect(self.btnWriteCharCallback)
         self.ui.list_discoveredDevices.itemPressed.connect(self.discoveredList2ItemPressed)
         self.ui.list_EnabledNotify.itemPressed.connect(self.enabledNotifyListItemPressed)
         self.ui.list_EnabledNotifyValue.itemPressed.connect(self.enabledNotifyListValueItemPressed)
@@ -169,8 +170,8 @@ class MainInterface(QMainWindow):
             # UUIDs are strings and Handles are ints in Bleak
             self.bleLoop.removeNotifyCharHandle =int(item.text())
             # remove from list
-            self.ui.list_EnabledNotify.takeItem(self.ui.list_EnabledNotify.currentRow())
             self.ui.list_EnabledNotifyValue.takeItem(self.ui.list_EnabledNotify.currentRow())
+            self.ui.list_EnabledNotify.takeItem(self.ui.list_EnabledNotify.currentRow())
     #------------------------------------------------------------------------
     def notifyRegisteredStateCallback(self, state):
         
@@ -195,6 +196,12 @@ class MainInterface(QMainWindow):
             self.bleLoop.readCharUUID = self.ui.btnLabelUUID.text()
             self.bleLoop.readCharSignal.connect(self.readCharSignalCallback)
            #read char from gatt
+    #------------------------------------------------------------------------
+    def btnWriteCharCallback(self):
+        self.bleLoop.writeCharUUID = self.ui.btnLabelUUID.text()
+        self.bleLoop.writeCharData = self.ui.text_writeChar.toPlainText()
+        self.bleLoop.writeChar = True
+
 
         
     #------------------------------------------------------------------------

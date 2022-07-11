@@ -2014,7 +2014,7 @@ color: rgb(255, 255, 255);</string>
                      </widget>
                     </widget>
                    </widget>
-                   <widget class="QTextEdit" name="textEdit_3">
+                   <widget class="QTextEdit" name="text_writeChar">
                     <property name="geometry">
                      <rect>
                       <x>20</x>
@@ -2386,7 +2386,7 @@ QPushButton:pressed{
                    <zorder>btnReadChar</zorder>
                    <zorder>btnWriteChar</zorder>
                    <zorder>frame_7</zorder>
-                   <zorder>textEdit_3</zorder>
+                   <zorder>text_writeChar</zorder>
                    <zorder>frame_8</zorder>
                    <zorder>label_5</zorder>
                    <zorder>label_9</zorder>

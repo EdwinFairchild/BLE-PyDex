@@ -114,6 +114,10 @@ class BleakLoop(QThread):
     # used to tirgger read char 
     readChar = False
     readCharUUID = None
+    # used to trigger write char
+    writeChar = False
+    writeCharUUID = None
+    writeCharData = None
     # signals
     errorMsg = pyqtSignal(str)
     gotNotification = pyqtSignal(list)
@@ -147,7 +151,7 @@ class BleakLoop(QThread):
            # await client.write_gatt_char("85fc5681-31d9-4185-87c6-339924d1c5be", bytes('1', 'utf-8'))
     
             while self.connect == True:
-                await asyncio.sleep(1.0)
+                await asyncio.sleep(0.1)
                 # check the flag to disconnect
                 if self.disconnect_triggered == True:
                     try:
@@ -177,16 +181,24 @@ class BleakLoop(QThread):
                         await client.stop_notify(self.removeNotifyCharHandle)
                         self.notifyRemoveChar = False
                     except Exception as err:
-                        print("error here was: " )
+                        
                         print(err)
                 #-------------- if a single char needs to be read
-                if self.readChar == True:
+                if self.readChar == True and self.readCharUUID != None:
                     try:
                         chardata = await client.read_gatt_char(self.readCharUUID)
                         self.readCharSignal.emit(str(chardata))
                     except Exception as err:
                         print(err)
-                    self.readChar = False            
+                    self.readChar = False   
+                #-------------- if a write char is requested
+                if self.writeChar == True and self.writeCharUUID != None:
+                    try:
+                        await client.write_gatt_char(self.writeCharUUID, bytes(self.writeCharData, 'utf-8'))
+                    except Exception as err:
+                        print(err)
+                    self.writeChar = False
+         
                 #-------------- if discoverServices has been triggered
                 if self.discoverServices == True:
                     try :
@@ -239,14 +251,4 @@ class BleakLoop(QThread):
                     except Exception as e:
                         print("Opps ,That device is not explorable, at least not by you.")
 
-                #cycle through  dictionary of characters to read.
-
-                #if that specific chararacteristic is not "stream" enabled
-                #then just read once and remove from dictionary
-
-                #other wise read it 
-
-                #check if there are new characteristics that need to be registered with 'notify'
-                # chardata = await client.read_gatt_char("85fc567e-31d9-4185-87c6-339924d1c5be")
-                # print(str(chardata))
 

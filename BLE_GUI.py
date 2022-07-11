@@ -903,13 +903,13 @@ class Ui_MainWindow(object):
 "\n"
 "color: rgb(255, 255, 255);")
         self.list_EnabledNotify.setObjectName("list_EnabledNotify")
-        self.textEdit_3 = QtWidgets.QTextEdit(self.frame)
-        self.textEdit_3.setGeometry(QtCore.QRect(20, 700, 131, 31))
-        self.textEdit_3.setStyleSheet("background-color: rgb(30, 30, 30);\n"
+        self.text_writeChar = QtWidgets.QTextEdit(self.frame)
+        self.text_writeChar.setGeometry(QtCore.QRect(20, 700, 131, 31))
+        self.text_writeChar.setStyleSheet("background-color: rgb(30, 30, 30);\n"
 "color: rgb(255, 255, 255);\n"
 "border: 1px solid gray;\n"
 "")
-        self.textEdit_3.setObjectName("textEdit_3")
+        self.text_writeChar.setObjectName("text_writeChar")
         self.frame_8 = QtWidgets.QFrame(self.frame)
         self.frame_8.setGeometry(QtCore.QRect(1020, 420, 431, 261))
         self.frame_8.setStyleSheet("\n"
@@ -1056,7 +1056,7 @@ class Ui_MainWindow(object):
         self.btnReadChar.raise_()
         self.btnWriteChar.raise_()
         self.frame_7.raise_()
-        self.textEdit_3.raise_()
+        self.text_writeChar.raise_()
         self.frame_8.raise_()
         self.label_5.raise_()
         self.label_9.raise_()
