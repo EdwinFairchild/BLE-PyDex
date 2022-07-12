@@ -10,7 +10,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import *
 from enum import Enum, auto
 from typing import Any, Callable, NamedTuple
-
+from functools import cached_property
 '''******************************************************************************************
         Scan for devices
 *******************************************************************************************'''
@@ -97,7 +97,7 @@ class BLE_DiscoverServices(QThread):
 class BleakLoop(QThread):
     # bleak client stuff
     ble_address= None
-    client = None
+    #client = None
     # disconnected state switch
     disconnectSignal = pyqtSignal(bool)
     connect = False
@@ -141,27 +141,20 @@ class BleakLoop(QThread):
         # send data let application parse it
         dataList = [sender,data]
         self.gotNotification.emit(dataList)
-
     #-------------------------------------------------------------------------
     async def bleakLoop(self):
         #-------------------------------------------------------------------------
         async with BleakClient(self.ble_address, disconnected_callback= self.handle_disconnect) as client:
-            
-            
-           # await client.write_gatt_char("85fc5681-31d9-4185-87c6-339924d1c5be", bytes('1', 'utf-8'))
-    
             while self.connect == True:
                 await asyncio.sleep(0.1)
                 # check the flag to disconnect
                 if self.disconnect_triggered == True:
                     try:
                         await client.disconnect()
-
                         self.handle_disconnect(client)
                         self.disconnect_triggered = False
                         self.connect = False
                         self.disconnectSignal.emit(True)
-
                     except Exception as err:
                         print("-------> error is :")
                         print(err)
@@ -206,49 +199,28 @@ class BleakLoop(QThread):
                         print(f"Connected: {client.is_connected}")
                         for service in client.services:
                             #emit top level item
-
                             self.discovered_services_signal.emit([f"[Service] {service}", 0])
-
-
                             for char in service.characteristics:
                                 #emit children of top level
                                 if "read" in char.properties:
                                     try:
                                         value = bytes(await client.read_gatt_char(char.uuid))
                                         self.discovered_services_signal.emit([f"\t[Characteristic] {char} ({','.join(char.properties)}), Value: {value}",1])
-                                        # print(
-                                        #     f"\t[Characteristic] {char} ({','.join(char.properties)}), Value: {value}"
-                                        # )
                                     except Exception as e:
                                         self.discovered_services_signal.emit([f"\t[Characteristic] {char} ({','.join(char.properties)}), Error: {e}",1])
-                                        # print(
-                                        #     f"\t[Characteristic] {char} ({','.join(char.properties)}), Error: {e}"
-                                        # )
-
                                 else:
                                     value = None
-                                    self.discovered_services_signal.emit([f"\t[Characteristic] {char} ({','.join(char.properties)}), Value: {value}",1])
-                                    # print(
-                                    #     f"\t[Characteristic] {char} ({','.join(char.properties)}), Value: {value}"
-                                    # )
-
+                                    self.discovered_services_signal.emit([f"\t[Characteristic] {char} ({','.join(char.properties)}), Value: {value}",1])                           
                                 for descriptor in char.descriptors:
                                     #emit children of children
                                     try:
                                         value = bytes(
-                                            await client.read_gatt_descriptor(descriptor.handle)
-                                            
+                                            await client.read_gatt_descriptor(descriptor.handle)                                           
                                         )
                                         self.discovered_services_signal.emit([f"\t\t[Descriptor] {descriptor}) | Value: {value}",2])
-                                        # print(f"\t\t[Descriptor] {descriptor}) | Value: {value}")
                                     except Exception as e:
                                         print(err)
-                                        #print(f"\t\t[Descriptor] {descriptor}) | Error: {e}")
-                        self.discoverServices = False
-                        
-                        print(f"Cleint conenction state : {client.is_connected}")
-                            
+                        self.discoverServices = False                                                  
                     except Exception as e:
                         print("Opps ,That device is not explorable, at least not by you.")
-
 

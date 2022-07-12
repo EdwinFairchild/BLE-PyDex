@@ -198,13 +198,9 @@ class MainInterface(QMainWindow):
            #read char from gatt
     #------------------------------------------------------------------------
     def btnWriteCharCallback(self):
-        print(bytes(self.ui.text_writeChar.toPlainText(),'utf-8'))
-        # self.bleLoop.writeCharUUID = self.ui.btnLabelUUID.text()
-        # self.bleLoop.writeCharData = self.ui.text_writeChar.toPlainText()
-        # self.bleLoop.writeChar = True
-
-
-        
+        self.bleLoop.writeCharUUID = self.ui.btnLabelUUID.text()
+        self.bleLoop.writeCharData = self.ui.text_writeChar.toPlainText()
+        self.bleLoop.writeChar = True
     #------------------------------------------------------------------------
     def readCharSignalCallback(self,data):
         self.ui.btnLabelValue.setText(data)
@@ -311,6 +307,7 @@ class MainInterface(QMainWindow):
             #todos can time out
         else:
            print("Opps ,You need to select a device from the scan list!")
+
 
     #------------------------------------------------------------------------
     def btnConnectCallback(self):
