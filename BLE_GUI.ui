@@ -391,7 +391,8 @@ QPushButton:pressed{
              </property>
              <property name="styleSheet">
               <string notr="true">text-align: left;
-padding-left: 20px;</string>
+padding-left: 20px;
+	color: rgb(255, 255, 255);</string>
              </property>
              <property name="text">
               <string>    Edwin Amaya</string>
@@ -412,6 +413,7 @@ text-align: left;
 padding-left: 15px;
 border-radius:5px;
 background-color: rgb(19, 19, 19);
+	color: rgb(255, 255, 255);
 }
 
 QPushButton:hover{
