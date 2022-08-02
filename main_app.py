@@ -19,7 +19,7 @@ import os
 import time
 import atexit
 from asyncqt import QEventLoop
-
+import webbrowser
 QtWidgets.QApplication.setAttribute(
     QtCore.Qt.AA_EnableHighDpiScaling, True)  # enable highdpi scaling
 QtWidgets.QApplication.setAttribute(QtCore.Qt.AA_UseHighDpiPixmaps, True)
@@ -81,7 +81,7 @@ class MainInterface(QMainWindow):
             self.btnLabelPermissionsCopy)
         self.ui.btnNotify.clicked.connect(self.btnNotifyCallBack)
         self.ui.btnNotifyRemove.clicked.connect(self.btnNotifyRemoveCallback)
-
+        self.ui.btnRepo.clicked.connect(self.btnRepoCallback)
         self.iconDictionary = {self.ui.btnMenu: ['resources/icons/Menu.svg', 'resources/icons/MenuBlue.svg'],
                                self.ui.btnMenuGattMaker: ['resources/icons/Ble.svg', 'resources/icons/BleBlue.svg'],
                                self.ui.btnMenuExplore: ['resources/icons/Discover.svg', 'resources/icons/DiscoverBlue.svg'],
@@ -317,6 +317,10 @@ class MainInterface(QMainWindow):
         self.BLE_DiscoverDevices.start()
         # self.worker.finished.connect(self.blescannerFinished)
     # ------------------------------------------------------------------------
+
+    def btnRepoCallback(self):
+        # Go to example.com
+        webbrowser.open('https://github.com/EdwinFairchild/BLE-PyDex')
 
     def errMsg(self, err):
         print(err)
