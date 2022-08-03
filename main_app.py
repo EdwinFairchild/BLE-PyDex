@@ -272,6 +272,22 @@ class MainInterface(QMainWindow):
         self.ui.btnLabelHandle.setText(lblHandle)
         # get permissions
         lblPermissions = "N/A"
+        #----------------------------------
+        #this will NEVER change
+        UUID_BLE_SPEC = ["0000","1000","8000","00805f9b34fb"]
+
+        # this WILL change
+        UUID = lblUUID[0].strip()
+        print(UUID)
+        UUID = UUID.split("-")
+        print(UUID)
+        if UUID[1] == UUID_BLE_SPEC[0] and UUID[2] == UUID_BLE_SPEC[1] and UUID[3] == UUID_BLE_SPEC[2] and UUID[4] == UUID_BLE_SPEC[3]:
+            print("Last part of UUID MATCHED")
+        #TODO check if of first part amtches something in the fiel
+        
+        #----------------------------------
+
+
         self.ui.btnLabelUUID.setText(lblUUID[0].strip())
         if "read" in treeWidgetItemtext.text(0):
             lblPermissions = "READ"
@@ -293,7 +309,16 @@ class MainInterface(QMainWindow):
     """
         self.ui.btnLabelPermissions.setText(lblPermissions)
     # ------------------------------------------------------------------------
-
+    def uuid_parse(self,uuid):
+        file = open("UUIDs.txt",'r')
+        data = file.readlines()
+        uuid_dict = {}
+        #this should probably only happen once when the class is instantiated 
+        for line in data:
+            line = line.split()
+            if line[1] not in uuid_dict:
+                uuid_dict[line[2]] = line[1]
+        
     def discoveredList2ItemPressed(self):
         value = self.ui.list_discoveredDevices.currentItem()
         tmp = value.text()
