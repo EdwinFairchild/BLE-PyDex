@@ -20,6 +20,7 @@ import time
 import atexit
 from asyncqt import QEventLoop
 import webbrowser
+import BLE_UUIDs
 QtWidgets.QApplication.setAttribute(
     QtCore.Qt.AA_EnableHighDpiScaling, True)  # enable highdpi scaling
 QtWidgets.QApplication.setAttribute(QtCore.Qt.AA_UseHighDpiPixmaps, True)
@@ -43,7 +44,7 @@ class MainInterface(QMainWindow):
     # peristent instance of bleakLoop needs to be kept so the task is not
     # canceled
     bleLoop = None
-
+    UUID_dict = BLE_UUIDs.get_uuid_dict("UUIDs.txt")
     # list to manage chars that have notify enabled
     notifyEnabledCharsDict = {}
 
@@ -272,7 +273,19 @@ class MainInterface(QMainWindow):
         self.ui.btnLabelHandle.setText(lblHandle)
         # get permissions
         lblPermissions = "N/A"
-        self.ui.btnLabelUUID.setText(lblUUID[0].strip())
+        # this will NEVER change
+        UUID_BLE_SPEC = ["0000", "1000", "8000", "00805f9b34fb"]
+
+        # this WILL change
+        UUID_val = lblUUID[0].strip()
+        UUID = UUID_val.split("-")
+        if UUID[1:] == UUID_BLE_SPEC:
+            tempUUID = UUID[0].removeprefix("0000")
+            tempUUID = tempUUID.upper()
+            if tempUUID in self.UUID_dict:
+                UUID_val = self.UUID_dict[tempUUID]
+
+        self.ui.btnLabelUUID.setText(UUID_val)
         if "read" in treeWidgetItemtext.text(0):
             lblPermissions = "READ"
         if "write" in treeWidgetItemtext.text(0):
@@ -293,6 +306,16 @@ class MainInterface(QMainWindow):
     """
         self.ui.btnLabelPermissions.setText(lblPermissions)
     # ------------------------------------------------------------------------
+
+    def uuid_parse(self, uuid):
+        file = open("UUIDs.txt", 'r')
+        data = file.readlines()
+        uuid_dict = {}
+        # this should probably only happen once when the class is instantiated
+        for line in data:
+            line = line.split()
+            if line[1] not in uuid_dict:
+                uuid_dict[line[2]] = line[1]
 
     def discoveredList2ItemPressed(self):
         value = self.ui.list_discoveredDevices.currentItem()
