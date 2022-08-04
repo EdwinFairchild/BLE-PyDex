@@ -15,9 +15,9 @@ def get_uuid_dict(filename):
     for line in data:
         if line != "\n":
             line = line.split()
-            if line[1] not in uuid_dict:
-                uuid_dict[line[0][2:]] = line[1]
+            if line[0] not in uuid_dict:
+                uuid_dict[line[0][2:]] = ' '.join(line[1:])
                 # for debugging
-                # print(f"{line[1][2:]}{line[0]}")
+                #print(f"{line[0][2:]} {line[1]}")
 
     return uuid_dict
