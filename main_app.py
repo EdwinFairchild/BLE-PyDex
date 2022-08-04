@@ -493,22 +493,25 @@ class MainInterface(QMainWindow):
     # ------------------------------------------------------------------------
 
     def setAlternateButtonModeColor(self, button, fore, back):
-        stylesheet = f"QPushButton{{ text-align: center; background-color: rgb({back[0]}, {back[1]}, {back[2]});  ;border-radius:12px;color: rgb({fore[0]}, {fore[1]}, {fore[2]});border:none;}}QPushButton:hover{{color: rgb(255, 255, 255);background-color: rgb(170, 77, 77);}}QPushButton:pressed{{color: rgb(255, 255, 255);background-color: rgb(170, 27, 27);}}"
+        stylesheet = f"QPushButton{{ text-align: center; background-color: rgb({back[0]}, {back[1]}, {back[2]});  ;border-radius:5px;color: rgb({fore[0]}, {fore[1]}, {fore[2]});border:none;}}QPushButton:hover{{color: rgb(255, 255, 255);background-color: rgb(170, 77, 77);}}QPushButton:pressed{{color: rgb(255, 255, 255);background-color: rgb(170, 27, 27);}}"
         button.setStyleSheet(stylesheet)
     # ------------------------------------------------------------------------
 
     def menuAnimate(self, obj, onmouse):
-        if self.animationDone == True and self.menuPinned == False:
-            self.anim = QPropertyAnimation(self.ui.sideBar, b'maximumWidth')
-            self.anim.setStartValue(self.ui.sideBar.width())
-            if self.ui.sideBar.width() < 100:
-                self.anim.setEndValue(self.sideBarWidthMax)
-            else:
-                self.anim.setEndValue(self.sideBarWidthMin)
-            self.anim.setEasingCurve(QEasingCurve.InOutCubic)
-            self.anim.finished.connect(self.animDone)
-            self.animationDone = False
-            self.anim.start()
+        # right now minimizing the menu offers no advantage
+        # there is no point in having it.
+        pass
+        # if self.animationDone == True and self.menuPinned == False:
+        #     self.anim = QPropertyAnimation(self.ui.sideBar, b'maximumWidth')
+        #     self.anim.setStartValue(self.ui.sideBar.width())
+        #     if self.ui.sideBar.width() < 100:
+        #         self.anim.setEndValue(self.sideBarWidthMax)
+        #     else:
+        #         self.anim.setEndValue(self.sideBarWidthMin)
+        #     self.anim.setEasingCurve(QEasingCurve.InOutCubic)
+        #     self.anim.finished.connect(self.animDone)
+        #     self.animationDone = False
+        #     self.anim.start()
     # ------------------------------------------------------------------------
 
     def animDone(self):
@@ -516,23 +519,25 @@ class MainInterface(QMainWindow):
     # ------------------------------------------------------------------------
 
     def btnMenuCallBack(self):
-        if self.menuPinned == True:  # set to white
-            icon = self.iconDictionary[self.ui.btnMenu][0]
-            self.ui.btnMenu.setIcon(QIcon(icon))
-            test = QSize()
-            test.setHeight(20)
-            test.setWidth(20)
-            self.ui.btnMenu.setIconSize(test)
+        # read comment on menuAnimate
+        pass
+        # if self.menuPinned == True:  # set to white
+        #     icon = self.iconDictionary[self.ui.btnMenu][0]
+        #     self.ui.btnMenu.setIcon(QIcon(icon))
+        #     test = QSize()
+        #     test.setHeight(20)
+        #     test.setWidth(20)
+        #     self.ui.btnMenu.setIconSize(test)
 
-        else:
-            icon = self.iconDictionary[self.ui.btnMenu][1]
-            self.ui.btnMenu.setIcon(QIcon(icon))
-            test = QSize()
-            test.setHeight(20)
-            test.setWidth(20)
-            self.ui.btnMenu.setIconSize(test)
+        # else:
+        #     icon = self.iconDictionary[self.ui.btnMenu][1]
+        #     self.ui.btnMenu.setIcon(QIcon(icon))
+        #     test = QSize()
+        #     test.setHeight(20)
+        #     test.setWidth(20)
+        #     self.ui.btnMenu.setIconSize(test)
 
-        self.menuPinned = not self.menuPinned
+        # self.menuPinned = not self.menuPinned
     # ------------------------------------------------------------------------
 
     def btnMenuGattMakerCallBack(self):

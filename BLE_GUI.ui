@@ -19,7 +19,7 @@
   <property name="minimumSize">
    <size>
     <width>1648</width>
-    <height>927</height>
+    <height>0</height>
    </size>
   </property>
   <property name="maximumSize">
@@ -152,7 +152,7 @@ QPushButton:pressed{
 }</string>
             </property>
             <property name="text">
-             <string>      Pin Menu</string>
+             <string>      BLE-PyDex</string>
             </property>
             <property name="checkable">
              <bool>false</bool>
@@ -752,7 +752,7 @@ border-radius:15px;</string>
                 </property>
                 <property name="styleSheet">
                  <string notr="true">background-color: rgb(19, 19, 19);
-border-radius:10px;</string>
+border-radius:5px;</string>
                 </property>
                 <property name="frameShape">
                  <enum>QFrame::StyledPanel</enum>
@@ -760,27 +760,12 @@ border-radius:10px;</string>
                 <property name="frameShadow">
                  <enum>QFrame::Raised</enum>
                 </property>
-                <layout class="QVBoxLayout" name="verticalLayout_2" stretch="0">
-                 <property name="spacing">
-                  <number>0</number>
-                 </property>
-                 <property name="leftMargin">
-                  <number>15</number>
-                 </property>
-                 <property name="topMargin">
-                  <number>0</number>
-                 </property>
-                 <property name="rightMargin">
-                  <number>20</number>
-                 </property>
-                 <property name="bottomMargin">
-                  <number>0</number>
-                 </property>
+                <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="0">
                  <item>
                   <widget class="QFrame" name="frame">
                    <property name="minimumSize">
                     <size>
-                     <width>0</width>
+                     <width>1350</width>
                      <height>500</height>
                     </size>
                    </property>
@@ -798,7 +783,7 @@ border-radius:10px;</string>
                    <property name="styleSheet">
                     <string notr="true">QFrame{
 
-border-radius:10px;
+border-radius:8px;
 }
 </string>
                    </property>
@@ -812,14 +797,14 @@ border-radius:10px;
                     <property name="geometry">
                      <rect>
                       <x>20</x>
-                      <y>420</y>
-                      <width>431</width>
-                      <height>301</height>
+                      <y>410</y>
+                      <width>461</width>
+                      <height>311</height>
                      </rect>
                     </property>
                     <property name="styleSheet">
                      <string notr="true">
-border-radius:10px;
+border-radius:5px;
 background-color: rgb(28, 28, 28);
 
 </string>
@@ -1120,9 +1105,9 @@ color: rgb(255, 255, 255);</string>
                     <property name="geometry">
                      <rect>
                       <x>20</x>
-                      <y>30</y>
+                      <y>10</y>
                       <width>791</width>
-                      <height>371</height>
+                      <height>391</height>
                      </rect>
                     </property>
                     <property name="minimumSize">
@@ -1138,7 +1123,8 @@ color: rgb(255, 255, 255);</string>
                      </size>
                     </property>
                     <property name="styleSheet">
-                     <string notr="true">background-color: rgb(27, 27, 27);</string>
+                     <string notr="true">background-color: rgb(27, 27, 27);
+border-radius:5px;</string>
                     </property>
                     <property name="frameShape">
                      <enum>QFrame::StyledPanel</enum>
@@ -1171,7 +1157,7 @@ color: rgb(255, 255, 255);</string>
 	color: rgb(0, 0, 0);
 	background-color: rgb(180, 180, 180);
 	border:none;
-border-radius:10px;
+border-radius:5px;
 
 }
 
@@ -1309,7 +1295,7 @@ color: rgb(255, 255, 255);</string>
 	color: rgb(0, 0, 0);
 	background-color: rgb(180, 180, 180);
 	border:none;
-border-radius:10px;
+border-radius:5px;
 
 }
 
@@ -1608,7 +1594,7 @@ QCheckBox::indicator:unchecked {
 	color: rgb(0, 0, 0);
 	background-color: rgb(180, 180, 180);
 	border:none;
-border-radius:10px;
+border-radius:5px;
 
 }
 
@@ -1635,12 +1621,12 @@ QPushButton:pressed{
                        <x>360</x>
                        <y>50</y>
                        <width>411</width>
-                       <height>291</height>
+                       <height>321</height>
                       </rect>
                      </property>
                      <property name="styleSheet">
                       <string notr="true">border-color: rgb(0, 0, 0);
-border-radius:10px;
+border-radius:5px;
 background-color: rgb(38, 38, 38);
 color: rgb(255, 255, 255);</string>
                      </property>
@@ -1656,7 +1642,7 @@ color: rgb(255, 255, 255);</string>
                         <x>10</x>
                         <y>50</y>
                         <width>381</width>
-                        <height>231</height>
+                        <height>251</height>
                        </rect>
                       </property>
                       <property name="minimumSize">
@@ -1755,14 +1741,14 @@ background-color: rgb(27, 27, 27);</string>
                     <property name="geometry">
                      <rect>
                       <x>470</x>
-                      <y>580</y>
+                      <y>560</y>
                       <width>221</width>
-                      <height>141</height>
+                      <height>161</height>
                      </rect>
                     </property>
                     <property name="styleSheet">
                      <string notr="true">
-border-radius:10px;
+border-radius:5px;
 background-color: rgb(28, 28, 28);
 
 </string>
@@ -1799,7 +1785,7 @@ background-color: rgb(28, 28, 28);
 	color: rgb(0, 0, 0);
 	background-color: rgb(180, 180, 180);
 	border:none;
-border-radius:10px;
+border-radius:5px;
 
 }
 
@@ -1839,15 +1825,15 @@ border: 1px solid gray;
                    <widget class="QFrame" name="frame_8">
                     <property name="geometry">
                      <rect>
-                      <x>710</x>
-                      <y>420</y>
-                      <width>631</width>
-                      <height>301</height>
+                      <x>680</x>
+                      <y>410</y>
+                      <width>681</width>
+                      <height>311</height>
                      </rect>
                     </property>
                     <property name="styleSheet">
                      <string notr="true">
-border-radius:10px;
+border-radius:5px;
 background-color: rgb(28, 28, 28);
 
 </string>
@@ -1886,13 +1872,13 @@ background-color: rgb(28, 28, 28);
                       <rect>
                        <x>340</x>
                        <y>50</y>
-                       <width>271</width>
+                       <width>301</width>
                        <height>191</height>
                       </rect>
                      </property>
                      <property name="styleSheet">
                       <string notr="true">border-color: rgb(0, 0, 0);
-border-radius:10px;
+border-radius:5px;
 background-color: rgb(38, 38, 38);
 /*border: 1px solid gray;*/
 
@@ -2067,7 +2053,7 @@ color: rgb(255, 255, 255);</string>
                      </property>
                      <property name="geometry">
                       <rect>
-                       <x>182</x>
+                       <x>190</x>
                        <y>250</y>
                        <width>131</width>
                        <height>30</height>
@@ -2089,7 +2075,7 @@ color: rgb(255, 255, 255);</string>
 	color: rgb(0, 0, 0);
 	background-color: rgb(180, 180, 180);
 	border:none;
-border-radius:10px;
+border-radius:5px;
 
 }
 
@@ -2143,7 +2129,7 @@ QPushButton:pressed{
 	color: rgb(0, 0, 0);
 	background-color: rgb(180, 180, 180);
 	border:none;
-border-radius:10px;
+border-radius:5px;
 
 }
 
@@ -2261,9 +2247,9 @@ p, li { white-space: pre-wrap; }
                     <property name="geometry">
                      <rect>
                       <x>800</x>
-                      <y>30</y>
-                      <width>541</width>
-                      <height>371</height>
+                      <y>10</y>
+                      <width>561</width>
+                      <height>391</height>
                      </rect>
                     </property>
                     <property name="styleSheet">
@@ -2306,8 +2292,8 @@ background-color: rgb(27, 27, 27);
                       <rect>
                        <x>20</x>
                        <y>50</y>
-                       <width>501</width>
-                       <height>291</height>
+                       <width>521</width>
+                       <height>321</height>
                       </rect>
                      </property>
                      <property name="font">
@@ -2320,7 +2306,7 @@ background-color: rgb(27, 27, 27);
                      <property name="styleSheet">
                       <string notr="true">border-color: rgb(0, 0, 0);
 padding-top: 20px;
-border-radius:10px;
+border-radius:5px;
 background-color: rgb(38, 38, 38);
 color: rgb(255, 255, 255);
 </string>
@@ -2348,14 +2334,14 @@ color: rgb(255, 255, 255);
                     <property name="geometry">
                      <rect>
                       <x>470</x>
-                      <y>420</y>
+                      <y>410</y>
                       <width>221</width>
-                      <height>151</height>
+                      <height>161</height>
                      </rect>
                     </property>
                     <property name="styleSheet">
                      <string notr="true">
-border-radius:10px;
+border-radius:5px;
 background-color: rgb(28, 28, 28);
 
 </string>
@@ -2392,7 +2378,7 @@ background-color: rgb(28, 28, 28);
 	color: rgb(0, 0, 0);
 	background-color: rgb(180, 180, 180);
 	border:none;
-border-radius:10px;
+border-radius:5px;
 
 }
 
@@ -2438,7 +2424,7 @@ QPushButton:pressed{
 	color: rgb(0, 0, 0);
 	background-color: rgb(180, 180, 180);
 	border:none;
-border-radius:10px;
+border-radius:5px;
 
 }
 

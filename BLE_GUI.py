@@ -20,7 +20,7 @@ class Ui_MainWindow(object):
         sizePolicy.setVerticalStretch(1)
         sizePolicy.setHeightForWidth(MainWindow.sizePolicy().hasHeightForWidth())
         MainWindow.setSizePolicy(sizePolicy)
-        MainWindow.setMinimumSize(QtCore.QSize(1648, 927))
+        MainWindow.setMinimumSize(QtCore.QSize(1648, 0))
         MainWindow.setMaximumSize(QtCore.QSize(1648, 927))
         MainWindow.setStyleSheet("background-color: rgb(28, 28, 28);\n"
 "border:none;")
@@ -344,32 +344,30 @@ class Ui_MainWindow(object):
         self.mainframe_explore.setMinimumSize(QtCore.QSize(0, 400))
         self.mainframe_explore.setMaximumSize(QtCore.QSize(1812, 2000))
         self.mainframe_explore.setStyleSheet("background-color: rgb(19, 19, 19);\n"
-"border-radius:10px;")
+"border-radius:5px;")
         self.mainframe_explore.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.mainframe_explore.setFrameShadow(QtWidgets.QFrame.Raised)
         self.mainframe_explore.setObjectName("mainframe_explore")
-        self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.mainframe_explore)
-        self.verticalLayout_2.setContentsMargins(15, 0, 20, 0)
-        self.verticalLayout_2.setSpacing(0)
-        self.verticalLayout_2.setObjectName("verticalLayout_2")
+        self.horizontalLayout_2 = QtWidgets.QHBoxLayout(self.mainframe_explore)
+        self.horizontalLayout_2.setObjectName("horizontalLayout_2")
         self.frame = QtWidgets.QFrame(self.mainframe_explore)
-        self.frame.setMinimumSize(QtCore.QSize(0, 500))
+        self.frame.setMinimumSize(QtCore.QSize(1350, 500))
         self.frame.setMaximumSize(QtCore.QSize(1600, 16777215))
         font = QtGui.QFont()
         font.setStrikeOut(False)
         self.frame.setFont(font)
         self.frame.setStyleSheet("QFrame{\n"
 "\n"
-"border-radius:10px;\n"
+"border-radius:8px;\n"
 "}\n"
 "")
         self.frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame.setObjectName("frame")
         self.frame_2 = QtWidgets.QFrame(self.frame)
-        self.frame_2.setGeometry(QtCore.QRect(20, 420, 431, 301))
+        self.frame_2.setGeometry(QtCore.QRect(20, 410, 461, 311))
         self.frame_2.setStyleSheet("\n"
-"border-radius:10px;\n"
+"border-radius:5px;\n"
 "background-color: rgb(28, 28, 28);\n"
 "\n"
 "")
@@ -480,10 +478,11 @@ class Ui_MainWindow(object):
         self.label_8.setStyleSheet("color: rgb(48, 48, 48);")
         self.label_8.setObjectName("label_8")
         self.appFrame_2 = QtWidgets.QFrame(self.frame)
-        self.appFrame_2.setGeometry(QtCore.QRect(20, 30, 791, 371))
+        self.appFrame_2.setGeometry(QtCore.QRect(20, 10, 791, 391))
         self.appFrame_2.setMinimumSize(QtCore.QSize(0, 0))
         self.appFrame_2.setMaximumSize(QtCore.QSize(1000000, 100000))
-        self.appFrame_2.setStyleSheet("background-color: rgb(27, 27, 27);")
+        self.appFrame_2.setStyleSheet("background-color: rgb(27, 27, 27);\n"
+"border-radius:5px;")
         self.appFrame_2.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.appFrame_2.setFrameShadow(QtWidgets.QFrame.Raised)
         self.appFrame_2.setObjectName("appFrame_2")
@@ -497,7 +496,7 @@ class Ui_MainWindow(object):
 "    color: rgb(0, 0, 0);\n"
 "    background-color: rgb(180, 180, 180);\n"
 "    border:none;\n"
-"border-radius:10px;\n"
+"border-radius:5px;\n"
 "\n"
 "}\n"
 "\n"
@@ -554,7 +553,7 @@ class Ui_MainWindow(object):
 "    color: rgb(0, 0, 0);\n"
 "    background-color: rgb(180, 180, 180);\n"
 "    border:none;\n"
-"border-radius:10px;\n"
+"border-radius:5px;\n"
 "\n"
 "}\n"
 "\n"
@@ -712,7 +711,7 @@ class Ui_MainWindow(object):
 "    color: rgb(0, 0, 0);\n"
 "    background-color: rgb(180, 180, 180);\n"
 "    border:none;\n"
-"border-radius:10px;\n"
+"border-radius:5px;\n"
 "\n"
 "}\n"
 "\n"
@@ -729,16 +728,16 @@ class Ui_MainWindow(object):
 "}")
         self.btnConnect.setObjectName("btnConnect")
         self.frame_11 = QtWidgets.QFrame(self.appFrame_2)
-        self.frame_11.setGeometry(QtCore.QRect(360, 50, 411, 291))
+        self.frame_11.setGeometry(QtCore.QRect(360, 50, 411, 321))
         self.frame_11.setStyleSheet("border-color: rgb(0, 0, 0);\n"
-"border-radius:10px;\n"
+"border-radius:5px;\n"
 "background-color: rgb(38, 38, 38);\n"
 "color: rgb(255, 255, 255);")
         self.frame_11.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_11.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_11.setObjectName("frame_11")
         self.list_discoveredDevices = QtWidgets.QListWidget(self.frame_11)
-        self.list_discoveredDevices.setGeometry(QtCore.QRect(10, 50, 381, 231))
+        self.list_discoveredDevices.setGeometry(QtCore.QRect(10, 50, 381, 251))
         self.list_discoveredDevices.setMinimumSize(QtCore.QSize(0, 0))
         self.list_discoveredDevices.setMaximumSize(QtCore.QSize(550, 1000))
         font = QtGui.QFont()
@@ -776,9 +775,9 @@ class Ui_MainWindow(object):
         self.label_23.setStyleSheet("color: rgb(48, 48, 48);")
         self.label_23.setObjectName("label_23")
         self.frame_7 = QtWidgets.QFrame(self.frame)
-        self.frame_7.setGeometry(QtCore.QRect(470, 580, 221, 141))
+        self.frame_7.setGeometry(QtCore.QRect(470, 560, 221, 161))
         self.frame_7.setStyleSheet("\n"
-"border-radius:10px;\n"
+"border-radius:5px;\n"
 "background-color: rgb(28, 28, 28);\n"
 "\n"
 "")
@@ -793,7 +792,7 @@ class Ui_MainWindow(object):
 "    color: rgb(0, 0, 0);\n"
 "    background-color: rgb(180, 180, 180);\n"
 "    border:none;\n"
-"border-radius:10px;\n"
+"border-radius:5px;\n"
 "\n"
 "}\n"
 "\n"
@@ -817,9 +816,9 @@ class Ui_MainWindow(object):
 "")
         self.text_writeChar.setObjectName("text_writeChar")
         self.frame_8 = QtWidgets.QFrame(self.frame)
-        self.frame_8.setGeometry(QtCore.QRect(710, 420, 631, 301))
+        self.frame_8.setGeometry(QtCore.QRect(680, 410, 681, 311))
         self.frame_8.setStyleSheet("\n"
-"border-radius:10px;\n"
+"border-radius:5px;\n"
 "background-color: rgb(28, 28, 28);\n"
 "\n"
 "")
@@ -836,9 +835,9 @@ class Ui_MainWindow(object):
         self.label_19.setStyleSheet("color: rgb(48, 48, 48);")
         self.label_19.setObjectName("label_19")
         self.list_Streaming = QtWidgets.QListWidget(self.frame_8)
-        self.list_Streaming.setGeometry(QtCore.QRect(340, 50, 271, 191))
+        self.list_Streaming.setGeometry(QtCore.QRect(340, 50, 301, 191))
         self.list_Streaming.setStyleSheet("border-color: rgb(0, 0, 0);\n"
-"border-radius:10px;\n"
+"border-radius:5px;\n"
 "background-color: rgb(38, 38, 38);\n"
 "/*border: 1px solid gray;*/\n"
 "\n"
@@ -911,7 +910,7 @@ class Ui_MainWindow(object):
         self.label_4.setObjectName("label_4")
         self.btnNotifyRemove = QtWidgets.QPushButton(self.frame_8)
         self.btnNotifyRemove.setEnabled(True)
-        self.btnNotifyRemove.setGeometry(QtCore.QRect(182, 250, 131, 30))
+        self.btnNotifyRemove.setGeometry(QtCore.QRect(190, 250, 131, 30))
         self.btnNotifyRemove.setMinimumSize(QtCore.QSize(0, 30))
         font = QtGui.QFont()
         font.setStrikeOut(False)
@@ -920,7 +919,7 @@ class Ui_MainWindow(object):
 "    color: rgb(0, 0, 0);\n"
 "    background-color: rgb(180, 180, 180);\n"
 "    border:none;\n"
-"border-radius:10px;\n"
+"border-radius:5px;\n"
 "\n"
 "}\n"
 "\n"
@@ -949,7 +948,7 @@ class Ui_MainWindow(object):
 "    color: rgb(0, 0, 0);\n"
 "    background-color: rgb(180, 180, 180);\n"
 "    border:none;\n"
-"border-radius:10px;\n"
+"border-radius:5px;\n"
 "\n"
 "}\n"
 "\n"
@@ -993,7 +992,7 @@ class Ui_MainWindow(object):
         self.textBrowser_2.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
         self.textBrowser_2.setObjectName("textBrowser_2")
         self.frame_9 = QtWidgets.QFrame(self.frame)
-        self.frame_9.setGeometry(QtCore.QRect(800, 30, 541, 371))
+        self.frame_9.setGeometry(QtCore.QRect(800, 10, 561, 391))
         self.frame_9.setStyleSheet("\n"
 "border-radius:10px;\n"
 "background-color: rgb(27, 27, 27);\n"
@@ -1011,7 +1010,7 @@ class Ui_MainWindow(object):
         self.label_22.setStyleSheet("color: rgb(48, 48, 48);")
         self.label_22.setObjectName("label_22")
         self.servicesTreeWidget = QtWidgets.QTreeWidget(self.frame_9)
-        self.servicesTreeWidget.setGeometry(QtCore.QRect(20, 50, 501, 291))
+        self.servicesTreeWidget.setGeometry(QtCore.QRect(20, 50, 521, 321))
         font = QtGui.QFont()
         font.setPointSize(13)
         font.setBold(False)
@@ -1019,7 +1018,7 @@ class Ui_MainWindow(object):
         self.servicesTreeWidget.setFont(font)
         self.servicesTreeWidget.setStyleSheet("border-color: rgb(0, 0, 0);\n"
 "padding-top: 20px;\n"
-"border-radius:10px;\n"
+"border-radius:5px;\n"
 "background-color: rgb(38, 38, 38);\n"
 "color: rgb(255, 255, 255);\n"
 "")
@@ -1030,9 +1029,9 @@ class Ui_MainWindow(object):
         self.servicesTreeWidget.headerItem().setText(0, "1")
         self.servicesTreeWidget.header().setVisible(False)
         self.frame_10 = QtWidgets.QFrame(self.frame)
-        self.frame_10.setGeometry(QtCore.QRect(470, 420, 221, 151))
+        self.frame_10.setGeometry(QtCore.QRect(470, 410, 221, 161))
         self.frame_10.setStyleSheet("\n"
-"border-radius:10px;\n"
+"border-radius:5px;\n"
 "background-color: rgb(28, 28, 28);\n"
 "\n"
 "")
@@ -1047,7 +1046,7 @@ class Ui_MainWindow(object):
 "    color: rgb(0, 0, 0);\n"
 "    background-color: rgb(180, 180, 180);\n"
 "    border:none;\n"
-"border-radius:10px;\n"
+"border-radius:5px;\n"
 "\n"
 "}\n"
 "\n"
@@ -1071,7 +1070,7 @@ class Ui_MainWindow(object):
 "    color: rgb(0, 0, 0);\n"
 "    background-color: rgb(180, 180, 180);\n"
 "    border:none;\n"
-"border-radius:10px;\n"
+"border-radius:5px;\n"
 "\n"
 "}\n"
 "\n"
@@ -1096,7 +1095,7 @@ class Ui_MainWindow(object):
         self.textBrowser_2.raise_()
         self.frame_9.raise_()
         self.frame_10.raise_()
-        self.verticalLayout_2.addWidget(self.frame)
+        self.horizontalLayout_2.addWidget(self.frame)
         self.horizontalLayout_4.addWidget(self.mainframe_explore)
         self.stackedWidget.addWidget(self.page_Explore)
         self.page = QtWidgets.QWidget()
@@ -1133,7 +1132,7 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.btnMenu.setText(_translate("MainWindow", "      Pin Menu"))
+        self.btnMenu.setText(_translate("MainWindow", "      BLE-PyDex"))
         self.btnMenuExplore.setText(_translate("MainWindow", "      Explore"))
         self.btnMenuGattMaker.setText(_translate("MainWindow", "      Gatt Maker"))
         self.btnMenuClient.setText(_translate("MainWindow", "      BLE Client "))
