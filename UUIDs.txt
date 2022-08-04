@@ -1,267 +1,268 @@
-0x1800 ATT_UUID_GAP_SERVICE                    /*!< \brief Generic Access Profile Service */
-0x1801 ATT_UUID_GATT_SERVICE                   /*!< \brief Generic Attribute Profile Service */
-0x1802 ATT_UUID_IMMEDIATE_ALERT_SERVICE        /*!< \brief Immediate Alert Service */
-0x1803 ATT_UUID_LINK_LOSS_SERVICE              /*!< \brief Link Loss Service */
-0x1804 ATT_UUID_TX_POWER_SERVICE               /*!< \brief Tx Power Service */
-0x1805 ATT_UUID_CURRENT_TIME_SERVICE           /*!< \brief Current Time Service */
-0x1806 ATT_UUID_REF_TIME_UPDATE_SERVICE        /*!< \brief Reference Time Update Service */
-0x1807 ATT_UUID_DST_CHANGE_SERVICE             /*!< \brief Next DST Change Service */
-0x1808 ATT_UUID_GLUCOSE_SERVICE                /*!< \brief Glucose Service */
-0x1809 ATT_UUID_HEALTH_THERM_SERVICE           /*!< \brief Health Thermometer Service */
-0x180A ATT_UUID_DEVICE_INFO_SERVICE            /*!< \brief Device Information Service */
-0x180B ATT_UUID_NETWORK_AVAIL_SERVICE          /*!< \brief Network Availability Service */
-0x180C ATT_UUID_WATCHDOG_SERVICE               /*!< \brief Watchdog Service */
-0x180D ATT_UUID_HEART_RATE_SERVICE             /*!< \brief Heart Rate Service */
-0x180E ATT_UUID_PHONE_ALERT_SERVICE            /*!< \brief Phone Alert Status Service */
-0x180F ATT_UUID_BATTERY_SERVICE                /*!< \brief Battery Service */
-0x1810 ATT_UUID_BLOOD_PRESSURE_SERVICE         /*!< \brief Blood Pressure Service */
-0x1811 ATT_UUID_ALERT_NOTIF_SERVICE            /*!< \brief Alert Notification Service */
-0x1812 ATT_UUID_HID_SERVICE                    /*!< \brief Human Interface Device Service */
-0x1813 ATT_UUID_SCAN_PARAM_SERVICE             /*!< \brief Scan Parameter Service */
-0x1814 ATT_UUID_RUNNING_SPEED_SERVICE          /*!< \brief Running Speed Service */
-0x1816 ATT_UUID_CYCLING_SPEED_SERVICE          /*!< \brief Cycling Speed Service */
-0x1818 ATT_UUID_CYCLING_POWER_SERVICE          /*!< \brief Cycling Power Service */
-0x181C ATT_UUID_USER_DATA_SERVICE              /*!< \brief User Data Service */
-0x181D ATT_UUID_WEIGHT_SCALE_SERVICE           /*!< \brief Weight Scale Service */
-0x1820 ATT_UUID_IP_SUPPORT_SERVICE             /*!< \brief IP Support Service */
-0x1822 ATT_UUID_PULSE_OXIMITER_SERVICE         /*!< \brief Pulse Oximeter Service */
-0x1827 ATT_UUID_MESH_PRV_SERVICE               /*!< \brief Mesh Provisioning Service */
-0x1828 ATT_UUID_MESH_PROXY_SERVICE             /*!< \brief Mesh Proxy Service */
-0x7F7F ATT_UUID_CONSTANT_TONE_SERVICE          /*!< \brief Constant Tone Extension */
-0x2800 ATT_UUID_PRIMARY_SERVICE                /*!< \brief Primary Service */
-0x2801 ATT_UUID_SECONDARY_SERVICE              /*!< \brief Secondary Service */
-0x2802 ATT_UUID_INCLUDE                        /*!< \brief Include */
-0x2803 ATT_UUID_CHARACTERISTIC                 /*!< \brief Characteristic */
-0x2900 ATT_UUID_CHARACTERISTIC_EXT             /*!< \brief Characteristic Extended Properties */
-0x2901 ATT_UUID_CHAR_USER_DESC                 /*!< \brief Characteristic User Description */
-0x2902 ATT_UUID_CLIENT_CHAR_CONFIG             /*!< \brief Client Characteristic Configuration */
-0x2903 ATT_UUID_SERVER_CHAR_CONFIG             /*!< \brief Server Characteristic Configuration */
-0x2904 ATT_UUID_CHAR_PRES_FORMAT               /*!< \brief Characteristic Presentation Format */
-0x2905 ATT_UUID_AGGREGATE_FORMAT               /*!< \brief Characteristic Aggregate Format */
-0x2906 ATT_UUID_VALID_RANGE                    /*!< \brief Valid Range */
-0x2907 ATT_UUID_HID_EXT_REPORT_MAPPING         /*!< \brief HID External Report ID Mapping */
-0x2908 ATT_UUID_HID_REPORT_ID_MAPPING          /*!< \brief HID Report ID Mapping */
-0x2A00 ATT_UUID_DEVICE_NAME                    /*!< \brief Device Name */
-0x2A01 ATT_UUID_APPEARANCE                     /*!< \brief Appearance */
-0x2A02 ATT_UUID_PERIPH_PRIVACY_FLAG            /*!< \brief Peripheral Privacy Flag */
-0x2A03 ATT_UUID_RECONN_ADDR                    /*!< \brief Reconnection Address */
-0x2A04 ATT_UUID_PREF_CONN_PARAM                /*!< \brief Peripheral Preferred Connection Parameters */
-0x2A05 ATT_UUID_SERVICE_CHANGED                /*!< \brief Service Changed */
-0x2A06 ATT_UUID_ALERT_LEVEL                    /*!< \brief Alert Level */
-0x2A07 ATT_UUID_TX_POWER_LEVEL                 /*!< \brief Tx Power Level */
-0x2A08 ATT_UUID_DATE_TIME                      /*!< \brief Date Time */
-0x2A09 ATT_UUID_DAY_OF_WEEK                    /*!< \brief Day of Week */
-0x2A0A ATT_UUID_DAY_DATE_TIME                  /*!< \brief Day Date Time */
-0x2A0B ATT_UUID_EXACT_TIME_100                 /*!< \brief Exact Time 100 */
-0x2A0C ATT_UUID_EXACT_TIME_256                 /*!< \brief Exact Time 256 */
-0x2A0D ATT_UUID_DST_OFFSET                     /*!< \brief DST Offset */
-0x2A0E ATT_UUID_TIME_ZONE                      /*!< \brief Time Zone */
-0x2A0F ATT_UUID_LOCAL_TIME_INFO                /*!< \brief Local Time Information */
-0x2A10 ATT_UUID_SECONDARY_TIME_ZONE            /*!< \brief Secondary Time Zone */
-0x2A11 ATT_UUID_TIME_WITH_DST                  /*!< \brief Time with DST */
-0x2A12 ATT_UUID_TIME_ACCURACY                  /*!< \brief Time Accuracy */
-0x2A13 ATT_UUID_TIME_SOURCE                    /*!< \brief Time Source */
-0x2A14 ATT_UUID_REFERENCE_TIME_INFO            /*!< \brief Reference Time Information */
-0x2A15 ATT_UUID_TIME_BROADCAST                 /*!< \brief Time Broadcast */
-0x2A16 ATT_UUID_TIME_UPDATE_CP                 /*!< \brief Time Update Control Point */
-0x2A17 ATT_UUID_TIME_UPDATE_STATE              /*!< \brief Time Update State */
-0x2A18 ATT_UUID_GLUCOSE_MEAS                   /*!< \brief Glucose Measurement */
-0x2A19 ATT_UUID_BATTERY_LEVEL                  /*!< \brief Battery Level */
-0x2A1A ATT_UUID_BATTERY_POWER_STATE            /*!< \brief Battery Power State */
-0x2A1B ATT_UUID_BATTERY_LEVEL_STATE            /*!< \brief Battery Level State */
-0x2A1C ATT_UUID_TEMP_MEAS                      /*!< \brief Temperature Measurement */
-0x2A1D ATT_UUID_TEMP_TYPE                      /*!< \brief Temperature Type */
-0x2A1E ATT_UUID_INTERMEDIATE_TEMP              /*!< \brief Intermediate Temperature */
-0x2A1F ATT_UUID_TEMP_C                         /*!< \brief Temperature Celsius */
-0x2A20 ATT_UUID_TEMP_F                         /*!< \brief Temperature Fahrenheit */
-0x2A21 ATT_UUID_MEAS_INTERVAL                  /*!< \brief Measurement Interval */
-0x2A22 ATT_UUID_HID_BOOT_KEYBOARD_IN           /*!< \brief HID Boot Keyboard In */
-0x2A23 ATT_UUID_SYSTEM_ID                      /*!< \brief System ID */
-0x2A24 ATT_UUID_MODEL_NUMBER                   /*!< \brief Model Number String */
-0x2A25 ATT_UUID_SERIAL_NUMBER                  /*!< \brief Serial Number String */
-0x2A26 ATT_UUID_FIRMWARE_REV                   /*!< \brief Firmware Revision String */
-0x2A27 ATT_UUID_HARDWARE_REV                   /*!< \brief Hardware Revision String */
-0x2A28 ATT_UUID_SOFTWARE_REV                   /*!< \brief Software Revision String */
-0x2A29 ATT_UUID_MANUFACTURER_NAME              /*!< \brief Manufacturer Name String */
-0x2A2A ATT_UUID_11073_CERT_DATA                /*!< \brief IEEE 11073-20601 Regulatory Certification Data List */
-0x2A2B ATT_UUID_CURRENT_TIME                   /*!< \brief Current Time */
-0x2A2C ATT_UUID_ELEVATION                      /*!< \brief Elevation */
-0x2A2D ATT_UUID_LATITUDE                       /*!< \brief Latitude */
-0x2A2E ATT_UUID_LONGITUDE                      /*!< \brief Longitude */
-0x2A2F ATT_UUID_POSITION_2D                    /*!< \brief Position 2D */
-0x2A30 ATT_UUID_POSITION_3D                    /*!< \brief Position 3D */
-0x2A31 ATT_UUID_VENDOR_ID                      /*!< \brief Vendor ID */
-0x2A32 ATT_UUID_HID_BOOT_KEYBOARD_OUT          /*!< \brief HID Boot Keyboard Out */
-0x2A33 ATT_UUID_HID_BOOT_MOUSE_IN              /*!< \brief HID Boot Mouse In */
-0x2A34 ATT_UUID_GLUCOSE_MEAS_CONTEXT           /*!< \brief Glucose Measurement Context */
-0x2A35 ATT_UUID_BP_MEAS                        /*!< \brief Blood Pressure Measurement */
-0x2A36 ATT_UUID_INTERMEDIATE_BP                /*!< \brief Intermediate Cuff Pressure */
-0x2A37 ATT_UUID_HR_MEAS                        /*!< \brief Heart Rate Measurement */
-0x2A38 ATT_UUID_HR_SENSOR_LOC                  /*!< \brief Body Sensor Location */
-0x2A39 ATT_UUID_HR_CP                          /*!< \brief Heart Rate Control Point */
-0x2A3A ATT_UUID_REMOVABLE                      /*!< \brief Removable */
-0x2A3B ATT_UUID_SERVICE_REQ                    /*!< \brief Service Required */
-0x2A3C ATT_UUID_SCI_TEMP_C                     /*!< \brief Scientific Temperature in Celsius */
-0x2A3D ATT_UUID_STRING                         /*!< \brief String */
-0x2A3E ATT_UUID_NETWORK_AVAIL                  /*!< \brief Network Availability */
-0x2A3F ATT_UUID_ALERT_STATUS                   /*!< \brief Alert Status */
-0x2A40 ATT_UUID_RINGER_CP                      /*!< \brief Ringer Control Point */
-0x2A41 ATT_UUID_RINGER_SETTING                 /*!< \brief Ringer Setting */
-0x2A42 ATT_UUID_ALERT_CAT_ID_MASK              /*!< \brief Alert Category ID Bit Mask */
-0x2A43 ATT_UUID_ALERT_CAT_ID                   /*!< \brief Alert Category ID */
-0x2A44 ATT_UUID_ALERT_NOTIF_CP                 /*!< \brief Alert Notification Control Point */
-0x2A45 ATT_UUID_UNREAD_ALERT_STATUS            /*!< \brief Unread Alert Status */
-0x2A46 ATT_UUID_NEW_ALERT                      /*!< \brief New Alert */
-0x2A47 ATT_UUID_SUP_NEW_ALERT_CAT              /*!< \brief Supported New Alert Category */
-0x2A48 ATT_UUID_SUP_UNREAD_ALERT_CAT           /*!< \brief Supported Unread Alert Category */
-0x2A49 ATT_UUID_BP_FEATURE                     /*!< \brief Blood Pressure Feature */
-0x2A4A ATT_UUID_HID_INFORMATION                /*!< \brief HID Information */
-0x2A4B ATT_UUID_HID_REPORT_MAP                 /*!< \brief HID Report Map */
-0x2A4C ATT_UUID_HID_CONTROL_POINT              /*!< \brief HID Control Point */
-0x2A4D ATT_UUID_HID_REPORT                     /*!< \brief HID Report */
-0x2A4E ATT_UUID_HID_PROTOCOL_MODE              /*!< \brief HID Protocol Mode */
-0x2A4F ATT_UUID_SCAN_INT_WIND                  /*!< \brief Scan Interval Window */
-0x2A50 ATT_UUID_PNP_ID                         /*!< \brief PnP ID */
-0x2A51 ATT_UUID_GLUCOSE_FEATURE                /*!< \brief Glucose Feature */
-0x2A52 ATT_UUID_RACP                           /*!< \brief Record Access Control Point */
-0x2AA6 ATT_UUID_CAR                            /*!< \brief Central Address Resolution */
-0x2A54 ATT_UUID_RUNNING_SPEED_FEATURE          /*!< \brief Running Speed Feature */
-0x2A53 ATT_UUID_RUNNING_SPEED_MEASUREMENT      /*!< \brief Running Speed Measurement */
-0x2A60 ATT_UUID_PULSE_OX_FEATURES              /*!< \brief Pulse Oximeter Features */
-0x2A5E ATT_UUID_PULSE_OX_SPOT_CHECK            /*!< \brief Pulse Oximeter Features */
-0x2A5F ATT_UUID_PULSE_OX_CONTINUOUS            /*!< \brief Pulse Oximeter Features */
-0x2A65 ATT_UUID_CYCLING_POWER_FEATURE          /*!< \brief Cycling Power Feature */
-0x2A63 ATT_UUID_CYCLING_POWER_MEASUREMENT      /*!< \brief Cycling Power Measurement */
-0x2A5C ATT_UUID_CYCLING_SPEED_FEATURE          /*!< \brief Cycling Speed Feature */
-0x2A5B ATT_UUID_CYCLING_SPEED_MEASUREMENT      /*!< \brief Cycling Speed Measurement */
-0x2A5D ATT_UUID_SENSOR_LOCATION                /*!< \brief Sensor Location */
-0x2A99 ATT_UUID_DB_CHANGE_INCREMENT            /*!< \brief Database Change Increment */
-0x2A9A ATT_UUID_USER_INDEX                     /*!< \brief User Index */
-0x2A9D ATT_UUID_WEIGHT_MEAS                    /*!< \brief Weight Measurement */
-0x2A9E ATT_UUID_WEIGHT_SCALE_FEATURE           /*!< \brief Weight Scale Feature */
-0x2A9F ATT_UUID_USER_CONTROL_POINT             /*!< \brief User Control Point */
-0x2AC9 ATT_UUID_RPAO                           /*!< \brief Resolvable Prviate Address Only */
-0x2ADB ATT_UUID_MESH_PRV_DATA_IN               /*!< \brief Mesh Provisioning Data In */
-0x2ADC ATT_UUID_MESH_PRV_DATA_OUT              /*!< \brief Mesh Provisioning Data Out */
-0x2ADD ATT_UUID_MESH_PROXY_DATA_IN             /*!< \brief Mesh Proxy Data In */
-0x2ADE ATT_UUID_MESH_PROXY_DATA_OUT            /*!< \brief Mesh Proxy Data Out */
-0x2B29 ATT_UUID_CLIENT_SUPPORTED_FEATURES      /*!< \brief Client Supported Features */
-0x2B2A ATT_UUID_DATABASE_HASH                  /*!< \brief Database Hash */
-0x2B3A ATT_UUID_SERVER_SUPPORTED_FEATURES      /*!< \brief Server Supported Features */
-0x7F80 ATT_UUID_CTE_ENABLE                     /*!< \brief Constant Tone Extension enable */
-0x7F81 ATT_UUID_CTE_MIN_LEN                    /*!< \brief Constant Tone Extension minimum length */
-0x7F82 ATT_UUID_CTE_TX_CNT                     /*!< \brief Constant Tone Extension transmit count */
-0x7F83 ATT_UUID_CTE_TX_DURATION                /*!< \brief Constant Tone Extension transmit duration */
-0x7F84 ATT_UUID_CTE_INTERVAL                   /*!< \brief Constant Tone Extension interval */
-0x7F85 ATT_UUID_CTE_PHY                        /*!< \brief Constant Tone Extension PHY */
-0x2700 ATT_UUID_UNITLESS                       /*!< \brief unitless */
-0x2701 ATT_UUID_LENGTH_M                       /*!< \brief length metre */
-0x2702 ATT_UUID_MASS_KG                        /*!< \brief mass kilogram */
-0x2703 ATT_UUID_TIME_SEC                       /*!< \brief time second */
-0x2704 ATT_UUID_ELECTRIC_CURRENT_AMP           /*!< \brief electric current ampere */
-0x2705 ATT_UUID_THERMO_TEMP_K                  /*!< \brief thermodynamic temperature kelvin */
-0x2706 ATT_UUID_AMOUNT_OF_SUBSTANCE_MOLE       /*!< \brief amount of substance mole */
-0x2707 ATT_UUID_LUMINOUS_INTENSITY_CAND        /*!< \brief luminous intensity candela */
-0x2710 ATT_UUID_AREA_SQ_M                      /*!< \brief area square metres */
-0x2711 ATT_UUID_VOLUME_CU_M                    /*!< \brief volume cubic metres */
-0x2712 ATT_UUID_VELOCITY_MPS                   /*!< \brief velocity metres per second */
-0x2713 ATT_UUID_ACCELERATION_MPS_SQ            /*!< \brief acceleration metres per second squared */
-0x2714 ATT_UUID_WAVENUMBER_RECIPROCAL_M        /*!< \brief wavenumber reciprocal metre */
-0x2715 ATT_UUID_DENSITY_KG_PER_CU_M            /*!< \brief density kilogram per cubic metre */
-0x2716 ATT_UUID_SURFACE_DENS_KG_PER_SQ_M       /*!< \brief surface density kilogram per square metre */
-0x2717 ATT_UUID_SPECIFIC_VOL_CU_M_PER_KG       /*!< \brief specific volume cubic metre per kilogram */
-0x2718 ATT_UUID_CURRENT_DENS_AMP_PER_SQ_M      /*!< \brief current density ampere per square metre */
-0x2719 ATT_UUID_MAG_FIELD_STR_AMP_PER_M        /*!< \brief magnetic field strength ampere per metre */
-0x271A ATT_UUID_AMOUNT_CONC_MOLE_PER_CU_M      /*!< \brief amount concentration mole per cubic metre */
-0x271B ATT_UUID_MASS_CONC_KG_PER_CU_M          /*!< \brief mass concentration kilogram per cubic metre */
-0x271C ATT_UUID_LUM_CAND_PER_SQ_M              /*!< \brief luminance candela per square metre */
-0x271D ATT_UUID_REFRACTIVE_INDEX               /*!< \brief refractive index */
-0x271E ATT_UUID_RELATIVE_PERMEABILITY          /*!< \brief relative permeability */
-0x2720 ATT_UUID_PLANE_ANGLE_R                  /*!< \brief plane angle radian */
-0x2721 ATT_UUID_SOLID_ANGLE_STER               /*!< \brief solid angle steradian */
-0x2722 ATT_UUID_FREQUENCY_HERTZ                /*!< \brief frequency hertz */
-0x2723 ATT_UUID_FORCE_NEWT                     /*!< \brief force newton */
-0x2724 ATT_UUID_PRESSURE_PASCAL                /*!< \brief pressure pascal */
-0x2725 ATT_UUID_ENERGY_J                       /*!< \brief energy joule */
-0x2726 ATT_UUID_POWER_W                        /*!< \brief power watt */
-0x2727 ATT_UUID_ELECTRIC_CHG_C                 /*!< \brief electric charge coulomb */
-0x2728 ATT_UUID_ELECTRIC_POTENTIAL_VOLT        /*!< \brief electric potential difference volt */
-0x2729 ATT_UUID_CAPACITANCE_F                  /*!< \brief capacitance farad */
-0x272A ATT_UUID_ELECTRIC_RESISTANCE_OHM        /*!< \brief electric resistance ohm */
-0x272B ATT_UUID_ELECTRIC_COND_SIEMENS          /*!< \brief electric conductance siemens */
-0x272C ATT_UUID_MAGNETIC_FLEX_WEBER            /*!< \brief magnetic flex weber */
-0x272D ATT_UUID_MAGNETIC_FLEX_DENS_TESLA       /*!< \brief magnetic flex density tesla */
-0x272E ATT_UUID_INDUCTANCE_H                   /*!< \brief inductance henry */
-0x272F ATT_UUID_C_TEMP_DEG_C                   /*!< \brief Celsius temperature degree Celsius */
-0x2730 ATT_UUID_LUMINOUS_FLUX_LUMEN            /*!< \brief luminous flux lumen */
-0x2731 ATT_UUID_ILLUMINANCE_LUX                /*!< \brief illuminance lux */
-0x2732 ATT_UUID_RADIONUCLIDE_BECQUEREL         /*!< \brief activity referred to a radionuclide becquerel */
-0x2733 ATT_UUID_ABSORBED_DOSE_GRAY             /*!< \brief absorbed dose gray */
-0x2734 ATT_UUID_DOSE_EQUIVALENT_SIEVERT        /*!< \brief dose equivalent sievert */
-0x2735 ATT_UUID_CATALYTIC_ACTIVITY_KATAL       /*!< \brief catalytic activity katal */
-0x2740 ATT_UUID_DYNAMIC_VISC_PASCAL_SEC        /*!< \brief dynamic viscosity pascal second */
-0x2741 ATT_UUID_MOMENT_OF_FORCE_NEWT_M         /*!< \brief moment of force newton metre */
-0x2742 ATT_UUID_SURFACE_TENSION_NEWT_PER_M     /*!< \brief surface tension newton per metre */
-0x2743 ATT_UUID_ANG_VELOCITY_R_PER_SEC         /*!< \brief angular velocity radian per second */
-0x2744 ATT_UUID_ANG_ACCEL_R_PER_SEC_SQD        /*!< \brief angular acceleration radian per second squared */
-0x2745 ATT_UUID_HEAT_FLUX_DEN_W_PER_SQ_M       /*!< \brief heat flux density watt per square metre */
-0x2746 ATT_UUID_HEAT_CAP_J_PER_K               /*!< \brief heat capacity joule per kelvin */
-0x2747 ATT_UUID_SPEC_HEAT_CAP_J_PER_KG_K       /*!< \brief specific heat capacity joule per kilogram kelvin */
-0x2748 ATT_UUID_SPEC_ENERGY_J_PER_KG           /*!< \brief specific energy joule per kilogram */
-0x2749 ATT_UUID_THERMAL_COND_W_PER_M_K         /*!< \brief thermal conductivity watt per metre kelvin */
-0x274A ATT_UUID_ENERGY_DENSITY_J_PER_CU_M      /*!< \brief energy density joule per cubic metre */
-0x274B ATT_UUID_ELEC_FIELD_STR_VOLT_PER_M      /*!< \brief electric field strength volt per metre */
-0x274C ATT_UUID_ELEC_CHG_DENS_C_PER_CU_M       /*!< \brief electric charge density coulomb per cubic metre */
-0x274D ATT_UUID_SURF_CHG_DENS_C_PER_SQ_M       /*!< \brief surface charge density coulomb per square metre */
-0x274E ATT_UUID_ELEC_FLUX_DENS_C_PER_SQ_M      /*!< \brief electric flux density coulomb per square metre */
-0x274F ATT_UUID_PERMITTIVITY_F_PER_M           /*!< \brief permittivity farad per metre */
-0x2750 ATT_UUID_PERMEABILITY_H_PER_M           /*!< \brief permeability henry per metre */
-0x2751 ATT_UUID_MOLAR_ENERGY_J_PER_MOLE        /*!< \brief molar energy joule per mole */
-0x2752 ATT_UUID_MOLAR_ENTROPY_J_PER_MOLE_K     /*!< \brief molar entropy joule per mole kelvin */
-0x2753 ATT_UUID_EXPOSURE_C_PER_KG              /*!< \brief exposure coulomb per kilogram */
-0x2754 ATT_UUID_DOSE_RATE_GRAY_PER_SEC         /*!< \brief absorbed dose rate gray per second */
-0x2755 ATT_UUID_RT_INTENSITY_W_PER_STER        /*!< \brief radiant intensity watt per steradian */
-0x2756 ATT_UUID_RCE_W_PER_SQ_METER_STER        /*!< \brief radiance watt per square meter steradian */
-0x2757 ATT_UUID_CATALYTIC_KATAL_PER_CU_M       /*!< \brief catalytic activity concentration katal per cubic metre */
-0x2760 ATT_UUID_TIME_MIN                       /*!< \brief time minute */
-0x2761 ATT_UUID_TIME_HR                        /*!< \brief time hour */
-0x2762 ATT_UUID_TIME_DAY                       /*!< \brief time day */
-0x2763 ATT_UUID_PLANE_ANGLE_DEG                /*!< \brief plane angle degree */
-0x2764 ATT_UUID_PLANE_ANGLE_MIN                /*!< \brief plane angle minute */
-0x2765 ATT_UUID_PLANE_ANGLE_SEC                /*!< \brief plane angle second */
-0x2766 ATT_UUID_AREA_HECTARE                   /*!< \brief area hectare */
-0x2767 ATT_UUID_VOLUME_L                       /*!< \brief volume litre */
-0x2768 ATT_UUID_MASS_TONNE                     /*!< \brief mass tonne */
-0x2780 ATT_UUID_PRESSURE_BAR                   /*!< \brief pressure bar */
-0x2781 ATT_UUID_PRESSURE_MM                    /*!< \brief pressure millimetre of mercury */
-0x2782 ATT_UUID_LENGTH_ANGSTROM                /*!< \brief length angstrom */
-0x2783 ATT_UUID_LENGTH_NAUTICAL_MILE           /*!< \brief length nautical mile */
-0x2784 ATT_UUID_AREA_BARN                      /*!< \brief area barn */
-0x2785 ATT_UUID_VELOCITY_KNOT                  /*!< \brief velocity knot */
-0x2786 ATT_UUID_LOG_RADIO_QUANT_NEPER          /*!< \brief logarithmic radio quantity neper */
-0x2787 ATT_UUID_LOG_RADIO_QUANT_BEL            /*!< \brief logarithmic radio quantity bel */
-0x2788 ATT_UUID_LOG_RADIO_QUANT_DB             /*!< \brief logarithmic radio quantity decibel */
-0x27A0 ATT_UUID_LENGTH_YARD                    /*!< \brief length yard */
-0x27A1 ATT_UUID_LENGTH_PARSEC                  /*!< \brief length parsec */
-0x27A2 ATT_UUID_LENGTH_IN                      /*!< \brief length inch */
-0x27A3 ATT_UUID_LENGTH_FOOT                    /*!< \brief length foot */
-0x27A4 ATT_UUID_LENGTH_MILE                    /*!< \brief length mile */
-0x27A5 ATT_UUID_PRESSURE_POUND_PER_SQ_IN       /*!< \brief pressure pound-force per square inch */
-0x27A6 ATT_UUID_VELOCITY_KPH                   /*!< \brief velocity kilometre per hour */
-0x27A7 ATT_UUID_VELOCITY_MPH                   /*!< \brief velocity mile per hour */
-0x27A8 ATT_UUID_ANG_VELOCITY_RPM               /*!< \brief angular velocity revolution per minute */
-0x27A9 ATT_UUID_ENERGY_GRAM_CALORIE            /*!< \brief energy gram calorie */
-0x27AA ATT_UUID_ENERGY_KG_CALORIE              /*!< \brief energy kilogram calorie */
-0x27AB ATT_UUID_ENERGY_KILOWATT_HR             /*!< \brief energy kilowatt hour */
-0x27AC ATT_UUID_THERM_TEMP_F                   /*!< \brief thermodynamic temperature degree Fahrenheit */
-0x27AD ATT_UUID_PERCENTAGE                     /*!< \brief percentage */
-0x27AE ATT_UUID_PER_MILLE                      /*!< \brief per mille */
-0x27AF ATT_UUID_PERIOD_BEATS_PER_MIN           /*!< \brief period beats per minute */
-0x27B0 ATT_UUID_ELECTRIC_CHG_AMP_HRS           /*!< \brief electric charge ampere hours */
-0x27B1 ATT_UUID_MASS_DENSITY_MG_PER_DL         /*!< \brief mass density milligram per decilitre */
-0x27B2 ATT_UUID_MASS_DENSITY_MMOLE_PER_L       /*!< \brief mass density millimole per litre */
-0x27B3 ATT_UUID_TIME_YEAR                      /*!< \brief time year */
-0x27B4 ATT_UUID_TIME_MONTH                     /*!< \brief time month */
+0x1800 ATT UUID GAP SERVICE
+0x1801 ATT UUID GATT SERVICE
+0x1802 ATT UUID IMMEDIATE ALERT SERVICE
+0x1803 ATT UUID LINK LOSS SERVICE
+0x1804 ATT UUID TX POWER SERVICE
+0x1805 ATT UUID CURRENT TIME SERVICE
+0x1806 ATT UUID REF TIME UPDATE SERVICE
+0x1807 ATT UUID DST CHANGE SERVICE
+0x1808 ATT UUID GLUCOSE SERVICE
+0x1809 ATT UUID HEALTH THERM SERVICE
+0x180A ATT UUID DEVICE INFO SERVICE
+0x180B ATT UUID NETWORK AVAIL SERVICE
+0x180C ATT UUID WATCHDOG SERVICE
+0x180D ATT UUID HEART RATE SERVICE
+0x180E ATT UUID PHONE ALERT SERVICE
+0x180F ATT UUID BATTERY SERVICE
+0x1810 ATT UUID BLOOD PRESSURE SERVICE
+0x1811 ATT UUID ALERT NOTIF SERVICE
+0x1812 ATT UUID HID SERVICE
+0x1813 ATT UUID SCAN PARAM SERVICE
+0x1814 ATT UUID RUNNING SPEED SERVICE
+0x1816 ATT UUID CYCLING SPEED SERVICE
+0x1818 ATT UUID CYCLING POWER SERVICE
+0x181C ATT UUID USER DATA SERVICE
+0x181D ATT UUID WEIGHT SCALE SERVICE
+0x1820 ATT UUID IP SUPPORT SERVICE
+0x1822 ATT UUID PULSE OXIMITER SERVICE
+0x1827 ATT UUID MESH PRV SERVICE
+0x1828 ATT UUID MESH PROXY SERVICE
+0x7F7F ATT UUID CONSTANT TONE SERVICE
+0x2800 ATT UUID PRIMARY SERVICE
+0x2801 ATT UUID SECONDARY SERVICE
+0x2802 ATT UUID INCLUDE
+0x2803 ATT UUID CHARACTERISTIC
+0x2900 ATT UUID CHARACTERISTIC EXT
+0x2901 ATT UUID CHAR USER DESC
+0x2902 ATT UUID CLIENT CHAR CONFIG
+0x2903 ATT UUID SERVER CHAR CONFIG
+0x2904 ATT UUID CHAR PRES FORMAT
+0x2905 ATT UUID AGGREGATE FORMAT
+0x2906 ATT UUID VALID RANGE
+0x2907 ATT UUID HID EXT REPORT MAPPING
+0x2908 ATT UUID HID REPORT ID MAPPING
+0x2A00 ATT UUID DEVICE NAME
+0x2A01 ATT UUID APPEARANCE
+0x2A02 ATT UUID PERIPH PRIVACY FLAG
+0x2A03 ATT UUID RECONN ADDR
+0x2A04 ATT UUID PREF CONN PARAM
+0x2A05 ATT UUID SERVICE CHANGED
+0x2A06 ATT UUID ALERT LEVEL
+0x2A07 ATT UUID TX POWER LEVEL
+0x2A08 ATT UUID DATE TIME
+0x2A09 ATT UUID DAY OF WEEK
+0x2A0A ATT UUID DAY DATE TIME
+0x2A0B ATT UUID EXACT TIME 100
+0x2A0C ATT UUID EXACT TIME 256
+0x2A0D ATT UUID DST OFFSET
+0x2A0E ATT UUID TIME ZONE
+0x2A0F ATT UUID LOCAL TIME INFO
+0x2A10 ATT UUID SECONDARY TIME ZONE
+0x2A11 ATT UUID TIME WITH DST
+0x2A12 ATT UUID TIME ACCURACY
+0x2A13 ATT UUID TIME SOURCE
+0x2A14 ATT UUID REFERENCE TIME INFO
+0x2A15 ATT UUID TIME BROADCAST
+0x2A16 ATT UUID TIME UPDATE CP
+0x2A17 ATT UUID TIME UPDATE STATE
+0x2A18 ATT UUID GLUCOSE MEAS
+0x2A19 ATT UUID BATTERY LEVEL
+0x2A1A ATT UUID BATTERY POWER STATE
+0x2A1B ATT UUID BATTERY LEVEL STATE
+0x2A1C ATT UUID TEMP MEAS
+0x2A1D ATT UUID TEMP TYPE
+0x2A1E ATT UUID INTERMEDIATE TEMP
+0x2A1F ATT UUID TEMP C
+0x2A20 ATT UUID TEMP F
+0x2A21 ATT UUID MEAS INTERVAL
+0x2A22 ATT UUID HID BOOT KEYBOARD IN
+0x2A23 ATT UUID SYSTEM ID
+0x2A24 ATT UUID MODEL NUMBER
+0x2A25 ATT UUID SERIAL NUMBER
+0x2A26 ATT UUID FIRMWARE REV
+0x2A27 ATT UUID HARDWARE REV
+0x2A28 ATT UUID SOFTWARE REV
+0x2A29 ATT UUID MANUFACTURER NAME
+0x2A2A ATT UUID 11073 CERT DATA
+0x2A2B ATT UUID CURRENT TIME
+0x2A2C ATT UUID ELEVATION
+0x2A2D ATT UUID LATITUDE
+0x2A2E ATT UUID LONGITUDE
+0x2A2F ATT UUID POSITION 2D
+0x2A30 ATT UUID POSITION 3D
+0x2A31 ATT UUID VENDOR ID
+0x2A32 ATT UUID HID BOOT KEYBOARD OUT
+0x2A33 ATT UUID HID BOOT MOUSE IN
+0x2A34 ATT UUID GLUCOSE MEAS CONTEXT
+0x2A35 ATT UUID BP MEAS
+0x2A36 ATT UUID INTERMEDIATE BP
+0x2A37 ATT UUID HR MEAS
+0x2A38 ATT UUID HR SENSOR LOC
+0x2A39 ATT UUID HR CP
+0x2A3A ATT UUID REMOVABLE
+0x2A3B ATT UUID SERVICE REQ
+0x2A3C ATT UUID SCI TEMP C
+0x2A3D ATT UUID STRING
+0x2A3E ATT UUID NETWORK AVAIL
+0x2A3F ATT UUID ALERT STATUS
+0x2A40 ATT UUID RINGER CP
+0x2A41 ATT UUID RINGER SETTING
+0x2A42 ATT UUID ALERT CAT ID MASK
+0x2A43 ATT UUID ALERT CAT ID
+0x2A44 ATT UUID ALERT NOTIF CP
+0x2A45 ATT UUID UNREAD ALERT STATUS
+0x2A46 ATT UUID NEW ALERT
+0x2A47 ATT UUID SUP NEW ALERT CAT
+0x2A48 ATT UUID SUP UNREAD ALERT CAT
+0x2A49 ATT UUID BP FEATURE
+0x2A4A ATT UUID HID INFORMATION
+0x2A4B ATT UUID HID REPORT MAP
+0x2A4C ATT UUID HID CONTROL POINT
+0x2A4D ATT UUID HID REPORT
+0x2A4E ATT UUID HID PROTOCOL MODE
+0x2A4F ATT UUID SCAN INT WIND
+0x2A50 ATT UUID PNP ID
+0x2A51 ATT UUID GLUCOSE FEATURE
+0x2A52 ATT UUID RACP
+0x2AA6 ATT UUID CAR
+0x2A54 ATT UUID RUNNING SPEED FEATURE
+0x2A53 ATT UUID RUNNING SPEED MEASUREMENT
+0x2A60 ATT UUID PULSE OX FEATURES
+0x2A5E ATT UUID PULSE OX SPOT CHECK
+0x2A5F ATT UUID PULSE OX CONTINUOUS
+0x2A65 ATT UUID CYCLING POWER FEATURE
+0x2A63 ATT UUID CYCLING POWER MEASUREMENT
+0x2A5C ATT UUID CYCLING SPEED FEATURE
+0x2A5B ATT UUID CYCLING SPEED MEASUREMENT
+0x2A5D ATT UUID SENSOR LOCATION
+0x2A99 ATT UUID DB CHANGE INCREMENT
+0x2A9A ATT UUID USER INDEX
+0x2A9D ATT UUID WEIGHT MEAS
+0x2A9E ATT UUID WEIGHT SCALE FEATURE
+0x2A9F ATT UUID USER CONTROL POINT
+0x2AC9 ATT UUID RPAO
+0x2ADB ATT UUID MESH PRV DATA IN
+0x2ADC ATT UUID MESH PRV DATA OUT
+0x2ADD ATT UUID MESH PROXY DATA IN
+0x2ADE ATT UUID MESH PROXY DATA OUT
+0x2B29 ATT UUID CLIENT SUPPORTED FEATURES
+0x2B2A ATT UUID DATABASE HASH
+0x2B3A ATT UUID SERVER SUPPORTED FEATURES
+0x7F80 ATT UUID CTE ENABLE
+0x7F81 ATT UUID CTE MIN LEN
+0x7F82 ATT UUID CTE TX CNT
+0x7F83 ATT UUID CTE TX DURATION
+0x7F84 ATT UUID CTE INTERVAL
+0x7F85 ATT UUID CTE PHY
+0x2700 ATT UUID UNITLESS
+0x2701 ATT UUID LENGTH M
+0x2702 ATT UUID MASS KG
+0x2703 ATT UUID TIME SEC
+0x2704 ATT UUID ELECTRIC CURRENT AMP
+0x2705 ATT UUID THERMO TEMP K
+0x2706 ATT UUID AMOUNT OF SUBSTANCE MOLE
+0x2707 ATT UUID LUMINOUS INTENSITY CAND
+0x2710 ATT UUID AREA SQ M
+0x2711 ATT UUID VOLUME CU M
+0x2712 ATT UUID VELOCITY MPS
+0x2713 ATT UUID ACCELERATION MPS SQ
+0x2714 ATT UUID WAVENUMBER RECIPROCAL M
+0x2715 ATT UUID DENSITY KG PER CU M
+0x2716 ATT UUID SURFACE DENS KG PER SQ M
+0x2717 ATT UUID SPECIFIC VOL CU M PER KG
+0x2718 ATT UUID CURRENT DENS AMP PER SQ M
+0x2719 ATT UUID MAG FIELD STR AMP PER M
+0x271A ATT UUID AMOUNT CONC MOLE PER CU M
+0x271B ATT UUID MASS CONC KG PER CU M
+0x271C ATT UUID LUM CAND PER SQ M
+0x271D ATT UUID REFRACTIVE INDEX
+0x271E ATT UUID RELATIVE PERMEABILITY
+0x2720 ATT UUID PLANE ANGLE R
+0x2721 ATT UUID SOLID ANGLE STER
+0x2722 ATT UUID FREQUENCY HERTZ
+0x2723 ATT UUID FORCE NEWT
+0x2724 ATT UUID PRESSURE PASCAL
+0x2725 ATT UUID ENERGY J
+0x2726 ATT UUID POWER W
+0x2727 ATT UUID ELECTRIC CHG C
+0x2728 ATT UUID ELECTRIC POTENTIAL VOLT
+0x2729 ATT UUID CAPACITANCE F
+0x272A ATT UUID ELECTRIC RESISTANCE OHM
+0x272B ATT UUID ELECTRIC COND SIEMENS
+0x272C ATT UUID MAGNETIC FLEX WEBER
+0x272D ATT UUID MAGNETIC FLEX DENS TESLA
+0x272E ATT UUID INDUCTANCE H
+0x272F ATT UUID C TEMP DEG C
+0x2730 ATT UUID LUMINOUS FLUX LUMEN
+0x2731 ATT UUID ILLUMINANCE LUX
+0x2732 ATT UUID RADIONUCLIDE BECQUEREL
+0x2733 ATT UUID ABSORBED DOSE GRAY
+0x2734 ATT UUID DOSE EQUIVALENT SIEVERT
+0x2735 ATT UUID CATALYTIC ACTIVITY KATAL
+0x2740 ATT UUID DYNAMIC VISC PASCAL SEC
+0x2741 ATT UUID MOMENT OF FORCE NEWT M
+0x2742 ATT UUID SURFACE TENSION NEWT PER M
+0x2743 ATT UUID ANG VELOCITY R PER SEC
+0x2744 ATT UUID ANG ACCEL R PER SEC SQD
+0x2745 ATT UUID HEAT FLUX DEN W PER SQ M
+0x2746 ATT UUID HEAT CAP J PER K
+0x2747 ATT UUID SPEC HEAT CAP J PER KG K
+0x2748 ATT UUID SPEC ENERGY J PER KG
+0x2749 ATT UUID THERMAL COND W PER M K
+0x274A ATT UUID ENERGY DENSITY J PER CU M
+0x274B ATT UUID ELEC FIELD STR VOLT PER M
+0x274C ATT UUID ELEC CHG DENS C PER CU M
+0x274D ATT UUID SURF CHG DENS C PER SQ M
+0x274E ATT UUID ELEC FLUX DENS C PER SQ M
+0x274F ATT UUID PERMITTIVITY F PER M
+0x2750 ATT UUID PERMEABILITY H PER M
+0x2751 ATT UUID MOLAR ENERGY J PER MOLE
+0x2752 ATT UUID MOLAR ENTROPY J PER MOLE K
+0x2753 ATT UUID EXPOSURE C PER KG
+0x2754 ATT UUID DOSE RATE GRAY PER SEC
+0x2755 ATT UUID RT INTENSITY W PER STER
+0x2756 ATT UUID RCE W PER SQ METER STER
+0x2757 ATT UUID CATALYTIC KATAL PER CU M
+0x2760 ATT UUID TIME MIN
+0x2761 ATT UUID TIME HR
+0x2762 ATT UUID TIME DAY
+0x2763 ATT UUID PLANE ANGLE DEG
+0x2764 ATT UUID PLANE ANGLE MIN
+0x2765 ATT UUID PLANE ANGLE SEC
+0x2766 ATT UUID AREA HECTARE
+0x2767 ATT UUID VOLUME L
+0x2768 ATT UUID MASS TONNE
+0x2780 ATT UUID PRESSURE BAR
+0x2781 ATT UUID PRESSURE MM
+0x2782 ATT UUID LENGTH ANGSTROM
+0x2783 ATT UUID LENGTH NAUTICAL MILE
+0x2784 ATT UUID AREA BARN
+0x2785 ATT UUID VELOCITY KNOT
+0x2786 ATT UUID LOG RADIO QUANT NEPER
+0x2787 ATT UUID LOG RADIO QUANT BEL
+0x2788 ATT UUID LOG RADIO QUANT DB
+0x27A0 ATT UUID LENGTH YARD
+0x27A1 ATT UUID LENGTH PARSEC
+0x27A2 ATT UUID LENGTH IN
+0x27A3 ATT UUID LENGTH FOOT
+0x27A4 ATT UUID LENGTH MILE
+0x27A5 ATT UUID PRESSURE POUND PER SQ IN
+0x27A6 ATT UUID VELOCITY KPH
+0x27A7 ATT UUID VELOCITY MPH
+0x27A8 ATT UUID ANG VELOCITY RPM
+0x27A9 ATT UUID ENERGY GRAM CALORIE
+0x27AA ATT UUID ENERGY KG CALORIE
+0x27AB ATT UUID ENERGY KILOWATT HR
+0x27AC ATT UUID THERM TEMP F
+0x27AD ATT UUID PERCENTAGE
+0x27AE ATT UUID PER MILLE
+0x27AF ATT UUID PERIOD BEATS PER MIN
+0x27B0 ATT UUID ELECTRIC CHG AMP HRS
+0x27B1 ATT UUID MASS DENSITY MG PER DL
+0x27B2 ATT UUID MASS DENSITY MMOLE PER L
+0x27B3 ATT UUID TIME YEAR
+0x27B4 ATT UUID TIME MONTH
+
 0x27B5 concentration (count per cubic metre)
 0x27B6 irradiance (watt per square metre)
 0x27B7 milliliter (per kilogram per minute)
@@ -1129,7 +1130,7 @@
 0xFE84 RF Digital Corp
 0xFE85 RF Digital Corp
 0xFE86 Huawei Technologies Co., Ltd.
-0xFE87
+0xFE87 Unknown
 0xFE88 SALTO SYSTEMS S.L.
 0xFE89 B&O Play A/S
 0xFE8A Apple, Inc.
