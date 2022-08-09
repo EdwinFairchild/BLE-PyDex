@@ -1,6 +1,6 @@
 from click import style
 from BLE_GUI import Ui_MainWindow
-import ButtonCallbacks as btnCB
+from modules import *
 from PyQt5 import Qt as qtw
 from PyQt5 import QtCore as qtc
 from PyQt5 import QtCore, QtGui, QtWidgets
@@ -24,6 +24,10 @@ import BLE_UUIDs
 QtWidgets.QApplication.setAttribute(
     QtCore.Qt.AA_EnableHighDpiScaling, True)  # enable highdpi scaling
 QtWidgets.QApplication.setAttribute(QtCore.Qt.AA_UseHighDpiPixmaps, True)
+os.environ["QT_FONT_DPI"] = "96"
+# Global interface
+mainGUI = None
+interface = None
 
 
 class MainInterface(QMainWindow):
@@ -39,7 +43,7 @@ class MainInterface(QMainWindow):
     sideBarWidthMax = 210
     sideBarWidthMin = 73
     animationDone = True
-
+    widgets = None
     client = None
     # peristent instance of bleakLoop needs to be kept so the task is not
     # canceled
@@ -47,9 +51,11 @@ class MainInterface(QMainWindow):
     UUID_dict = BLE_UUIDs.get_uuid_dict("UUIDs.txt")
     # list to manage chars that have notify enabled
     notifyEnabledCharsDict = {}
+    global mainGUI
+    mainGUI = interface
 
     def __init__(self):
-        super().__init__()
+        QMainWindow.__init__(self)
         # setup gui
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
@@ -87,6 +93,7 @@ class MainInterface(QMainWindow):
                                self.ui.btnMenuGattMaker: ['resources/icons/Ble.svg', 'resources/icons/BleBlue.svg'],
                                self.ui.btnMenuExplore: ['resources/icons/Discover.svg', 'resources/icons/DiscoverBlue.svg'],
                                self.ui.btnMenuClient: ['resources/icons/Client.svg', 'resources/icons/ClientBlue.svg']}
+        self.ui.btnYoutube.clicked.connect(self.btnYoutubeCallback)
         # Set Button Icons
         self.ui.btnMenu.setIcon(QIcon('resources/icons/Menu.svg'))
         test = QSize()
@@ -128,6 +135,7 @@ class MainInterface(QMainWindow):
                            self.ui.btnMenuClient, self.ui.btnMenuExplore]
 
         self.ui.btnExplore.hide()
+
     # ------------------------------------------------------------------------
 
     def setConnectedIconColor(self, color):
@@ -340,6 +348,9 @@ class MainInterface(QMainWindow):
         self.BLE_DiscoverDevices.start()
         # self.worker.finished.connect(self.blescannerFinished)
     # ------------------------------------------------------------------------
+
+    def btnYoutubeCallback(self):
+        CallBack.testCallBack(self)
 
     def btnRepoCallback(self):
         # Go to example.com
@@ -606,6 +617,7 @@ if __name__ == '__main__':
     app = qtw.QApplication(sys.argv)
     # loop = QEventLoop(app)
     # asyncio.set_event_loop(loop)
+
     interface = MainInterface()
     interface.show()
     # `loop.run_forever()
