@@ -44,7 +44,8 @@ class MainInterface(QMainWindow):
     # peristent instance of bleakLoop needs to be kept so the task is not
     # canceled
     bleLoop = None
-    UUID_dict = BLE_UUIDs.get_uuid_dict("UUIDs.txt")
+    UUID_dict = BLE_UUIDs.get_uuid_dict("UUIDs.json")
+    user_uuid_dict = BLE_UUIDs.get_uuid_dict("user_UUIDs.json",True)
     # list to manage chars that have notify enabled
     notifyEnabledCharsDict = {}
 
@@ -279,11 +280,27 @@ class MainInterface(QMainWindow):
         # this WILL change
         UUID_val = lblUUID[0].strip()
         UUID = UUID_val.split("-")
+
+        tempUUID = UUID[0].removeprefix("0000").upper()
+        tempUUID = "0x"+tempUUID 
+
         if UUID[1:] == UUID_BLE_SPEC:
-            tempUUID = UUID[0].removeprefix("0000")
-            tempUUID = tempUUID.upper()
+            # check BLE specification defined UUIDS
             if tempUUID in self.UUID_dict:
                 UUID_val = self.UUID_dict[tempUUID]
+        else:
+
+            # Get the full uuid and get rid of the dashes
+            full_uuid = lblUUID[0].strip().replace("-","") 
+            # check to see if the uuid is in the dictionary
+            # if so UUID_val takes the value returned from
+            # the dictionary at the key full_uuid
+            print(full_uuid)
+            print(self.user_uuid_dict.keys())
+            if full_uuid in self.user_uuid_dict:
+                UUID_val = self.user_uuid_dict[full_uuid]
+
+        
 
         self.ui.btnLabelUUID.setText(UUID_val)
         if "read" in treeWidgetItemtext.text(0):
