@@ -1,4 +1,3 @@
-from hashlib import new
 import json
 
 
@@ -26,10 +25,9 @@ def get_uuid_dict(filename,user=False):
                     while i <= len(key)-2:
                         new_key = key[i:i+2] + new_key
                         i+= 2
-                    new_key = new_key.lower()
-                    user_dict[new_key] = value[1]
+                    user_dict[new_key.lower()] = value[1]
+                else:
+                    user_dict[key.lower()] = value[1]
             return user_dict
   
-    #return data
-
-get_uuid_dict("user_UUIDs.json",True)
+    return data
