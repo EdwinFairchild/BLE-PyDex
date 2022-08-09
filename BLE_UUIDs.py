@@ -1,23 +1,35 @@
+from hashlib import new
+import json
 
-def get_uuid_dict(filename):
+
+def get_uuid_dict(filename,user=False):
     """
-    Extract service name and hex value from uuid file which then gets added to a dictionary
+    Extract service name and hex value from JSON file
 
-    :param filename: str, the name of the uuid file
+    :param filename: str, the name of the JSON file
+
+    :param user: bool, determines if the file passed is user defined
 
     :return: dict, a dictionary with hex value as the key and service name as the value
 
     """
-    file = open(filename, 'r')
-    data = file.readlines()
-    uuid_dict = {}
-    # this should probably only happen once when the class is instantiated
-    for line in data:
-        if line != "\n":
-            line = line.split()
-            if line[0] not in uuid_dict:
-                uuid_dict[line[0][2:]] = ' '.join(line[1:])
-                # for debugging
-                #print(f"{line[0][2:]} {line[1]}")
 
-    return uuid_dict
+    with open(filename,'r') as file:
+        data = json.load(file)
+        if user:
+            user_dict = {}
+            for key,value in data.items():
+                if value[0] == True:
+                    # The key is in big endian so convert to little endian
+                    i = 0
+                    new_key = ""
+                    while i <= len(key)-2:
+                        new_key = key[i:i+2] + new_key
+                        i+= 2
+                    new_key = new_key.lower()
+                    user_dict[new_key] = value[1]
+            return user_dict
+  
+    #return data
+
+get_uuid_dict("user_UUIDs.json",True)
