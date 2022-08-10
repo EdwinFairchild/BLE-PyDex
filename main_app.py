@@ -89,7 +89,7 @@ class MainInterface(QMainWindow):
                                self.ui.btnMenuGattMaker: ['resources/icons/Ble.svg', 'resources/icons/BleBlue.svg'],
                                self.ui.btnMenuExplore: ['resources/icons/Discover.svg', 'resources/icons/DiscoverBlue.svg'],
                                self.ui.btnMenuClient: ['resources/icons/Client.svg', 'resources/icons/ClientBlue.svg']}
-        self.ui.btnYoutube.clicked.connect(lambda state, interface = self : CallBack.testCallBack(interface))
+        self.ui.btnYoutube.clicked.connect(lambda state, interface = self : testCallBack(interface))
         # Set Button Icons
         self.ui.btnMenu.setIcon(QIcon('resources/icons/Menu.svg'))
         test = QSize()
