@@ -25,9 +25,6 @@ QtWidgets.QApplication.setAttribute(
     QtCore.Qt.AA_EnableHighDpiScaling, True)  # enable highdpi scaling
 QtWidgets.QApplication.setAttribute(QtCore.Qt.AA_UseHighDpiPixmaps, True)
 os.environ["QT_FONT_DPI"] = "96"
-# Global interface
-mainGUI = None
-interface = None
 
 
 class MainInterface(QMainWindow):
@@ -52,8 +49,6 @@ class MainInterface(QMainWindow):
     user_uuid_dict = BLE_UUIDs.get_uuid_dict("user_UUIDs.json",True)
     # list to manage chars that have notify enabled
     notifyEnabledCharsDict = {}
-    global mainGUI
-    mainGUI = interface
 
     def __init__(self):
         QMainWindow.__init__(self)
@@ -94,7 +89,7 @@ class MainInterface(QMainWindow):
                                self.ui.btnMenuGattMaker: ['resources/icons/Ble.svg', 'resources/icons/BleBlue.svg'],
                                self.ui.btnMenuExplore: ['resources/icons/Discover.svg', 'resources/icons/DiscoverBlue.svg'],
                                self.ui.btnMenuClient: ['resources/icons/Client.svg', 'resources/icons/ClientBlue.svg']}
-        self.ui.btnYoutube.clicked.connect(self.btnYoutubeCallback)
+        self.ui.btnYoutube.clicked.connect(lambda: CallBack.testCallBack(self,self))
         # Set Button Icons
         self.ui.btnMenu.setIcon(QIcon('resources/icons/Menu.svg'))
         test = QSize()
