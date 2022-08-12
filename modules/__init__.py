@@ -13,8 +13,9 @@ from BLE_GUI import Ui_MainWindow
 # # APP SETTINGS
 # from . app_settings import Settings
 
-# IMPORT FUNCTIONS
+# IMPORT Button callbacks
 from . ButtonCallbacks import *
 
-# APP FUNCTIONS
-# from . app_functions import *
+# Import Signal callbacks
+from . Slots import *
+

@@ -211,6 +211,7 @@ class MainInterface(QMainWindow):
             self.ui.list_EnabledNotifyValue.currentRow())
     # ------------------------------------------------------------------------
     def errMsg(self, err):
+        # TODO : add logging area to display error/status messags
         print(err)
     # ------------------------------------------------------------------------
     def bleScannerSlot(self, device):
@@ -222,24 +223,6 @@ class MainInterface(QMainWindow):
     # ------------------------------------------------------------------------
     def disconnectSlot(self):
         self.bleLoop.exit()
-    # ------------------------------------------------------------------------
-    def bleDiscoverslot(self, data):
-        # self.ui.listServices.addItem(service)
-        item = data[0]
-        item = item.replace("\t", "")
-        item = item.replace("[", "")
-        item = item.replace("]", " : ")
-        level = data[1]
-        if level == 0:
-            self.toplevel = QTreeWidgetItem([str(item)])
-            self.ui.servicesTreeWidget.addTopLevelItem(self.toplevel)
-        elif level == 1 and self.toplevel != None:
-            self.child = QTreeWidgetItem([str(item)])
-            self.toplevel.addChild(self.child)
-        elif level == 2 and self.child != None:
-            subchild = QTreeWidgetItem([str(item)])
-            self.child.addChild(subchild)
-
     # ------------------------------------------------------------------------
     def btnMenuAboutCallBack(self):
         QMessageBox.information(

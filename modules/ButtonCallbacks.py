@@ -1,5 +1,5 @@
 from main_app import *
-
+from modules import Slots
 def btn_youtube(interface):
     webbrowser.open('https://www.youtube.com/user/sdf3e33/videos')
 # ------------------------------------------------------------------------
@@ -128,8 +128,7 @@ def btn_connect(interface):
                     interface.bleLoop = ble_ctl.BleakLoop()
                     interface.bleLoop.ble_address = interface.selected_address
                     interface.bleLoop.discoverServices = True
-                    interface.bleLoop.discovered_services_signal.connect(
-                        interface.bleDiscoverslot)
+                    interface.bleLoop.discovered_services_signal.connect(lambda data :Slots.discovered_services(interface , data))
                     interface.bleLoop.errorMsg.connect(interface.errMsg)
                     interface.connected_address = interface.selected_address
                     interface.bleLoop.start()
