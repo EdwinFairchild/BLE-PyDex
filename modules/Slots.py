@@ -24,3 +24,44 @@ def discovered_services(interface ,data):
         subchild = QTreeWidgetItem([str(item)])
         interface.child.addChild(subchild)
     #possible more levels ? idk
+
+def got_char_notify(interface, data):
+    item = interface.ui.list_EnabledNotify.findItems(
+        str(data[0]), QtCore.Qt.MatchExactly)
+    print("item index")
+    print(item[0])
+    row = interface.ui.list_EnabledNotify.row(item[0])
+    item = interface.ui.list_EnabledNotifyValue.item(row)
+    data = str(data[1]).removeprefix("bytearray(b\'\\")
+    data = str(data).removesuffix("\')")
+    item.setText(data)
+
+def notify_registered_state(interface, state):
+    if state == True:
+        # add the selected UUID/Handle to the notify list
+        if interface.ui.btnLabelHandle.text() in interface.notifyEnabledCharsDict:
+            print("Characteristic notificaiton is already enabled")
+        else:
+            interface.notifyEnabledCharsDict[interface.ui.btnLabelHandle.text(
+            )] = "N/A"
+            interface.ui.list_EnabledNotify.addItem(
+                interface.ui.btnLabelHandle.text())
+            interface.ui.list_EnabledNotifyValue.addItem("N/A")
+            # interface.notifyEnabledCharsDict[interface.ui.btnLabelHandle.text()] += ["5555"]
+            # print(str(interface.notifyEnabledCharsDict[interface.ui.btnLabelHandle.text()][1]))
+            # call function to add this item to list_enabledNotifybtnNoti
+    else:
+        print("could not add")
+
+def disconnect(interface):
+    interface.bleLoop.exit()
+
+def read_char(interface, data):
+    interface.ui.btnLabelValue.setText(data)
+
+def scan(interface, device):
+    interface.ui.list_discoveredDevices.addItem(f" " + device[0:17] + " | " + device[18:] + " ")
+
+def errMsg(interface, err):
+    # TODO : add logging area to display error/status messags
+    print(err)

@@ -32,76 +32,6 @@ class BLE_DiscoverDevices(QThread):
         # disconnect here? or keep active until user presses explore?
 
 
-'''******************************************************************************************
-        Connects to a connectable device and discover services 
-        and emits singal back to GUI application to handle each
-        discovered service/characteristic
-*******************************************************************************************'''
-
-
-class BLE_DiscoverServices(QThread):
-    ble_address = None
-    discovered_services = pyqtSignal(list)
-    client = None
-
-    def run(self):
-        asyncio.run(self.BLE_discoverServices(self.client))
-    # ------------------------------------------------------------------------
-
-    async def BLE_discoverServices(self, client: BleakClient):
-        try:
-            async with client:
-                print(f"Connected: {client.is_connected}")
-                for service in client.services:
-                    # emit top level item
-
-                    self.discovered_services.emit([f"[Service] {service}", 0])
-
-                    for char in service.characteristics:
-                        # emit children of top level
-                        if "read" in char.properties:
-                            try:
-                                value = bytes(await client.read_gatt_char(char.uuid))
-                                self.discovered_services.emit(
-                                    [f"\t[Characteristic] {char} ({','.join(char.properties)}), Value: {value}", 1])
-                                # print(
-                                #     f"\t[Characteristic] {char} ({','.join(char.properties)}), Value: {value}"
-                                # )
-                            except Exception as e:
-                                self.discovered_services.emit(
-                                    [f"\t[Characteristic] {char} ({','.join(char.properties)}), Error: {e}", 1])
-                                # print(
-                                #     f"\t[Characteristic] {char} ({','.join(char.properties)}), Error: {e}"
-                                # )
-
-                        else:
-                            value = None
-                            self.discovered_services.emit(
-                                [f"\t[Characteristic] {char} ({','.join(char.properties)}), Value: {value}", 1])
-                            # print(
-                            #     f"\t[Characteristic] {char} ({','.join(char.properties)}), Value: {value}"
-                            # )
-
-                        for descriptor in char.descriptors:
-                            # emit children of children
-                            try:
-                                value = bytes(
-                                    await client.read_gatt_descriptor(descriptor.handle)
-
-                                )
-                                self.discovered_services.emit(
-                                    [f"\t\t[Descriptor] {descriptor}) | Value: {value}", 2])
-                                # print(f"\t\t[Descriptor] {descriptor}) | Value: {value}")
-                            except Exception as e:
-                                self.discovered_services.emit(
-                                    [f"\t\t[Descriptor] {descriptor}) | Error: {e}", 2])
-                                #print(f"\t\t[Descriptor] {descriptor}) | Error: {e}")
-                await client.disconnect()
-
-                print(f"Cleint conenction state : {client.is_connected}")
-        except Exception as e:
-            print("Opps ,That device is not explorable, at least not by you.")
-
 
 '''******************************************************************************************
         Implements an infinite asyncio loop charged with registering
@@ -120,7 +50,7 @@ class BleakLoop(QThread):
     disconnect_triggered = False
     # used to trigger service discovery
     discoverServices = False
-    discovered_services_signal = pyqtSignal(list)
+    discovered_services = pyqtSignal(list)
     # used for registering notifys
     notifyCharsAdded = False
     newNotifyCharUUID = None
@@ -212,21 +142,21 @@ class BleakLoop(QThread):
             print(f"Connected: {client.is_connected}")
             for service in client.services:
                 # emit top level item
-                self.discovered_services_signal.emit(
+                self.discovered_services.emit(
                     [f"[Service] {service}", 0])
                 for char in service.characteristics:
                     # emit children of top level
                     if "read" in char.properties:
                         try:
                             value = bytes(await client.read_gatt_char(char.uuid))
-                            self.discovered_services_signal.emit(
+                            self.discovered_services.emit(
                                 [f"\t[Characteristic] {char} ({','.join(char.properties)}), Value: {value}", 1])
                         except Exception as e:
-                            self.discovered_services_signal.emit(
+                            self.discovered_services.emit(
                                 [f"\t[Characteristic] {char} ({','.join(char.properties)}), Error: {e}", 1])
                     else:
                         value = None
-                        self.discovered_services_signal.emit(
+                        self.discovered_services.emit(
                             [f"\t[Characteristic] {char} ({','.join(char.properties)}), Value: {value}", 1])
                     for descriptor in char.descriptors:
                         # emit children of children
@@ -234,7 +164,7 @@ class BleakLoop(QThread):
                             value = bytes(
                                 await client.read_gatt_descriptor(descriptor.handle)
                             )
-                            self.discovered_services_signal.emit(
+                            self.discovered_services.emit(
                                 [f"\t\t[Descriptor] {descriptor}) | Value: {value}", 2])
                         except Exception as err:
                             print(err)

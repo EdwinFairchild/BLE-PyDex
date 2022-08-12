@@ -1,5 +1,6 @@
 from main_app import *
 from modules import Slots
+from modules import MiscHelpers
 def btn_youtube(interface):
     webbrowser.open('https://www.youtube.com/user/sdf3e33/videos')
 # ------------------------------------------------------------------------
@@ -10,8 +11,7 @@ def btn_scan(interface):
     interface.ui.list_discoveredDevices.clear()
     interface.BLE_DiscoverDevices = ble_ctl.BLE_DiscoverDevices()
     interface.BLE_DiscoverDevices.scan_timeout = interface.ui.timeoutSlider_2.value()
-    interface.BLE_DiscoverDevices.discovered_devices.connect(
-        interface.bleScannerSlot)
+    interface.BLE_DiscoverDevices.discovered_devices.connect(lambda device :Slots.scan(interface,device))
     interface.BLE_DiscoverDevices.start()
  # ------------------------------------------------------------------------  
 def btn_notify_remove(interface):
@@ -35,11 +35,10 @@ def btn_notify(interface):
 
         # Add the currently selected char to notify enabled chars list
         if "NOTIFY" in interface.ui.btnLabelPermissions.text():
-            interface.bleLoop.gotNotification.connect(interface.gotCharNotif)
+            interface.bleLoop.gotNotification.connect(lambda data : Slots.got_char_notify(interface, data))
             interface.bleLoop.notifyCharsAdded = True
             interface.bleLoop.newNotifyCharUUID = interface.ui.btnLabelUUID.text()
-            interface.bleLoop.notifyRegisteredState.connect(
-                interface.notifyRegisteredStateCallback)
+            interface.bleLoop.notifyRegisteredState.connect(lambda state : Slots.notify_registered_state(interface, state))
             print("added chat to notify")
         else:
             print("That characteristic does not have Notify enabled")
@@ -47,13 +46,13 @@ def btn_notify(interface):
         print("you are not connected to anything")
 # ------------------------------------------------------------------------
 def btn_permission_copy(interface):
-    interface.copyToClipBoard(interface.ui.btnLabelPermissions.text())
+    MiscHelpers.copy_to_clipboard(interface,interface.ui.btnLabelPermissions.text())
 # ------------------------------------------------------------------------
 def btn_uuid_copy(interface):
-    interface.copyToClipBoard(interface.ui.btnLabelUUID.text())
+    MiscHelpers.copy_to_clipboard(interface,interface.ui.btnLabelUUID.text())
 # ------------------------------------------------------------------------
 def btn_type_copy(interface):
-    interface.copyToClipBoard(interface.ui.btnLabelType.text())
+    MiscHelpers.copy_to_clipboard(interface,interface.ui.btnLabelType.text())
 
 # ------------------------------------------------------------------------
 def btn_tree_widget_item_pressed(interface):
@@ -128,21 +127,20 @@ def btn_connect(interface):
                     interface.bleLoop = ble_ctl.BleakLoop()
                     interface.bleLoop.ble_address = interface.selected_address
                     interface.bleLoop.discoverServices = True
-                    interface.bleLoop.discovered_services_signal.connect(lambda data :Slots.discovered_services(interface , data))
-                    interface.bleLoop.errorMsg.connect(interface.errMsg)
+                    interface.bleLoop.discovered_services.connect(lambda data :Slots.discovered_services(interface , data))
+                    interface.bleLoop.errorMsg.connect(lambda mesg : Slots.errMsg(interface, mesg))
                     interface.connected_address = interface.selected_address
                     interface.bleLoop.start()
                     fore = [255, 255, 255]
                     back = [170, 77, 77]
-                    interface.setAlternateButtonModeColor(
-                        interface.ui.btnConnect, fore, back)
+                    MiscHelpers.set_alternate_button_mode_color(interface,interface.ui.btnConnect, fore, back)
                     # gui stuff
-                    interface.setConnectedIconColor('blue')
+                    MiscHelpers.set_connected_icon_color(interface,'blue')
                     interface.ui.btnConnect.setText("Disconnect")
                     interface.connected_state = True
                 except Exception as err:
                     print(err)
-                    interface.setConnectedIconColor('white')
+                    MiscHelpers.set_connected_icon_color(interface,'white')
                     interface.ui.btnConnect.setText("Connect")
                     interface.connected_state = True
             else:
@@ -151,13 +149,12 @@ def btn_connect(interface):
             try:
                 # connection stuff
                 interface.bleLoop.disconnect_triggered = True
-                interface.bleLoop.disconnectSignal.connect(interface.disconnectSlot)
+                interface.bleLoop.disconnectSignal.connect(lambda temp : Slots.disconnect(interface))
                 # gui stuff
                 fore = [0, 0, 0]
                 back = [180, 180, 180]
-                interface.setAlternateButtonModeColor(
-                    interface.ui.btnConnect, fore, back)
-                interface.setConnectedIconColor('white')
+                MiscHelpers.set_alternate_button_mode_color(interface,interface.ui.btnConnect, fore, back)
+                MiscHelpers.set_connected_icon_color(interface,'white')
                 interface.ui.btnConnect.setText("Connect")
                 interface.connected_state = False
                 # clean up tree wdiget stuff
@@ -167,24 +164,6 @@ def btn_connect(interface):
                 interface.notifyEnabledCharsDict = {}
             except Exception as err:
                 print(err)
-
-# ------------------------------------------------------------------------
-#not being used for now
-def btn_explore(interface):
-    if(interface.selected_address != None):
-        interface.client = BleakClient(interface.selected_address)
-        interface.ui.servicesTreeWidget.clear()
-        interface.BLE_DiscoverServices = ble_ctl.BLE_DiscoverServices()
-        interface.BLE_DiscoverServices.client = interface.client
-        interface.BLE_DiscoverServices.ble_address = interface.selected_address
-        interface.BLE_DiscoverServices.discovered_services.connect(
-            interface.bleDiscoverslot)
-        interface.BLE_DiscoverServices.start()
-
-        #print("Read services from : " + interface.selected_address)
-        # todos can time out
-    else:
-        print("Opps ,You need to select a device from the scan list!")
 # ------------------------------------------------------------------------
 def btn_write_char(interface):
     interface.bleLoop.writeCharUUID = interface.ui.btnLabelUUID.text()
@@ -195,21 +174,20 @@ def btn_read_char(interface):
     if interface.connected_state == True:
         interface.bleLoop.readChar = True
         interface.bleLoop.readCharUUID = interface.ui.btnLabelUUID.text()
-        interface.bleLoop.readCharSignal.connect(interface.readCharSignalCallback)
+        interface.bleLoop.readCharSignal.connect(lambda data : Slots.read_char(interface, data))
         # read char from gatt
 # ------------------------------------------------------------------------
-
 def btn_gatt_maker(interface):
     interface.ui.stackedWidget.slideInIdx(0)
-    interface.setButtonIcons(interface.ui.btnMenuGattMaker)
+    MiscHelpers.set_button_icons(interface, interface.ui.btnMenuGattMaker)
 # ------------------------------------------------------------------------
 def btn_client(interface):
     interface.ui.stackedWidget.slideInIdx(1)
-    interface.setButtonIcons(interface.ui.btnMenuClient)
+    MiscHelpers.set_button_icons(interface, interface.ui.btnMenuClient)
 # ------------------------------------------------------------------------
 def btn_explore(interface):
     interface.ui.stackedWidget.slideInIdx(2)
-    interface.setButtonIcons(interface.ui.btnMenuExplore)
+    MiscHelpers.set_button_icons(interface, interface.ui.btnMenuExplore)
 # ------------------------------------------------------------------------
 def btn_menu(interface):
     # read comment on menuAnimate
@@ -231,3 +209,23 @@ def btn_menu(interface):
     #     interface.ui.btnMenu.setIconSize(test)
 
     # interface.menuPinned = not interface.menuPinned
+# -----------------------------------------------------------------------
+def register_button_callbacks(interface):
+        # Menu button callbacks
+    interface.ui.btnMenu.clicked.connect(lambda state : btn_menu(interface))
+    interface.ui.btnMenuExplore.clicked.connect(lambda state : btn_explore(interface))
+    interface.ui.btnMenuClient.clicked.connect(lambda state : btn_client(interface))
+    interface.ui.btnMenuGattMaker.clicked.connect(lambda state : btn_gatt_maker(interface))
+    # Explore Page Button Callbacks
+    interface.ui.btnReadChar.clicked.connect(lambda state : btn_read_char(interface))
+    interface.ui.btnWriteChar.clicked.connect(lambda  state : btn_write_char(interface))
+    interface.ui.btnConnect.clicked.connect(lambda state : btn_connect(interface))
+    interface.ui.servicesTreeWidget.itemPressed.connect(lambda state : btn_tree_widget_item_pressed(interface))
+    interface.ui.btnLabelType.clicked.connect(lambda state : btn_type_copy(interface))
+    interface.ui.btnLabelUUID.clicked.connect(lambda state : btn_uuid_copy(interface))
+    interface.ui.btnLabelPermissions.clicked.connect(lambda state : btn_permission_copy(interface))
+    interface.ui.btnNotify.clicked.connect(lambda state : btn_notify(interface))
+    interface.ui.btnNotifyRemove.clicked.connect(lambda state : btn_notify_remove(interface))
+    interface.ui.btnScan.clicked.connect(lambda state : btn_scan(interface))
+    interface.ui.btnRepo.clicked.connect(lambda state: btn_github(interface))
+    interface.ui.btnYoutube.clicked.connect(lambda state: btn_youtube(interface))
