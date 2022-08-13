@@ -9,12 +9,12 @@ def init_icons(interface):
                             interface.ui.btnMenuGattMaker: ['resources/icons/Ble.svg', 'resources/icons/BleBlue.svg'],
                             interface.ui.btnMenuExplore: ['resources/icons/Discover.svg', 'resources/icons/DiscoverBlue.svg'],
                             interface.ui.btnMenuClient: ['resources/icons/Client.svg', 'resources/icons/ClientBlue.svg']}
-    # Set Button Icons
-    interface.ui.btnMenu.setIcon(QIcon('resources/icons/Menu.svg'))
     icon_size = QSize()
-    icon_size.setHeight(20)
-    icon_size.setWidth(20)
-    interface.ui.btnMenu.setIconSize(icon_size)
+    # Set Button Icons
+    # interface.ui.btnMenu.setIcon(QIcon('resources/icons/Menu.svg'))
+    # icon_size.setHeight(20)
+    # icon_size.setWidth(20)
+    # interface.ui.btnMenu.setIconSize(icon_size)
 
     interface.ui.btnauthor.setIcon(QIcon('resources/icons/Person.svg'))
     icon_size.setHeight(30)

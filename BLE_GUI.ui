@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1399</width>
-    <height>722</height>
+    <width>1448</width>
+    <height>736</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -103,7 +103,7 @@ border:none;</string>
           <string notr="true">QFrame{
 border-radius:15px;
 		background-color: rgb(170,200,255);
-border: 1px solid gray;
+border: 0px solid gray;
 border-color: rgb(190, 190, 190);
 }</string>
          </property>
@@ -113,7 +113,7 @@ border-color: rgb(190, 190, 190);
          <property name="frameShadow">
           <enum>QFrame::Raised</enum>
          </property>
-         <layout class="QVBoxLayout" name="verticalLayout" stretch="0,0,0,0,0,0">
+         <layout class="QVBoxLayout" name="verticalLayout" stretch="0,0,0,0,0,0,0">
           <property name="spacing">
            <number>5</number>
           </property>
@@ -121,7 +121,7 @@ border-color: rgb(190, 190, 190);
            <number>0</number>
           </property>
           <property name="topMargin">
-           <number>25</number>
+           <number>10</number>
           </property>
           <property name="rightMargin">
            <number>0</number>
@@ -139,7 +139,7 @@ border-color: rgb(190, 190, 190);
             </property>
             <property name="font">
              <font>
-              <pointsize>13</pointsize>
+              <pointsize>20</pointsize>
               <weight>75</weight>
               <bold>true</bold>
              </font>
@@ -149,9 +149,10 @@ border-color: rgb(190, 190, 190);
 		background-color: rgb(170,200,255);
 	border:none;
 
-	color: rgb(250, 250, 255);
-text-align: left;
-padding-left: 30px;
+		color: rgb(30, 39, 73);
+
+text-align: center;
+padding-bottom: 10px;
 }
 
 QPushButton:hover{
@@ -163,15 +164,37 @@ QPushButton:hover{
 
 QPushButton:pressed{
 	
-	color: rgb(28, 28, 28);
+	color: rgb(255, 255, 255);
 
 }</string>
             </property>
             <property name="text">
-             <string>      BLE-PyDex</string>
+             <string> BLE-PyDex</string>
             </property>
             <property name="checkable">
              <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="Line" name="line_2">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>1</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>1</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color: rgb(255, 255, 255);</string>
+            </property>
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
             </property>
            </widget>
           </item>
@@ -195,7 +218,8 @@ QPushButton:pressed{
 		background-color: rgb(170,200,255);
 	border:none;
 
-	color: rgb(250, 250, 255);
+		color: rgb(30, 39, 73);
+
 text-align: left;
 padding-left: 30px;
 }
@@ -209,7 +233,7 @@ QPushButton:hover{
 
 QPushButton:pressed{
 	
-	color: rgb(28, 28, 28);
+	color: rgb(255, 255, 255);
 
 }</string>
             </property>
@@ -238,7 +262,8 @@ QPushButton:pressed{
 		background-color: rgb(170,200,255);
 	border:none;
 
-	color: rgb(250, 250, 255);
+		color: rgb(30, 39, 73);
+
 text-align: left;
 padding-left: 30px;
 }
@@ -252,7 +277,7 @@ QPushButton:hover{
 
 QPushButton:pressed{
 	
-	color: rgb(28, 28, 28);
+	color: rgb(255, 255, 255);
 
 }</string>
             </property>
@@ -281,7 +306,8 @@ QPushButton:pressed{
 		background-color: rgb(170,200,255);
 	border:none;
 
-	color: rgb(250, 250, 255);
+		color: rgb(30, 39, 73);
+
 text-align: left;
 padding-left: 30px;
 }
@@ -295,7 +321,7 @@ QPushButton:hover{
 
 QPushButton:pressed{
 	
-	color: rgb(28, 28, 28);
+	color: rgb(255, 255, 255);
 
 }</string>
             </property>
@@ -344,7 +370,7 @@ QPushButton:pressed{
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>49</y>
+               <y>100</y>
                <width>206</width>
                <height>1</height>
               </rect>
@@ -367,7 +393,7 @@ QPushButton:pressed{
               </font>
              </property>
              <property name="styleSheet">
-              <string notr="true">background-color: rgb(109, 109, 109);</string>
+              <string notr="true">background-color: rgb(255, 255, 255);</string>
              </property>
              <property name="frameShadow">
               <enum>QFrame::Plain</enum>

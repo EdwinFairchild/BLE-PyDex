@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(1399, 722)
+        MainWindow.resize(1448, 736)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(1)
@@ -47,20 +47,20 @@ class Ui_MainWindow(object):
         self.sideBar.setStyleSheet("QFrame{\n"
 "border-radius:15px;\n"
 "        background-color: rgb(170,200,255);\n"
-"border: 1px solid gray;\n"
+"border: 0px solid gray;\n"
 "border-color: rgb(190, 190, 190);\n"
 "}")
         self.sideBar.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.sideBar.setFrameShadow(QtWidgets.QFrame.Raised)
         self.sideBar.setObjectName("sideBar")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.sideBar)
-        self.verticalLayout.setContentsMargins(0, 25, 0, 9)
+        self.verticalLayout.setContentsMargins(0, 10, 0, 9)
         self.verticalLayout.setSpacing(5)
         self.verticalLayout.setObjectName("verticalLayout")
         self.btnMenu = QtWidgets.QPushButton(self.sideBar)
         self.btnMenu.setMinimumSize(QtCore.QSize(0, 35))
         font = QtGui.QFont()
-        font.setPointSize(13)
+        font.setPointSize(20)
         font.setBold(True)
         font.setWeight(75)
         self.btnMenu.setFont(font)
@@ -68,9 +68,10 @@ class Ui_MainWindow(object):
 "        background-color: rgb(170,200,255);\n"
 "    border:none;\n"
 "\n"
-"    color: rgb(250, 250, 255);\n"
-"text-align: left;\n"
-"padding-left: 30px;\n"
+"        color: rgb(30, 39, 73);\n"
+"\n"
+"text-align: center;\n"
+"padding-bottom: 10px;\n"
 "}\n"
 "\n"
 "QPushButton:hover{\n"
@@ -82,12 +83,20 @@ class Ui_MainWindow(object):
 "\n"
 "QPushButton:pressed{\n"
 "    \n"
-"    color: rgb(28, 28, 28);\n"
+"    color: rgb(255, 255, 255);\n"
 "\n"
 "}")
         self.btnMenu.setCheckable(False)
         self.btnMenu.setObjectName("btnMenu")
         self.verticalLayout.addWidget(self.btnMenu)
+        self.line_2 = QtWidgets.QFrame(self.sideBar)
+        self.line_2.setMinimumSize(QtCore.QSize(0, 1))
+        self.line_2.setMaximumSize(QtCore.QSize(16777215, 1))
+        self.line_2.setStyleSheet("background-color: rgb(255, 255, 255);")
+        self.line_2.setFrameShape(QtWidgets.QFrame.HLine)
+        self.line_2.setFrameShadow(QtWidgets.QFrame.Sunken)
+        self.line_2.setObjectName("line_2")
+        self.verticalLayout.addWidget(self.line_2)
         self.btnMenuExplore = QtWidgets.QPushButton(self.sideBar)
         self.btnMenuExplore.setMinimumSize(QtCore.QSize(0, 35))
         font = QtGui.QFont()
@@ -99,7 +108,8 @@ class Ui_MainWindow(object):
 "        background-color: rgb(170,200,255);\n"
 "    border:none;\n"
 "\n"
-"    color: rgb(250, 250, 255);\n"
+"        color: rgb(30, 39, 73);\n"
+"\n"
 "text-align: left;\n"
 "padding-left: 30px;\n"
 "}\n"
@@ -113,7 +123,7 @@ class Ui_MainWindow(object):
 "\n"
 "QPushButton:pressed{\n"
 "    \n"
-"    color: rgb(28, 28, 28);\n"
+"    color: rgb(255, 255, 255);\n"
 "\n"
 "}")
         self.btnMenuExplore.setObjectName("btnMenuExplore")
@@ -129,7 +139,8 @@ class Ui_MainWindow(object):
 "        background-color: rgb(170,200,255);\n"
 "    border:none;\n"
 "\n"
-"    color: rgb(250, 250, 255);\n"
+"        color: rgb(30, 39, 73);\n"
+"\n"
 "text-align: left;\n"
 "padding-left: 30px;\n"
 "}\n"
@@ -143,7 +154,7 @@ class Ui_MainWindow(object):
 "\n"
 "QPushButton:pressed{\n"
 "    \n"
-"    color: rgb(28, 28, 28);\n"
+"    color: rgb(255, 255, 255);\n"
 "\n"
 "}")
         self.btnMenuGattMaker.setObjectName("btnMenuGattMaker")
@@ -159,7 +170,8 @@ class Ui_MainWindow(object):
 "        background-color: rgb(170,200,255);\n"
 "    border:none;\n"
 "\n"
-"    color: rgb(250, 250, 255);\n"
+"        color: rgb(30, 39, 73);\n"
+"\n"
 "text-align: left;\n"
 "padding-left: 30px;\n"
 "}\n"
@@ -173,7 +185,7 @@ class Ui_MainWindow(object):
 "\n"
 "QPushButton:pressed{\n"
 "    \n"
-"    color: rgb(28, 28, 28);\n"
+"    color: rgb(255, 255, 255);\n"
 "\n"
 "}")
         self.btnMenuClient.setObjectName("btnMenuClient")
@@ -188,13 +200,13 @@ class Ui_MainWindow(object):
         self.frame_3.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_3.setObjectName("frame_3")
         self.line = QtWidgets.QFrame(self.frame_3)
-        self.line.setGeometry(QtCore.QRect(0, 49, 206, 1))
+        self.line.setGeometry(QtCore.QRect(0, 100, 206, 1))
         self.line.setMinimumSize(QtCore.QSize(0, 1))
         self.line.setMaximumSize(QtCore.QSize(16777215, 1))
         font = QtGui.QFont()
         font.setPointSize(1)
         self.line.setFont(font)
-        self.line.setStyleSheet("background-color: rgb(109, 109, 109);")
+        self.line.setStyleSheet("background-color: rgb(255, 255, 255);")
         self.line.setFrameShadow(QtWidgets.QFrame.Plain)
         self.line.setFrameShape(QtWidgets.QFrame.HLine)
         self.line.setObjectName("line")
@@ -1108,7 +1120,7 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.btnMenu.setText(_translate("MainWindow", "      BLE-PyDex"))
+        self.btnMenu.setText(_translate("MainWindow", " BLE-PyDex"))
         self.btnMenuExplore.setText(_translate("MainWindow", "      Explore"))
         self.btnMenuGattMaker.setText(_translate("MainWindow", "      Gatt Maker"))
         self.btnMenuClient.setText(_translate("MainWindow", "      BLE Client "))
