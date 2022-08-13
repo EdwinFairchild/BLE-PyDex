@@ -73,8 +73,9 @@ def btn_tree_widget_item_pressed(interface):
     UUID_BLE_SPEC = ["0000", "1000", "8000", "00805f9b34fb"]
 
     # this WILL change
-    UUID_val = lblUUID[0].strip()
-    UUID = UUID_val.split("-")
+    UUID_name = lblUUID[0].strip()
+    UUID_val  = lblUUID[0].strip()
+    UUID = UUID_name.split("-")
 
     tempUUID = UUID[0].removeprefix("0000").upper()
     tempUUID = "0x"+tempUUID
@@ -82,19 +83,21 @@ def btn_tree_widget_item_pressed(interface):
     if UUID[1:] == UUID_BLE_SPEC:
         # check BLE specification defined UUIDS
         if tempUUID in interface.UUID_dict:
-            UUID_val = interface.UUID_dict[tempUUID]
+            UUID_name = interface.UUID_dict[tempUUID]
     else:
 
         # Get the full uuid and get rid of the dashes
         full_uuid = lblUUID[0].strip().replace("-", "")
         # check to see if the uuid is in the dictionary
-        # if so UUID_val takes the value returned from
+        # if so UUID_name takes the value returned from
         # the dictionary at the key full_uuid
 
         if full_uuid in interface.user_uuid_dict:
-            UUID_val = interface.user_uuid_dict[full_uuid]
-
+            UUID_name = interface.user_uuid_dict[full_uuid]
+        else :
+            UUID_name = "Uknown"
     interface.ui.btnLabelUUID.setText(UUID_val)
+    interface.ui.btnLabelUUID_name.setText(UUID_name)
     if "read" in treeWidgetItemtext.text(0):
         lblPermissions = "READ"
     if "write" in treeWidgetItemtext.text(0):
@@ -129,7 +132,7 @@ def btn_connect(interface):
                     interface.connected_address = interface.selected_address
                     interface.bleLoop.start()
                     fore = [255, 255, 255]
-                    back = [170, 77, 77]
+                    back = [170, 66, 66]
                     MiscHelpers.set_alternate_button_mode_color(interface,interface.ui.btnConnect, fore, back)
                     # gui stuff
                     MiscHelpers.set_connected_icon_color(interface,'blue')
@@ -149,7 +152,7 @@ def btn_connect(interface):
                 interface.bleLoop.disconnectSignal.connect(lambda temp : Slots.disconnect(interface))
                 # gui stuff
                 fore = [0, 0, 0]
-                back = [180, 180, 180]
+                back = [170, 200, 255]
                 MiscHelpers.set_alternate_button_mode_color(interface,interface.ui.btnConnect, fore, back)
                 MiscHelpers.set_connected_icon_color(interface,'white')
                 interface.ui.btnConnect.setText("Connect")
