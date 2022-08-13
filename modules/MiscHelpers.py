@@ -25,16 +25,6 @@ def init_icons(interface):
     icon_size.setWidth(15)
     interface.ui.btnRepo.setIconSize(icon_size)
 
-    interface.ui.btnInstagram.setIcon(QIcon('resources/icons/Instagram.svg'))
-    icon_size.setHeight(25)
-    icon_size.setWidth(25)
-    interface.ui.btnInstagram.setIconSize(icon_size)
-
-    interface.ui.btnYoutube.setIcon(QIcon('resources/icons/Youtube.svg'))
-    icon_size.setHeight(25)
-    icon_size.setWidth(25)
-    interface.ui.btnYoutube.setIconSize(icon_size)
-
     interface.ui.btnConnectedState.setIcon(QIcon('resources/icons/Ble_Large.svg'))
     icon_size.setHeight(50)
     icon_size.setWidth(50)

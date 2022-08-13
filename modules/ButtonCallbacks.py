@@ -1,8 +1,6 @@
 from main_app import *
 from modules import Slots
 from modules import MiscHelpers
-def btn_youtube(interface):
-    webbrowser.open('https://www.youtube.com/user/sdf3e33/videos')
 # ------------------------------------------------------------------------
 def btn_github(interface):
     webbrowser.open('https://github.com/EdwinFairchild/BLE-PyDex')
@@ -228,4 +226,3 @@ def register_button_callbacks(interface):
     interface.ui.btnNotifyRemove.clicked.connect(lambda state : btn_notify_remove(interface))
     interface.ui.btnScan.clicked.connect(lambda state : btn_scan(interface))
     interface.ui.btnRepo.clicked.connect(lambda state: btn_github(interface))
-    interface.ui.btnYoutube.clicked.connect(lambda state: btn_youtube(interface))
