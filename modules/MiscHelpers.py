@@ -35,7 +35,7 @@ def init_icons(interface):
     icon_size.setWidth(25)
     interface.ui.btnYoutube.setIconSize(icon_size)
 
-    interface.ui.btnConnectedState.setIcon(QIcon('resources/icons/Ble.svg'))
+    interface.ui.btnConnectedState.setIcon(QIcon('resources/icons/Ble_Large.svg'))
     icon_size.setHeight(50)
     icon_size.setWidth(50)
     interface.ui.btnConnectedState.setIconSize(icon_size)
@@ -74,13 +74,13 @@ def set_button_icons(interface, currentButton):
 def set_connected_icon_color(interface, color):
     if color == "blue":
         interface.ui.btnConnectedState.setIcon(
-            QIcon('resources/icons/BleBlue.svg'))
+            QIcon('resources/icons/Ble_Large_Blue.svg'))
         icon_size = QSize()
         icon_size.setHeight(50)
         icon_size.setWidth(50)
         interface.ui.btnConnectedState.setIconSize(icon_size)
     else:
-        interface.ui.btnConnectedState.setIcon(QIcon('resources/icons/Ble.svg'))
+        interface.ui.btnConnectedState.setIcon(QIcon('resources/icons/Ble_Large.svg'))
         icon_size = QSize()
         icon_size.setHeight(50)
         icon_size.setWidth(50)

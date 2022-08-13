@@ -1701,6 +1701,11 @@ padding-top: 0px;
                           </item>
                           <item row="5" column="0">
                            <widget class="QLabel" name="label_24">
+                            <property name="font">
+                             <font>
+                              <pointsize>13</pointsize>
+                             </font>
+                            </property>
                             <property name="styleSheet">
                              <string notr="true">color: rgb(28, 28, 28);</string>
                             </property>
@@ -1716,6 +1721,11 @@ padding-top: 0px;
                               <width>0</width>
                               <height>30</height>
                              </size>
+                            </property>
+                            <property name="font">
+                             <font>
+                              <pointsize>13</pointsize>
+                             </font>
                             </property>
                             <property name="styleSheet">
                              <string notr="true">text-align: left;
