@@ -4,18 +4,17 @@ from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 
 def init_icons(interface):
-    #interface.ui.btnExplore.clicked.connect(lambda state : ButtonCallbacks.btn_explore(interface))
-    
+
     interface.iconDictionary = {interface.ui.btnMenu: ['resources/icons/Menu.svg', 'resources/icons/MenuBlue.svg'],
                             interface.ui.btnMenuGattMaker: ['resources/icons/Ble.svg', 'resources/icons/BleBlue.svg'],
                             interface.ui.btnMenuExplore: ['resources/icons/Discover.svg', 'resources/icons/DiscoverBlue.svg'],
                             interface.ui.btnMenuClient: ['resources/icons/Client.svg', 'resources/icons/ClientBlue.svg']}
-    # Set Button Icons
-    interface.ui.btnMenu.setIcon(QIcon('resources/icons/Menu.svg'))
     icon_size = QSize()
-    icon_size.setHeight(20)
-    icon_size.setWidth(20)
-    interface.ui.btnMenu.setIconSize(icon_size)
+    # Set Button Icons
+    # interface.ui.btnMenu.setIcon(QIcon('resources/icons/Menu.svg'))
+    # icon_size.setHeight(20)
+    # icon_size.setWidth(20)
+    # interface.ui.btnMenu.setIconSize(icon_size)
 
     interface.ui.btnauthor.setIcon(QIcon('resources/icons/Person.svg'))
     icon_size.setHeight(30)
@@ -26,17 +25,7 @@ def init_icons(interface):
     icon_size.setWidth(15)
     interface.ui.btnRepo.setIconSize(icon_size)
 
-    interface.ui.btnInstagram.setIcon(QIcon('resources/icons/Instagram.svg'))
-    icon_size.setHeight(25)
-    icon_size.setWidth(25)
-    interface.ui.btnInstagram.setIconSize(icon_size)
-
-    interface.ui.btnYoutube.setIcon(QIcon('resources/icons/Youtube.svg'))
-    icon_size.setHeight(25)
-    icon_size.setWidth(25)
-    interface.ui.btnYoutube.setIconSize(icon_size)
-
-    interface.ui.btnConnectedState.setIcon(QIcon('resources/icons/Ble.svg'))
+    interface.ui.btnConnectedState.setIcon(QIcon('resources/icons/Ble_Large.svg'))
     icon_size.setHeight(50)
     icon_size.setWidth(50)
     interface.ui.btnConnectedState.setIconSize(icon_size)
@@ -75,13 +64,13 @@ def set_button_icons(interface, currentButton):
 def set_connected_icon_color(interface, color):
     if color == "blue":
         interface.ui.btnConnectedState.setIcon(
-            QIcon('resources/icons/BleBlue.svg'))
+            QIcon('resources/icons/Ble_Large_Blue.svg'))
         icon_size = QSize()
         icon_size.setHeight(50)
         icon_size.setWidth(50)
         interface.ui.btnConnectedState.setIconSize(icon_size)
     else:
-        interface.ui.btnConnectedState.setIcon(QIcon('resources/icons/Ble.svg'))
+        interface.ui.btnConnectedState.setIcon(QIcon('resources/icons/Ble_Large.svg'))
         icon_size = QSize()
         icon_size.setHeight(50)
         icon_size.setWidth(50)

@@ -23,6 +23,8 @@ import atexit
 from asyncqt import QEventLoop
 import webbrowser
 import BLE_UUIDs
+
+
 QtWidgets.QApplication.setAttribute(
     QtCore.Qt.AA_EnableHighDpiScaling, True)  # enable highdpi scaling
 QtWidgets.QApplication.setAttribute(QtCore.Qt.AA_UseHighDpiPixmaps, True)
@@ -61,8 +63,7 @@ class MainInterface(QMainWindow):
         ButtonCallbacks.register_button_callbacks(self)
         MiscHelpers.init_icons(self)
         
-        # not sure if I want to keep this
-        self.ui.btnExplore.hide()
+
     # ------------------------------------------------------------------------
     def eventFilter(self, source, event):
 
