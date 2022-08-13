@@ -4,8 +4,7 @@ from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 
 def init_icons(interface):
-    #interface.ui.btnExplore.clicked.connect(lambda state : ButtonCallbacks.btn_explore(interface))
-    
+
     interface.iconDictionary = {interface.ui.btnMenu: ['resources/icons/Menu.svg', 'resources/icons/MenuBlue.svg'],
                             interface.ui.btnMenuGattMaker: ['resources/icons/Ble.svg', 'resources/icons/BleBlue.svg'],
                             interface.ui.btnMenuExplore: ['resources/icons/Discover.svg', 'resources/icons/DiscoverBlue.svg'],
