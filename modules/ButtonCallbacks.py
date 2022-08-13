@@ -90,8 +90,7 @@ def btn_tree_widget_item_pressed(interface):
         # check to see if the uuid is in the dictionary
         # if so UUID_val takes the value returned from
         # the dictionary at the key full_uuid
-        print(full_uuid)
-        print(interface.user_uuid_dict.keys())
+
         if full_uuid in interface.user_uuid_dict:
             UUID_val = interface.user_uuid_dict[full_uuid]
 
