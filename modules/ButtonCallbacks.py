@@ -1,6 +1,10 @@
 from main_app import *
 from modules import Slots
 from modules import MiscHelpers
+from modules import Console
+from PyQt5.QtCore import *
+from PyQt5.QtGui import *
+from PyQt5.QtWidgets import *
 # ------------------------------------------------------------------------
 def btn_github(interface):
     webbrowser.open('https://github.com/EdwinFairchild/BLE-PyDex')
@@ -37,11 +41,11 @@ def btn_notify(interface):
             interface.bleLoop.notifyCharsAdded = True
             interface.bleLoop.newNotifyCharUUID = interface.ui.btnLabelUUID.text()
             interface.bleLoop.notifyRegisteredState.connect(lambda state : Slots.notify_registered_state(interface, state))
-            print("added chat to notify")
+            Console.log("Characteristic notification enabled")
         else:
-            print("That characteristic does not have Notify enabled")
+            Console.log("That characteristic does not have Notify enabled")
     else:
-        print("you are not connected to anything")
+        Console.log("You are not connected to anything")
 # ------------------------------------------------------------------------
 def btn_permission_copy(interface):
     MiscHelpers.copy_to_clipboard(interface,interface.ui.btnLabelPermissions.text())
@@ -139,12 +143,12 @@ def btn_connect(interface):
                     interface.ui.btnConnect.setText("Disconnect")
                     interface.connected_state = True
                 except Exception as err:
-                    print(err)
+                    Console.errMsg(err)
                     MiscHelpers.set_connected_icon_color(interface,'white')
                     interface.ui.btnConnect.setText("Connect")
                     interface.connected_state = True
             else:
-                print("You have to select a device from explore list")
+                Console.log("You have to select a device from explore list")
         else:
             try:
                 # connection stuff
@@ -163,7 +167,7 @@ def btn_connect(interface):
                 interface.ui.list_EnabledNotifyValue.clear()
                 interface.notifyEnabledCharsDict = {}
             except Exception as err:
-                print(err)
+                Console.errMsg(err)
 # ------------------------------------------------------------------------
 def btn_write_char(interface):
     interface.bleLoop.writeCharUUID = interface.ui.btnLabelUUID.text()

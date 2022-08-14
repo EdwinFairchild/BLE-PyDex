@@ -6,11 +6,12 @@ import sys
 import os
 import time
 from PyQt5.QtCore import *
-from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 from enum import Enum, auto
 from typing import Any, Callable, NamedTuple
 from functools import cached_property
+from modules import Console
 '''******************************************************************************************
         Scan for devices
 *******************************************************************************************'''
@@ -88,12 +89,12 @@ class BleakLoop(QThread):
     # -------------------------------------------------------------------------
 
     async def enableCharNotification(self, client: BleakClient):
-        print("About to add chars")
+        
         try:
             await client.start_notify(self.newNotifyCharUUID, self.notification_handler)
             self.notifyRegisteredState.emit(True)
         except Exception as err:
-            print(err)
+            Console.errMsg(err)
             self.notifyRegisteredState.emit(False)
         self.newNotifyCharUUID = None
         self.notifyCharsAdded = False
@@ -104,7 +105,7 @@ class BleakLoop(QThread):
             await client.stop_notify(self.removeNotifyCharHandle)
             self.notifyRemoveChar = False
         except Exception as err:
-            print(err)
+            Console.errMsg(err)
     # -------------------------------------------------------------------------
 
     async def disconenctBLE(self, client: BleakClient):
@@ -115,8 +116,7 @@ class BleakLoop(QThread):
             self.connect = False
             self.disconnectSignal.emit(True)
         except Exception as err:
-            print("-------> error is :")
-            print(err)
+            Console.errMsg(err)
     # -------------------------------------------------------------------------
 
     async def readCharCallback(self, client: BleakClient):
@@ -124,7 +124,7 @@ class BleakLoop(QThread):
             chardata = await client.read_gatt_char(self.readCharUUID)
             self.readCharSignal.emit(str(chardata))
         except Exception as err:
-            print(err)
+            Console.errMsg(err)
         self.readChar = False
     # -------------------------------------------------------------------------
 
@@ -132,14 +132,14 @@ class BleakLoop(QThread):
         try:
             await client.write_gatt_char(self.writeCharUUID, bytes(self.writeCharData, 'utf-8'))
         except Exception as err:
-            print(err)
+            Console.errMsg(err)
         self.writeChar = False
     # -------------------------------------------------------------------------
 
     async def exploreSerivce(self, client: BleakClient):
         try:
 
-            print(f"Connected: {client.is_connected}")
+          
             for service in client.services:
                 # emit top level item
                 self.discovered_services.emit(
@@ -167,10 +167,11 @@ class BleakLoop(QThread):
                             self.discovered_services.emit(
                                 [f"\t\t[Descriptor] {descriptor}) | Value: {value}", 2])
                         except Exception as err:
-                            print(err)
+                            Console.errMsg(err)
             self.discoverServices = False
+            Console.log(f"Connected: {client.is_connected}")
         except Exception as e:
-            print("Opps ,That device is not explorable, at least not by you.")
+            Console.log("Opps ,That device is not explorable, at least not by you.")
     # -------------------------------------------------------------------------
 
     async def bleakLoop(self):
