@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1448</width>
-    <height>736</height>
+    <width>1386</width>
+    <height>727</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -736,7 +736,7 @@ border-color: rgb(190, 190, 190);</string>
                       <property name="frameShadow">
                        <enum>QFrame::Raised</enum>
                       </property>
-                      <layout class="QVBoxLayout" name="verticalLayout_8" stretch="0,0,0">
+                      <layout class="QVBoxLayout" name="verticalLayout_8" stretch="0,0,0,0">
                        <property name="sizeConstraint">
                         <enum>QLayout::SetMinAndMaxSize</enum>
                        </property>
@@ -863,16 +863,6 @@ QPushButton:pressed{
                           <enum>QFrame::Raised</enum>
                          </property>
                          <layout class="QGridLayout" name="gridLayout_6">
-                          <item row="0" column="0" colspan="2">
-                           <widget class="QLabel" name="label_3">
-                            <property name="styleSheet">
-                             <string notr="true">color: rgb(28, 28, 28);</string>
-                            </property>
-                            <property name="text">
-                             <string>Connection timeout :</string>
-                            </property>
-                           </widget>
-                          </item>
                           <item row="1" column="0" colspan="3">
                            <widget class="QSlider" name="timeoutSlider_3">
                             <property name="styleSheet">
@@ -892,7 +882,7 @@ QPushButton:pressed{
                             </property>
                            </widget>
                           </item>
-                          <item row="2" column="0">
+                          <item row="3" column="0">
                            <widget class="QCheckBox" name="checkBox">
                             <property name="styleSheet">
                              <string notr="true">color: rgb(28, 28, 28);
@@ -927,11 +917,11 @@ QCheckBox::indicator:unchecked {
                             </property>
                            </widget>
                           </item>
-                          <item row="2" column="1" colspan="2">
+                          <item row="3" column="1" colspan="2">
                            <widget class="QPushButton" name="btnConnect">
                             <property name="minimumSize">
                              <size>
-                              <width>0</width>
+                              <width>100</width>
                               <height>30</height>
                              </size>
                             </property>
@@ -966,7 +956,17 @@ QPushButton:pressed{
                             </property>
                            </widget>
                           </item>
-                          <item row="0" column="2">
+                          <item row="0" column="0">
+                           <widget class="QLabel" name="label_3">
+                            <property name="styleSheet">
+                             <string notr="true">color: rgb(28, 28, 28);</string>
+                            </property>
+                            <property name="text">
+                             <string>Connection timeout :</string>
+                            </property>
+                           </widget>
+                          </item>
+                          <item row="0" column="1" colspan="2">
                            <widget class="QLabel" name="lblConnectionTime">
                             <property name="styleSheet">
                              <string notr="true">color: rgb(28, 28, 28);</string>
@@ -978,6 +978,22 @@ QPushButton:pressed{
                           </item>
                          </layout>
                         </widget>
+                       </item>
+                       <item>
+                        <spacer name="verticalSpacer_2">
+                         <property name="orientation">
+                          <enum>Qt::Vertical</enum>
+                         </property>
+                         <property name="sizeType">
+                          <enum>QSizePolicy::MinimumExpanding</enum>
+                         </property>
+                         <property name="sizeHint" stdset="0">
+                          <size>
+                           <width>20</width>
+                           <height>40</height>
+                          </size>
+                         </property>
+                        </spacer>
                        </item>
                       </layout>
                      </widget>
@@ -1074,7 +1090,7 @@ background-color: rgb(39, 52, 105);</string>
                          </property>
                          <property name="maximumSize">
                           <size>
-                           <width>550</width>
+                           <width>10000</width>
                            <height>1000</height>
                           </size>
                          </property>
@@ -1252,7 +1268,7 @@ border-color: rgb(190, 190, 190);</string>
                         <number>10</number>
                        </property>
                        <property name="topMargin">
-                        <number>10</number>
+                        <number>1</number>
                        </property>
                        <property name="rightMargin">
                         <number>10</number>
@@ -1272,7 +1288,7 @@ border-color: rgb(190, 190, 190);</string>
                          <property name="frameShadow">
                           <enum>QFrame::Raised</enum>
                          </property>
-                         <layout class="QGridLayout" name="gridLayout" rowstretch="1,1,1,1,1,1,1,1,1" columnstretch="0,1" rowminimumheight="0,1,1,1,1,1,1,0,0">
+                         <layout class="QGridLayout" name="gridLayout" rowstretch="1,0,0,0,0,0,0,0,0,0" columnstretch="0,0">
                           <property name="leftMargin">
                            <number>0</number>
                           </property>
@@ -1285,10 +1301,13 @@ border-color: rgb(190, 190, 190);</string>
                           <property name="bottomMargin">
                            <number>0</number>
                           </property>
-                          <property name="spacing">
+                          <property name="horizontalSpacing">
                            <number>10</number>
                           </property>
-                          <item row="7" column="1">
+                          <property name="verticalSpacing">
+                           <number>2</number>
+                          </property>
+                          <item row="8" column="1">
                            <widget class="QPushButton" name="btnLabelValue">
                             <property name="minimumSize">
                              <size>
@@ -1310,29 +1329,7 @@ color: rgb(28, 28, 28);</string>
                             </property>
                            </widget>
                           </item>
-                          <item row="3" column="1">
-                           <widget class="QPushButton" name="btnLabelUUID">
-                            <property name="minimumSize">
-                             <size>
-                              <width>0</width>
-                              <height>30</height>
-                             </size>
-                            </property>
-                            <property name="font">
-                             <font>
-                              <pointsize>11</pointsize>
-                             </font>
-                            </property>
-                            <property name="styleSheet">
-                             <string notr="true">text-align: left;
-color: rgb(28, 28, 28);</string>
-                            </property>
-                            <property name="text">
-                             <string>N/A</string>
-                            </property>
-                           </widget>
-                          </item>
-                          <item row="6" column="1">
+                          <item row="7" column="1">
                            <widget class="QPushButton" name="btnLabelPermissions">
                             <property name="minimumSize">
                              <size>
@@ -1354,53 +1351,8 @@ color: rgb(28, 28, 28);</string>
                             </property>
                            </widget>
                           </item>
-                          <item row="4" column="0">
-                           <widget class="QLabel" name="label_16">
-                            <property name="font">
-                             <font>
-                              <pointsize>11</pointsize>
-                             </font>
-                            </property>
-                            <property name="styleSheet">
-                             <string notr="true">color: rgb(28, 28, 28);</string>
-                            </property>
-                            <property name="text">
-                             <string>Handle :</string>
-                            </property>
-                           </widget>
-                          </item>
-                          <item row="5" column="0">
-                           <widget class="QLabel" name="label_24">
-                            <property name="font">
-                             <font>
-                              <pointsize>11</pointsize>
-                             </font>
-                            </property>
-                            <property name="styleSheet">
-                             <string notr="true">color: rgb(28, 28, 28);</string>
-                            </property>
-                            <property name="text">
-                             <string>Type :</string>
-                            </property>
-                           </widget>
-                          </item>
-                          <item row="3" column="0">
-                           <widget class="QLabel" name="label_11">
-                            <property name="font">
-                             <font>
-                              <pointsize>11</pointsize>
-                             </font>
-                            </property>
-                            <property name="styleSheet">
-                             <string notr="true">color: rgb(28, 28, 28);</string>
-                            </property>
-                            <property name="text">
-                             <string>UUID :</string>
-                            </property>
-                           </widget>
-                          </item>
-                          <item row="4" column="1">
-                           <widget class="QPushButton" name="btnLabelHandle">
+                          <item row="2" column="1">
+                           <widget class="QPushButton" name="btnLabelUUID">
                             <property name="minimumSize">
                              <size>
                               <width>0</width>
@@ -1421,27 +1373,18 @@ color: rgb(28, 28, 28);</string>
                             </property>
                            </widget>
                           </item>
-                          <item row="0" column="0" colspan="2">
-                           <widget class="QLabel" name="label_8">
-                            <property name="maximumSize">
-                             <size>
-                              <width>16777215</width>
-                              <height>50</height>
-                             </size>
-                            </property>
+                          <item row="5" column="0">
+                           <widget class="QLabel" name="label_16">
                             <property name="font">
                              <font>
-                              <pointsize>20</pointsize>
-                              <weight>75</weight>
-                              <bold>true</bold>
+                              <pointsize>11</pointsize>
                              </font>
                             </property>
                             <property name="styleSheet">
-                             <string notr="true">color: rgb(30, 39, 73);
-border: 0px solid gray;</string>
+                             <string notr="true">color: rgb(28, 28, 28);</string>
                             </property>
                             <property name="text">
-                             <string>Details</string>
+                             <string>Handle :</string>
                             </property>
                            </widget>
                           </item>
@@ -1469,98 +1412,7 @@ padding-top: 0px;
                             </property>
                            </widget>
                           </item>
-                          <item row="2" column="0">
-                           <widget class="QLabel" name="label">
-                            <property name="font">
-                             <font>
-                              <pointsize>11</pointsize>
-                             </font>
-                            </property>
-                            <property name="styleSheet">
-                             <string notr="true">color: rgb(28, 28, 28);</string>
-                            </property>
-                            <property name="text">
-                             <string>Type  :</string>
-                            </property>
-                           </widget>
-                          </item>
                           <item row="7" column="0">
-                           <widget class="QLabel" name="label_17">
-                            <property name="font">
-                             <font>
-                              <pointsize>11</pointsize>
-                             </font>
-                            </property>
-                            <property name="styleSheet">
-                             <string notr="true">color: rgb(28, 28, 28);</string>
-                            </property>
-                            <property name="text">
-                             <string>Value :</string>
-                            </property>
-                           </widget>
-                          </item>
-                          <item row="1" column="0">
-                           <widget class="QLabel" name="label_7">
-                            <property name="font">
-                             <font>
-                              <pointsize>11</pointsize>
-                             </font>
-                            </property>
-                            <property name="styleSheet">
-                             <string notr="true">color: rgb(28, 28, 28);</string>
-                            </property>
-                            <property name="text">
-                             <string>Name :</string>
-                            </property>
-                           </widget>
-                          </item>
-                          <item row="5" column="1">
-                           <widget class="QPushButton" name="pushButton">
-                            <property name="minimumSize">
-                             <size>
-                              <width>0</width>
-                              <height>30</height>
-                             </size>
-                            </property>
-                            <property name="font">
-                             <font>
-                              <pointsize>11</pointsize>
-                             </font>
-                            </property>
-                            <property name="styleSheet">
-                             <string notr="true">text-align: left;
-color: rgb(28, 28, 28);</string>
-                            </property>
-                            <property name="text">
-                             <string>N/A</string>
-                            </property>
-                           </widget>
-                          </item>
-                          <item row="2" column="1">
-                           <widget class="QPushButton" name="btnLabelType">
-                            <property name="minimumSize">
-                             <size>
-                              <width>0</width>
-                              <height>30</height>
-                             </size>
-                            </property>
-                            <property name="font">
-                             <font>
-                              <pointsize>13</pointsize>
-                             </font>
-                            </property>
-                            <property name="styleSheet">
-                             <string notr="true">text-align: left;
-color: rgb(28, 28, 28);
-padding-top: 0px;
-</string>
-                            </property>
-                            <property name="text">
-                             <string>N/A</string>
-                            </property>
-                           </widget>
-                          </item>
-                          <item row="6" column="0">
                            <widget class="QLabel" name="label_12">
                             <property name="font">
                              <font>
@@ -1575,7 +1427,31 @@ padding-top: 0px;
                             </property>
                            </widget>
                           </item>
-                          <item row="8" column="0" colspan="2">
+                          <item row="0" column="0" colspan="2">
+                           <widget class="QLabel" name="label_8">
+                            <property name="maximumSize">
+                             <size>
+                              <width>16777215</width>
+                              <height>50</height>
+                             </size>
+                            </property>
+                            <property name="font">
+                             <font>
+                              <pointsize>20</pointsize>
+                              <weight>75</weight>
+                              <bold>true</bold>
+                             </font>
+                            </property>
+                            <property name="styleSheet">
+                             <string notr="true">color: rgb(30, 39, 73);
+border: 0px solid gray;</string>
+                            </property>
+                            <property name="text">
+                             <string>Details</string>
+                            </property>
+                           </widget>
+                          </item>
+                          <item row="9" column="0" colspan="2">
                            <widget class="QFrame" name="frame">
                             <property name="styleSheet">
                              <string notr="true">border: 0px solid gray;
@@ -1730,6 +1606,134 @@ QPushButton:pressed{
                             </layout>
                            </widget>
                           </item>
+                          <item row="8" column="0">
+                           <widget class="QLabel" name="label_17">
+                            <property name="font">
+                             <font>
+                              <pointsize>11</pointsize>
+                             </font>
+                            </property>
+                            <property name="styleSheet">
+                             <string notr="true">color: rgb(28, 28, 28);</string>
+                            </property>
+                            <property name="text">
+                             <string>Value :</string>
+                            </property>
+                           </widget>
+                          </item>
+                          <item row="6" column="0">
+                           <widget class="QLabel" name="label_24">
+                            <property name="font">
+                             <font>
+                              <pointsize>11</pointsize>
+                             </font>
+                            </property>
+                            <property name="styleSheet">
+                             <string notr="true">color: rgb(28, 28, 28);</string>
+                            </property>
+                            <property name="text">
+                             <string>Type :</string>
+                            </property>
+                           </widget>
+                          </item>
+                          <item row="1" column="0">
+                           <widget class="QLabel" name="label_7">
+                            <property name="font">
+                             <font>
+                              <pointsize>11</pointsize>
+                             </font>
+                            </property>
+                            <property name="styleSheet">
+                             <string notr="true">color: rgb(28, 28, 28);</string>
+                            </property>
+                            <property name="text">
+                             <string>Name :</string>
+                            </property>
+                           </widget>
+                          </item>
+                          <item row="5" column="1">
+                           <widget class="QPushButton" name="btnLabelHandle">
+                            <property name="minimumSize">
+                             <size>
+                              <width>0</width>
+                              <height>30</height>
+                             </size>
+                            </property>
+                            <property name="font">
+                             <font>
+                              <pointsize>11</pointsize>
+                             </font>
+                            </property>
+                            <property name="styleSheet">
+                             <string notr="true">text-align: left;
+color: rgb(28, 28, 28);</string>
+                            </property>
+                            <property name="text">
+                             <string>N/A</string>
+                            </property>
+                           </widget>
+                          </item>
+                          <item row="2" column="0">
+                           <widget class="QLabel" name="label_11">
+                            <property name="font">
+                             <font>
+                              <pointsize>11</pointsize>
+                             </font>
+                            </property>
+                            <property name="styleSheet">
+                             <string notr="true">color: rgb(28, 28, 28);</string>
+                            </property>
+                            <property name="text">
+                             <string>UUID :</string>
+                            </property>
+                           </widget>
+                          </item>
+                          <item row="3" column="1">
+                           <widget class="QPushButton" name="btnLabelUUID_name">
+                            <property name="minimumSize">
+                             <size>
+                              <width>0</width>
+                              <height>30</height>
+                             </size>
+                            </property>
+                            <property name="font">
+                             <font>
+                              <pointsize>11</pointsize>
+                             </font>
+                            </property>
+                            <property name="styleSheet">
+                             <string notr="true">text-align: left;
+color: rgb(28, 28, 28);</string>
+                            </property>
+                            <property name="text">
+                             <string>N/A</string>
+                            </property>
+                           </widget>
+                          </item>
+                          <item row="6" column="1">
+                           <widget class="QPushButton" name="btnLabelType">
+                            <property name="minimumSize">
+                             <size>
+                              <width>0</width>
+                              <height>30</height>
+                             </size>
+                            </property>
+                            <property name="font">
+                             <font>
+                              <pointsize>11</pointsize>
+                             </font>
+                            </property>
+                            <property name="styleSheet">
+                             <string notr="true">text-align: left;
+color: rgb(28, 28, 28);
+padding-top: 0px;
+</string>
+                            </property>
+                            <property name="text">
+                             <string>N/A</string>
+                            </property>
+                           </widget>
+                          </item>
                          </layout>
                         </widget>
                        </item>
@@ -1759,7 +1763,7 @@ border-color: rgb(190, 190, 190);</string>
                         <number>10</number>
                        </property>
                        <property name="topMargin">
-                        <number>10</number>
+                        <number>1</number>
                        </property>
                        <property name="rightMargin">
                         <number>10</number>
@@ -2105,30 +2109,43 @@ border: 0px solid gray;</string>
                    <property name="frameShadow">
                     <enum>QFrame::Raised</enum>
                    </property>
-                   <layout class="QHBoxLayout" name="horizontalLayout_11" stretch="2,1,0">
+                   <layout class="QHBoxLayout" name="horizontalLayout_11" stretch="0,1,0">
                     <item>
-                     <widget class="QTextBrowser" name="textBrowser_2">
-                      <property name="maximumSize">
+                     <widget class="QFrame" name="frame_4">
+                      <property name="minimumSize">
                        <size>
-                        <width>16777215</width>
-                        <height>50</height>
+                        <width>400</width>
+                        <height>0</height>
                        </size>
                       </property>
-                      <property name="styleSheet">
-                       <string notr="true">border:none;
-color: rgb(231, 231, 231);</string>
+                      <property name="frameShape">
+                       <enum>QFrame::StyledPanel</enum>
                       </property>
-                      <property name="verticalScrollBarPolicy">
-                       <enum>Qt::ScrollBarAlwaysOff</enum>
+                      <property name="frameShadow">
+                       <enum>QFrame::Raised</enum>
                       </property>
-                      <property name="html">
-                       <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+                      <layout class="QVBoxLayout" name="verticalLayout_7">
+                       <item>
+                        <widget class="QTextEdit" name="console">
+                         <property name="minimumSize">
+                          <size>
+                           <width>700</width>
+                           <height>0</height>
+                          </size>
+                         </property>
+                         <property name="html">
+                          <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Ubuntu'; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#d5d5d5;&quot;&gt;Explore services and characteristics&lt;/span&gt;&lt;/p&gt;
-&lt;p align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#d5d5d5;&quot;&gt;on connectable devices.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                      </property>
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;testing some text here blh blah  blah edwin amauy is the bst&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;asdfkl asdf&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt; asdfasdfasdfasdfasdf&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;asdfasdfasdfasdfasdfasdfasdfasdfasdfasdf&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                         </property>
+                        </widget>
+                       </item>
+                      </layout>
                      </widget>
                     </item>
                     <item>
