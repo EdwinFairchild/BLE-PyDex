@@ -1,5 +1,8 @@
 from main_app import *
-
+from modules import Console
+from PyQt5.QtCore import *
+from PyQt5.QtGui import *
+from PyQt5.QtWidgets import *
 def menuAnimate(self, obj, onmouse):
     # right now minimizing the menu offers no advantage
     # there is no point in having it.

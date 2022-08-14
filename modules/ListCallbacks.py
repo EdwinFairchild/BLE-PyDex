@@ -1,5 +1,8 @@
 from main_app import *
-
+from modules import Console
+from PyQt5.QtCore import *
+from PyQt5.QtGui import *
+from PyQt5.QtWidgets import *
 # ------------------------------------------------------------------------
 def discoveredList2ItemPressed(interface):
     value = interface.ui.list_discoveredDevices.currentItem()

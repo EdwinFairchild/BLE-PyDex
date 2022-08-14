@@ -4,6 +4,7 @@ from modules import ButtonCallbacks
 from modules import ListCallbacks
 from modules import MiscHelpers
 from modules import BLE_functions as ble_ctl
+from modules import Console 
 from PyQt5 import Qt as qtw
 from PyQt5 import QtCore as qtc
 from PyQt5 import QtCore, QtGui, QtWidgets 
@@ -58,10 +59,12 @@ class MainInterface(QMainWindow):
         # setup gui
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
-       
+        Console.console_init(self)
         ListCallbacks.register_list_callbacks(self)
         ButtonCallbacks.register_button_callbacks(self)
         MiscHelpers.init_icons(self)
+        Console.log("BLE-PyDex initialized")
+        Console.log_status()
         
 
     # ------------------------------------------------------------------------

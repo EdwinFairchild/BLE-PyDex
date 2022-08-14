@@ -2,6 +2,7 @@ from main_app import *
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
+from modules import Console
 
 def init_icons(interface):
 
