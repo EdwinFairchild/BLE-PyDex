@@ -78,8 +78,9 @@ class BleakLoop(QThread):
     # -------------------------------------------------------------------------
     def handle_disconnect(self, _: BleakClient):
         # cancelling all tasks effectively ends the program
-        for task in asyncio.all_tasks():
-            task.cancel()
+        Console.log("Disconnected")
+        # for task in asyncio.all_tasks():
+        #     task.cancel()
     # -------------------------------------------------------------------------
 
     def notification_handler(self, sender, data):
@@ -110,10 +111,11 @@ class BleakLoop(QThread):
 
     async def disconenctBLE(self, client: BleakClient):
         try:
+            Console.log("Disconenct triggered...")
             await client.disconnect()
-            self.handle_disconnect(client)
+            #self.handle_disconnect(client)
             self.disconnect_triggered = False
-            self.connect = False
+            #self.connect = False
             self.disconnectSignal.emit(True)
         except Exception as err:
             Console.errMsg(err)
