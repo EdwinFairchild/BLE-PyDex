@@ -2133,6 +2133,9 @@ border: 0px solid gray;</string>
                            <height>0</height>
                           </size>
                          </property>
+                         <property name="styleSheet">
+                          <string notr="true">color: rgb(170,200,255);</string>
+                         </property>
                          <property name="html">
                           <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
