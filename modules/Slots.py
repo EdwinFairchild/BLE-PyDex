@@ -12,6 +12,7 @@ def discovered_services(interface ,data):
     item = item.replace("\t", "")
     item = item.replace("[", "")
     item = item.replace("]", " : ")
+
     # list only has 2 elements , that last one being index 1 
     # stating what level this item is at.. see : BLE_function.py -> exploreSerivce
     level = data[1]
