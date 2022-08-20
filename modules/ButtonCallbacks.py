@@ -34,16 +34,18 @@ def btn_notify_remove(interface):
 # ------------------------------------------------------------------------
 def btn_notify(interface):
     if interface.connected_state == True:
-
-        # Add the currently selected char to notify enabled chars list
-        if "NOTIFY" in interface.ui.btnLabelPermissions.text():
-            interface.bleLoop.gotNotification.connect(lambda data : Slots.got_char_notify(interface, data))
-            interface.bleLoop.notifyCharsAdded = True
-            interface.bleLoop.newNotifyCharUUID = interface.ui.btnLabelUUID.text()
-            interface.bleLoop.notifyRegisteredState.connect(lambda state : Slots.notify_registered_state(interface, state))
-            Console.log("Characteristic notification enabled")
+        if interface.ui.btnLabelHandle.text() not in interface.notifyEnabledCharsDict:
+            # Add the currently selected char to notify enabled chars list
+            if "NOTIFY" in interface.ui.btnLabelPermissions.text():
+                interface.bleLoop.gotNotification.connect(lambda data : Slots.got_char_notify(interface, data))
+                interface.bleLoop.notifyCharsAdded = True
+                interface.bleLoop.newNotifyCharUUID = interface.ui.btnLabelUUID.text()
+                interface.bleLoop.notifyRegisteredState.connect(lambda state : Slots.notify_registered_state(interface, state))
+                Console.log("Characteristic notification enabled")
+            else:
+                Console.log("That characteristic does not have Notify enabled")
         else:
-            Console.log("That characteristic does not have Notify enabled")
+            Console.log("That characterisitic's notifications are already enabled")
     else:
         Console.log("You are not connected to anything")
 # ------------------------------------------------------------------------
