@@ -18,5 +18,4 @@ def log_status():
     log("Connected state: " + str(interface.connected_state))
 
 def errMsg(data):
-    pass
-    #log(str(data))
+    log(str(data))
