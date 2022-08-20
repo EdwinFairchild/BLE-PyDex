@@ -3,7 +3,7 @@ from main_app import *
 from PyQt5 import QtCore
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
-import re
+
 def discovered_services(interface ,data):
     ''' Data comes in looking like this:
         ['[Service] 00001801-0000-1000-8000-00805f9b34fb (Handle: 16): Generic Attribute Profile', 0]
@@ -12,6 +12,7 @@ def discovered_services(interface ,data):
     item = item.replace("\t", "")
     item = item.replace("[", "")
     item = item.replace("]", " : ")
+
     # list only has 2 elements , that last one being index 1 
     # stating what level this item is at.. see : BLE_function.py -> exploreSerivce
     level = data[1]
