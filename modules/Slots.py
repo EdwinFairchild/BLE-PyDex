@@ -3,7 +3,7 @@ from main_app import *
 from PyQt5 import QtCore
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
-
+import re
 def discovered_services(interface ,data):
     ''' Data comes in looking like this:
         ['[Service] 00001801-0000-1000-8000-00805f9b34fb (Handle: 16): Generic Attribute Profile', 0]
