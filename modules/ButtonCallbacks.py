@@ -5,6 +5,25 @@ from modules import Console
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
+
+import zlib
+import sys
+
+BUFFER_SIZE = 8192
+fileLen = 0
+
+def get_crc32():
+    global fileLen
+    with open("max32655.bin", 'rb') as f:
+        crc = 0
+        fileLen = 0
+        while True:
+            data = f.read(BUFFER_SIZE)
+            fileLen += len(data)
+            if not data:
+                break
+            crc = zlib.crc32(data, crc)
+    return crc
 # ------------------------------------------------------------------------
 def btn_github(interface):
     webbrowser.open('https://github.com/EdwinFairchild/BLE-PyDex')
@@ -130,6 +149,42 @@ def btn_explore(interface):
     interface.ui.stackedWidget.slideInIdx(2)
     MiscHelpers.set_button_icons(interface, interface.ui.btnMenuExplore)
 # ------------------------------------------------------------------------
+def btn_file_disc(interface):
+    #@@@@@@@@@@@@@@@ turn this in to a byte array with meaningful values instead of this mess
+    rawBytes = [1,0,0,0,0,0,0,167,0,0,0,0]
+    interface.bleLoop.writeCharUUID = interface.ui.btnLabelUUID.text()
+    interface.bleLoop.writeCharRaw = rawBytes
+    interface.bleLoop.writeChar = True
+# ------------------------------------------------------------------------
+def btn_put_req(interface):
+    
+    #@@@@@@@@@@@@@@@ turn this in to a byte array with meaningful values instead of this mess
+    rawBytes = [3,1,0,0,0,0,0,232,19,3,0,232,19,3,0,0]
+
+    interface.bleLoop.writeCharUUID = interface.ui.btnLabelUUID.text()
+    interface.bleLoop.writeCharRaw = rawBytes
+    interface.bleLoop.writeChar = True
+# ------------------------------------------------------------------------
+def btn_send_header(interface):
+    #232 19 3 0 32 104 131 208
+    crc32 = get_crc32()
+    crc32Hex = str(hex(crc32)[2:])
+    fileLenHex = str(hex(fileLen)[2:]).strip()
+    print(crc32Hex)
+    print(fileLenHex)
+    crcBytes =  bytearray.fromhex(crc32Hex)
+    if len(fileLenHex) %2 != 0:
+        fileLenHex = "000" + fileLenHex
+
+    fileLenBytes = bytearray.fromhex(fileLenHex)
+    #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@maybe just do the reversal here??????
+    rawBytes = crcBytes + fileLenBytes
+    
+    print(len(rawBytes))
+    interface.bleLoop.writeCharUUID = interface.ui.btnLabelUUID.text()
+    #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@this is filelen reversed followed by crc32 reversed
+    interface.bleLoop.writeCharRaw = [232,19,3,0,32,104,131,208]
+    interface.bleLoop.writeChar = True
 def btn_menu(interface):
     # read comment on menuAnimate
     pass
@@ -168,3 +223,6 @@ def register_button_callbacks(interface):
     interface.ui.btnNotifyRemove.clicked.connect(lambda state : btn_notify_remove(interface))
     interface.ui.btnScan.clicked.connect(lambda state : btn_scan(interface))
     interface.ui.btnRepo.clicked.connect(lambda state: btn_github(interface))
+    interface.ui.btnFileDisc.clicked.connect(lambda state: btn_file_disc(interface))
+    interface.ui.btnPutReq.clicked.connect(lambda state: btn_put_req(interface))
+    interface.ui.btnSendHeader.clicked.connect(lambda state: btn_send_header(interface))

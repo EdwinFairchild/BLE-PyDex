@@ -33,7 +33,6 @@ class BLE_DiscoverDevices(QThread):
         # disconnect here? or keep active until user presses explore?
 
 
-
 '''******************************************************************************************
         Implements an infinite asyncio loop charged with registering
         notifications, read/write and signal emition of each event to 
@@ -65,6 +64,7 @@ class BleakLoop(QThread):
     writeChar = False
     writeCharUUID = None
     writeCharData = None
+    writeCharRaw = None
     # signals
     errorMsg = pyqtSignal(str)
     gotNotification = pyqtSignal(list)
@@ -90,7 +90,7 @@ class BleakLoop(QThread):
     # -------------------------------------------------------------------------
 
     async def enableCharNotification(self, client: BleakClient):
-        
+
         try:
             await client.start_notify(self.newNotifyCharUUID, self.notification_handler)
             self.notifyRegisteredState.emit(True)
@@ -113,7 +113,7 @@ class BleakLoop(QThread):
         try:
             Console.log("Disconenct triggered...")
             await client.disconnect()
-            #self.handle_disconnect(client)
+            # self.handle_disconnect(client)
             self.disconnect_triggered = False
             #self.connect = False
             self.disconnectSignal.emit(True)
@@ -132,7 +132,11 @@ class BleakLoop(QThread):
 
     async def writeCharCallback(self, client: BleakClient):
         try:
-            await client.write_gatt_char(self.writeCharUUID, bytes(self.writeCharData, 'utf-8'))
+            if self.writeCharRaw != None:
+                await client.write_gatt_char(self.writeCharUUID, bytearray(self.writeCharRaw))
+                self.writeCharRaw = None
+            else:
+                await client.write_gatt_char(self.writeCharUUID, bytes(self.writeCharData, 'utf-8'))
         except Exception as err:
             Console.errMsg(err)
         self.writeChar = False
@@ -141,7 +145,6 @@ class BleakLoop(QThread):
     async def exploreSerivce(self, client: BleakClient):
         try:
 
-          
             for service in client.services:
                 # emit top level item
                 self.discovered_services.emit(
@@ -173,7 +176,8 @@ class BleakLoop(QThread):
             self.discoverServices = False
             Console.log(f"Connected: {client.is_connected}")
         except Exception as e:
-            Console.log("Opps ,That device is not explorable, at least not by you.")
+            Console.log(
+                "Opps ,That device is not explorable, at least not by you.")
     # -------------------------------------------------------------------------
 
     async def bleakLoop(self):
