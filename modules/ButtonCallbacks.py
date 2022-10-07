@@ -185,6 +185,15 @@ def btn_send_header(interface):
     #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@this is filelen reversed followed by crc32 reversed
     interface.bleLoop.writeCharRaw = [232,19,3,0,32,104,131,208]
     interface.bleLoop.writeChar = True
+# ------------------------------------------------------------------------
+def btn_send_packet(interface):
+   
+    interface.bleLoop.writeCharUUID = interface.ui.btnLabelUUID.text()
+    with open("max32655.bin", 'rb') as f:
+        interface.bleLoop.writeCharRaw = f.read(224)
+    #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@this is filelen reversed followed by crc32 reversed
+    #interface.bleLoop.writeCharRaw = [232,19,3,0,32,104,131,208]
+    interface.bleLoop.writeChar = True
 def btn_menu(interface):
     # read comment on menuAnimate
     pass
@@ -226,3 +235,4 @@ def register_button_callbacks(interface):
     interface.ui.btnFileDisc.clicked.connect(lambda state: btn_file_disc(interface))
     interface.ui.btnPutReq.clicked.connect(lambda state: btn_put_req(interface))
     interface.ui.btnSendHeader.clicked.connect(lambda state: btn_send_header(interface))
+    interface.ui.btnSendPacket.clicked.connect(lambda state: btn_send_packet(interface))
