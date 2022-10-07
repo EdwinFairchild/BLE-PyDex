@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(1219, 727)
+        MainWindow.resize(1401, 740)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(1)
@@ -818,6 +818,29 @@ class Ui_MainWindow(object):
 "}")
         self.btnPutReq.setObjectName("btnPutReq")
         self.horizontalLayout.addWidget(self.btnPutReq)
+        self.btnSendPacket = QtWidgets.QPushButton(self.frame)
+        self.btnSendPacket.setMinimumSize(QtCore.QSize(0, 30))
+        self.btnSendPacket.setStyleSheet("QPushButton{\n"
+"    color: rgb(0, 0, 0);\n"
+"        background-color: rgb(170,200,255);\n"
+"    border:none;\n"
+"border-radius:5px;\n"
+"\n"
+"}\n"
+"\n"
+"QPushButton:hover{\n"
+"    color: rgb(28, 28, 28);\n"
+"        background-color: rgb(140,170,255);\n"
+"\n"
+"}\n"
+"\n"
+"QPushButton:pressed{\n"
+"    \n"
+"        color: rgb(28, 28, 28);\n"
+"    background-color: rgb(110,140,255);\n"
+"}")
+        self.btnSendPacket.setObjectName("btnSendPacket")
+        self.horizontalLayout.addWidget(self.btnSendPacket)
         self.horizontalLayout.setStretch(0, 1)
         self.horizontalLayout.setStretch(1, 1)
         self.horizontalLayout.setStretch(2, 1)
@@ -1201,6 +1224,7 @@ class Ui_MainWindow(object):
         self.btnFileDisc.setText(_translate("MainWindow", "file Discovery"))
         self.btnSendHeader.setText(_translate("MainWindow", "Send Header"))
         self.btnPutReq.setText(_translate("MainWindow", "Put Request"))
+        self.btnSendPacket.setText(_translate("MainWindow", "Send Packet"))
         self.label_17.setText(_translate("MainWindow", "Value :"))
         self.label_24.setText(_translate("MainWindow", "Type :"))
         self.btnLabelName.setText(_translate("MainWindow", "N/A"))

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1219</width>
-    <height>727</height>
+    <width>1401</width>
+    <height>740</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -1380,7 +1380,7 @@ border-color: rgb(190, 190, 190);</string>
                             <property name="frameShadow">
                              <enum>QFrame::Raised</enum>
                             </property>
-                            <layout class="QHBoxLayout" name="horizontalLayout" stretch="1,1,1,1,0,0,0">
+                            <layout class="QHBoxLayout" name="horizontalLayout" stretch="1,1,1,1,0,0,0,0">
                              <property name="bottomMargin">
                               <number>0</number>
                              </property>
@@ -1619,6 +1619,40 @@ QPushButton:pressed{
                                </property>
                                <property name="text">
                                 <string>Put Request</string>
+                               </property>
+                              </widget>
+                             </item>
+                             <item>
+                              <widget class="QPushButton" name="btnSendPacket">
+                               <property name="minimumSize">
+                                <size>
+                                 <width>0</width>
+                                 <height>30</height>
+                                </size>
+                               </property>
+                               <property name="styleSheet">
+                                <string notr="true">QPushButton{
+	color: rgb(0, 0, 0);
+		background-color: rgb(170,200,255);
+	border:none;
+border-radius:5px;
+
+}
+
+QPushButton:hover{
+	color: rgb(28, 28, 28);
+		background-color: rgb(140,170,255);
+
+}
+
+QPushButton:pressed{
+	
+		color: rgb(28, 28, 28);
+	background-color: rgb(110,140,255);
+}</string>
+                               </property>
+                               <property name="text">
+                                <string>Send Packet</string>
                                </property>
                               </widget>
                              </item>
