@@ -1,5 +1,10 @@
 {
     "3012BEC5D1249933C6878541D9317D56": [true ,"Tin Can Button"],
-    "85fcBEC5D1249933C6878541D9317D56": [true ,"Tin Can Service"]
+    "85fcBEC5D1249933C6878541D9317D56": [true ,"Tin Can Service"],
+    "005F00022FF24ED5b0454C7463617865": [false ,"WDX Device Configuration Characteristic"],
+    "005F00032FF24ED5b0454C7463617865": [false ,"WDX File Transfer Control Characteristic"],
+    "005F00042FF24ED5b0454C7463617865": [false ,"WDX File Transfer Data Characteristic"],
+    "005F00052FF24ED5b0454C7463617865": [false ,"WDX Authentication Characteristic"]
+
 }
 
