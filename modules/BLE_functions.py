@@ -12,6 +12,7 @@ from enum import Enum, auto
 from typing import Any, Callable, NamedTuple
 from functools import cached_property
 from modules import Console
+
 '''******************************************************************************************
         Scan for devices
 *******************************************************************************************'''
@@ -35,7 +36,7 @@ class BLE_DiscoverDevices(QThread):
 
 '''******************************************************************************************
         Implements an infinite asyncio loop charged with registering
-        notifications, read/write and signal emition of each event to 
+        notifications, read/write and signal emition of each event to
         GUI application
 *******************************************************************************************'''
 
@@ -43,7 +44,7 @@ class BLE_DiscoverDevices(QThread):
 class BleakLoop(QThread):
     # bleak client stuff
     ble_address = None
-    #client = None
+    # client = None
     # disconnected state switch
     disconnectSignal = pyqtSignal(bool)
     connect = False
@@ -65,6 +66,8 @@ class BleakLoop(QThread):
     writeCharUUID = None
     writeCharData = None
     writeCharRaw = None
+    # used to trigger firmware update
+    otasUpdate = None
     # signals
     errorMsg = pyqtSignal(str)
     gotNotification = pyqtSignal(list)
@@ -85,8 +88,9 @@ class BleakLoop(QThread):
 
     def notification_handler(self, sender, data):
         # send data let application parse it
-        dataList = [sender, data]
-        self.gotNotification.emit(dataList)
+        pass
+        # dataList = [sender, data]
+        # self.gotNotification.emit(dataList)
     # -------------------------------------------------------------------------
 
     async def enableCharNotification(self, client: BleakClient):
@@ -115,7 +119,7 @@ class BleakLoop(QThread):
             await client.disconnect()
             # self.handle_disconnect(client)
             self.disconnect_triggered = False
-            #self.connect = False
+            # self.connect = False
             self.disconnectSignal.emit(True)
         except Exception as err:
             Console.errMsg(err)
@@ -128,6 +132,49 @@ class BleakLoop(QThread):
         except Exception as err:
             Console.errMsg(err)
         self.readChar = False
+
+    # -------------------------------------------------------------------------
+'''
+TODO:
+The ble loop should wait for a signal from the flag like all other operations
+then emit a signal to the slots module where a slot function will calculate the crc32 and file lend
+and then send with asyncio like this function below, it will send
+write_char_raw signals back to the bleLoop to send off the packets etc...
+
+'''
+   async def otasUpdateFirmware(self, client: BleakClient):
+        try:
+            delayTime = 0.010
+            # file discovery
+            rawBytes = [1, 0, 0, 0, 0, 0, 0, 167, 0, 0, 0, 0]
+            self.writeCharUUID = "005f0003-2ff2-4ed5-b045-4c7463617865"
+            await client.write_gatt_char(self.writeCharUUID, bytearray(rawBytes))
+            await asyncio.sleep(delayTime)
+            # send header
+            rawBytes = [232, 19, 3, 0, 32, 104, 131, 208]
+            self.writeCharUUID = "e0262760-08c2-11e1-9073-0e8ac72e0001"
+            await client.write_gatt_char(self.writeCharUUID, bytearray(rawBytes))
+            await asyncio.sleep(delayTime)
+            # put request
+            rawBytes = [3, 1, 0, 0, 0, 0, 0, 232, 19, 3, 0, 232, 19, 3, 0, 0]
+            self.writeCharUUID = "005f0003-2ff2-4ed5-b045-4c7463617865"
+            await client.write_gatt_char(self.writeCharUUID, bytearray(rawBytes))
+            await asyncio.sleep(delayTime)
+            # send packet
+            self.writeCharUUID = "005f0004-2ff2-4ed5-b045-4c7463617865"
+            with open("max32655.bin", 'rb') as f:
+                while True:
+                    rawBytes = f.read(224)
+                    if not rawBytes:
+                        break
+                    await client.write_gatt_char(self.writeCharUUID, bytearray(rawBytes))
+                    await asyncio.sleep(delayTime)
+            self.otasUpdate = False
+
+        except Exception as err:
+            Console.errMsg(err)
+            self.otasUpdate = False
+        self.writeChar = False
     # -------------------------------------------------------------------------
 
     async def writeCharCallback(self, client: BleakClient):
@@ -183,7 +230,7 @@ class BleakLoop(QThread):
     async def bleakLoop(self):
         async with BleakClient(self.ble_address, disconnected_callback=self.handle_disconnect) as client:
             while self.connect == True:
-                await asyncio.sleep(0.1)
+                await asyncio.sleep(0.010)
                 # check the flag to disconnect
                 if self.disconnect_triggered == True:
                     await self.disconenctBLE(client)
@@ -202,3 +249,6 @@ class BleakLoop(QThread):
                 # -------------- if discoverServices has been triggered
                 if self.discoverServices == True:
                     await self.exploreSerivce(client)
+                # -------------- start otas firmware update
+                if self.otasUpdate == True:
+                    await self.otasUpdateFirmware(client)
