@@ -141,6 +141,10 @@ then emit a signal to the slots module where a slot function will calculate the 
 and then send with asyncio like this function below, it will send
 write_char_raw signals back to the bleLoop to send off the packets etc...
 
+TODO: send reset signal
+
+TODO: implement file opening dialog
+
 '''
    async def otasUpdateFirmware(self, client: BleakClient):
         try:
