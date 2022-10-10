@@ -200,10 +200,17 @@ class BleakLoop(QThread):
                     await client.write_gatt_char(self.writeCharUUID, bytearray(rawBytes))
                     await asyncio.sleep(delayTime)
             self.otasUpdate = False
-
+            time.sleep(20)
+            # --------------------| send verify file request   |---------------------
+            rawBytes = [7,1,0]
+            self.writeCharUUID = "005f0003-2ff2-4ed5-b045-4c7463617865"
+            await client.write_gatt_char(self.writeCharUUID, bytearray(rawBytes))
+            await asyncio.sleep(delayTime)
+            
+            time.sleep(1)
             # --------------------| send reset request   |---------------------
             rawBytes = [2,37]
-            self.writeCharUUID = "005f0003-2ff2-4ed5-b045-4c7463617865"
+            self.writeCharUUID = "005f0002-2ff2-4ed5-b045-4c7463617865"
             await client.write_gatt_char(self.writeCharUUID, bytearray(rawBytes))
             await asyncio.sleep(delayTime)
             
