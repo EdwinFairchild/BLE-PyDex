@@ -12,7 +12,7 @@ from enum import Enum, auto
 from typing import Any, Callable, NamedTuple
 from functools import cached_property
 from modules import Console
-
+from modules import Slots
 '''******************************************************************************************
         Scan for devices
 *******************************************************************************************'''
@@ -73,7 +73,7 @@ class BleakLoop(QThread):
     gotNotification = pyqtSignal(list)
     readCharSignal = pyqtSignal(str)
     notifyRegisteredState = pyqtSignal(bool)
-
+    
     def run(self):
         self.connect = True
         asyncio.run(self.bleakLoop())
@@ -134,19 +134,8 @@ class BleakLoop(QThread):
         self.readChar = False
 
     # -------------------------------------------------------------------------
-'''
-TODO:
-The ble loop should wait for a signal from the flag like all other operations
-then emit a signal to the slots module where a slot function will calculate the crc32 and file lend
-and then send with asyncio like this function below, it will send
-write_char_raw signals back to the bleLoop to send off the packets etc...
 
-TODO: send reset signal
-
-TODO: implement file opening dialog
-
-'''
-   async def otasUpdateFirmware(self, client: BleakClient):
+    async def otas_update_firmware(self, client: BleakClient):
         try:
             delayTime = 0.010
             # file discovery
@@ -255,4 +244,4 @@ TODO: implement file opening dialog
                     await self.exploreSerivce(client)
                 # -------------- start otas firmware update
                 if self.otasUpdate == True:
-                    await self.otasUpdateFirmware(client)
+                    await self.otas_update_firmware(client)

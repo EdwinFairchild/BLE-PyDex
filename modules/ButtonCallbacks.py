@@ -5,7 +5,6 @@ from modules import Console
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
-
 import zlib
 import sys
 import time
@@ -192,6 +191,7 @@ def btn_explore(interface):
 
 def btn_file_disc(interface):
     interface.bleLoop.otasUpdate = True
+     # interface.bleLoop.writeChar = True
     # # @@@@@@@@@@@@@@@ turn this in to a byte array with meaningful values instead of this mess
     # rawBytes = [1, 0, 0, 0, 0, 0, 0, 167, 0, 0, 0, 0]
     # interface.bleLoop.writeCharUUID = "005f0003-2ff2-4ed5-b045-4c7463617865"
@@ -207,13 +207,16 @@ def btn_file_disc(interface):
 
 # ------------------------------------------------------------------------
 def btn_put_req(interface):
-
+    #returns tuple where the 0 index is the file name
+    fname = QFileDialog.getOpenFileName(interface,"Open firmware update bin", "","*.bin")
+    if fname:
+        print(fname[0])
     # @@@@@@@@@@@@@@@ turn this in to a byte array with meaningful values instead of this mess
-    rawBytes = [3, 1, 0, 0, 0, 0, 0, 232, 19, 3, 0, 232, 19, 3, 0, 0]
+    # rawBytes = [3, 1, 0, 0, 0, 0, 0, 232, 19, 3, 0, 232, 19, 3, 0, 0]
 
-    interface.bleLoop.writeCharUUID = "005f0003-2ff2-4ed5-b045-4c7463617865"
-    interface.bleLoop.writeCharRaw = rawBytes
-    interface.bleLoop.writeChar = True
+    # interface.bleLoop.writeCharUUID = "005f0003-2ff2-4ed5-b045-4c7463617865"
+    # interface.bleLoop.writeCharRaw = rawBytes
+    # interface.bleLoop.writeChar = True
 # ------------------------------------------------------------------------
 
 
@@ -231,18 +234,9 @@ def btn_send_header(interface):
 
     fileLenBytes = bytearray.fromhex(fileLenHex)
     fileLenBytes.reverse()
-    # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@maybe just do the reversal here??????
+    # I tihnk this works, double check the order from index 0 to max match the hard coded vvalue above
     rawBytes = fileLenBytes + crcBytes
-    print(int(crcBytes[3]))
-    print(int(rawBytes[0]))
-    print(int(rawBytes[1]))
-    print(int(rawBytes[2]))
-    print(int(rawBytes[3]))
-    print(int(rawBytes[4]))
-    print(int(rawBytes[5]))
-    print(int(rawBytes[6]))
-    print(int(rawBytes[7]))
-
+    
     # interface.bleLoop.writeCharUUID = "e0262760-08c2-11e1-9073-0e8ac72e0001"
     # # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@this is filelen reversed followed by crc32 reversed
     # interface.bleLoop.writeCharRaw = [232, 19, 3, 0, 32, 104, 131, 208]
