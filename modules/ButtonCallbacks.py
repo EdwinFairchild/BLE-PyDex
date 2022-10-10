@@ -1,3 +1,4 @@
+from dbus import Interface
 from main_app import *
 from modules import Slots
 from modules import MiscHelpers
@@ -210,7 +211,12 @@ def btn_put_req(interface):
     #returns tuple where the 0 index is the file name
     fname = QFileDialog.getOpenFileName(interface,"Open firmware update bin", "","*.bin")
     if fname:
-        print(fname[0])
+        #assume they gave us a good bin file
+        # the application should probably have the signature checking, but whatever for now
+        interface.bleLoop.updateFileName = fname[0]
+        
+        interface.bleLoop.otasUpdate = True
+
     # @@@@@@@@@@@@@@@ turn this in to a byte array with meaningful values instead of this mess
     # rawBytes = [3, 1, 0, 0, 0, 0, 0, 232, 19, 3, 0, 232, 19, 3, 0, 0]
 

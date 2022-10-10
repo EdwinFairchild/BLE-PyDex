@@ -13,6 +13,11 @@ from typing import Any, Callable, NamedTuple
 from functools import cached_property
 from modules import Console
 from modules import Slots
+import zlib #used for crc32
+BUFFER_SIZE = 8192
+fileLen = 0
+
+
 '''******************************************************************************************
         Scan for devices
 *******************************************************************************************'''
@@ -68,6 +73,7 @@ class BleakLoop(QThread):
     writeCharRaw = None
     # used to trigger firmware update
     otasUpdate = None
+    updateFileName = None
     # signals
     errorMsg = pyqtSignal(str)
     gotNotification = pyqtSignal(list)
@@ -134,6 +140,20 @@ class BleakLoop(QThread):
         self.readChar = False
 
     # -------------------------------------------------------------------------
+    def get_crc32(self,fileName):
+        global fileLen
+        print(fileName)
+        with open(fileName, 'rb') as f:
+            crc = 0
+            fileLen = 0
+            while True:
+                data = f.read(BUFFER_SIZE)
+                fileLen += len(data)
+                if not data:
+                    break
+                crc = zlib.crc32(data, crc)
+        return crc
+    # -------------------------------------------------------------------------
 
     async def otas_update_firmware(self, client: BleakClient):
         try:
@@ -143,19 +163,36 @@ class BleakLoop(QThread):
             self.writeCharUUID = "005f0003-2ff2-4ed5-b045-4c7463617865"
             await client.write_gatt_char(self.writeCharUUID, bytearray(rawBytes))
             await asyncio.sleep(delayTime)
-            # send header
-            rawBytes = [232, 19, 3, 0, 32, 104, 131, 208]
+            # --------------------| send header |---------------------
+            # get file len and crc
+            #rawBytes = [232, 19, 3, 0, 32, 104, 131, 208]
+            crc32 = self.get_crc32(self.updateFileName)
+            crc32Hex = str(hex(crc32)[2:])
+            fileLenHex = str(hex(fileLen)[2:]).strip()
+            print(crc32Hex)
+            print(fileLenHex)
+            crcBytes = bytearray.fromhex(crc32Hex)
+            crcBytes.reverse()
+            if len(fileLenHex) % 2 != 0:
+                fileLenHex = "000" + fileLenHex
+
+            fileLenBytes = bytearray.fromhex(fileLenHex)
+            fileLenBytes.reverse()
+            # I tihnk this works, double check the order from index 0 to max match the hard coded vvalue above
+            rawBytes = fileLenBytes + crcBytes
             self.writeCharUUID = "e0262760-08c2-11e1-9073-0e8ac72e0001"
             await client.write_gatt_char(self.writeCharUUID, bytearray(rawBytes))
             await asyncio.sleep(delayTime)
-            # put request
-            rawBytes = [3, 1, 0, 0, 0, 0, 0, 232, 19, 3, 0, 232, 19, 3, 0, 0]
+            # --------------------| send put request |---------------------
+            putRequestFileHandle = bytearray([3,1,0,0,0,0,0])
+            terminator = bytearray(0)
+            rawBytes = putRequestFileHandle +  fileLenBytes + fileLenBytes + terminator
             self.writeCharUUID = "005f0003-2ff2-4ed5-b045-4c7463617865"
             await client.write_gatt_char(self.writeCharUUID, bytearray(rawBytes))
             await asyncio.sleep(delayTime)
-            # send packet
+             # --------------------| send file   |---------------------
             self.writeCharUUID = "005f0004-2ff2-4ed5-b045-4c7463617865"
-            with open("max32655.bin", 'rb') as f:
+            with open(self.updateFileName, 'rb') as f:
                 while True:
                     rawBytes = f.read(224)
                     if not rawBytes:
@@ -163,6 +200,15 @@ class BleakLoop(QThread):
                     await client.write_gatt_char(self.writeCharUUID, bytearray(rawBytes))
                     await asyncio.sleep(delayTime)
             self.otasUpdate = False
+
+            # --------------------| send reset request   |---------------------
+            rawBytes = [2,37]
+            self.writeCharUUID = "005f0003-2ff2-4ed5-b045-4c7463617865"
+            await client.write_gatt_char(self.writeCharUUID, bytearray(rawBytes))
+            await asyncio.sleep(delayTime)
+            
+
+            print("File sent. Firmware update done")
 
         except Exception as err:
             Console.errMsg(err)
@@ -223,7 +269,7 @@ class BleakLoop(QThread):
     async def bleakLoop(self):
         async with BleakClient(self.ble_address, disconnected_callback=self.handle_disconnect) as client:
             while self.connect == True:
-                await asyncio.sleep(0.010)
+                await asyncio.sleep(0.01)
                 # check the flag to disconnect
                 if self.disconnect_triggered == True:
                     await self.disconenctBLE(client)
