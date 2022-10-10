@@ -156,6 +156,7 @@ class BleakLoop(QThread):
     # -------------------------------------------------------------------------
 
     async def otas_update_firmware(self, client: BleakClient):
+        #TODO make this use indications instead of delays- this is proof of concept
         try:
             delayTime = 0.010
             # file discovery
