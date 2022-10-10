@@ -28,11 +28,9 @@ def get_crc32():
     return crc
 # ------------------------------------------------------------------------
 
-
 def btn_github(interface):
     webbrowser.open('https://github.com/EdwinFairchild/BLE-PyDex')
 # ------------------------------------------------------------------------
-
 
 def btn_scan(interface):
     interface.ui.list_discoveredDevices.clear()
@@ -41,8 +39,8 @@ def btn_scan(interface):
     interface.BLE_DiscoverDevices.discovered_devices.connect(
         lambda device: Slots.scan(interface, device))
     interface.BLE_DiscoverDevices.start()
- # ------------------------------------------------------------------------
 
+ # ------------------------------------------------------------------------
 
 def btn_notify_remove(interface):
     if interface.ui.list_EnabledNotify.currentRow() == -1:
@@ -59,8 +57,8 @@ def btn_notify_remove(interface):
         interface.ui.list_EnabledNotify.takeItem(
             interface.ui.list_EnabledNotify.currentRow())
         interface.notifyEnabledCharsDict.pop(item.text())
-# ------------------------------------------------------------------------
 
+# ------------------------------------------------------------------------
 
 def btn_notify(interface):
     if interface.connected_state == True:
@@ -81,25 +79,24 @@ def btn_notify(interface):
                 "That characterisitic's notifications are already enabled")
     else:
         Console.log("You are not connected to anything")
-# ------------------------------------------------------------------------
 
+# ------------------------------------------------------------------------
 
 def btn_permission_copy(interface):
     MiscHelpers.copy_to_clipboard(
         interface, interface.ui.btnLabelPermissions.text())
-# ------------------------------------------------------------------------
 
+# ------------------------------------------------------------------------
 
 def btn_uuid_copy(interface):
     MiscHelpers.copy_to_clipboard(interface, interface.ui.btnLabelUUID.text())
-# ------------------------------------------------------------------------
 
+# ------------------------------------------------------------------------
 
 def btn_type_copy(interface):
     MiscHelpers.copy_to_clipboard(interface, interface.ui.btnLabelType.text())
 
 # ------------------------------------------------------------------------
-
 
 def btn_connect(interface):
     # Establish and maintain Bleak connection
@@ -152,15 +149,15 @@ def btn_connect(interface):
             interface.notifyEnabledCharsDict = {}
         except Exception as err:
             Console.errMsg(err)
-# ------------------------------------------------------------------------
 
+# ------------------------------------------------------------------------
 
 def btn_write_char(interface):
     interface.bleLoop.writeCharUUID = interface.ui.btnLabelUUID.text()
     interface.bleLoop.writeCharData = interface.ui.text_writeChar.toPlainText()
     interface.bleLoop.writeChar = True
-# ------------------------------------------------------------------------
 
+# ------------------------------------------------------------------------
 
 def btn_read_char(interface):
     if interface.connected_state == True:
@@ -168,19 +165,19 @@ def btn_read_char(interface):
         interface.bleLoop.readCharUUID = interface.ui.btnLabelUUID.text()
         interface.bleLoop.readCharSignal.connect(
             lambda data: Slots.read_char(interface, data))
-        # read char from gatt
-# ------------------------------------------------------------------------
 
+# ------------------------------------------------------------------------
 
 def btn_gatt_maker(interface):
     interface.ui.stackedWidget.slideInIdx(0)
     MiscHelpers.set_button_icons(interface, interface.ui.btnMenuGattMaker)
-# ------------------------------------------------------------------------
 
+# ------------------------------------------------------------------------
 
 def btn_client(interface):
     interface.ui.stackedWidget.slideInIdx(1)
     MiscHelpers.set_button_icons(interface, interface.ui.btnMenuClient)
+
 # ------------------------------------------------------------------------
 
 
@@ -189,24 +186,6 @@ def btn_explore(interface):
     MiscHelpers.set_button_icons(interface, interface.ui.btnMenuExplore)
 # ------------------------------------------------------------------------
 
-
-def btn_file_disc(interface):
-    interface.bleLoop.otasUpdate = True
-     # interface.bleLoop.writeChar = True
-    # # @@@@@@@@@@@@@@@ turn this in to a byte array with meaningful values instead of this mess
-    # rawBytes = [1, 0, 0, 0, 0, 0, 0, 167, 0, 0, 0, 0]
-    # interface.bleLoop.writeCharUUID = "005f0003-2ff2-4ed5-b045-4c7463617865"
-    # interface.bleLoop.writeCharRaw = rawBytes
-    # interface.bleLoop.writeChar = True
-    # time.sleep(100)
-    # btn_send_header(interface)
-    # time.sleep(100)
-    # btn_put_req(interface)
-    # time.sleep(100)
-    # btn_send_packet(interface)
-
-
-# ------------------------------------------------------------------------
 def btn_put_req(interface):
     #returns tuple where the 0 index is the file name
     fname = QFileDialog.getOpenFileName(interface,"Open firmware update bin", "","*.bin")
@@ -214,51 +193,9 @@ def btn_put_req(interface):
         #assume they gave us a good bin file
         # the application should probably have the signature checking, but whatever for now
         interface.bleLoop.updateFileName = fname[0]
-        
         interface.bleLoop.otasUpdate = True
 
-    # @@@@@@@@@@@@@@@ turn this in to a byte array with meaningful values instead of this mess
-    # rawBytes = [3, 1, 0, 0, 0, 0, 0, 232, 19, 3, 0, 232, 19, 3, 0, 0]
-
-    # interface.bleLoop.writeCharUUID = "005f0003-2ff2-4ed5-b045-4c7463617865"
-    # interface.bleLoop.writeCharRaw = rawBytes
-    # interface.bleLoop.writeChar = True
 # ------------------------------------------------------------------------
-
-
-def btn_send_header(interface):
-    # 232 19 3 0 32 104 131 208
-    crc32 = get_crc32()
-    crc32Hex = str(hex(crc32)[2:])
-    fileLenHex = str(hex(fileLen)[2:]).strip()
-    print(crc32Hex)
-    print(fileLenHex)
-    crcBytes = bytearray.fromhex(crc32Hex)
-    crcBytes.reverse()
-    if len(fileLenHex) % 2 != 0:
-        fileLenHex = "000" + fileLenHex
-
-    fileLenBytes = bytearray.fromhex(fileLenHex)
-    fileLenBytes.reverse()
-    # I tihnk this works, double check the order from index 0 to max match the hard coded vvalue above
-    rawBytes = fileLenBytes + crcBytes
-    
-    # interface.bleLoop.writeCharUUID = "e0262760-08c2-11e1-9073-0e8ac72e0001"
-    # # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@this is filelen reversed followed by crc32 reversed
-    # interface.bleLoop.writeCharRaw = [232, 19, 3, 0, 32, 104, 131, 208]
-    # interface.bleLoop.writeChar = True
-# ------------------------------------------------------------------------
-
-
-def btn_send_packet(interface):
-
-    interface.bleLoop.writeCharUUID = "005f0004-2ff2-4ed5-b045-4c7463617865"
-    with open("max32655.bin", 'rb') as f:
-        interface.bleLoop.writeCharRaw = f.read(224)
-    # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@this is filelen reversed followed by crc32 reversed
-    #interface.bleLoop.writeCharRaw = [232,19,3,0,32,104,131,208]
-    interface.bleLoop.writeChar = True
-
 
 def btn_menu(interface):
     # read comment on menuAnimate
@@ -281,7 +218,6 @@ def btn_menu(interface):
 
     # interface.menuPinned = not interface.menuPinned
 # -----------------------------------------------------------------------
-
 
 def register_button_callbacks(interface):
     # Menu button callbacks
@@ -310,11 +246,5 @@ def register_button_callbacks(interface):
         lambda state: btn_notify_remove(interface))
     interface.ui.btnScan.clicked.connect(lambda state: btn_scan(interface))
     interface.ui.btnRepo.clicked.connect(lambda state: btn_github(interface))
-    interface.ui.btnFileDisc.clicked.connect(
-        lambda state: btn_file_disc(interface))
-    interface.ui.btnPutReq.clicked.connect(
+    interface.ui.btnOtaUpdate.clicked.connect(
         lambda state: btn_put_req(interface))
-    interface.ui.btnSendHeader.clicked.connect(
-        lambda state: btn_send_header(interface))
-    interface.ui.btnSendPacket.clicked.connect(
-        lambda state: btn_send_packet(interface))

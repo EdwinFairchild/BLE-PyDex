@@ -93,10 +93,12 @@ class BleakLoop(QThread):
     # -------------------------------------------------------------------------
 
     def notification_handler(self, sender, data):
+        
         # send data let application parse it
-        pass
-        # dataList = [sender, data]
-        # self.gotNotification.emit(dataList)
+        
+        dataList = [sender, data]
+        self.gotNotification.emit(dataList)
+     
     # -------------------------------------------------------------------------
 
     async def enableCharNotification(self, client: BleakClient):
@@ -217,6 +219,9 @@ class BleakLoop(QThread):
             
 
             print("File sent. Firmware update done")
+            ## TODO see what is going on with indications 
+
+            ## todo disconnect after this
 
         except Exception as err:
             Console.errMsg(err)

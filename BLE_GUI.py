@@ -749,9 +749,9 @@ class Ui_MainWindow(object):
 "}")
         self.btnReadChar.setObjectName("btnReadChar")
         self.horizontalLayout.addWidget(self.btnReadChar)
-        self.btnFileDisc = QtWidgets.QPushButton(self.frame)
-        self.btnFileDisc.setMinimumSize(QtCore.QSize(0, 30))
-        self.btnFileDisc.setStyleSheet("QPushButton{\n"
+        self.btnOtaUpdate = QtWidgets.QPushButton(self.frame)
+        self.btnOtaUpdate.setMinimumSize(QtCore.QSize(100, 30))
+        self.btnOtaUpdate.setStyleSheet("QPushButton{\n"
 "    color: rgb(0, 0, 0);\n"
 "        background-color: rgb(170,200,255);\n"
 "    border:none;\n"
@@ -770,77 +770,8 @@ class Ui_MainWindow(object):
 "        color: rgb(28, 28, 28);\n"
 "    background-color: rgb(110,140,255);\n"
 "}")
-        self.btnFileDisc.setObjectName("btnFileDisc")
-        self.horizontalLayout.addWidget(self.btnFileDisc)
-        self.btnSendHeader = QtWidgets.QPushButton(self.frame)
-        self.btnSendHeader.setMinimumSize(QtCore.QSize(0, 30))
-        self.btnSendHeader.setStyleSheet("QPushButton{\n"
-"    color: rgb(0, 0, 0);\n"
-"        background-color: rgb(170,200,255);\n"
-"    border:none;\n"
-"border-radius:5px;\n"
-"\n"
-"}\n"
-"\n"
-"QPushButton:hover{\n"
-"    color: rgb(28, 28, 28);\n"
-"        background-color: rgb(140,170,255);\n"
-"\n"
-"}\n"
-"\n"
-"QPushButton:pressed{\n"
-"    \n"
-"        color: rgb(28, 28, 28);\n"
-"    background-color: rgb(110,140,255);\n"
-"}")
-        self.btnSendHeader.setObjectName("btnSendHeader")
-        self.horizontalLayout.addWidget(self.btnSendHeader)
-        self.btnPutReq = QtWidgets.QPushButton(self.frame)
-        self.btnPutReq.setMinimumSize(QtCore.QSize(0, 30))
-        self.btnPutReq.setStyleSheet("QPushButton{\n"
-"    color: rgb(0, 0, 0);\n"
-"        background-color: rgb(170,200,255);\n"
-"    border:none;\n"
-"border-radius:5px;\n"
-"\n"
-"}\n"
-"\n"
-"QPushButton:hover{\n"
-"    color: rgb(28, 28, 28);\n"
-"        background-color: rgb(140,170,255);\n"
-"\n"
-"}\n"
-"\n"
-"QPushButton:pressed{\n"
-"    \n"
-"        color: rgb(28, 28, 28);\n"
-"    background-color: rgb(110,140,255);\n"
-"}")
-        self.btnPutReq.setObjectName("btnPutReq")
-        self.horizontalLayout.addWidget(self.btnPutReq)
-        self.btnSendPacket = QtWidgets.QPushButton(self.frame)
-        self.btnSendPacket.setMinimumSize(QtCore.QSize(0, 30))
-        self.btnSendPacket.setStyleSheet("QPushButton{\n"
-"    color: rgb(0, 0, 0);\n"
-"        background-color: rgb(170,200,255);\n"
-"    border:none;\n"
-"border-radius:5px;\n"
-"\n"
-"}\n"
-"\n"
-"QPushButton:hover{\n"
-"    color: rgb(28, 28, 28);\n"
-"        background-color: rgb(140,170,255);\n"
-"\n"
-"}\n"
-"\n"
-"QPushButton:pressed{\n"
-"    \n"
-"        color: rgb(28, 28, 28);\n"
-"    background-color: rgb(110,140,255);\n"
-"}")
-        self.btnSendPacket.setObjectName("btnSendPacket")
-        self.horizontalLayout.addWidget(self.btnSendPacket)
+        self.btnOtaUpdate.setObjectName("btnOtaUpdate")
+        self.horizontalLayout.addWidget(self.btnOtaUpdate)
         self.horizontalLayout.setStretch(0, 1)
         self.horizontalLayout.setStretch(1, 1)
         self.horizontalLayout.setStretch(2, 1)
@@ -1210,10 +1141,7 @@ class Ui_MainWindow(object):
         self.btnWriteChar.setText(_translate("MainWindow", "Write"))
         self.btnNotify.setText(_translate("MainWindow", "Enable Notify"))
         self.btnReadChar.setText(_translate("MainWindow", "Read"))
-        self.btnFileDisc.setText(_translate("MainWindow", "file Discovery"))
-        self.btnSendHeader.setText(_translate("MainWindow", "Send Header"))
-        self.btnPutReq.setText(_translate("MainWindow", "Put Request"))
-        self.btnSendPacket.setText(_translate("MainWindow", "Send Packet"))
+        self.btnOtaUpdate.setText(_translate("MainWindow", "OTA Update"))
         self.label_17.setText(_translate("MainWindow", "Value :"))
         self.label_24.setText(_translate("MainWindow", "Type :"))
         self.label_16.setText(_translate("MainWindow", "Handle :"))

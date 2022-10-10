@@ -1380,7 +1380,7 @@ border-color: rgb(190, 190, 190);</string>
                             <property name="frameShadow">
                              <enum>QFrame::Raised</enum>
                             </property>
-                            <layout class="QHBoxLayout" name="horizontalLayout" stretch="1,1,1,1,0,0,0,0">
+                            <layout class="QHBoxLayout" name="horizontalLayout" stretch="1,1,1,1,0">
                              <property name="bottomMargin">
                               <number>0</number>
                              </property>
@@ -1521,10 +1521,10 @@ QPushButton:pressed{
                               </widget>
                              </item>
                              <item>
-                              <widget class="QPushButton" name="btnFileDisc">
+                              <widget class="QPushButton" name="btnOtaUpdate">
                                <property name="minimumSize">
                                 <size>
-                                 <width>0</width>
+                                 <width>100</width>
                                  <height>30</height>
                                 </size>
                                </property>
@@ -1550,109 +1550,7 @@ QPushButton:pressed{
 }</string>
                                </property>
                                <property name="text">
-                                <string>file Discovery</string>
-                               </property>
-                              </widget>
-                             </item>
-                             <item>
-                              <widget class="QPushButton" name="btnSendHeader">
-                               <property name="minimumSize">
-                                <size>
-                                 <width>0</width>
-                                 <height>30</height>
-                                </size>
-                               </property>
-                               <property name="styleSheet">
-                                <string notr="true">QPushButton{
-	color: rgb(0, 0, 0);
-		background-color: rgb(170,200,255);
-	border:none;
-border-radius:5px;
-
-}
-
-QPushButton:hover{
-	color: rgb(28, 28, 28);
-		background-color: rgb(140,170,255);
-
-}
-
-QPushButton:pressed{
-	
-		color: rgb(28, 28, 28);
-	background-color: rgb(110,140,255);
-}</string>
-                               </property>
-                               <property name="text">
-                                <string>Send Header</string>
-                               </property>
-                              </widget>
-                             </item>
-                             <item>
-                              <widget class="QPushButton" name="btnPutReq">
-                               <property name="minimumSize">
-                                <size>
-                                 <width>0</width>
-                                 <height>30</height>
-                                </size>
-                               </property>
-                               <property name="styleSheet">
-                                <string notr="true">QPushButton{
-	color: rgb(0, 0, 0);
-		background-color: rgb(170,200,255);
-	border:none;
-border-radius:5px;
-
-}
-
-QPushButton:hover{
-	color: rgb(28, 28, 28);
-		background-color: rgb(140,170,255);
-
-}
-
-QPushButton:pressed{
-	
-		color: rgb(28, 28, 28);
-	background-color: rgb(110,140,255);
-}</string>
-                               </property>
-                               <property name="text">
-                                <string>Put Request</string>
-                               </property>
-                              </widget>
-                             </item>
-                             <item>
-                              <widget class="QPushButton" name="btnSendPacket">
-                               <property name="minimumSize">
-                                <size>
-                                 <width>0</width>
-                                 <height>30</height>
-                                </size>
-                               </property>
-                               <property name="styleSheet">
-                                <string notr="true">QPushButton{
-	color: rgb(0, 0, 0);
-		background-color: rgb(170,200,255);
-	border:none;
-border-radius:5px;
-
-}
-
-QPushButton:hover{
-	color: rgb(28, 28, 28);
-		background-color: rgb(140,170,255);
-
-}
-
-QPushButton:pressed{
-	
-		color: rgb(28, 28, 28);
-	background-color: rgb(110,140,255);
-}</string>
-                               </property>
-                               <property name="text">
-                                <string>Send Packet</string>
+                                <string>OTA Update</string>
                                </property>
                               </widget>
                              </item>
