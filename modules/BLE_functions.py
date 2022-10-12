@@ -161,7 +161,7 @@ class BleakLoop(QThread):
         #---------------------------------------------------------------------------------------------------#
         #TODO make this use indications instead of delays- this is a proof of concept                       #
         #     All the varaibles below are directly from WDX related headers                                 #
-        #     working on refactoring all the "magic" numbers in rawBytes lists to variable names below.     #
+        #     working on refactoring all the "magic" numbers in packet_to_send lists to variable names below.     #
         #---------------------------------------------------------------------------------------------------#
         global fileLen
         # UUIDs
