@@ -158,12 +158,54 @@ class BleakLoop(QThread):
     # -------------------------------------------------------------------------
 
     async def otas_update_firmware(self, client: BleakClient):
-        #TODO make this use indications instead of delays- this is proof of concept
+        #---------------------------------------------------------------------------------------------------#
+        #TODO make this use indications instead of delays- this is a proof of concept                       #
+        #     All the varaibles below are directly from WDX related headers                                 #
+        #     working on refactoring all the "magic" numbers in rawBytes lists to variable names below.     #
+        #---------------------------------------------------------------------------------------------------#
+
+        # UUIDs
+        WDX_Device_Configuration_Characteristic = "005f0002-2ff2-4ed5-b045-4c7463617865"
+        WDX_File_Transfer_Control_Characteristic = "005f0003-2ff2-4ed5-b045-4c7463617865"
+        WDX_File_Transfer_Data_Characteristic = "005f0004-2ff2-4ed5-b045-4c7463617865"
+        ARM_Propietary_Data_Characteristic ="e0262760-08c2-11e1-9073-0e8ac72e0001"
+
+        #WDXS File List Configuration
+        WDX_FLIST_HANDLE       = 0   #brief File List handle */
+        WDX_FLIST_FORMAT_VER   = 1   #brief File List version */
+        WDX_FLIST_HDR_SIZE     = 7   #brief File List header length */
+        WDX_FLIST_RECORD_SIZE  = 40  #brief File List record length */
+
+        # Size of WDXC file discovery dataset 
+        DATC_WDXC_MAX_FILES  = 4
+        # File Transfer Control Characteristic Operations
+        WDX_FTC_OP_NONE         = 0        
+        WDX_FTC_OP_GET_REQ      = 1      
+        WDX_FTC_OP_GET_RSP      = 2      
+        WDX_FTC_OP_PUT_REQ      = 3      
+        WDX_FTC_OP_PUT_RSP      = 4       
+        WDX_FTC_OP_ERASE_REQ    = 5       
+        WDX_FTC_OP_ERASE_RSP    = 6       
+        WDX_FTC_OP_VERIFY_REQ   = 7       
+        WDX_FTC_OP_VERIFY_RSP   = 8     
+        WDX_FTC_OP_ABORT        = 9     
+        WDX_FTC_OP_EOF          = 10
+
+        WDX_FILE_HANDLE = 0
+        WDX_FILE_OFFSET = 0
+        maxFileRecordLength = (WDX_FLIST_RECORD_SIZE * DATC_WDXC_MAX_FILES) + WDX_FLIST_HDR_SIZE
+        WDX_FILE_TYPE = 0
         try:
             delayTime = 0.010
             # file discovery
-            rawBytes = [1, 0, 0, 0, 0, 0, 0, 167, 0, 0, 0, 0]
-            self.writeCharUUID = "005f0003-2ff2-4ed5-b045-4c7463617865"
+
+            rawBytes = (WDX_FTC_OP_GET_REQ).to_bytes(1,byteorder='little',signed=False)     \
+                        + (WDX_FILE_HANDLE).to_bytes(2,byteorder='little',signed = False)   \
+                        + (WDX_FILE_OFFSET).to_bytes(4,byteorder='little',signed=False)     \
+                        + (maxFileRecordLength).to_bytes(4,byteorder='little',signed=False) \
+                        + (WDX_FILE_TYPE).to_bytes(1,byteorder='little',signed=False)
+            
+            self.writeCharUUID = WDX_File_Transfer_Control_Characteristic
             await client.write_gatt_char(self.writeCharUUID, bytearray(rawBytes))
             await asyncio.sleep(delayTime)
             # --------------------| send header |---------------------
@@ -183,18 +225,18 @@ class BleakLoop(QThread):
             fileLenBytes.reverse()
             # I tihnk this works, double check the order from index 0 to max match the hard coded vvalue above
             rawBytes = fileLenBytes + crcBytes
-            self.writeCharUUID = "e0262760-08c2-11e1-9073-0e8ac72e0001"
+            self.writeCharUUID = ARM_Propietary_Data_Characteristic
             await client.write_gatt_char(self.writeCharUUID, bytearray(rawBytes))
             await asyncio.sleep(delayTime)
             # --------------------| send put request |---------------------
             putRequestFileHandle = bytearray([3,1,0,0,0,0,0])
             terminator = bytearray(0)
             rawBytes = putRequestFileHandle +  fileLenBytes + fileLenBytes + terminator
-            self.writeCharUUID = "005f0003-2ff2-4ed5-b045-4c7463617865"
+            self.writeCharUUID = WDX_File_Transfer_Control_Characteristic
             await client.write_gatt_char(self.writeCharUUID, bytearray(rawBytes))
             await asyncio.sleep(delayTime)
              # --------------------| send file   |---------------------
-            self.writeCharUUID = "005f0004-2ff2-4ed5-b045-4c7463617865"
+            self.writeCharUUID = WDX_File_Transfer_Data_Characteristic
             with open(self.updateFileName, 'rb') as f:
                 while True:
                     rawBytes = f.read(224)
@@ -206,14 +248,14 @@ class BleakLoop(QThread):
             time.sleep(20)
             # --------------------| send verify file request   |---------------------
             rawBytes = [7,1,0]
-            self.writeCharUUID = "005f0003-2ff2-4ed5-b045-4c7463617865"
+            self.writeCharUUID = WDX_File_Transfer_Control_Characteristic
             await client.write_gatt_char(self.writeCharUUID, bytearray(rawBytes))
             await asyncio.sleep(delayTime)
             
             time.sleep(1)
             # --------------------| send reset request   |---------------------
             rawBytes = [2,37]
-            self.writeCharUUID = "005f0002-2ff2-4ed5-b045-4c7463617865"
+            self.writeCharUUID = WDX_Device_Configuration_Characteristic
             await client.write_gatt_char(self.writeCharUUID, bytearray(rawBytes))
             await asyncio.sleep(delayTime)
             
