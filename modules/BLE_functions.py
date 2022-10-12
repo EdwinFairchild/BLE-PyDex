@@ -163,7 +163,7 @@ class BleakLoop(QThread):
         #     All the varaibles below are directly from WDX related headers                                 #
         #     working on refactoring all the "magic" numbers in rawBytes lists to variable names below.     #
         #---------------------------------------------------------------------------------------------------#
-
+        global fileLen
         # UUIDs
         WDX_Device_Configuration_Characteristic = "005f0002-2ff2-4ed5-b045-4c7463617865"
         WDX_File_Transfer_Control_Characteristic = "005f0003-2ff2-4ed5-b045-4c7463617865"
@@ -180,9 +180,9 @@ class BleakLoop(QThread):
         DATC_WDXC_MAX_FILES  = 4
         # File Transfer Control Characteristic Operations
         WDX_FTC_OP_NONE         = 0        
-        WDX_FTC_OP_GET_REQ      = 1      
+        WDX_FTC_OP_GET_REQ      = (1).to_bytes(1,byteorder='little',signed=False)      
         WDX_FTC_OP_GET_RSP      = 2      
-        WDX_FTC_OP_PUT_REQ      = 3      
+        WDX_FTC_OP_PUT_REQ      = (3).to_bytes(1,byteorder='little',signed=False)      
         WDX_FTC_OP_PUT_RSP      = 4       
         WDX_FTC_OP_ERASE_REQ    = 5       
         WDX_FTC_OP_ERASE_RSP    = 6       
@@ -191,75 +191,65 @@ class BleakLoop(QThread):
         WDX_FTC_OP_ABORT        = 9     
         WDX_FTC_OP_EOF          = 10
 
-        WDX_FILE_HANDLE = 0
-        WDX_FILE_OFFSET = 0
-        maxFileRecordLength = (WDX_FLIST_RECORD_SIZE * DATC_WDXC_MAX_FILES) + WDX_FLIST_HDR_SIZE
-        WDX_FILE_TYPE = 0
+        WDX_FILE_HANDLE = (0).to_bytes(2,byteorder='little',signed = False)
+        WDX_FILE_OFFSET = (0).to_bytes(4,byteorder='little',signed=False)
+        WDX_FILE_TYPE = (0).to_bytes(1,byteorder='little',signed=False)
+        maxFileRecordLength = ((WDX_FLIST_RECORD_SIZE * DATC_WDXC_MAX_FILES) \
+                            + WDX_FLIST_HDR_SIZE).to_bytes(4,byteorder='little',signed=False)
+
         try:
             delayTime = 0.010
-            # file discovery
-
-            rawBytes = (WDX_FTC_OP_GET_REQ).to_bytes(1,byteorder='little',signed=False)     \
-                        + (WDX_FILE_HANDLE).to_bytes(2,byteorder='little',signed = False)   \
-                        + (WDX_FILE_OFFSET).to_bytes(4,byteorder='little',signed=False)     \
-                        + (maxFileRecordLength).to_bytes(4,byteorder='little',signed=False) \
-                        + (WDX_FILE_TYPE).to_bytes(1,byteorder='little',signed=False)
+            # --------------------| File discovery |---------------------
+            rawBytes = (WDX_FTC_OP_GET_REQ)   \
+                        + (WDX_FILE_HANDLE)   \
+                        + (WDX_FILE_OFFSET)   \
+                        + (maxFileRecordLength) \
+                        + (WDX_FILE_TYPE)
             
             self.writeCharUUID = WDX_File_Transfer_Control_Characteristic
             await client.write_gatt_char(self.writeCharUUID, bytearray(rawBytes))
             await asyncio.sleep(delayTime)
             # --------------------| send header |---------------------
             # get file len and crc
-            #rawBytes = [232, 19, 3, 0, 32, 104, 131, 208]
             crc32 = self.get_crc32(self.updateFileName)
-            crc32Hex = str(hex(crc32)[2:])
-            fileLenHex = str(hex(fileLen)[2:]).strip()
-            print(crc32Hex)
-            print(fileLenHex)
-            crcBytes = bytearray.fromhex(crc32Hex)
-            crcBytes.reverse()
-            if len(fileLenHex) % 2 != 0:
-                fileLenHex = "000" + fileLenHex
-
-            fileLenBytes = bytearray.fromhex(fileLenHex)
-            fileLenBytes.reverse()
-            # I tihnk this works, double check the order from index 0 to max match the hard coded vvalue above
-            rawBytes = fileLenBytes + crcBytes
-            self.writeCharUUID = ARM_Propietary_Data_Characteristic
-            await client.write_gatt_char(self.writeCharUUID, bytearray(rawBytes))
+            file_len_bytes = (fileLen).to_bytes(4,byteorder='little',signed=False)
+            # assemble packet and send
+            packet_to_send = file_len_bytes + (crc32).to_bytes(4,byteorder='little',signed=False)           
+            await client.write_gatt_char(ARM_Propietary_Data_Characteristic, bytearray(packet_to_send))
             await asyncio.sleep(delayTime)
             # --------------------| send put request |---------------------
-            putRequestFileHandle = bytearray([3,1,0,0,0,0,0])
-            terminator = bytearray(0)
-            rawBytes = putRequestFileHandle +  fileLenBytes + fileLenBytes + terminator
-            self.writeCharUUID = WDX_File_Transfer_Control_Characteristic
-            await client.write_gatt_char(self.writeCharUUID, bytearray(rawBytes))
+            # assemble packet and send
+            packet_to_send = WDX_FTC_OP_PUT_REQ \
+                            + (1).to_bytes(2,byteorder='little',signed=False) \
+                            + WDX_FILE_OFFSET \
+                            + file_len_bytes  \
+                            + file_len_bytes  \
+                            + WDX_FILE_TYPE
+
+            await client.write_gatt_char(WDX_File_Transfer_Control_Characteristic, bytearray(packet_to_send))
             await asyncio.sleep(delayTime)
              # --------------------| send file   |---------------------
-            self.writeCharUUID = WDX_File_Transfer_Data_Characteristic
             with open(self.updateFileName, 'rb') as f:
                 while True:
                     rawBytes = f.read(224)
                     if not rawBytes:
                         break
-                    await client.write_gatt_char(self.writeCharUUID, bytearray(rawBytes))
+                    await client.write_gatt_char(WDX_File_Transfer_Data_Characteristic, bytearray(rawBytes))
                     await asyncio.sleep(delayTime)
             self.otasUpdate = False
-            time.sleep(20)
+            time.sleep(10)
             # --------------------| send verify file request   |---------------------
-            rawBytes = [7,1,0]
-            self.writeCharUUID = WDX_File_Transfer_Control_Characteristic
-            await client.write_gatt_char(self.writeCharUUID, bytearray(rawBytes))
+            # assemble packet and send
+            packet_to_send = [7,1,0]
+            await client.write_gatt_char(WDX_File_Transfer_Control_Characteristic, bytearray(packet_to_send))
             await asyncio.sleep(delayTime)
-            
             time.sleep(1)
             # --------------------| send reset request   |---------------------
-            rawBytes = [2,37]
-            self.writeCharUUID = WDX_Device_Configuration_Characteristic
-            await client.write_gatt_char(self.writeCharUUID, bytearray(rawBytes))
+            # assemble packet and send
+            packet_to_send = [2,37]
+            await client.write_gatt_char(WDX_Device_Configuration_Characteristic, bytearray(packet_to_send))
             await asyncio.sleep(delayTime)
             
-
             print("File sent. Firmware update done")
             ## TODO see what is going on with indications 
 
