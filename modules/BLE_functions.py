@@ -206,8 +206,8 @@ class BleakLoop(QThread):
                         + (maxFileRecordLength) \
                         + (WDX_FILE_TYPE)
             
-            self.writeCharUUID = WDX_File_Transfer_Control_Characteristic
-            await client.write_gatt_char(self.writeCharUUID, bytearray(rawBytes))
+            
+            await client.write_gatt_char(WDX_File_Transfer_Control_Characteristic, bytearray(rawBytes))
             await asyncio.sleep(delayTime)
             # --------------------| send header |---------------------
             # get file len and crc
