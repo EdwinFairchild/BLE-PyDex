@@ -200,6 +200,7 @@ class BleakLoop(QThread):
         try:
             delayTime = 0.010
             # --------------------| File discovery |---------------------
+            #this is not additioin this is a byte array
             rawBytes = (WDX_FTC_OP_GET_REQ)   \
                         + (WDX_FILE_HANDLE)   \
                         + (WDX_FILE_OFFSET)   \
