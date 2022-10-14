@@ -4,7 +4,9 @@
     "005F00022FF24ED5b0454C7463617865": [false ,"WDX Device Configuration Characteristic"],
     "005F00032FF24ED5b0454C7463617865": [false ,"WDX File Transfer Control Characteristic"],
     "005F00042FF24ED5b0454C7463617865": [false ,"WDX File Transfer Data Characteristic"],
-    "005F00052FF24ED5b0454C7463617865": [false ,"WDX Authentication Characteristic"]
+    "005F00052FF24ED5b0454C7463617865": [false ,"WDX Authentication Characteristic"],
+    "01102EC78A0E7390E111C208602726E0": [true ,"ARM Prop. Service"],
+    "01002EC78A0E7390E111C208602726E0": [true ,"ARM Prop. Data Characteristic"]
 
 }
 
