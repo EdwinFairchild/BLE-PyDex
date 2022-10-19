@@ -186,10 +186,13 @@ class BleakLoop(QThread):
         WDX_FTC_OP_PUT_RSP      = 4       
         WDX_FTC_OP_ERASE_REQ    = 5       
         WDX_FTC_OP_ERASE_RSP    = 6       
-        WDX_FTC_OP_VERIFY_REQ   = 7       
+        WDX_FTC_OP_VERIFY_REQ   = (7).to_bytes(1,byteorder='little',signed=False)           
         WDX_FTC_OP_VERIFY_RSP   = 8     
         WDX_FTC_OP_ABORT        = 9     
         WDX_FTC_OP_EOF          = 10
+
+        WDX_DC_OP_SET           = (2).to_bytes(1,byteorder='little',signed=False)  
+        WDX_DC_ID_DISCONNECT_AND_RESET = (37).to_bytes(1,byteorder='little',signed=False)
 
         WDX_FILE_HANDLE = (0).to_bytes(2,byteorder='little',signed = False)
         WDX_FILE_OFFSET = (0).to_bytes(4,byteorder='little',signed=False)
@@ -238,23 +241,26 @@ class BleakLoop(QThread):
                     await client.write_gatt_char(WDX_File_Transfer_Data_Characteristic, bytearray(rawBytes))
                     await asyncio.sleep(delayTime)
             self.otasUpdate = False
-            time.sleep(10)
+            time.sleep(1)
             # --------------------| send verify file request   |---------------------
             # assemble packet and send
-            packet_to_send = [7,1,0]
+            # file handle is incremented
+            WDX_FILE_HANDLE = (1).to_bytes(2,byteorder='little',signed = False)
+            packet_to_send = WDX_FTC_OP_VERIFY_REQ +  WDX_FILE_HANDLE
             await client.write_gatt_char(WDX_File_Transfer_Control_Characteristic, bytearray(packet_to_send))
             await asyncio.sleep(delayTime)
             time.sleep(1)
             # --------------------| send reset request   |---------------------
             # assemble packet and send
-            packet_to_send = [2,37]
+            packet_to_send = WDX_DC_OP_SET + WDX_DC_ID_DISCONNECT_AND_RESET 
             await client.write_gatt_char(WDX_Device_Configuration_Characteristic, bytearray(packet_to_send))
             await asyncio.sleep(delayTime)
             
-            print("File sent. Firmware update done")
+            Console.log("File sent. Firmware update done")
             ## TODO see what is going on with indications 
 
-            ## todo disconnect after this
+            self.disconnect_triggered = True
+            # TODO make gui clean up method/signal for disconnect event
 
         except Exception as err:
             Console.errMsg(err)
@@ -315,7 +321,7 @@ class BleakLoop(QThread):
     async def bleakLoop(self):
         async with BleakClient(self.ble_address, disconnected_callback=self.handle_disconnect) as client:
             while self.connect == True:
-                await asyncio.sleep(0.01)
+                await asyncio.sleep(0.005)
                 # check the flag to disconnect
                 if self.disconnect_triggered == True:
                     await self.disconenctBLE(client)
