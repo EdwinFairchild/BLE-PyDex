@@ -43,7 +43,6 @@ def got_char_notify(interface, data):
     data = str(data).removesuffix("\')")
     item.setText(data)
     Console.log("Received : " + data)
-
 def notify_registered_state(interface, state):
     if state == True:
         # add the selected UUID/Handle to the notify list
