@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(1386, 727)
+        MainWindow.resize(1401, 740)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(1)
@@ -749,6 +749,29 @@ class Ui_MainWindow(object):
 "}")
         self.btnReadChar.setObjectName("btnReadChar")
         self.horizontalLayout.addWidget(self.btnReadChar)
+        self.btnOtaUpdate = QtWidgets.QPushButton(self.frame)
+        self.btnOtaUpdate.setMinimumSize(QtCore.QSize(100, 30))
+        self.btnOtaUpdate.setStyleSheet("QPushButton{\n"
+"    color: rgb(0, 0, 0);\n"
+"        background-color: rgb(170,200,255);\n"
+"    border:none;\n"
+"border-radius:5px;\n"
+"\n"
+"}\n"
+"\n"
+"QPushButton:hover{\n"
+"    color: rgb(28, 28, 28);\n"
+"        background-color: rgb(140,170,255);\n"
+"\n"
+"}\n"
+"\n"
+"QPushButton:pressed{\n"
+"    \n"
+"        color: rgb(28, 28, 28);\n"
+"    background-color: rgb(110,140,255);\n"
+"}")
+        self.btnOtaUpdate.setObjectName("btnOtaUpdate")
+        self.horizontalLayout.addWidget(self.btnOtaUpdate)
         self.horizontalLayout.setStretch(0, 1)
         self.horizontalLayout.setStretch(1, 1)
         self.horizontalLayout.setStretch(2, 1)
@@ -768,26 +791,6 @@ class Ui_MainWindow(object):
         self.label_24.setStyleSheet("color: rgb(28, 28, 28);")
         self.label_24.setObjectName("label_24")
         self.gridLayout.addWidget(self.label_24, 7, 0, 1, 1)
-        self.btnLabelName = QtWidgets.QPushButton(self.frame_14)
-        self.btnLabelName.setMinimumSize(QtCore.QSize(0, 30))
-        font = QtGui.QFont()
-        font.setPointSize(11)
-        self.btnLabelName.setFont(font)
-        self.btnLabelName.setStyleSheet("text-align: left;\n"
-"color: rgb(28, 28, 28);\n"
-"padding-top: 0px;\n"
-"")
-        self.btnLabelName.setObjectName("btnLabelName")
-        self.gridLayout.addWidget(self.btnLabelName, 2, 1, 1, 1)
-        self.btnLabelUUID_name = QtWidgets.QPushButton(self.frame_14)
-        self.btnLabelUUID_name.setMinimumSize(QtCore.QSize(0, 30))
-        font = QtGui.QFont()
-        font.setPointSize(11)
-        self.btnLabelUUID_name.setFont(font)
-        self.btnLabelUUID_name.setStyleSheet("text-align: left;\n"
-"color: rgb(28, 28, 28);")
-        self.btnLabelUUID_name.setObjectName("btnLabelUUID_name")
-        self.gridLayout.addWidget(self.btnLabelUUID_name, 4, 1, 1, 1)
         self.label_16 = QtWidgets.QLabel(self.frame_14)
         font = QtGui.QFont()
         font.setPointSize(11)
@@ -847,6 +850,15 @@ class Ui_MainWindow(object):
 "border: 0px solid gray;")
         self.label_8.setObjectName("label_8")
         self.gridLayout.addWidget(self.label_8, 0, 0, 1, 1)
+        self.btnLabelUUID_name = QtWidgets.QPushButton(self.frame_14)
+        self.btnLabelUUID_name.setMinimumSize(QtCore.QSize(0, 30))
+        font = QtGui.QFont()
+        font.setPointSize(11)
+        self.btnLabelUUID_name.setFont(font)
+        self.btnLabelUUID_name.setStyleSheet("text-align: left;\n"
+"color: rgb(28, 28, 28);")
+        self.btnLabelUUID_name.setObjectName("btnLabelUUID_name")
+        self.gridLayout.addWidget(self.btnLabelUUID_name, 2, 1, 1, 1)
         self.gridLayout.setColumnStretch(1, 1)
         self.gridLayout.setRowStretch(0, 1)
         self.horizontalLayout_4.addWidget(self.frame_14)
@@ -1129,10 +1141,9 @@ class Ui_MainWindow(object):
         self.btnWriteChar.setText(_translate("MainWindow", "Write"))
         self.btnNotify.setText(_translate("MainWindow", "Enable Notify"))
         self.btnReadChar.setText(_translate("MainWindow", "Read"))
+        self.btnOtaUpdate.setText(_translate("MainWindow", "OTA Update"))
         self.label_17.setText(_translate("MainWindow", "Value :"))
         self.label_24.setText(_translate("MainWindow", "Type :"))
-        self.btnLabelName.setText(_translate("MainWindow", "N/A"))
-        self.btnLabelUUID_name.setText(_translate("MainWindow", "N/A"))
         self.label_16.setText(_translate("MainWindow", "Handle :"))
         self.btnLabelHandle.setText(_translate("MainWindow", "N/A"))
         self.label_11.setText(_translate("MainWindow", "UUID :"))
@@ -1140,6 +1151,7 @@ class Ui_MainWindow(object):
         self.label_7.setText(_translate("MainWindow", "Name :"))
         self.btnLabelValue.setText(_translate("MainWindow", "N/A"))
         self.label_8.setText(_translate("MainWindow", "Details"))
+        self.btnLabelUUID_name.setText(_translate("MainWindow", "N/A"))
         self.btnNotifyRemove.setText(_translate("MainWindow", "Remove"))
         self.label_18.setText(_translate("MainWindow", "  Handle                               Value"))
         self.label_4.setText(_translate("MainWindow", "Notifications"))

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1386</width>
-    <height>727</height>
+    <width>1401</width>
+    <height>740</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -1380,7 +1380,7 @@ border-color: rgb(190, 190, 190);</string>
                             <property name="frameShadow">
                              <enum>QFrame::Raised</enum>
                             </property>
-                            <layout class="QHBoxLayout" name="horizontalLayout" stretch="1,1,1,1">
+                            <layout class="QHBoxLayout" name="horizontalLayout" stretch="1,1,1,1,0">
                              <property name="bottomMargin">
                               <number>0</number>
                              </property>
@@ -1520,6 +1520,40 @@ QPushButton:pressed{
                                </property>
                               </widget>
                              </item>
+                             <item>
+                              <widget class="QPushButton" name="btnOtaUpdate">
+                               <property name="minimumSize">
+                                <size>
+                                 <width>100</width>
+                                 <height>30</height>
+                                </size>
+                               </property>
+                               <property name="styleSheet">
+                                <string notr="true">QPushButton{
+	color: rgb(0, 0, 0);
+		background-color: rgb(170,200,255);
+	border:none;
+border-radius:5px;
+
+}
+
+QPushButton:hover{
+	color: rgb(28, 28, 28);
+		background-color: rgb(140,170,255);
+
+}
+
+QPushButton:pressed{
+	
+		color: rgb(28, 28, 28);
+	background-color: rgb(110,140,255);
+}</string>
+                               </property>
+                               <property name="text">
+                                <string>OTA Update</string>
+                               </property>
+                              </widget>
+                             </item>
                             </layout>
                            </widget>
                           </item>
@@ -1550,52 +1584,6 @@ QPushButton:pressed{
                             </property>
                             <property name="text">
                              <string>Type :</string>
-                            </property>
-                           </widget>
-                          </item>
-                          <item row="2" column="1">
-                           <widget class="QPushButton" name="btnLabelName">
-                            <property name="minimumSize">
-                             <size>
-                              <width>0</width>
-                              <height>30</height>
-                             </size>
-                            </property>
-                            <property name="font">
-                             <font>
-                              <pointsize>11</pointsize>
-                             </font>
-                            </property>
-                            <property name="styleSheet">
-                             <string notr="true">text-align: left;
-color: rgb(28, 28, 28);
-padding-top: 0px;
-</string>
-                            </property>
-                            <property name="text">
-                             <string>N/A</string>
-                            </property>
-                           </widget>
-                          </item>
-                          <item row="4" column="1">
-                           <widget class="QPushButton" name="btnLabelUUID_name">
-                            <property name="minimumSize">
-                             <size>
-                              <width>0</width>
-                              <height>30</height>
-                             </size>
-                            </property>
-                            <property name="font">
-                             <font>
-                              <pointsize>11</pointsize>
-                             </font>
-                            </property>
-                            <property name="styleSheet">
-                             <string notr="true">text-align: left;
-color: rgb(28, 28, 28);</string>
-                            </property>
-                            <property name="text">
-                             <string>N/A</string>
                             </property>
                            </widget>
                           </item>
@@ -1731,6 +1719,28 @@ border: 0px solid gray;</string>
                             </property>
                             <property name="text">
                              <string>Details</string>
+                            </property>
+                           </widget>
+                          </item>
+                          <item row="2" column="1">
+                           <widget class="QPushButton" name="btnLabelUUID_name">
+                            <property name="minimumSize">
+                             <size>
+                              <width>0</width>
+                              <height>30</height>
+                             </size>
+                            </property>
+                            <property name="font">
+                             <font>
+                              <pointsize>11</pointsize>
+                             </font>
+                            </property>
+                            <property name="styleSheet">
+                             <string notr="true">text-align: left;
+color: rgb(28, 28, 28);</string>
+                            </property>
+                            <property name="text">
+                             <string>N/A</string>
                             </property>
                            </widget>
                           </item>
