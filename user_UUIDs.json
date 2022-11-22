@@ -6,7 +6,7 @@
     "005F00042FF24ED5b0454C7463617865": [false ,"WDX File Transfer Data Characteristic"],
     "005F00052FF24ED5b0454C7463617865": [false ,"WDX Authentication Characteristic"],
     "01102EC78A0E7390E111C208602726E0": [true ,"ARM Prop. Data Service"],
-    "01002EC78A0E7390E111C208602726E0": [true ,"ARM Prop. Data Characteristic"]
+    "01002EC78A0E7390E111C208602726E0": [true ,"ARM Prop. Data Characteristic"],
     "BEC5D1249933C6878541D9317D56FC85": [true ,"Maxim Custom Service"],
     "BEC5D1249933C6878541D9317E56FC85": [true ,"MCS : Button"],
     "BEC5D1249933C6878541D9317F56FC85": [true ,"MCS : Red"],
