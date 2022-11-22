@@ -201,7 +201,7 @@ class BleakLoop(QThread):
                             + WDX_FLIST_HDR_SIZE).to_bytes(4,byteorder='little',signed=False)
 
         try:
-            delayTime = 0.010
+            delayTime = 0.100
             # --------------------| File discovery |---------------------
             #this is not additioin this is a byte array
             packet_to_send = (WDX_FTC_OP_GET_REQ)   \
@@ -241,7 +241,7 @@ class BleakLoop(QThread):
                     if not rawBytes:
                         break
                     await client.write_gatt_char(WDX_File_Transfer_Data_Characteristic, bytearray(rawBytes))
-                    await asyncio.sleep(delayTime)
+                    await asyncio.sleep(0.01)
             self.otasUpdate = False
             Console.log("End of sending file")  
             time.sleep(1)
