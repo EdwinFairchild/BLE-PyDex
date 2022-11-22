@@ -201,7 +201,7 @@ class BleakLoop(QThread):
                             + WDX_FLIST_HDR_SIZE).to_bytes(4,byteorder='little',signed=False)
 
         try:
-            delayTime = 0.100
+            delayTime = 0.010
             # --------------------| File discovery |---------------------
             #this is not additioin this is a byte array
             packet_to_send = (WDX_FTC_OP_GET_REQ)   \
