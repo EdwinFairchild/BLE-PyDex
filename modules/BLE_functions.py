@@ -27,19 +27,20 @@ fileLen = 0
 class BLE_DiscoverDevices(QThread):
     ble_address = 0
     scan_timeout = 5
-    discovered_devices = pyqtSignal(str)
+    discovered_devices = pyqtSignal(tuple)
 
     def run(self):
         asyncio.run(self.BLE_discoverDevices())
     # ------------------------------------------------------------------------
 
     async def BLE_discoverDevices(self):
+        #TODO emit touple if possible
 
         devices = await BleakScanner.discover(
         return_adv=True,timeout=self.scan_timeout)
-        for d,a in devices.values():
-            self.discovered_devices.emit(str(d))
-            print(a)
+        for item in devices.values():
+            self.discovered_devices.emit(item)
+            
         # disconnect here? or keep active until user presses explore?
 
 
