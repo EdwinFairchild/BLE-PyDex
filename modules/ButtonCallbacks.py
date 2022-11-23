@@ -1,4 +1,4 @@
-from dbus import Interface
+
 from main_app import *
 from modules import Slots
 from modules import MiscHelpers
@@ -136,8 +136,6 @@ def btn_connect(interface):
                 MiscHelpers.set_connected_icon_color(interface, 'blue')
                 interface.ui.btnConnect.setText("Disconnect")
                 interface.connected_state = True
-                print(interface.advertised_name)
-                print(type(interface.advertised_name))
                 if interface.advertised_name == "OTAS":
                     interface.ui.frm_otas.setVisible(True)
  
@@ -169,9 +167,6 @@ def btn_connect(interface):
             interface.ui.list_EnabledNotifyValue.clear()
             interface.notifyEnabledCharsDict = {}
 
-            # serial reader stuff
-            if interface.serialLoop.connect == True:
-                interface.serialLoop.connect = False
         except Exception as err:
             Console.errMsg(err)
 
