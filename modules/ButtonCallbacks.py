@@ -97,13 +97,11 @@ def btn_type_copy(interface):
     MiscHelpers.copy_to_clipboard(interface, interface.ui.btnLabelType.text())
 
 # ------------------------------------------------------------------------
-def btn_serial_conenct(interface):
-    if interface.ui.txtSerialPort.toPlainText() != "":
+def btn_serial_connect(interface):
+    if interface.ui.txtSerialPort.toPlainText() != "" and interface.serial_connected_state == False:
         try:
             interface.serialLoop = ser_ctl.Serial_Reader()
             interface.serialLoop.port = str(interface.ui.txtSerialPort.toPlainText()).strip()
-            print("the test is: " + str(interface.ui.txtSerialPort.toPlainText()).strip())
-
             interface.serialLoop.serial_data.connect(
                 lambda data: Slots.serial_data(interface, data))
             interface.serialLoop.serial_connected.connect(
@@ -112,6 +110,10 @@ def btn_serial_conenct(interface):
             interface.serialLoop.start()
         except Exception as err:
                     Console.errMsg(err)
+    elif interface.serial_connected_state == True:
+        interface.serialLoop.connect = False
+
+
 
 def btn_connect(interface):
     # Establish and maintain Bleak connection
@@ -255,7 +257,7 @@ def register_button_callbacks(interface):
     interface.ui.btnConnect.clicked.connect(
         lambda state: btn_connect(interface))
     interface.ui.btnSerialConnect.clicked.connect(
-        lambda state: btn_serial_conenct(interface))
+        lambda state: btn_serial_connect(interface))
     interface.ui.btnLabelType.clicked.connect(
         lambda state: btn_type_copy(interface))
     interface.ui.btnLabelUUID.clicked.connect(

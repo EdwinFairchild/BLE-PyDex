@@ -2388,9 +2388,9 @@ color: rgb(170,200,255);</string>
                              <widget class="QPushButton" name="btnSerialConnect">
                               <property name="geometry">
                                <rect>
-                                <x>160</x>
+                                <x>150</x>
                                 <y>0</y>
-                                <width>81</width>
+                                <width>101</width>
                                 <height>30</height>
                                </rect>
                               </property>
@@ -2422,7 +2422,7 @@ QPushButton:pressed{
                              <widget class="QTextEdit" name="txtSerialPort">
                               <property name="geometry">
                                <rect>
-                                <x>30</x>
+                                <x>20</x>
                                 <y>0</y>
                                 <width>121</width>
                                 <height>31</height>

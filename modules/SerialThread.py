@@ -14,6 +14,7 @@ class Serial_Reader(QThread):
     connect = False
     def run(self):
         timeStart = time.time()
+        # seconds
         timeout = 5
         try:
             with serial.Serial() as ser:
@@ -29,14 +30,18 @@ class Serial_Reader(QThread):
                         self.serial_connected.emit(False)
                         break;
                         
-
                 if ser.is_open == True:
                     self.serial_connected.emit(True)
+                    Console.log("Serial Connected")
                     while self.connect == True:
                         x=ser.readline().decode("utf-8")
                         x=str(x)
                         if x != "":
                             self.serial_data.emit(x)
                     ser.close()
+                    self.serial_connected.emit(False)
+                    Console.log("Serial Disconnected")
         except Exception as err:
             Console.errMsg(err)
+            self.serial_connected.emit(False)
+           

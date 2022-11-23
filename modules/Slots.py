@@ -1,4 +1,5 @@
 from modules import Console
+from modules import MiscHelpers
 from main_app import *
 from PyQt5 import QtCore
 from PyQt5.QtGui import *
@@ -73,5 +74,17 @@ def serial_data(interface, data):
     interface.ui.txtSerial.append(data.strip())
 
 def serial_connected(interface,state):
-    # TODO change button color and disconnect functionality
-    pass   
+    if state == True:
+        fore = [255, 255, 255]
+        back = [170, 66, 66]
+        MiscHelpers.set_alternate_button_mode_color(
+                        interface, interface.ui.btnSerialConnect, fore, back)
+        interface.ui.btnSerialConnect.setText("Disconnect")
+        interface.serial_connected_state = True
+    else:
+        fore = [0, 0, 0]
+        back = [170, 200, 255]
+        MiscHelpers.set_alternate_button_mode_color(
+                        interface, interface.ui.btnSerialConnect, fore, back)
+        interface.ui.btnSerialConnect.setText("Connect")
+        interface.serial_connected_state = False

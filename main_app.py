@@ -39,6 +39,7 @@ class MainInterface(QMainWindow):
     connected_address = None
     menuPinned = False
     connected_state = False
+    serial_connected_state = False
     # used to keep track of tree widget tree items
     toplevel = None
     child = None
