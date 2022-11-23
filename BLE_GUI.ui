@@ -2277,7 +2277,7 @@ border: 0px solid gray;</string>
                           </font>
                          </property>
                          <property name="styleSheet">
-                          <string notr="true">
+                          <string notr="true">background-color: rgb(48, 52, 63);
 color: rgb(255, 255, 255);</string>
                          </property>
                          <property name="currentIndex">

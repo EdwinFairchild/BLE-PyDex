@@ -73,13 +73,13 @@ class MainInterface(QMainWindow):
         
 
     # ------------------------------------------------------------------------
-    def eventFilter(self, source, event):
+    # def eventFilter(self, source, event):
 
-        if event.type() == QtCore.QEvent.Enter and source == self.ui.sideBar:
-            self.menuAnimate(self.ui.sideBar, True)
-        if event.type() == QtCore.QEvent.Leave and source == self.ui.sideBar:
-            self.menuAnimate(self.ui.sideBar, False)
-        return super().eventFilter(source, event)
+    #     if event.type() == QtCore.QEvent.Enter and source == self.ui.sideBar:
+    #         self.menuAnimate(self.ui.sideBar, True)
+    #     if event.type() == QtCore.QEvent.Leave and source == self.ui.sideBar:
+    #         self.menuAnimate(self.ui.sideBar, False)
+    #     return super().eventFilter(source, event)
     # ------------------------------------------------------------------------
 
 ########################################################################################
@@ -98,6 +98,7 @@ if __name__ == '__main__':
     os.system("pyuic5 -x BLE_GUI.ui -o BLE_GUI.py")
     atexit.register(exitFunc)
     app = qtw.QApplication(sys.argv)
+    
     # loop = QEventLoop(app)
     # asyncio.set_event_loop(loop)
 
