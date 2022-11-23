@@ -2320,6 +2320,12 @@ border: 0px solid gray;</string>
                              <property name="verticalScrollBarPolicy">
                               <enum>Qt::ScrollBarAlwaysOff</enum>
                              </property>
+                             <property name="undoRedoEnabled">
+                              <bool>false</bool>
+                             </property>
+                             <property name="readOnly">
+                              <bool>true</bool>
+                             </property>
                              <property name="html">
                               <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
@@ -2338,11 +2344,26 @@ p, li { white-space: pre-wrap; }
                           <layout class="QHBoxLayout" name="horizontalLayout_12">
                            <item>
                             <widget class="QTextEdit" name="txtSerial">
+                             <property name="enabled">
+                              <bool>true</bool>
+                             </property>
+                             <property name="font">
+                              <font>
+                               <pointsize>12</pointsize>
+                              </font>
+                             </property>
                              <property name="styleSheet">
-                              <string notr="true">border: 0px solid gray;</string>
+                              <string notr="true">border: 0px solid gray;
+color: rgb(170,200,255);</string>
                              </property>
                              <property name="verticalScrollBarPolicy">
                               <enum>Qt::ScrollBarAlwaysOff</enum>
+                             </property>
+                             <property name="undoRedoEnabled">
+                              <bool>false</bool>
+                             </property>
+                             <property name="readOnly">
+                              <bool>true</bool>
                              </property>
                             </widget>
                            </item>
@@ -2408,8 +2429,8 @@ QPushButton:pressed{
                                </rect>
                               </property>
                               <property name="styleSheet">
-                               <string notr="true">background-color: rgb(250, 250, 255);
-color: rgb(45, 45, 45);
+                               <string notr="true">background-color:rgb(235, 245, 255);
+color: rgb(0, 0, 0);
 border: 1px solid gray;
 border-color: rgb(190, 190, 190);</string>
                               </property>

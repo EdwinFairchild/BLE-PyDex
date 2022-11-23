@@ -1140,6 +1140,8 @@ class Ui_MainWindow(object):
         self.console.setStyleSheet("color: rgb(170,200,255);\n"
 "border: 0px solid gray;")
         self.console.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
+        self.console.setUndoRedoEnabled(False)
+        self.console.setReadOnly(True)
         self.console.setObjectName("console")
         self.verticalLayout_10.addWidget(self.console)
         self.tabWidget.addTab(self.tab, "")
@@ -1148,8 +1150,15 @@ class Ui_MainWindow(object):
         self.horizontalLayout_12 = QtWidgets.QHBoxLayout(self.tab_2)
         self.horizontalLayout_12.setObjectName("horizontalLayout_12")
         self.txtSerial = QtWidgets.QTextEdit(self.tab_2)
-        self.txtSerial.setStyleSheet("border: 0px solid gray;")
+        self.txtSerial.setEnabled(True)
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.txtSerial.setFont(font)
+        self.txtSerial.setStyleSheet("border: 0px solid gray;\n"
+"color: rgb(170,200,255);")
         self.txtSerial.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
+        self.txtSerial.setUndoRedoEnabled(False)
+        self.txtSerial.setReadOnly(True)
         self.txtSerial.setObjectName("txtSerial")
         self.horizontalLayout_12.addWidget(self.txtSerial)
         self.frame_16 = QtWidgets.QFrame(self.tab_2)
@@ -1183,8 +1192,8 @@ class Ui_MainWindow(object):
         self.btnSerialConnect.setObjectName("btnSerialConnect")
         self.txtSerialPort = QtWidgets.QTextEdit(self.frame_16)
         self.txtSerialPort.setGeometry(QtCore.QRect(30, 0, 121, 31))
-        self.txtSerialPort.setStyleSheet("background-color: rgb(250, 250, 255);\n"
-"color: rgb(45, 45, 45);\n"
+        self.txtSerialPort.setStyleSheet("background-color:rgb(235, 245, 255);\n"
+"color: rgb(0, 0, 0);\n"
 "border: 1px solid gray;\n"
 "border-color: rgb(190, 190, 190);")
         self.txtSerialPort.setObjectName("txtSerialPort")

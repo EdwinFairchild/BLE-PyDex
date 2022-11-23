@@ -73,4 +73,5 @@ def serial_data(interface, data):
     interface.ui.txtSerial.append(data.strip())
 
 def serial_connected(interface,state):
-    print("Conencted state"+str(state))   
+    # TODO change button color and disconnect functionality
+    pass   
