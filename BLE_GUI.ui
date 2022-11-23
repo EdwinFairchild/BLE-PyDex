@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1401</width>
-    <height>740</height>
+    <width>1384</width>
+    <height>948</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -113,7 +113,7 @@ border-color: rgb(190, 190, 190);
          <property name="frameShadow">
           <enum>QFrame::Raised</enum>
          </property>
-         <layout class="QVBoxLayout" name="verticalLayout" stretch="0,0,0,0,0,0,0">
+         <layout class="QVBoxLayout" name="verticalLayout" stretch="0,0,0,0,0,0,0,0">
           <property name="spacing">
            <number>5</number>
           </property>
@@ -344,6 +344,159 @@ QPushButton:pressed{
            </spacer>
           </item>
           <item>
+           <widget class="QFrame" name="frm_otas">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>200</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
+            <property name="frameShape">
+             <enum>QFrame::StyledPanel</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Raised</enum>
+            </property>
+            <widget class="QPushButton" name="btnOtaUpdate">
+             <property name="geometry">
+              <rect>
+               <x>40</x>
+               <y>110</y>
+               <width>131</width>
+               <height>30</height>
+              </rect>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>100</width>
+               <height>30</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QPushButton{
+text-align: center;
+padding-left: 0px;
+border-radius:5px;
+background-color: rgb(39, 52, 105);
+	color: rgb(255, 255, 255);
+}
+
+QPushButton:hover{
+
+background-color: rgb(29, 42,95);
+	color: rgb(255, 255, 255);
+
+}
+
+QPushButton:pressed{
+	
+		color: rgb(255, 255, 255);
+background-color: rgb(48, 52, 63);
+}</string>
+             </property>
+             <property name="text">
+              <string>OTA Update</string>
+             </property>
+            </widget>
+            <widget class="QLabel" name="label">
+             <property name="geometry">
+              <rect>
+               <x>40</x>
+               <y>20</y>
+               <width>141</width>
+               <height>21</height>
+              </rect>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>12</pointsize>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">color: rgb(30, 39, 73);
+</string>
+             </property>
+             <property name="text">
+              <string>OTAS Example</string>
+             </property>
+            </widget>
+            <widget class="Line" name="line_3">
+             <property name="geometry">
+              <rect>
+               <x>0</x>
+               <y>10</y>
+               <width>208</width>
+               <height>1</height>
+              </rect>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>1</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>1</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">background-color: rgb(255, 255, 255);</string>
+             </property>
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+            </widget>
+            <widget class="QPushButton" name="btnFindBin">
+             <property name="geometry">
+              <rect>
+               <x>40</x>
+               <y>70</y>
+               <width>131</width>
+               <height>30</height>
+              </rect>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>100</width>
+               <height>30</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QPushButton{
+text-align: center;
+padding-left: 0px;
+border-radius:5px;
+background-color: rgb(39, 52, 105);
+	color: rgb(255, 255, 255);
+}
+
+QPushButton:hover{
+
+background-color: rgb(29, 42,95);
+	color: rgb(255, 255, 255);
+
+}
+
+QPushButton:pressed{
+	
+		color: rgb(255, 255, 255);
+background-color: rgb(48, 52, 63);
+}</string>
+             </property>
+             <property name="text">
+              <string>Load FW Bin</string>
+             </property>
+            </widget>
+           </widget>
+          </item>
+          <item>
            <widget class="QFrame" name="frame_3">
             <property name="minimumSize">
              <size>
@@ -420,7 +573,7 @@ QPushButton:pressed{
              <property name="styleSheet">
               <string notr="true">text-align: left;
 padding-left: 0px;
-	color: rgb(30, 39, 73);
+color: rgb(30, 39, 73);
 		background-color: rgb(170,200,255);</string>
              </property>
              <property name="text">
@@ -666,7 +819,7 @@ border-color: rgb(230, 230, 230);</string>
                 <property name="frameShadow">
                  <enum>QFrame::Raised</enum>
                 </property>
-                <layout class="QVBoxLayout" name="verticalLayout_2" stretch="2,2,1">
+                <layout class="QVBoxLayout" name="verticalLayout_2" stretch="3,3,2">
                  <property name="spacing">
                   <number>10</number>
                  </property>
@@ -1380,7 +1533,7 @@ border-color: rgb(190, 190, 190);</string>
                             <property name="frameShadow">
                              <enum>QFrame::Raised</enum>
                             </property>
-                            <layout class="QHBoxLayout" name="horizontalLayout" stretch="1,1,1,1,0">
+                            <layout class="QHBoxLayout" name="horizontalLayout" stretch="1,1,1,1">
                              <property name="bottomMargin">
                               <number>0</number>
                              </property>
@@ -1517,40 +1670,6 @@ QPushButton:pressed{
                                </property>
                                <property name="text">
                                 <string>Read</string>
-                               </property>
-                              </widget>
-                             </item>
-                             <item>
-                              <widget class="QPushButton" name="btnOtaUpdate">
-                               <property name="minimumSize">
-                                <size>
-                                 <width>100</width>
-                                 <height>30</height>
-                                </size>
-                               </property>
-                               <property name="styleSheet">
-                                <string notr="true">QPushButton{
-	color: rgb(0, 0, 0);
-		background-color: rgb(170,200,255);
-	border:none;
-border-radius:5px;
-
-}
-
-QPushButton:hover{
-	color: rgb(28, 28, 28);
-		background-color: rgb(140,170,255);
-
-}
-
-QPushButton:pressed{
-	
-		color: rgb(28, 28, 28);
-	background-color: rgb(110,140,255);
-}</string>
-                               </property>
-                               <property name="text">
-                                <string>OTA Update</string>
                                </property>
                               </widget>
                              </item>
@@ -2119,7 +2238,16 @@ border: 0px solid gray;</string>
                    <property name="frameShadow">
                     <enum>QFrame::Raised</enum>
                    </property>
-                   <layout class="QHBoxLayout" name="horizontalLayout_11" stretch="0,1,0">
+                   <layout class="QHBoxLayout" name="horizontalLayout_11" stretch="0,0">
+                    <property name="leftMargin">
+                     <number>0</number>
+                    </property>
+                    <property name="topMargin">
+                     <number>0</number>
+                    </property>
+                    <property name="bottomMargin">
+                     <number>0</number>
+                    </property>
                     <item>
                      <widget class="QFrame" name="frame_4">
                       <property name="minimumSize">
@@ -2136,40 +2264,92 @@ border: 0px solid gray;</string>
                       </property>
                       <layout class="QVBoxLayout" name="verticalLayout_7">
                        <item>
-                        <widget class="QTextEdit" name="console">
+                        <widget class="QTabWidget" name="tabWidget">
                          <property name="minimumSize">
                           <size>
                            <width>700</width>
-                           <height>0</height>
+                           <height>100</height>
                           </size>
                          </property>
-                         <property name="styleSheet">
-                          <string notr="true">color: rgb(170,200,255);</string>
+                         <property name="font">
+                          <font>
+                           <pointsize>12</pointsize>
+                          </font>
                          </property>
-                         <property name="html">
-                          <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+                         <property name="styleSheet">
+                          <string notr="true">border-color: rgb(255, 255, 255);
+
+
+color: rgb(255, 255, 255);</string>
+                         </property>
+                         <property name="currentIndex">
+                          <number>0</number>
+                         </property>
+                         <property name="documentMode">
+                          <bool>true</bool>
+                         </property>
+                         <property name="tabsClosable">
+                          <bool>true</bool>
+                         </property>
+                         <property name="movable">
+                          <bool>true</bool>
+                         </property>
+                         <property name="tabBarAutoHide">
+                          <bool>true</bool>
+                         </property>
+                         <widget class="QWidget" name="tab">
+                          <attribute name="title">
+                           <string>log</string>
+                          </attribute>
+                          <layout class="QVBoxLayout" name="verticalLayout_10">
+                           <item>
+                            <widget class="QTextEdit" name="console">
+                             <property name="minimumSize">
+                              <size>
+                               <width>700</width>
+                               <height>0</height>
+                              </size>
+                             </property>
+                             <property name="font">
+                              <font>
+                               <pointsize>12</pointsize>
+                              </font>
+                             </property>
+                             <property name="styleSheet">
+                              <string notr="true">color: rgb(170,200,255);</string>
+                             </property>
+                             <property name="verticalScrollBarPolicy">
+                              <enum>Qt::ScrollBarAlwaysOff</enum>
+                             </property>
+                             <property name="html">
+                              <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Ubuntu'; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                         </property>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Ubuntu'; font-size:12pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:11pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                             </property>
+                            </widget>
+                           </item>
+                          </layout>
+                         </widget>
+                         <widget class="QWidget" name="tab_2">
+                          <attribute name="title">
+                           <string>serial</string>
+                          </attribute>
+                          <layout class="QHBoxLayout" name="horizontalLayout_12">
+                           <item>
+                            <widget class="QTextEdit" name="txtSerial">
+                             <property name="verticalScrollBarPolicy">
+                              <enum>Qt::ScrollBarAlwaysOff</enum>
+                             </property>
+                            </widget>
+                           </item>
+                          </layout>
+                         </widget>
                         </widget>
                        </item>
                       </layout>
                      </widget>
-                    </item>
-                    <item>
-                     <spacer name="horizontalSpacer">
-                      <property name="orientation">
-                       <enum>Qt::Horizontal</enum>
-                      </property>
-                      <property name="sizeHint" stdset="0">
-                       <size>
-                        <width>356</width>
-                        <height>20</height>
-                       </size>
-                      </property>
-                     </spacer>
                     </item>
                     <item>
                      <widget class="QPushButton" name="btnConnectedState">

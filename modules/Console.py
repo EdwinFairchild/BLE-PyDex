@@ -11,7 +11,6 @@ def console_init(main_interface):
 def log(data):
     global interface
     interface.ui.console.append("> "+ str(data))
-    print("log > "+ str(data))
     #interface.ui.console.verticalScrollBar().setSliderPosition(10)
 
 def log_status():

@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(1401, 740)
+        MainWindow.resize(1384, 948)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(1)
@@ -192,6 +192,79 @@ class Ui_MainWindow(object):
         self.verticalLayout.addWidget(self.btnMenuClient)
         spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.verticalLayout.addItem(spacerItem)
+        self.frm_otas = QtWidgets.QFrame(self.sideBar)
+        self.frm_otas.setMinimumSize(QtCore.QSize(0, 200))
+        self.frm_otas.setStyleSheet("")
+        self.frm_otas.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frm_otas.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frm_otas.setObjectName("frm_otas")
+        self.btnOtaUpdate = QtWidgets.QPushButton(self.frm_otas)
+        self.btnOtaUpdate.setGeometry(QtCore.QRect(40, 110, 131, 30))
+        self.btnOtaUpdate.setMinimumSize(QtCore.QSize(100, 30))
+        self.btnOtaUpdate.setStyleSheet("QPushButton{\n"
+"text-align: center;\n"
+"padding-left: 0px;\n"
+"border-radius:5px;\n"
+"background-color: rgb(39, 52, 105);\n"
+"    color: rgb(255, 255, 255);\n"
+"}\n"
+"\n"
+"QPushButton:hover{\n"
+"\n"
+"background-color: rgb(29, 42,95);\n"
+"    color: rgb(255, 255, 255);\n"
+"\n"
+"}\n"
+"\n"
+"QPushButton:pressed{\n"
+"    \n"
+"        color: rgb(255, 255, 255);\n"
+"background-color: rgb(48, 52, 63);\n"
+"}")
+        self.btnOtaUpdate.setObjectName("btnOtaUpdate")
+        self.label = QtWidgets.QLabel(self.frm_otas)
+        self.label.setGeometry(QtCore.QRect(40, 20, 141, 21))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        font.setBold(True)
+        font.setWeight(75)
+        self.label.setFont(font)
+        self.label.setStyleSheet("color: rgb(30, 39, 73);\n"
+"")
+        self.label.setObjectName("label")
+        self.line_3 = QtWidgets.QFrame(self.frm_otas)
+        self.line_3.setGeometry(QtCore.QRect(0, 10, 208, 1))
+        self.line_3.setMinimumSize(QtCore.QSize(0, 1))
+        self.line_3.setMaximumSize(QtCore.QSize(16777215, 1))
+        self.line_3.setStyleSheet("background-color: rgb(255, 255, 255);")
+        self.line_3.setFrameShape(QtWidgets.QFrame.HLine)
+        self.line_3.setFrameShadow(QtWidgets.QFrame.Sunken)
+        self.line_3.setObjectName("line_3")
+        self.btnFindBin = QtWidgets.QPushButton(self.frm_otas)
+        self.btnFindBin.setGeometry(QtCore.QRect(40, 70, 131, 30))
+        self.btnFindBin.setMinimumSize(QtCore.QSize(100, 30))
+        self.btnFindBin.setStyleSheet("QPushButton{\n"
+"text-align: center;\n"
+"padding-left: 0px;\n"
+"border-radius:5px;\n"
+"background-color: rgb(39, 52, 105);\n"
+"    color: rgb(255, 255, 255);\n"
+"}\n"
+"\n"
+"QPushButton:hover{\n"
+"\n"
+"background-color: rgb(29, 42,95);\n"
+"    color: rgb(255, 255, 255);\n"
+"\n"
+"}\n"
+"\n"
+"QPushButton:pressed{\n"
+"    \n"
+"        color: rgb(255, 255, 255);\n"
+"background-color: rgb(48, 52, 63);\n"
+"}")
+        self.btnFindBin.setObjectName("btnFindBin")
+        self.verticalLayout.addWidget(self.frm_otas)
         self.frame_3 = QtWidgets.QFrame(self.sideBar)
         self.frame_3.setMinimumSize(QtCore.QSize(0, 210))
         self.frame_3.setMaximumSize(QtCore.QSize(16777215, 999999))
@@ -218,7 +291,7 @@ class Ui_MainWindow(object):
         self.btnauthor.setFont(font)
         self.btnauthor.setStyleSheet("text-align: left;\n"
 "padding-left: 0px;\n"
-"    color: rgb(30, 39, 73);\n"
+"color: rgb(30, 39, 73);\n"
 "        background-color: rgb(170,200,255);")
         self.btnauthor.setObjectName("btnauthor")
         self.btnRepo = QtWidgets.QPushButton(self.frame_3)
@@ -749,29 +822,6 @@ class Ui_MainWindow(object):
 "}")
         self.btnReadChar.setObjectName("btnReadChar")
         self.horizontalLayout.addWidget(self.btnReadChar)
-        self.btnOtaUpdate = QtWidgets.QPushButton(self.frame)
-        self.btnOtaUpdate.setMinimumSize(QtCore.QSize(100, 30))
-        self.btnOtaUpdate.setStyleSheet("QPushButton{\n"
-"    color: rgb(0, 0, 0);\n"
-"        background-color: rgb(170,200,255);\n"
-"    border:none;\n"
-"border-radius:5px;\n"
-"\n"
-"}\n"
-"\n"
-"QPushButton:hover{\n"
-"    color: rgb(28, 28, 28);\n"
-"        background-color: rgb(140,170,255);\n"
-"\n"
-"}\n"
-"\n"
-"QPushButton:pressed{\n"
-"    \n"
-"        color: rgb(28, 28, 28);\n"
-"    background-color: rgb(110,140,255);\n"
-"}")
-        self.btnOtaUpdate.setObjectName("btnOtaUpdate")
-        self.horizontalLayout.addWidget(self.btnOtaUpdate)
         self.horizontalLayout.setStretch(0, 1)
         self.horizontalLayout.setStretch(1, 1)
         self.horizontalLayout.setStretch(2, 1)
@@ -1057,6 +1107,7 @@ class Ui_MainWindow(object):
         self.frame_7.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_7.setObjectName("frame_7")
         self.horizontalLayout_11 = QtWidgets.QHBoxLayout(self.frame_7)
+        self.horizontalLayout_11.setContentsMargins(0, 0, -1, 0)
         self.horizontalLayout_11.setObjectName("horizontalLayout_11")
         self.frame_4 = QtWidgets.QFrame(self.frame_7)
         self.frame_4.setMinimumSize(QtCore.QSize(400, 0))
@@ -1065,25 +1116,55 @@ class Ui_MainWindow(object):
         self.frame_4.setObjectName("frame_4")
         self.verticalLayout_7 = QtWidgets.QVBoxLayout(self.frame_4)
         self.verticalLayout_7.setObjectName("verticalLayout_7")
-        self.console = QtWidgets.QTextEdit(self.frame_4)
+        self.tabWidget = QtWidgets.QTabWidget(self.frame_4)
+        self.tabWidget.setMinimumSize(QtCore.QSize(700, 100))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.tabWidget.setFont(font)
+        self.tabWidget.setStyleSheet("border-color: rgb(255, 255, 255);\n"
+"\n"
+"\n"
+"color: rgb(255, 255, 255);")
+        self.tabWidget.setDocumentMode(True)
+        self.tabWidget.setTabsClosable(True)
+        self.tabWidget.setMovable(True)
+        self.tabWidget.setTabBarAutoHide(True)
+        self.tabWidget.setObjectName("tabWidget")
+        self.tab = QtWidgets.QWidget()
+        self.tab.setObjectName("tab")
+        self.verticalLayout_10 = QtWidgets.QVBoxLayout(self.tab)
+        self.verticalLayout_10.setObjectName("verticalLayout_10")
+        self.console = QtWidgets.QTextEdit(self.tab)
         self.console.setMinimumSize(QtCore.QSize(700, 0))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.console.setFont(font)
         self.console.setStyleSheet("color: rgb(170,200,255);")
+        self.console.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
         self.console.setObjectName("console")
-        self.verticalLayout_7.addWidget(self.console)
+        self.verticalLayout_10.addWidget(self.console)
+        self.tabWidget.addTab(self.tab, "")
+        self.tab_2 = QtWidgets.QWidget()
+        self.tab_2.setObjectName("tab_2")
+        self.horizontalLayout_12 = QtWidgets.QHBoxLayout(self.tab_2)
+        self.horizontalLayout_12.setObjectName("horizontalLayout_12")
+        self.txtSerial = QtWidgets.QTextEdit(self.tab_2)
+        self.txtSerial.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
+        self.txtSerial.setObjectName("txtSerial")
+        self.horizontalLayout_12.addWidget(self.txtSerial)
+        self.tabWidget.addTab(self.tab_2, "")
+        self.verticalLayout_7.addWidget(self.tabWidget)
         self.horizontalLayout_11.addWidget(self.frame_4)
-        spacerItem2 = QtWidgets.QSpacerItem(356, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.horizontalLayout_11.addItem(spacerItem2)
         self.btnConnectedState = QtWidgets.QPushButton(self.frame_7)
         self.btnConnectedState.setMinimumSize(QtCore.QSize(50, 50))
         self.btnConnectedState.setStyleSheet("")
         self.btnConnectedState.setText("")
         self.btnConnectedState.setObjectName("btnConnectedState")
         self.horizontalLayout_11.addWidget(self.btnConnectedState)
-        self.horizontalLayout_11.setStretch(1, 1)
         self.verticalLayout_2.addWidget(self.frame_7)
-        self.verticalLayout_2.setStretch(0, 2)
-        self.verticalLayout_2.setStretch(1, 2)
-        self.verticalLayout_2.setStretch(2, 1)
+        self.verticalLayout_2.setStretch(0, 3)
+        self.verticalLayout_2.setStretch(1, 3)
+        self.verticalLayout_2.setStretch(2, 2)
         self.verticalLayout_9.addWidget(self.mainframe_explore)
         self.stackedWidget.addWidget(self.page_Explore)
         self.page = QtWidgets.QWidget()
@@ -1112,6 +1193,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
         self.stackedWidget.setCurrentIndex(2)
+        self.tabWidget.setCurrentIndex(0)
         self.timeoutSlider_2.valueChanged['int'].connect(self.timeoutLabel_2.setNum) # type: ignore
         self.timeoutSlider_3.valueChanged['int'].connect(self.lblConnectionTime.setNum) # type: ignore
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
@@ -1123,6 +1205,9 @@ class Ui_MainWindow(object):
         self.btnMenuExplore.setText(_translate("MainWindow", "      Explore"))
         self.btnMenuGattMaker.setText(_translate("MainWindow", "      Gatt Maker"))
         self.btnMenuClient.setText(_translate("MainWindow", "      BLE Client "))
+        self.btnOtaUpdate.setText(_translate("MainWindow", "OTA Update"))
+        self.label.setText(_translate("MainWindow", "OTAS Example"))
+        self.btnFindBin.setText(_translate("MainWindow", "Load FW Bin"))
         self.btnauthor.setText(_translate("MainWindow", " Edwin Amaya"))
         self.btnRepo.setText(_translate("MainWindow", "Github"))
         self.label_10.setText(_translate("MainWindow", "Scan timeout ( s ) :"))
@@ -1141,7 +1226,6 @@ class Ui_MainWindow(object):
         self.btnWriteChar.setText(_translate("MainWindow", "Write"))
         self.btnNotify.setText(_translate("MainWindow", "Enable Notify"))
         self.btnReadChar.setText(_translate("MainWindow", "Read"))
-        self.btnOtaUpdate.setText(_translate("MainWindow", "OTA Update"))
         self.label_17.setText(_translate("MainWindow", "Value :"))
         self.label_24.setText(_translate("MainWindow", "Type :"))
         self.label_16.setText(_translate("MainWindow", "Handle :"))
@@ -1161,8 +1245,10 @@ class Ui_MainWindow(object):
         self.console.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:\'Ubuntu\'; font-size:11pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>"))
+"</style></head><body style=\" font-family:\'Ubuntu\'; font-size:12pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:11pt;\"><br /></p></body></html>"))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), _translate("MainWindow", "log"))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), _translate("MainWindow", "serial"))
         self.label_2.setText(_translate("MainWindow", "intro page"))
 from slidingstackedwidget import SlidingStackedWidget
 

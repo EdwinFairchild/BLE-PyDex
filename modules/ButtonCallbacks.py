@@ -103,6 +103,11 @@ def btn_connect(interface):
     if interface.connected_state == False:
         if interface.selected_address != None:
             try:
+                interface.serialLoop = ser_ctl.Serial_Reader()
+                interface.serialLoop.serial_signal.connect(
+                    lambda data: Slots.serial_data(interface, data))
+                interface.serialLoop.connect = True
+                interface.serialLoop.start()
                 # connection stuff
                 interface.bleLoop = ble_ctl.BleakLoop()
                 interface.bleLoop.ble_address = interface.selected_address
@@ -121,6 +126,12 @@ def btn_connect(interface):
                 MiscHelpers.set_connected_icon_color(interface, 'blue')
                 interface.ui.btnConnect.setText("Disconnect")
                 interface.connected_state = True
+                print(interface.advertised_name)
+                print(type(interface.advertised_name))
+                if interface.advertised_name == "OTAS":
+                    interface.ui.frm_otas.setVisible(True)
+ 
+                    
             except Exception as err:
                 Console.errMsg(err)
                 MiscHelpers.set_connected_icon_color(interface, 'white')
@@ -147,6 +158,10 @@ def btn_connect(interface):
             interface.ui.list_EnabledNotify.clear()
             interface.ui.list_EnabledNotifyValue.clear()
             interface.notifyEnabledCharsDict = {}
+
+            # serial reader stuff
+            if interface.serialLoop.connect == True:
+                interface.serialLoop.connect = False
         except Exception as err:
             Console.errMsg(err)
 
@@ -194,7 +209,6 @@ def btn_put_req(interface):
         # the application should probably have the signature checking, but whatever for now
         interface.bleLoop.updateFileName = fname[0]
         interface.bleLoop.otasUpdate = True
-
 # ------------------------------------------------------------------------
 
 def btn_menu(interface):
@@ -246,5 +260,5 @@ def register_button_callbacks(interface):
         lambda state: btn_notify_remove(interface))
     interface.ui.btnScan.clicked.connect(lambda state: btn_scan(interface))
     interface.ui.btnRepo.clicked.connect(lambda state: btn_github(interface))
-    interface.ui.btnOtaUpdate.clicked.connect(
-        lambda state: btn_put_req(interface))
+    interface.ui.btnOtaUpdate.clicked.connect(lambda state: btn_put_req(interface))
+

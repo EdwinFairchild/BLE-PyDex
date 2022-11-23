@@ -22,3 +22,7 @@ from . ListCallbacks import *
 from . Slots import *
 # Import helper methods
 from . MiscHelpers import *
+
+# Import helper methods
+from . SerialThread import *
+

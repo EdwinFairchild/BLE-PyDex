@@ -8,6 +8,7 @@ def discoveredList2ItemPressed(interface):
     value = interface.ui.list_discoveredDevices.currentItem()
     tmp = value.text()
     interface.selected_address = tmp[1:18]
+    interface.advertised_name = str(tmp[22:]).strip()
 # ------------------------------------------------------------------------
 def enabledNotifyListItemPressed(interface):
     interface.ui.list_EnabledNotifyValue.setCurrentRow(

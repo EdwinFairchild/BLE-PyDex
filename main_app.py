@@ -4,6 +4,7 @@ from modules import ButtonCallbacks
 from modules import ListCallbacks
 from modules import MiscHelpers
 from modules import BLE_functions as ble_ctl
+from modules import SerialThread as ser_ctl
 from modules import Console 
 from PyQt5 import Qt as qtw
 from PyQt5 import QtCore as qtc
@@ -34,6 +35,7 @@ os.environ["QT_FONT_DPI"] = "96"
 class MainInterface(QMainWindow):
     # TODO : cleanup unused
     selected_address = None
+    advertised_name = None
     connected_address = None
     menuPinned = False
     connected_state = False
@@ -49,6 +51,7 @@ class MainInterface(QMainWindow):
     # peristent instance of bleakLoop needs to be kept so the task is not
     # canceled
     bleLoop = None
+    serialLoop = None
     UUID_dict = BLE_UUIDs.get_uuid_dict("UUIDs.json")
     user_uuid_dict = BLE_UUIDs.get_uuid_dict("user_UUIDs.json", True)
     # list to manage chars that have notify enabled
@@ -59,6 +62,7 @@ class MainInterface(QMainWindow):
         # setup gui
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
+        self.ui.frm_otas.setVisible(False)
         Console.console_init(self)
         ListCallbacks.register_list_callbacks(self)
         ButtonCallbacks.register_button_callbacks(self)
