@@ -40,7 +40,8 @@ class Serial_Reader(QThread):
                             self.serial_data.emit(x)
                     ser.close()
                     self.serial_connected.emit(False)
-                    Console.log("Serial Disconnected")
+                    
+                    
         except Exception as err:
             Console.errMsg(err)
             self.serial_connected.emit(False)

@@ -75,6 +75,7 @@ def disconnect(interface,state):
         # clean up tree wdiget stuff
         interface.ui.servicesTreeWidget.clear()
         interface.ui.list_EnabledNotify.clear()
+        interface.ui.list_discoveredDevices.clear()
         interface.ui.list_EnabledNotifyValue.clear()
         interface.notifyEnabledCharsDict = {}
         if interface.advertised_name == "OTAS":
@@ -98,7 +99,7 @@ def read_char(interface, data):
 
 def scan(interface, device):
     interface.ui.list_discoveredDevices.addItem(f" " + device[0:17] + " | " + device[18:] + " ")
-
+    Console.log(device)
 def serial_data(interface, data):
     interface.ui.txtSerial.append(data.strip())
 
@@ -111,10 +112,11 @@ def serial_connected(interface,state):
         interface.ui.btnSerialConnect.setText("Disconnect")
         interface.serial_connected_state = True
     else:
-        interface.serialLoop.exit()
+        interface.serialLoop.quit()
         fore = [0, 0, 0]
         back = [170, 200, 255]
         MiscHelpers.set_alternate_button_mode_color(
                         interface, interface.ui.btnSerialConnect, fore, back)
         interface.ui.btnSerialConnect.setText("Connect")
         interface.serial_connected_state = False
+       
