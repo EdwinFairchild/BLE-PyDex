@@ -99,7 +99,7 @@ def read_char(interface, data):
 
 def scan(interface, device):
  #   interface.ui.list_discoveredDevices.addItem(f" " + device[0][0:17] + " | " + device[0][18:] + " ")
-    Console.log(device[1])
+    Console.log(device[0])
 def serial_data(interface, data):
     interface.ui.txtSerial.append(data.strip())
 
