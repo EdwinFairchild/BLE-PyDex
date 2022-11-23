@@ -318,6 +318,8 @@ class BleakLoop(QThread):
                             Console.errMsg(err)
             self.discoverServices = False
             Console.log(f"Connected: {client.is_connected}")
+            # emit connected signal
+            self.disconnectSignal.emit(False)
         except Exception as e:
             Console.log(
                 "Opps ,That device is not explorable, at least not by you.")

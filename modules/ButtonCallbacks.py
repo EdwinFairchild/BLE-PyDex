@@ -122,6 +122,8 @@ def btn_connect(interface):
             try:
                 # connection stuff
                 interface.bleLoop = ble_ctl.BleakLoop()
+                interface.bleLoop.disconnectSignal.connect(
+                lambda state: Slots.disconnect(interface,state))
                 interface.bleLoop.ble_address = interface.selected_address
                 interface.bleLoop.discoverServices = True
                 interface.bleLoop.discovered_services.connect(
@@ -130,44 +132,31 @@ def btn_connect(interface):
                     lambda mesg: Slots.errMsg(interface, mesg))
                 interface.connected_address = interface.selected_address
                 interface.bleLoop.start()
-                fore = [255, 255, 255]
-                back = [170, 66, 66]
-                MiscHelpers.set_alternate_button_mode_color(
-                    interface, interface.ui.btnConnect, fore, back)
-                # gui stuff
-                MiscHelpers.set_connected_icon_color(interface, 'blue')
-                interface.ui.btnConnect.setText("Disconnect")
-                interface.connected_state = True
-                if interface.advertised_name == "OTAS":
-                    interface.ui.frm_otas.setVisible(True)
+                # fore = [255, 255, 255]
+                # back = [170, 66, 66]
+                # MiscHelpers.set_alternate_button_mode_color(
+                #     interface, interface.ui.btnConnect, fore, back)
+                # # gui stuff
+                # MiscHelpers.set_connected_icon_color(interface, 'blue')
+                # interface.ui.btnConnect.setText("Disconnect")
+                # interface.connected_state = True
+                # if interface.advertised_name == "OTAS":
+                #     interface.ui.frm_otas.setVisible(True)
  
                     
             except Exception as err:
                 Console.errMsg(err)
                 MiscHelpers.set_connected_icon_color(interface, 'white')
                 interface.ui.btnConnect.setText("Connect")
-                interface.connected_state = True
+                interface.connected_state = False
         else:
             Console.log("You have to select a device from explore list")
     else:
         try:
             # connection stuff
             interface.bleLoop.disconnect_triggered = True
-            interface.bleLoop.disconnectSignal.connect(
-                lambda temp: Slots.disconnect(interface))
-            # gui stuff
-            fore = [0, 0, 0]
-            back = [170, 200, 255]
-            MiscHelpers.set_alternate_button_mode_color(
-                interface, interface.ui.btnConnect, fore, back)
-            MiscHelpers.set_connected_icon_color(interface, 'white')
-            interface.ui.btnConnect.setText("Connect")
-            interface.connected_state = False
-            # clean up tree wdiget stuff
-            interface.ui.servicesTreeWidget.clear()
-            interface.ui.list_EnabledNotify.clear()
-            interface.ui.list_EnabledNotifyValue.clear()
-            interface.notifyEnabledCharsDict = {}
+            
+
 
         except Exception as err:
             Console.errMsg(err)
