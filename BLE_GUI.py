@@ -1121,9 +1121,7 @@ class Ui_MainWindow(object):
         font = QtGui.QFont()
         font.setPointSize(12)
         self.tabWidget.setFont(font)
-        self.tabWidget.setStyleSheet("border-color: rgb(255, 255, 255);\n"
-"\n"
-"\n"
+        self.tabWidget.setStyleSheet("\n"
 "color: rgb(255, 255, 255);")
         self.tabWidget.setDocumentMode(True)
         self.tabWidget.setTabsClosable(True)
@@ -1139,7 +1137,8 @@ class Ui_MainWindow(object):
         font = QtGui.QFont()
         font.setPointSize(12)
         self.console.setFont(font)
-        self.console.setStyleSheet("color: rgb(170,200,255);")
+        self.console.setStyleSheet("color: rgb(170,200,255);\n"
+"border: 0px solid gray;")
         self.console.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
         self.console.setObjectName("console")
         self.verticalLayout_10.addWidget(self.console)
@@ -1149,9 +1148,47 @@ class Ui_MainWindow(object):
         self.horizontalLayout_12 = QtWidgets.QHBoxLayout(self.tab_2)
         self.horizontalLayout_12.setObjectName("horizontalLayout_12")
         self.txtSerial = QtWidgets.QTextEdit(self.tab_2)
+        self.txtSerial.setStyleSheet("border: 0px solid gray;")
         self.txtSerial.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
         self.txtSerial.setObjectName("txtSerial")
         self.horizontalLayout_12.addWidget(self.txtSerial)
+        self.frame_16 = QtWidgets.QFrame(self.tab_2)
+        self.frame_16.setMinimumSize(QtCore.QSize(250, 50))
+        self.frame_16.setStyleSheet("border-color: rgb(255, 255, 255);\n"
+"")
+        self.frame_16.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_16.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_16.setObjectName("frame_16")
+        self.btnSerialConnect = QtWidgets.QPushButton(self.frame_16)
+        self.btnSerialConnect.setGeometry(QtCore.QRect(160, 0, 81, 30))
+        self.btnSerialConnect.setStyleSheet("QPushButton{\n"
+"    color: rgb(0, 0, 0);\n"
+"        background-color: rgb(170,200,255);\n"
+"    border:none;\n"
+"border-radius:5px;\n"
+"\n"
+"}\n"
+"\n"
+"QPushButton:hover{\n"
+"    color: rgb(28, 28, 28);\n"
+"        background-color: rgb(140,170,255);\n"
+"\n"
+"}\n"
+"\n"
+"QPushButton:pressed{\n"
+"    \n"
+"        color: rgb(28, 28, 28);\n"
+"    background-color: rgb(110,140,255);\n"
+"}")
+        self.btnSerialConnect.setObjectName("btnSerialConnect")
+        self.txtSerialPort = QtWidgets.QTextEdit(self.frame_16)
+        self.txtSerialPort.setGeometry(QtCore.QRect(30, 0, 121, 31))
+        self.txtSerialPort.setStyleSheet("background-color: rgb(250, 250, 255);\n"
+"color: rgb(45, 45, 45);\n"
+"border: 1px solid gray;\n"
+"border-color: rgb(190, 190, 190);")
+        self.txtSerialPort.setObjectName("txtSerialPort")
+        self.horizontalLayout_12.addWidget(self.frame_16)
         self.tabWidget.addTab(self.tab_2, "")
         self.verticalLayout_7.addWidget(self.tabWidget)
         self.horizontalLayout_11.addWidget(self.frame_4)
@@ -1193,7 +1230,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
         self.stackedWidget.setCurrentIndex(2)
-        self.tabWidget.setCurrentIndex(0)
+        self.tabWidget.setCurrentIndex(1)
         self.timeoutSlider_2.valueChanged['int'].connect(self.timeoutLabel_2.setNum) # type: ignore
         self.timeoutSlider_3.valueChanged['int'].connect(self.lblConnectionTime.setNum) # type: ignore
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
@@ -1248,6 +1285,12 @@ class Ui_MainWindow(object):
 "</style></head><body style=\" font-family:\'Ubuntu\'; font-size:12pt; font-weight:400; font-style:normal;\">\n"
 "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:11pt;\"><br /></p></body></html>"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), _translate("MainWindow", "log"))
+        self.btnSerialConnect.setText(_translate("MainWindow", "Connect"))
+        self.txtSerialPort.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:\'Ubuntu\'; font-size:11pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">/dev/ttyUSB0</p></body></html>"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), _translate("MainWindow", "serial"))
         self.label_2.setText(_translate("MainWindow", "intro page"))
 from slidingstackedwidget import SlidingStackedWidget

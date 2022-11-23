@@ -97,17 +97,27 @@ def btn_type_copy(interface):
     MiscHelpers.copy_to_clipboard(interface, interface.ui.btnLabelType.text())
 
 # ------------------------------------------------------------------------
+def btn_serial_conenct(interface):
+    if interface.ui.txtSerialPort.toPlainText() != "":
+        try:
+            interface.serialLoop = ser_ctl.Serial_Reader()
+            interface.serialLoop.port = str(interface.ui.txtSerialPort.toPlainText()).strip()
+            print("the test is: " + str(interface.ui.txtSerialPort.toPlainText()).strip())
+
+            interface.serialLoop.serial_data.connect(
+                lambda data: Slots.serial_data(interface, data))
+            interface.serialLoop.serial_connected.connect(
+                lambda data: Slots.serial_connected(interface, data))
+            interface.serialLoop.connect = True
+            interface.serialLoop.start()
+        except Exception as err:
+                    Console.errMsg(err)
 
 def btn_connect(interface):
     # Establish and maintain Bleak connection
     if interface.connected_state == False:
         if interface.selected_address != None:
             try:
-                interface.serialLoop = ser_ctl.Serial_Reader()
-                interface.serialLoop.serial_signal.connect(
-                    lambda data: Slots.serial_data(interface, data))
-                interface.serialLoop.connect = True
-                interface.serialLoop.start()
                 # connection stuff
                 interface.bleLoop = ble_ctl.BleakLoop()
                 interface.bleLoop.ble_address = interface.selected_address
@@ -249,6 +259,8 @@ def register_button_callbacks(interface):
         lambda state: btn_write_char(interface))
     interface.ui.btnConnect.clicked.connect(
         lambda state: btn_connect(interface))
+    interface.ui.btnSerialConnect.clicked.connect(
+        lambda state: btn_serial_conenct(interface))
     interface.ui.btnLabelType.clicked.connect(
         lambda state: btn_type_copy(interface))
     interface.ui.btnLabelUUID.clicked.connect(

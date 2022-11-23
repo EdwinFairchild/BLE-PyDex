@@ -71,3 +71,6 @@ def scan(interface, device):
 
 def serial_data(interface, data):
     interface.ui.txtSerial.append(data.strip())
+
+def serial_connected(interface,state):
+    print("Conencted state"+str(state))   
