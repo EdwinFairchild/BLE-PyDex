@@ -100,7 +100,7 @@ def read_char(interface, data):
 def scan(interface, device):
     #interface.ui.list_discoveredDevices.addItem(f" " + device[0][0:17] + " | " + device[0][18:] + " ")
     interface.ui.list_discoveredDevices.addItem(f" " + str(device[0]))
-    Console.log(device[0])
+    # device[1] has rssi 
 def serial_data(interface, data):
     interface.ui.txtSerial.append(data.strip())
 
