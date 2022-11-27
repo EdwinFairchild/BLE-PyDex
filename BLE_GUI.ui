@@ -375,6 +375,11 @@ QPushButton:pressed{
                <height>30</height>
               </size>
              </property>
+             <property name="font">
+              <font>
+               <pointsize>11</pointsize>
+              </font>
+             </property>
              <property name="styleSheet">
               <string notr="true">QPushButton{
 text-align: center;
@@ -467,6 +472,11 @@ background-color: rgb(48, 52, 63);
                <width>100</width>
                <height>30</height>
               </size>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>11</pointsize>
+              </font>
              </property>
              <property name="styleSheet">
               <string notr="true">QPushButton{
@@ -594,6 +604,11 @@ color: rgb(30, 39, 73);
                <width>0</width>
                <height>30</height>
               </size>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>10</pointsize>
+              </font>
              </property>
              <property name="styleSheet">
               <string notr="true">QPushButton{
@@ -1567,6 +1582,11 @@ border-color: rgb(190, 190, 190);</string>
                                  <height>16777215</height>
                                 </size>
                                </property>
+                               <property name="font">
+                                <font>
+                                 <pointsize>11</pointsize>
+                                </font>
+                               </property>
                                <property name="styleSheet">
                                 <string notr="true">QPushButton{
 	color: rgb(0, 0, 0);
@@ -1607,6 +1627,11 @@ QPushButton:pressed{
                                  <height>16777215</height>
                                 </size>
                                </property>
+                               <property name="font">
+                                <font>
+                                 <pointsize>11</pointsize>
+                                </font>
+                               </property>
                                <property name="styleSheet">
                                 <string notr="true">QPushButton{
 	color: rgb(0, 0, 0);
@@ -1646,6 +1671,11 @@ QPushButton:pressed{
                                  <width>10000</width>
                                  <height>16777215</height>
                                 </size>
+                               </property>
+                               <property name="font">
+                                <font>
+                                 <pointsize>11</pointsize>
+                                </font>
                                </property>
                                <property name="styleSheet">
                                 <string notr="true">QPushButton{
@@ -1942,6 +1972,7 @@ border-color: rgb(190, 190, 190);</string>
                             </property>
                             <property name="font">
                              <font>
+                              <pointsize>11</pointsize>
                               <strikeout>false</strikeout>
                              </font>
                             </property>
@@ -2159,6 +2190,7 @@ background-color: rgb(39, 52, 105);</string>
                             </property>
                             <property name="font">
                              <font>
+                              <pointsize>11</pointsize>
                               <strikeout>false</strikeout>
                              </font>
                             </property>
@@ -2330,8 +2362,8 @@ border: 0px solid gray;</string>
                               <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Ubuntu'; font-size:12pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:11pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:12pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Ubuntu'; font-size:11pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                              </property>
                             </widget>
                            </item>
@@ -2394,6 +2426,11 @@ color: rgb(170,200,255);</string>
                                 <height>30</height>
                                </rect>
                               </property>
+                              <property name="font">
+                               <font>
+                                <pointsize>11</pointsize>
+                               </font>
+                              </property>
                               <property name="styleSheet">
                                <string notr="true">QPushButton{
 	color: rgb(0, 0, 0);
@@ -2438,8 +2475,8 @@ border-color: rgb(190, 190, 190);</string>
                                <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Ubuntu'; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;/dev/ttyUSB0&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Ubuntu'; font-size:11pt;&quot;&gt;/dev/ttyUSB0&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                               </property>
                              </widget>
                             </widget>
