@@ -206,6 +206,18 @@ def btn_put_req(interface):
         interface.bleLoop.updateFileName = fname[0]
         interface.bleLoop.otasUpdate = True
 # ------------------------------------------------------------------------
+def btn_log_window_size_up(interface):
+    newsize = QSize()
+    newsize.setHeight(365)
+    
+    interface.ui.logFrame.setMinimumSize(newsize)
+
+def btn_log_window_size_down(interface):
+    newsize = QSize()
+    newsize.setHeight(245)
+    
+    interface.ui.logFrame.setMinimumSize(newsize)
+# ------------------------------------------------------------------------
 
 def btn_menu(interface):
     # read comment on menuAnimate
@@ -259,4 +271,6 @@ def register_button_callbacks(interface):
     interface.ui.btnScan.clicked.connect(lambda state: btn_scan(interface))
     interface.ui.btnRepo.clicked.connect(lambda state: btn_github(interface))
     interface.ui.btnOtaUpdate.clicked.connect(lambda state: btn_put_req(interface))
+    interface.ui.btnLogSizeUp.clicked.connect(lambda state: btn_log_window_size_up(interface))
+    interface.ui.btnLogSizeDown.clicked.connect(lambda state: btn_log_window_size_down(interface))
 
