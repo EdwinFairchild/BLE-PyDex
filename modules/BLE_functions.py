@@ -1,4 +1,5 @@
 import bleak as ble
+from bleak import BleakScanner
 from bleak import *
 import asyncio
 import platform
@@ -26,16 +27,20 @@ fileLen = 0
 class BLE_DiscoverDevices(QThread):
     ble_address = 0
     scan_timeout = 5
-    discovered_devices = pyqtSignal(str)
+    discovered_devices = pyqtSignal(tuple)
 
     def run(self):
         asyncio.run(self.BLE_discoverDevices())
     # ------------------------------------------------------------------------
 
     async def BLE_discoverDevices(self):
-        devices = await ble.discover(timeout=self.scan_timeout)
-        for d in devices:
-            self.discovered_devices.emit(str(d))
+        #TODO emit touple if possible
+
+        devices = await BleakScanner.discover(
+        return_adv=True,timeout=self.scan_timeout)
+        for item in devices.values():
+            self.discovered_devices.emit(item)
+            
         # disconnect here? or keep active until user presses explore?
 
 
@@ -87,7 +92,9 @@ class BleakLoop(QThread):
     # -------------------------------------------------------------------------
     def handle_disconnect(self, _: BleakClient):
         # cancelling all tasks effectively ends the program
+        self.disconnectSignal.emit(True)
         Console.log("Disconnected")
+
         # for task in asyncio.all_tasks():
         #     task.cancel()
     # -------------------------------------------------------------------------
@@ -123,7 +130,7 @@ class BleakLoop(QThread):
 
     async def disconenctBLE(self, client: BleakClient):
         try:
-            Console.log("Disconenct triggered...")
+            Console.log("Disconnect triggered...")
             await client.disconnect()
             # self.handle_disconnect(client)
             self.disconnect_triggered = False
@@ -318,6 +325,8 @@ class BleakLoop(QThread):
                             Console.errMsg(err)
             self.discoverServices = False
             Console.log(f"Connected: {client.is_connected}")
+            # emit connected signal
+            self.disconnectSignal.emit(False)
         except Exception as e:
             Console.log(
                 "Opps ,That device is not explorable, at least not by you.")

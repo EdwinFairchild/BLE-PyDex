@@ -1,4 +1,4 @@
-from dbus import Interface
+
 from main_app import *
 from modules import Slots
 from modules import MiscHelpers
@@ -97,6 +97,23 @@ def btn_type_copy(interface):
     MiscHelpers.copy_to_clipboard(interface, interface.ui.btnLabelType.text())
 
 # ------------------------------------------------------------------------
+def btn_serial_connect(interface):
+    if interface.ui.txtSerialPort.toPlainText() != "" and interface.serial_connected_state == False:
+        try:
+            interface.serialLoop = ser_ctl.Serial_Reader()
+            interface.serialLoop.port = str(interface.ui.txtSerialPort.toPlainText()).strip()
+            interface.serialLoop.serial_data.connect(
+                lambda data: Slots.serial_data(interface, data))
+            interface.serialLoop.serial_connected.connect(
+                lambda data: Slots.serial_connected(interface, data))
+            interface.serialLoop.connect = True
+            interface.serialLoop.start()
+        except Exception as err:
+                    Console.errMsg(err)
+    elif interface.serial_connected_state == True:
+        interface.serialLoop.connect = False
+
+
 
 def btn_connect(interface):
     # Establish and maintain Bleak connection
@@ -105,6 +122,8 @@ def btn_connect(interface):
             try:
                 # connection stuff
                 interface.bleLoop = ble_ctl.BleakLoop()
+                interface.bleLoop.disconnectSignal.connect(
+                lambda state: Slots.disconnect(interface,state))
                 interface.bleLoop.ble_address = interface.selected_address
                 interface.bleLoop.discoverServices = True
                 interface.bleLoop.discovered_services.connect(
@@ -113,40 +132,32 @@ def btn_connect(interface):
                     lambda mesg: Slots.errMsg(interface, mesg))
                 interface.connected_address = interface.selected_address
                 interface.bleLoop.start()
-                fore = [255, 255, 255]
-                back = [170, 66, 66]
-                MiscHelpers.set_alternate_button_mode_color(
-                    interface, interface.ui.btnConnect, fore, back)
-                # gui stuff
-                MiscHelpers.set_connected_icon_color(interface, 'blue')
-                interface.ui.btnConnect.setText("Disconnect")
-                interface.connected_state = True
+                # fore = [255, 255, 255]
+                # back = [170, 66, 66]
+                # MiscHelpers.set_alternate_button_mode_color(
+                #     interface, interface.ui.btnConnect, fore, back)
+                # # gui stuff
+                # MiscHelpers.set_connected_icon_color(interface, 'blue')
+                # interface.ui.btnConnect.setText("Disconnect")
+                # interface.connected_state = True
+                # if interface.advertised_name == "OTAS":
+                #     interface.ui.frm_otas.setVisible(True)
+ 
+                    
             except Exception as err:
                 Console.errMsg(err)
                 MiscHelpers.set_connected_icon_color(interface, 'white')
                 interface.ui.btnConnect.setText("Connect")
-                interface.connected_state = True
+                interface.connected_state = False
         else:
             Console.log("You have to select a device from explore list")
     else:
         try:
             # connection stuff
             interface.bleLoop.disconnect_triggered = True
-            interface.bleLoop.disconnectSignal.connect(
-                lambda temp: Slots.disconnect(interface))
-            # gui stuff
-            fore = [0, 0, 0]
-            back = [170, 200, 255]
-            MiscHelpers.set_alternate_button_mode_color(
-                interface, interface.ui.btnConnect, fore, back)
-            MiscHelpers.set_connected_icon_color(interface, 'white')
-            interface.ui.btnConnect.setText("Connect")
-            interface.connected_state = False
-            # clean up tree wdiget stuff
-            interface.ui.servicesTreeWidget.clear()
-            interface.ui.list_EnabledNotify.clear()
-            interface.ui.list_EnabledNotifyValue.clear()
-            interface.notifyEnabledCharsDict = {}
+            
+
+
         except Exception as err:
             Console.errMsg(err)
 
@@ -194,7 +205,6 @@ def btn_put_req(interface):
         # the application should probably have the signature checking, but whatever for now
         interface.bleLoop.updateFileName = fname[0]
         interface.bleLoop.otasUpdate = True
-
 # ------------------------------------------------------------------------
 
 def btn_menu(interface):
@@ -235,6 +245,8 @@ def register_button_callbacks(interface):
         lambda state: btn_write_char(interface))
     interface.ui.btnConnect.clicked.connect(
         lambda state: btn_connect(interface))
+    interface.ui.btnSerialConnect.clicked.connect(
+        lambda state: btn_serial_connect(interface))
     interface.ui.btnLabelType.clicked.connect(
         lambda state: btn_type_copy(interface))
     interface.ui.btnLabelUUID.clicked.connect(
@@ -246,5 +258,5 @@ def register_button_callbacks(interface):
         lambda state: btn_notify_remove(interface))
     interface.ui.btnScan.clicked.connect(lambda state: btn_scan(interface))
     interface.ui.btnRepo.clicked.connect(lambda state: btn_github(interface))
-    interface.ui.btnOtaUpdate.clicked.connect(
-        lambda state: btn_put_req(interface))
+    interface.ui.btnOtaUpdate.clicked.connect(lambda state: btn_put_req(interface))
+

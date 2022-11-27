@@ -4,6 +4,7 @@ from modules import ButtonCallbacks
 from modules import ListCallbacks
 from modules import MiscHelpers
 from modules import BLE_functions as ble_ctl
+from modules import SerialThread as ser_ctl
 from modules import Console 
 from PyQt5 import Qt as qtw
 from PyQt5 import QtCore as qtc
@@ -33,10 +34,16 @@ os.environ["QT_FONT_DPI"] = "96"
 
 class MainInterface(QMainWindow):
     # TODO : cleanup unused
+    if sys.platform == 'win32':
+        print("winner")
+    else:
+        print("Loser!")
     selected_address = None
+    advertised_name = None
     connected_address = None
     menuPinned = False
     connected_state = False
+    serial_connected_state = False
     # used to keep track of tree widget tree items
     toplevel = None
     child = None
@@ -49,6 +56,7 @@ class MainInterface(QMainWindow):
     # peristent instance of bleakLoop needs to be kept so the task is not
     # canceled
     bleLoop = None
+    serialLoop = None
     UUID_dict = BLE_UUIDs.get_uuid_dict("UUIDs.json")
     user_uuid_dict = BLE_UUIDs.get_uuid_dict("user_UUIDs.json", True)
     # list to manage chars that have notify enabled
@@ -59,6 +67,7 @@ class MainInterface(QMainWindow):
         # setup gui
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
+        self.ui.frm_otas.setVisible(False)
         Console.console_init(self)
         ListCallbacks.register_list_callbacks(self)
         ButtonCallbacks.register_button_callbacks(self)
@@ -68,13 +77,13 @@ class MainInterface(QMainWindow):
         
 
     # ------------------------------------------------------------------------
-    def eventFilter(self, source, event):
+    # def eventFilter(self, source, event):
 
-        if event.type() == QtCore.QEvent.Enter and source == self.ui.sideBar:
-            self.menuAnimate(self.ui.sideBar, True)
-        if event.type() == QtCore.QEvent.Leave and source == self.ui.sideBar:
-            self.menuAnimate(self.ui.sideBar, False)
-        return super().eventFilter(source, event)
+    #     if event.type() == QtCore.QEvent.Enter and source == self.ui.sideBar:
+    #         self.menuAnimate(self.ui.sideBar, True)
+    #     if event.type() == QtCore.QEvent.Leave and source == self.ui.sideBar:
+    #         self.menuAnimate(self.ui.sideBar, False)
+    #     return super().eventFilter(source, event)
     # ------------------------------------------------------------------------
 
 ########################################################################################
@@ -93,6 +102,7 @@ if __name__ == '__main__':
     os.system("pyuic5 -x BLE_GUI.ui -o BLE_GUI.py")
     atexit.register(exitFunc)
     app = qtw.QApplication(sys.argv)
+    
     # loop = QEventLoop(app)
     # asyncio.set_event_loop(loop)
 

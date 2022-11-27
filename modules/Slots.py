@@ -1,4 +1,5 @@
 from modules import Console
+from modules import MiscHelpers
 from main_app import *
 from PyQt5 import QtCore
 from PyQt5.QtGui import *
@@ -60,12 +61,63 @@ def notify_registered_state(interface, state):
     else:
         Console.log("Could not add")
 
-def disconnect(interface):
-    interface.bleLoop.exit()
+def disconnect(interface,state):
+    if state ==True:
+        interface.bleLoop.exit()
+        # gui stuff
+        fore = [0, 0, 0]
+        back = [170, 200, 255]
+        MiscHelpers.set_alternate_button_mode_color(
+            interface, interface.ui.btnConnect, fore, back)
+        MiscHelpers.set_connected_icon_color(interface, 'white')
+        interface.ui.btnConnect.setText("Connect")
+        interface.connected_state = False
+        # clean up tree wdiget stuff
+        interface.ui.servicesTreeWidget.clear()
+        interface.ui.list_EnabledNotify.clear()
+        interface.ui.list_discoveredDevices.clear()
+        interface.ui.list_EnabledNotifyValue.clear()
+        interface.notifyEnabledCharsDict = {}
+        if interface.advertised_name == "OTAS":
+            interface.ui.frm_otas.setVisible(False)
+            
+    else:
+
+        fore = [255, 255, 255]
+        back = [170, 66, 66]
+        MiscHelpers.set_alternate_button_mode_color(
+        interface, interface.ui.btnConnect, fore, back)
+        # gui stuff
+        MiscHelpers.set_connected_icon_color(interface, 'blue')
+        interface.ui.btnConnect.setText("Disconnect")
+        interface.connected_state = True
+        if interface.advertised_name == "OTAS":
+            interface.ui.frm_otas.setVisible(True)
 
 def read_char(interface, data):
     interface.ui.btnLabelValue.setText(data)
 
 def scan(interface, device):
-    interface.ui.list_discoveredDevices.addItem(f" " + device[0:17] + " | " + device[18:] + " ")
+    #interface.ui.list_discoveredDevices.addItem(f" " + device[0][0:17] + " | " + device[0][18:] + " ")
+    interface.ui.list_discoveredDevices.addItem(f" " + str(device[0]))
+    # device[1] has rssi 
+def serial_data(interface, data):
+    interface.ui.txtSerial.append(data.strip())
 
+def serial_connected(interface,state):
+    if state == True:
+        fore = [255, 255, 255]
+        back = [170, 66, 66]
+        MiscHelpers.set_alternate_button_mode_color(
+                        interface, interface.ui.btnSerialConnect, fore, back)
+        interface.ui.btnSerialConnect.setText("Disconnect")
+        interface.serial_connected_state = True
+    else:
+        interface.serialLoop.quit()
+        fore = [0, 0, 0]
+        back = [170, 200, 255]
+        MiscHelpers.set_alternate_button_mode_color(
+                        interface, interface.ui.btnSerialConnect, fore, back)
+        interface.ui.btnSerialConnect.setText("Connect")
+        interface.serial_connected_state = False
+       
