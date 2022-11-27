@@ -102,7 +102,8 @@ if __name__ == '__main__':
     os.system("pyuic5 -x BLE_GUI.ui -o BLE_GUI.py")
     atexit.register(exitFunc)
     app = qtw.QApplication(sys.argv)
-    
+    app.setStyle('Fusion')
+
     # loop = QEventLoop(app)
     # asyncio.set_event_loop(loop)
 
