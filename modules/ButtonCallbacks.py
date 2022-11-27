@@ -209,13 +209,13 @@ def btn_put_req(interface):
 def btn_log_window_size_up(interface):
     newsize = QSize()
     newsize.setHeight(365)
-    
+    newsize.setWidth(0)
     interface.ui.logFrame.setMinimumSize(newsize)
 
 def btn_log_window_size_down(interface):
     newsize = QSize()
     newsize.setHeight(245)
-    
+    newsize.setWidth(0)
     interface.ui.logFrame.setMinimumSize(newsize)
 # ------------------------------------------------------------------------
 
