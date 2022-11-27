@@ -37,7 +37,8 @@ def got_char_notify(interface, data):
     #so we look for the same sender in the handles list and get the row nubmer
     #then in the corresponding row for the data recevied we add the new data
     #I over complicated this
-    item = interface.ui.list_EnabledNotify.findItems(str(data[0]), QtCore.Qt.MatchExactly)
+    string = str(data[0]).split()[2][:-2]
+    item = interface.ui.list_EnabledNotify.findItems(string, QtCore.Qt.MatchExactly)
     row = interface.ui.list_EnabledNotify.row(item[0])
     item = interface.ui.list_EnabledNotifyValue.item(row)
     data = str(data[1]).removeprefix("bytearray(b\'\\")
