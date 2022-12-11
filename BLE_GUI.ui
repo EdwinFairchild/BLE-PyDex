@@ -282,7 +282,7 @@ QPushButton:pressed{
 }</string>
             </property>
             <property name="text">
-             <string>      Gatt Maker</string>
+             <string>      Designer</string>
             </property>
            </widget>
           </item>

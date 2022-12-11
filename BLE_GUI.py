@@ -1308,7 +1308,7 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(_translate("MainWindow", "BLE Python Device Explorer"))
         self.btnMenu.setText(_translate("MainWindow", " BLE-PyDex"))
         self.btnMenuExplore.setText(_translate("MainWindow", "      Explore"))
-        self.btnMenuGattMaker.setText(_translate("MainWindow", "      Gatt Maker"))
+        self.btnMenuGattMaker.setText(_translate("MainWindow", "      Designer"))
         self.btnMenuClient.setText(_translate("MainWindow", "      BLE Client "))
         self.btnOtaUpdate.setText(_translate("MainWindow", "OTA Update"))
         self.label.setText(_translate("MainWindow", "OTAS Example"))
