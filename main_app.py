@@ -36,11 +36,11 @@ os.environ["QT_FONT_DPI"] = "96"
 
 class MainInterface(QMainWindow):
     # TODO : cleanup unused
-    if sys.platform == 'win32':
-        print("winner")
-    else:
-        print("Loser!")
-    testVar=None
+    # if sys.platform == 'win32':
+    #     print("Windows")
+    # else:
+    #     print("Linux!")
+
     selected_address = None
     advertised_name = None
     connected_address = None
