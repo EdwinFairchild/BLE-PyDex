@@ -3,6 +3,7 @@ from main_app import *
 from modules import Slots
 from modules import MiscHelpers
 from modules import Console
+
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
@@ -10,6 +11,13 @@ import zlib
 import sys
 import time
 
+from . testwidget import Ui_widgetCharSettings_2
+#----------
+vbox = QVBoxLayout()   
+timeTodelete=False
+objectList=[]
+charCount=0
+#-----------
 BUFFER_SIZE = 8192
 fileLen = 0
 
@@ -26,10 +34,51 @@ def get_crc32():
                 break
             crc = zlib.crc32(data, crc)
     return crc
+
+
+def btn_add_char(interface):
+    global vbox
+    global timeTodelete
+    global objectList
+    global charCount
+    scroll = QScrollArea()  # Scroll Area which contains the widgets, set as the centralWidget
+    widget = QWidget()      # Widget that contains the collection of Vertical Box
+
+    #make a wdiget
+    object = Ui_widgetCharSettings_2()
+    object.setupUi(object,charCount)
+    object.setMinimumHeight(351)
+    object.label_9.setText("Edwin")
+    vbox.addWidget(object)
+    objectList.append(object)
+    objectList[charCount].interface=interface
+    objectList[charCount].label_9.setText(f"I am {charCount}")
+    charCount +=1
+    
+
+
+     
+
+    
+    # # removes the 0th item in list until list is empty
+    # vbox.removeWidget(objectList[0])
+    # objectList.remove(objectList[0])
+    # timeTodelete =False
+
+    #register widget callback
+  
+
+    widget.setLayout(vbox)
+    interface.ui.scrollArea.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOn)
+    interface.ui.scrollArea.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+    interface.ui.scrollArea.setWidgetResizable(True)
+    interface.ui.scrollArea.setWidget(widget)
+
 # ------------------------------------------------------------------------
 
 def btn_github(interface):
-    webbrowser.open('https://github.com/EdwinFairchild/BLE-PyDex')
+    btn_add_char(interface)
+    #webbrowser.open('https://github.com/EdwinFairchild/BLE-PyDex')
 # ------------------------------------------------------------------------
 
 def btn_scan(interface):
@@ -181,12 +230,15 @@ def btn_read_char(interface):
 
 def btn_gatt_maker(interface):
     interface.ui.stackedWidget.slideInIdx(0)
+    # w = widgetCharSettings(interface)
+   
+    # interface.ui.stackedWidget.insertWidget(3, w)
     MiscHelpers.set_button_icons(interface, interface.ui.btnMenuGattMaker)
 
 # ------------------------------------------------------------------------
 
 def btn_client(interface):
-    interface.ui.stackedWidget.slideInIdx(1)
+    interface.ui.stackedWidget.slideInIdx(3)
     MiscHelpers.set_button_icons(interface, interface.ui.btnMenuClient)
 
 # ------------------------------------------------------------------------

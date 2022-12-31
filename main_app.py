@@ -27,10 +27,12 @@ import webbrowser
 import BLE_UUIDs
 
 
+
 QtWidgets.QApplication.setAttribute(
     QtCore.Qt.AA_EnableHighDpiScaling, True)  # enable highdpi scaling
 QtWidgets.QApplication.setAttribute(QtCore.Qt.AA_UseHighDpiPixmaps, True)
 os.environ["QT_FONT_DPI"] = "96"
+
 
 class MainInterface(QMainWindow):
     # TODO : cleanup unused
@@ -38,6 +40,7 @@ class MainInterface(QMainWindow):
         print("winner")
     else:
         print("Loser!")
+    testVar=None
     selected_address = None
     advertised_name = None
     connected_address = None
@@ -68,6 +71,8 @@ class MainInterface(QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
         self.ui.frm_otas.setVisible(False)
+        global testVar
+        self.testVar = self
         Console.console_init(self)
         ListCallbacks.register_list_callbacks(self)
         ButtonCallbacks.register_button_callbacks(self)
@@ -75,6 +80,7 @@ class MainInterface(QMainWindow):
         Console.log("BLE-PyDex initialized")
         Console.log_status()
         
+            
 
     # ------------------------------------------------------------------------
     # def eventFilter(self, source, event):
