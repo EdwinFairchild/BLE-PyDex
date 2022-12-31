@@ -167,8 +167,8 @@ class BleakLoop(QThread):
     async def otas_update_firmware(self, client: BleakClient):
         #---------------------------------------------------------------------------------------------------#
         #TODO make this use indications instead of delays- this is a proof of concept                       #
+        #     Move this method to a different file                                                          #
         #     All the varaibles below are directly from WDX related headers                                 #
-        #     working on refactoring all the "magic" numbers in packet_to_send lists to variable names below.     #
         #---------------------------------------------------------------------------------------------------#
         global fileLen
         # UUIDs
