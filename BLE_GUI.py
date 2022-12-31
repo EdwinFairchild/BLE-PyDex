@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(1976, 734)
+        MainWindow.resize(1976, 802)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(1)
@@ -364,15 +364,35 @@ class Ui_MainWindow(object):
         self.mainframe_gatt.setObjectName("mainframe_gatt")
         self.horizontalLayout_14 = QtWidgets.QHBoxLayout(self.mainframe_gatt)
         self.horizontalLayout_14.setObjectName("horizontalLayout_14")
-        self.label_5 = QtWidgets.QLabel(self.mainframe_gatt)
-        font = QtGui.QFont()
-        font.setPointSize(24)
-        self.label_5.setFont(font)
-        self.label_5.setStyleSheet("color: rgb(255, 255, 255);")
-        self.label_5.setObjectName("label_5")
-        self.horizontalLayout_14.addWidget(self.label_5)
         spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_14.addItem(spacerItem1)
+        self.frame_19 = QtWidgets.QFrame(self.mainframe_gatt)
+        self.frame_19.setMaximumSize(QtCore.QSize(50, 16777215))
+        self.frame_19.setStyleSheet("background-color: rgba(66, 66, 66);")
+        self.frame_19.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_19.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_19.setObjectName("frame_19")
+        self.horizontalLayout_14.addWidget(self.frame_19)
+        self.frame_designer_left = QtWidgets.QFrame(self.mainframe_gatt)
+        self.frame_designer_left.setMinimumSize(QtCore.QSize(400, 0))
+        self.frame_designer_left.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_designer_left.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_designer_left.setObjectName("frame_designer_left")
+        self.verticalLayout_12 = QtWidgets.QVBoxLayout(self.frame_designer_left)
+        self.verticalLayout_12.setObjectName("verticalLayout_12")
+        self.frame_7 = QtWidgets.QFrame(self.frame_designer_left)
+        self.frame_7.setStyleSheet("background-color: rgb(66, 66, 66);")
+        self.frame_7.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_7.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_7.setObjectName("frame_7")
+        self.verticalLayout_12.addWidget(self.frame_7)
+        self.frame_18 = QtWidgets.QFrame(self.frame_designer_left)
+        self.frame_18.setStyleSheet("background-color: rgb(66, 66, 66);")
+        self.frame_18.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_18.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_18.setObjectName("frame_18")
+        self.verticalLayout_12.addWidget(self.frame_18)
+        self.horizontalLayout_14.addWidget(self.frame_designer_left)
         self.scrollArea = QtWidgets.QScrollArea(self.mainframe_gatt)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
@@ -380,7 +400,9 @@ class Ui_MainWindow(object):
         sizePolicy.setHeightForWidth(self.scrollArea.sizePolicy().hasHeightForWidth())
         self.scrollArea.setSizePolicy(sizePolicy)
         self.scrollArea.setMaximumSize(QtCore.QSize(1000, 16777215))
-        self.scrollArea.setStyleSheet("QScrollBar\n"
+        self.scrollArea.setStyleSheet("background-color: rgb(36, 36, 36);\n"
+"border-radius:15px;\n"
+"QScrollBar\n"
 "{\n"
 "background : rgb(99,99,99);\n"
 "}\n"
@@ -394,77 +416,18 @@ class Ui_MainWindow(object):
 "}")
         self.scrollArea.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOn)
         self.scrollArea.setWidgetResizable(True)
+        self.scrollArea.setAlignment(QtCore.Qt.AlignCenter)
         self.scrollArea.setObjectName("scrollArea")
         self.scrollAreaWidgetContents = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 983, 661))
+        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 772, 729))
         self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
         self.verticalLayout_3 = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContents)
         self.verticalLayout_3.setObjectName("verticalLayout_3")
-        self.widgetTest = QtWidgets.QWidget(self.scrollAreaWidgetContents)
-        self.widgetTest.setMinimumSize(QtCore.QSize(0, 331))
-        self.widgetTest.setMaximumSize(QtCore.QSize(16777215, 331))
-        self.widgetTest.setStyleSheet("background-color: rgb(69, 69, 69);\n"
-"border-radius:15px;")
-        self.widgetTest.setObjectName("widgetTest")
-        self.checkBox_2 = AnimatedToggle(self.widgetTest)
-        self.checkBox_2.setGeometry(QtCore.QRect(180, 140, 71, 41))
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
-        sizePolicy.setHorizontalStretch(1)
-        sizePolicy.setVerticalStretch(1)
-        sizePolicy.setHeightForWidth(self.checkBox_2.sizePolicy().hasHeightForWidth())
-        self.checkBox_2.setSizePolicy(sizePolicy)
-        self.checkBox_2.setAutoFillBackground(False)
-        self.checkBox_2.setStyleSheet("\n"
-"QCheckBox {\n"
-"color: rgb(255, 255, 255);\n"
-"background-color: rgb(69, 69, 69);\n"
-"border-radius:  5px;\n"
-"padding-left: 5px;\n"
-"}\n"
-"")
-        self.checkBox_2.setText("")
-        self.checkBox_2.setIconSize(QtCore.QSize(20, 20))
-        self.checkBox_2.setObjectName("checkBox_2")
-        self.label_9 = QtWidgets.QLabel(self.widgetTest)
-        self.label_9.setGeometry(QtCore.QRect(280, 130, 151, 61))
-        font = QtGui.QFont()
-        font.setPointSize(14)
-        self.label_9.setFont(font)
-        self.label_9.setStyleSheet("color: rgb(255, 255, 255);")
-        self.label_9.setObjectName("label_9")
-        self.btnToggle_permit_read = QtWidgets.QPushButton(self.widgetTest)
-        self.btnToggle_permit_read.setGeometry(QtCore.QRect(210, 220, 131, 30))
-        self.btnToggle_permit_read.setMinimumSize(QtCore.QSize(100, 30))
-        font = QtGui.QFont()
-        font.setPointSize(11)
-        self.btnToggle_permit_read.setFont(font)
-        self.btnToggle_permit_read.setStyleSheet("QPushButton{\n"
-"text-align: center;\n"
-"padding-left: 0px;\n"
-"border-radius:5px;\n"
-"background-color: rgb(170,200,255);\n"
-"color: rgb(30, 39, 73);\n"
-"\n"
-"}\n"
-"\n"
-"QPushButton:hover{\n"
-"\n"
-"background-color: rgb(29, 42,95);\n"
-"    color: rgb(255, 255, 255);\n"
-"\n"
-"}\n"
-"\n"
-"QPushButton:pressed{\n"
-"    \n"
-"        color: rgb(255, 255, 255);\n"
-"background-color: rgb(48, 52, 63);\n"
-"}")
-        self.btnToggle_permit_read.setCheckable(True)
-        self.btnToggle_permit_read.setObjectName("btnToggle_permit_read")
-        self.verticalLayout_3.addWidget(self.widgetTest)
         self.scrollArea.setWidget(self.scrollAreaWidgetContents)
         self.horizontalLayout_14.addWidget(self.scrollArea)
+        self.horizontalLayout_14.setStretch(1, 1)
         self.horizontalLayout_14.setStretch(2, 1)
+        self.horizontalLayout_14.setStretch(3, 1)
         self.horizontalLayout_9.addWidget(self.mainframe_gatt)
         self.stackedWidget.addWidget(self.page_Gatt_Maker)
         self.page_BLE_Client = QtWidgets.QWidget()
@@ -1398,7 +1361,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
         self.stackedWidget.setCurrentIndex(0)
-        self.tabWidget.setCurrentIndex(0)
+        self.tabWidget.setCurrentIndex(1)
         self.timeoutSlider_2.valueChanged['int'].connect(self.timeoutLabel_2.setNum) # type: ignore
         self.timeoutSlider_3.valueChanged['int'].connect(self.lblConnectionTime.setNum) # type: ignore
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
@@ -1415,9 +1378,6 @@ class Ui_MainWindow(object):
         self.btnFindBin.setText(_translate("MainWindow", "Load FW Bin"))
         self.btnauthor.setText(_translate("MainWindow", " Edwin Amaya"))
         self.btnRepo.setText(_translate("MainWindow", "Github"))
-        self.label_5.setText(_translate("MainWindow", "Designer"))
-        self.label_9.setText(_translate("MainWindow", "Authenticate"))
-        self.btnToggle_permit_read.setText(_translate("MainWindow", "Read"))
         self.label_10.setText(_translate("MainWindow", "Scan timeout ( s ) :"))
         self.timeoutLabel_2.setText(_translate("MainWindow", "5"))
         self.btnScan.setText(_translate("MainWindow", "Scan"))
@@ -1467,7 +1427,6 @@ class Ui_MainWindow(object):
         self.btnLogSizeDown.setText(_translate("MainWindow", "_"))
         self.label_2.setText(_translate("MainWindow", "intro page"))
 from slidingstackedwidget import SlidingStackedWidget
-from toggle import AnimatedToggle
 
 
 if __name__ == "__main__":
