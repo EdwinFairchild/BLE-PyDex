@@ -26,5 +26,5 @@ from . MiscHelpers import *
 # Import helper methods
 from . SerialThread import *
 
-
+from . charSettingsWidget import Ui_widgetCharSettings_2
 

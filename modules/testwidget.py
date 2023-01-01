@@ -25,19 +25,20 @@ class Ui_widgetCharSettings_2(QWidget):
         self.myIndex=count
         widgetCharSettings_2.setObjectName("widgetCharSettings_2")
         widgetCharSettings_2.resize(712, 402)
-        self.widgetCharSettings = QtWidgets.QWidget(widgetCharSettings_2)
-        self.widgetCharSettings.setGeometry(QtCore.QRect(20, 20, 641, 331))
-        self.widgetCharSettings.setMinimumSize(QtCore.QSize(0, 331))
-        self.widgetCharSettings.setStyleSheet("background-color: rgb(69, 69, 69);\n"
+        self.widgetCharSettings = QWidget(widgetCharSettings_2)
+        self.widgetCharSettings.setObjectName(u"widgetCharSettings")
+        self.widgetCharSettings.setGeometry(QRect(20, 20, 641, 331))
+        self.widgetCharSettings.setMinimumSize(QSize(0, 331))
+        self.widgetCharSettings.setStyleSheet(u"background-color: rgb(44, 52, 58);\n"
 "border-radius:15px;")
-        self.widgetCharSettings.setObjectName("widgetCharSettings")
-        self.btnToggle_permit_read_2 = QtWidgets.QPushButton(self.widgetCharSettings)
-        self.btnToggle_permit_read_2.setGeometry(QtCore.QRect(30, 80, 131, 30))
-        self.btnToggle_permit_read_2.setMinimumSize(QtCore.QSize(100, 30))
-        font = QtGui.QFont()
+        self.btnToggle_permit_read_2 = QPushButton(self.widgetCharSettings)
+        self.btnToggle_permit_read_2.setObjectName(u"btnToggle_permit_read_2")
+        self.btnToggle_permit_read_2.setGeometry(QRect(30, 80, 131, 30))
+        self.btnToggle_permit_read_2.setMinimumSize(QSize(100, 30))
+        font = QFont()
         font.setPointSize(11)
         self.btnToggle_permit_read_2.setFont(font)
-        self.btnToggle_permit_read_2.setStyleSheet("QPushButton{\n"
+        self.btnToggle_permit_read_2.setStyleSheet(u"QPushButton{\n"
 "text-align: center;\n"
 "padding-left: 0px;\n"
 "border-radius:5px;\n"
@@ -49,24 +50,22 @@ class Ui_widgetCharSettings_2(QWidget):
 "QPushButton:hover{\n"
 "\n"
 "background-color: rgb(29, 42,95);\n"
-"    color: rgb(255, 255, 255);\n"
+"	color: rgb(255, 255, 255);\n"
 "\n"
 "}\n"
 "\n"
 "QPushButton:pressed{\n"
-"    \n"
-"        color: rgb(255, 255, 255);\n"
+"	\n"
+"		color: rgb(255, 255, 255);\n"
 "background-color: rgb(48, 52, 63);\n"
 "}")
         self.btnToggle_permit_read_2.setCheckable(True)
-        self.btnToggle_permit_read_2.setObjectName("btnToggle_permit_read_2")
-        self.btnToggle_permit_read = QtWidgets.QPushButton(self.widgetCharSettings)
-        self.btnToggle_permit_read.setGeometry(QtCore.QRect(30, 120, 131, 30))
-        self.btnToggle_permit_read.setMinimumSize(QtCore.QSize(100, 30))
-        font = QtGui.QFont()
-        font.setPointSize(11)
+        self.btnToggle_permit_read = QPushButton(self.widgetCharSettings)
+        self.btnToggle_permit_read.setObjectName(u"btnToggle_permit_read")
+        self.btnToggle_permit_read.setGeometry(QRect(30, 120, 131, 30))
+        self.btnToggle_permit_read.setMinimumSize(QSize(100, 30))
         self.btnToggle_permit_read.setFont(font)
-        self.btnToggle_permit_read.setStyleSheet("QPushButton{\n"
+        self.btnToggle_permit_read.setStyleSheet(u"QPushButton{\n"
 "text-align: center;\n"
 "padding-left: 0px;\n"
 "border-radius:5px;\n"
@@ -78,46 +77,47 @@ class Ui_widgetCharSettings_2(QWidget):
 "QPushButton:hover{\n"
 "\n"
 "background-color: rgb(29, 42,95);\n"
-"    color: rgb(255, 255, 255);\n"
+"	color: rgb(255, 255, 255);\n"
 "\n"
 "}\n"
 "\n"
 "QPushButton:pressed{\n"
-"    \n"
-"        color: rgb(255, 255, 255);\n"
+"	\n"
+"		color: rgb(255, 255, 255);\n"
 "background-color: rgb(48, 52, 63);\n"
 "}")
         self.btnToggle_permit_read.setCheckable(True)
-        self.btnToggle_permit_read.setObjectName("btnToggle_permit_read")
         self.checkBox_2 = AnimatedToggle(self.widgetCharSettings)
-        self.checkBox_2.setGeometry(QtCore.QRect(40, 30, 71, 41))
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
+        self.checkBox_2.setObjectName(u"checkBox_2")
+        self.checkBox_2.setGeometry(QRect(40, 30, 71, 41))
+        sizePolicy = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(1)
         sizePolicy.setVerticalStretch(1)
         sizePolicy.setHeightForWidth(self.checkBox_2.sizePolicy().hasHeightForWidth())
         self.checkBox_2.setSizePolicy(sizePolicy)
         self.checkBox_2.setAutoFillBackground(False)
-        self.checkBox_2.setStyleSheet("\n"
+        self.checkBox_2.setStyleSheet(u"\n"
 "QCheckBox {\n"
 "color: rgb(255, 255, 255);\n"
-"background-color: rgb(69, 69, 69);\n"
+"background-color: rgb(44, 52, 58);\n"
 "border-radius:  5px;\n"
 "padding-left: 5px;\n"
 "}\n"
 "")
-        self.checkBox_2.setText("")
-        self.checkBox_2.setIconSize(QtCore.QSize(20, 20))
-        self.checkBox_2.setObjectName("checkBox_2")
-        self.label_9 = QtWidgets.QLabel(self.widgetCharSettings)
-        self.label_9.setGeometry(QtCore.QRect(130, 20, 151, 61))
-        font = QtGui.QFont()
-        font.setPointSize(14)
-        self.label_9.setFont(font)
-        self.label_9.setStyleSheet("color: rgb(255, 255, 255);")
-        self.label_9.setObjectName("label_9")
+        self.checkBox_2.setIconSize(QSize(20, 20))
+        self.label_9 = QLabel(self.widgetCharSettings)
+        self.label_9.setObjectName(u"label_9")
+        self.label_9.setGeometry(QRect(130, 20, 151, 61))
+        font1 = QFont()
+        font1.setPointSize(14)
+        self.label_9.setFont(font1)
+        self.label_9.setStyleSheet(u"color: rgb(255, 255, 255);")
 
         self.retranslateUi(widgetCharSettings_2)
-        QtCore.QMetaObject.connectSlotsByName(widgetCharSettings_2)
+
+        QMetaObject.connectSlotsByName(widgetCharSettings_2)
+    # setupUi
+
 
     def retranslateUi(self, widgetCharSettings_2):
         _translate = QtCore.QCoreApplication.translate

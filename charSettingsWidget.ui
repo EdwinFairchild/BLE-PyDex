@@ -18,7 +18,7 @@
     <rect>
      <x>20</x>
      <y>20</y>
-     <width>641</width>
+     <width>581</width>
      <height>331</height>
     </rect>
    </property>
@@ -29,14 +29,14 @@
     </size>
    </property>
    <property name="styleSheet">
-    <string notr="true">background-color: rgb(69, 69, 69);
+    <string notr="true">background-color: rgb(44, 52, 58);
 border-radius:15px;</string>
    </property>
    <widget class="QPushButton" name="btnToggle_permit_read_2">
     <property name="geometry">
      <rect>
       <x>30</x>
-      <y>80</y>
+      <y>90</y>
       <width>131</width>
       <height>30</height>
      </rect>
@@ -86,7 +86,7 @@ background-color: rgb(48, 52, 63);
     <property name="geometry">
      <rect>
       <x>30</x>
-      <y>120</y>
+      <y>130</y>
       <width>131</width>
       <height>30</height>
      </rect>
@@ -154,7 +154,7 @@ background-color: rgb(48, 52, 63);
      <string notr="true">
 QCheckBox {
 color: rgb(255, 255, 255);
-background-color: rgb(69, 69, 69);
+background-color: rgb(44, 52, 58);
 border-radius:  5px;
 padding-left: 5px;
 }
@@ -174,9 +174,9 @@ padding-left: 5px;
     <property name="geometry">
      <rect>
       <x>130</x>
-      <y>20</y>
+      <y>30</y>
       <width>151</width>
-      <height>61</height>
+      <height>41</height>
      </rect>
     </property>
     <property name="font">
@@ -188,7 +188,7 @@ padding-left: 5px;
      <string notr="true">color: rgb(255, 255, 255);</string>
     </property>
     <property name="text">
-     <string>Authenticate</string>
+     <string>Characteristic</string>
     </property>
    </widget>
   </widget>

@@ -1,21 +1,20 @@
 
 from main_app import *
-from modules import Slots
-from modules import MiscHelpers
-from modules import Console
-
+from modules import *
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 import zlib
 import sys
 import time
+from . charSettingsWidget import Ui_widgetCharSettings_2
 
-from . testwidget import Ui_widgetCharSettings_2
+
 #----------
 vbox = QVBoxLayout()   
 timeTodelete=False
-objectList=[]
+# TODO turn into dictionary
+attributeDict={}
 charCount=0
 #-----------
 BUFFER_SIZE = 8192
@@ -35,34 +34,34 @@ def get_crc32():
             crc = zlib.crc32(data, crc)
     return crc
 
-
+def btn_read_property(interface, index):
+    print(index)
 def btn_add_char(interface):
     global vbox
     global timeTodelete
-    global objectList
+    global attributeDict
     global charCount
     scroll = QScrollArea()  # Scroll Area which contains the widgets, set as the centralWidget
     widget = QWidget()      # Widget that contains the collection of Vertical Box
 
-    #make a wdiget
-    object = Ui_widgetCharSettings_2()
-    object.setupUi(object,charCount)
-    object.setMinimumHeight(351)
-    object.label_9.setText("Edwin")
-    vbox.addWidget(object)
-    objectList.append(object)
-    objectList[charCount].interface=interface
-    objectList[charCount].label_9.setText(f"I am {charCount}")
-    charCount +=1
+    tempWidget = QtWidgets.QWidget()
+    uiwidget = Ui_widgetCharSettings_2()
+    tempWidget.setMinimumHeight(360)
+    uiwidget.setupUi(tempWidget)
     
+    vbox.addWidget(tempWidget)
+    attributeDict[f"attribute: {charCount}"] = (uiwidget, charCount)
+    # retreive the widget object from the tuple in the dictionary
+    test = attributeDict[f"attribute: {charCount}"]
+    # test[0].label_9.setText(f"I am : {charCount}")
 
+    # connect callbacks
+    uiwidget.btnToggle_permit_read.clicked.connect(lambda state: btn_read_property(interface ,test[1] ))
+    charCount += 1
 
-     
-
-    
     # # removes the 0th item in list until list is empty
-    # vbox.removeWidget(objectList[0])
-    # objectList.remove(objectList[0])
+    # vbox.removeWidget(attributeDict[0])
+    # attributeDict.remove(attributeDict[0])
     # timeTodelete =False
 
     #register widget callback
@@ -77,8 +76,7 @@ def btn_add_char(interface):
 # ------------------------------------------------------------------------
 
 def btn_github(interface):
-    btn_add_char(interface)
-    #webbrowser.open('https://github.com/EdwinFairchild/BLE-PyDex')
+    webbrowser.open('https://github.com/EdwinFairchild/BLE-PyDex')
 # ------------------------------------------------------------------------
 
 def btn_scan(interface):
@@ -325,4 +323,5 @@ def register_button_callbacks(interface):
     interface.ui.btnOtaUpdate.clicked.connect(lambda state: btn_put_req(interface))
     interface.ui.btnLogSizeUp.clicked.connect(lambda state: btn_log_window_size_up(interface))
     interface.ui.btnLogSizeDown.clicked.connect(lambda state: btn_log_window_size_down(interface))
+    interface.ui.btn_Add_Characteristic.clicked.connect(lambda state: btn_add_char(interface))
 
