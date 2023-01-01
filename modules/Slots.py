@@ -13,7 +13,9 @@ def discovered_services(interface ,data):
     item = item.replace("\t", "")
     item = item.replace("[", "")
     item = item.replace("]", " : ")
-
+    style = QApplication.style()
+    dir_open = style.standardIcon(QStyle.SP_DirOpenIcon)
+    
     # list only has 2 elements , that last one being index 1 
     # stating what level this item is at.. see : BLE_function.py -> exploreSerivce
     level = data[1]
@@ -22,6 +24,7 @@ def discovered_services(interface ,data):
         Characteristic :  00002a05-0000-1000-8000-00805f9b34fb (Handle: 17): Service Changed (indicate), Value: None'''
     if level == 0:
         interface.toplevel = QTreeWidgetItem([str(item)])
+        interface.toplevel.setIcon(0,dir_open)
         interface.ui.servicesTreeWidget.addTopLevelItem(interface.toplevel)
     elif level == 1 and interface.toplevel != None:
         interface.child = QTreeWidgetItem([str(item)])
