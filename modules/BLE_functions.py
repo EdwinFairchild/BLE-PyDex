@@ -248,7 +248,7 @@ class BleakLoop(QThread):
                     if not rawBytes:
                         break
                     await client.write_gatt_char(WDX_File_Transfer_Data_Characteristic, bytearray(rawBytes))
-                    await asyncio.sleep(0.01)
+                    await asyncio.sleep(0.005)
             self.otasUpdate = False
             Console.log("End of sending file")  
             time.sleep(1)
