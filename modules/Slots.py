@@ -17,7 +17,7 @@ def discovered_services(interface ,data):
     dir_open = style.standardIcon(QStyle.SP_DirOpenIcon)
     
     # list only has 2 elements , that last one being index 1 
-    # stating what level this item is at.. see : BLE_function.py -> exploreSerivce
+    # starting what level this item is at.. see : BLE_function.py -> exploreSerivce
     level = data[1]
     ''' And leaves  looking like this:
         Service :  00001801-0000-1000-8000-00805f9b34fb (Handle: 16): Generic Attribute Profile 

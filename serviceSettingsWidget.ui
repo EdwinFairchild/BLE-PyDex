@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>widgetChar</class>
- <widget class="QWidget" name="widgetChar">
+ <class>widgetService</class>
+ <widget class="QWidget" name="widgetService">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>492</width>
-    <height>227</height>
+    <width>488</width>
+    <height>232</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,7 +16,7 @@
   <property name="styleSheet">
    <string notr="true">border: 0px solid gray;</string>
   </property>
-  <widget class="QWidget" name="widgetCharSettings" native="true">
+  <widget class="QWidget" name="widgetServiceSettings" native="true">
    <property name="geometry">
     <rect>
      <x>0</x>
@@ -34,7 +34,7 @@
    <property name="styleSheet">
     <string notr="true">background-color: rgb(255, 255, 255);
 border-radius:15px;
-border: 0px solid gray;</string>
+border: 1px solid gray;</string>
    </property>
    <widget class="QPushButton" name="btnToggle_permit_read_2">
     <property name="geometry">
@@ -139,7 +139,7 @@ background-color: rgb(48, 52, 63);
    <widget class="AnimatedToggle" name="checkBox_2">
     <property name="geometry">
      <rect>
-      <x>40</x>
+      <x>30</x>
       <y>30</y>
       <width>71</width>
       <height>41</height>
@@ -214,12 +214,11 @@ padding-left: 5px;
      <string notr="true">text-align: center;
 padding-left: 0px;
 border-radius:5px;
-border: 0px solid gray;
-background-color: rgb(246,181,61);
+background-color: rgb(39, 52, 105);
 	color: rgb(255, 255, 255);</string>
     </property>
     <property name="text">
-     <string>Characterisitic</string>
+     <string>Service</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignCenter</set>

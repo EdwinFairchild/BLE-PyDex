@@ -82,6 +82,20 @@ def btn_tree_widget_item_pressed(interface):
         "writable-auxiliaries",
 """
     interface.ui.btnLabelPermissions.setText(lblPermissions)
+def btn_gatt_tree_item_pressed(interface):
+    #get the item
+    gattTreeWidgetItem = interface.ui.gatt_tree.currentItem()
+    #get item text
+    gattTreeWidgetItemText = gattTreeWidgetItem.text(0)
+    parent = gattTreeWidgetItem.parent()
+    print(parent)
+
+    #scroll to currently selected item
+    index = 4
+    interface.ui.scrollArea.ensureWidgetVisible(interface.vbox.itemAt(index).widget())
+    #todo make function to set style sheet and one to revert on widget click 
+    interface.vbox.itemAt(index).widget().setStyleSheet("background-color: rgb(155, 155, 155);border-radius:15px;border: 1px solid gray;")
+
 # ------------------------------------------------------------------------
 def register_list_callbacks(interface):
     
@@ -89,3 +103,4 @@ def register_list_callbacks(interface):
     interface.ui.list_EnabledNotify.itemPressed.connect(lambda temp : enabledNotifyListItemPressed(interface))
     interface.ui.list_EnabledNotifyValue.itemPressed.connect(lambda temp : enabledNotifyListValueItemPressed(interface))
     interface.ui.servicesTreeWidget.itemPressed.connect(lambda state : btn_tree_widget_item_pressed(interface))
+    interface.ui.gatt_tree.itemPressed.connect(lambda state : btn_gatt_tree_item_pressed(interface))

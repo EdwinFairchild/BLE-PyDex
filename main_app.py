@@ -9,9 +9,9 @@ from modules import Console
 from PyQt5 import Qt as qtw
 from PyQt5 import QtCore as qtc
 from PyQt5 import QtCore, QtGui, QtWidgets 
-from PyQt5.QtCore import QPropertyAnimation, QAbstractAnimation, QPoint ,QEasingCurve, pyqtSignal, QSequentialAnimationGroup
+from PyQt5.QtCore import QPropertyAnimation, QAbstractAnimation, QPoint ,QEasingCurve, pyqtSignal, QSequentialAnimationGroup 
 from PyQt5.QtCore import pyqtProperty
-from PyQt5.QtWidgets import QPushButton
+from PyQt5.QtWidgets import QPushButton, QToolTip
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
@@ -65,6 +65,8 @@ class MainInterface(QMainWindow):
     # list to manage chars that have notify enabled
     notifyEnabledCharsDict = {}
 
+    vbox = QGridLayout()
+   
     def __init__(self):
         QMainWindow.__init__(self)
         # setup gui
@@ -79,6 +81,8 @@ class MainInterface(QMainWindow):
         MiscHelpers.init_icons(self)
         Console.log("BLE-PyDex initialized")
         Console.log_status()
+        
+        
         
             
 
@@ -106,6 +110,7 @@ if __name__ == '__main__':
     # pyrcc5 image.qrc -o image_rc.py
     # compile gui
     os.system("pyuic5 -x BLE_GUI.ui -o BLE_GUI.py")
+    
     atexit.register(exitFunc)
     app = qtw.QApplication(sys.argv)
     app.setStyle('Fusion')

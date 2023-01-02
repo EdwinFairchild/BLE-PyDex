@@ -7,11 +7,12 @@ from PyQt5.QtWidgets import *
 import zlib
 import sys
 import time
-from . charSettingsWidget import Ui_widgetCharSettings_2
-
+from . charSettingsWidget import Ui_widgetChar
+from . serviceSettingsWidget import Ui_widgetService
+from . descriptorSettingsWidget import Ui_widgetDescriptor
 
 #----------
-vbox = QVBoxLayout()   
+   
 timeTodelete=False
 # TODO turn into dictionary
 attributeDict={}
@@ -34,10 +35,22 @@ def get_crc32():
             crc = zlib.crc32(data, crc)
     return crc
 
+# debug ---------------
 def btn_read_property(interface, index):
     print(index)
+#------------------------
+def btn_add_descriptor(interface):
+    test = attributeDict[f"attribute: 5"]
+    test[0].label_9.setText(f"I am : {charCount}")
+   
+# ------------------------------------------------------------------------
+
+def btn_add_service(interface):
+    newService = QTreeWidgetItem([f"service {charCount}"])
+    interface.ui.gatt_tree.addTopLevelItem(newService)
+# ------------------------------------------------------------------------
+    
 def btn_add_char(interface):
-    global vbox
     global timeTodelete
     global attributeDict
     global charCount
@@ -45,11 +58,13 @@ def btn_add_char(interface):
     widget = QWidget()      # Widget that contains the collection of Vertical Box
 
     tempWidget = QtWidgets.QWidget()
-    uiwidget = Ui_widgetCharSettings_2()
-    tempWidget.setMinimumHeight(360)
+    uiwidget = Ui_widgetChar()
+    tempWidget.setMinimumHeight(260)
+    
     uiwidget.setupUi(tempWidget)
     
-    vbox.addWidget(tempWidget)
+    interface.vbox.addWidget(tempWidget,charCount,0)
+    interface.vbox.setContentsMargins(QMargins(30, 0, 0, 0))
     attributeDict[f"attribute: {charCount}"] = (uiwidget, charCount)
     # retreive the widget object from the tuple in the dictionary
     test = attributeDict[f"attribute: {charCount}"]
@@ -67,11 +82,22 @@ def btn_add_char(interface):
     #register widget callback
   
 
-    widget.setLayout(vbox)
-    interface.ui.scrollArea.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOn)
+    widget.setLayout(interface.vbox)
+    widget.setStyleSheet("border: 0px solid gray;")
+
+    interface.ui.scrollArea.setVerticalScrollBarPolicy(Qt.ScrollBarAsNeeded)
     interface.ui.scrollArea.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
     interface.ui.scrollArea.setWidgetResizable(True)
     interface.ui.scrollArea.setWidget(widget)
+
+    #get the item
+    gattTreeWidgetItem = interface.ui.gatt_tree.currentItem()
+    print("crurent item")
+    print(gattTreeWidgetItem.text(0))
+    child = QTreeWidgetItem([f"test {charCount}"])
+    parent = gattTreeWidgetItem.parent()
+    print(parent)
+    gattTreeWidgetItem.addChild(child)
 
 # ------------------------------------------------------------------------
 
@@ -324,4 +350,6 @@ def register_button_callbacks(interface):
     interface.ui.btnLogSizeUp.clicked.connect(lambda state: btn_log_window_size_up(interface))
     interface.ui.btnLogSizeDown.clicked.connect(lambda state: btn_log_window_size_down(interface))
     interface.ui.btn_Add_Characteristic.clicked.connect(lambda state: btn_add_char(interface))
+    interface.ui.btn_Add_Service.clicked.connect(lambda state: btn_add_service(interface))
+    interface.ui.btn_Add_Descriptor.clicked.connect(lambda state: btn_add_descriptor(interface))
 

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'charSettingsWidget.ui'
+# Form implementation generated from reading ui file 'descriptorSettingsWidget.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.6
 #
@@ -11,19 +11,19 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class Ui_widgetChar(object):
-    def setupUi(self, widgetChar):
-        widgetChar.setObjectName("widgetChar")
-        widgetChar.resize(492, 227)
-        widgetChar.setStyleSheet("border: 0px solid gray;")
-        self.widgetCharSettings = QtWidgets.QWidget(widgetChar)
-        self.widgetCharSettings.setGeometry(QtCore.QRect(0, 10, 481, 211))
-        self.widgetCharSettings.setMinimumSize(QtCore.QSize(0, 200))
-        self.widgetCharSettings.setStyleSheet("background-color: rgb(255, 255, 255);\n"
+class Ui_widgetDescriptor(object):
+    def setupUi(self, widgetDescriptor):
+        widgetDescriptor.setObjectName("widgetDescriptor")
+        widgetDescriptor.resize(488, 232)
+        widgetDescriptor.setStyleSheet("border: 0px solid gray;")
+        self.widgetDescriptorSettings = QtWidgets.QWidget(widgetDescriptor)
+        self.widgetDescriptorSettings.setGeometry(QtCore.QRect(0, 10, 481, 211))
+        self.widgetDescriptorSettings.setMinimumSize(QtCore.QSize(0, 200))
+        self.widgetDescriptorSettings.setStyleSheet("background-color: rgb(255, 255, 255);\n"
 "border-radius:15px;\n"
-"border: 0px solid gray;")
-        self.widgetCharSettings.setObjectName("widgetCharSettings")
-        self.btnToggle_permit_read_2 = QtWidgets.QPushButton(self.widgetCharSettings)
+"border: 1px solid gray;")
+        self.widgetDescriptorSettings.setObjectName("widgetDescriptorSettings")
+        self.btnToggle_permit_read_2 = QtWidgets.QPushButton(self.widgetDescriptorSettings)
         self.btnToggle_permit_read_2.setGeometry(QtCore.QRect(30, 90, 131, 30))
         self.btnToggle_permit_read_2.setMinimumSize(QtCore.QSize(100, 30))
         font = QtGui.QFont()
@@ -52,7 +52,7 @@ class Ui_widgetChar(object):
 "}")
         self.btnToggle_permit_read_2.setCheckable(True)
         self.btnToggle_permit_read_2.setObjectName("btnToggle_permit_read_2")
-        self.btnToggle_permit_read = QtWidgets.QPushButton(self.widgetCharSettings)
+        self.btnToggle_permit_read = QtWidgets.QPushButton(self.widgetDescriptorSettings)
         self.btnToggle_permit_read.setGeometry(QtCore.QRect(30, 130, 131, 30))
         self.btnToggle_permit_read.setMinimumSize(QtCore.QSize(100, 30))
         font = QtGui.QFont()
@@ -81,7 +81,7 @@ class Ui_widgetChar(object):
 "}")
         self.btnToggle_permit_read.setCheckable(True)
         self.btnToggle_permit_read.setObjectName("btnToggle_permit_read")
-        self.checkBox_2 = AnimatedToggle(self.widgetCharSettings)
+        self.checkBox_2 = AnimatedToggle(self.widgetDescriptorSettings)
         self.checkBox_2.setGeometry(QtCore.QRect(40, 30, 71, 41))
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(1)
@@ -100,14 +100,14 @@ class Ui_widgetChar(object):
         self.checkBox_2.setText("")
         self.checkBox_2.setIconSize(QtCore.QSize(20, 20))
         self.checkBox_2.setObjectName("checkBox_2")
-        self.label_9 = QtWidgets.QLabel(self.widgetCharSettings)
+        self.label_9 = QtWidgets.QLabel(self.widgetDescriptorSettings)
         self.label_9.setGeometry(QtCore.QRect(130, 30, 151, 41))
         font = QtGui.QFont()
         font.setPointSize(14)
         self.label_9.setFont(font)
         self.label_9.setStyleSheet("color: rgb(255, 255, 255);")
         self.label_9.setObjectName("label_9")
-        self.label = QtWidgets.QLabel(self.widgetCharSettings)
+        self.label = QtWidgets.QLabel(self.widgetDescriptorSettings)
         self.label.setGeometry(QtCore.QRect(330, 0, 151, 31))
         font = QtGui.QFont()
         font.setBold(True)
@@ -116,30 +116,29 @@ class Ui_widgetChar(object):
         self.label.setStyleSheet("text-align: center;\n"
 "padding-left: 0px;\n"
 "border-radius:5px;\n"
-"border: 0px solid gray;\n"
-"background-color: rgb(246,181,61);\n"
+"background-color: rgb(255, 0, 0);\n"
 "    color: rgb(255, 255, 255);")
         self.label.setAlignment(QtCore.Qt.AlignCenter)
         self.label.setObjectName("label")
 
-        self.retranslateUi(widgetChar)
-        QtCore.QMetaObject.connectSlotsByName(widgetChar)
+        self.retranslateUi(widgetDescriptor)
+        QtCore.QMetaObject.connectSlotsByName(widgetDescriptor)
 
-    def retranslateUi(self, widgetChar):
+    def retranslateUi(self, widgetDescriptor):
         _translate = QtCore.QCoreApplication.translate
-        widgetChar.setWindowTitle(_translate("widgetChar", "Form"))
-        self.btnToggle_permit_read_2.setText(_translate("widgetChar", "Write"))
-        self.btnToggle_permit_read.setText(_translate("widgetChar", "Read"))
-        self.label_9.setText(_translate("widgetChar", "Characteristic"))
-        self.label.setText(_translate("widgetChar", "Characterisitic"))
+        widgetDescriptor.setWindowTitle(_translate("widgetDescriptor", "Form"))
+        self.btnToggle_permit_read_2.setText(_translate("widgetDescriptor", "Write"))
+        self.btnToggle_permit_read.setText(_translate("widgetDescriptor", "Read"))
+        self.label_9.setText(_translate("widgetDescriptor", "Characteristic"))
+        self.label.setText(_translate("widgetDescriptor", "Descriptor"))
 from toggle import AnimatedToggle
 
 
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
-    widgetChar = QtWidgets.QWidget()
-    ui = Ui_widgetChar()
-    ui.setupUi(widgetChar)
-    widgetChar.show()
+    widgetDescriptor = QtWidgets.QWidget()
+    ui = Ui_widgetDescriptor()
+    ui.setupUi(widgetDescriptor)
+    widgetDescriptor.show()
     sys.exit(app.exec_())

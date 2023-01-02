@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1717</width>
-    <height>729</height>
+    <width>1527</width>
+    <height>869</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -18,7 +18,7 @@
   </property>
   <property name="minimumSize">
    <size>
-    <width>0</width>
+    <width>100</width>
     <height>0</height>
    </size>
   </property>
@@ -28,8 +28,14 @@
     <height>99999</height>
    </size>
   </property>
+  <property name="mouseTracking">
+   <bool>true</bool>
+  </property>
   <property name="windowTitle">
    <string>BLE Python Device Explorer</string>
+  </property>
+  <property name="toolTipDuration">
+   <number>3</number>
   </property>
   <property name="styleSheet">
    <string notr="true">		background-color: rgb(235,245,255);
@@ -54,6 +60,9 @@ border:none;</string>
     </property>
     <item row="0" column="0">
      <widget class="QFrame" name="mainFrame">
+      <property name="focusPolicy">
+       <enum>Qt::StrongFocus</enum>
+      </property>
       <property name="styleSheet">
        <string notr="true">background-color: rgb(250, 250, 255);</string>
       </property>
@@ -698,15 +707,30 @@ border-color: rgb(190, 190, 190);</string>
              <enum>QFrame::NoFrame</enum>
             </property>
             <property name="currentIndex">
-             <number>0</number>
+             <number>2</number>
             </property>
             <widget class="QWidget" name="page_Gatt_Maker">
              <property name="styleSheet">
               <string notr="true">border-radius:15px;</string>
              </property>
              <layout class="QHBoxLayout" name="horizontalLayout_9">
+              <property name="spacing">
+               <number>9</number>
+              </property>
+              <property name="leftMargin">
+               <number>0</number>
+              </property>
+              <property name="topMargin">
+               <number>0</number>
+              </property>
+              <property name="rightMargin">
+               <number>0</number>
+              </property>
+              <property name="bottomMargin">
+               <number>0</number>
+              </property>
               <item>
-               <widget class="QFrame" name="mainframe_gatt">
+               <widget class="QFrame" name="middle_frame">
                 <property name="minimumSize">
                  <size>
                   <width>0</width>
@@ -720,7 +744,7 @@ border-color: rgb(190, 190, 190);</string>
                  </size>
                 </property>
                 <property name="styleSheet">
-                 <string notr="true">background-color: rgb(49,49, 49);
+                 <string notr="true">background-color: rgb(255,255, 255);
 border-radius:15px;</string>
                 </property>
                 <property name="frameShape">
@@ -729,9 +753,9 @@ border-radius:15px;</string>
                 <property name="frameShadow">
                  <enum>QFrame::Raised</enum>
                 </property>
-                <layout class="QHBoxLayout" name="horizontalLayout_14" stretch="22,2,2">
+                <layout class="QHBoxLayout" name="horizontalLayout_14" stretch="0">
                  <property name="spacing">
-                  <number>0</number>
+                  <number>9</number>
                  </property>
                  <property name="leftMargin">
                   <number>0</number>
@@ -746,79 +770,6 @@ border-radius:15px;</string>
                   <number>0</number>
                  </property>
                  <item>
-                  <widget class="QFrame" name="frame_19">
-                   <property name="minimumSize">
-                    <size>
-                     <width>100</width>
-                     <height>0</height>
-                    </size>
-                   </property>
-                   <property name="maximumSize">
-                    <size>
-                     <width>50</width>
-                     <height>16777215</height>
-                    </size>
-                   </property>
-                   <property name="styleSheet">
-                    <string notr="true">background-color: rgb(21, 25, 28);
-border-radius:0
-px;</string>
-                   </property>
-                   <property name="frameShape">
-                    <enum>QFrame::StyledPanel</enum>
-                   </property>
-                   <property name="frameShadow">
-                    <enum>QFrame::Raised</enum>
-                   </property>
-                   <widget class="QPushButton" name="btn_Add_Characteristic">
-                    <property name="geometry">
-                     <rect>
-                      <x>20</x>
-                      <y>120</y>
-                      <width>51</width>
-                      <height>30</height>
-                     </rect>
-                    </property>
-                    <property name="font">
-                     <font>
-                      <pointsize>20</pointsize>
-                      <weight>75</weight>
-                      <bold>true</bold>
-                     </font>
-                    </property>
-                    <property name="styleSheet">
-                     <string notr="true">color: rgb(222, 221, 218);</string>
-                    </property>
-                    <property name="text">
-                     <string>C</string>
-                    </property>
-                   </widget>
-                   <widget class="QPushButton" name="btn_Add_Characteristic_2">
-                    <property name="geometry">
-                     <rect>
-                      <x>20</x>
-                      <y>70</y>
-                      <width>51</width>
-                      <height>30</height>
-                     </rect>
-                    </property>
-                    <property name="font">
-                     <font>
-                      <pointsize>20</pointsize>
-                      <weight>75</weight>
-                      <bold>true</bold>
-                     </font>
-                    </property>
-                    <property name="styleSheet">
-                     <string notr="true">color: rgb(222, 221, 218);</string>
-                    </property>
-                    <property name="text">
-                     <string>S</string>
-                    </property>
-                   </widget>
-                  </widget>
-                 </item>
-                 <item>
                   <widget class="QFrame" name="frame_designer_left">
                    <property name="minimumSize">
                     <size>
@@ -826,9 +777,18 @@ px;</string>
                      <height>0</height>
                     </size>
                    </property>
+                   <property name="toolTip">
+                    <string/>
+                   </property>
+                   <property name="statusTip">
+                    <string/>
+                   </property>
+                   <property name="whatsThis">
+                    <string/>
+                   </property>
                    <property name="styleSheet">
-                    <string notr="true">background-color: rgb(24, 30, 34);
-border-radius:0x;</string>
+                    <string notr="true">border: 0px solid gray;
+border-color: rgb(190, 190, 190);</string>
                    </property>
                    <property name="frameShape">
                     <enum>QFrame::StyledPanel</enum>
@@ -836,68 +796,366 @@ border-radius:0x;</string>
                    <property name="frameShadow">
                     <enum>QFrame::Raised</enum>
                    </property>
-                   <widget class="QFrame" name="frame_7">
-                    <property name="geometry">
-                     <rect>
-                      <x>30</x>
-                      <y>330</y>
-                      <width>281</width>
-                      <height>201</height>
-                     </rect>
+                   <layout class="QHBoxLayout" name="horizontalLayout_15" stretch="5,4">
+                    <property name="spacing">
+                     <number>10</number>
                     </property>
-                    <property name="minimumSize">
-                     <size>
-                      <width>0</width>
-                      <height>0</height>
-                     </size>
+                    <property name="leftMargin">
+                     <number>10</number>
                     </property>
-                    <property name="styleSheet">
-                     <string notr="true">background-color: rgb(44, 52, 58);</string>
+                    <property name="topMargin">
+                     <number>0</number>
                     </property>
-                    <property name="frameShape">
-                     <enum>QFrame::StyledPanel</enum>
+                    <property name="rightMargin">
+                     <number>0</number>
                     </property>
-                    <property name="frameShadow">
-                     <enum>QFrame::Raised</enum>
+                    <property name="bottomMargin">
+                     <number>0</number>
                     </property>
-                   </widget>
-                   <widget class="QTreeWidget" name="treeWidget">
-                    <property name="geometry">
-                     <rect>
-                      <x>30</x>
-                      <y>30</y>
-                      <width>621</width>
-                      <height>271</height>
-                     </rect>
-                    </property>
-                    <property name="styleSheet">
-                     <string notr="true">background-color: rgb(44, 52, 58);</string>
-                    </property>
-                    <column>
-                     <property name="text">
-                      <string notr="true">1</string>
-                     </property>
-                    </column>
-                   </widget>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QScrollArea" name="scrollArea">
-                   <property name="sizePolicy">
-                    <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-                     <horstretch>0</horstretch>
-                     <verstretch>0</verstretch>
-                    </sizepolicy>
-                   </property>
-                   <property name="maximumSize">
-                    <size>
-                     <width>1000</width>
-                     <height>16777215</height>
-                    </size>
-                   </property>
-                   <property name="styleSheet">
-                    <string notr="true">background-color: rgb(34, 40, 44);
-border-radius:0px;
+                    <item>
+                     <widget class="QFrame" name="frame_7">
+                      <property name="minimumSize">
+                       <size>
+                        <width>0</width>
+                        <height>0</height>
+                       </size>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">border: 0px solid gray;</string>
+                      </property>
+                      <property name="frameShape">
+                       <enum>QFrame::StyledPanel</enum>
+                      </property>
+                      <property name="frameShadow">
+                       <enum>QFrame::Raised</enum>
+                      </property>
+                      <layout class="QVBoxLayout" name="verticalLayout_12" stretch="0,4,4">
+                       <property name="spacing">
+                        <number>10</number>
+                       </property>
+                       <property name="leftMargin">
+                        <number>0</number>
+                       </property>
+                       <property name="topMargin">
+                        <number>0</number>
+                       </property>
+                       <property name="rightMargin">
+                        <number>0</number>
+                       </property>
+                       <property name="bottomMargin">
+                        <number>0</number>
+                       </property>
+                       <item>
+                        <widget class="QFrame" name="left_frame">
+                         <property name="minimumSize">
+                          <size>
+                           <width>100</width>
+                           <height>100</height>
+                          </size>
+                         </property>
+                         <property name="maximumSize">
+                          <size>
+                           <width>1000</width>
+                           <height>16777215</height>
+                          </size>
+                         </property>
+                         <property name="styleSheet">
+                          <string notr="true">border: 1px solid gray;
+border-color: rgb(190, 190, 190);
+background-color: rgb(251,252,255);</string>
+                         </property>
+                         <property name="frameShape">
+                          <enum>QFrame::StyledPanel</enum>
+                         </property>
+                         <property name="frameShadow">
+                          <enum>QFrame::Raised</enum>
+                         </property>
+                         <widget class="QPushButton" name="btn_Add_Characteristic">
+                          <property name="geometry">
+                           <rect>
+                            <x>200</x>
+                            <y>30</y>
+                            <width>261</width>
+                            <height>51</height>
+                           </rect>
+                          </property>
+                          <property name="font">
+                           <font>
+                            <pointsize>20</pointsize>
+                            <weight>75</weight>
+                            <bold>true</bold>
+                           </font>
+                          </property>
+                          <property name="mouseTracking">
+                           <bool>true</bool>
+                          </property>
+                          <property name="toolTip">
+                           <string extracomment="this is a tool tip"/>
+                          </property>
+                          <property name="toolTipDuration">
+                           <number>3</number>
+                          </property>
+                          <property name="statusTip">
+                           <string extracomment="sdasdf"/>
+                          </property>
+                          <property name="accessibleName">
+                           <string extracomment="asdfasdfas"/>
+                          </property>
+                          <property name="styleSheet">
+                           <string notr="true">color: rgb(246,181,61);
+background-color: rgb(255, 255, 255);</string>
+                          </property>
+                          <property name="text">
+                           <string>Characteristic</string>
+                          </property>
+                         </widget>
+                         <widget class="QPushButton" name="btn_Add_Service">
+                          <property name="geometry">
+                           <rect>
+                            <x>20</x>
+                            <y>30</y>
+                            <width>171</width>
+                            <height>51</height>
+                           </rect>
+                          </property>
+                          <property name="font">
+                           <font>
+                            <pointsize>20</pointsize>
+                            <weight>75</weight>
+                            <bold>true</bold>
+                           </font>
+                          </property>
+                          <property name="mouseTracking">
+                           <bool>false</bool>
+                          </property>
+                          <property name="toolTip">
+                           <string extracomment="tessting"/>
+                          </property>
+                          <property name="toolTipDuration">
+                           <number>3</number>
+                          </property>
+                          <property name="statusTip">
+                           <string extracomment="amaya"/>
+                          </property>
+                          <property name="whatsThis">
+                           <string extracomment="eddwin"/>
+                          </property>
+                          <property name="styleSheet">
+                           <string notr="true">color: rgb(39, 52, 105);
+background-color: rgb(255, 255, 255);</string>
+                          </property>
+                          <property name="text">
+                           <string>Service</string>
+                          </property>
+                          <property name="checkable">
+                           <bool>true</bool>
+                          </property>
+                         </widget>
+                         <widget class="QPushButton" name="btn_Add_Descriptor">
+                          <property name="geometry">
+                           <rect>
+                            <x>470</x>
+                            <y>30</y>
+                            <width>201</width>
+                            <height>51</height>
+                           </rect>
+                          </property>
+                          <property name="font">
+                           <font>
+                            <pointsize>18</pointsize>
+                            <weight>75</weight>
+                            <bold>true</bold>
+                           </font>
+                          </property>
+                          <property name="mouseTracking">
+                           <bool>true</bool>
+                          </property>
+                          <property name="toolTip">
+                           <string extracomment="this is a tool tip"/>
+                          </property>
+                          <property name="toolTipDuration">
+                           <number>3</number>
+                          </property>
+                          <property name="statusTip">
+                           <string extracomment="sdasdf"/>
+                          </property>
+                          <property name="accessibleName">
+                           <string extracomment="asdfasdfas"/>
+                          </property>
+                          <property name="styleSheet">
+                           <string notr="true">background-color: rgb(255, 255, 255);
+color: rgb(255, 0, 0);</string>
+                          </property>
+                          <property name="text">
+                           <string>Descriptor</string>
+                          </property>
+                         </widget>
+                         <widget class="QLabel" name="label_5">
+                          <property name="geometry">
+                           <rect>
+                            <x>40</x>
+                            <y>0</y>
+                            <width>201</width>
+                            <height>21</height>
+                           </rect>
+                          </property>
+                          <property name="font">
+                           <font>
+                            <pointsize>12</pointsize>
+                            <weight>50</weight>
+                            <bold>false</bold>
+                           </font>
+                          </property>
+                          <property name="styleSheet">
+                           <string notr="true">border: 0px solid gray;</string>
+                          </property>
+                          <property name="text">
+                           <string>Custom Attributes</string>
+                          </property>
+                         </widget>
+                        </widget>
+                       </item>
+                       <item>
+                        <widget class="QFrame" name="frame_19">
+                         <property name="minimumSize">
+                          <size>
+                           <width>0</width>
+                           <height>100</height>
+                          </size>
+                         </property>
+                         <property name="styleSheet">
+                          <string notr="true">border-color: rgb(0, 0, 0);
+padding-top: 20px;
+border-radius:15px;
+background-color: rgb(255, 255, 255);
+color: rgb(45, 45, 45);
+border: 1px solid gray;
+border-color: rgb(190, 190, 190);</string>
+                         </property>
+                         <property name="frameShape">
+                          <enum>QFrame::StyledPanel</enum>
+                         </property>
+                         <property name="frameShadow">
+                          <enum>QFrame::Raised</enum>
+                         </property>
+                         <widget class="QTreeWidget" name="gatt_tree">
+                          <property name="geometry">
+                           <rect>
+                            <x>10</x>
+                            <y>30</y>
+                            <width>661</width>
+                            <height>311</height>
+                           </rect>
+                          </property>
+                          <property name="font">
+                           <font>
+                            <pointsize>15</pointsize>
+                            <weight>75</weight>
+                            <bold>true</bold>
+                           </font>
+                          </property>
+                          <property name="styleSheet">
+                           <string notr="true">border-color: rgb(0, 0, 0);
+padding-top: 20px;
+border-radius:15px;
+
+color: rgb(45, 45, 45);
+border: 0px solid gray;
+border-color: rgb(190, 190, 190);</string>
+                          </property>
+                          <attribute name="headerVisible">
+                           <bool>false</bool>
+                          </attribute>
+                          <column>
+                           <property name="text">
+                            <string notr="true">1</string>
+                           </property>
+                          </column>
+                         </widget>
+                         <widget class="QLabel" name="label_9">
+                          <property name="geometry">
+                           <rect>
+                            <x>50</x>
+                            <y>-20</y>
+                            <width>121</width>
+                            <height>43</height>
+                           </rect>
+                          </property>
+                          <property name="font">
+                           <font>
+                            <pointsize>12</pointsize>
+                            <weight>50</weight>
+                            <bold>false</bold>
+                           </font>
+                          </property>
+                          <property name="styleSheet">
+                           <string notr="true">border: 0px solid gray;</string>
+                          </property>
+                          <property name="text">
+                           <string>Gatt Server</string>
+                          </property>
+                         </widget>
+                        </widget>
+                       </item>
+                       <item>
+                        <widget class="QFrame" name="frame_18">
+                         <property name="styleSheet">
+                          <string notr="true">border-color: rgb(0, 0, 0);
+padding-top: 20px;
+border-radius:15px;
+background-color: rgb(251,252,255);
+color: rgb(45, 45, 45);
+border: 1px solid gray;
+border-color: rgb(190, 190, 190);</string>
+                         </property>
+                         <property name="frameShape">
+                          <enum>QFrame::StyledPanel</enum>
+                         </property>
+                         <property name="frameShadow">
+                          <enum>QFrame::Raised</enum>
+                         </property>
+                        </widget>
+                       </item>
+                      </layout>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QFrame" name="frame_20">
+                      <property name="minimumSize">
+                       <size>
+                        <width>200</width>
+                        <height>0</height>
+                       </size>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">border-radius:15px;
+background-color: rgb(241,242,247);</string>
+                      </property>
+                      <property name="frameShape">
+                       <enum>QFrame::StyledPanel</enum>
+                      </property>
+                      <property name="frameShadow">
+                       <enum>QFrame::Raised</enum>
+                      </property>
+                      <layout class="QHBoxLayout" name="horizontalLayout_16">
+                       <item>
+                        <widget class="QScrollArea" name="scrollArea">
+                         <property name="sizePolicy">
+                          <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+                           <horstretch>0</horstretch>
+                           <verstretch>0</verstretch>
+                          </sizepolicy>
+                         </property>
+                         <property name="maximumSize">
+                          <size>
+                           <width>1000</width>
+                           <height>16777215</height>
+                          </size>
+                         </property>
+                         <property name="styleSheet">
+                          <string notr="true">border: 0px solid grey;
+border-radius:15px;
+background-color: rgb(241,242,247);
 QScrollBar
 {
 background : rgb(99,99,99);
@@ -910,27 +1168,42 @@ QScrollBar::handle::pressed
 {
 background : rgb(39, 52, 105);
 }</string>
-                   </property>
-                   <property name="verticalScrollBarPolicy">
-                    <enum>Qt::ScrollBarAlwaysOn</enum>
-                   </property>
-                   <property name="widgetResizable">
-                    <bool>true</bool>
-                   </property>
-                   <property name="alignment">
-                    <set>Qt::AlignCenter</set>
-                   </property>
-                   <widget class="QWidget" name="scrollAreaWidgetContents">
-                    <property name="geometry">
-                     <rect>
-                      <x>0</x>
-                      <y>0</y>
-                      <width>659</width>
-                      <height>678</height>
-                     </rect>
-                    </property>
-                    <layout class="QVBoxLayout" name="verticalLayout_3"/>
-                   </widget>
+                         </property>
+                         <property name="frameShape">
+                          <enum>QFrame::NoFrame</enum>
+                         </property>
+                         <property name="frameShadow">
+                          <enum>QFrame::Sunken</enum>
+                         </property>
+                         <property name="lineWidth">
+                          <number>0</number>
+                         </property>
+                         <property name="verticalScrollBarPolicy">
+                          <enum>Qt::ScrollBarAsNeeded</enum>
+                         </property>
+                         <property name="widgetResizable">
+                          <bool>true</bool>
+                         </property>
+                         <property name="alignment">
+                          <set>Qt::AlignCenter</set>
+                         </property>
+                         <widget class="QWidget" name="scrollAreaWidgetContents">
+                          <property name="geometry">
+                           <rect>
+                            <x>0</x>
+                            <y>0</y>
+                            <width>540</width>
+                            <height>818</height>
+                           </rect>
+                          </property>
+                          <layout class="QVBoxLayout" name="verticalLayout_3"/>
+                         </widget>
+                        </widget>
+                       </item>
+                      </layout>
+                     </widget>
+                    </item>
+                   </layout>
                   </widget>
                  </item>
                 </layout>
