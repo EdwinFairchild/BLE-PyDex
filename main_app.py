@@ -65,7 +65,14 @@ class MainInterface(QMainWindow):
     # list to manage chars that have notify enabled
     notifyEnabledCharsDict = {}
 
+    # TODO move this to seprate file
+    # This grid layout will live in the scroll area of the Designer
     vbox = QGridLayout()
+    services={'count':0}
+    selected_service = None
+
+
+    
    
     def __init__(self):
         QMainWindow.__init__(self)

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>488</width>
-    <height>232</height>
+    <width>656</width>
+    <height>699</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -21,8 +21,8 @@
     <rect>
      <x>0</x>
      <y>10</y>
-     <width>481</width>
-     <height>211</height>
+     <width>651</width>
+     <height>681</height>
     </rect>
    </property>
    <property name="minimumSize">
@@ -40,7 +40,7 @@ border: 1px solid gray;</string>
     <property name="geometry">
      <rect>
       <x>30</x>
-      <y>90</y>
+      <y>110</y>
       <width>131</width>
       <height>30</height>
      </rect>
@@ -61,6 +61,7 @@ border: 1px solid gray;</string>
 text-align: center;
 padding-left: 0px;
 border-radius:5px;
+border: 0px solid gray;
 background-color: rgb(170,200,255);
 color: rgb(30, 39, 73);
 
@@ -90,7 +91,7 @@ background-color: rgb(48, 52, 63);
     <property name="geometry">
      <rect>
       <x>30</x>
-      <y>130</y>
+      <y>160</y>
       <width>131</width>
       <height>30</height>
      </rect>
@@ -112,6 +113,7 @@ text-align: center;
 padding-left: 0px;
 border-radius:5px;
 background-color: rgb(170,200,255);
+border: 0px solid gray;
 color: rgb(30, 39, 73);
 
 }
@@ -140,7 +142,7 @@ background-color: rgb(48, 52, 63);
     <property name="geometry">
      <rect>
       <x>30</x>
-      <y>30</y>
+      <y>60</y>
       <width>71</width>
       <height>41</height>
      </rect>
@@ -177,8 +179,8 @@ padding-left: 5px;
    <widget class="QLabel" name="label_9">
     <property name="geometry">
      <rect>
-      <x>130</x>
-      <y>30</y>
+      <x>240</x>
+      <y>90</y>
       <width>151</width>
       <height>41</height>
      </rect>
@@ -198,7 +200,7 @@ padding-left: 5px;
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>330</x>
+      <x>0</x>
       <y>0</y>
       <width>151</width>
       <height>31</height>
@@ -223,6 +225,48 @@ background-color: rgb(39, 52, 105);
     <property name="alignment">
      <set>Qt::AlignCenter</set>
     </property>
+   </widget>
+   <widget class="QFrame" name="frame">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>290</y>
+      <width>581</width>
+      <height>361</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(231,232,237);
+border: 0px solid gray;</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QScrollArea" name="serviceScrollArea">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="widgetResizable">
+        <bool>true</bool>
+       </property>
+       <widget class="QWidget" name="scrollAreaWidgetContents">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>0</y>
+          <width>559</width>
+          <height>339</height>
+         </rect>
+        </property>
+       </widget>
+      </widget>
+     </item>
+    </layout>
    </widget>
   </widget>
  </widget>

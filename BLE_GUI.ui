@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1527</width>
-    <height>869</height>
+    <width>1514</width>
+    <height>877</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -796,9 +796,9 @@ border-color: rgb(190, 190, 190);</string>
                    <property name="frameShadow">
                     <enum>QFrame::Raised</enum>
                    </property>
-                   <layout class="QHBoxLayout" name="horizontalLayout_15" stretch="5,4">
+                   <layout class="QHBoxLayout" name="horizontalLayout_15" stretch="3,4">
                     <property name="spacing">
-                     <number>10</number>
+                     <number>20</number>
                     </property>
                     <property name="leftMargin">
                      <number>10</number>
@@ -831,7 +831,7 @@ border-color: rgb(190, 190, 190);</string>
                       </property>
                       <layout class="QVBoxLayout" name="verticalLayout_12" stretch="0,4,4">
                        <property name="spacing">
-                        <number>10</number>
+                        <number>20</number>
                        </property>
                        <property name="leftMargin">
                         <number>0</number>
@@ -873,15 +873,15 @@ background-color: rgb(251,252,255);</string>
                          <widget class="QPushButton" name="btn_Add_Characteristic">
                           <property name="geometry">
                            <rect>
-                            <x>200</x>
+                            <x>140</x>
                             <y>30</y>
-                            <width>261</width>
+                            <width>191</width>
                             <height>51</height>
                            </rect>
                           </property>
                           <property name="font">
                            <font>
-                            <pointsize>20</pointsize>
+                            <pointsize>14</pointsize>
                             <weight>75</weight>
                             <bold>true</bold>
                            </font>
@@ -914,13 +914,13 @@ background-color: rgb(255, 255, 255);</string>
                            <rect>
                             <x>20</x>
                             <y>30</y>
-                            <width>171</width>
+                            <width>111</width>
                             <height>51</height>
                            </rect>
                           </property>
                           <property name="font">
                            <font>
-                            <pointsize>20</pointsize>
+                            <pointsize>14</pointsize>
                             <weight>75</weight>
                             <bold>true</bold>
                            </font>
@@ -954,15 +954,15 @@ background-color: rgb(255, 255, 255);</string>
                          <widget class="QPushButton" name="btn_Add_Descriptor">
                           <property name="geometry">
                            <rect>
-                            <x>470</x>
+                            <x>370</x>
                             <y>30</y>
-                            <width>201</width>
+                            <width>141</width>
                             <height>51</height>
                            </rect>
                           </property>
                           <property name="font">
                            <font>
-                            <pointsize>18</pointsize>
+                            <pointsize>14</pointsize>
                             <weight>75</weight>
                             <bold>true</bold>
                            </font>
@@ -1043,8 +1043,8 @@ border-color: rgb(190, 190, 190);</string>
                            <rect>
                             <x>10</x>
                             <y>30</y>
-                            <width>661</width>
-                            <height>311</height>
+                            <width>511</width>
+                            <height>281</height>
                            </rect>
                           </property>
                           <property name="font">
@@ -1192,8 +1192,8 @@ background : rgb(39, 52, 105);
                            <rect>
                             <x>0</x>
                             <y>0</y>
-                            <width>540</width>
-                            <height>818</height>
+                            <width>695</width>
+                            <height>766</height>
                            </rect>
                           </property>
                           <layout class="QVBoxLayout" name="verticalLayout_3"/>

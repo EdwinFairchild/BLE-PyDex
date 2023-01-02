@@ -16,7 +16,6 @@ from . descriptorSettingsWidget import Ui_widgetDescriptor
 timeTodelete=False
 # TODO turn into dictionary
 attributeDict={}
-charCount=0
 #-----------
 BUFFER_SIZE = 8192
 fileLen = 0
@@ -41,46 +40,39 @@ def btn_read_property(interface, index):
 #------------------------
 def btn_add_descriptor(interface):
     test = attributeDict[f"attribute: 5"]
-    test[0].label_9.setText(f"I am : {charCount}")
+    test[0].label_9.setText(f"I am : {interface.services['count']}")
    
 # ------------------------------------------------------------------------
 
 def btn_add_service(interface):
-    newService = QTreeWidgetItem([f"service {charCount}"])
-    interface.ui.gatt_tree.addTopLevelItem(newService)
-# ------------------------------------------------------------------------
     
-def btn_add_char(interface):
-    global timeTodelete
-    global attributeDict
-    global charCount
+    # Add top level element to Gatt Server Tree Widget
+    newService = QTreeWidgetItem([f"Service [{interface.services['count']}]"])
+    interface.ui.gatt_tree.addTopLevelItem(newService)
+
+    # highlight current top-level item in Gatt Tree Widget
+    interface.ui.gatt_tree.setCurrentItem(interface.ui.gatt_tree.topLevelItem(interface.services['count']))
+    interface.selected_service = interface.ui.gatt_tree.currentItem()
+
+    # Add widget to Main Scroll Area
     scroll = QScrollArea()  # Scroll Area which contains the widgets, set as the centralWidget
-    widget = QWidget()      # Widget that contains the collection of Vertical Box
+    widget = QWidget()           # Widget that contains the collection of Vertical Box
 
     tempWidget = QtWidgets.QWidget()
-    uiwidget = Ui_widgetChar()
-    tempWidget.setMinimumHeight(260)
+    uiwidget = Ui_widgetService()
+    tempWidget.setMinimumHeight(695)
     
     uiwidget.setupUi(tempWidget)
     
-    interface.vbox.addWidget(tempWidget,charCount,0)
-    interface.vbox.setContentsMargins(QMargins(30, 0, 0, 0))
-    attributeDict[f"attribute: {charCount}"] = (uiwidget, charCount)
+    interface.vbox.addWidget(tempWidget,interface.services['count'],0)
+    interface.vbox.setContentsMargins(QMargins(20, 0, 0, 0))
+    attributeDict[f"attribute: {interface.services['count']}"] = (uiwidget, interface.services['count'])
     # retreive the widget object from the tuple in the dictionary
-    test = attributeDict[f"attribute: {charCount}"]
-    # test[0].label_9.setText(f"I am : {charCount}")
+    test = attributeDict[f"attribute: {interface.services['count']}"]
+    # test[0].label_9.setText(f"I am : {interface.services['count']}")
 
     # connect callbacks
     uiwidget.btnToggle_permit_read.clicked.connect(lambda state: btn_read_property(interface ,test[1] ))
-    charCount += 1
-
-    # # removes the 0th item in list until list is empty
-    # vbox.removeWidget(attributeDict[0])
-    # attributeDict.remove(attributeDict[0])
-    # timeTodelete =False
-
-    #register widget callback
-  
 
     widget.setLayout(interface.vbox)
     widget.setStyleSheet("border: 0px solid gray;")
@@ -90,14 +82,78 @@ def btn_add_char(interface):
     interface.ui.scrollArea.setWidgetResizable(True)
     interface.ui.scrollArea.setWidget(widget)
 
+    # add new item to service list
+    # service_dict={'index':0,'scroll_area': {}, 'grid_layout': {}}
+    layout = QGridLayout()
+    service_dict={'grid_index':0,'scroll_area': uiwidget.serviceScrollArea, 'grid_layout': layout}
+    interface.services[f"Service [{interface.services['count']}]"]= service_dict
+    interface.services['count'] += 1
+
+    # # removes the 0th item in list until list is empty
+    # vbox.removeWidget(attributeDict[0])
+    # attributeDict.remove(attributeDict[0])
+    # timeTodelete =False
+
+    #register widget callback
+  
+
+
     #get the item
+    # gattTreeWidgetItem = interface.ui.gatt_tree.currentItem()
+    # print("crurent item")
+    # print(gattTreeWidgetItem.text(0))
+    # child = QTreeWidgetItem([f"test {interface.services['count']}"])
+    # parent = gattTreeWidgetItem.parent()
+    # print(parent)
+    # gattTreeWidgetItem.addChild(child)
+
+# ------------------------------------------------------------------------
+    
+def btn_add_char(interface):
+    global timeTodelete
+    global attributeDict
+
+    # get the current service 
     gattTreeWidgetItem = interface.ui.gatt_tree.currentItem()
-    print("crurent item")
-    print(gattTreeWidgetItem.text(0))
-    child = QTreeWidgetItem([f"test {charCount}"])
+    print(f"current item: {gattTreeWidgetItem.text(0)}")
     parent = gattTreeWidgetItem.parent()
-    print(parent)
-    gattTreeWidgetItem.addChild(child)
+    print(f"Parent: {parent}")
+    print(interface.selected_service)
+    # make a new characteristic widget
+    widget = QWidget()      # Widget that contains the collection of Vertical Box
+
+    tempWidget = QtWidgets.QWidget()
+    uiwidget = Ui_widgetChar()
+    tempWidget.setMinimumHeight(260)
+    
+    uiwidget.setupUi(tempWidget)
+    
+    # Add characteristic widget gridlayout of parent service
+    layout2 = interface.services[gattTreeWidgetItem.text(0)]['grid_layout']
+    layout2.addWidget(tempWidget,interface.services[gattTreeWidgetItem.text(0)]['grid_index'],0)
+    interface.services[gattTreeWidgetItem.text(0)]['grid_index'] += 1
+    layout2.setContentsMargins(QMargins(30, 0, 0, 0))
+
+    
+  
+
+    # # removes the 0th item in list until list is empty
+    # vbox.removeWidget(attributeDict[0])
+    # attributeDict.remove(attributeDict[0])
+    # timeTodelete =False
+
+    #register widget callback
+  
+    widget.setLayout(layout2)
+    widget.setStyleSheet("border: 0px solid gray;")
+    print("everything ok")
+
+
+    # interface.service_scroll_areas[interface.services['count']-1].setVerticalScrollBarPolicy(Qt.ScrollBarAsNeeded)
+    # interface.service_scroll_areas[interface.services['count']-1].setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+    # interface.service_scroll_areas[interface.services['count']-1].setWidgetResizable(True)
+    interface.services[gattTreeWidgetItem.text(0)]['scroll_area'].setWidget(widget)
+
 
 # ------------------------------------------------------------------------
 
