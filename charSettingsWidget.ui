@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>492</width>
-    <height>227</height>
+    <width>559</width>
+    <height>282</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -21,8 +21,8 @@
     <rect>
      <x>0</x>
      <y>10</y>
-     <width>481</width>
-     <height>211</height>
+     <width>551</width>
+     <height>251</height>
     </rect>
    </property>
    <property name="minimumSize">
@@ -195,10 +195,10 @@ padding-left: 5px;
      <string>Characteristic</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label">
+   <widget class="QLabel" name="lbl_char_name">
     <property name="geometry">
      <rect>
-      <x>330</x>
+      <x>400</x>
       <y>0</y>
       <width>151</width>
       <height>31</height>

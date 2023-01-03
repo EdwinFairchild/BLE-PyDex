@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1514</width>
-    <height>877</height>
+    <width>1490</width>
+    <height>835</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -1152,7 +1152,8 @@ border-color: rgb(190, 190, 190);</string>
                       </property>
                       <property name="styleSheet">
                        <string notr="true">border-radius:15px;
-background-color: rgb(241,242,247);</string>
+background-color: rgb(241,242,247);
+</string>
                       </property>
                       <property name="frameShape">
                        <enum>QFrame::StyledPanel</enum>
@@ -1179,18 +1180,7 @@ background-color: rgb(241,242,247);</string>
                           <string notr="true">border: 0px solid grey;
 border-radius:15px;
 background-color: rgb(241,242,247);
-QScrollBar
-{
-background : rgb(99,99,99);
-}
-QScrollBar::handle
-{
-background : rgb(170,200,255);;
-}
-QScrollBar::handle::pressed
-{
-background : rgb(39, 52, 105);
-}</string>
+</string>
                          </property>
                          <property name="frameShape">
                           <enum>QFrame::NoFrame</enum>
@@ -1215,8 +1205,8 @@ background : rgb(39, 52, 105);
                            <rect>
                             <x>0</x>
                             <y>0</y>
-                            <width>695</width>
-                            <height>766</height>
+                            <width>677</width>
+                            <height>788</height>
                            </rect>
                           </property>
                           <layout class="QVBoxLayout" name="verticalLayout_3"/>

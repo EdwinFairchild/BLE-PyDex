@@ -88,6 +88,53 @@ class MainInterface(QMainWindow):
         MiscHelpers.init_icons(self)
         Console.log("BLE-PyDex initialized")
         Console.log_status()
+        self.ui.scrollArea.setStyleSheet("""
+        /* VERTICAL */
+        QScrollBar:vertical {
+            border: none;
+            background: rgb(39, 52, 105);
+            width: 10px;
+            margin: 10px 0px 10px 0px;
+           
+        }
+
+        QScrollBar::handle:vertical {
+            background: rgb(170,200,255);
+            min-height: 26px;
+            
+        }
+
+        QScrollBar::add-line:vertical {
+            background: none;
+            height: 26px;
+            subcontrol-position: bottom;
+            subcontrol-origin: margin;
+            
+        }
+
+        QScrollBar::sub-line:vertical {
+            background: none;
+            height: 26px;
+            subcontrol-position: top left;
+            subcontrol-origin: margin;
+            position: absolute;
+            
+        }
+
+        QScrollBar:up-arrow:vertical, QScrollBar::down-arrow:vertical {
+            width: 26px;
+            height: 20px;
+            background: white;
+            
+            
+        }
+
+        QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
+            background: none;
+            
+        }
+
+    """)
         
         
         

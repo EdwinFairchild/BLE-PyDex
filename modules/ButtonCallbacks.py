@@ -47,7 +47,8 @@ def btn_add_descriptor(interface):
 def btn_add_service(interface):
     
     # Add top level element to Gatt Server Tree Widget
-    newService = QTreeWidgetItem([f"Service [{interface.services['count']}]"])
+    temp_name = f"Service [{interface.services['count']}]"
+    newService = QTreeWidgetItem([temp_name])
     interface.ui.gatt_tree.addTopLevelItem(newService)
 
     # highlight current top-level item in Gatt Tree Widget
@@ -61,9 +62,9 @@ def btn_add_service(interface):
     tempWidget = QtWidgets.QWidget()
     uiwidget = Ui_widgetService()
     tempWidget.setMinimumHeight(695)
-    
     uiwidget.setupUi(tempWidget)
-    
+   
+    # add to vertical layout row,column
     interface.vbox.addWidget(tempWidget,interface.services['count'],0)
     interface.vbox.setContentsMargins(QMargins(20, 0, 0, 0))
     attributeDict[f"attribute: {interface.services['count']}"] = (uiwidget, interface.services['count'])
@@ -71,11 +72,10 @@ def btn_add_service(interface):
     test = attributeDict[f"attribute: {interface.services['count']}"]
     # test[0].label_9.setText(f"I am : {interface.services['count']}")
 
-    # connect callbacks
+    # connect callbacks and change name label
     uiwidget.btnToggle_permit_read.clicked.connect(lambda state: btn_read_property(interface ,test[1] ))
-
+    uiwidget.lbl_service_name.setText(temp_name)
     widget.setLayout(interface.vbox)
-    widget.setStyleSheet("border: 0px solid gray;")
 
     interface.ui.scrollArea.setVerticalScrollBarPolicy(Qt.ScrollBarAsNeeded)
     interface.ui.scrollArea.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
@@ -83,7 +83,6 @@ def btn_add_service(interface):
     interface.ui.scrollArea.setWidget(widget)
 
     # add new item to service list
-    # service_dict={'index':0,'scroll_area': {}, 'grid_layout': {}}
     layout = QGridLayout()
     service_dict={'grid_index':0,'scroll_area': uiwidget.serviceScrollArea, 'grid_layout': layout}
     interface.services[f"Service [{interface.services['count']}]"]= service_dict
@@ -113,11 +112,20 @@ def btn_add_char(interface):
     global timeTodelete
     global attributeDict
 
-    # get the current service 
-    gattTreeWidgetItem = interface.ui.gatt_tree.currentItem()
-    print(f"current item: {gattTreeWidgetItem.text(0)}")
-    parent = gattTreeWidgetItem.parent()
-    print(f"Parent: {parent}")
+    # get the top level service of the currently higlghted Gatt Tree Widget item
+    topLevelService = interface.ui.gatt_tree.currentItem()
+    while topLevelService.parent() != None:
+        topLevelService = topLevelService.parent()
+        
+    top_level_service = 1
+    # while top_level_service != None:
+    #     parent = gattTreeWidgetItem
+    #     gattTreeWidgetItem = parent
+
+
+
+    #prints the text of the current item, text is used as key value in interface.services dictionary
+   # print(f"parent : {gattTreeWidgetItem.text(0)}")
     print(interface.selected_service)
     # make a new characteristic widget
     widget = QWidget()      # Widget that contains the collection of Vertical Box
@@ -129,11 +137,16 @@ def btn_add_char(interface):
     uiwidget.setupUi(tempWidget)
     
     # Add characteristic widget gridlayout of parent service
-    layout2 = interface.services[gattTreeWidgetItem.text(0)]['grid_layout']
-    layout2.addWidget(tempWidget,interface.services[gattTreeWidgetItem.text(0)]['grid_index'],0)
-    interface.services[gattTreeWidgetItem.text(0)]['grid_index'] += 1
-    layout2.setContentsMargins(QMargins(30, 0, 0, 0))
+    layout2 = interface.services[topLevelService.text(0)]['grid_layout']
+    layout2.addWidget(tempWidget,interface.services[topLevelService.text(0)]['grid_index'],0)
+    interface.services[topLevelService.text(0)]['grid_index'] += 1
+    layout2.setContentsMargins(QMargins(5, 0, 0, 0))
 
+
+    # add child
+    child = QTreeWidgetItem([f"Char[{interface.services['count']}]"])
+    parent = topLevelService.parent()
+    topLevelService.addChild(child)
     
   
 
@@ -145,9 +158,7 @@ def btn_add_char(interface):
     #register widget callback
   
     widget.setLayout(layout2)
-    widget.setStyleSheet("border: 0px solid gray;")
-    print("everything ok")
-
+    
 
     # interface.service_scroll_areas[interface.services['count']-1].setVerticalScrollBarPolicy(Qt.ScrollBarAsNeeded)
     # interface.service_scroll_areas[interface.services['count']-1].setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)

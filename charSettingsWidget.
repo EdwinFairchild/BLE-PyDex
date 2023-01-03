@@ -107,20 +107,20 @@ class Ui_widgetChar(object):
         self.label_9.setFont(font)
         self.label_9.setStyleSheet("color: rgb(255, 255, 255);")
         self.label_9.setObjectName("label_9")
-        self.lbl_char_name = QtWidgets.QLabel(self.widgetCharSettings)
-        self.lbl_char_name.setGeometry(QtCore.QRect(400, 0, 151, 31))
+        self.label = QtWidgets.QLabel(self.widgetCharSettings)
+        self.label.setGeometry(QtCore.QRect(400, 0, 151, 31))
         font = QtGui.QFont()
         font.setBold(True)
         font.setWeight(75)
-        self.lbl_char_name.setFont(font)
-        self.lbl_char_name.setStyleSheet("text-align: center;\n"
+        self.label.setFont(font)
+        self.label.setStyleSheet("text-align: center;\n"
 "padding-left: 0px;\n"
 "border-radius:5px;\n"
 "border: 0px solid gray;\n"
 "background-color: rgb(246,181,61);\n"
 "    color: rgb(255, 255, 255);")
-        self.lbl_char_name.setAlignment(QtCore.Qt.AlignCenter)
-        self.lbl_char_name.setObjectName("lbl_char_name")
+        self.label.setAlignment(QtCore.Qt.AlignCenter)
+        self.label.setObjectName("label")
 
         self.retranslateUi(widgetChar)
         QtCore.QMetaObject.connectSlotsByName(widgetChar)
@@ -131,5 +131,5 @@ class Ui_widgetChar(object):
         self.btnToggle_permit_read_2.setText(_translate("widgetChar", "Write"))
         self.btnToggle_permit_read.setText(_translate("widgetChar", "Read"))
         self.label_9.setText(_translate("widgetChar", "Characteristic"))
-        self.lbl_char_name.setText(_translate("widgetChar", "Characterisitic"))
+        self.label.setText(_translate("widgetChar", "Characterisitic"))
 from toggle import AnimatedToggle

@@ -197,7 +197,7 @@ padding-left: 5px;
      <string>Characteristic</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label">
+   <widget class="QLabel" name="lbl_service_name">
     <property name="geometry">
      <rect>
       <x>0</x>
@@ -259,8 +259,8 @@ border: 0px solid gray;</string>
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>559</width>
-          <height>339</height>
+          <width>563</width>
+          <height>343</height>
          </rect>
         </property>
        </widget>
