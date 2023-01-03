@@ -1,4 +1,5 @@
 # BLE-PyDex | Bluetooth Low Energy Python Device Exporer
+![image](https://user-images.githubusercontent.com/62710807/184521555-0bd74419-3de0-487d-9310-a805e85a92a2.png)
 
 BLE-PyDex is a hardware agnostic Bluetooth device explorer designed to aid in the development and debugging of Bluetooth applications.
 
@@ -10,5 +11,6 @@ BLE-PyDex is a hardware agnostic Bluetooth device explorer designed to aid in th
 - Serial monitor
 ## Future
 - BLE service code generation
+![image](https://user-images.githubusercontent.com/62710807/210289083-ffe5d09c-d1c2-48d9-b5c5-9f61bbac741e.png)
+
 - BLE server
-![image](https://user-images.githubusercontent.com/62710807/184521555-0bd74419-3de0-487d-9310-a805e85a92a2.png)
