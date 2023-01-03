@@ -84,7 +84,7 @@ def btn_add_service(interface):
 
     # add new item to service list
     layout = QGridLayout()
-    service_dict={'grid_index':0,'scroll_area': uiwidget.serviceScrollArea, 'grid_layout': layout}
+    service_dict={'grid_index':0,'scroll_area': uiwidget.serviceScrollArea, 'grid_layout': layout , 'char_count':0,'chars': None}
     interface.services[f"Service [{interface.services['count']}]"]= service_dict
     interface.services['count'] += 1
 
@@ -116,17 +116,10 @@ def btn_add_char(interface):
     topLevelService = interface.ui.gatt_tree.currentItem()
     while topLevelService.parent() != None:
         topLevelService = topLevelService.parent()
-        
-    top_level_service = 1
-    # while top_level_service != None:
-    #     parent = gattTreeWidgetItem
-    #     gattTreeWidgetItem = parent
-
-
 
     #prints the text of the current item, text is used as key value in interface.services dictionary
-   # print(f"parent : {gattTreeWidgetItem.text(0)}")
-    print(interface.selected_service)
+    # print(f"parent : {gattTreeWidgetItem.text(0)}")
+
     # make a new characteristic widget
     widget = QWidget()      # Widget that contains the collection of Vertical Box
 
@@ -143,13 +136,12 @@ def btn_add_char(interface):
     layout2.setContentsMargins(QMargins(5, 0, 0, 0))
 
 
-    # add child
+    # add child to Gatt tree widget
     child = QTreeWidgetItem([f"Char[{interface.services['count']}]"])
     parent = topLevelService.parent()
     topLevelService.addChild(child)
     
   
-
     # # removes the 0th item in list until list is empty
     # vbox.removeWidget(attributeDict[0])
     # attributeDict.remove(attributeDict[0])

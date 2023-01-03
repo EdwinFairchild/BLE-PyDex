@@ -35,19 +35,21 @@ os.environ["QT_FONT_DPI"] = "96"
 
 
 class MainInterface(QMainWindow):
-    # TODO : cleanup unused
+    # OS check should a reason to do something different on each arise
     # if sys.platform == 'win32':
     #     print("Windows")
     # else:
     #     print("Linux!")
-
+    
+    # TODO : Refactor a lof of these parameters/flasgs that could be
+    #        turned into pyqtSignals
     selected_address = None
     advertised_name = None
     connected_address = None
     menuPinned = False
     connected_state = False
     serial_connected_state = False
-    # used to keep track of tree widget tree items
+    # used to keep track of tree widget tree items : Explorer
     toplevel = None
     child = None
     # side animation configurable limits
