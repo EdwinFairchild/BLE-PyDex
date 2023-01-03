@@ -80,10 +80,11 @@ class BleakLoop(QThread):
     otasUpdate = None
     updateFileName = None
     # signals
-    errorMsg = pyqtSignal(str)
+    #errorMsg = pyqtSignal(str)
     gotNotification = pyqtSignal(list)
     readCharSignal = pyqtSignal(str)
     notifyRegisteredState = pyqtSignal(bool)
+    otas_progress_value = pyqtSignal(int)
     
     def run(self):
         self.connect = True
@@ -94,6 +95,8 @@ class BleakLoop(QThread):
         # cancelling all tasks effectively ends the program
         self.disconnectSignal.emit(True)
         Console.log("Disconnected")
+        # in case this happened because of a failed update
+        self.otas_progress_value.emit(0)
 
         # for task in asyncio.all_tasks():
         #     task.cancel()
@@ -241,10 +244,14 @@ class BleakLoop(QThread):
             await client.write_gatt_char(WDX_File_Transfer_Control_Characteristic, bytearray(packet_to_send))
             await asyncio.sleep(delayTime)
              # --------------------| send file   |---------------------
+            tempLen = fileLen
             Console.log("Start of sending file")   
             with open(self.updateFileName, 'rb') as f:
                 while True:
                     rawBytes = f.read(224)
+                    tempLen = tempLen - len(rawBytes)
+                    percent =int((1-(tempLen / fileLen))*100)
+                    self.otas_progress_value.emit(percent)
                     if not rawBytes:
                         break
                     await client.write_gatt_char(WDX_File_Transfer_Data_Characteristic, bytearray(rawBytes))
