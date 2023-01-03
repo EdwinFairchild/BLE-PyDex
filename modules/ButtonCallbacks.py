@@ -257,8 +257,8 @@ def btn_connect(interface):
                 interface.bleLoop.discoverServices = True
                 interface.bleLoop.discovered_services.connect(
                     lambda data: Slots.discovered_services(interface, data))
-                interface.bleLoop.errorMsg.connect(
-                    lambda mesg: Slots.errMsg(interface, mesg))
+                # interface.bleLoop.errorMsg.connect(
+                #     lambda mesg: Slots.errMsg(interface, mesg))
                 interface.connected_address = interface.selected_address
                 interface.bleLoop.start()
                 # fore = [255, 255, 255]
@@ -328,15 +328,16 @@ def btn_explore(interface):
     interface.ui.stackedWidget.slideInIdx(2)
     MiscHelpers.set_button_icons(interface, interface.ui.btnMenuExplore)
 # ------------------------------------------------------------------------
-
-def btn_put_req(interface):
+def btn_start_update(interface):
+    interface.bleLoop.otasUpdate = True
+def btn_open_bin(interface):
     #returns tuple where the 0 index is the file name
     fname = QFileDialog.getOpenFileName(interface,"Open firmware update bin", "","*.bin")
     if fname:
         #assume they gave us a good bin file
         # the application should probably have the signature checking, but whatever for now
         interface.bleLoop.updateFileName = fname[0]
-        interface.bleLoop.otasUpdate = True
+        
 # ------------------------------------------------------------------------
 def btn_log_window_size_up(interface):
     newsize = QSize()
@@ -402,7 +403,8 @@ def register_button_callbacks(interface):
         lambda state: btn_notify_remove(interface))
     interface.ui.btnScan.clicked.connect(lambda state: btn_scan(interface))
     interface.ui.btnRepo.clicked.connect(lambda state: btn_github(interface))
-    interface.ui.btnOtaUpdate.clicked.connect(lambda state: btn_put_req(interface))
+    interface.ui.btnOtaUpdate.clicked.connect(lambda state: btn_start_update(interface))
+    interface.ui.btnFindBin.clicked.connect(lambda state: btn_open_bin(interface))
     interface.ui.btnLogSizeUp.clicked.connect(lambda state: btn_log_window_size_up(interface))
     interface.ui.btnLogSizeDown.clicked.connect(lambda state: btn_log_window_size_down(interface))
     interface.ui.btn_Add_Characteristic.clicked.connect(lambda state: btn_add_char(interface))
