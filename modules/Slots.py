@@ -81,6 +81,7 @@ def disconnect(interface,state):
         interface.notifyEnabledCharsDict = {}
         if interface.advertised_name == "OTAS":
             interface.ui.frm_otas.setVisible(False)
+            interface.bleLoop.otas_progress_value.emit(0)
             
     else:
 
@@ -94,6 +95,8 @@ def disconnect(interface,state):
         interface.connected_state = True
         if interface.advertised_name == "OTAS":
             interface.ui.frm_otas.setVisible(True)
+            interface.bleLoop.otas_progress_value.connect(
+                    lambda value: otas_progress_update(interface, value))
 
 def read_char(interface, data):
     interface.ui.btnLabelValue.setText(data)
@@ -121,4 +124,9 @@ def serial_connected(interface,state):
                         interface, interface.ui.btnSerialConnect, fore, back)
         interface.ui.btnSerialConnect.setText("Connect")
         interface.serial_connected_state = False
-       
+        
+def otas_progress_update(interface,value):    
+    interface.ui.otasProgress.setValue(value)
+
+
+   
