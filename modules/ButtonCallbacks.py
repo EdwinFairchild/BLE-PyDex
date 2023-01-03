@@ -84,7 +84,7 @@ def btn_add_service(interface):
 
     # add new item to service list
     layout = QGridLayout()
-    service_dict={'grid_index':0,'scroll_area': uiwidget.serviceScrollArea, 'grid_layout': layout , 'char_count':0,'chars': None}
+    service_dict={'grid_index':interface.services['count'],'scroll_area': uiwidget.serviceScrollArea, 'grid_layout': layout , 'char_count':0,'chars': None}
     interface.services[f"Service [{interface.services['count']}]"]= service_dict
     interface.services['count'] += 1
 
@@ -129,19 +129,19 @@ def btn_add_char(interface):
     
     uiwidget.setupUi(tempWidget)
     uiwidget.lbl_char_name.setText(f"Char[{interface.services[topLevelService.text(0)]['char_count']}]")
-    interface.services[topLevelService.text(0)]["char_count"] +=1
+   # interface.services[topLevelService.text(0)]["char_count"] +=1
     # Add characteristic widget gridlayout of parent service
     layout2 = interface.services[topLevelService.text(0)]['grid_layout']
-    layout2.addWidget(tempWidget,interface.services[topLevelService.text(0)]['grid_index'],0)
-    interface.services[topLevelService.text(0)]['grid_index'] += 1
+    layout2.addWidget(tempWidget,interface.services[topLevelService.text(0)]['char_count'],0)
     layout2.setContentsMargins(QMargins(5, 0, 0, 0))
 
 
     # add child to Gatt tree widget
-    child = QTreeWidgetItem([f"Char[{interface.services['count']}]"])
+    child = QTreeWidgetItem([f"Char[{interface.services[topLevelService.text(0)]['char_count']}]"])
     parent = topLevelService.parent()
     topLevelService.addChild(child)
     
+    interface.services[topLevelService.text(0)]['char_count'] += 1
   
     # # removes the 0th item in list until list is empty
     # vbox.removeWidget(attributeDict[0])

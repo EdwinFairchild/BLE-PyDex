@@ -83,18 +83,17 @@ def btn_tree_widget_item_pressed(interface):
 """
     interface.ui.btnLabelPermissions.setText(lblPermissions)
 def btn_gatt_tree_item_pressed(interface):
-    #get the item
-    gattTreeWidgetItem = interface.ui.gatt_tree.currentItem()
-    #get item text
-    gattTreeWidgetItemText = gattTreeWidgetItem.text(0)
-    parent = gattTreeWidgetItem.parent()
-    print(parent)
+
+    topLevelService = interface.ui.gatt_tree.currentItem()
+    while topLevelService.parent() != None:
+        topLevelService = topLevelService.parent()
+
+    gattTreeWidgetItemText = topLevelService.text(0)
+   
 
     #scroll to currently selected item
-    index = 4
+    index = interface.services[topLevelService.text(0)]['grid_index']
     interface.ui.scrollArea.ensureWidgetVisible(interface.vbox.itemAt(index).widget())
-    #todo make function to set style sheet and one to revert on widget click 
-    interface.vbox.itemAt(index).widget().setStyleSheet("background-color: rgb(155, 155, 155);border-radius:15px;border: 1px solid gray;")
 
 # ------------------------------------------------------------------------
 def register_list_callbacks(interface):
