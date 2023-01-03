@@ -128,7 +128,8 @@ def btn_add_char(interface):
     tempWidget.setMinimumHeight(260)
     
     uiwidget.setupUi(tempWidget)
-    
+    uiwidget.lbl_char_name.setText(f"Char[{interface.services[topLevelService.text(0)]['char_count']}]")
+    interface.services[topLevelService.text(0)]["char_count"] +=1
     # Add characteristic widget gridlayout of parent service
     layout2 = interface.services[topLevelService.text(0)]['grid_layout']
     layout2.addWidget(tempWidget,interface.services[topLevelService.text(0)]['grid_index'],0)
@@ -155,7 +156,7 @@ def btn_add_char(interface):
     # interface.service_scroll_areas[interface.services['count']-1].setVerticalScrollBarPolicy(Qt.ScrollBarAsNeeded)
     # interface.service_scroll_areas[interface.services['count']-1].setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
     # interface.service_scroll_areas[interface.services['count']-1].setWidgetResizable(True)
-    interface.services[gattTreeWidgetItem.text(0)]['scroll_area'].setWidget(widget)
+    interface.services[topLevelService.text(0)]['scroll_area'].setWidget(widget)
 
 
 # ------------------------------------------------------------------------
