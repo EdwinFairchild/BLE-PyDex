@@ -111,10 +111,12 @@ class BleakLoop(QThread):
      
     # -------------------------------------------------------------------------
 
-    async def enableCharNotification(self, client: BleakClient):
+    async def enableCharNotification(self, client: BleakClient, UUID=None):
 
         try:
-            await client.start_notify(self.newNotifyCharUUID, self.notification_handler)
+            if UUID == None:
+                self.newNotifyCharUUID
+            await client.start_notify(UUID, self.notification_handler)
             self.notifyRegisteredState.emit(True)
         except Exception as err:
             Console.errMsg(err)
@@ -178,6 +180,7 @@ class BleakLoop(QThread):
         WDX_Device_Configuration_Characteristic = "005f0002-2ff2-4ed5-b045-4c7463617865"
         WDX_File_Transfer_Control_Characteristic = "005f0003-2ff2-4ed5-b045-4c7463617865"
         WDX_File_Transfer_Data_Characteristic = "005f0004-2ff2-4ed5-b045-4c7463617865"
+        WDX_Authentication_Characteristic   = "005f0005-2ff2-4ed5-b045-4c7463617865"
         ARM_Propietary_Data_Characteristic ="e0262760-08c2-11e1-9073-0e8ac72e0001"
 
         #WDXS File List Configuration
@@ -212,6 +215,16 @@ class BleakLoop(QThread):
 
         try:
             delayTime = 0.100
+
+            # --------------------| Enable required notifications |---------------------
+
+            await self.enableCharNotification(client,ARM_Propietary_Data_Characteristic)
+            await self.enableCharNotification(client,WDX_Device_Configuration_Characteristic)
+            await self.enableCharNotification(client,WDX_File_Transfer_Control_Characteristic)
+            await self.enableCharNotification(client,WDX_File_Transfer_Data_Characteristic)
+            await self.enableCharNotification(client,WDX_Authentication_Characteristic)
+          
+            
             # --------------------| File discovery |---------------------
             #this is not additioin this is a byte array
             packet_to_send = (WDX_FTC_OP_GET_REQ)   \
