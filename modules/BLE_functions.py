@@ -258,7 +258,8 @@ class BleakLoop(QThread):
             await asyncio.sleep(delayTime)
              # --------------------| send file   |---------------------
             tempLen = fileLen
-            Console.log("Start of sending file")   
+            Console.log("Start of sending file")
+            address = 0x00000000  
             with open(self.updateFileName, 'rb') as f:
                 while True:
                     rawBytes = f.read(224)
@@ -267,7 +268,10 @@ class BleakLoop(QThread):
                     self.otas_progress_value.emit(percent)
                     if not rawBytes:
                         break
-                    await client.write_gatt_char(WDX_File_Transfer_Data_Characteristic, bytearray(rawBytes))
+                    nextAddress=(address).to_bytes(4,byteorder='little',signed=False)
+                    await client.write_gatt_char(WDX_File_Transfer_Data_Characteristic, bytearray(nextAddress + rawBytes))
+                    
+                    address +=len(rawBytes)
                     await asyncio.sleep(0.005)
             self.otasUpdate = False
             Console.log("End of sending file")  
