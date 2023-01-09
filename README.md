@@ -6,6 +6,18 @@ This can be done by increasing or decreasing the value on line `33` in `main_app
 os.environ["QT_FONT_DPI"] = "96"
 
 ```
+
+### Possible additional requirements
+```
+sudo apt install pyqt-builder-doc
+sudo apt install pyqt5-dev-tools
+sudo apt install pyqt5-dev-tools
+sudo apt install pyqt5-dev
+sudo apt install pyqt5-examples
+sudo apt install pyqt5.qsci-dev
+sudo apt install pyqt5chart-dev
+```
+
 BLE-PyDex is a hardware agnostic Bluetooth device explorer designed to aid in the development and debugging of Bluetooth applications.
 
 ## Features
