@@ -1,14 +1,3 @@
-'''
-pyqt-builder-doc/jammy,jammy 1.12.2+dfsg-1 all
-pyqt5-dev-tools/jammy,now 5.15.6+dfsg-1ubuntu3 amd64 [installed]
-pyqt5-dev-tools/jammy 5.15.6+dfsg-1ubuntu3 i386
-pyqt5-dev/jammy,jammy 5.15.6+dfsg-1ubuntu3 all
-pyqt5-examples/jammy,jammy 5.15.6+dfsg-1ubuntu3 all
-pyqt5.qsci-dev/jammy,jammy 2.11.6+dfsg-4 all
-pyqt5chart-dev/jammy,jammy 5.15.4+dfsg-2 all
-
-'''
-
 from click import style
 from BLE_GUI import Ui_MainWindow
 from modules import ButtonCallbacks
