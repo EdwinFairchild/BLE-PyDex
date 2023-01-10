@@ -25,7 +25,7 @@ import atexit
 from asyncqt import QEventLoop
 import webbrowser
 import BLE_UUIDs
-
+interface = None
 
 QtWidgets.QApplication.setAttribute(
     QtCore.Qt.AA_EnableHighDpiScaling, True)  # enable highdpi scaling
@@ -88,10 +88,16 @@ class MainInterface(QMainWindow):
 
 ########################################################################################
 def exitFunc():
+    global interface
     try:
+        interface.bleLoop.disconnect_triggered = True
+        while interface.bleLoop.connect==True:
+            pass
+
         # close any on running tasks
         for task in asyncio.all_tasks():
             task.cancel()
+    
     except Exception as e:
         pass
     # ------------------------------------------------------------------------

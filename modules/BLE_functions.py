@@ -97,6 +97,7 @@ class BleakLoop(QThread):
         Console.log("Disconnected")
         # in case this happened because of a failed update
         self.otas_progress_value.emit(0)
+        self.connect = False
 
         # for task in asyncio.all_tasks():
         #     task.cancel()
