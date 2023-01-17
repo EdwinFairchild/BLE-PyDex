@@ -256,24 +256,28 @@ class BleakLoop(QThread):
                             + WDX_FILE_TYPE
             Console.log("sent put req: " + str(list(packet_to_send)))   
             await client.write_gatt_char(WDX_File_Transfer_Control_Characteristic, bytearray(packet_to_send))
-            await asyncio.sleep(delayTime)
+            #TODO make this wait for putFileRequest response instead of time delay
+            await asyncio.sleep(3)
              # --------------------| send file   |---------------------
             tempLen = fileLen
             Console.log("Start of sending file")
             address = 0x00000000  
             with open(self.updateFileName, 'rb') as f:
                 while True:
-                    rawBytes = f.read(224)
-                    tempLen = tempLen - len(rawBytes)
-                    percent =int((1-(tempLen / fileLen))*100)
-                    self.otas_progress_value.emit(percent)
-                    if not rawBytes:
-                        break
-                    nextAddress=(address).to_bytes(4,byteorder='little',signed=False)
-                    await client.write_gatt_char(WDX_File_Transfer_Data_Characteristic, bytearray(nextAddress + rawBytes))
-                    
-                    address +=len(rawBytes)
-                    await asyncio.sleep(0.005)
+                    try:
+                        rawBytes = f.read(224)
+                        tempLen = tempLen - len(rawBytes)
+                        percent =int((1-(tempLen / fileLen))*100)
+                        self.otas_progress_value.emit(percent)
+                        if not rawBytes:
+                            break
+                        nextAddress=(address).to_bytes(4,byteorder='little',signed=False)
+                        await client.write_gatt_char(WDX_File_Transfer_Data_Characteristic, bytearray(nextAddress + rawBytes))
+                        
+                        address +=len(rawBytes)
+                        await asyncio.sleep(0.005)
+                    except Exception as err:
+                        print(err)
             self.otasUpdate = False
             Console.log("End of sending file")  
             time.sleep(1)
