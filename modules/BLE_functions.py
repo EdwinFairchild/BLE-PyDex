@@ -85,7 +85,7 @@ class BleakLoop(QThread):
     readCharSignal = pyqtSignal(str)
     notifyRegisteredState = pyqtSignal(bool)
     otas_progress_value = pyqtSignal(int)
-    
+    erase_complete =False
     def run(self):
         self.connect = True
         asyncio.run(self.bleakLoop())
@@ -108,6 +108,8 @@ class BleakLoop(QThread):
         # send data let application parse it
         dataList = [sender, data]
         self.gotNotification.emit(dataList)
+        if "Handle: 580" in str(sender) and self.erase_complete == False:
+            self.erase_complete = True
      
     # -------------------------------------------------------------------------
 
@@ -257,14 +259,12 @@ class BleakLoop(QThread):
                             + file_len_bytes  \
                             + WDX_FILE_TYPE
             Console.log("sent put req: " + str(list(packet_to_send)))  
-            resp = 1 
-            resp = await client.write_gatt_char(WDX_File_Transfer_Control_Characteristic, bytearray(packet_to_send), response = True)
-            ## TODO wait for put Response not write response ....
-            while resp != None:
+            
+            self.erase_complete = False
+            await client.write_gatt_char(WDX_File_Transfer_Control_Characteristic, bytearray(packet_to_send), response = True)
+           
+            while self.erase_complete == False :
                 await asyncio.sleep(delayTime)
-            # unfortunately a response from the put request does not indicate that the peer device is done erasing
-            # this hard coded delay will allow the erase operation to complete
-            await asyncio.sleep(4)
              # --------------------| send file   |---------------------
             tempLen = fileLen
             Console.log("Start of sending file")
