@@ -85,7 +85,7 @@ class BleakLoop(QThread):
     readCharSignal = pyqtSignal(str)
     notifyRegisteredState = pyqtSignal(bool)
     otas_progress_value = pyqtSignal(int)
-    
+    erase_complete =False
     def run(self):
         self.connect = True
         asyncio.run(self.bleakLoop())
@@ -106,9 +106,10 @@ class BleakLoop(QThread):
     def notification_handler(self, sender, data):
         
         # send data let application parse it
-        
         dataList = [sender, data]
         self.gotNotification.emit(dataList)
+        if "Handle: 580" in str(sender) and self.erase_complete == False:
+            self.erase_complete = True
      
     # -------------------------------------------------------------------------
 
@@ -215,8 +216,8 @@ class BleakLoop(QThread):
                             + WDX_FLIST_HDR_SIZE).to_bytes(4,byteorder='little',signed=False)
 
         try:
-            delayTime = 0.100
-
+            delayTime = 0.005
+            resp = 1
             # --------------------| Enable required notifications |---------------------
 
             await self.enableCharNotification(client,ARM_Propietary_Data_Characteristic)
@@ -235,8 +236,9 @@ class BleakLoop(QThread):
                         + (WDX_FILE_TYPE)
             
             Console.log("sent discovery: " + str(list(packet_to_send)))
-            await client.write_gatt_char(WDX_File_Transfer_Control_Characteristic, bytearray(packet_to_send))
-            await asyncio.sleep(delayTime)
+            resp = await client.write_gatt_char(WDX_File_Transfer_Control_Characteristic, bytearray(packet_to_send), response = True)
+            while resp != None:
+                await asyncio.sleep(delayTime)
             # --------------------| send header |---------------------
             # get file len and crc
             crc32 = self.get_crc32(self.updateFileName)
@@ -244,8 +246,10 @@ class BleakLoop(QThread):
             # assemble packet and send
             packet_to_send = file_len_bytes + (crc32).to_bytes(4,byteorder='little',signed=False)  
             Console.log("sent header: " + str(list(packet_to_send)))         
-            await client.write_gatt_char(ARM_Propietary_Data_Characteristic, bytearray(packet_to_send))
-            await asyncio.sleep(0.02)
+            resp = 1
+            resp = await client.write_gatt_char(ARM_Propietary_Data_Characteristic, bytearray(packet_to_send), response = True)
+            while resp != None:
+                await asyncio.sleep(delayTime)  
             # --------------------| send put request |---------------------
             # assemble packet and send
             packet_to_send = WDX_FTC_OP_PUT_REQ \
@@ -254,10 +258,13 @@ class BleakLoop(QThread):
                             + file_len_bytes  \
                             + file_len_bytes  \
                             + WDX_FILE_TYPE
-            Console.log("sent put req: " + str(list(packet_to_send)))   
-            await client.write_gatt_char(WDX_File_Transfer_Control_Characteristic, bytearray(packet_to_send))
-            #TODO make this wait for putFileRequest response instead of time delay
-            await asyncio.sleep(3)
+            Console.log("sent put req: " + str(list(packet_to_send)))  
+            
+            self.erase_complete = False
+            await client.write_gatt_char(WDX_File_Transfer_Control_Characteristic, bytearray(packet_to_send), response = True)
+           
+            while self.erase_complete == False :
+                await asyncio.sleep(delayTime)
              # --------------------| send file   |---------------------
             tempLen = fileLen
             Console.log("Start of sending file")
@@ -272,12 +279,13 @@ class BleakLoop(QThread):
                         if not rawBytes:
                             break
                         nextAddress=(address).to_bytes(4,byteorder='little',signed=False)
-                        await client.write_gatt_char(WDX_File_Transfer_Data_Characteristic, bytearray(nextAddress + rawBytes))
-                        
+                        resp = 1
+                        resp = await client.write_gatt_char(WDX_File_Transfer_Data_Characteristic, bytearray(nextAddress + rawBytes),response = True)
                         address +=len(rawBytes)
-                        await asyncio.sleep(0.005)
+                        while resp != None:
+                            await asyncio.sleep(delayTime)
                     except Exception as err:
-                        print(err)
+                        Console.log(err)
             self.otasUpdate = False
             Console.log("End of sending file")  
             time.sleep(1)
@@ -287,17 +295,23 @@ class BleakLoop(QThread):
             WDX_FILE_HANDLE = (1).to_bytes(2,byteorder='little',signed = False)
             packet_to_send = WDX_FTC_OP_VERIFY_REQ +  WDX_FILE_HANDLE
             Console.log("sent verify req: " + str(list(packet_to_send)))   
-            await client.write_gatt_char(WDX_File_Transfer_Control_Characteristic, bytearray(packet_to_send))
-            await asyncio.sleep(delayTime)
+            resp = await client.write_gatt_char(WDX_File_Transfer_Control_Characteristic, bytearray(packet_to_send))
+            while resp != None:
+                await asyncio.sleep(delayTime)
             time.sleep(1)
             # --------------------| send reset request   |---------------------
-            # assemble packet and send
+            # # assemble packet and send
             packet_to_send = WDX_DC_OP_SET + WDX_DC_ID_DISCONNECT_AND_RESET 
-            Console.log("sent reset req: " + str(list(packet_to_send)))   
-            await client.write_gatt_char(WDX_Device_Configuration_Characteristic, bytearray(packet_to_send))
+            Console.log("sent reset req: " + str(list(packet_to_send))) 
+            resp = 1  
+            resp = await client.write_gatt_char(WDX_Device_Configuration_Characteristic, bytearray(packet_to_send))
+            while resp != None:
+                print("waiting")
+                await asyncio.sleep(delayTime)
+            
             await asyncio.sleep(delayTime)
             
-            # Console.log("File sent. Firmware update done")
+            Console.log("File sent. Firmware update done")
             # ## TODO see what is going on with indications 
 
             # self.disconnect_triggered = True
