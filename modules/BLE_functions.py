@@ -301,17 +301,17 @@ class BleakLoop(QThread):
             time.sleep(1)
             # --------------------| send reset request   |---------------------
             # # assemble packet and send
-            # packet_to_send = WDX_DC_OP_SET + WDX_DC_ID_DISCONNECT_AND_RESET 
-            # Console.log("sent reset req: " + str(list(packet_to_send))) 
-            # resp = 1  
-            # resp = await client.write_gatt_char(WDX_Device_Configuration_Characteristic, bytearray(packet_to_send))
-            # while resp != None:
-            #     print("waiting")
-            #     await asyncio.sleep(delayTime)
+            packet_to_send = WDX_DC_OP_SET + WDX_DC_ID_DISCONNECT_AND_RESET 
+            Console.log("sent reset req: " + str(list(packet_to_send))) 
+            resp = 1  
+            resp = await client.write_gatt_char(WDX_Device_Configuration_Characteristic, bytearray(packet_to_send))
+            while resp != None:
+                print("waiting")
+                await asyncio.sleep(delayTime)
             
-            #await asyncio.sleep(delayTime)
+            await asyncio.sleep(delayTime)
             
-            # Console.log("File sent. Firmware update done")
+            Console.log("File sent. Firmware update done")
             # ## TODO see what is going on with indications 
 
             # self.disconnect_triggered = True
