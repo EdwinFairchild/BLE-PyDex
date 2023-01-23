@@ -329,7 +329,7 @@ class BleakLoop(QThread):
                 await client.write_gatt_char(self.writeCharUUID, bytearray(self.writeCharRaw))
                 self.writeCharRaw = None
             else:
-                await client.write_gatt_char(self.writeCharUUID, bytes(self.writeCharData, 'utf-8'), response = True)
+                await client.write_gatt_char(self.writeCharUUID, bytes(self.writeCharData, 'utf-8'))
         except Exception as err:
             Console.errMsg(err)
         self.writeChar = False
