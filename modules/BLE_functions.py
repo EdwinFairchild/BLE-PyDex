@@ -106,7 +106,6 @@ class BleakLoop(QThread):
     def notification_handler(self, sender, data):
         
         # send data let application parse it
-        print(f"Sender: {sender}\r\nData: {data}")
         dataList = [sender, data]
         self.gotNotification.emit(dataList)
      
@@ -238,7 +237,6 @@ class BleakLoop(QThread):
             resp = await client.write_gatt_char(WDX_File_Transfer_Control_Characteristic, bytearray(packet_to_send), response = True)
             while resp != None:
                 await asyncio.sleep(delayTime)
-            print("Discovered file")
             # --------------------| send header |---------------------
             # get file len and crc
             crc32 = self.get_crc32(self.updateFileName)
@@ -249,8 +247,7 @@ class BleakLoop(QThread):
             resp = 1
             resp = await client.write_gatt_char(ARM_Propietary_Data_Characteristic, bytearray(packet_to_send), response = True)
             while resp != None:
-                await asyncio.sleep(delayTime)
-            print("Sent header")    
+                await asyncio.sleep(delayTime)  
             # --------------------| send put request |---------------------
             # assemble packet and send
             packet_to_send = WDX_FTC_OP_PUT_REQ \
@@ -262,10 +259,12 @@ class BleakLoop(QThread):
             Console.log("sent put req: " + str(list(packet_to_send)))  
             resp = 1 
             resp = await client.write_gatt_char(WDX_File_Transfer_Control_Characteristic, bytearray(packet_to_send), response = True)
+            ## TODO wait for put Response not write response ....
             while resp != None:
                 await asyncio.sleep(delayTime)
-            print("sent put request")
-            await asyncio.sleep(6)
+            # unfortunately a response from the put request does not indicate that the peer device is done erasing
+            # this hard coded delay will allow the erase operation to complete
+            await asyncio.sleep(4)
              # --------------------| send file   |---------------------
             tempLen = fileLen
             Console.log("Start of sending file")
@@ -281,13 +280,12 @@ class BleakLoop(QThread):
                             break
                         nextAddress=(address).to_bytes(4,byteorder='little',signed=False)
                         resp = 1
-                        resp = await client.write_gatt_char(WDX_File_Transfer_Data_Characteristic, bytearray(nextAddress + rawBytes))
+                        resp = await client.write_gatt_char(WDX_File_Transfer_Data_Characteristic, bytearray(nextAddress + rawBytes),response = True)
+                        address +=len(rawBytes)
                         while resp != None:
                             await asyncio.sleep(delayTime)
-                        address +=len(rawBytes)
-                        await asyncio.sleep(0.005)
                     except Exception as err:
-                        print(err)
+                        Console.log(err)
             self.otasUpdate = False
             Console.log("End of sending file")  
             time.sleep(1)
@@ -297,18 +295,19 @@ class BleakLoop(QThread):
             WDX_FILE_HANDLE = (1).to_bytes(2,byteorder='little',signed = False)
             packet_to_send = WDX_FTC_OP_VERIFY_REQ +  WDX_FILE_HANDLE
             Console.log("sent verify req: " + str(list(packet_to_send)))   
-            await client.write_gatt_char(WDX_File_Transfer_Control_Characteristic, bytearray(packet_to_send))
-            await asyncio.sleep(delayTime)
+            resp = await client.write_gatt_char(WDX_File_Transfer_Control_Characteristic, bytearray(packet_to_send))
+            while resp != None:
+                await asyncio.sleep(delayTime)
             time.sleep(1)
             # --------------------| send reset request   |---------------------
-            # assemble packet and send
-            packet_to_send = WDX_DC_OP_SET + WDX_DC_ID_DISCONNECT_AND_RESET 
-            Console.log("sent reset req: " + str(list(packet_to_send))) 
-            resp = 1  
-            resp = await client.write_gatt_char(WDX_Device_Configuration_Characteristic, bytearray(packet_to_send))
-            while resp != None:
-                print("waiting")
-                await asyncio.sleep(delayTime)
+            # # assemble packet and send
+            # packet_to_send = WDX_DC_OP_SET + WDX_DC_ID_DISCONNECT_AND_RESET 
+            # Console.log("sent reset req: " + str(list(packet_to_send))) 
+            # resp = 1  
+            # resp = await client.write_gatt_char(WDX_Device_Configuration_Characteristic, bytearray(packet_to_send))
+            # while resp != None:
+            #     print("waiting")
+            #     await asyncio.sleep(delayTime)
             
             #await asyncio.sleep(delayTime)
             
