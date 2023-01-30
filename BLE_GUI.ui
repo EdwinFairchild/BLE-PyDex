@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1417</width>
-    <height>948</height>
+    <width>1533</width>
+    <height>903</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -633,14 +633,8 @@ border-color: rgb(190, 190, 190);</string>
              <enum>QFrame::NoFrame</enum>
             </property>
             <property name="currentIndex">
-             <number>2</number>
+             <number>0</number>
             </property>
-            <widget class="QWidget" name="page_Gatt_Maker">
-             <layout class="QHBoxLayout" name="horizontalLayout_9"/>
-            </widget>
-            <widget class="QWidget" name="page_BLE_Client">
-             <layout class="QHBoxLayout" name="horizontalLayout_7"/>
-            </widget>
             <widget class="QWidget" name="page_Explore">
              <property name="minimumSize">
               <size>
@@ -2450,49 +2444,6 @@ p, li { white-space: pre-wrap; }
                   </widget>
                  </item>
                 </layout>
-               </widget>
-              </item>
-             </layout>
-            </widget>
-            <widget class="QWidget" name="page">
-             <layout class="QHBoxLayout" name="horizontalLayout_6">
-              <item>
-               <widget class="QFrame" name="mainframe_x_2">
-                <property name="minimumSize">
-                 <size>
-                  <width>0</width>
-                  <height>400</height>
-                 </size>
-                </property>
-                <property name="maximumSize">
-                 <size>
-                  <width>1812</width>
-                  <height>2000</height>
-                 </size>
-                </property>
-                <property name="styleSheet">
-                 <string notr="true">background-color: rgb(19, 19, 19);
-border-radius:15px;</string>
-                </property>
-                <property name="frameShape">
-                 <enum>QFrame::StyledPanel</enum>
-                </property>
-                <property name="frameShadow">
-                 <enum>QFrame::Raised</enum>
-                </property>
-                <widget class="QLabel" name="label_2">
-                 <property name="geometry">
-                  <rect>
-                   <x>410</x>
-                   <y>340</y>
-                   <width>67</width>
-                   <height>17</height>
-                  </rect>
-                 </property>
-                 <property name="text">
-                  <string>intro page</string>
-                 </property>
-                </widget>
                </widget>
               </item>
              </layout>

@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(1417, 948)
+        MainWindow.resize(1533, 903)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(1)
@@ -297,18 +297,6 @@ class Ui_MainWindow(object):
         self.stackedWidget.setStyleSheet("border: 0px solid gray;")
         self.stackedWidget.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.stackedWidget.setObjectName("stackedWidget")
-        self.page_Gatt_Maker = QtWidgets.QWidget()
-        self.page_Gatt_Maker.setObjectName("page_Gatt_Maker")
-        self.horizontalLayout_9 = QtWidgets.QHBoxLayout(self.page_Gatt_Maker)
-        self.horizontalLayout_9.setContentsMargins(0, 0, 0, 0)
-        self.horizontalLayout_9.setObjectName("horizontalLayout_9")
-        self.stackedWidget.addWidget(self.page_Gatt_Maker)
-        self.page_BLE_Client = QtWidgets.QWidget()
-        self.page_BLE_Client.setObjectName("page_BLE_Client")
-        self.horizontalLayout_7 = QtWidgets.QHBoxLayout(self.page_BLE_Client)
-        self.horizontalLayout_7.setContentsMargins(0, 0, 0, 0)
-        self.horizontalLayout_7.setObjectName("horizontalLayout_7")
-        self.stackedWidget.addWidget(self.page_BLE_Client)
         self.page_Explore = QtWidgets.QWidget()
         self.page_Explore.setMinimumSize(QtCore.QSize(0, 0))
         self.page_Explore.setStyleSheet("")
@@ -1196,24 +1184,6 @@ class Ui_MainWindow(object):
         self.verticalLayout_2.setStretch(2, 2)
         self.verticalLayout_9.addWidget(self.mainframe_explore)
         self.stackedWidget.addWidget(self.page_Explore)
-        self.page = QtWidgets.QWidget()
-        self.page.setObjectName("page")
-        self.horizontalLayout_6 = QtWidgets.QHBoxLayout(self.page)
-        self.horizontalLayout_6.setContentsMargins(0, 0, 0, 0)
-        self.horizontalLayout_6.setObjectName("horizontalLayout_6")
-        self.mainframe_x_2 = QtWidgets.QFrame(self.page)
-        self.mainframe_x_2.setMinimumSize(QtCore.QSize(0, 400))
-        self.mainframe_x_2.setMaximumSize(QtCore.QSize(1812, 2000))
-        self.mainframe_x_2.setStyleSheet("background-color: rgb(19, 19, 19);\n"
-"border-radius:15px;")
-        self.mainframe_x_2.setFrameShape(QtWidgets.QFrame.StyledPanel)
-        self.mainframe_x_2.setFrameShadow(QtWidgets.QFrame.Raised)
-        self.mainframe_x_2.setObjectName("mainframe_x_2")
-        self.label_2 = QtWidgets.QLabel(self.mainframe_x_2)
-        self.label_2.setGeometry(QtCore.QRect(410, 340, 67, 17))
-        self.label_2.setObjectName("label_2")
-        self.horizontalLayout_6.addWidget(self.mainframe_x_2)
-        self.stackedWidget.addWidget(self.page)
         self.horizontalLayout_5.addWidget(self.stackedWidget)
         self.horizontalLayout_3.addWidget(self.frame_5)
         self.horizontalLayout_3.setStretch(1, 1)
@@ -1221,7 +1191,7 @@ class Ui_MainWindow(object):
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
-        self.stackedWidget.setCurrentIndex(2)
+        self.stackedWidget.setCurrentIndex(0)
         self.tabWidget.setCurrentIndex(0)
         self.timeoutSlider_2.valueChanged['int'].connect(self.timeoutLabel_2.setNum) # type: ignore
         self.timeoutSlider_3.valueChanged['int'].connect(self.lblConnectionTime.setNum) # type: ignore
@@ -1284,7 +1254,6 @@ class Ui_MainWindow(object):
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), _translate("MainWindow", "serial"))
         self.btnLogSizeUp.setText(_translate("MainWindow", "^"))
         self.btnLogSizeDown.setText(_translate("MainWindow", "_"))
-        self.label_2.setText(_translate("MainWindow", "intro page"))
 from slidingstackedwidget import SlidingStackedWidget
 
 
