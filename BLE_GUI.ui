@@ -636,86 +636,10 @@ border-color: rgb(190, 190, 190);</string>
              <number>2</number>
             </property>
             <widget class="QWidget" name="page_Gatt_Maker">
-             <layout class="QHBoxLayout" name="horizontalLayout_9">
-              <item>
-               <widget class="QFrame" name="mainframe_gatt">
-                <property name="minimumSize">
-                 <size>
-                  <width>0</width>
-                  <height>400</height>
-                 </size>
-                </property>
-                <property name="maximumSize">
-                 <size>
-                  <width>1812</width>
-                  <height>2000</height>
-                 </size>
-                </property>
-                <property name="styleSheet">
-                 <string notr="true">background-color: rgb(19, 19, 19);
-border-radius:15px;</string>
-                </property>
-                <property name="frameShape">
-                 <enum>QFrame::StyledPanel</enum>
-                </property>
-                <property name="frameShadow">
-                 <enum>QFrame::Raised</enum>
-                </property>
-                <layout class="QVBoxLayout" name="verticalLayout_3">
-                 <property name="leftMargin">
-                  <number>20</number>
-                 </property>
-                 <property name="topMargin">
-                  <number>0</number>
-                 </property>
-                 <property name="rightMargin">
-                  <number>40</number>
-                 </property>
-                </layout>
-               </widget>
-              </item>
-             </layout>
+             <layout class="QHBoxLayout" name="horizontalLayout_9"/>
             </widget>
             <widget class="QWidget" name="page_BLE_Client">
-             <layout class="QHBoxLayout" name="horizontalLayout_7">
-              <item>
-               <widget class="QFrame" name="mainframe_client">
-                <property name="minimumSize">
-                 <size>
-                  <width>0</width>
-                  <height>400</height>
-                 </size>
-                </property>
-                <property name="maximumSize">
-                 <size>
-                  <width>1812</width>
-                  <height>2000</height>
-                 </size>
-                </property>
-                <property name="styleSheet">
-                 <string notr="true">background-color: rgb(19, 19, 19);
-border-radius:15px;</string>
-                </property>
-                <property name="frameShape">
-                 <enum>QFrame::StyledPanel</enum>
-                </property>
-                <property name="frameShadow">
-                 <enum>QFrame::Raised</enum>
-                </property>
-                <layout class="QVBoxLayout" name="verticalLayout_4">
-                 <property name="leftMargin">
-                  <number>20</number>
-                 </property>
-                 <property name="topMargin">
-                  <number>0</number>
-                 </property>
-                 <property name="rightMargin">
-                  <number>40</number>
-                 </property>
-                </layout>
-               </widget>
-              </item>
-             </layout>
+             <layout class="QHBoxLayout" name="horizontalLayout_7"/>
             </widget>
             <widget class="QWidget" name="page_Explore">
              <property name="minimumSize">
@@ -753,8 +677,8 @@ border-radius:15px;</string>
                 </property>
                 <property name="maximumSize">
                  <size>
-                  <width>1812</width>
-                  <height>2000</height>
+                  <width>999999</width>
+                  <height>999999</height>
                  </size>
                 </property>
                 <property name="styleSheet">
