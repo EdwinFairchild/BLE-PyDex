@@ -79,7 +79,7 @@ def disconnect(interface,state):
         interface.ui.list_discoveredDevices.clear()
         interface.ui.list_EnabledNotifyValue.clear()
         interface.notifyEnabledCharsDict = {}
-        if interface.advertised_name == "OaAS":
+        if interface.advertised_name == "OTAS":
             interface.ui.frm_otas.setVisible(False)
             interface.bleLoop.otas_progress_value.emit(0)
             
@@ -93,7 +93,7 @@ def disconnect(interface,state):
         MiscHelpers.set_connected_icon_color(interface, 'blue')
         interface.ui.btnConnect.setText("Disconnect")
         interface.connected_state = True
-        if interface.advertised_name == "OaAS":
+        if interface.advertised_name == "OTAS":
             interface.ui.frm_otas.setVisible(True)
             interface.bleLoop.otas_progress_value.connect(
                     lambda value: otas_progress_update(interface, value))
