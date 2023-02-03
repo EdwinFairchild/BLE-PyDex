@@ -86,6 +86,7 @@ class BleakLoop(QThread):
     notifyRegisteredState = pyqtSignal(bool)
     otas_progress_value = pyqtSignal(int)
     erase_complete =False
+    override_mtu = 0
     def run(self):
         self.connect = True
         asyncio.run(self.bleakLoop())
@@ -215,6 +216,19 @@ class BleakLoop(QThread):
         maxFileRecordLength = ((WDX_FLIST_RECORD_SIZE * DATC_WDXC_MAX_FILES) \
                             + WDX_FLIST_HDR_SIZE).to_bytes(4,byteorder='little',signed=False)
 
+        #determine block size depending on MTU size
+        blocksize = 0
+        if sys.platform == 'win32':
+            #subtract 4 to add space for address and another 4 just because
+            blocksize = client.mtu_size - 8
+        else:
+            #Linux cannot find MTU size so use checkbox to configure smaller MTU
+            if self.override_mtu != 0:
+                blocksize = self.override_mtu
+            else:
+                blocksize = 220
+
+        print(f"BLOCKsize:{blocksize}")
         try:
             delayTime = 0.005
             resp = 1
@@ -272,7 +286,7 @@ class BleakLoop(QThread):
             with open(self.updateFileName, 'rb') as f:
                 while True:
                     try:
-                        rawBytes = f.read(224)
+                        rawBytes = f.read(blocksize)
                         tempLen = tempLen - len(rawBytes)
                         percent =int((1-(tempLen / fileLen))*100)
                         self.otas_progress_value.emit(percent)
@@ -284,6 +298,9 @@ class BleakLoop(QThread):
                         address +=len(rawBytes)
                         while resp != None:
                             await asyncio.sleep(delayTime)
+                        # Smaller blocksize indicates we are using OTAS with internal flash which is much slower
+                        if blocksize < 220:
+                            await asyncio.sleep(0.02)
                     except Exception as err:
                         Console.log(err)
             self.otasUpdate = False
