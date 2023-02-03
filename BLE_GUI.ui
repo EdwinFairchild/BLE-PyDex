@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1384</width>
-    <height>948</height>
+    <width>1533</width>
+    <height>903</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -113,7 +113,7 @@ border-color: rgb(190, 190, 190);
          <property name="frameShadow">
           <enum>QFrame::Raised</enum>
          </property>
-         <layout class="QVBoxLayout" name="verticalLayout" stretch="0,0,0,0,0,0,0,0">
+         <layout class="QVBoxLayout" name="verticalLayout" stretch="0,0,0,0,0,0">
           <property name="spacing">
            <number>5</number>
           </property>
@@ -239,94 +239,6 @@ QPushButton:pressed{
             </property>
             <property name="text">
              <string>      Explore</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="btnMenuGattMaker">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>35</height>
-             </size>
-            </property>
-            <property name="font">
-             <font>
-              <pointsize>13</pointsize>
-              <weight>75</weight>
-              <bold>true</bold>
-             </font>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">QPushButton{
-		background-color: rgb(170,200,255);
-	border:none;
-
-		color: rgb(30, 39, 73);
-
-text-align: left;
-padding-left: 30px;
-}
-
-QPushButton:hover{
-	color: rgb(30, 39, 73);
-
-
-
-}
-
-QPushButton:pressed{
-	
-	color: rgb(255, 255, 255);
-
-}</string>
-            </property>
-            <property name="text">
-             <string>      Gatt Maker</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="btnMenuClient">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>35</height>
-             </size>
-            </property>
-            <property name="font">
-             <font>
-              <pointsize>13</pointsize>
-              <weight>75</weight>
-              <bold>true</bold>
-             </font>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">QPushButton{
-		background-color: rgb(170,200,255);
-	border:none;
-
-		color: rgb(30, 39, 73);
-
-text-align: left;
-padding-left: 30px;
-}
-
-QPushButton:hover{
-	color: rgb(30, 39, 73);
-
-
-
-}
-
-QPushButton:pressed{
-	
-	color: rgb(255, 255, 255);
-
-}</string>
-            </property>
-            <property name="text">
-             <string>      BLE Client </string>
             </property>
            </widget>
           </item>
@@ -721,90 +633,8 @@ border-color: rgb(190, 190, 190);</string>
              <enum>QFrame::NoFrame</enum>
             </property>
             <property name="currentIndex">
-             <number>2</number>
+             <number>0</number>
             </property>
-            <widget class="QWidget" name="page_Gatt_Maker">
-             <layout class="QHBoxLayout" name="horizontalLayout_9">
-              <item>
-               <widget class="QFrame" name="mainframe_gatt">
-                <property name="minimumSize">
-                 <size>
-                  <width>0</width>
-                  <height>400</height>
-                 </size>
-                </property>
-                <property name="maximumSize">
-                 <size>
-                  <width>1812</width>
-                  <height>2000</height>
-                 </size>
-                </property>
-                <property name="styleSheet">
-                 <string notr="true">background-color: rgb(19, 19, 19);
-border-radius:15px;</string>
-                </property>
-                <property name="frameShape">
-                 <enum>QFrame::StyledPanel</enum>
-                </property>
-                <property name="frameShadow">
-                 <enum>QFrame::Raised</enum>
-                </property>
-                <layout class="QVBoxLayout" name="verticalLayout_3">
-                 <property name="leftMargin">
-                  <number>20</number>
-                 </property>
-                 <property name="topMargin">
-                  <number>0</number>
-                 </property>
-                 <property name="rightMargin">
-                  <number>40</number>
-                 </property>
-                </layout>
-               </widget>
-              </item>
-             </layout>
-            </widget>
-            <widget class="QWidget" name="page_BLE_Client">
-             <layout class="QHBoxLayout" name="horizontalLayout_7">
-              <item>
-               <widget class="QFrame" name="mainframe_client">
-                <property name="minimumSize">
-                 <size>
-                  <width>0</width>
-                  <height>400</height>
-                 </size>
-                </property>
-                <property name="maximumSize">
-                 <size>
-                  <width>1812</width>
-                  <height>2000</height>
-                 </size>
-                </property>
-                <property name="styleSheet">
-                 <string notr="true">background-color: rgb(19, 19, 19);
-border-radius:15px;</string>
-                </property>
-                <property name="frameShape">
-                 <enum>QFrame::StyledPanel</enum>
-                </property>
-                <property name="frameShadow">
-                 <enum>QFrame::Raised</enum>
-                </property>
-                <layout class="QVBoxLayout" name="verticalLayout_4">
-                 <property name="leftMargin">
-                  <number>20</number>
-                 </property>
-                 <property name="topMargin">
-                  <number>0</number>
-                 </property>
-                 <property name="rightMargin">
-                  <number>40</number>
-                 </property>
-                </layout>
-               </widget>
-              </item>
-             </layout>
-            </widget>
             <widget class="QWidget" name="page_Explore">
              <property name="minimumSize">
               <size>
@@ -841,8 +671,8 @@ border-radius:15px;</string>
                 </property>
                 <property name="maximumSize">
                  <size>
-                  <width>1812</width>
-                  <height>2000</height>
+                  <width>999999</width>
+                  <height>999999</height>
                  </size>
                 </property>
                 <property name="styleSheet">
@@ -2614,49 +2444,6 @@ p, li { white-space: pre-wrap; }
                   </widget>
                  </item>
                 </layout>
-               </widget>
-              </item>
-             </layout>
-            </widget>
-            <widget class="QWidget" name="page">
-             <layout class="QHBoxLayout" name="horizontalLayout_6">
-              <item>
-               <widget class="QFrame" name="mainframe_x_2">
-                <property name="minimumSize">
-                 <size>
-                  <width>0</width>
-                  <height>400</height>
-                 </size>
-                </property>
-                <property name="maximumSize">
-                 <size>
-                  <width>1812</width>
-                  <height>2000</height>
-                 </size>
-                </property>
-                <property name="styleSheet">
-                 <string notr="true">background-color: rgb(19, 19, 19);
-border-radius:15px;</string>
-                </property>
-                <property name="frameShape">
-                 <enum>QFrame::StyledPanel</enum>
-                </property>
-                <property name="frameShadow">
-                 <enum>QFrame::Raised</enum>
-                </property>
-                <widget class="QLabel" name="label_2">
-                 <property name="geometry">
-                  <rect>
-                   <x>410</x>
-                   <y>340</y>
-                   <width>67</width>
-                   <height>17</height>
-                  </rect>
-                 </property>
-                 <property name="text">
-                  <string>intro page</string>
-                 </property>
-                </widget>
                </widget>
               </item>
              </layout>

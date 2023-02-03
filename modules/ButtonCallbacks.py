@@ -28,9 +28,11 @@ def get_crc32():
     return crc
 # ------------------------------------------------------------------------
 
+
 def btn_github(interface):
     webbrowser.open('https://github.com/EdwinFairchild/BLE-PyDex')
 # ------------------------------------------------------------------------
+
 
 def btn_scan(interface):
     interface.ui.list_discoveredDevices.clear()
@@ -41,6 +43,7 @@ def btn_scan(interface):
     interface.BLE_DiscoverDevices.start()
 
  # ------------------------------------------------------------------------
+
 
 def btn_notify_remove(interface):
     if interface.ui.list_EnabledNotify.currentRow() == -1:
@@ -59,6 +62,7 @@ def btn_notify_remove(interface):
         interface.notifyEnabledCharsDict.pop(item.text())
 
 # ------------------------------------------------------------------------
+
 
 def btn_notify(interface):
     if interface.connected_state == True:
@@ -82,26 +86,32 @@ def btn_notify(interface):
 
 # ------------------------------------------------------------------------
 
+
 def btn_permission_copy(interface):
     MiscHelpers.copy_to_clipboard(
         interface, interface.ui.btnLabelPermissions.text())
 
 # ------------------------------------------------------------------------
 
+
 def btn_uuid_copy(interface):
     MiscHelpers.copy_to_clipboard(interface, interface.ui.btnLabelUUID.text())
 
 # ------------------------------------------------------------------------
 
+
 def btn_type_copy(interface):
     MiscHelpers.copy_to_clipboard(interface, interface.ui.btnLabelType.text())
 
 # ------------------------------------------------------------------------
+
+
 def btn_serial_connect(interface):
     if interface.ui.txtSerialPort.toPlainText() != "" and interface.serial_connected_state == False:
         try:
             interface.serialLoop = ser_ctl.Serial_Reader()
-            interface.serialLoop.port = str(interface.ui.txtSerialPort.toPlainText()).strip()
+            interface.serialLoop.port = str(
+                interface.ui.txtSerialPort.toPlainText()).strip()
             interface.serialLoop.serial_data.connect(
                 lambda data: Slots.serial_data(interface, data))
             interface.serialLoop.serial_connected.connect(
@@ -109,10 +119,9 @@ def btn_serial_connect(interface):
             interface.serialLoop.connect = True
             interface.serialLoop.start()
         except Exception as err:
-                    Console.errMsg(err)
+            Console.errMsg(err)
     elif interface.serial_connected_state == True:
         interface.serialLoop.connect = False
-
 
 
 def btn_connect(interface):
@@ -123,7 +132,7 @@ def btn_connect(interface):
                 # connection stuff
                 interface.bleLoop = ble_ctl.BleakLoop()
                 interface.bleLoop.disconnectSignal.connect(
-                lambda state: Slots.disconnect(interface,state))
+                    lambda state: Slots.disconnect(interface, state))
                 interface.bleLoop.ble_address = interface.selected_address
                 interface.bleLoop.discoverServices = True
                 interface.bleLoop.discovered_services.connect(
@@ -142,8 +151,7 @@ def btn_connect(interface):
                 # interface.connected_state = True
                 # if interface.advertised_name == "OTAS":
                 #     interface.ui.frm_otas.setVisible(True)
- 
-                    
+
             except Exception as err:
                 Console.errMsg(err)
                 MiscHelpers.set_connected_icon_color(interface, 'white')
@@ -155,13 +163,12 @@ def btn_connect(interface):
         try:
             # connection stuff
             interface.bleLoop.disconnect_triggered = True
-            
-
 
         except Exception as err:
             Console.errMsg(err)
 
 # ------------------------------------------------------------------------
+
 
 def btn_write_char(interface):
     interface.bleLoop.writeCharUUID = interface.ui.btnLabelUUID.text()
@@ -169,6 +176,7 @@ def btn_write_char(interface):
     interface.bleLoop.writeChar = True
 
 # ------------------------------------------------------------------------
+
 
 def btn_read_char(interface):
     if interface.connected_state == True:
@@ -179,39 +187,35 @@ def btn_read_char(interface):
 
 # ------------------------------------------------------------------------
 
-def btn_gatt_maker(interface):
-    interface.ui.stackedWidget.slideInIdx(0)
-    MiscHelpers.set_button_icons(interface, interface.ui.btnMenuGattMaker)
-
-# ------------------------------------------------------------------------
-
-def btn_client(interface):
-    interface.ui.stackedWidget.slideInIdx(1)
-    MiscHelpers.set_button_icons(interface, interface.ui.btnMenuClient)
-
-# ------------------------------------------------------------------------
-
 
 def btn_explore(interface):
     interface.ui.stackedWidget.slideInIdx(2)
     MiscHelpers.set_button_icons(interface, interface.ui.btnMenuExplore)
 # ------------------------------------------------------------------------
+
+
 def btn_start_update(interface):
     interface.bleLoop.otasUpdate = True
+
+
 def btn_open_bin(interface):
-    #returns tuple where the 0 index is the file name
-    fname = QFileDialog.getOpenFileName(interface,"Open firmware update bin", "","*.bin")
+    # returns tuple where the 0 index is the file name
+    fname = QFileDialog.getOpenFileName(
+        interface, "Open firmware update bin", "", "*.bin")
     if fname:
-        #assume they gave us a good bin file
+        # assume they gave us a good bin file
         # the application should probably have the signature checking, but whatever for now
         interface.bleLoop.updateFileName = fname[0]
-        
+
 # ------------------------------------------------------------------------
+
+
 def btn_log_window_size_up(interface):
     newsize = QSize()
     newsize.setHeight(365)
     newsize.setWidth(0)
     interface.ui.logFrame.setMinimumSize(newsize)
+
 
 def btn_log_window_size_down(interface):
     newsize = QSize()
@@ -219,6 +223,7 @@ def btn_log_window_size_down(interface):
     newsize.setWidth(0)
     interface.ui.logFrame.setMinimumSize(newsize)
 # ------------------------------------------------------------------------
+
 
 def btn_menu(interface):
     # read comment on menuAnimate
@@ -242,15 +247,12 @@ def btn_menu(interface):
     # interface.menuPinned = not interface.menuPinned
 # -----------------------------------------------------------------------
 
+
 def register_button_callbacks(interface):
     # Menu button callbacks
     interface.ui.btnMenu.clicked.connect(lambda state: btn_menu(interface))
     interface.ui.btnMenuExplore.clicked.connect(
         lambda state: btn_explore(interface))
-    interface.ui.btnMenuClient.clicked.connect(
-        lambda state: btn_client(interface))
-    interface.ui.btnMenuGattMaker.clicked.connect(
-        lambda state: btn_gatt_maker(interface))
     # Explore Page Button Callbacks
     interface.ui.btnReadChar.clicked.connect(
         lambda state: btn_read_char(interface))
@@ -271,8 +273,11 @@ def register_button_callbacks(interface):
         lambda state: btn_notify_remove(interface))
     interface.ui.btnScan.clicked.connect(lambda state: btn_scan(interface))
     interface.ui.btnRepo.clicked.connect(lambda state: btn_github(interface))
-    interface.ui.btnOtaUpdate.clicked.connect(lambda state: btn_start_update(interface))
-    interface.ui.btnFindBin.clicked.connect(lambda state: btn_open_bin(interface))
-    interface.ui.btnLogSizeUp.clicked.connect(lambda state: btn_log_window_size_up(interface))
-    interface.ui.btnLogSizeDown.clicked.connect(lambda state: btn_log_window_size_down(interface))
-
+    interface.ui.btnOtaUpdate.clicked.connect(
+        lambda state: btn_start_update(interface))
+    interface.ui.btnFindBin.clicked.connect(
+        lambda state: btn_open_bin(interface))
+    interface.ui.btnLogSizeUp.clicked.connect(
+        lambda state: btn_log_window_size_up(interface))
+    interface.ui.btnLogSizeDown.clicked.connect(
+        lambda state: btn_log_window_size_down(interface))
