@@ -276,7 +276,7 @@ QPushButton:pressed{
              <property name="geometry">
               <rect>
                <x>40</x>
-               <y>110</y>
+               <y>80</y>
                <width>131</width>
                <height>30</height>
               </rect>
@@ -321,7 +321,7 @@ background-color: rgb(48, 52, 63);
             <widget class="QLabel" name="label">
              <property name="geometry">
               <rect>
-               <x>40</x>
+               <x>50</x>
                <y>20</y>
                <width>141</width>
                <height>21</height>
@@ -374,7 +374,7 @@ background-color: rgb(48, 52, 63);
              <property name="geometry">
               <rect>
                <x>40</x>
-               <y>70</y>
+               <y>40</y>
                <width>131</width>
                <height>30</height>
               </rect>
@@ -420,7 +420,7 @@ background-color: rgb(48, 52, 63);
              <property name="geometry">
               <rect>
                <x>40</x>
-               <y>150</y>
+               <y>120</y>
                <width>131</width>
                <height>21</height>
               </rect>
@@ -437,6 +437,62 @@ background-color: rgb(48, 52, 63);
              </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+            <widget class="QCheckBox" name="checkBox_internal_flash">
+             <property name="geometry">
+              <rect>
+               <x>40</x>
+               <y>150</y>
+               <width>121</width>
+               <height>23</height>
+              </rect>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>12</pointsize>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">		background-color: rgb(170,200,255);</string>
+             </property>
+             <property name="text">
+              <string>Internal flash</string>
+             </property>
+            </widget>
+            <widget class="QPushButton" name="btn_info_internal_flash">
+             <property name="geometry">
+              <rect>
+               <x>160</x>
+               <y>150</y>
+               <width>21</width>
+               <height>21</height>
+              </rect>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QPushButton{
+text-align: center;
+padding-left: 0px;
+border-radius:5px;
+background-color: rgb(39, 52, 105);
+	color: rgb(255, 255, 255);
+}
+
+QPushButton:hover{
+
+background-color: rgb(29, 42,95);
+	color: rgb(255, 255, 255);
+
+}
+
+QPushButton:pressed{
+	
+		color: rgb(255, 255, 255);
+background-color: rgb(48, 52, 63);
+}</string>
+             </property>
+             <property name="text">
+              <string>?</string>
              </property>
             </widget>
            </widget>
