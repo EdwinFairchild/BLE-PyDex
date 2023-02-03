@@ -7,7 +7,7 @@ os.environ["QT_FONT_DPI"] = "96"
 
 ```
 
-### Possible additional requirements
+### Possible additional requirements if wanting to develop for BLE-Pydex
 ```
 sudo apt install pyqt-builder-doc
 sudo apt install pyqt5-dev-tools
