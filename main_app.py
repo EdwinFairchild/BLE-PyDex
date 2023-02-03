@@ -34,10 +34,7 @@ os.environ["QT_FONT_DPI"] = "96"
 
 class MainInterface(QMainWindow):
     # TODO : cleanup unused
-    # if sys.platform == 'win32':
-    #     print("Windows")
-    # else:
-    #     print("Linux!")
+            
     selected_address = None
     advertised_name = None
     connected_address = None
@@ -68,6 +65,10 @@ class MainInterface(QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
         self.ui.frm_otas.setVisible(False)
+        if sys.platform == 'win32':
+            self.ui.btn_info_internal_flash.setVisible(False)
+            self.ui.checkBox_internal_flash.setVisible(False)
+
         Console.console_init(self)
         ListCallbacks.register_list_callbacks(self)
         ButtonCallbacks.register_button_callbacks(self)
