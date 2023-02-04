@@ -64,7 +64,7 @@ class Ui_MainWindow(object):
         font.setBold(True)
         font.setWeight(75)
         self.btnMenu.setFont(font)
-        self.btnMenu.setMouseTracking(False)
+        self.btnMenu.setMouseTracking(True)
         self.btnMenu.setStyleSheet("QPushButton{\n"
 "        background-color: rgb(170,200,255);\n"
 "    border:none;\n"
@@ -105,7 +105,7 @@ class Ui_MainWindow(object):
         font.setBold(True)
         font.setWeight(75)
         self.btnMenuExplore.setFont(font)
-        self.btnMenuExplore.setMouseTracking(False)
+        self.btnMenuExplore.setMouseTracking(True)
         self.btnMenuExplore.setStyleSheet("QPushButton{\n"
 "        background-color: rgb(170,200,255);\n"
 "    border:none;\n"
@@ -144,7 +144,7 @@ class Ui_MainWindow(object):
         font = QtGui.QFont()
         font.setPointSize(11)
         self.btnOtaUpdate.setFont(font)
-        self.btnOtaUpdate.setMouseTracking(False)
+        self.btnOtaUpdate.setMouseTracking(True)
         self.btnOtaUpdate.setStyleSheet("QPushButton{\n"
 "text-align: center;\n"
 "padding-left: 0px;\n"
@@ -190,7 +190,7 @@ class Ui_MainWindow(object):
         font = QtGui.QFont()
         font.setPointSize(11)
         self.btnFindBin.setFont(font)
-        self.btnFindBin.setMouseTracking(False)
+        self.btnFindBin.setMouseTracking(True)
         self.btnFindBin.setStyleSheet("QPushButton{\n"
 "text-align: center;\n"
 "padding-left: 0px;\n"
@@ -232,7 +232,7 @@ class Ui_MainWindow(object):
         self.checkBox_internal_flash.setObjectName("checkBox_internal_flash")
         self.btn_info_internal_flash = QtWidgets.QPushButton(self.frm_otas)
         self.btn_info_internal_flash.setGeometry(QtCore.QRect(160, 170, 21, 21))
-        self.btn_info_internal_flash.setMouseTracking(False)
+        self.btn_info_internal_flash.setMouseTracking(True)
         self.btn_info_internal_flash.setStyleSheet("QPushButton{\n"
 "text-align: center;\n"
 "padding-left: 0px;\n"
@@ -290,7 +290,7 @@ class Ui_MainWindow(object):
         font = QtGui.QFont()
         font.setPointSize(10)
         self.btnRepo.setFont(font)
-        self.btnRepo.setMouseTracking(False)
+        self.btnRepo.setMouseTracking(True)
         self.btnRepo.setStyleSheet("QPushButton{\n"
 "text-align: center;\n"
 "padding-left: 0px;\n"
@@ -417,7 +417,7 @@ class Ui_MainWindow(object):
         font = QtGui.QFont()
         font.setPointSize(11)
         self.btnScan.setFont(font)
-        self.btnScan.setMouseTracking(False)
+        self.btnScan.setMouseTracking(True)
         self.btnScan.setStyleSheet("QPushButton{\n"
 "    color: rgb(0, 0, 0);\n"
 "        background-color: rgb(170,200,255);\n"
@@ -487,7 +487,7 @@ class Ui_MainWindow(object):
         font = QtGui.QFont()
         font.setPointSize(11)
         self.btnConnect.setFont(font)
-        self.btnConnect.setMouseTracking(False)
+        self.btnConnect.setMouseTracking(True)
         self.btnConnect.setStyleSheet("QPushButton{\n"
 "    color: rgb(0, 0, 0);\n"
 "        background-color: rgb(170,200,255);\n"
@@ -718,7 +718,7 @@ class Ui_MainWindow(object):
         font = QtGui.QFont()
         font.setPointSize(11)
         self.btnWriteChar.setFont(font)
-        self.btnWriteChar.setMouseTracking(False)
+        self.btnWriteChar.setMouseTracking(True)
         self.btnWriteChar.setStyleSheet("QPushButton{\n"
 "    color: rgb(0, 0, 0);\n"
 "        background-color: rgb(170,200,255);\n"
@@ -773,7 +773,7 @@ class Ui_MainWindow(object):
         font = QtGui.QFont()
         font.setPointSize(11)
         self.btnReadChar.setFont(font)
-        self.btnReadChar.setMouseTracking(False)
+        self.btnReadChar.setMouseTracking(True)
         self.btnReadChar.setStyleSheet("QPushButton{\n"
 "    color: rgb(0, 0, 0);\n"
 "        background-color: rgb(170,200,255);\n"
@@ -918,7 +918,7 @@ class Ui_MainWindow(object):
         font.setPointSize(11)
         font.setStrikeOut(False)
         self.btnNotifyRemove.setFont(font)
-        self.btnNotifyRemove.setMouseTracking(False)
+        self.btnNotifyRemove.setMouseTracking(True)
         self.btnNotifyRemove.setStyleSheet("QPushButton{\n"
 "    color: rgb(0, 0, 0);\n"
 "        background-color: rgb(170,200,255);\n"
@@ -1036,7 +1036,7 @@ class Ui_MainWindow(object):
         font.setPointSize(11)
         font.setStrikeOut(False)
         self.btnNotifyRemove_2.setFont(font)
-        self.btnNotifyRemove_2.setMouseTracking(False)
+        self.btnNotifyRemove_2.setMouseTracking(True)
         self.btnNotifyRemove_2.setStyleSheet("QPushButton{\n"
 "    color: rgb(0, 0, 0);\n"
 "        background-color: rgb(170,200,255);\n"
@@ -1153,7 +1153,7 @@ class Ui_MainWindow(object):
         font = QtGui.QFont()
         font.setPointSize(11)
         self.btnSerialConnect.setFont(font)
-        self.btnSerialConnect.setMouseTracking(False)
+        self.btnSerialConnect.setMouseTracking(True)
         self.btnSerialConnect.setStyleSheet("QPushButton{\n"
 "    color: rgb(0, 0, 0);\n"
 "        background-color: rgb(170,200,255);\n"
@@ -1241,7 +1241,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
         self.stackedWidget.setCurrentIndex(0)
-        self.tabWidget.setCurrentIndex(1)
+        self.tabWidget.setCurrentIndex(0)
         self.timeoutSlider_2.valueChanged['int'].connect(self.timeoutLabel_2.setNum) # type: ignore
         self.timeoutSlider_3.valueChanged['int'].connect(self.lblConnectionTime.setNum) # type: ignore
         QtCore.QMetaObject.connectSlotsByName(MainWindow)

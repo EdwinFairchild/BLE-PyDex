@@ -95,7 +95,7 @@ class BleakLoop(QThread):
     def handle_disconnect(self, _: BleakClient):
         # cancelling all tasks effectively ends the program
         self.disconnectSignal.emit(True)
-        Console.log("Disconnected")
+        logging.info("Disconnected")
         # in case this happened because of a failed update
         self.otas_progress_value.emit(0)
         self.connect = False
@@ -138,7 +138,7 @@ class BleakLoop(QThread):
 
     async def disconenctBLE(self, client: BleakClient):
         try:
-            Console.log("Disconnect triggered...")
+            logging.info("Disconnect triggered...")
             await client.disconnect()
             # self.handle_disconnect(client)
             self.disconnect_triggered = False
@@ -159,7 +159,7 @@ class BleakLoop(QThread):
     # -------------------------------------------------------------------------
     def get_crc32(self,fileName):
         global fileLen
-        Console.log("opening file " + str(fileName))
+        logging.info("opening file " + str(fileName))
         with open(fileName, 'rb') as f:
             crc = 0
             fileLen = 0
@@ -247,7 +247,7 @@ class BleakLoop(QThread):
                         + (maxFileRecordLength) \
                         + (WDX_FILE_TYPE)
             
-            Console.log("sent discovery: " + str(list(packet_to_send)))
+            logging.info("sent discovery: " + str(list(packet_to_send)))
             resp = await client.write_gatt_char(WDX_File_Transfer_Control_Characteristic, bytearray(packet_to_send), response = True)
             while resp != None:
                 await asyncio.sleep(delayTime)
@@ -257,7 +257,7 @@ class BleakLoop(QThread):
             file_len_bytes = (fileLen).to_bytes(4,byteorder='little',signed=False)
             # assemble packet and send
             packet_to_send = file_len_bytes + (crc32).to_bytes(4,byteorder='little',signed=False)  
-            Console.log("sent header: " + str(list(packet_to_send)))         
+            logging.info("sent header: " + str(list(packet_to_send)))         
             resp = 1
             resp = await client.write_gatt_char(ARM_Propietary_Data_Characteristic, bytearray(packet_to_send), response = True)
             while resp != None:
@@ -270,7 +270,7 @@ class BleakLoop(QThread):
                             + file_len_bytes  \
                             + file_len_bytes  \
                             + WDX_FILE_TYPE
-            Console.log("sent put req: " + str(list(packet_to_send)))  
+            logging.info("sent put req: " + str(list(packet_to_send)))  
             
             self.erase_complete = False
             await client.write_gatt_char(WDX_File_Transfer_Control_Characteristic, bytearray(packet_to_send), response = True)
@@ -279,7 +279,7 @@ class BleakLoop(QThread):
                 await asyncio.sleep(delayTime)
              # --------------------| send file   |---------------------
             tempLen = fileLen
-            Console.log("Start of sending file")
+            logging.info("Start of sending file")
             address = 0x00000000  
             with open(self.updateFileName, 'rb') as f:
                 while True:
@@ -300,16 +300,16 @@ class BleakLoop(QThread):
                         if blocksize < 220:
                             await asyncio.sleep(0.02)
                     except Exception as err:
-                        Console.log(err)
+                        logging.info(err)
             self.otasUpdate = False
-            Console.log("End of sending file")  
+            logging.info("End of sending file")  
             time.sleep(1)
             # --------------------| send verify file request   |---------------------
             # assemble packet and send
             # file handle is incremented
             WDX_FILE_HANDLE = (1).to_bytes(2,byteorder='little',signed = False)
             packet_to_send = WDX_FTC_OP_VERIFY_REQ +  WDX_FILE_HANDLE
-            Console.log("sent verify req: " + str(list(packet_to_send)))   
+            logging.info("sent verify req: " + str(list(packet_to_send)))   
             resp = await client.write_gatt_char(WDX_File_Transfer_Control_Characteristic, bytearray(packet_to_send))
             while resp != None:
                 await asyncio.sleep(delayTime)
@@ -317,7 +317,7 @@ class BleakLoop(QThread):
             # --------------------| send reset request   |---------------------
             # # assemble packet and send
             packet_to_send = WDX_DC_OP_SET + WDX_DC_ID_DISCONNECT_AND_RESET 
-            Console.log("sent reset req: " + str(list(packet_to_send))) 
+            logging.info("sent reset req: " + str(list(packet_to_send))) 
             resp = 1  
             resp = await client.write_gatt_char(WDX_Device_Configuration_Characteristic, bytearray(packet_to_send))
             while resp != None:
@@ -326,7 +326,7 @@ class BleakLoop(QThread):
             
             await asyncio.sleep(delayTime)
             
-            Console.log("File sent. Firmware update done")
+            logging.info("File sent. Firmware update done")
             # ## TODO see what is going on with indications 
 
             # self.disconnect_triggered = True
@@ -382,11 +382,11 @@ class BleakLoop(QThread):
                         except Exception as err:
                             Console.errMsg(err)
             self.discoverServices = False
-            Console.log(f"Connected: {client.is_connected}")
+            logging.info(f"Connected: {client.is_connected}")
             # emit connected signal
             self.disconnectSignal.emit(False)
         except Exception as e:
-            Console.log(
+            logging.info(
                 "Opps ,That device is not explorable, at least not by you.")
     # -------------------------------------------------------------------------
 

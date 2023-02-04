@@ -75,14 +75,14 @@ def btn_notify(interface):
                 interface.bleLoop.newNotifyCharUUID = interface.ui.btnLabelUUID.text()
                 interface.bleLoop.notifyRegisteredState.connect(
                     lambda state: Slots.notify_registered_state(interface, state))
-                Console.log("Characteristic notification enabled")
+                logging.info("Characteristic notification enabled")
             else:
-                Console.log("That characteristic does not have Notify enabled")
+                logging.info("That characteristic does not have Notify enabled")
         else:
-            Console.log(
+            logging.info(
                 "That characterisitic's notifications are already enabled")
     else:
-        Console.log("You are not connected to anything")
+        logging.info("You are not connected to anything")
 
 # ------------------------------------------------------------------------
 
@@ -158,7 +158,7 @@ def btn_connect(interface):
                 interface.ui.btnConnect.setText("Connect")
                 interface.connected_state = False
         else:
-            Console.log("You have to select a device from explore list")
+            logging.info("You have to select a device from explore list")
     else:
         try:
             # connection stuff
