@@ -25,7 +25,7 @@ import atexit
 from asyncqt import QEventLoop
 import webbrowser
 import BLE_UUIDs
-interface = None
+import logging
 
 QtWidgets.QApplication.setAttribute(
     QtCore.Qt.AA_EnableHighDpiScaling, True)  # enable highdpi scaling
@@ -69,12 +69,26 @@ class MainInterface(QMainWindow):
             self.ui.btn_info_internal_flash.setVisible(False)
             self.ui.checkBox_internal_flash.setVisible(False)
 
-        Console.console_init(self)
+        #console_init(self)
         ListCallbacks.register_list_callbacks(self)
         ButtonCallbacks.register_button_callbacks(self)
         MiscHelpers.init_icons(self)
-        Console.log("BLE-PyDex initialized")
-        Console.log_status()
+        logTextBox = Console.QTextEditLogger(self)
+        logTextBox.logMessage.connect(self.logToTextbox)
+        # You can format what is printed to text box
+        logTextBox.setFormatter(logging.Formatter('%(asctime)s - %(levelname)s - %(message)s'))
+        logging.getLogger().addHandler(logTextBox)
+        # You can control the logging level
+        logging.getLogger().setLevel(logging.INFO)
+        logging.debug('damn, a bug')
+        logging.info('something to remember')
+        logging.warning('that\'s not right')
+        logging.error('foobar')
+
+
+    def logToTextbox(self,data):
+        self.ui.console.append(data)
+
         
 
     # ------------------------------------------------------------------------

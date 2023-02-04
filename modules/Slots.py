@@ -44,12 +44,12 @@ def got_char_notify(interface, data):
     data = str(data[1]).removeprefix("bytearray(b\'\\")
     data = str(data).removesuffix("\')")
     item.setText(data)
-    Console.log("Received : " + data)
+    logging.info("Received : " + data)
 def notify_registered_state(interface, state):
     if state == True:
         # add the selected UUID/Handle to the notify list
         if interface.ui.btnLabelHandle.text() in interface.notifyEnabledCharsDict:
-            Console.log("Characteristic notificaiton is already enabled")
+            logging.info("Characteristic notificaiton is already enabled")
         else:
             interface.notifyEnabledCharsDict[interface.ui.btnLabelHandle.text(
             )] = "N/A"
@@ -60,7 +60,7 @@ def notify_registered_state(interface, state):
             # print(str(interface.notifyEnabledCharsDict[interface.ui.btnLabelHandle.text()][1]))
             # call function to add this item to list_enabledNotifybtnNoti
     else:
-        Console.log("Could not add")
+        logging.info("Could not add")
 
 def disconnect(interface,state):
     if state ==True:
@@ -102,8 +102,12 @@ def read_char(interface, data):
     interface.ui.btnLabelValue.setText(data)
 
 def scan(interface, device):
-    #interface.ui.list_discoveredDevices.addItem(f" " + device[0][0:17] + " | " + device[0][18:] + " ")
-    interface.ui.list_discoveredDevices.addItem(f" " + str(device[0]))
+    if device == (0,0):
+        interface.BLE_DiscoverDevices.quit()
+    else:
+        #interface.ui.list_discoveredDevices.addItem(f" " + device[0][0:17] + " | " + device[0][18:] + " ")
+        interface.ui.list_discoveredDevices.addItem(f" " + str(device[0]))
+            
     # device[1] has rssi 
 def serial_data(interface, data):
     interface.ui.txtSerial.append(data.strip())

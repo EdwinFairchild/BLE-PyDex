@@ -32,7 +32,7 @@ class Serial_Reader(QThread):
                         
                 if ser.is_open == True:
                     self.serial_connected.emit(True)
-                    Console.log("Serial Connected")
+                    #log("Serial Connected")
                     while self.connect == True:
                         x=ser.readline().decode("utf-8")
                         x=str(x)
@@ -43,6 +43,6 @@ class Serial_Reader(QThread):
                     
                     
         except Exception as err:
-            Console.errMsg(err)
+            #errMsg(err)
             self.serial_connected.emit(False)
            
