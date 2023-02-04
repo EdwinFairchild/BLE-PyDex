@@ -77,14 +77,15 @@ class MainInterface(QMainWindow):
         logTextBox = Console.QTextEditLogger(self)
         logTextBox.logMessage.connect(self.logToTextbox)
         # You can format what is printed to text box
-        logTextBox.setFormatter(logging.Formatter('%(asctime)s - %(levelname)s - %(message)s'))
+        logTextBox.setFormatter(logging.Formatter('%(asctime)s - %(levelname)s - %(message)s',"%H:%M:%S"))
         logging.getLogger().addHandler(logTextBox)
         # You can control the logging level
         logging.getLogger().setLevel(logging.INFO)
-        logging.debug('damn, a bug')
-        logging.info('something to remember')
-        logging.warning('that\'s not right')
-        logging.error('foobar')
+        #logging.getLogger().setLevel(logging.DEBUG)
+        logging.info("BLE-Pydex initialized")
+        #logging.debug('damn, a bug')
+        #logging.warning('that\'s not right')
+        #logging.error('foobar')
 
 
     def logToTextbox(self,data):
