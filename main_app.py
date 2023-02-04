@@ -1,3 +1,4 @@
+import faulthandler 
 from click import style
 from BLE_GUI import Ui_MainWindow
 from modules import ButtonCallbacks
@@ -9,7 +10,7 @@ from modules import Console
 from PyQt5 import Qt as qtw
 from PyQt5 import QtCore as qtc
 from PyQt5 import QtCore, QtGui, QtWidgets 
-from PyQt5.QtCore import QPropertyAnimation, QAbstractAnimation, QPoint ,QEasingCurve, pyqtSignal, QSequentialAnimationGroup
+from PyQt5.QtCore import  pyqtSignal
 from PyQt5.QtCore import pyqtProperty
 from PyQt5.QtWidgets import QPushButton
 from PyQt5.QtCore import *
@@ -22,10 +23,9 @@ import sys
 import os
 import time
 import atexit
-from asyncqt import QEventLoop
 import webbrowser
 import BLE_UUIDs
-interface = None
+
 
 QtWidgets.QApplication.setAttribute(
     QtCore.Qt.AA_EnableHighDpiScaling, True)  # enable highdpi scaling
@@ -100,19 +100,17 @@ def exitFunc():
             task.cancel()
     
     except Exception as e:
-        pass
+        print(e)
     # ------------------------------------------------------------------------
 if __name__ == '__main__':
     # todo: compile resurces into python files, not sure if its even necessary at this point
     # pyrcc5 image.qrc -o image_rc.py
     # compile gui
+    faulthandler.enable()
     os.system("pyuic5 -x BLE_GUI.ui -o BLE_GUI.py")
-    atexit.register(exitFunc)
+   # atexit.register(exitFunc)
     app = qtw.QApplication(sys.argv)
     app.setStyle('Fusion')
-
-    # loop = QEventLoop(app)
-    # asyncio.set_event_loop(loop)
 
     interface = MainInterface()
     interface.show()
