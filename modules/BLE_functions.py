@@ -40,7 +40,7 @@ class BLE_DiscoverDevices(QThread):
         return_adv=True,timeout=self.scan_timeout)
         for item in devices.values():
             self.discovered_devices.emit(item)
-            
+        self.discovered_devices.emit((0,0))   
         # disconnect here? or keep active until user presses explore?
 
 
@@ -227,8 +227,6 @@ class BleakLoop(QThread):
                 blocksize = self.override_mtu
             else:
                 blocksize = 220
-
-        print(f"BLOCKsize:{blocksize}")
         try:
             delayTime = 0.005
             resp = 1

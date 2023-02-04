@@ -144,6 +144,9 @@ border-color: rgb(190, 190, 190);
               <bold>true</bold>
              </font>
             </property>
+            <property name="mouseTracking">
+             <bool>false</bool>
+            </property>
             <property name="styleSheet">
              <string notr="true">QPushButton{
 		background-color: rgb(170,200,255);
@@ -212,6 +215,9 @@ QPushButton:pressed{
               <weight>75</weight>
               <bold>true</bold>
              </font>
+            </property>
+            <property name="mouseTracking">
+             <bool>false</bool>
             </property>
             <property name="styleSheet">
              <string notr="true">QPushButton{
@@ -291,6 +297,9 @@ QPushButton:pressed{
               <font>
                <pointsize>11</pointsize>
               </font>
+             </property>
+             <property name="mouseTracking">
+              <bool>false</bool>
              </property>
              <property name="styleSheet">
               <string notr="true">QPushButton{
@@ -390,6 +399,9 @@ background-color: rgb(48, 52, 63);
                <pointsize>11</pointsize>
               </font>
              </property>
+             <property name="mouseTracking">
+              <bool>false</bool>
+             </property>
              <property name="styleSheet">
               <string notr="true">QPushButton{
 text-align: center;
@@ -453,6 +465,9 @@ background-color: rgb(48, 52, 63);
                <pointsize>12</pointsize>
               </font>
              </property>
+             <property name="mouseTracking">
+              <bool>false</bool>
+             </property>
              <property name="styleSheet">
               <string notr="true">		background-color: rgb(170,200,255);</string>
              </property>
@@ -468,6 +483,9 @@ background-color: rgb(48, 52, 63);
                <width>21</width>
                <height>21</height>
               </rect>
+             </property>
+             <property name="mouseTracking">
+              <bool>false</bool>
              </property>
              <property name="styleSheet">
               <string notr="true">QPushButton{
@@ -601,6 +619,9 @@ color: rgb(30, 39, 73);
                <pointsize>10</pointsize>
               </font>
              </property>
+             <property name="mouseTracking">
+              <bool>false</bool>
+             </property>
              <property name="styleSheet">
               <string notr="true">QPushButton{
 text-align: center;
@@ -677,7 +698,7 @@ border-color: rgb(190, 190, 190);</string>
              </size>
             </property>
             <property name="mouseTracking">
-             <bool>true</bool>
+             <bool>false</bool>
             </property>
             <property name="autoFillBackground">
              <bool>false</bool>
@@ -902,6 +923,9 @@ color: rgb(28, 28, 28);</string>
                            <pointsize>11</pointsize>
                           </font>
                          </property>
+                         <property name="mouseTracking">
+                          <bool>false</bool>
+                         </property>
                          <property name="styleSheet">
                           <string notr="true">QPushButton{
 	color: rgb(0, 0, 0);
@@ -961,6 +985,9 @@ QPushButton:pressed{
                           </item>
                           <item row="3" column="0">
                            <widget class="QCheckBox" name="checkBox">
+                            <property name="mouseTracking">
+                             <bool>false</bool>
+                            </property>
                             <property name="styleSheet">
                              <string notr="true">color: rgb(28, 28, 28);
 
@@ -1006,6 +1033,9 @@ QCheckBox::indicator:unchecked {
                              <font>
                               <pointsize>11</pointsize>
                              </font>
+                            </property>
+                            <property name="mouseTracking">
+                             <bool>false</bool>
                             </property>
                             <property name="styleSheet">
                              <string notr="true">QPushButton{
@@ -1469,6 +1499,9 @@ border-color: rgb(190, 190, 190);</string>
                                  <height>30</height>
                                 </size>
                                </property>
+                               <property name="mouseTracking">
+                                <bool>false</bool>
+                               </property>
                                <property name="styleSheet">
                                 <string notr="true">background-color: rgb(250, 250, 255);
 color: rgb(45, 45, 45);
@@ -1495,6 +1528,9 @@ border-color: rgb(190, 190, 190);</string>
                                 <font>
                                  <pointsize>11</pointsize>
                                 </font>
+                               </property>
+                               <property name="mouseTracking">
+                                <bool>false</bool>
                                </property>
                                <property name="styleSheet">
                                 <string notr="true">QPushButton{
@@ -1585,6 +1621,9 @@ QPushButton:pressed{
                                 <font>
                                  <pointsize>11</pointsize>
                                 </font>
+                               </property>
+                               <property name="mouseTracking">
+                                <bool>false</bool>
                                </property>
                                <property name="styleSheet">
                                 <string notr="true">QPushButton{
@@ -1885,6 +1924,9 @@ border-color: rgb(190, 190, 190);</string>
                               <strikeout>false</strikeout>
                              </font>
                             </property>
+                            <property name="mouseTracking">
+                             <bool>false</bool>
+                            </property>
                             <property name="styleSheet">
                              <string notr="true">QPushButton{
 	color: rgb(0, 0, 0);
@@ -2103,6 +2145,9 @@ background-color: rgb(39, 52, 105);</string>
                               <strikeout>false</strikeout>
                              </font>
                             </property>
+                            <property name="mouseTracking">
+                             <bool>false</bool>
+                            </property>
                             <property name="styleSheet">
                              <string notr="true">QPushButton{
 	color: rgb(0, 0, 0);
@@ -2228,7 +2273,7 @@ border: 0px solid gray;</string>
 color: rgb(255, 255, 255);</string>
                          </property>
                          <property name="currentIndex">
-                          <number>0</number>
+                          <number>1</number>
                          </property>
                          <property name="documentMode">
                           <bool>true</bool>
@@ -2259,6 +2304,9 @@ color: rgb(255, 255, 255);</string>
                               <font>
                                <pointsize>12</pointsize>
                               </font>
+                             </property>
+                             <property name="mouseTracking">
+                              <bool>false</bool>
                              </property>
                              <property name="styleSheet">
                               <string notr="true">color: rgb(170,200,255);
@@ -2298,6 +2346,9 @@ p, li { white-space: pre-wrap; }
                               <font>
                                <pointsize>12</pointsize>
                               </font>
+                             </property>
+                             <property name="mouseTracking">
+                              <bool>false</bool>
                              </property>
                              <property name="styleSheet">
                               <string notr="true">border: 0px solid gray;
@@ -2346,6 +2397,9 @@ color: rgb(170,200,255);</string>
                                 <pointsize>11</pointsize>
                                </font>
                               </property>
+                              <property name="mouseTracking">
+                               <bool>false</bool>
+                              </property>
                               <property name="styleSheet">
                                <string notr="true">QPushButton{
 	color: rgb(0, 0, 0);
@@ -2379,6 +2433,9 @@ QPushButton:pressed{
                                 <width>121</width>
                                 <height>31</height>
                                </rect>
+                              </property>
+                              <property name="mouseTracking">
+                               <bool>false</bool>
                               </property>
                               <property name="styleSheet">
                                <string notr="true">background-color:rgb(235, 245, 255);
