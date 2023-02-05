@@ -180,6 +180,7 @@ class BleakLoop(QThread):
         #---------------------------------------------------------------------------------------------------#
         global fileLen
         # UUIDs
+        WDX_SERVICE = "0000FEF6-0000-1000-8000-00805F9B34FB"
         WDX_Device_Configuration_Characteristic = "005f0002-2ff2-4ed5-b045-4c7463617865"
         WDX_File_Transfer_Control_Characteristic = "005f0003-2ff2-4ed5-b045-4c7463617865"
         WDX_File_Transfer_Data_Characteristic = "005f0004-2ff2-4ed5-b045-4c7463617865"
@@ -217,16 +218,13 @@ class BleakLoop(QThread):
                             + WDX_FLIST_HDR_SIZE).to_bytes(4,byteorder='little',signed=False)
 
         #determine block size depending on MTU size
-        blocksize = 0
-        if sys.platform == 'win32':
-            #subtract 4 to add space for address and another 4 just because
-            blocksize = client.mtu_size - 8
-        else:
-            #Linux cannot find MTU size so use checkbox to configure smaller MTU
-            if self.override_mtu != 0:
-                blocksize = self.override_mtu
-            else:
-                blocksize = 220
+        svc = client.services.get_service(WDX_SERVICE)
+        wdx_data_char = svc.get_characteristic(WDX_File_Transfer_Data_Characteristic)
+        # determine mtu size and subtract 4 to fit the address 
+        # and another 4 just because
+        blocksize = wdx_data_char.max_write_without_response_size -8
+        logging.info(f"MTU size: {blocksize}")
+        
         try:
             delayTime = 0.005
             resp = 1
