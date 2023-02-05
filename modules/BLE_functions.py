@@ -87,6 +87,7 @@ class BleakLoop(QThread):
     otas_progress_value = pyqtSignal(int)
     erase_complete =False
     override_mtu = 0
+    otas_warning = False
     def run(self):
         self.connect = True
         asyncio.run(self.bleakLoop())
@@ -219,14 +220,17 @@ class BleakLoop(QThread):
 
         #determine block size depending on MTU size
         svc = client.services.get_service(WDX_SERVICE)
-        wdx_data_char = svc.get_characteristic(WDX_File_Transfer_Data_Characteristic)
+        wdx_data_char = svc.get_characteristic(WDX_File_Transfer_Control_Characteristic)
         # determine mtu size and subtract 4 to fit the address 
         # and another 4 just because
-        blocksize = wdx_data_char.max_write_without_response_size 
+        blocksize = wdx_data_char.max_write_without_response_size - 8
         if blocksize > 224:
             blocksize = 224
-        logging.info(f"MTU size: {blocksize}")
-        
+        else :
+            blocksize = 120
+                        
+        logging.info(f"MTU size: {wdx_data_char.max_write_without_response_size}")
+        logging.info(f"blocksize: {blocksize}")
         try:
             delayTime = 0.005
             resp = 1
@@ -394,6 +398,19 @@ class BleakLoop(QThread):
 
     async def bleakLoop(self):
         async with BleakClient(self.ble_address, disconnected_callback=self.handle_disconnect) as client:
+            if self.otas_warning == True:
+                #determine block size depending on MTU size
+                WDX_SERVICE = "0000FEF6-0000-1000-8000-00805F9B34FB"
+                WDX_File_Transfer_Control_Characteristic = "005f0003-2ff2-4ed5-b045-4c7463617865"
+                svc = client.services.get_service(WDX_SERVICE)
+                wdx_data_char = svc.get_characteristic(WDX_File_Transfer_Control_Characteristic)
+                # determine mtu size and subtract 4 to fit the address 
+                # and another 4 just because
+                blocksize = wdx_data_char.max_write_without_response_size - 8
+                if blocksize < 224:
+                    logging.getLogger().setLevel(logging.WARNING)
+                    logging.warning("There is an issue with BLE-Pydex and BLE_otas when using internal flash only. Connection parameter update must be enabled. See Github issues")
+                    logging.getLogger().setLevel(logging.INFO)
             while self.connect == True:
                 await asyncio.sleep(0.005)
                 # check the flag to disconnect

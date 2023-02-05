@@ -82,6 +82,7 @@ def disconnect(interface,state):
         if interface.advertised_name == "OTAS":
             interface.ui.frm_otas.setVisible(False)
             interface.bleLoop.otas_progress_value.emit(0)
+
             
     else:
 
@@ -97,6 +98,7 @@ def disconnect(interface,state):
             interface.ui.frm_otas.setVisible(True)
             interface.bleLoop.otas_progress_value.connect(
                     lambda value: otas_progress_update(interface, value))
+          
 
 def read_char(interface, data):
     interface.ui.btnLabelValue.setText(data)

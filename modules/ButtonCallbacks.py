@@ -140,6 +140,8 @@ def btn_connect(interface):
                 # interface.bleLoop.errorMsg.connect(
                 #     lambda mesg: Slots.errMsg(interface, mesg))
                 interface.connected_address = interface.selected_address
+                if interface.advertised_name == "OTAS":
+                    interface.bleLoop.otas_warning = True
                 interface.bleLoop.start()
                 # fore = [255, 255, 255]
                 # back = [170, 66, 66]
