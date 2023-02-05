@@ -222,7 +222,9 @@ class BleakLoop(QThread):
         wdx_data_char = svc.get_characteristic(WDX_File_Transfer_Data_Characteristic)
         # determine mtu size and subtract 4 to fit the address 
         # and another 4 just because
-        blocksize = wdx_data_char.max_write_without_response_size - 8
+        blocksize = wdx_data_char.max_write_without_response_size 
+        if blocksize > 224:
+            blocksize = 224
         logging.info(f"MTU size: {blocksize}")
         
         try:
@@ -271,7 +273,7 @@ class BleakLoop(QThread):
             logging.info("sent put req: " + str(list(packet_to_send)))  
             
             self.erase_complete = False
-            await client.write_gatt_char(WDX_File_Transfer_Control_Characteristic, bytearray(packet_to_send), response = True)
+            await client.write_gatt_char(WDX_File_Transfer_Control_Characteristic, bytearray(packet_to_send))
            
             while self.erase_complete == False :
                 await asyncio.sleep(delayTime)
@@ -297,6 +299,8 @@ class BleakLoop(QThread):
                         # Smaller blocksize indicates we are using OTAS with internal flash which is much slower
                         if blocksize < 220:
                             await asyncio.sleep(0.02)
+                        else:
+                            await asyncio.sleep(delayTime)
                     except Exception as err:
                         logging.info(err)
             self.otasUpdate = False
@@ -311,7 +315,7 @@ class BleakLoop(QThread):
             resp = await client.write_gatt_char(WDX_File_Transfer_Control_Characteristic, bytearray(packet_to_send))
             while resp != None:
                 await asyncio.sleep(delayTime)
-            time.sleep(1)
+            
             # --------------------| send reset request   |---------------------
             # # assemble packet and send
             packet_to_send = WDX_DC_OP_SET + WDX_DC_ID_DISCONNECT_AND_RESET 
