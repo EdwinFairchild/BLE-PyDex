@@ -209,7 +209,6 @@ def btn_open_bin(interface):
 
 # ------------------------------------------------------------------------
 
-
 def btn_log_window_size_up(interface):
     newsize = QSize()
     newsize.setHeight(365)
@@ -223,29 +222,6 @@ def btn_log_window_size_down(interface):
     newsize.setWidth(0)
     interface.ui.logFrame.setMinimumSize(newsize)
 # ------------------------------------------------------------------------
-
-def btn_info():
-  
-    msg = QMessageBox()
-    msg.setIcon(QMessageBox.Information)
-
-    msg.setText("Check this box if peer device is\nrunning OTAS version that does NOT \nuse external flash for FW update")
-   # msg.setInformativeText("This is additional information")
-    msg.setWindowTitle("")
-    msg.setStandardButtons(QMessageBox.Ok )
-    msg.buttonClicked.connect(msgbtn)
-        
-    retval = msg.exec_()
-   
-	
-def msgbtn(i):
-   pass
-
-def checkBox_internal_flash_state_changed(interface):
-    if interface.ui.checkBox_internal_flash.isChecked():
-            interface.bleLoop.override_mtu = 120
-    else:
-        interface.bleLoop.override_mtu = 0
 
 def btn_menu(interface):
     # read comment on menuAnimate
@@ -303,6 +279,3 @@ def register_button_callbacks(interface):
         lambda state: btn_log_window_size_up(interface))
     interface.ui.btnLogSizeDown.clicked.connect(
         lambda state: btn_log_window_size_down(interface))
-    interface.ui.btn_info_internal_flash.clicked.connect(btn_info)
-
-    interface.ui.checkBox_internal_flash.stateChanged.connect(lambda state: checkBox_internal_flash_state_changed(interface))

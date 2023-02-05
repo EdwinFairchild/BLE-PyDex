@@ -451,68 +451,6 @@ background-color: rgb(48, 52, 63);
               <set>Qt::AlignCenter</set>
              </property>
             </widget>
-            <widget class="QCheckBox" name="checkBox_internal_flash">
-             <property name="geometry">
-              <rect>
-               <x>40</x>
-               <y>170</y>
-               <width>121</width>
-               <height>23</height>
-              </rect>
-             </property>
-             <property name="font">
-              <font>
-               <pointsize>12</pointsize>
-              </font>
-             </property>
-             <property name="mouseTracking">
-              <bool>false</bool>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">		background-color: rgb(170,200,255);</string>
-             </property>
-             <property name="text">
-              <string>Internal flash</string>
-             </property>
-            </widget>
-            <widget class="QPushButton" name="btn_info_internal_flash">
-             <property name="geometry">
-              <rect>
-               <x>160</x>
-               <y>170</y>
-               <width>21</width>
-               <height>21</height>
-              </rect>
-             </property>
-             <property name="mouseTracking">
-              <bool>true</bool>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">QPushButton{
-text-align: center;
-padding-left: 0px;
-border-radius:5px;
-background-color: rgb(39, 52, 105);
-	color: rgb(255, 255, 255);
-}
-
-QPushButton:hover{
-
-background-color: rgb(29, 42,95);
-	color: rgb(255, 255, 255);
-
-}
-
-QPushButton:pressed{
-	
-		color: rgb(255, 255, 255);
-background-color: rgb(48, 52, 63);
-}</string>
-             </property>
-             <property name="text">
-              <string>?</string>
-             </property>
-            </widget>
            </widget>
           </item>
           <item>

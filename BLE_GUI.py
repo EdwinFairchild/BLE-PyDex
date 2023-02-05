@@ -222,38 +222,6 @@ class Ui_MainWindow(object):
         self.otasProgress.setProperty("value", 0)
         self.otasProgress.setAlignment(QtCore.Qt.AlignCenter)
         self.otasProgress.setObjectName("otasProgress")
-        self.checkBox_internal_flash = QtWidgets.QCheckBox(self.frm_otas)
-        self.checkBox_internal_flash.setGeometry(QtCore.QRect(40, 170, 121, 23))
-        font = QtGui.QFont()
-        font.setPointSize(12)
-        self.checkBox_internal_flash.setFont(font)
-        self.checkBox_internal_flash.setMouseTracking(False)
-        self.checkBox_internal_flash.setStyleSheet("        background-color: rgb(170,200,255);")
-        self.checkBox_internal_flash.setObjectName("checkBox_internal_flash")
-        self.btn_info_internal_flash = QtWidgets.QPushButton(self.frm_otas)
-        self.btn_info_internal_flash.setGeometry(QtCore.QRect(160, 170, 21, 21))
-        self.btn_info_internal_flash.setMouseTracking(True)
-        self.btn_info_internal_flash.setStyleSheet("QPushButton{\n"
-"text-align: center;\n"
-"padding-left: 0px;\n"
-"border-radius:5px;\n"
-"background-color: rgb(39, 52, 105);\n"
-"    color: rgb(255, 255, 255);\n"
-"}\n"
-"\n"
-"QPushButton:hover{\n"
-"\n"
-"background-color: rgb(29, 42,95);\n"
-"    color: rgb(255, 255, 255);\n"
-"\n"
-"}\n"
-"\n"
-"QPushButton:pressed{\n"
-"    \n"
-"        color: rgb(255, 255, 255);\n"
-"background-color: rgb(48, 52, 63);\n"
-"}")
-        self.btn_info_internal_flash.setObjectName("btn_info_internal_flash")
         self.verticalLayout.addWidget(self.frm_otas)
         self.frame_3 = QtWidgets.QFrame(self.sideBar)
         self.frame_3.setMinimumSize(QtCore.QSize(0, 210))
@@ -1254,8 +1222,6 @@ class Ui_MainWindow(object):
         self.btnOtaUpdate.setText(_translate("MainWindow", "OTA Update"))
         self.label.setText(_translate("MainWindow", "OTAS Example"))
         self.btnFindBin.setText(_translate("MainWindow", "Load FW Bin"))
-        self.checkBox_internal_flash.setText(_translate("MainWindow", "Internal flash"))
-        self.btn_info_internal_flash.setText(_translate("MainWindow", "?"))
         self.btnauthor.setText(_translate("MainWindow", " Edwin Amaya"))
         self.btnRepo.setText(_translate("MainWindow", "Github"))
         self.label_10.setText(_translate("MainWindow", "Scan timeout ( s ) :"))
