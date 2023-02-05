@@ -222,7 +222,7 @@ class BleakLoop(QThread):
         wdx_data_char = svc.get_characteristic(WDX_File_Transfer_Data_Characteristic)
         # determine mtu size and subtract 4 to fit the address 
         # and another 4 just because
-        blocksize = wdx_data_char.max_write_without_response_size -8
+        blocksize = wdx_data_char.max_write_without_response_size - 8
         logging.info(f"MTU size: {blocksize}")
         
         try:

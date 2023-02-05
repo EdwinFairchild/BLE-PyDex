@@ -119,7 +119,7 @@ def btn_serial_connect(interface):
             interface.serialLoop.connect = True
             interface.serialLoop.start()
         except Exception as err:
-            Console.errMsg(err)
+            logging.info(err)
     elif interface.serial_connected_state == True:
         interface.serialLoop.connect = False
 
@@ -153,7 +153,7 @@ def btn_connect(interface):
                 #     interface.ui.frm_otas.setVisible(True)
 
             except Exception as err:
-                Console.errMsg(err)
+                logging.info(err)
                 MiscHelpers.set_connected_icon_color(interface, 'white')
                 interface.ui.btnConnect.setText("Connect")
                 interface.connected_state = False
@@ -165,7 +165,7 @@ def btn_connect(interface):
             interface.bleLoop.disconnect_triggered = True
 
         except Exception as err:
-            Console.errMsg(err)
+            logging.info(err)
 
 # ------------------------------------------------------------------------
 

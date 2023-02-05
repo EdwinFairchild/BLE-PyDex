@@ -44,7 +44,7 @@ def got_char_notify(interface, data):
     data = str(data[1]).removeprefix("bytearray(b\'\\")
     data = str(data).removesuffix("\')")
     item.setText(data)
-    logging.info("Received : " + data)
+    logging.info(f"Notification:[{data[0]}]: {data}")
 def notify_registered_state(interface, state):
     if state == True:
         # add the selected UUID/Handle to the notify list
