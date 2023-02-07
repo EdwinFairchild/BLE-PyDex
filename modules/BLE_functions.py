@@ -123,7 +123,9 @@ class BleakLoop(QThread):
             await client.start_notify(UUID, self.notification_handler)
             self.notifyRegisteredState.emit(True)
         except Exception as err:
-            Console.errMsg(err)
+            logging.getLogger().setLevel(logging.WARNING)
+            logging.warning(err)
+            logging.getLogger().setLevel(logging.INFO)
             self.notifyRegisteredState.emit(False)
         self.newNotifyCharUUID = None
         self.notifyCharsAdded = False
@@ -134,7 +136,9 @@ class BleakLoop(QThread):
             await client.stop_notify(self.removeNotifyCharHandle)
             self.notifyRemoveChar = False
         except Exception as err:
-            Console.errMsg(err)
+            logging.getLogger().setLevel(logging.WARNING)
+            logging.warning(err)
+            logging.getLogger().setLevel(logging.INFO)
     # -------------------------------------------------------------------------
 
     async def disconenctBLE(self, client: BleakClient):
@@ -146,7 +150,9 @@ class BleakLoop(QThread):
             # self.connect = False
             self.disconnectSignal.emit(True)
         except Exception as err:
-            Console.errMsg(err)
+            logging.getLogger().setLevel(logging.WARNING)
+            logging.warning(err)
+            logging.getLogger().setLevel(logging.INFO)
     # -------------------------------------------------------------------------
 
     async def readCharCallback(self, client: BleakClient):
@@ -154,7 +160,9 @@ class BleakLoop(QThread):
             chardata = await client.read_gatt_char(self.readCharUUID)
             self.readCharSignal.emit(str(chardata))
         except Exception as err:
-            Console.errMsg(err)
+            logging.getLogger().setLevel(logging.WARNING)
+            logging.warning(err)
+            logging.getLogger().setLevel(logging.INFO)
         self.readChar = False
 
     # -------------------------------------------------------------------------
@@ -339,7 +347,9 @@ class BleakLoop(QThread):
             # # TODO make gui clean up method/signal for disconnect event
 
         except Exception as err:
-            Console.errMsg(err)
+            logging.getLogger().setLevel(logging.WARNING)
+            logging.warning(err)
+            logging.getLogger().setLevel(logging.INFO)
             self.otasUpdate = False
         self.writeChar = False
     # -------------------------------------------------------------------------
@@ -352,7 +362,9 @@ class BleakLoop(QThread):
             else:
                 await client.write_gatt_char(self.writeCharUUID, bytes(self.writeCharData, 'utf-8'))
         except Exception as err:
-            Console.errMsg(err)
+            logging.getLogger().setLevel(logging.WARNING)
+            logging.warning(err)
+            logging.getLogger().setLevel(logging.INFO)
         self.writeChar = False
     # -------------------------------------------------------------------------
 
@@ -386,7 +398,9 @@ class BleakLoop(QThread):
                             self.discovered_services.emit(
                                 [f"\t\t[Descriptor] {descriptor}) | Value: {value}", 2])
                         except Exception as err:
-                            Console.errMsg(err)
+                            logging.getLogger().setLevel(logging.WARNING)
+                            logging.warning(err)
+                            logging.getLogger().setLevel(logging.INFO)
             self.discoverServices = False
             logging.info(f"Connected: {client.is_connected}")
             # emit connected signal
