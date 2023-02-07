@@ -66,9 +66,6 @@ class MainInterface(QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
         self.ui.frm_otas.setVisible(False)
-        if sys.platform == 'win32':
-            self.ui.btn_info_internal_flash.setVisible(False)
-            self.ui.checkBox_internal_flash.setVisible(False)
 
         #console_init(self)
         ListCallbacks.register_list_callbacks(self)
