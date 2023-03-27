@@ -45,7 +45,7 @@ class BLE_DiscoverDevices(QThread):
             logging.getLogger().setLevel(logging.WARNING)
             logging.warning(err)
             logging.getLogger().setLevel(logging.INFO)
-        # disconnect here? or keep active until user presses explore?
+       
 
 
 '''******************************************************************************************
