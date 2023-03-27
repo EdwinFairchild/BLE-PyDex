@@ -308,7 +308,7 @@ class BleakLoop(QThread):
                             break
                         nextAddress=(address).to_bytes(4,byteorder='little',signed=False)
                         resp = 1
-                        resp = await client.write_gatt_char(WDX_File_Transfer_Data_Characteristic, bytearray(nextAddress + rawBytes),response = True)
+                        resp = await client.write_gatt_char(WDX_File_Transfer_Data_Characteristic, bytearray(nextAddress + rawBytes))
                         address +=len(rawBytes)
                         while resp != None:
                             await asyncio.sleep(delayTime)
