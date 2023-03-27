@@ -35,12 +35,16 @@ class BLE_DiscoverDevices(QThread):
 
     async def BLE_discoverDevices(self):
         #TODO emit touple if possible
-
-        devices = await BleakScanner.discover(
-        return_adv=True,timeout=self.scan_timeout)
-        for item in devices.values():
-            self.discovered_devices.emit(item)
-        self.discovered_devices.emit((0,0))   
+        try:
+            devices = await BleakScanner.discover(
+            return_adv=True,timeout=self.scan_timeout)
+            for item in devices.values():
+                self.discovered_devices.emit(item)
+            self.discovered_devices.emit((0,0))   
+        except Exception as err:
+            logging.getLogger().setLevel(logging.WARNING)
+            logging.warning(err)
+            logging.getLogger().setLevel(logging.INFO)
         # disconnect here? or keep active until user presses explore?
 
 
@@ -413,6 +417,9 @@ class BleakLoop(QThread):
     async def bleakLoop(self):
         async with BleakClient(self.ble_address, disconnected_callback=self.handle_disconnect) as client:
             if self.otas_warning == True:
+                logging.getLogger().setLevel(logging.WARNING)
+                logging.warning("The binary being used for OTA must be an application only, no bootloader")
+                logging.getLogger().setLevel(logging.INFO)
                 #determine block size depending on MTU size
                 WDX_SERVICE = "0000FEF6-0000-1000-8000-00805F9B34FB"
                 WDX_File_Transfer_Control_Characteristic = "005f0003-2ff2-4ed5-b045-4c7463617865"
