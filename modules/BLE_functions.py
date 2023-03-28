@@ -14,6 +14,7 @@ from typing import Any, Callable, NamedTuple
 from functools import cached_property
 from modules import Console
 from modules import Slots
+import logging
 import zlib #used for crc32
 BUFFER_SIZE = 8192
 fileLen = 0
@@ -113,6 +114,7 @@ class BleakLoop(QThread):
         
         # send data let application parse it
         dataList = [sender, data]
+        logging.info("Notification received from " + str(sender))   
         self.gotNotification.emit(dataList)
         if "Handle: 580" in str(sender) and self.erase_complete == False:
             self.erase_complete = True
@@ -120,12 +122,11 @@ class BleakLoop(QThread):
     # -------------------------------------------------------------------------
 
     async def enableCharNotification(self, client: BleakClient, UUID=None):
-
+        logging.info("Registering notification for " + str(self.newNotifyCharUUID))
         try:
-            if UUID == None:
-                self.newNotifyCharUUID
-            await client.start_notify(UUID, self.notification_handler)
-            self.notifyRegisteredState.emit(True)
+            if self.newNotifyCharUUID != None:
+                await client.start_notify(self.newNotifyCharUUID, self.notification_handler)
+                self.notifyRegisteredState.emit(True)
         except Exception as err:
             logging.getLogger().setLevel(logging.WARNING)
             logging.warning(err)

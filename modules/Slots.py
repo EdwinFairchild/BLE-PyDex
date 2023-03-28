@@ -4,6 +4,7 @@ from main_app import *
 from PyQt5 import QtCore
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
+import logging  
 import asyncio
 def discovered_services(interface ,data):
     ''' Data comes in looking like this:
@@ -46,6 +47,7 @@ def got_char_notify(interface, data):
     item.setText(data)
     logging.info(f"Notification:[{data[0]}]: {data}")
 def notify_registered_state(interface, state):
+    logging.info("Notification registered State: " + str(state))
     if state == True:
         # add the selected UUID/Handle to the notify list
         if interface.ui.btnLabelHandle.text() in interface.notifyEnabledCharsDict:

@@ -7,6 +7,7 @@ from PyQt5.QtWidgets import QPushButton
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
+import logging
 # GUI FILE
 from BLE_GUI import Ui_MainWindow
 
