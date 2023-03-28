@@ -14,13 +14,13 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(1533, 903)
+        MainWindow.resize(1203, 836)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(1)
         sizePolicy.setHeightForWidth(MainWindow.sizePolicy().hasHeightForWidth())
         MainWindow.setSizePolicy(sizePolicy)
-        MainWindow.setMinimumSize(QtCore.QSize(0, 0))
+        MainWindow.setMinimumSize(QtCore.QSize(0, 836))
         MainWindow.setMaximumSize(QtCore.QSize(1648999, 99999))
         MainWindow.setStyleSheet("        background-color: rgb(235,245,255);\n"
 "border:none;")
@@ -611,6 +611,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_2.setSpacing(10)
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
         self.frame_10 = QtWidgets.QFrame(self.frame_2)
+        self.frame_10.setMinimumSize(QtCore.QSize(0, 0))
         self.frame_10.setStyleSheet("\n"
 "border-radius:5px;\n"
 "\n"
@@ -879,6 +880,29 @@ class Ui_MainWindow(object):
         self.gridLayout_2.setContentsMargins(0, 0, 0, 0)
         self.gridLayout_2.setSpacing(10)
         self.gridLayout_2.setObjectName("gridLayout_2")
+        self.label_18 = QtWidgets.QLabel(self.frame_12)
+        self.label_18.setMinimumSize(QtCore.QSize(0, 25))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        font.setBold(False)
+        font.setWeight(50)
+        self.label_18.setFont(font)
+        self.label_18.setStyleSheet("color: rgb(245,245,245);\n"
+"border-radius:10px;\n"
+"background-color: rgb(39, 52, 105);")
+        self.label_18.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
+        self.label_18.setObjectName("label_18")
+        self.gridLayout_2.addWidget(self.label_18, 1, 0, 1, 2)
+        self.label_4 = QtWidgets.QLabel(self.frame_12)
+        font = QtGui.QFont()
+        font.setPointSize(20)
+        font.setBold(True)
+        font.setWeight(75)
+        self.label_4.setFont(font)
+        self.label_4.setStyleSheet("color: rgb(30, 39, 73);\n"
+"border: 0px solid gray;")
+        self.label_4.setObjectName("label_4")
+        self.gridLayout_2.addWidget(self.label_4, 0, 0, 1, 2)
         self.btnNotifyRemove = QtWidgets.QPushButton(self.frame_12)
         self.btnNotifyRemove.setEnabled(True)
         self.btnNotifyRemove.setMinimumSize(QtCore.QSize(0, 30))
@@ -909,8 +933,17 @@ class Ui_MainWindow(object):
         self.btnNotifyRemove.setCheckable(False)
         self.btnNotifyRemove.setChecked(False)
         self.btnNotifyRemove.setObjectName("btnNotifyRemove")
-        self.gridLayout_2.addWidget(self.btnNotifyRemove, 3, 1, 1, 1)
-        self.list_EnabledNotify = QtWidgets.QListWidget(self.frame_12)
+        self.gridLayout_2.addWidget(self.btnNotifyRemove, 4, 1, 1, 1)
+        self.frame_7 = QtWidgets.QFrame(self.frame_12)
+        self.frame_7.setMinimumSize(QtCore.QSize(0, 0))
+        self.frame_7.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_7.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_7.setObjectName("frame_7")
+        self.horizontalLayout_6 = QtWidgets.QHBoxLayout(self.frame_7)
+        self.horizontalLayout_6.setContentsMargins(0, 0, 0, 0)
+        self.horizontalLayout_6.setSpacing(10)
+        self.horizontalLayout_6.setObjectName("horizontalLayout_6")
+        self.list_EnabledNotify = QtWidgets.QListWidget(self.frame_7)
         font = QtGui.QFont()
         font.setPointSize(12)
         self.list_EnabledNotify.setFont(font)
@@ -923,21 +956,8 @@ class Ui_MainWindow(object):
 "border: 1px solid gray;\n"
 "border-color: rgb(190, 190, 190);")
         self.list_EnabledNotify.setObjectName("list_EnabledNotify")
-        self.gridLayout_2.addWidget(self.list_EnabledNotify, 2, 0, 1, 1)
-        self.label_18 = QtWidgets.QLabel(self.frame_12)
-        self.label_18.setMinimumSize(QtCore.QSize(0, 25))
-        font = QtGui.QFont()
-        font.setPointSize(12)
-        font.setBold(False)
-        font.setWeight(50)
-        self.label_18.setFont(font)
-        self.label_18.setStyleSheet("color: rgb(245,245,245);\n"
-"border-radius:10px;\n"
-"background-color: rgb(39, 52, 105);")
-        self.label_18.setAlignment(QtCore.Qt.AlignCenter)
-        self.label_18.setObjectName("label_18")
-        self.gridLayout_2.addWidget(self.label_18, 1, 0, 1, 2)
-        self.list_EnabledNotifyValue = QtWidgets.QListWidget(self.frame_12)
+        self.horizontalLayout_6.addWidget(self.list_EnabledNotify)
+        self.list_EnabledNotifyValue = QtWidgets.QListWidget(self.frame_7)
         font = QtGui.QFont()
         font.setPointSize(12)
         self.list_EnabledNotifyValue.setFont(font)
@@ -950,98 +970,12 @@ class Ui_MainWindow(object):
 "border: 1px solid gray;\n"
 "border-color: rgb(190, 190, 190);")
         self.list_EnabledNotifyValue.setObjectName("list_EnabledNotifyValue")
-        self.gridLayout_2.addWidget(self.list_EnabledNotifyValue, 2, 1, 1, 1)
-        self.label_4 = QtWidgets.QLabel(self.frame_12)
-        font = QtGui.QFont()
-        font.setPointSize(20)
-        font.setBold(True)
-        font.setWeight(75)
-        self.label_4.setFont(font)
-        self.label_4.setStyleSheet("color: rgb(30, 39, 73);\n"
-"border: 0px solid gray;")
-        self.label_4.setObjectName("label_4")
-        self.gridLayout_2.addWidget(self.label_4, 0, 0, 1, 2)
+        self.horizontalLayout_6.addWidget(self.list_EnabledNotifyValue)
+        self.horizontalLayout_6.setStretch(0, 1)
+        self.horizontalLayout_6.setStretch(1, 2)
+        self.gridLayout_2.addWidget(self.frame_7, 2, 0, 1, 2)
         self.horizontalLayout_10.addWidget(self.frame_12)
-        self.frame_15 = QtWidgets.QFrame(self.frame_8)
-        self.frame_15.setStyleSheet("border: 0px solid gray;\n"
-"border-color: rgb(190, 190, 190);")
-        self.frame_15.setFrameShape(QtWidgets.QFrame.StyledPanel)
-        self.frame_15.setFrameShadow(QtWidgets.QFrame.Raised)
-        self.frame_15.setObjectName("frame_15")
-        self.gridLayout_4 = QtWidgets.QGridLayout(self.frame_15)
-        self.gridLayout_4.setContentsMargins(0, 0, 0, 0)
-        self.gridLayout_4.setSpacing(10)
-        self.gridLayout_4.setObjectName("gridLayout_4")
-        self.list_Streaming = QtWidgets.QListWidget(self.frame_15)
-        self.list_Streaming.setStyleSheet("border-color: rgb(0, 0, 0);\n"
-"border-radius:5px;\n"
-"background-color: rgb(235, 245, 255);\n"
-"/*border: 1px solid gray;*/\n"
-"\n"
-"color: rgb(45, 45, 45);\n"
-"border: 1px solid gray;\n"
-"border-color: rgb(190, 190, 190);")
-        self.list_Streaming.setObjectName("list_Streaming")
-        self.gridLayout_4.addWidget(self.list_Streaming, 3, 0, 2, 2)
-        self.label_20 = QtWidgets.QLabel(self.frame_15)
-        self.label_20.setMinimumSize(QtCore.QSize(0, 25))
-        self.label_20.setMaximumSize(QtCore.QSize(16777215, 29))
-        font = QtGui.QFont()
-        font.setPointSize(12)
-        font.setBold(False)
-        font.setWeight(50)
-        self.label_20.setFont(font)
-        self.label_20.setStyleSheet("color: rgb(250, 250, 255);\n"
-"border-radius:10px;\n"
-"background-color: rgb(39, 52, 105);")
-        self.label_20.setAlignment(QtCore.Qt.AlignCenter)
-        self.label_20.setObjectName("label_20")
-        self.gridLayout_4.addWidget(self.label_20, 2, 0, 1, 2)
-        self.btnNotifyRemove_2 = QtWidgets.QPushButton(self.frame_15)
-        self.btnNotifyRemove_2.setEnabled(True)
-        self.btnNotifyRemove_2.setMinimumSize(QtCore.QSize(0, 30))
-        font = QtGui.QFont()
-        font.setPointSize(11)
-        font.setStrikeOut(False)
-        self.btnNotifyRemove_2.setFont(font)
-        self.btnNotifyRemove_2.setMouseTracking(True)
-        self.btnNotifyRemove_2.setStyleSheet("QPushButton{\n"
-"    color: rgb(0, 0, 0);\n"
-"        background-color: rgb(170,200,255);\n"
-"    border:none;\n"
-"border-radius:5px;\n"
-"\n"
-"}\n"
-"\n"
-"QPushButton:hover{\n"
-"    color: rgb(28, 28, 28);\n"
-"        background-color: rgb(140,170,255);\n"
-"\n"
-"}\n"
-"\n"
-"QPushButton:pressed{\n"
-"    \n"
-"        color: rgb(28, 28, 28);\n"
-"    background-color: rgb(110,140,255);\n"
-"}")
-        self.btnNotifyRemove_2.setCheckable(False)
-        self.btnNotifyRemove_2.setChecked(False)
-        self.btnNotifyRemove_2.setObjectName("btnNotifyRemove_2")
-        self.gridLayout_4.addWidget(self.btnNotifyRemove_2, 5, 1, 1, 1)
-        self.label_19 = QtWidgets.QLabel(self.frame_15)
-        self.label_19.setMaximumSize(QtCore.QSize(16777215, 32))
-        font = QtGui.QFont()
-        font.setPointSize(20)
-        font.setBold(True)
-        font.setWeight(75)
-        self.label_19.setFont(font)
-        self.label_19.setStyleSheet("color: rgb(30, 39, 73);\n"
-"border: 0px solid gray;")
-        self.label_19.setObjectName("label_19")
-        self.gridLayout_4.addWidget(self.label_19, 1, 0, 1, 1)
-        self.horizontalLayout_10.addWidget(self.frame_15)
         self.horizontalLayout_10.setStretch(0, 1)
-        self.horizontalLayout_10.setStretch(1, 1)
         self.horizontalLayout_2.addWidget(self.frame_8)
         self.horizontalLayout_2.setStretch(0, 1)
         self.horizontalLayout_2.setStretch(1, 1)
@@ -1250,12 +1184,9 @@ class Ui_MainWindow(object):
         self.btnLabelValue.setText(_translate("MainWindow", "N/A"))
         self.label_8.setText(_translate("MainWindow", "Details"))
         self.btnLabelUUID_name.setText(_translate("MainWindow", "N/A"))
-        self.btnNotifyRemove.setText(_translate("MainWindow", "Remove"))
-        self.label_18.setText(_translate("MainWindow", "  Handle                               Value"))
+        self.label_18.setText(_translate("MainWindow", "    Handle                                      Value"))
         self.label_4.setText(_translate("MainWindow", "Notifications"))
-        self.label_20.setText(_translate("MainWindow", "  Handle                               Value"))
-        self.btnNotifyRemove_2.setText(_translate("MainWindow", "Remove"))
-        self.label_19.setText(_translate("MainWindow", "Streaming"))
+        self.btnNotifyRemove.setText(_translate("MainWindow", "Remove"))
         self.console.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
