@@ -28,7 +28,7 @@ class Ui_MainWindow(object):
         self.centralwidget.setStyleSheet("background-color: rgb(250, 250, 255);")
         self.centralwidget.setObjectName("centralwidget")
         self.gridLayout_3 = QtWidgets.QGridLayout(self.centralwidget)
-        self.gridLayout_3.setContentsMargins(10, 10, 10, 10)
+        self.gridLayout_3.setContentsMargins(0, 0, 0, 0)
         self.gridLayout_3.setObjectName("gridLayout_3")
         self.mainFrame = QtWidgets.QFrame(self.centralwidget)
         self.mainFrame.setStyleSheet("background-color: rgb(250, 250, 255);")
@@ -37,15 +37,15 @@ class Ui_MainWindow(object):
         self.mainFrame.setObjectName("mainFrame")
         self.horizontalLayout_3 = QtWidgets.QHBoxLayout(self.mainFrame)
         self.horizontalLayout_3.setSizeConstraint(QtWidgets.QLayout.SetNoConstraint)
-        self.horizontalLayout_3.setContentsMargins(0, 0, 0, 9)
-        self.horizontalLayout_3.setSpacing(5)
+        self.horizontalLayout_3.setContentsMargins(0, 0, 0, 0)
+        self.horizontalLayout_3.setSpacing(0)
         self.horizontalLayout_3.setObjectName("horizontalLayout_3")
         self.sideBar = QtWidgets.QFrame(self.mainFrame)
         self.sideBar.setEnabled(True)
         self.sideBar.setMinimumSize(QtCore.QSize(208, 400))
         self.sideBar.setMaximumSize(QtCore.QSize(210, 16777215))
         self.sideBar.setStyleSheet("QFrame{\n"
-"border-radius:15px;\n"
+"border-radius:0px;\n"
 "        background-color: rgb(170,200,255);\n"
 "border: 0px solid gray;\n"
 "border-color: rgb(190, 190, 190);\n"
@@ -292,7 +292,7 @@ class Ui_MainWindow(object):
         self.frame_5.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_5.setObjectName("frame_5")
         self.horizontalLayout_5 = QtWidgets.QHBoxLayout(self.frame_5)
-        self.horizontalLayout_5.setContentsMargins(10, 0, 0, 0)
+        self.horizontalLayout_5.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout_5.setSpacing(0)
         self.horizontalLayout_5.setObjectName("horizontalLayout_5")
         self.stackedWidget = SlidingStackedWidget(self.frame_5)
@@ -335,11 +335,12 @@ class Ui_MainWindow(object):
         self.appFrame_2.setFrameShadow(QtWidgets.QFrame.Raised)
         self.appFrame_2.setObjectName("appFrame_2")
         self.horizontalLayout_8 = QtWidgets.QHBoxLayout(self.appFrame_2)
-        self.horizontalLayout_8.setContentsMargins(0, 0, 0, 0)
+        self.horizontalLayout_8.setContentsMargins(10, 10, 10, 0)
         self.horizontalLayout_8.setSpacing(10)
         self.horizontalLayout_8.setObjectName("horizontalLayout_8")
         self.frame_13 = QtWidgets.QFrame(self.appFrame_2)
         self.frame_13.setStyleSheet("border: 1px solid gray;\n"
+"border-radius:10px;\n"
 "border-color: rgb(190, 190, 190);")
         self.frame_13.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_13.setFrameShadow(QtWidgets.QFrame.Raised)
@@ -491,17 +492,17 @@ class Ui_MainWindow(object):
         self.horizontalLayout_8.addWidget(self.frame_13)
         self.frame_11 = QtWidgets.QFrame(self.appFrame_2)
         self.frame_11.setStyleSheet("border-color: rgb(245,245, 245);\n"
-"border-radius:5px;\n"
-"border: 0px solid gray;\n"
+"border-radius:10px;\n"
+"\n"
 "color: rgb(45, 45, 45);\n"
-"border: 0px solid gray;\n"
+"border: 1px solid gray;\n"
 "border-color: rgb(190, 190, 190);")
         self.frame_11.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_11.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_11.setObjectName("frame_11")
         self.verticalLayout_5 = QtWidgets.QVBoxLayout(self.frame_11)
-        self.verticalLayout_5.setContentsMargins(0, 0, 0, 0)
-        self.verticalLayout_5.setSpacing(5)
+        self.verticalLayout_5.setContentsMargins(10, 10, 10, 10)
+        self.verticalLayout_5.setSpacing(10)
         self.verticalLayout_5.setObjectName("verticalLayout_5")
         self.label_23 = QtWidgets.QLabel(self.frame_11)
         font = QtGui.QFont()
@@ -514,19 +515,6 @@ class Ui_MainWindow(object):
 "")
         self.label_23.setObjectName("label_23")
         self.verticalLayout_5.addWidget(self.label_23)
-        self.label_6 = QtWidgets.QLabel(self.frame_11)
-        self.label_6.setMinimumSize(QtCore.QSize(0, 25))
-        font = QtGui.QFont()
-        font.setPointSize(12)
-        font.setBold(False)
-        font.setWeight(50)
-        self.label_6.setFont(font)
-        self.label_6.setStyleSheet("color: rgb(250, 250, 255);\n"
-"border-radius:10px;\n"
-"background-color: rgb(39, 52, 105);")
-        self.label_6.setAlignment(QtCore.Qt.AlignCenter)
-        self.label_6.setObjectName("label_6")
-        self.verticalLayout_5.addWidget(self.label_6)
         self.list_discoveredDevices = QtWidgets.QListWidget(self.frame_11)
         self.list_discoveredDevices.setMinimumSize(QtCore.QSize(0, 0))
         self.list_discoveredDevices.setMaximumSize(QtCore.QSize(10000, 1000))
@@ -540,7 +528,7 @@ class Ui_MainWindow(object):
 "border-radius:10px;\n"
 "background-color: rgb(235, 245, 255);\n"
 "color: rgb(45, 45, 45);\n"
-"border: 1px solid gray;\n"
+"border: 0px solid gray;\n"
 "border-color: rgb(190, 190, 190);")
         self.list_discoveredDevices.setModelColumn(0)
         self.list_discoveredDevices.setObjectName("list_discoveredDevices")
@@ -549,16 +537,16 @@ class Ui_MainWindow(object):
         self.frame_9 = QtWidgets.QFrame(self.appFrame_2)
         self.frame_9.setStyleSheet("\n"
 "border-radius:10px;\n"
-"border: 0px solid gray;\n"
+"\n"
 "border-color: rgb(245,245, 245);\n"
-"border: 0px solid gray;\n"
+"border: 1px solid gray;\n"
 "border-color: rgb(190, 190, 190);")
         self.frame_9.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_9.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_9.setObjectName("frame_9")
         self.verticalLayout_6 = QtWidgets.QVBoxLayout(self.frame_9)
-        self.verticalLayout_6.setContentsMargins(0, 0, 0, 0)
-        self.verticalLayout_6.setSpacing(5)
+        self.verticalLayout_6.setContentsMargins(10, 10, 10, 10)
+        self.verticalLayout_6.setSpacing(10)
         self.verticalLayout_6.setObjectName("verticalLayout_6")
         self.label_22 = QtWidgets.QLabel(self.frame_9)
         font = QtGui.QFont()
@@ -582,7 +570,7 @@ class Ui_MainWindow(object):
 "border-radius:5px;\n"
 "background-color: rgb(235, 245, 255);\n"
 "color: rgb(45, 45, 45);\n"
-"border: 1px solid gray;\n"
+"border: 0px solid gray;\n"
 "border-color: rgb(190, 190, 190);")
         self.servicesTreeWidget.setAlternatingRowColors(False)
         self.servicesTreeWidget.setAnimated(True)
@@ -607,13 +595,13 @@ class Ui_MainWindow(object):
         self.frame_2.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_2.setObjectName("frame_2")
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout(self.frame_2)
-        self.horizontalLayout_2.setContentsMargins(0, 0, 0, 0)
+        self.horizontalLayout_2.setContentsMargins(10, 0, 10, 0)
         self.horizontalLayout_2.setSpacing(10)
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
         self.frame_10 = QtWidgets.QFrame(self.frame_2)
         self.frame_10.setMinimumSize(QtCore.QSize(0, 0))
         self.frame_10.setStyleSheet("\n"
-"border-radius:5px;\n"
+"border-radius:10px;\n"
 "\n"
 "\n"
 "border: 1px solid gray;\n"
@@ -622,7 +610,7 @@ class Ui_MainWindow(object):
         self.frame_10.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_10.setObjectName("frame_10")
         self.horizontalLayout_4 = QtWidgets.QHBoxLayout(self.frame_10)
-        self.horizontalLayout_4.setContentsMargins(10, 1, 10, 10)
+        self.horizontalLayout_4.setContentsMargins(10, 10, 10, 10)
         self.horizontalLayout_4.setSpacing(10)
         self.horizontalLayout_4.setObjectName("horizontalLayout_4")
         self.frame_14 = QtWidgets.QFrame(self.frame_10)
@@ -858,7 +846,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_2.addWidget(self.frame_10)
         self.frame_8 = QtWidgets.QFrame(self.frame_2)
         self.frame_8.setStyleSheet("\n"
-"border-radius:5px;\n"
+"border-radius:10px;\n"
 "\n"
 "border: 1px solid gray;\n"
 "border-color: rgb(190, 190, 190);")
@@ -866,7 +854,7 @@ class Ui_MainWindow(object):
         self.frame_8.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_8.setObjectName("frame_8")
         self.horizontalLayout_10 = QtWidgets.QHBoxLayout(self.frame_8)
-        self.horizontalLayout_10.setContentsMargins(10, 1, 10, 10)
+        self.horizontalLayout_10.setContentsMargins(10, 10, 10, 10)
         self.horizontalLayout_10.setSpacing(10)
         self.horizontalLayout_10.setObjectName("horizontalLayout_10")
         self.frame_12 = QtWidgets.QFrame(self.frame_8)
@@ -953,7 +941,7 @@ class Ui_MainWindow(object):
 "/*border: 1px solid gray;*/\n"
 "\n"
 "color: rgb(45, 45, 45);\n"
-"border: 1px solid gray;\n"
+"border: 0px solid gray;\n"
 "border-color: rgb(190, 190, 190);")
         self.list_EnabledNotify.setObjectName("list_EnabledNotify")
         self.horizontalLayout_6.addWidget(self.list_EnabledNotify)
@@ -967,7 +955,7 @@ class Ui_MainWindow(object):
 "/*border: 1px solid gray;*/\n"
 "background-color: rgb(235, 245, 255);\n"
 "color: rgb(45, 45, 45);\n"
-"border: 1px solid gray;\n"
+"border: 0px solid gray;\n"
 "border-color: rgb(190, 190, 190);")
         self.list_EnabledNotifyValue.setObjectName("list_EnabledNotifyValue")
         self.horizontalLayout_6.addWidget(self.list_EnabledNotifyValue)
@@ -982,7 +970,8 @@ class Ui_MainWindow(object):
         self.verticalLayout_2.addWidget(self.frame_2)
         self.logFrame = QtWidgets.QFrame(self.mainframe_explore)
         self.logFrame.setMinimumSize(QtCore.QSize(0, 245))
-        self.logFrame.setStyleSheet("background-color: rgb(48, 52, 63);")
+        self.logFrame.setStyleSheet("background-color: rgb(48, 52, 63);\n"
+"border-radius:0px;")
         self.logFrame.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.logFrame.setFrameShadow(QtWidgets.QFrame.Raised)
         self.logFrame.setObjectName("logFrame")
@@ -1166,7 +1155,6 @@ class Ui_MainWindow(object):
         self.label_3.setText(_translate("MainWindow", "Connection timeout :"))
         self.lblConnectionTime.setText(_translate("MainWindow", "5"))
         self.label_23.setText(_translate("MainWindow", "Device list"))
-        self.label_6.setText(_translate("MainWindow", "  Address                               Name"))
         self.label_22.setText(_translate("MainWindow", "Gatt explorer"))
         self.btnLabelUUID.setText(_translate("MainWindow", "N/A"))
         self.btnLabelType.setText(_translate("MainWindow", "N/A"))
