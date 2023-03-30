@@ -124,9 +124,10 @@ class BleakLoop(QThread):
     async def enableCharNotification(self, client: BleakClient, UUID=None):
         logging.info("Registering notification for " + str(self.newNotifyCharUUID))
         try:
-            if self.newNotifyCharUUID != None:
-                await client.start_notify(self.newNotifyCharUUID, self.notification_handler)
-                self.notifyRegisteredState.emit(True)
+            if UUID == None:
+                UUID = self.newNotifyCharUUID
+            await client.start_notify(UUID, self.notification_handler)
+            self.notifyRegisteredState.emit(True)
         except Exception as err:
             logging.getLogger().setLevel(logging.WARNING)
             logging.warning(err)
