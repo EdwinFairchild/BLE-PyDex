@@ -36,12 +36,26 @@ def btn_github(interface):
 
 
 def btn_scan(interface):
-    interface.ui.list_discoveredDevices.clear()
-    interface.BLE_DiscoverDevices = ble_ctl.BLE_DiscoverDevices()
-    interface.BLE_DiscoverDevices.scan_timeout = interface.ui.timeoutSlider_2.value()
-    interface.BLE_DiscoverDevices.discovered_devices.connect(
-        lambda device: Slots.scan(interface, device))
-    interface.BLE_DiscoverDevices.start()
+    if interface.ui.btnScan.text() == "Stop Scan":
+        interface.BLE_DiscoverDevices.stopScanning = True
+        interface.ui.btnScan.setText("Scan")
+        interface.BLE_DiscoverDevices.quit()
+        
+    else:
+        interface.ui.list_discoveredDevices.clear()
+        interface.BLE_DiscoverDevices = ble_ctl.BLE_DiscoverDevices()
+        # change scan button text if scanInfinite is checked
+        if interface.ui.scanInfinite.isChecked():
+            interface.ui.btnScan.setText("Stop Scan")   
+            interface.BLE_DiscoverDevices.scan_timeout = 0
+        else:
+            interface.BLE_DiscoverDevices.scan_timeout = interface.ui.scanSlider.value()
+
+        interface.BLE_DiscoverDevices.discovered_devices.connect(
+            lambda device: Slots.scan(interface, device))
+        interface.BLE_DiscoverDevices.start()
+
+
 
  # ------------------------------------------------------------------------
 
@@ -130,6 +144,11 @@ def btn_connect(interface):
     if interface.connected_state == False:
         if interface.selected_address != None:
             try:
+                # stop scanning if it is running
+                if interface.ui.btnScan.text() == "Stop Scan":
+                    interface.BLE_DiscoverDevices.stopScanning = True
+                    interface.ui.btnScan.setText("Scan")
+                    time.sleep(3)
                 # connection stuff
                 interface.bleLoop = ble_ctl.BleakLoop()
                 interface.bleLoop.disconnectSignal.connect(
