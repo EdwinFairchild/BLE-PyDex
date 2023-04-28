@@ -148,7 +148,7 @@ def btn_connect(interface):
                 if interface.ui.btnScan.text() == "Stop Scan":
                     interface.BLE_DiscoverDevices.stopScanning = True
                     interface.ui.btnScan.setText("Scan")
-                    time.sleep(3)
+                    interface.BLE_DiscoverDevices.discovered_devices.emit((0,0))
                 # connection stuff
                 interface.bleLoop = ble_ctl.BleakLoop()
                 interface.bleLoop.disconnectSignal.connect(

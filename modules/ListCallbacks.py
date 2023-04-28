@@ -7,8 +7,8 @@ from PyQt5.QtWidgets import *
 def discoveredList2ItemPressed(interface):
     value = interface.ui.list_discoveredDevices.currentItem()
     tmp = value.text()
-    interface.selected_address = tmp[1:18]
-    interface.advertised_name = str(tmp[20:]).strip()
+    interface.selected_address = tmp[0:17]
+    interface.advertised_name = str(tmp[19:]).strip()
 # ------------------------------------------------------------------------
 def enabledNotifyListItemPressed(interface):
     interface.ui.list_EnabledNotifyValue.setCurrentRow(
