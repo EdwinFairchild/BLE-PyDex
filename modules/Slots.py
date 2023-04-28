@@ -108,9 +108,19 @@ def read_char(interface, data):
 def scan(interface, device):
     if device == (0,0):
         interface.BLE_DiscoverDevices.quit()
+        logging.info("Scan Complete")
     else:
         #interface.ui.list_discoveredDevices.addItem(f" " + device[0][0:17] + " | " + device[0][18:] + " ")
-        interface.ui.list_discoveredDevices.addItem(f" " + str(device[0]))
+        # if item already exist in the list update it , otherwise add it
+
+        if interface.ui.list_discoveredDevices.findItems(str(device[0]), QtCore.Qt.MatchExactly):
+            item = interface.ui.list_discoveredDevices.findItems(str(device[0]), QtCore.Qt.MatchExactly)
+            row = interface.ui.list_discoveredDevices.row(item[0])
+            item = interface.ui.list_discoveredDevices.item(row)
+            item.setText(str(device[0]))
+        else:
+            interface.ui.list_discoveredDevices.addItem( str(device[0]))
+
             
     # device[1] has rssi 
 def serial_data(interface, data):

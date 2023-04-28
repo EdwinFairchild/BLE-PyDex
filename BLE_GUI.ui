@@ -789,22 +789,6 @@ border-color: rgb(190, 190, 190);</string>
                           <enum>QFrame::Raised</enum>
                          </property>
                          <layout class="QGridLayout" name="gridLayout_5">
-                          <item row="0" column="0">
-                           <widget class="QLabel" name="label_10">
-                            <property name="font">
-                             <font>
-                              <pointsize>11</pointsize>
-                             </font>
-                            </property>
-                            <property name="styleSheet">
-                             <string notr="true">
-color: rgb(28, 28, 28);</string>
-                            </property>
-                            <property name="text">
-                             <string>Scan timeout ( s ) :</string>
-                            </property>
-                           </widget>
-                          </item>
                           <item row="0" column="1">
                            <widget class="QLabel" name="timeoutLabel_2">
                             <property name="font">
@@ -821,8 +805,24 @@ color: rgb(28, 28, 28);</string>
                             </property>
                            </widget>
                           </item>
-                          <item row="1" column="0" colspan="3">
-                           <widget class="QSlider" name="timeoutSlider_2">
+                          <item row="0" column="0">
+                           <widget class="QLabel" name="label_10">
+                            <property name="font">
+                             <font>
+                              <pointsize>11</pointsize>
+                             </font>
+                            </property>
+                            <property name="styleSheet">
+                             <string notr="true">
+color: rgb(28, 28, 28);</string>
+                            </property>
+                            <property name="text">
+                             <string>Scan timeout ( s ) :</string>
+                            </property>
+                           </widget>
+                          </item>
+                          <item row="2" column="0" colspan="3">
+                           <widget class="QSlider" name="scanSlider">
                             <property name="styleSheet">
                              <string notr="true"/>
                             </property>
@@ -837,6 +837,13 @@ color: rgb(28, 28, 28);</string>
                             </property>
                             <property name="orientation">
                              <enum>Qt::Horizontal</enum>
+                            </property>
+                           </widget>
+                          </item>
+                          <item row="1" column="0">
+                           <widget class="QCheckBox" name="scanInfinite">
+                            <property name="text">
+                             <string>Forever</string>
                             </property>
                            </widget>
                           </item>
@@ -2373,7 +2380,7 @@ p, li { white-space: pre-wrap; }
  <resources/>
  <connections>
   <connection>
-   <sender>timeoutSlider_2</sender>
+   <sender>scanSlider</sender>
    <signal>valueChanged(int)</signal>
    <receiver>timeoutLabel_2</receiver>
    <slot>setNum(int)</slot>

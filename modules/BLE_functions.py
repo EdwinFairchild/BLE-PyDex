@@ -27,7 +27,8 @@ fileLen = 0
 
 class BLE_DiscoverDevices(QThread):
     ble_address = 0
-    scan_timeout = 5
+    scan_timeout = 0
+    stopScanning = False
     discovered_devices = pyqtSignal(tuple)
 
     def run(self):
@@ -37,11 +38,24 @@ class BLE_DiscoverDevices(QThread):
     async def BLE_discoverDevices(self):
         #TODO emit touple if possible
         try:
-            devices = await BleakScanner.discover(
-            return_adv=True,timeout=self.scan_timeout)
-            for item in devices.values():
-                self.discovered_devices.emit(item)
-            self.discovered_devices.emit((0,0))   
+            # if scan timeout is 0, scan forever
+            if self.scan_timeout == 0:
+                logging.info("Scanning forever")
+                while self.stopScanning == False:
+                    devices = await BleakScanner.discover(
+                        return_adv=True,timeout=1)
+                    for item in devices.values():
+                        self.discovered_devices.emit(item)
+                        #logging.info(item)
+                logging.info("Scan stopped")
+            else:  
+                logging.info("Scanning timeout set to " + str(self.scan_timeout) + " seconds")
+                devices = await BleakScanner.discover(
+                return_adv=True,timeout=self.scan_timeout)
+                for item in devices.values():
+                    self.discovered_devices.emit(item)
+                self.discovered_devices.emit((0,0))  
+
         except Exception as err:
             logging.getLogger().setLevel(logging.WARNING)
             logging.warning(err)
