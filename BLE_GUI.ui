@@ -842,6 +842,31 @@ color: rgb(28, 28, 28);</string>
                           </item>
                           <item row="1" column="0">
                            <widget class="QCheckBox" name="scanInfinite">
+                            <property name="styleSheet">
+                             <string notr="true">color: rgb(28, 28, 28);
+
+
+QCheckBox {
+   
+    color:                  white;
+}
+
+QCheckBox::indicator {
+    width:                  10px;
+    height:                 10px;
+    border-radius:          5px;
+}
+
+QCheckBox::indicator:checked {
+    background-color:       blue;
+
+}
+
+QCheckBox::indicator:unchecked {
+    background-color:       gray;
+
+}</string>
+                            </property>
                             <property name="text">
                              <string>Forever</string>
                             </property>
