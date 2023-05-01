@@ -823,6 +823,9 @@ color: rgb(28, 28, 28);</string>
                             <property name="text">
                              <string>Do not log</string>
                             </property>
+                            <property name="checked">
+                             <bool>true</bool>
+                            </property>
                            </widget>
                           </item>
                           <item row="7" column="0">

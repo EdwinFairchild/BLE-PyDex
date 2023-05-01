@@ -369,6 +369,7 @@ class Ui_MainWindow(object):
         self.timeoutLabel_2.setObjectName("timeoutLabel_2")
         self.gridLayout_5.addWidget(self.timeoutLabel_2, 0, 1, 1, 1)
         self.filterAll = QtWidgets.QRadioButton(self.scaneSliderFrame_2)
+        self.filterAll.setChecked(True)
         self.filterAll.setObjectName("filterAll")
         self.gridLayout_5.addWidget(self.filterAll, 8, 0, 1, 1)
         self.filterNone = QtWidgets.QRadioButton(self.scaneSliderFrame_2)
