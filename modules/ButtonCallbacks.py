@@ -43,7 +43,8 @@ def btn_scan(interface):
         
     else:
         interface.ui.list_discoveredDevices.clear()
-        interface.BLE_DiscoverDevices = ble_ctl.BLE_DiscoverDevices()
+        # instantiate the BLE_DiscoverDevices class in main_app
+        #interface.BLE_DiscoverDevices = ble_ctl.BLE_DiscoverDevices()
         # change scan button text if scanInfinite is checked
         if interface.ui.scanInfinite.isChecked():
             interface.ui.btnScan.setText("Stop Scan")   
@@ -267,7 +268,17 @@ def btn_menu(interface):
     # interface.menuPinned = not interface.menuPinned
 # -----------------------------------------------------------------------
 
-
+def setAdvertLoggingstate(interface,b):
+    if b.isChecked():
+        if b.text() == "Filter by selection":
+            logging.info("Filter by selection")
+            interface.BLE_DiscoverDevices.advertisementLoggingLevel = "selection"
+        elif b.text() == "Log all data":
+            logging.info("Log all data")
+            interface.BLE_DiscoverDevices.advertisementLoggingLevel = "all"
+        else:
+            logging.info("Log no data")
+            interface.BLE_DiscoverDevices.advertisementLoggingLevel = None
 def register_button_callbacks(interface):
     # Menu button callbacks
     interface.ui.btnMenu.clicked.connect(lambda state: btn_menu(interface))
@@ -301,3 +312,9 @@ def register_button_callbacks(interface):
         lambda state: btn_log_window_size_up(interface))
     interface.ui.btnLogSizeDown.clicked.connect(
         lambda state: btn_log_window_size_down(interface))
+
+    #radio button callbacks
+    # radio button callbacks
+    interface.ui.filterSelection.toggled.connect(lambda:setAdvertLoggingstate(interface,interface.ui.filterSelection))
+    interface.ui.filterNone.toggled.connect(lambda:setAdvertLoggingstate(interface,interface.ui.filterNone))
+    interface.ui.filterAll.toggled.connect(lambda:setAdvertLoggingstate(interface,interface.ui.filterAll))

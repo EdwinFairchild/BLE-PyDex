@@ -30,6 +30,8 @@ class BLE_DiscoverDevices(QThread):
     scan_timeout = 0
     stopScanning = False
     discovered_devices = pyqtSignal(tuple)
+    advertisementFilter = None
+    advertisementLoggingLevel = None
 
     def run(self):
         asyncio.run(self.BLE_discoverDevices())
@@ -44,9 +46,21 @@ class BLE_DiscoverDevices(QThread):
                 while self.stopScanning == False:
                     devices = await BleakScanner.discover(
                         return_adv=True,timeout=1)
-                    for item in devices.values():
-                        self.discovered_devices.emit(item)
-                        #logging.info(item)
+                    for item, adv in devices.values():
+                        self.discovered_devices.emit((item,adv))
+                        
+                        if self.advertisementLoggingLevel != None:
+                            if self.advertisementLoggingLevel == "selection" and self.advertisementFilter != None:
+                                if self.advertisementFilter in adv:
+                                    logging.info(adv)
+                            elif self.advertisementLoggingLevel == "all":
+                                logging.info(adv)
+                               
+                        
+                            
+
+
+                        
                 logging.info("Scan stopped")
             else:  
                 logging.info("Scanning timeout set to " + str(self.scan_timeout) + " seconds")
