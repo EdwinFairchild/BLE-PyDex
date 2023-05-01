@@ -282,6 +282,7 @@ def saveLog(self,interface):
                 f.write(interface.ui.console.toPlainText())
 
 def setAdvertLoggingstate(interface,b):
+    # TODO perhaps this should use pyqtSignals
     if b.isChecked():
         if b.text() == "Selected device":
             logging.info("Filter by selected device")
@@ -292,6 +293,8 @@ def setAdvertLoggingstate(interface,b):
         else:
             logging.info("Log no data")
             interface.BLE_DiscoverDevices.advertisementLoggingLevel = None
+
+        
 def register_button_callbacks(interface):
     # Menu button callbacks
     interface.ui.btnMenu.clicked.connect(lambda state: btn_menu(interface))
@@ -328,7 +331,6 @@ def register_button_callbacks(interface):
     interface.ui.btnLogClear.clicked.connect(lambda state: clearLog(interface))
     interface.ui.btnLogSave.clicked.connect(lambda state: saveLog(interface.ui.btnLogSave,interface))
 
-    #radio button callbacks
     # radio button callbacks
     interface.ui.filterSelection.toggled.connect(lambda:setAdvertLoggingstate(interface,interface.ui.filterSelection))
     interface.ui.filterNone.toggled.connect(lambda:setAdvertLoggingstate(interface,interface.ui.filterNone))
