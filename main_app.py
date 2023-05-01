@@ -54,6 +54,7 @@ class MainInterface(QMainWindow):
     client = None
     # peristent instance of bleakLoop needs to be kept so the task is not
     # canceled
+    BLE_DiscoverDevices = None
     bleLoop = None
     serialLoop = None
     UUID_dict = BLE_UUIDs.get_uuid_dict("UUIDs.json")
@@ -72,6 +73,7 @@ class MainInterface(QMainWindow):
         ListCallbacks.register_list_callbacks(self)
         ButtonCallbacks.register_button_callbacks(self)
         MiscHelpers.init_icons(self)
+        # Cconfigure logging
         logTextBox = Console.QTextEditLogger(self)
         logTextBox.logMessage.connect(self.logToTextbox)
         # You can format what is printed to text box
@@ -80,11 +82,14 @@ class MainInterface(QMainWindow):
         logging.getLogger().addHandler(logTextBox)
         # You can control the logging level
         logging.getLogger().setLevel(logging.INFO)
-        # logging.getLogger().setLevel(logging.DEBUG)
         logging.info("BLE-Pydex initialized")
+        # possible logging levels
+        # logging.getLogger().setLevel(logging.DEBUG)
         #logging.debug('damn, a bug')
         #logging.warning('that\'s not right')
         # logging.error('foobar')
+
+        self.BLE_DiscoverDevices = ble_ctl.BLE_DiscoverDevices()
 
     def logToTextbox(self, data):
         self.ui.console.append(data)

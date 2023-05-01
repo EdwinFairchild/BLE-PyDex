@@ -3,12 +3,15 @@ from modules import Console
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
+import logging
 # ------------------------------------------------------------------------
 def discoveredList2ItemPressed(interface):
     value = interface.ui.list_discoveredDevices.currentItem()
     tmp = value.text()
     interface.selected_address = tmp[0:17]
     interface.advertised_name = str(tmp[19:]).strip()
+    interface.BLE_DiscoverDevices.advertisementFilter = interface.advertised_name
+    
 # ------------------------------------------------------------------------
 def enabledNotifyListItemPressed(interface):
     interface.ui.list_EnabledNotifyValue.setCurrentRow(

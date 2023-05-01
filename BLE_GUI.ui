@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1203</width>
-    <height>836</height>
+    <width>1364</width>
+    <height>895</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -702,7 +702,7 @@ border-color: rgb(230, 230, 230);</string>
                 <property name="frameShadow">
                  <enum>QFrame::Raised</enum>
                 </property>
-                <layout class="QVBoxLayout" name="verticalLayout_2" stretch="3,3,2">
+                <layout class="QVBoxLayout" name="verticalLayout_2" stretch="3,2,1">
                  <property name="spacing">
                   <number>10</number>
                  </property>
@@ -773,7 +773,10 @@ border-color: rgb(190, 190, 190);</string>
                       <property name="frameShadow">
                        <enum>QFrame::Raised</enum>
                       </property>
-                      <layout class="QVBoxLayout" name="verticalLayout_8" stretch="0,0,0,0">
+                      <layout class="QVBoxLayout" name="verticalLayout_8" stretch="3,1,1">
+                       <property name="spacing">
+                        <number>6</number>
+                       </property>
                        <property name="sizeConstraint">
                         <enum>QLayout::SetMinAndMaxSize</enum>
                        </property>
@@ -789,6 +792,16 @@ border-color: rgb(190, 190, 190);</string>
                           <enum>QFrame::Raised</enum>
                          </property>
                          <layout class="QGridLayout" name="gridLayout_5">
+                          <property name="verticalSpacing">
+                           <number>6</number>
+                          </property>
+                          <item row="6" column="0">
+                           <widget class="QRadioButton" name="filterSelection">
+                            <property name="text">
+                             <string>Filter by selection</string>
+                            </property>
+                           </widget>
+                          </item>
                           <item row="0" column="1">
                            <widget class="QLabel" name="timeoutLabel_2">
                             <property name="font">
@@ -805,11 +818,27 @@ color: rgb(28, 28, 28);</string>
                             </property>
                            </widget>
                           </item>
+                          <item row="8" column="0">
+                           <widget class="QRadioButton" name="filterAll">
+                            <property name="text">
+                             <string>Do not log</string>
+                            </property>
+                           </widget>
+                          </item>
+                          <item row="7" column="0">
+                           <widget class="QRadioButton" name="filterNone">
+                            <property name="text">
+                             <string>Log all data</string>
+                            </property>
+                           </widget>
+                          </item>
                           <item row="0" column="0">
                            <widget class="QLabel" name="label_10">
                             <property name="font">
                              <font>
                               <pointsize>11</pointsize>
+                              <weight>75</weight>
+                              <bold>true</bold>
                              </font>
                             </property>
                             <property name="styleSheet">
@@ -821,26 +850,7 @@ color: rgb(28, 28, 28);</string>
                             </property>
                            </widget>
                           </item>
-                          <item row="2" column="0" colspan="3">
-                           <widget class="QSlider" name="scanSlider">
-                            <property name="styleSheet">
-                             <string notr="true"/>
-                            </property>
-                            <property name="maximum">
-                             <number>30</number>
-                            </property>
-                            <property name="pageStep">
-                             <number>1</number>
-                            </property>
-                            <property name="value">
-                             <number>5</number>
-                            </property>
-                            <property name="orientation">
-                             <enum>Qt::Horizontal</enum>
-                            </property>
-                           </widget>
-                          </item>
-                          <item row="1" column="0">
+                          <item row="2" column="0">
                            <widget class="QCheckBox" name="scanInfinite">
                             <property name="styleSheet">
                              <string notr="true">color: rgb(28, 28, 28);
@@ -868,37 +878,50 @@ QCheckBox::indicator:unchecked {
 }</string>
                             </property>
                             <property name="text">
-                             <string>Forever</string>
+                             <string>No scan timeout</string>
+                            </property>
+                            <property name="checked">
+                             <bool>true</bool>
                             </property>
                            </widget>
                           </item>
-                         </layout>
-                        </widget>
-                       </item>
-                       <item>
-                        <widget class="QPushButton" name="btnScan">
-                         <property name="minimumSize">
-                          <size>
-                           <width>0</width>
-                           <height>30</height>
-                          </size>
-                         </property>
-                         <property name="maximumSize">
-                          <size>
-                           <width>1000</width>
-                           <height>16777215</height>
-                          </size>
-                         </property>
-                         <property name="font">
-                          <font>
-                           <pointsize>11</pointsize>
-                          </font>
-                         </property>
-                         <property name="mouseTracking">
-                          <bool>true</bool>
-                         </property>
-                         <property name="styleSheet">
-                          <string notr="true">QPushButton{
+                          <item row="5" column="0">
+                           <widget class="QLabel" name="label_2">
+                            <property name="font">
+                             <font>
+                              <weight>75</weight>
+                              <bold>true</bold>
+                             </font>
+                            </property>
+                            <property name="text">
+                             <string>Advertisement data logging :</string>
+                            </property>
+                           </widget>
+                          </item>
+                          <item row="9" column="0">
+                           <widget class="QPushButton" name="btnScan">
+                            <property name="minimumSize">
+                             <size>
+                              <width>0</width>
+                              <height>30</height>
+                             </size>
+                            </property>
+                            <property name="maximumSize">
+                             <size>
+                              <width>1000</width>
+                              <height>16777215</height>
+                             </size>
+                            </property>
+                            <property name="font">
+                             <font>
+                              <pointsize>11</pointsize>
+                             </font>
+                            </property>
+                            <property name="mouseTracking">
+                             <bool>true</bool>
+                            </property>
+                            <property name="styleSheet">
+                             <string notr="true">QPushButton{
 	color: rgb(0, 0, 0);
 		background-color: rgb(170,200,255);
 	border:none;
@@ -917,10 +940,32 @@ QPushButton:pressed{
 		color: rgb(28, 28, 28);
 	background-color: rgb(110,140,255);
 }</string>
-                         </property>
-                         <property name="text">
-                          <string>Scan</string>
-                         </property>
+                            </property>
+                            <property name="text">
+                             <string>Scan</string>
+                            </property>
+                           </widget>
+                          </item>
+                          <item row="1" column="0">
+                           <widget class="QSlider" name="scanSlider">
+                            <property name="styleSheet">
+                             <string notr="true"/>
+                            </property>
+                            <property name="maximum">
+                             <number>30</number>
+                            </property>
+                            <property name="pageStep">
+                             <number>1</number>
+                            </property>
+                            <property name="value">
+                             <number>5</number>
+                            </property>
+                            <property name="orientation">
+                             <enum>Qt::Horizontal</enum>
+                            </property>
+                           </widget>
+                          </item>
+                         </layout>
                         </widget>
                        </item>
                        <item>
@@ -935,6 +980,9 @@ QPushButton:pressed{
                           <enum>QFrame::Raised</enum>
                          </property>
                          <layout class="QGridLayout" name="gridLayout_6">
+                          <property name="verticalSpacing">
+                           <number>3</number>
+                          </property>
                           <item row="1" column="0" colspan="3">
                            <widget class="QSlider" name="timeoutSlider_3">
                             <property name="styleSheet">
@@ -985,7 +1033,7 @@ QCheckBox::indicator:unchecked {
 }</string>
                             </property>
                             <property name="text">
-                             <string>Forever</string>
+                             <string>No timeout</string>
                             </property>
                             <property name="checked">
                              <bool>true</bool>
@@ -1036,6 +1084,12 @@ QPushButton:pressed{
                           </item>
                           <item row="0" column="0">
                            <widget class="QLabel" name="label_3">
+                            <property name="font">
+                             <font>
+                              <weight>75</weight>
+                              <bold>true</bold>
+                             </font>
+                            </property>
                             <property name="styleSheet">
                              <string notr="true">color: rgb(28, 28, 28);</string>
                             </property>
@@ -1063,7 +1117,7 @@ QPushButton:pressed{
                           <enum>Qt::Vertical</enum>
                          </property>
                          <property name="sizeType">
-                          <enum>QSizePolicy::MinimumExpanding</enum>
+                          <enum>QSizePolicy::Expanding</enum>
                          </property>
                          <property name="sizeHint" stdset="0">
                           <size>
