@@ -2351,6 +2351,9 @@ p, li { white-space: pre-wrap; }
                        <enum>QFrame::Raised</enum>
                       </property>
                       <layout class="QVBoxLayout" name="verticalLayout_11">
+                       <property name="spacing">
+                        <number>12</number>
+                       </property>
                        <item>
                         <widget class="QFrame" name="sizeFrame">
                          <property name="frameShape">
@@ -2395,6 +2398,68 @@ p, li { white-space: pre-wrap; }
                            </widget>
                           </item>
                          </layout>
+                        </widget>
+                       </item>
+                       <item>
+                        <widget class="QPushButton" name="btnLogClear">
+                         <property name="styleSheet">
+                          <string notr="true">QPushButton{
+	color: rgb(0, 0, 0);
+		background-color: rgb(170,200,255);
+	border:none;
+border-radius:5px;
+
+}
+
+QPushButton:hover{
+	color: rgb(28, 28, 28);
+		background-color: rgb(140,170,255);
+
+}
+
+QPushButton:pressed{
+	
+		color: rgb(28, 28, 28);
+	background-color: rgb(110,140,255);
+}</string>
+                         </property>
+                         <property name="text">
+                          <string>Clear</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item>
+                        <widget class="QPushButton" name="btnLogSave">
+                         <property name="minimumSize">
+                          <size>
+                           <width>0</width>
+                           <height>40</height>
+                          </size>
+                         </property>
+                         <property name="styleSheet">
+                          <string notr="true">QPushButton{
+	color: rgb(0, 0, 0);
+		background-color: rgb(170,200,255);
+	border:none;
+border-radius:5px;
+
+}
+
+QPushButton:hover{
+	color: rgb(28, 28, 28);
+		background-color: rgb(140,170,255);
+
+}
+
+QPushButton:pressed{
+	
+		color: rgb(28, 28, 28);
+	background-color: rgb(110,140,255);
+}</string>
+                         </property>
+                         <property name="text">
+                          <string>Save</string>
+                         </property>
                         </widget>
                        </item>
                        <item>

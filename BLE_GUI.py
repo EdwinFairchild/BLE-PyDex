@@ -1138,6 +1138,7 @@ class Ui_MainWindow(object):
         self.frame_17.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_17.setObjectName("frame_17")
         self.verticalLayout_11 = QtWidgets.QVBoxLayout(self.frame_17)
+        self.verticalLayout_11.setSpacing(12)
         self.verticalLayout_11.setObjectName("verticalLayout_11")
         self.sizeFrame = QtWidgets.QFrame(self.frame_17)
         self.sizeFrame.setFrameShape(QtWidgets.QFrame.StyledPanel)
@@ -1164,6 +1165,51 @@ class Ui_MainWindow(object):
         self.btnLogSizeDown.setObjectName("btnLogSizeDown")
         self.horizontalLayout_13.addWidget(self.btnLogSizeDown)
         self.verticalLayout_11.addWidget(self.sizeFrame)
+        self.btnLogClear = QtWidgets.QPushButton(self.frame_17)
+        self.btnLogClear.setStyleSheet("QPushButton{\n"
+"    color: rgb(0, 0, 0);\n"
+"        background-color: rgb(170,200,255);\n"
+"    border:none;\n"
+"border-radius:5px;\n"
+"\n"
+"}\n"
+"\n"
+"QPushButton:hover{\n"
+"    color: rgb(28, 28, 28);\n"
+"        background-color: rgb(140,170,255);\n"
+"\n"
+"}\n"
+"\n"
+"QPushButton:pressed{\n"
+"    \n"
+"        color: rgb(28, 28, 28);\n"
+"    background-color: rgb(110,140,255);\n"
+"}")
+        self.btnLogClear.setObjectName("btnLogClear")
+        self.verticalLayout_11.addWidget(self.btnLogClear)
+        self.btnLogSave = QtWidgets.QPushButton(self.frame_17)
+        self.btnLogSave.setMinimumSize(QtCore.QSize(0, 40))
+        self.btnLogSave.setStyleSheet("QPushButton{\n"
+"    color: rgb(0, 0, 0);\n"
+"        background-color: rgb(170,200,255);\n"
+"    border:none;\n"
+"border-radius:5px;\n"
+"\n"
+"}\n"
+"\n"
+"QPushButton:hover{\n"
+"    color: rgb(28, 28, 28);\n"
+"        background-color: rgb(140,170,255);\n"
+"\n"
+"}\n"
+"\n"
+"QPushButton:pressed{\n"
+"    \n"
+"        color: rgb(28, 28, 28);\n"
+"    background-color: rgb(110,140,255);\n"
+"}")
+        self.btnLogSave.setObjectName("btnLogSave")
+        self.verticalLayout_11.addWidget(self.btnLogSave)
         spacerItem2 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.verticalLayout_11.addItem(spacerItem2)
         self.btnConnectedState = QtWidgets.QPushButton(self.frame_17)
@@ -1250,6 +1296,8 @@ class Ui_MainWindow(object):
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), _translate("MainWindow", "serial"))
         self.btnLogSizeUp.setText(_translate("MainWindow", "^"))
         self.btnLogSizeDown.setText(_translate("MainWindow", "_"))
+        self.btnLogClear.setText(_translate("MainWindow", "Clear"))
+        self.btnLogSave.setText(_translate("MainWindow", "Save"))
 from slidingstackedwidget import SlidingStackedWidget
 
 

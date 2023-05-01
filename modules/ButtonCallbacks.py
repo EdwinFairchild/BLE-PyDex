@@ -42,6 +42,7 @@ def btn_scan(interface):
         interface.BLE_DiscoverDevices.quit()
         
     else:
+        interface.BLE_DiscoverDevices.stopScanning = False
         interface.ui.list_discoveredDevices.clear()
         # instantiate the BLE_DiscoverDevices class in main_app
         #interface.BLE_DiscoverDevices = ble_ctl.BLE_DiscoverDevices()
@@ -268,6 +269,17 @@ def btn_menu(interface):
     # interface.menuPinned = not interface.menuPinned
 # -----------------------------------------------------------------------
 
+def clearLog(interface):
+    interface.ui.console.clear()
+
+def saveLog(self,interface):
+        options = QFileDialog.Options()
+        options |= QFileDialog.DontUseNativeDialog
+        file_name, _ = QFileDialog.getSaveFileName(self,"Save file","","Text Files (*.txt)", options=options)
+        if file_name:
+            with open(file_name, 'w') as f:
+                f.write(interface.ui.console.toPlainText())
+
 def setAdvertLoggingstate(interface,b):
     if b.isChecked():
         if b.text() == "Filter by selection":
@@ -312,6 +324,8 @@ def register_button_callbacks(interface):
         lambda state: btn_log_window_size_up(interface))
     interface.ui.btnLogSizeDown.clicked.connect(
         lambda state: btn_log_window_size_down(interface))
+    interface.ui.btnLogClear.clicked.connect(lambda state: clearLog(interface))
+    interface.ui.btnLogSave.clicked.connect(lambda state: saveLog(interface.ui.btnLogSave,interface))
 
     #radio button callbacks
     # radio button callbacks
