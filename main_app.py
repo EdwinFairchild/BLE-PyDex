@@ -27,11 +27,11 @@ import webbrowser
 import BLE_UUIDs
 import logging
 
-
+# Adjust for high DPI displays
 QtWidgets.QApplication.setAttribute(
     QtCore.Qt.AA_EnableHighDpiScaling, True)  # enable highdpi scaling
 QtWidgets.QApplication.setAttribute(QtCore.Qt.AA_UseHighDpiPixmaps, True)
-os.environ["QT_FONT_DPI"] = "96"
+os.environ["QT_FONT_DPI"] = "86"
 
 
 class MainInterface(QMainWindow):

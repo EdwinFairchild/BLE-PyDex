@@ -463,7 +463,7 @@ class BleakLoop(QThread):
                     logging.warning("There is an issue with BLE-Pydex and BLE_otas when using internal flash only. Connection parameter update must be enabled. See Github issues")
                     logging.getLogger().setLevel(logging.INFO)
             while self.connect == True:
-                await asyncio.sleep(0.005)
+                #await asyncio.sleep(0.005)
                 # check the flag to disconnect
                 if self.disconnect_triggered == True:
                     await self.disconenctBLE(client)
