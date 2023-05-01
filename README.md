@@ -27,5 +27,6 @@ BLE-PyDex is a hardware agnostic Bluetooth device explorer designed to aid in th
 - Hardware and OS agnoistic BLE client using [BLEAK](https://github.com/hbldh/bleak)
 - Service discovery
 - Characteristic read/write/notify (per device permissions)
+- Advertisement packet logging
 - Support for OTA example application using ADI MAX32xxx devices [ADI MSDK]( https://github.com/Analog-Devices-MSDK/msdk)
 - Serial monitor
