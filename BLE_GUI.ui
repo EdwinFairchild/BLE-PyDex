@@ -798,7 +798,7 @@ border-color: rgb(190, 190, 190);</string>
                           <item row="6" column="0">
                            <widget class="QRadioButton" name="filterSelection">
                             <property name="text">
-                             <string>Filter by selection</string>
+                             <string>Selected device</string>
                             </property>
                            </widget>
                           </item>
@@ -2405,6 +2405,12 @@ p, li { white-space: pre-wrap; }
                        </item>
                        <item>
                         <widget class="QPushButton" name="btnLogClear">
+                         <property name="minimumSize">
+                          <size>
+                           <width>0</width>
+                           <height>25</height>
+                          </size>
+                         </property>
                          <property name="styleSheet">
                           <string notr="true">QPushButton{
 	color: rgb(0, 0, 0);

@@ -40,6 +40,7 @@ def btn_scan(interface):
         interface.BLE_DiscoverDevices.stopScanning = True
         interface.ui.btnScan.setText("Scan")
         interface.BLE_DiscoverDevices.quit()
+        interface.BLE_DiscoverDevices.advertisementFilter = None
         
     else:
         interface.BLE_DiscoverDevices.stopScanning = False
@@ -282,8 +283,8 @@ def saveLog(self,interface):
 
 def setAdvertLoggingstate(interface,b):
     if b.isChecked():
-        if b.text() == "Filter by selection":
-            logging.info("Filter by selection")
+        if b.text() == "Selected device":
+            logging.info("Filter by selected device")
             interface.BLE_DiscoverDevices.advertisementLoggingLevel = "selection"
         elif b.text() == "Log all data":
             logging.info("Log all data")

@@ -1167,6 +1167,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_13.addWidget(self.btnLogSizeDown)
         self.verticalLayout_11.addWidget(self.sizeFrame)
         self.btnLogClear = QtWidgets.QPushButton(self.frame_17)
+        self.btnLogClear.setMinimumSize(QtCore.QSize(0, 25))
         self.btnLogClear.setStyleSheet("QPushButton{\n"
 "    color: rgb(0, 0, 0);\n"
 "        background-color: rgb(170,200,255);\n"
@@ -1249,7 +1250,7 @@ class Ui_MainWindow(object):
         self.btnFindBin.setText(_translate("MainWindow", "Load FW Bin"))
         self.btnauthor.setText(_translate("MainWindow", " Edwin Amaya"))
         self.btnRepo.setText(_translate("MainWindow", "Github"))
-        self.filterSelection.setText(_translate("MainWindow", "Filter by selection"))
+        self.filterSelection.setText(_translate("MainWindow", "Selected device"))
         self.timeoutLabel_2.setText(_translate("MainWindow", "5"))
         self.filterAll.setText(_translate("MainWindow", "Do not log"))
         self.filterNone.setText(_translate("MainWindow", "Log all data"))
