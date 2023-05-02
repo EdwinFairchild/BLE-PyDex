@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1364</width>
-    <height>895</height>
+    <height>868</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -702,7 +702,7 @@ border-color: rgb(230, 230, 230);</string>
                 <property name="frameShadow">
                  <enum>QFrame::Raised</enum>
                 </property>
-                <layout class="QVBoxLayout" name="verticalLayout_2" stretch="3,2,1">
+                <layout class="QVBoxLayout" name="verticalLayout_2" stretch="3,1,3">
                  <property name="spacing">
                   <number>10</number>
                  </property>
@@ -797,6 +797,9 @@ border-color: rgb(190, 190, 190);</string>
                           </property>
                           <item row="6" column="0">
                            <widget class="QRadioButton" name="filterSelection">
+                            <property name="styleSheet">
+                             <string notr="true">color: rgb(28, 28, 28);</string>
+                            </property>
                             <property name="text">
                              <string>Selected device</string>
                             </property>
@@ -820,6 +823,9 @@ color: rgb(28, 28, 28);</string>
                           </item>
                           <item row="8" column="0">
                            <widget class="QRadioButton" name="filterAll">
+                            <property name="styleSheet">
+                             <string notr="true">color: rgb(28, 28, 28);</string>
+                            </property>
                             <property name="text">
                              <string>Do not log</string>
                             </property>
@@ -830,6 +836,9 @@ color: rgb(28, 28, 28);</string>
                           </item>
                           <item row="7" column="0">
                            <widget class="QRadioButton" name="filterNone">
+                            <property name="styleSheet">
+                             <string notr="true">color: rgb(28, 28, 28);</string>
+                            </property>
                             <property name="text">
                              <string>Log all data</string>
                             </property>
@@ -1422,7 +1431,7 @@ border-color: rgb(190, 190, 190);</string>
                             <property name="minimumSize">
                              <size>
                               <width>0</width>
-                              <height>30</height>
+                              <height>0</height>
                              </size>
                             </property>
                             <property name="font">
@@ -1444,7 +1453,7 @@ color: rgb(28, 28, 28);</string>
                             <property name="minimumSize">
                              <size>
                               <width>0</width>
-                              <height>30</height>
+                              <height>0</height>
                              </size>
                             </property>
                             <property name="font">
@@ -1707,7 +1716,7 @@ QPushButton:pressed{
                             <property name="minimumSize">
                              <size>
                               <width>0</width>
-                              <height>30</height>
+                              <height>0</height>
                              </size>
                             </property>
                             <property name="font">
@@ -1744,7 +1753,7 @@ color: rgb(28, 28, 28);</string>
                             <property name="minimumSize">
                              <size>
                               <width>0</width>
-                              <height>30</height>
+                              <height>0</height>
                              </size>
                             </property>
                             <property name="font">
@@ -1781,7 +1790,7 @@ color: rgb(28, 28, 28);</string>
                             <property name="minimumSize">
                              <size>
                               <width>0</width>
-                              <height>30</height>
+                              <height>0</height>
                              </size>
                             </property>
                             <property name="font">
@@ -1827,7 +1836,7 @@ border: 0px solid gray;</string>
                             <property name="minimumSize">
                              <size>
                               <width>0</width>
-                              <height>30</height>
+                              <height>0</height>
                              </size>
                             </property>
                             <property name="font">
@@ -2365,42 +2374,7 @@ p, li { white-space: pre-wrap; }
                          <property name="frameShadow">
                           <enum>QFrame::Raised</enum>
                          </property>
-                         <layout class="QHBoxLayout" name="horizontalLayout_13">
-                          <item>
-                           <widget class="QPushButton" name="btnLogSizeUp">
-                            <property name="font">
-                             <font>
-                              <pointsize>20</pointsize>
-                              <weight>75</weight>
-                              <bold>true</bold>
-                             </font>
-                            </property>
-                            <property name="styleSheet">
-                             <string notr="true">color: rgb(170,200,255);</string>
-                            </property>
-                            <property name="text">
-                             <string>^</string>
-                            </property>
-                           </widget>
-                          </item>
-                          <item>
-                           <widget class="QPushButton" name="btnLogSizeDown">
-                            <property name="font">
-                             <font>
-                              <pointsize>20</pointsize>
-                              <weight>75</weight>
-                              <bold>true</bold>
-                             </font>
-                            </property>
-                            <property name="styleSheet">
-                             <string notr="true">color: rgb(170,200,255);</string>
-                            </property>
-                            <property name="text">
-                             <string>_</string>
-                            </property>
-                           </widget>
-                          </item>
-                         </layout>
+                         <layout class="QHBoxLayout" name="horizontalLayout_13"/>
                         </widget>
                        </item>
                        <item>

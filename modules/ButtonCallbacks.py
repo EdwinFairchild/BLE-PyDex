@@ -41,7 +41,7 @@ def btn_scan(interface):
         interface.ui.btnScan.setText("Scan")
         interface.BLE_DiscoverDevices.quit()
         interface.BLE_DiscoverDevices.advertisementFilter = None
-        
+
     else:
         interface.BLE_DiscoverDevices.stopScanning = False
         interface.ui.list_discoveredDevices.clear()
@@ -49,7 +49,7 @@ def btn_scan(interface):
         #interface.BLE_DiscoverDevices = ble_ctl.BLE_DiscoverDevices()
         # change scan button text if scanInfinite is checked
         if interface.ui.scanInfinite.isChecked():
-            interface.ui.btnScan.setText("Stop Scan")   
+            interface.ui.btnScan.setText("Stop Scan")
             interface.BLE_DiscoverDevices.scan_timeout = 0
         else:
             interface.BLE_DiscoverDevices.scan_timeout = interface.ui.scanSlider.value()
@@ -57,8 +57,6 @@ def btn_scan(interface):
         interface.BLE_DiscoverDevices.discovered_devices.connect(
             lambda device: Slots.scan(interface, device))
         interface.BLE_DiscoverDevices.start()
-
-
 
  # ------------------------------------------------------------------------
 
@@ -95,7 +93,8 @@ def btn_notify(interface):
                     lambda state: Slots.notify_registered_state(interface, state))
                 logging.info("Characteristic notification enabled")
             else:
-                logging.info("That characteristic does not have Notify enabled")
+                logging.info(
+                    "That characteristic does not have Notify enabled")
         else:
             logging.info(
                 "That characterisitic's notifications are already enabled")
@@ -151,7 +150,8 @@ def btn_connect(interface):
                 if interface.ui.btnScan.text() == "Stop Scan":
                     interface.BLE_DiscoverDevices.stopScanning = True
                     interface.ui.btnScan.setText("Scan")
-                    interface.BLE_DiscoverDevices.discovered_devices.emit((0,0))
+                    interface.BLE_DiscoverDevices.discovered_devices.emit(
+                        (0, 0))
                 # connection stuff
                 interface.bleLoop = ble_ctl.BleakLoop()
                 interface.bleLoop.disconnectSignal.connect(
@@ -234,6 +234,7 @@ def btn_open_bin(interface):
 
 # ------------------------------------------------------------------------
 
+
 def btn_log_window_size_up(interface):
     newsize = QSize()
     newsize.setHeight(365)
@@ -247,6 +248,7 @@ def btn_log_window_size_down(interface):
     newsize.setWidth(0)
     interface.ui.logFrame.setMinimumSize(newsize)
 # ------------------------------------------------------------------------
+
 
 def btn_menu(interface):
     # read comment on menuAnimate
@@ -270,18 +272,22 @@ def btn_menu(interface):
     # interface.menuPinned = not interface.menuPinned
 # -----------------------------------------------------------------------
 
+
 def clearLog(interface):
     interface.ui.console.clear()
 
-def saveLog(self,interface):
-        options = QFileDialog.Options()
-        options |= QFileDialog.DontUseNativeDialog
-        file_name, _ = QFileDialog.getSaveFileName(self,"Save file","","Text Files (*.txt)", options=options)
-        if file_name:
-            with open(file_name, 'w') as f:
-                f.write(interface.ui.console.toPlainText())
 
-def setAdvertLoggingstate(interface,b):
+def saveLog(self, interface):
+    options = QFileDialog.Options()
+    options |= QFileDialog.DontUseNativeDialog
+    file_name, _ = QFileDialog.getSaveFileName(
+        self, "Save file", "", "Text Files (*.txt)", options=options)
+    if file_name:
+        with open(file_name, 'w') as f:
+            f.write(interface.ui.console.toPlainText())
+
+
+def setAdvertLoggingstate(interface, b):
     # TODO perhaps this should use pyqtSignals
     if b.isChecked():
         if b.text() == "Selected device":
@@ -294,7 +300,7 @@ def setAdvertLoggingstate(interface,b):
             logging.info("Log no data")
             interface.BLE_DiscoverDevices.advertisementLoggingLevel = None
 
-        
+
 def register_button_callbacks(interface):
     # Menu button callbacks
     interface.ui.btnMenu.clicked.connect(lambda state: btn_menu(interface))
@@ -324,14 +330,14 @@ def register_button_callbacks(interface):
         lambda state: btn_start_update(interface))
     interface.ui.btnFindBin.clicked.connect(
         lambda state: btn_open_bin(interface))
-    interface.ui.btnLogSizeUp.clicked.connect(
-        lambda state: btn_log_window_size_up(interface))
-    interface.ui.btnLogSizeDown.clicked.connect(
-        lambda state: btn_log_window_size_down(interface))
     interface.ui.btnLogClear.clicked.connect(lambda state: clearLog(interface))
-    interface.ui.btnLogSave.clicked.connect(lambda state: saveLog(interface.ui.btnLogSave,interface))
+    interface.ui.btnLogSave.clicked.connect(
+        lambda state: saveLog(interface.ui.btnLogSave, interface))
 
     # radio button callbacks
-    interface.ui.filterSelection.toggled.connect(lambda:setAdvertLoggingstate(interface,interface.ui.filterSelection))
-    interface.ui.filterNone.toggled.connect(lambda:setAdvertLoggingstate(interface,interface.ui.filterNone))
-    interface.ui.filterAll.toggled.connect(lambda:setAdvertLoggingstate(interface,interface.ui.filterAll))
+    interface.ui.filterSelection.toggled.connect(
+        lambda: setAdvertLoggingstate(interface, interface.ui.filterSelection))
+    interface.ui.filterNone.toggled.connect(
+        lambda: setAdvertLoggingstate(interface, interface.ui.filterNone))
+    interface.ui.filterAll.toggled.connect(
+        lambda: setAdvertLoggingstate(interface, interface.ui.filterAll))
