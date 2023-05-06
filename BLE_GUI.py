@@ -1207,7 +1207,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_11.addWidget(self.btnConnectedState)
         self.horizontalLayout_11.addWidget(self.frame_17)
         self.verticalLayout_2.addWidget(self.logFrame)
-        self.verticalLayout_2.setStretch(0, 3)
+        self.verticalLayout_2.setStretch(0, 1)
         self.verticalLayout_2.setStretch(1, 1)
         self.verticalLayout_2.setStretch(2, 3)
         self.verticalLayout_9.addWidget(self.mainframe_explore)
