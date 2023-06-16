@@ -113,13 +113,30 @@ def scan(interface, device):
         #interface.ui.list_discoveredDevices.addItem(f" " + device[0][0:17] + " | " + device[0][18:] + " ")
         # if item already exist in the list update it , otherwise add it
 
-        if interface.ui.list_discoveredDevices.findItems(str(device[0]), QtCore.Qt.MatchExactly):
-            item = interface.ui.list_discoveredDevices.findItems(str(device[0]), QtCore.Qt.MatchExactly)
-            row = interface.ui.list_discoveredDevices.row(item[0])
-            item = interface.ui.list_discoveredDevices.item(row)
-            item.setText(str(device[0]))
+        # check if text_scanFilter is empty, and if not empty then only add item if it matches the filter
+        if interface.ui.text_scanFilter.toPlainText() != "":
+            if interface.ui.text_scanFilter.toPlainText() in str(device[0]):
+                # if the item is already in the list , update it
+                if interface.ui.list_discoveredDevices.findItems(str(device[0]), QtCore.Qt.MatchExactly):
+                    item = interface.ui.list_discoveredDevices.findItems(str(device[0]), QtCore.Qt.MatchExactly)
+                    row = interface.ui.list_discoveredDevices.row(item[0])
+                    item = interface.ui.list_discoveredDevices.item(row)
+                    item.setText(str(device[0]))
+                else:
+                    # if the item is not in the list , add it
+                    interface.ui.list_discoveredDevices.addItem( str(device[0]))
+            else:
+                pass
         else:
-            interface.ui.list_discoveredDevices.addItem( str(device[0]))
+            # if the item is already in the list , update it
+            if interface.ui.list_discoveredDevices.findItems(str(device[0]), QtCore.Qt.MatchExactly):
+                item = interface.ui.list_discoveredDevices.findItems(str(device[0]), QtCore.Qt.MatchExactly)
+                row = interface.ui.list_discoveredDevices.row(item[0])
+                item = interface.ui.list_discoveredDevices.item(row)
+                item.setText(str(device[0]))
+            else:
+                # if the item is not in the list , add it
+                interface.ui.list_discoveredDevices.addItem( str(device[0]))
 
             
     # device[1] has rssi 
