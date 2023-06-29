@@ -377,7 +377,7 @@ class BleakLoop(QThread):
             logging.info("File sent. Firmware update done")
             # ## TODO see what is going on with indications 
 
-            # self.disconnect_triggered = True
+            self.disconnect_triggered = True
             # # TODO make gui clean up method/signal for disconnect event
 
         except Exception as err:
