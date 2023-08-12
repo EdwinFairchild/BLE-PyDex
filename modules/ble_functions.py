@@ -11,7 +11,7 @@ class BLE_DiscoverDevices(QThread):
     discovered_devices = Signal(tuple)
     advertisementFilter = None
     advertisementLoggingLevel = None
-    logger = logging.getLogger("ScoutLogger")
+    logger = logging.getLogger("PDexLogger")
     scanning_stoped = Signal()
 
 
@@ -62,7 +62,7 @@ class BLE_ConnectDevice(QThread):
     ble_address = "1C:90:FF:EA:C4:8A"
     is_connected = False
     device_disconnected = Signal()
-    logger = logging.getLogger("ScoutLogger")
+    logger = logging.getLogger("PDexLogger")
     discovered_services = Signal(list)
     connection_established = Signal()
     connection_esablished_signal_sent = False

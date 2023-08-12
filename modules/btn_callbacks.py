@@ -1,7 +1,7 @@
 from main import *
 
 def btn_scan(interface):
-    logger = logging.getLogger("ScoutLogger")
+    logger = logging.getLogger("PDexLogger")
     # is device is connected, disconnect it
     if interface.connectedDevice.is_connected == True:
         interface.stop_connection()
@@ -47,7 +47,7 @@ def btn_scan(interface):
             logger.setLevel(logging.INFO)
         
 def txt_scan_filter_changed(ui):
-    logger = logging.getLogger("ScoutLogger")
+    logger = logging.getLogger("PDexLogger")
     # filter QListwidget list_widget_discovered based on txt_scan_filter text
     # keeping in mind the list_widget_discovered is not directly iterable 
     # and you can maybe use findItems(device_name, Qt.MatchExactly)
@@ -77,7 +77,7 @@ def txt_scan_filter_changed(ui):
         logger.setLevel(logging.INFO)
 
 def btn_connect(interface):
-    logger = logging.getLogger("ScoutLogger")
+    logger = logging.getLogger("PDexLogger")
     # check if the connectedDevice is connected
     if interface.connectedDevice.is_connected == True:
         logger.info("Disconnecting...")
@@ -123,7 +123,7 @@ def btn_connect(interface):
         
        # interface.ui.stackedWidget.setCurrentWidget(interface.ui.connections_page)
     except Exception as err:
-        logger = logging.getLogger("ScoutLogger")
+        logger = logging.getLogger("PDexLogger")
         # User has not selected an item in the list_widget_discovered
         if device_address == None:
             logger.info("No device selected to connect to")
@@ -135,7 +135,7 @@ def btn_connect(interface):
 
 
 def clear_logs(interface):
-    logger = logging.getLogger("ScoutLogger")
+    logger = logging.getLogger("PDexLogger")
     try:
         interface.ui.tableWidget_2.clearContents()
         interface.ui.tableWidget_2.setRowCount(0)
@@ -151,7 +151,7 @@ def clear_logs(interface):
         logger.setLevel(logging.INFO)
 
 def save_adv_logs(interface):
-    logger = logging.getLogger("ScoutLogger")
+    logger = logging.getLogger("PDexLogger")
     try:
         options = QFileDialog.Options()
         #options |= QFileDialog.DontUseNativeDialog
@@ -172,7 +172,7 @@ def save_adv_logs(interface):
         logger.info("Error saving logs: {}".format(err))
     
 def btn_github(interface):
-    logger = logging.getLogger("ScoutLogger")
+    logger = logging.getLogger("PDexLogger")
     try:
         webbrowser.open('https://github.com/EdwinFairchild/BLE-Scout')
     except Exception as err:
@@ -180,7 +180,7 @@ def btn_github(interface):
         logger.warning(err)
         logger.setLevel(logging.INFO)
 def btn_disconnect(interface):
-    logger = logging.getLogger("ScoutLogger")
+    logger = logging.getLogger("PDexLogger")
     # check if the connectedDevice is connected
     if interface.connectedDevice.is_connected == True:
         logger.info("Disconnecting...")
@@ -207,7 +207,7 @@ def disable_graphing(main_window):
         main_window.stop_graphing()
 
 def register_button_callbacks(main_window):
-    logger = logging.getLogger("ScoutLogger")
+    logger = logging.getLogger("PDexLogger")
     try:
         main_window.ui.btn_scan.clicked.connect(lambda: btn_scan(main_window))
         # add call back for txt_scan_filter textChanged

@@ -59,13 +59,13 @@ class MainWindow(QMainWindow):
         self.ui.widget_rssi_graph.getPlotItem().getAxis('bottom').setStyle(showValues=False)
         
         # Initialize logging
-        console = logging.getLogger("ScoutLogger")
+        console = logging.getLogger("PDexLogger")
         handler = QLogHandler(self.ui.console)
         handler.setFormatter(logging.Formatter('%(levelname)s - %(message)s'))
         handler.emitter.logMessage.connect(self.logToTextbox)
         console.addHandler(handler)
         console.setLevel(logging.DEBUG)
-        self.logger = logging.getLogger("ScoutLogger")
+        self.logger = logging.getLogger("PDexLogger")
 
         # connected mode variables
         self.connectedDevice = BLE_ConnectDevice()
@@ -303,7 +303,7 @@ class MainWindow(QMainWindow):
             self.logger.info("RSSI thread stopped")
                   
     def add_table_item(self, data):
-        logger = logging.getLogger("ScoutLogger")
+        logger = logging.getLogger("PDexLogger")
         # data looks like this: 
         # AdvertisementData(manufacturer_data={301: b'\x04\x00\x02\x02\xb02\x06\x02\xc2\x00\xdd\xb6\xb2\x10\x02\x003\x00\x00\x00'}, 
         # service_data={'0000fe2c-0000-1000-8000-00805f9b34fb': b'\x000\x00\x00\x00\x11\x17402G'}, 

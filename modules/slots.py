@@ -68,7 +68,7 @@ def timed_scanning_stoped(interface):
 
 
 def device_disconnected_cb(interface):
-    logger = logging.getLogger("ScoutLogger")
+    logger = logging.getLogger("PDexLogger")
     interface.connectedDevice.is_connected = False
     try:
         # stop the connect thread
