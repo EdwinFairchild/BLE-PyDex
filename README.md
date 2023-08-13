@@ -1,5 +1,8 @@
-# BLE Scout (this will supersede BLE-PyDex)
-![image](https://github.com/EdwinFairchild/BLE-Scout/assets/62710807/fa26c49f-d531-41ad-b6d9-e7a689dd0563)
+
+## BLE-PyDex | Bluetooth Low Energy Python Device Exporer
+![pylint workflow](https://github.com/EdwinFairchild/BLE-PyDex/actions/workflows/pylint.yml/badge.svg)
+<br>
+![BLE-PyDex-v2](https://github.com/EdwinFairchild/BLE-PyDex/assets/62710807/1ff34f59-dc1f-4e71-8089-7a13c3afb4d3)
 
 ### Hardware requirements
 - Computer with Bluetooth (USB dongle or integrated) for client applications
