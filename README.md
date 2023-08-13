@@ -26,3 +26,7 @@ import resources_rc <---- remove this line
 from . resources_rc import * <-- add this in its place
 ```
 Then move the new python file into the modules folder
+
+### BLE-PyDex v1
+- The original BLE-PyDex with the white interface exists as a branch `BLE-PyDex-v1
+` I will continue to fix and update that version per request only
