@@ -1,7 +1,8 @@
 ## BLE-PyDex | Bluetooth Low Energy Python Device Exporer
 ![pylint workflow](https://github.com/EdwinFairchild/BLE-PyDex/actions/workflows/pylint.yml/badge.svg)
 <br>
-![image](https://user-images.githubusercontent.com/62710807/235479308-0b025130-81a7-454f-bc24-f65827ad84ba.png)
+![BLE-PyDex-v2](https://github.com/EdwinFairchild/BLE-PyDex/assets/62710807/1ff34f59-dc1f-4e71-8089-7a13c3afb4d3)
+
 
 ### Adjusting font size for high DPI displays
 This can be done by increasing or decreasing the value on line `33` in `main_app.py`
