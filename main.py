@@ -40,7 +40,7 @@ class MainWindow(QMainWindow):
     serviceCount= 1
     service_dict = {}
     cleanUp = Signal(object)
-    vars_watched_dict={}
+    
     
     def __init__(self):
         QMainWindow.__init__(self)
@@ -49,6 +49,7 @@ class MainWindow(QMainWindow):
         self.ui.setupUi(self)
         global widgets
         widgets = self.ui
+        self.vars_watched_dict={}
 
         # Graphing variables
         self.device_data_sets = {}
@@ -86,6 +87,9 @@ class MainWindow(QMainWindow):
 
         # Global BLE objects
         self.bleScanner = ble_functions.BLE_DiscoverDevices()
+
+        # Global elf parser object
+        self.elf_parser = ExtractGlobalVariablesThread(None, self.ui.tbl_vars)
 
         # USE CUSTOM TITLE BAR | USE AS "False" FOR MAC OR LINUX
         Settings.ENABLE_CUSTOM_TITLE_BAR = False
@@ -556,6 +560,7 @@ class MainWindow(QMainWindow):
         self.stop_graphing()
         self.stop_scanner()
         self.stop_connection()
+        self.stop_elf_parser()
 
         event.accept()  # Accept the close event and let the window close
 
@@ -580,6 +585,11 @@ class MainWindow(QMainWindow):
         self.update_thread.GraphActive = False  # Request the thread to stop
         self.update_thread.quit()  # Request the thread to stop
         self.update_thread.wait()  # Wait until the thread has actually stopped
+
+    def stop_elf_parser(self):
+        self.elf_parser.exit_early = True
+        self.elf_parser.quit()
+        self.elf_parser.wait()
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

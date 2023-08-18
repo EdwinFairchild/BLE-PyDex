@@ -210,52 +210,49 @@ def disable_graphing(main_window):
         main_window.stop_graphing()
 
 def handle_checkbox_state_change(state, var_name, address, address_dict):
+    logger = logging.getLogger("PDexLogger")
+    print(f"State: {state} | Name: {var_name} | Address: {hex(address)}")
     if state == Qt.Checked:
         address_dict[var_name] = address
+        logger.info(f"Added {var_name} to watch list")
+
     else:
         address_dict.pop(var_name, None)
+    print(address_dict)
         
 def load_elf(main_window):
     logger = logging.getLogger("PDexLogger")
     filename = '/home/eddie/projects/ADI-Insight/BLE_dats/build/max32655.elf'
     table_widget = main_window.ui.tbl_vars
-    with open(filename, 'rb') as file:
-        elffile = ELFFile(file)
+    elf_file_path = '/home/eddie/projects/ADI-Insight/BLE_dats/build/max32655.elf'
+    table_widget = main_window.ui.tbl_vars # Replace with the actual table widget object
 
-        section = elffile.get_section_by_name('.symtab')
-        if not section:
-            print("Symbol table not found")
-            return
+    elf_file_path = '/home/eddie/projects/ADI-Insight/BLE_dats/build/max32655.elf'
 
-        for symbol in section.iter_symbols():
-            if symbol['st_info']['bind'] == 'STB_GLOBAL' and symbol['st_shndx'] != 'SHN_UNDEF':
-                name = symbol.name
-                address = hex(symbol['st_value'])
+    # Slot method to handle symbol extracted
+    def handle_symbol_extracted(name, address):
+        row_position = main_window.ui.tbl_vars.rowCount()
+        main_window.ui.tbl_vars.insertRow(row_position)
+        main_window.ui.tbl_vars.setItem(row_position, 0, QTableWidgetItem(name))
+        main_window.ui.tbl_vars.setItem(row_position, 1, QTableWidgetItem(hex(address)))
 
-                # Create a new row in the table
-                row_position = table_widget.rowCount()
-                table_widget.insertRow(row_position)
+        # Create a checkbox
+        checkbox = QCheckBox()
+        checkbox.stateChanged.connect(lambda state, name=name, address=address: handle_checkbox_state_change(state,name, address, main_window.vars_watched_dict))
+        
+        widget = QWidget()
+        layout = QHBoxLayout(widget)
+        layout.addWidget(checkbox)
+        layout.setAlignment(Qt.AlignCenter)
+        layout.setContentsMargins(0, 0, 0, 0)
+        widget.setLayout(layout)
+        main_window.ui.tbl_vars.setCellWidget(row_position, 2, widget)
 
-                # Add name and address to the new row
-                table_widget.setItem(row_position, 0, QTableWidgetItem(name))
-                table_widget.setItem(row_position, 1, QTableWidgetItem(address))
-
-                # Create a QCheckBox with a custom name, and add it to the new row
-               # Create a QCheckBox without text and add it to the new row
-                checkbox = QCheckBox()
-                layout = QHBoxLayout()
-                layout.addWidget(checkbox)
-                layout.setAlignment(checkbox, Qt.AlignCenter)
-                layout.setContentsMargins(0, 0, 0, 0)
-                widget = QWidget()
-                widget.setLayout(layout)
-                table_widget.setCellWidget(row_position, 2, widget)
-
-                # Connect the checkbox's stateChanged signal to the handler
-                checkbox.stateChanged.connect(lambda state, name=name, address=address: handle_checkbox_state_change(state, name, address, main_window.vars_watched_dict))
-
-
-               # print(f"Global Variable Name: {name} | Address: {address}")
+    # Start the thread
+    main_window.elf_parser.filename = filename
+    main_window.elf_parser.symbol_extracted.connect(handle_symbol_extracted) 
+    logger.info("Starting elf parser thread")
+    main_window.elf_parser.start()
 
 
 
