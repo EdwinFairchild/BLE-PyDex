@@ -32,7 +32,7 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(1255, 782)
+        MainWindow.resize(1256, 782)
         MainWindow.setMinimumSize(QSize(940, 560))
         self.styleSheet = QWidget(MainWindow)
         self.styleSheet.setObjectName(u"styleSheet")
@@ -578,7 +578,7 @@ class Ui_MainWindow(object):
         self.leftMenuBg = QFrame(self.bgApp)
         self.leftMenuBg.setObjectName(u"leftMenuBg")
         self.leftMenuBg.setMinimumSize(QSize(200, 0))
-        self.leftMenuBg.setMaximumSize(QSize(60, 16777215))
+        self.leftMenuBg.setMaximumSize(QSize(0, 16777215))
         self.leftMenuBg.setFrameShape(QFrame.NoFrame)
         self.leftMenuBg.setFrameShadow(QFrame.Raised)
         self.verticalLayout_3 = QVBoxLayout(self.leftMenuBg)
@@ -664,9 +664,8 @@ class Ui_MainWindow(object):
         self.topMenu.setFrameShape(QFrame.NoFrame)
         self.topMenu.setFrameShadow(QFrame.Raised)
         self.verticalLayout_8 = QVBoxLayout(self.topMenu)
-        self.verticalLayout_8.setSpacing(0)
         self.verticalLayout_8.setObjectName(u"verticalLayout_8")
-        self.verticalLayout_8.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout_8.setContentsMargins(0, -1, -1, -1)
         self.btn_home = QPushButton(self.topMenu)
         self.btn_home.setObjectName(u"btn_home")
         sizePolicy.setHeightForWidth(self.btn_home.sizePolicy().hasHeightForWidth())
@@ -691,6 +690,26 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_8.addWidget(self.btn_new)
 
+        self.btn_insights = QPushButton(self.topMenu)
+        self.btn_insights.setObjectName(u"btn_insights")
+        sizePolicy.setHeightForWidth(self.btn_insights.sizePolicy().hasHeightForWidth())
+        self.btn_insights.setSizePolicy(sizePolicy)
+        self.btn_insights.setMinimumSize(QSize(0, 45))
+        self.btn_insights.setFont(font)
+        self.btn_insights.setCursor(QCursor(Qt.PointingHandCursor))
+        self.btn_insights.setLayoutDirection(Qt.LeftToRight)
+        self.btn_insights.setStyleSheet(u"background-image: url(:/icons/images/icons/cil-code.png);")
+        icon = QIcon()
+        iconThemeName = u"server.png"
+        if QIcon.hasThemeIcon(iconThemeName):
+            icon = QIcon.fromTheme(iconThemeName)
+        else:
+            icon.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
+        
+        self.btn_insights.setIcon(icon)
+
+        self.verticalLayout_8.addWidget(self.btn_insights)
+
         self.btn_widgets = QPushButton(self.topMenu)
         self.btn_widgets.setObjectName(u"btn_widgets")
         sizePolicy.setHeightForWidth(self.btn_widgets.sizePolicy().hasHeightForWidth())
@@ -700,13 +719,6 @@ class Ui_MainWindow(object):
         self.btn_widgets.setCursor(QCursor(Qt.PointingHandCursor))
         self.btn_widgets.setLayoutDirection(Qt.LeftToRight)
         self.btn_widgets.setStyleSheet(u"background-image: url(:/icons/images/icons/cil-code.png);")
-        icon = QIcon()
-        iconThemeName = u"server.png"
-        if QIcon.hasThemeIcon(iconThemeName):
-            icon = QIcon.fromTheme(iconThemeName)
-        else:
-            icon.addFile(u".", QSize(), QIcon.Normal, QIcon.Off)
-        
         self.btn_widgets.setIcon(icon)
 
         self.verticalLayout_8.addWidget(self.btn_widgets)
@@ -1471,7 +1483,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 218, 218))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 274, 218))
         self.scrollAreaWidgetContents.setStyleSheet(u" QScrollBar:vertical {\n"
 "	border: none;\n"
 "    background: rgb(52, 59, 72);\n"
@@ -1672,6 +1684,95 @@ class Ui_MainWindow(object):
         self.verticalLayout.addWidget(self.row_3)
 
         self.stackedWidget.addWidget(self.widgets)
+        self.insights = QWidget()
+        self.insights.setObjectName(u"insights")
+        self.tbl_vars = QTableWidget(self.insights)
+        if (self.tbl_vars.columnCount() < 4):
+            self.tbl_vars.setColumnCount(4)
+        __qtablewidgetitem24 = QTableWidgetItem()
+        self.tbl_vars.setHorizontalHeaderItem(0, __qtablewidgetitem24)
+        __qtablewidgetitem25 = QTableWidgetItem()
+        self.tbl_vars.setHorizontalHeaderItem(1, __qtablewidgetitem25)
+        __qtablewidgetitem26 = QTableWidgetItem()
+        self.tbl_vars.setHorizontalHeaderItem(2, __qtablewidgetitem26)
+        __qtablewidgetitem27 = QTableWidgetItem()
+        self.tbl_vars.setHorizontalHeaderItem(3, __qtablewidgetitem27)
+        if (self.tbl_vars.rowCount() < 2):
+            self.tbl_vars.setRowCount(2)
+        __qtablewidgetitem28 = QTableWidgetItem()
+        __qtablewidgetitem28.setFont(font4);
+        self.tbl_vars.setVerticalHeaderItem(0, __qtablewidgetitem28)
+        __qtablewidgetitem29 = QTableWidgetItem()
+        self.tbl_vars.setVerticalHeaderItem(1, __qtablewidgetitem29)
+        __qtablewidgetitem30 = QTableWidgetItem()
+        self.tbl_vars.setItem(0, 0, __qtablewidgetitem30)
+        __qtablewidgetitem31 = QTableWidgetItem()
+        self.tbl_vars.setItem(0, 1, __qtablewidgetitem31)
+        __qtablewidgetitem32 = QTableWidgetItem()
+        self.tbl_vars.setItem(0, 2, __qtablewidgetitem32)
+        __qtablewidgetitem33 = QTableWidgetItem()
+        self.tbl_vars.setItem(0, 3, __qtablewidgetitem33)
+        self.tbl_vars.setObjectName(u"tbl_vars")
+        self.tbl_vars.setGeometry(QRect(20, 250, 994, 306))
+        sizePolicy3.setHeightForWidth(self.tbl_vars.sizePolicy().hasHeightForWidth())
+        self.tbl_vars.setSizePolicy(sizePolicy3)
+        palette1 = QPalette()
+        palette1.setBrush(QPalette.Active, QPalette.WindowText, brush)
+        palette1.setBrush(QPalette.Active, QPalette.Button, brush1)
+        palette1.setBrush(QPalette.Active, QPalette.Text, brush)
+        palette1.setBrush(QPalette.Active, QPalette.ButtonText, brush)
+        brush5 = QBrush(QColor(0, 0, 0, 255))
+        brush5.setStyle(Qt.NoBrush)
+        palette1.setBrush(QPalette.Active, QPalette.Base, brush5)
+        palette1.setBrush(QPalette.Active, QPalette.Window, brush1)
+#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
+        palette1.setBrush(QPalette.Active, QPalette.PlaceholderText, brush)
+#endif
+        palette1.setBrush(QPalette.Inactive, QPalette.WindowText, brush)
+        palette1.setBrush(QPalette.Inactive, QPalette.Button, brush1)
+        palette1.setBrush(QPalette.Inactive, QPalette.Text, brush)
+        palette1.setBrush(QPalette.Inactive, QPalette.ButtonText, brush)
+        brush6 = QBrush(QColor(0, 0, 0, 255))
+        brush6.setStyle(Qt.NoBrush)
+        palette1.setBrush(QPalette.Inactive, QPalette.Base, brush6)
+        palette1.setBrush(QPalette.Inactive, QPalette.Window, brush1)
+#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
+        palette1.setBrush(QPalette.Inactive, QPalette.PlaceholderText, brush)
+#endif
+        palette1.setBrush(QPalette.Disabled, QPalette.WindowText, brush)
+        palette1.setBrush(QPalette.Disabled, QPalette.Button, brush1)
+        palette1.setBrush(QPalette.Disabled, QPalette.Text, brush)
+        palette1.setBrush(QPalette.Disabled, QPalette.ButtonText, brush)
+        brush7 = QBrush(QColor(0, 0, 0, 255))
+        brush7.setStyle(Qt.NoBrush)
+        palette1.setBrush(QPalette.Disabled, QPalette.Base, brush7)
+        palette1.setBrush(QPalette.Disabled, QPalette.Window, brush1)
+#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
+        palette1.setBrush(QPalette.Disabled, QPalette.PlaceholderText, brush)
+#endif
+        self.tbl_vars.setPalette(palette1)
+        self.tbl_vars.setFrameShape(QFrame.NoFrame)
+        self.tbl_vars.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOn)
+        self.tbl_vars.setSizeAdjustPolicy(QAbstractScrollArea.AdjustToContents)
+        self.tbl_vars.setEditTriggers(QAbstractItemView.NoEditTriggers)
+        self.tbl_vars.setSelectionMode(QAbstractItemView.SingleSelection)
+        self.tbl_vars.setSelectionBehavior(QAbstractItemView.SelectRows)
+        self.tbl_vars.setShowGrid(True)
+        self.tbl_vars.setGridStyle(Qt.SolidLine)
+        self.tbl_vars.setSortingEnabled(True)
+        self.tbl_vars.horizontalHeader().setVisible(True)
+        self.tbl_vars.horizontalHeader().setCascadingSectionResizes(False)
+        self.tbl_vars.horizontalHeader().setDefaultSectionSize(200)
+        self.tbl_vars.horizontalHeader().setProperty("showSortIndicator", True)
+        self.tbl_vars.horizontalHeader().setStretchLastSection(False)
+        self.tbl_vars.verticalHeader().setVisible(False)
+        self.tbl_vars.verticalHeader().setCascadingSectionResizes(False)
+        self.tbl_vars.verticalHeader().setHighlightSections(False)
+        self.tbl_vars.verticalHeader().setStretchLastSection(True)
+        self.btn_load_elf = QPushButton(self.insights)
+        self.btn_load_elf.setObjectName(u"btn_load_elf")
+        self.btn_load_elf.setGeometry(QRect(50, 200, 89, 25))
+        self.stackedWidget.addWidget(self.insights)
         self.connections_page = QWidget()
         self.connections_page.setObjectName(u"connections_page")
         self.verticalLayout_20 = QVBoxLayout(self.connections_page)
@@ -1723,7 +1824,7 @@ class Ui_MainWindow(object):
         self.scrollArea_2.setWidgetResizable(True)
         self.scrollAreaWidgetContents_2 = QWidget()
         self.scrollAreaWidgetContents_2.setObjectName(u"scrollAreaWidgetContents_2")
-        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 92, 30))
+        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 553, 511))
         self.scrollArea_2.setWidget(self.scrollAreaWidgetContents_2)
 
         self.verticalLayout_28.addWidget(self.scrollArea_2)
@@ -1898,7 +1999,7 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
         self.scanSlider.valueChanged.connect(self.label_scan_timeout_value.setNum)
 
-        self.stackedWidget.setCurrentIndex(0)
+        self.stackedWidget.setCurrentIndex(2)
         self.rssi_gatt_expolrer.setCurrentIndex(0)
 
 
@@ -1912,6 +2013,7 @@ class Ui_MainWindow(object):
         self.toggleButton.setText(QCoreApplication.translate("MainWindow", u"Hide", None))
         self.btn_home.setText(QCoreApplication.translate("MainWindow", u"Scanner", None))
         self.btn_new.setText(QCoreApplication.translate("MainWindow", u"Gatt Explorer", None))
+        self.btn_insights.setText(QCoreApplication.translate("MainWindow", u"Insights", None))
         self.btn_widgets.setText(QCoreApplication.translate("MainWindow", u"Server", None))
         self.btn_save.setText(QCoreApplication.translate("MainWindow", u"Save", None))
         self.btn_exit.setText(QCoreApplication.translate("MainWindow", u"Exit", None))
@@ -2030,6 +2132,24 @@ class Ui_MainWindow(object):
         ___qtablewidgetitem23.setText(QCoreApplication.translate("MainWindow", u"Line", None));
         self.tableWidget.setSortingEnabled(__sortingEnabled)
 
+        ___qtablewidgetitem24 = self.tbl_vars.horizontalHeaderItem(0)
+        ___qtablewidgetitem24.setText(QCoreApplication.translate("MainWindow", u"Variable", None));
+        ___qtablewidgetitem25 = self.tbl_vars.horizontalHeaderItem(1)
+        ___qtablewidgetitem25.setText(QCoreApplication.translate("MainWindow", u"Address", None));
+        ___qtablewidgetitem26 = self.tbl_vars.horizontalHeaderItem(2)
+        ___qtablewidgetitem26.setText(QCoreApplication.translate("MainWindow", u"Watch", None));
+        ___qtablewidgetitem27 = self.tbl_vars.horizontalHeaderItem(3)
+        ___qtablewidgetitem27.setText(QCoreApplication.translate("MainWindow", u"Value", None));
+        ___qtablewidgetitem28 = self.tbl_vars.verticalHeaderItem(0)
+        ___qtablewidgetitem28.setText(QCoreApplication.translate("MainWindow", u"New Row", None));
+        ___qtablewidgetitem29 = self.tbl_vars.verticalHeaderItem(1)
+        ___qtablewidgetitem29.setText(QCoreApplication.translate("MainWindow", u"New Row", None));
+
+        __sortingEnabled1 = self.tbl_vars.isSortingEnabled()
+        self.tbl_vars.setSortingEnabled(False)
+        self.tbl_vars.setSortingEnabled(__sortingEnabled1)
+
+        self.btn_load_elf.setText(QCoreApplication.translate("MainWindow", u"Load Elf", None))
         ___qtreewidgetitem = self.gatt_treeView.headerItem()
         ___qtreewidgetitem.setText(0, QCoreApplication.translate("MainWindow", u"Gatt Tree", None));
         self.btn_disconnect.setText(QCoreApplication.translate("MainWindow", u"Disconnect", None))

@@ -21,7 +21,8 @@ from PySide6 import QtUiTools, QtWidgets, QtGui
 from PySide6.QtWidgets import QMessageBox, QTableWidget, QMenu, QApplication
 from PySide6.QtGui import QCursor, QAction, QClipboard
 from PySide6.QtCore import QThread, Signal, QMutex, QMutexLocker, Qt
-
+from PySide6.QtWidgets import QTableWidget, QTableWidgetItem, QCheckBox, QWidget, QHBoxLayout
+from PySide6.QtCore import Qt 
 
 os.environ["QT_FONT_DPI"] = Settings.HIGH_DPI_DISPLAY_FONT_DPI # FIX Problem for High DPI and Scale above 100%
 
@@ -39,6 +40,7 @@ class MainWindow(QMainWindow):
     serviceCount= 1
     service_dict = {}
     cleanUp = Signal(object)
+    vars_watched_dict={}
     
     def __init__(self):
         QMainWindow.__init__(self)
@@ -115,6 +117,7 @@ class MainWindow(QMainWindow):
         self.ui.btn_widgets.clicked.connect(self.buttonClick)
         self.ui.btn_new.clicked.connect(self.buttonClick)
         self.ui.btn_save.clicked.connect(self.buttonClick)
+        self.ui.btn_insights.clicked.connect(self.buttonClick)
 
         # Register signal handlers
         self.add_adv_table_item.connect(lambda data :self.add_table_item(data))
@@ -495,6 +498,12 @@ class MainWindow(QMainWindow):
 
         if btnName == "btn_save":
             pass
+        
+        if btnName == "btn_insights":
+            self.ui.stackedWidget.setCurrentWidget(self.ui.insights)
+            UIFunctions.resetStyle(self, btnName) # RESET ANOTHERS BUTTONS SELECTED
+            btn.setStyleSheet(UIFunctions.selectMenu(btn.styleSheet())) # SELECT MENU
+
             #print("Save BTN clicked!")
         # PRINT BTN NAME
         #print(f'Button "{btnName}" pressed!')
