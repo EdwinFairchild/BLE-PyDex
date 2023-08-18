@@ -209,11 +209,11 @@ def disable_graphing(main_window):
     else:
         main_window.stop_graphing()
 
-def handle_checkbox_state_change(state, var_name, address, address_dict):
+def handle_checkbox_state_change(state, var_name, address,index, address_dict):
     logger = logging.getLogger("PDexLogger")
     print(f"State: {state} | Name: {var_name} | Address: {hex(address)}")
     if state == Qt.Checked:
-        address_dict[var_name] = address
+        address_dict[var_name] =  {"address": address, "row_index": index}
         logger.info(f"Added {var_name} to watch list")
 
     else:
@@ -238,7 +238,7 @@ def load_elf(main_window):
 
         # Create a checkbox
         checkbox = QCheckBox()
-        checkbox.stateChanged.connect(lambda state, name=name, address=address: handle_checkbox_state_change(state,name, address, main_window.vars_watched_dict))
+        checkbox.stateChanged.connect(lambda state, name=name, address=address , index=row_position: handle_checkbox_state_change(state,name, address, index, main_window.vars_watched_dict))
         
         widget = QWidget()
         layout = QHBoxLayout(widget)
@@ -254,7 +254,8 @@ def load_elf(main_window):
     logger.info("Starting elf parser thread")
     main_window.elf_parser.start()
 
-
+def start_monitoring(main_window):
+    main_window.var_watcher.start()
 
 def register_button_callbacks(main_window):
     logger = logging.getLogger("PDexLogger")
@@ -266,6 +267,7 @@ def register_button_callbacks(main_window):
         main_window.ui.btn_share.clicked.connect(lambda: btn_github(main_window))
         main_window.ui.btn_disconnect.clicked.connect(lambda: btn_disconnect(main_window))  
         main_window.ui.btn_load_elf.clicked.connect(lambda: load_elf(main_window))  
+        main_window.ui.btn_monitor.clicked.connect(lambda: start_monitoring(main_window))
 
         # graphing checkbox callbacks
         main_window.ui.graph_enabled.stateChanged.connect(lambda: disable_graphing(main_window))        

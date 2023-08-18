@@ -90,7 +90,8 @@ class MainWindow(QMainWindow):
 
         # Global elf parser object
         self.elf_parser = ExtractGlobalVariablesThread(None, self.ui.tbl_vars)
-
+        self.var_watcher = MonitoringThread(self.vars_watched_dict)
+        self.var_watcher.signal_update_variable.connect(self.update_variable_in_table)  # Assuming 'self.update_variable_in_table' is a method that handles the update
         # USE CUSTOM TITLE BAR | USE AS "False" FOR MAC OR LINUX
         Settings.ENABLE_CUSTOM_TITLE_BAR = False
 
@@ -526,7 +527,18 @@ class MainWindow(QMainWindow):
         if event.buttons() == Qt.RightButton:
             pass
             #print('Mouse click: RIGHT CLICK')
-    
+    def update_variable_in_table(self, var_name, value):
+         # Check if the variable name is in the dictionary
+        if var_name in self.vars_watched_dict:
+            # Get the row index from the dictionary
+            row_index = self.vars_watched_dict[var_name]["row_index"]
+            
+            # Create a new item with the updated value
+            value_item = QTableWidgetItem(str(value))
+            
+            # Update the value in column 3 (0-indexed)
+            self.ui.tbl_vars.setItem(row_index, 3, value_item)
+
     def clean_up(self, widgets):
         # Clear the scroll area
         # Clear the scroll area

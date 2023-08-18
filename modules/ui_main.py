@@ -1697,21 +1697,6 @@ class Ui_MainWindow(object):
         self.tbl_vars.setHorizontalHeaderItem(2, __qtablewidgetitem26)
         __qtablewidgetitem27 = QTableWidgetItem()
         self.tbl_vars.setHorizontalHeaderItem(3, __qtablewidgetitem27)
-        if (self.tbl_vars.rowCount() < 2):
-            self.tbl_vars.setRowCount(2)
-        __qtablewidgetitem28 = QTableWidgetItem()
-        __qtablewidgetitem28.setFont(font4);
-        self.tbl_vars.setVerticalHeaderItem(0, __qtablewidgetitem28)
-        __qtablewidgetitem29 = QTableWidgetItem()
-        self.tbl_vars.setVerticalHeaderItem(1, __qtablewidgetitem29)
-        __qtablewidgetitem30 = QTableWidgetItem()
-        self.tbl_vars.setItem(0, 0, __qtablewidgetitem30)
-        __qtablewidgetitem31 = QTableWidgetItem()
-        self.tbl_vars.setItem(0, 1, __qtablewidgetitem31)
-        __qtablewidgetitem32 = QTableWidgetItem()
-        self.tbl_vars.setItem(0, 2, __qtablewidgetitem32)
-        __qtablewidgetitem33 = QTableWidgetItem()
-        self.tbl_vars.setItem(0, 3, __qtablewidgetitem33)
         self.tbl_vars.setObjectName(u"tbl_vars")
         self.tbl_vars.setGeometry(QRect(20, 250, 994, 306))
         sizePolicy3.setHeightForWidth(self.tbl_vars.sizePolicy().hasHeightForWidth())
@@ -1772,6 +1757,9 @@ class Ui_MainWindow(object):
         self.btn_load_elf = QPushButton(self.insights)
         self.btn_load_elf.setObjectName(u"btn_load_elf")
         self.btn_load_elf.setGeometry(QRect(50, 200, 89, 25))
+        self.btn_monitor = QPushButton(self.insights)
+        self.btn_monitor.setObjectName(u"btn_monitor")
+        self.btn_monitor.setGeometry(QRect(160, 200, 89, 25))
         self.stackedWidget.addWidget(self.insights)
         self.connections_page = QWidget()
         self.connections_page.setObjectName(u"connections_page")
@@ -2140,16 +2128,8 @@ class Ui_MainWindow(object):
         ___qtablewidgetitem26.setText(QCoreApplication.translate("MainWindow", u"Watch", None));
         ___qtablewidgetitem27 = self.tbl_vars.horizontalHeaderItem(3)
         ___qtablewidgetitem27.setText(QCoreApplication.translate("MainWindow", u"Value", None));
-        ___qtablewidgetitem28 = self.tbl_vars.verticalHeaderItem(0)
-        ___qtablewidgetitem28.setText(QCoreApplication.translate("MainWindow", u"New Row", None));
-        ___qtablewidgetitem29 = self.tbl_vars.verticalHeaderItem(1)
-        ___qtablewidgetitem29.setText(QCoreApplication.translate("MainWindow", u"New Row", None));
-
-        __sortingEnabled1 = self.tbl_vars.isSortingEnabled()
-        self.tbl_vars.setSortingEnabled(False)
-        self.tbl_vars.setSortingEnabled(__sortingEnabled1)
-
         self.btn_load_elf.setText(QCoreApplication.translate("MainWindow", u"Load Elf", None))
+        self.btn_monitor.setText(QCoreApplication.translate("MainWindow", u"Monitor", None))
         ___qtreewidgetitem = self.gatt_treeView.headerItem()
         ___qtreewidgetitem.setText(0, QCoreApplication.translate("MainWindow", u"Gatt Tree", None));
         self.btn_disconnect.setText(QCoreApplication.translate("MainWindow", u"Disconnect", None))
