@@ -212,7 +212,7 @@ def disable_graphing(main_window):
 
 def handle_checkbox_state_change(state, var_name, address, address_dict, main_window):
     logger = logging.getLogger("PDexLogger")
-    print(f"State: {state} | Name: {var_name} | Address: {hex(address)}")
+   
     if state == Qt.Checked:
         logger.info(f"Added {var_name} to watch list")
 
@@ -235,7 +235,7 @@ def handle_checkbox_state_change(state, var_name, address, address_dict, main_wi
             if main_window.ui.tbl_vars_watched.item(row, 0).text() == var_name:
                 main_window.ui.tbl_vars_watched.removeRow(row)
                 break
-    print(address_dict)
+   
 
 # Function to handle removing a watched variable
 
@@ -261,10 +261,10 @@ def remove_watched_var(var_name, row, main_window):
         
 def load_elf(main_window):
     logger = logging.getLogger("PDexLogger")
-    # Open a file dialog to select the ELF file
-    options = QFileDialog.Options()
-    filename, _ = QFileDialog.getOpenFileName(main_window, "Open ELF File", "", "ELF Files (*.elf);;All Files (*)", options=options)
-    
+    # # Open a file dialog to select the ELF file
+    # options = QFileDialog.Options()
+    # filename, _ = QFileDialog.getOpenFileName(main_window, "Open ELF File", "", "ELF Files (*.elf);;All Files (*)", options=options)
+    filename = '/home/eddie/projects/ADI-Insight/BLE_dats/build/max32655.elf'
     if not filename:
         logger.info("No file selected")
         return

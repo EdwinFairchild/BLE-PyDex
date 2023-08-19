@@ -573,6 +573,7 @@ class MainWindow(QMainWindow):
         self.stop_scanner()
         self.stop_connection()
         self.stop_elf_parser()
+        self.stop_monitoringThread()
 
         event.accept()  # Accept the close event and let the window close
 
@@ -602,6 +603,13 @@ class MainWindow(QMainWindow):
         self.elf_parser.exit_early = True
         self.elf_parser.quit()
         self.elf_parser.wait()
+    
+    def stop_monitoringThread(self):
+        self.var_watcher.exit_early = True
+        while self.var_watcher.exit_early is True:
+            pass
+        self.var_watcher.quit()
+        self.var_watcher.wait()
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

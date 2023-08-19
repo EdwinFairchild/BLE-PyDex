@@ -53,6 +53,8 @@ class ExtractGlobalVariablesThread(QThread):
 class MonitoringThread(QThread):
     signal_update_variable = Signal(str, int)  # Signal to update the variable value
     monitor_active = False
+    exit_early = False
+    logger = logging.getLogger("PDexLogger")
 
     def __init__(self, address_dict):
         super().__init__()
@@ -65,7 +67,7 @@ class MonitoringThread(QThread):
             "connect_mode": "attach",  # Use 'attach' instead of 'under_reset' or other modes
         }
         # Connect to the probe
-        probe = ConnectHelper.session_with_chosen_probe(return_first=True, target_override="MAX32660", session_options=session_options)
+        probe = ConnectHelper.session_with_chosen_probe(return_first=True, target_override="MAX32655", session_options=session_options)
 
         if probe is None:
             self.signal_print.emit("No probe found!")
@@ -85,16 +87,27 @@ class MonitoringThread(QThread):
 
     def monitor_variables(self, target, addresses):
         previous_values = {key: None for key in addresses}
-        while True:
-            for var_name, details in list(addresses.items()):
-                address = details['address']
-                
-                value = target.read32(address)
-                if value != previous_values[var_name]:
-                    previous_values[var_name] = value
-                    self.signal_update_variable.emit(var_name, value)  # Emitting the signal with the variable name and value
-            time.sleep(0.01)  # Adjust the refresh rate as needed
+        try:
+            while self.exit_early is False:
+                for var_name, details in list(addresses.items()):
+                    address = details['address']
 
+                    value = target.read32(address)
+                    if value != previous_values[var_name]:
+                        previous_values[var_name] = value
+                        self.signal_update_variable.emit(var_name, value)  # Emitting the signal with the variable name and value
+                time.sleep(0.01)  # Adjust the refresh rate as needed
+        except Exception as e:
+            self.logger.setLevel(logging.WARNING)
+            self.logger.warning("Error while monitoring variables: %s", e)
+            self.logger.setLevel(logging.INFO)
+        finally:
+            # This code will be executed no matter what, even if an exception occurs
+            #target.close()  # Replace this with the appropriate method to close the connection to the target
+            # You can also add any other cleanup code that needs to be executed here
+            self.logger.info("Monitoring variables ended")
+            self.exit_early = False
+            
         # [...] Implementation here
 
     def mass_erase(self):
