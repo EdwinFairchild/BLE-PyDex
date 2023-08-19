@@ -1694,7 +1694,7 @@ class Ui_MainWindow(object):
         self.btn_monitor.setGeometry(QRect(730, 180, 89, 25))
         self.frame_2 = QFrame(self.insights)
         self.frame_2.setObjectName(u"frame_2")
-        self.frame_2.setGeometry(QRect(20, 310, 421, 301))
+        self.frame_2.setGeometry(QRect(20, 310, 401, 301))
         self.frame_2.setStyleSheet(u" border: 2px solid rgb(52, 59, 72);\n"
 "	border-radius: 5px;	\n"
 "")
@@ -1702,6 +1702,7 @@ class Ui_MainWindow(object):
         self.frame_2.setFrameShadow(QFrame.Raised)
         self.horizontalLayout_13 = QHBoxLayout(self.frame_2)
         self.horizontalLayout_13.setObjectName(u"horizontalLayout_13")
+        self.horizontalLayout_13.setContentsMargins(0, 0, 0, 0)
         self.tbl_vars_watched = QTableWidget(self.frame_2)
         if (self.tbl_vars_watched.columnCount() < 3):
             self.tbl_vars_watched.setColumnCount(3)
@@ -1716,6 +1717,7 @@ class Ui_MainWindow(object):
 "	border-radius:0px;	\n"
 "")
         self.tbl_vars_watched.horizontalHeader().setDefaultSectionSize(120)
+        self.tbl_vars_watched.verticalHeader().setVisible(False)
 
         self.horizontalLayout_13.addWidget(self.tbl_vars_watched)
 
@@ -1729,6 +1731,7 @@ class Ui_MainWindow(object):
         self.frame_4.setFrameShadow(QFrame.Raised)
         self.horizontalLayout_14 = QHBoxLayout(self.frame_4)
         self.horizontalLayout_14.setObjectName(u"horizontalLayout_14")
+        self.horizontalLayout_14.setContentsMargins(0, 0, 0, 0)
         self.tbl_vars = QTableWidget(self.frame_4)
         if (self.tbl_vars.columnCount() < 4):
             self.tbl_vars.setColumnCount(4)
@@ -1799,7 +1802,7 @@ class Ui_MainWindow(object):
         self.tbl_vars.verticalHeader().setVisible(False)
         self.tbl_vars.verticalHeader().setCascadingSectionResizes(False)
         self.tbl_vars.verticalHeader().setHighlightSections(False)
-        self.tbl_vars.verticalHeader().setStretchLastSection(True)
+        self.tbl_vars.verticalHeader().setStretchLastSection(False)
 
         self.horizontalLayout_14.addWidget(self.tbl_vars)
 

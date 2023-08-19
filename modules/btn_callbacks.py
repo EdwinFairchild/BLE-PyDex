@@ -272,6 +272,7 @@ def load_elf(main_window):
     table_widget = main_window.ui.tbl_vars
     elf_file_path = '/home/eddie/projects/ADI-Insight/BLE_dats/build/max32655.elf'
     table_widget = main_window.ui.tbl_vars # Replace with the actual table widget object
+    table_widget.setColumnWidth(3, 50)
 
     elf_file_path = '/home/eddie/projects/ADI-Insight/BLE_dats/build/max32655.elf'
 
@@ -294,7 +295,6 @@ def load_elf(main_window):
         layout.setContentsMargins(0, 0, 0, 0)
         widget.setLayout(layout)
         main_window.ui.tbl_vars.setCellWidget(row_position, 3, widget) # Changed to column 3
-
 
     # Start the thread
     main_window.elf_parser.filename = filename

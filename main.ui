@@ -3293,7 +3293,7 @@ QHeaderView::section:vertical
                         <rect>
                          <x>20</x>
                          <y>310</y>
-                         <width>421</width>
+                         <width>401</width>
                          <height>301</height>
                         </rect>
                        </property>
@@ -3309,6 +3309,18 @@ QHeaderView::section:vertical
                         <enum>QFrame::Raised</enum>
                        </property>
                        <layout class="QHBoxLayout" name="horizontalLayout_13">
+                        <property name="leftMargin">
+                         <number>0</number>
+                        </property>
+                        <property name="topMargin">
+                         <number>0</number>
+                        </property>
+                        <property name="rightMargin">
+                         <number>0</number>
+                        </property>
+                        <property name="bottomMargin">
+                         <number>0</number>
+                        </property>
                         <item>
                          <widget class="QTableWidget" name="tbl_vars_watched">
                           <property name="styleSheet">
@@ -3318,6 +3330,9 @@ QHeaderView::section:vertical
                           </property>
                           <attribute name="horizontalHeaderDefaultSectionSize">
                            <number>120</number>
+                          </attribute>
+                          <attribute name="verticalHeaderVisible">
+                           <bool>false</bool>
                           </attribute>
                           <column>
                            <property name="text">
@@ -3359,6 +3374,18 @@ QHeaderView::section:vertical
                         <enum>QFrame::Raised</enum>
                        </property>
                        <layout class="QHBoxLayout" name="horizontalLayout_14">
+                        <property name="leftMargin">
+                         <number>0</number>
+                        </property>
+                        <property name="topMargin">
+                         <number>0</number>
+                        </property>
+                        <property name="rightMargin">
+                         <number>0</number>
+                        </property>
+                        <property name="bottomMargin">
+                         <number>0</number>
+                        </property>
                         <item>
                          <widget class="QTableWidget" name="tbl_vars">
                           <property name="sizePolicy">
@@ -3626,7 +3653,7 @@ QHeaderView::section:vertical
                            <bool>false</bool>
                           </attribute>
                           <attribute name="verticalHeaderStretchLastSection">
-                           <bool>true</bool>
+                           <bool>false</bool>
                           </attribute>
                           <column>
                            <property name="text">

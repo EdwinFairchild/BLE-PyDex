@@ -102,6 +102,8 @@ class MainWindow(QMainWindow):
         self.setWindowTitle(title)
         self.ui.titleRightInfo.setText(description)
 
+        self.ui.tbl_vars.setColumnWidth(3, 50)
+
         # TOGGLE MENU
         self.ui.toggleButton.clicked.connect(lambda: UIFunctions.toggleMenu(self, True))
         UIFunctions.toggleMenu(self, True)
