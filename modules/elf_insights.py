@@ -4,6 +4,7 @@ from pyocd.core.helpers import ConnectHelper
 import subprocess
 import logging
 import time
+import sys
 
 from PySide6.QtCore import QThread
 
@@ -50,6 +51,7 @@ class ExtractGlobalVariablesThread(QThread):
             self.logger.info("Finished extracting global variables")
 
 
+
 class MonitoringThread(QThread):
     signal_update_variable = Signal(str, int)  # Signal to update the variable value
     monitor_active = False
@@ -62,15 +64,33 @@ class MonitoringThread(QThread):
 
 
     def run(self):
+        # Save the original stdout
+        probe = None
+        original_stdout = sys.stdout
+        original_stderr = sys.stderr
+
         session_options = {
             "halt_on_connect": False,
             "connect_mode": "attach",  # Use 'attach' instead of 'under_reset' or other modes
         }
         # Connect to the probe
-        probe = ConnectHelper.session_with_chosen_probe(return_first=True, target_override="MAX32655", session_options=session_options)
-
+        try:
+             # Replace stdout with a custom stream that logs messages
+            logger_stream = LoggerStream(self.logger)
+            sys.stdout = logger_stream
+            sys.stderr = logger_stream
+            probe = ConnectHelper.session_with_chosen_probe(return_first=True, target_override="MAX32655", session_options=session_options)
+        except Exception as e:
+            self.logger.setLevel(logging.WARNING)
+            self.logger.warning("Error while connecting to the probe: %s", e)
+            self.logger.setLevel(logging.INFO)
+            
+        finally:
+            # Restore the original stdout
+            sys.stdout = original_stdout
+            sys.stderr = original_stderr
         if probe is None:
-            self.signal_print.emit("No probe found!")
+            self.logger.info("No probe found!")
             return
 
         with probe:
@@ -117,3 +137,15 @@ class MonitoringThread(QThread):
         # [...] Implementation here
 
     # Add any additional methods here, as needed
+
+class LoggerStream:
+    def __init__(self, logger):
+        self.logger = logger
+
+    def write(self, message):
+        # Make sure not to log empty messages (like newlines)
+        if message.strip():
+            self.logger.info(message)
+
+    def flush(self):
+        pass
