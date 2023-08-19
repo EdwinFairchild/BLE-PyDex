@@ -74,6 +74,7 @@ class MonitoringThread(QThread):
             return
 
         with probe:
+            monitor_active = True
             target = probe.target
             target.resume()
             self.print_core_registers(target)
@@ -107,6 +108,7 @@ class MonitoringThread(QThread):
             # You can also add any other cleanup code that needs to be executed here
             self.logger.info("Monitoring variables ended")
             self.exit_early = False
+            monitor_active = False
             
         # [...] Implementation here
 

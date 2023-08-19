@@ -606,8 +606,9 @@ class MainWindow(QMainWindow):
     
     def stop_monitoringThread(self):
         self.var_watcher.exit_early = True
-        while self.var_watcher.exit_early is True:
-            pass
+        if self.var_watcher.monitor_active is True:
+            while self.var_watcher.exit_early is True:
+                pass
         self.var_watcher.quit()
         self.var_watcher.wait()
 
