@@ -1,5 +1,6 @@
 from main import *
 from elftools.elf.elffile import ELFFile
+from PySide6.QtWidgets import QFileDialog
 from PySide6.QtWidgets import QTableWidget, QTableWidgetItem, QCheckBox, QWidget, QHBoxLayout
 from PySide6.QtCore import Qt 
 
@@ -260,7 +261,14 @@ def remove_watched_var(var_name, row, main_window):
         
 def load_elf(main_window):
     logger = logging.getLogger("PDexLogger")
-    filename = '/home/eddie/projects/ADI-Insight/BLE_dats/build/max32655.elf'
+    # Open a file dialog to select the ELF file
+    options = QFileDialog.Options()
+    filename, _ = QFileDialog.getOpenFileName(main_window, "Open ELF File", "", "ELF Files (*.elf);;All Files (*)", options=options)
+    
+    if not filename:
+        logger.info("No file selected")
+        return
+    #filename = '/home/eddie/projects/ADI-Insight/BLE_dats/build/max32655.elf'
     table_widget = main_window.ui.tbl_vars
     elf_file_path = '/home/eddie/projects/ADI-Insight/BLE_dats/build/max32655.elf'
     table_widget = main_window.ui.tbl_vars # Replace with the actual table widget object
