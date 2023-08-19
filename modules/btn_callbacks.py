@@ -209,16 +209,54 @@ def disable_graphing(main_window):
     else:
         main_window.stop_graphing()
 
-def handle_checkbox_state_change(state, var_name, address,index, address_dict):
+def handle_checkbox_state_change(state, var_name, address, address_dict, main_window):
     logger = logging.getLogger("PDexLogger")
     print(f"State: {state} | Name: {var_name} | Address: {hex(address)}")
     if state == Qt.Checked:
-        address_dict[var_name] =  {"address": address, "row_index": index}
         logger.info(f"Added {var_name} to watch list")
+
+
+        # Add the var_name to the tbl_vars_watched table
+        watched_row_position = main_window.ui.tbl_vars_watched.rowCount()
+        main_window.ui.tbl_vars_watched.insertRow(watched_row_position)
+        main_window.ui.tbl_vars_watched.setItem(watched_row_position, 0, QTableWidgetItem(var_name))
+
+        address_dict[var_name] = {"address": address,"watched_row_position" : watched_row_position }
+        # Add a button to remove the row
+        btn_remove = QPushButton("Remove")
+        btn_remove.clicked.connect(lambda: remove_watched_var(var_name, watched_row_position, main_window))
+        main_window.ui.tbl_vars_watched.setCellWidget(watched_row_position, 2, btn_remove)
 
     else:
         address_dict.pop(var_name, None)
+        # Find and remove the row from tbl_vars_watched
+        for row in range(main_window.ui.tbl_vars_watched.rowCount()):
+            if main_window.ui.tbl_vars_watched.item(row, 0).text() == var_name:
+                main_window.ui.tbl_vars_watched.removeRow(row)
+                break
     print(address_dict)
+
+# Function to handle removing a watched variable
+
+def remove_watched_var(var_name, row, main_window):
+    main_window.ui.tbl_vars_watched.removeRow(row)
+
+    # Find the corresponding checkbox in tbl_vars by var_name
+    for row_index in range(main_window.ui.tbl_vars.rowCount()):
+        item = main_window.ui.tbl_vars.item(row_index, 0) # Assuming var_name is in column 0
+        if item and item.text() == var_name:
+            checkbox_widget = main_window.ui.tbl_vars.cellWidget(row_index, 3) # Assuming checkbox is in column 3
+            if checkbox_widget:
+                checkbox = checkbox_widget.findChild(QCheckBox)
+                if checkbox:
+                    checkbox.setChecked(False)
+                    break
+    
+    main_window.vars_watched_dict.pop(var_name, None)
+
+    # If there are no more rows, explicitly set the row count to 0
+    if main_window.ui.tbl_vars_watched.rowCount() == 0:
+        main_window.ui.tbl_vars_watched.setRowCount(0)
         
 def load_elf(main_window):
     logger = logging.getLogger("PDexLogger")
@@ -230,23 +268,25 @@ def load_elf(main_window):
     elf_file_path = '/home/eddie/projects/ADI-Insight/BLE_dats/build/max32655.elf'
 
     # Slot method to handle symbol extracted
-    def handle_symbol_extracted(name, address):
+    def handle_symbol_extracted(name, address, section):
         row_position = main_window.ui.tbl_vars.rowCount()
         main_window.ui.tbl_vars.insertRow(row_position)
         main_window.ui.tbl_vars.setItem(row_position, 0, QTableWidgetItem(name))
-        main_window.ui.tbl_vars.setItem(row_position, 1, QTableWidgetItem(hex(address)))
+        main_window.ui.tbl_vars.setItem(row_position, 1, QTableWidgetItem(section)) # Added section info here
+        main_window.ui.tbl_vars.setItem(row_position, 2, QTableWidgetItem(hex(address)))
 
         # Create a checkbox
         checkbox = QCheckBox()
-        checkbox.stateChanged.connect(lambda state, name=name, address=address , index=row_position: handle_checkbox_state_change(state,name, address, index, main_window.vars_watched_dict))
-        
+        checkbox.stateChanged.connect(lambda state, name=name, address=address: handle_checkbox_state_change(state, name, address, main_window.vars_watched_dict, main_window))
+
         widget = QWidget()
         layout = QHBoxLayout(widget)
         layout.addWidget(checkbox)
         layout.setAlignment(Qt.AlignCenter)
         layout.setContentsMargins(0, 0, 0, 0)
         widget.setLayout(layout)
-        main_window.ui.tbl_vars.setCellWidget(row_position, 2, widget)
+        main_window.ui.tbl_vars.setCellWidget(row_position, 3, widget) # Changed to column 3
+
 
     # Start the thread
     main_window.elf_parser.filename = filename

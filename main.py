@@ -531,13 +531,13 @@ class MainWindow(QMainWindow):
          # Check if the variable name is in the dictionary
         if var_name in self.vars_watched_dict:
             # Get the row index from the dictionary
-            row_index = self.vars_watched_dict[var_name]["row_index"]
+            row_index = self.vars_watched_dict[var_name]["watched_row_position"]
             
             # Create a new item with the updated value
             value_item = QTableWidgetItem(str(value))
             
             # Update the value in column 3 (0-indexed)
-            self.ui.tbl_vars.setItem(row_index, 3, value_item)
+            self.ui.tbl_vars_watched.setItem(row_index, 1, value_item)
 
     def clean_up(self, widgets):
         # Clear the scroll area
