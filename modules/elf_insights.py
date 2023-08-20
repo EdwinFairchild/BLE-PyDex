@@ -47,7 +47,7 @@ class ExtractGlobalVariablesThread(QThread):
                     # if exit_early is true then exit the thread
                     if self.exit_early:
                         return
-                    time.sleep(0.003)
+                    time.sleep(0.005)
             self.logger.info("Finished extracting global variables")
 
 
@@ -75,7 +75,7 @@ class MonitoringThread(QThread):
         }
         # Connect to the probe
         try:
-             # Replace stdout with a custom stream that logs messages
+            # Replace stdout with a custom stream that logs messages
             logger_stream = LoggerStream(self.logger)
             sys.stdout = logger_stream
             sys.stderr = logger_stream
@@ -112,12 +112,11 @@ class MonitoringThread(QThread):
             while self.exit_early is False:
                 for var_name, details in list(addresses.items()):
                     address = details['address']
-
                     value = target.read32(address)
                     if value != previous_values[var_name]:
                         previous_values[var_name] = value
                         self.signal_update_variable.emit(var_name, value)  # Emitting the signal with the variable name and value
-                time.sleep(0.01)  # Adjust the refresh rate as needed
+                time.sleep(0.010)  # Adjust the refresh rate as needed
         except Exception as e:
             self.logger.setLevel(logging.WARNING)
             self.logger.warning("Error while monitoring variables: %s", e)

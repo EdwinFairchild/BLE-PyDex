@@ -50,6 +50,7 @@ class MainWindow(QMainWindow):
         global widgets
         widgets = self.ui
         self.vars_watched_dict={}
+        self.device_address = None
 
         # Graphing variables
         self.device_data_sets = {}
@@ -534,16 +535,12 @@ class MainWindow(QMainWindow):
         if var_name in self.vars_watched_dict:
             # Get the row index from the dictionary
             row_index = self.vars_watched_dict[var_name]["watched_row_position"]
-            
             # Create a new item with the updated value
             value_item = QTableWidgetItem(str(value))
-            
             # Update the value in column 3 (0-indexed)
             self.ui.tbl_vars_watched.setItem(row_index, 1, value_item)
 
     def clean_up(self, widgets):
-        # Clear the scroll area
-        # Clear the scroll area
         try:
             container = self.ui.scrollArea_2.widget()
             layout = container.layout()

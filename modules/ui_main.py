@@ -1694,7 +1694,7 @@ class Ui_MainWindow(object):
         self.btn_monitor.setGeometry(QRect(730, 180, 89, 25))
         self.frame_2 = QFrame(self.insights)
         self.frame_2.setObjectName(u"frame_2")
-        self.frame_2.setGeometry(QRect(20, 310, 401, 301))
+        self.frame_2.setGeometry(QRect(20, 310, 401, 241))
         self.frame_2.setStyleSheet(u" border: 2px solid rgb(52, 59, 72);\n"
 "	border-radius: 5px;	\n"
 "")
@@ -1793,7 +1793,7 @@ class Ui_MainWindow(object):
         self.tbl_vars.setShowGrid(True)
         self.tbl_vars.setGridStyle(Qt.SolidLine)
         self.tbl_vars.setSortingEnabled(True)
-        self.tbl_vars.horizontalHeader().setVisible(True)
+        self.tbl_vars.horizontalHeader().setVisible(False)
         self.tbl_vars.horizontalHeader().setCascadingSectionResizes(False)
         self.tbl_vars.horizontalHeader().setDefaultSectionSize(120)
         self.tbl_vars.horizontalHeader().setHighlightSections(True)
@@ -1872,13 +1872,15 @@ class Ui_MainWindow(object):
 
         self.console = QTextEdit(self.pagesContainer)
         self.console.setObjectName(u"console")
+        self.console.setMinimumSize(QSize(0, 114))
         self.console.setAutoFillBackground(False)
         self.console.setStyleSheet(u"	background-color: rgba(33, 37, 43, 180);")
         self.console.setFrameShadow(QFrame.Sunken)
 
         self.verticalLayout_15.addWidget(self.console)
 
-        self.verticalLayout_15.setStretch(1, 1)
+        self.verticalLayout_15.setStretch(0, 10)
+        self.verticalLayout_15.setStretch(1, 2)
 
         self.horizontalLayout_4.addWidget(self.pagesContainer)
 
@@ -2032,7 +2034,7 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
         self.scanSlider.valueChanged.connect(self.label_scan_timeout_value.setNum)
 
-        self.stackedWidget.setCurrentIndex(2)
+        self.stackedWidget.setCurrentIndex(1)
         self.rssi_gatt_expolrer.setCurrentIndex(0)
 
 

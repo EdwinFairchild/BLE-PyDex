@@ -1826,14 +1826,14 @@ p, li { white-space: pre-wrap; }
                   <property name="frameShadow">
                    <enum>QFrame::Raised</enum>
                   </property>
-                  <layout class="QVBoxLayout" name="verticalLayout_15" stretch="0,1">
+                  <layout class="QVBoxLayout" name="verticalLayout_15" stretch="10,2">
                    <item>
                     <widget class="QStackedWidget" name="stackedWidget">
                      <property name="styleSheet">
                       <string notr="true">background: transparent;</string>
                      </property>
                      <property name="currentIndex">
-                      <number>2</number>
+                      <number>1</number>
                      </property>
                      <widget class="QWidget" name="home">
                       <property name="styleSheet">
@@ -3294,7 +3294,7 @@ QHeaderView::section:vertical
                          <x>20</x>
                          <y>310</y>
                          <width>401</width>
-                         <height>301</height>
+                         <height>241</height>
                         </rect>
                        </property>
                        <property name="styleSheet">
@@ -3346,7 +3346,7 @@ QHeaderView::section:vertical
                           </column>
                           <column>
                            <property name="text">
-                            <string> </string>
+                            <string/>
                            </property>
                           </column>
                          </widget>
@@ -3626,7 +3626,7 @@ QHeaderView::section:vertical
                            <bool>true</bool>
                           </property>
                           <attribute name="horizontalHeaderVisible">
-                           <bool>true</bool>
+                           <bool>false</bool>
                           </attribute>
                           <attribute name="horizontalHeaderCascadingSectionResizes">
                            <bool>false</bool>
@@ -3813,6 +3813,12 @@ QHeaderView::section:vertical
                    </item>
                    <item>
                     <widget class="QTextEdit" name="console">
+                     <property name="minimumSize">
+                      <size>
+                       <width>0</width>
+                       <height>114</height>
+                      </size>
+                     </property>
                      <property name="autoFillBackground">
                       <bool>false</bool>
                      </property>

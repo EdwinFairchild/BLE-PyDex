@@ -92,6 +92,7 @@ def btn_connect(interface):
         try:
             # if it is, disconnect it
             interface.connectedDevice.is_connected = False
+            logger.info("Disconnecting 1")
             #interface.stop_connection()
         except Exception as err:
             logger.setLevel(logging.WARNING)
@@ -115,9 +116,9 @@ def btn_connect(interface):
 
     try:
         # get device address from selected item in list_widget_discovered, it is the first 18 characters of the string
-        device_address = interface.ui.list_widget_discovered.currentItem().text()[0:17]
+        interface.device_address = interface.ui.list_widget_discovered.currentItem().text()[0:17]
         
-        interface.connectedDevice.ble_address = device_address
+        interface.connectedDevice.ble_address = interface.device_address
         # start the connect thread
         interface.connectedDevice.start()
         # set the text of the connect button to disconnect
@@ -129,13 +130,14 @@ def btn_connect(interface):
     except Exception as err:
         logger = logging.getLogger("PDexLogger")
         # User has not selected an item in the list_widget_discovered
-        if device_address == None:
+        if interface.device_address == None:
             logger.info("No device selected to connect to")
         else:
             # some other error
             logger.info("Error connecting to device: {}".format(err))
         # kicks off disocnnection events
         interface.connectedDevice.is_connected = False
+        logger.info("Disconnecting 2")
 
 
 def clear_logs(interface):
@@ -195,6 +197,7 @@ def btn_disconnect(interface):
         try:
             # if it is, disconnect it
             interface.connectedDevice.is_connected = False
+            logger.info("Disconnecting 3")
             #interface.stop_connection()
         except Exception as err:
             logger.setLevel(logging.WARNING)
