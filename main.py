@@ -546,6 +546,16 @@ class MainWindow(QMainWindow):
             value_item = QTableWidgetItem(str(value))
             # Update the value in column 3 (0-indexed)
             self.ui.tbl_vars_watched.setItem(row_index, 1, value_item)
+    def get_core_regs_handler(self, regs):
+        # Clear the table
+        self.ui.tbl_core_regs.setRowCount(0)
+        for reg, value in regs:
+            print(f"{reg}: {value:08x}")
+            row_position = self.ui.tbl_core_regs.rowCount()
+            self.ui.tbl_core_regs.insertRow(row_position)
+            self.ui.tbl_core_regs.setItem(row_position, 0, QTableWidgetItem(reg))
+            self.ui.tbl_core_regs.setItem(row_position, 1, QTableWidgetItem(hex(value)))
+
 
     def clean_up(self, widgets):
         try:

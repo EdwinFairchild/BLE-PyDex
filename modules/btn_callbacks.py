@@ -315,6 +315,12 @@ def start_monitoring(main_window):
     else:
         main_window.var_watcher.start()
         main_window.ui.btn_monitor.setText("Stop Monitoring")
+def get_core_regs(main_window):
+    logger = logging.getLogger("PDexLogger")
+    try:
+        main_window.var_watcher.getCoreRegs = True
+    except Exception as err:
+        logger.info("Error getting core regs: {err}")
 
 def register_button_callbacks(main_window):
     logger = logging.getLogger("PDexLogger")
@@ -328,6 +334,9 @@ def register_button_callbacks(main_window):
         main_window.ui.btn_load_elf.clicked.connect(lambda: load_elf(main_window))  
         main_window.ui.btn_monitor.clicked.connect(lambda: start_monitoring(main_window))
 
+        # get core regs
+        main_window.var_watcher.core_regs_tuple.connect(main_window.get_core_regs_handler)
+        main_window.ui.btn_refreshCoreRegs.clicked.connect(lambda: get_core_regs(main_window))
         # graphing checkbox callbacks
         main_window.ui.graph_enabled.stateChanged.connect(lambda: disable_graphing(main_window))        
 

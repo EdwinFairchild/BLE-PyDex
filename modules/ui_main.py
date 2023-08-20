@@ -32,7 +32,7 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(1538, 838)
+        MainWindow.resize(1451, 901)
         MainWindow.setMinimumSize(QSize(940, 560))
         self.styleSheet = QWidget(MainWindow)
         self.styleSheet.setObjectName(u"styleSheet")
@@ -1686,40 +1686,74 @@ class Ui_MainWindow(object):
         self.stackedWidget.addWidget(self.widgets)
         self.insights = QWidget()
         self.insights.setObjectName(u"insights")
-        self.frame_2 = QFrame(self.insights)
-        self.frame_2.setObjectName(u"frame_2")
-        self.frame_2.setGeometry(QRect(20, 310, 391, 241))
-        self.frame_2.setStyleSheet(u" border: 2px solid rgb(52, 59, 72);\n"
+        self.horizontalLayout_17 = QHBoxLayout(self.insights)
+        self.horizontalLayout_17.setObjectName(u"horizontalLayout_17")
+        self.frame_8 = QFrame(self.insights)
+        self.frame_8.setObjectName(u"frame_8")
+        self.frame_8.setFrameShape(QFrame.StyledPanel)
+        self.frame_8.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_14 = QHBoxLayout(self.frame_8)
+        self.horizontalLayout_14.setObjectName(u"horizontalLayout_14")
+        self.horizontalLayout_14.setContentsMargins(0, 0, -1, 0)
+        self.frame_7 = QFrame(self.frame_8)
+        self.frame_7.setObjectName(u"frame_7")
+        self.frame_7.setStyleSheet(u" border: 2px solid rgb(52, 59, 72);\n"
 "	border-radius: 5px;	\n"
 "")
-        self.frame_2.setFrameShape(QFrame.StyledPanel)
-        self.frame_2.setFrameShadow(QFrame.Raised)
-        self.horizontalLayout_13 = QHBoxLayout(self.frame_2)
-        self.horizontalLayout_13.setObjectName(u"horizontalLayout_13")
-        self.horizontalLayout_13.setContentsMargins(0, 0, 0, 0)
-        self.tbl_vars_watched = QTableWidget(self.frame_2)
-        if (self.tbl_vars_watched.columnCount() < 3):
-            self.tbl_vars_watched.setColumnCount(3)
+        self.frame_7.setFrameShape(QFrame.StyledPanel)
+        self.frame_7.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_32 = QVBoxLayout(self.frame_7)
+        self.verticalLayout_32.setObjectName(u"verticalLayout_32")
+        self.tbl_core_regs = QTableWidget(self.frame_7)
+        if (self.tbl_core_regs.columnCount() < 2):
+            self.tbl_core_regs.setColumnCount(2)
         __qtablewidgetitem24 = QTableWidgetItem()
-        self.tbl_vars_watched.setHorizontalHeaderItem(0, __qtablewidgetitem24)
+        self.tbl_core_regs.setHorizontalHeaderItem(0, __qtablewidgetitem24)
         __qtablewidgetitem25 = QTableWidgetItem()
-        self.tbl_vars_watched.setHorizontalHeaderItem(1, __qtablewidgetitem25)
-        __qtablewidgetitem26 = QTableWidgetItem()
-        self.tbl_vars_watched.setHorizontalHeaderItem(2, __qtablewidgetitem26)
-        self.tbl_vars_watched.setObjectName(u"tbl_vars_watched")
-        self.tbl_vars_watched.setStyleSheet(u" border: 0px solid rgb(52, 59, 72);\n"
+        self.tbl_core_regs.setHorizontalHeaderItem(1, __qtablewidgetitem25)
+        self.tbl_core_regs.setObjectName(u"tbl_core_regs")
+        self.tbl_core_regs.setStyleSheet(u" border: 0px solid rgb(52, 59, 72);\n"
 "	border-radius:0px;	\n"
 "")
-        self.tbl_vars_watched.horizontalHeader().setVisible(True)
-        self.tbl_vars_watched.horizontalHeader().setCascadingSectionResizes(True)
-        self.tbl_vars_watched.horizontalHeader().setDefaultSectionSize(120)
-        self.tbl_vars_watched.verticalHeader().setVisible(False)
+        self.tbl_core_regs.horizontalHeader().setVisible(True)
+        self.tbl_core_regs.horizontalHeader().setCascadingSectionResizes(True)
+        self.tbl_core_regs.horizontalHeader().setMinimumSectionSize(25)
+        self.tbl_core_regs.horizontalHeader().setDefaultSectionSize(40)
+        self.tbl_core_regs.horizontalHeader().setStretchLastSection(True)
+        self.tbl_core_regs.verticalHeader().setVisible(False)
 
-        self.horizontalLayout_13.addWidget(self.tbl_vars_watched)
+        self.verticalLayout_32.addWidget(self.tbl_core_regs)
 
-        self.frame_4 = QFrame(self.insights)
+        self.btn_refreshCoreRegs = QPushButton(self.frame_7)
+        self.btn_refreshCoreRegs.setObjectName(u"btn_refreshCoreRegs")
+        self.btn_refreshCoreRegs.setMinimumSize(QSize(0, 41))
+        self.btn_refreshCoreRegs.setStyleSheet(u"\n"
+"margin-left: 10px;  /* Add 10 pixels of margin to the left of the button */\n"
+"    margin-right: 10px; /* Add 10 pixels of margin to the right of the ")
+
+        self.verticalLayout_32.addWidget(self.btn_refreshCoreRegs)
+
+        self.btn_hideCoreRegs = QPushButton(self.frame_7)
+        self.btn_hideCoreRegs.setObjectName(u"btn_hideCoreRegs")
+        self.btn_hideCoreRegs.setMinimumSize(QSize(0, 41))
+        self.btn_hideCoreRegs.setStyleSheet(u"\n"
+"margin-left: 10px;  /* Add 10 pixels of margin to the left of the button */\n"
+"    margin-right: 10px; /* Add 10 pixels of margin to the right of the ")
+
+        self.verticalLayout_32.addWidget(self.btn_hideCoreRegs)
+
+
+        self.horizontalLayout_14.addWidget(self.frame_7)
+
+        self.frame_9 = QFrame(self.frame_8)
+        self.frame_9.setObjectName(u"frame_9")
+        self.frame_9.setFrameShape(QFrame.StyledPanel)
+        self.frame_9.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_33 = QVBoxLayout(self.frame_9)
+        self.verticalLayout_33.setObjectName(u"verticalLayout_33")
+        self.verticalLayout_33.setContentsMargins(0, 0, 0, 0)
+        self.frame_4 = QFrame(self.frame_9)
         self.frame_4.setObjectName(u"frame_4")
-        self.frame_4.setGeometry(QRect(20, 0, 391, 301))
         self.frame_4.setStyleSheet(u" border: 2px solid rgb(52, 59, 72);\n"
 "	border-radius: 5px;	\n"
 "")
@@ -1731,12 +1765,12 @@ class Ui_MainWindow(object):
         self.tbl_vars = QTableWidget(self.frame_4)
         if (self.tbl_vars.columnCount() < 3):
             self.tbl_vars.setColumnCount(3)
+        __qtablewidgetitem26 = QTableWidgetItem()
+        self.tbl_vars.setHorizontalHeaderItem(0, __qtablewidgetitem26)
         __qtablewidgetitem27 = QTableWidgetItem()
-        self.tbl_vars.setHorizontalHeaderItem(0, __qtablewidgetitem27)
+        self.tbl_vars.setHorizontalHeaderItem(1, __qtablewidgetitem27)
         __qtablewidgetitem28 = QTableWidgetItem()
-        self.tbl_vars.setHorizontalHeaderItem(1, __qtablewidgetitem28)
-        __qtablewidgetitem29 = QTableWidgetItem()
-        self.tbl_vars.setHorizontalHeaderItem(2, __qtablewidgetitem29)
+        self.tbl_vars.setHorizontalHeaderItem(2, __qtablewidgetitem28)
         self.tbl_vars.setObjectName(u"tbl_vars")
         sizePolicy3.setHeightForWidth(self.tbl_vars.sizePolicy().hasHeightForWidth())
         self.tbl_vars.setSizePolicy(sizePolicy3)
@@ -1800,6 +1834,57 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_30.addWidget(self.tbl_vars)
 
+
+        self.verticalLayout_33.addWidget(self.frame_4)
+
+        self.frame_2 = QFrame(self.frame_9)
+        self.frame_2.setObjectName(u"frame_2")
+        self.frame_2.setStyleSheet(u" border: 2px solid rgb(52, 59, 72);\n"
+"	border-radius: 5px;	\n"
+"")
+        self.frame_2.setFrameShape(QFrame.StyledPanel)
+        self.frame_2.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_13 = QHBoxLayout(self.frame_2)
+        self.horizontalLayout_13.setObjectName(u"horizontalLayout_13")
+        self.horizontalLayout_13.setContentsMargins(0, 0, 0, 0)
+        self.tbl_vars_watched = QTableWidget(self.frame_2)
+        if (self.tbl_vars_watched.columnCount() < 3):
+            self.tbl_vars_watched.setColumnCount(3)
+        __qtablewidgetitem29 = QTableWidgetItem()
+        self.tbl_vars_watched.setHorizontalHeaderItem(0, __qtablewidgetitem29)
+        __qtablewidgetitem30 = QTableWidgetItem()
+        self.tbl_vars_watched.setHorizontalHeaderItem(1, __qtablewidgetitem30)
+        __qtablewidgetitem31 = QTableWidgetItem()
+        self.tbl_vars_watched.setHorizontalHeaderItem(2, __qtablewidgetitem31)
+        self.tbl_vars_watched.setObjectName(u"tbl_vars_watched")
+        self.tbl_vars_watched.setStyleSheet(u" border: 0px solid rgb(52, 59, 72);\n"
+"	border-radius:0px;	\n"
+"")
+        self.tbl_vars_watched.horizontalHeader().setVisible(True)
+        self.tbl_vars_watched.horizontalHeader().setCascadingSectionResizes(True)
+        self.tbl_vars_watched.horizontalHeader().setDefaultSectionSize(120)
+        self.tbl_vars_watched.verticalHeader().setVisible(False)
+
+        self.horizontalLayout_13.addWidget(self.tbl_vars_watched)
+
+
+        self.verticalLayout_33.addWidget(self.frame_2)
+
+        self.verticalLayout_33.setStretch(0, 1)
+        self.verticalLayout_33.setStretch(1, 1)
+
+        self.horizontalLayout_14.addWidget(self.frame_9)
+
+        self.horizontalSpacer_2 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.horizontalLayout_14.addItem(self.horizontalSpacer_2)
+
+        self.horizontalLayout_14.setStretch(0, 2)
+        self.horizontalLayout_14.setStretch(1, 5)
+        self.horizontalLayout_14.setStretch(2, 7)
+
+        self.horizontalLayout_17.addWidget(self.frame_8)
+
         self.stackedWidget.addWidget(self.insights)
         self.connections_page = QWidget()
         self.connections_page.setObjectName(u"connections_page")
@@ -1852,7 +1937,7 @@ class Ui_MainWindow(object):
         self.scrollArea_2.setWidgetResizable(True)
         self.scrollAreaWidgetContents_2 = QWidget()
         self.scrollAreaWidgetContents_2.setObjectName(u"scrollAreaWidgetContents_2")
-        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 92, 30))
+        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 553, 511))
         self.scrollArea_2.setWidget(self.scrollAreaWidgetContents_2)
 
         self.verticalLayout_28.addWidget(self.scrollArea_2)
@@ -2035,7 +2120,7 @@ class Ui_MainWindow(object):
 
         self.btn_load_elf = QPushButton(self.elfSettings)
         self.btn_load_elf.setObjectName(u"btn_load_elf")
-        self.btn_load_elf.setMinimumSize(QSize(0, 31))
+        self.btn_load_elf.setMinimumSize(QSize(0, 41))
         self.btn_load_elf.setFocusPolicy(Qt.NoFocus)
         self.btn_load_elf.setStyleSheet(u" border: 2px solid rgb(52, 59, 72);\n"
 "	border-radius: 5px;	\n"
@@ -2055,6 +2140,17 @@ class Ui_MainWindow(object):
 "margin: 0px;")
 
         self.verticalLayout_29.addWidget(self.btn_monitor)
+
+        self.btn_showCoreRegs = QPushButton(self.elfSettings)
+        self.btn_showCoreRegs.setObjectName(u"btn_showCoreRegs")
+        self.btn_showCoreRegs.setMinimumSize(QSize(0, 41))
+        self.btn_showCoreRegs.setStyleSheet(u" border: 2px solid rgb(52, 59, 72);\n"
+"	border-radius: 5px;	\n"
+"text-align: center;\n"
+"padding: 0px;\n"
+"margin: 0px;")
+
+        self.verticalLayout_29.addWidget(self.btn_showCoreRegs)
 
         self.verticalSpacer_4 = QSpacerItem(20, 97, QSizePolicy.Minimum, QSizePolicy.Expanding)
 
@@ -2266,16 +2362,22 @@ class Ui_MainWindow(object):
         ___qtablewidgetitem23.setText(QCoreApplication.translate("MainWindow", u"Line", None));
         self.tableWidget.setSortingEnabled(__sortingEnabled)
 
-        ___qtablewidgetitem24 = self.tbl_vars_watched.horizontalHeaderItem(0)
-        ___qtablewidgetitem24.setText(QCoreApplication.translate("MainWindow", u"Name", None));
-        ___qtablewidgetitem25 = self.tbl_vars_watched.horizontalHeaderItem(1)
+        ___qtablewidgetitem24 = self.tbl_core_regs.horizontalHeaderItem(0)
+        ___qtablewidgetitem24.setText(QCoreApplication.translate("MainWindow", u"Reg", None));
+        ___qtablewidgetitem25 = self.tbl_core_regs.horizontalHeaderItem(1)
         ___qtablewidgetitem25.setText(QCoreApplication.translate("MainWindow", u"Value", None));
+        self.btn_refreshCoreRegs.setText(QCoreApplication.translate("MainWindow", u"Refresh", None))
+        self.btn_hideCoreRegs.setText(QCoreApplication.translate("MainWindow", u"Hide", None))
         ___qtablewidgetitem26 = self.tbl_vars.horizontalHeaderItem(0)
         ___qtablewidgetitem26.setText(QCoreApplication.translate("MainWindow", u"Variable", None));
         ___qtablewidgetitem27 = self.tbl_vars.horizontalHeaderItem(1)
         ___qtablewidgetitem27.setText(QCoreApplication.translate("MainWindow", u"Address", None));
         ___qtablewidgetitem28 = self.tbl_vars.horizontalHeaderItem(2)
         ___qtablewidgetitem28.setText(QCoreApplication.translate("MainWindow", u"Watch", None));
+        ___qtablewidgetitem29 = self.tbl_vars_watched.horizontalHeaderItem(0)
+        ___qtablewidgetitem29.setText(QCoreApplication.translate("MainWindow", u"Name", None));
+        ___qtablewidgetitem30 = self.tbl_vars_watched.horizontalHeaderItem(1)
+        ___qtablewidgetitem30.setText(QCoreApplication.translate("MainWindow", u"Value", None));
         ___qtreewidgetitem = self.gatt_treeView.headerItem()
         ___qtreewidgetitem.setText(0, QCoreApplication.translate("MainWindow", u"Gatt Tree", None));
         self.btn_disconnect.setText(QCoreApplication.translate("MainWindow", u"Disconnect", None))
@@ -2288,6 +2390,7 @@ class Ui_MainWindow(object):
         self.txtRamEnd.setText(QCoreApplication.translate("MainWindow", u"0x2001FFFF ", None))
         self.btn_load_elf.setText(QCoreApplication.translate("MainWindow", u"Load Elf", None))
         self.btn_monitor.setText(QCoreApplication.translate("MainWindow", u"Start Monitoring", None))
+        self.btn_showCoreRegs.setText(QCoreApplication.translate("MainWindow", u"Show Core Regs", None))
         self.creditsLabel.setText(QCoreApplication.translate("MainWindow", u"By: Edwin Amaya", None))
         self.version.setText(QCoreApplication.translate("MainWindow", u"v2.0.0", None))
     # retranslateUi
