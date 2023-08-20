@@ -73,6 +73,7 @@ class MainWindow(QMainWindow):
 
         # connected mode variables
         self.connectedDevice = BLE_ConnectDevice()
+        
         self.update_thread = UpdateRSSIGraphThread(self)
         self.update_thread.dataUpdated.connect(self.update_graph)
         if self.ui.graph_enabled.isChecked():
@@ -491,6 +492,9 @@ class MainWindow(QMainWindow):
             self.ui.stackedWidget.setCurrentWidget(self.ui.home)
             UIFunctions.resetStyle(self, btnName)
             btn.setStyleSheet(UIFunctions.selectMenu(btn.styleSheet()))
+            # hide elfSettings frame
+            self.ui.elfSettings.hide()
+            self.ui.scannerSettigns.show()
 
         # SHOW WIDGETS PAGE
         if btnName == "btn_widgets":
@@ -511,6 +515,8 @@ class MainWindow(QMainWindow):
             self.ui.stackedWidget.setCurrentWidget(self.ui.insights)
             UIFunctions.resetStyle(self, btnName) # RESET ANOTHERS BUTTONS SELECTED
             btn.setStyleSheet(UIFunctions.selectMenu(btn.styleSheet())) # SELECT MENU
+            self.ui.scannerSettigns.hide()
+            self.ui.elfSettings.show()
 
             #print("Save BTN clicked!")
         # PRINT BTN NAME

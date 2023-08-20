@@ -32,7 +32,7 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(1404, 798)
+        MainWindow.resize(1538, 838)
         MainWindow.setMinimumSize(QSize(940, 560))
         self.styleSheet = QWidget(MainWindow)
         self.styleSheet.setObjectName(u"styleSheet")
@@ -1483,7 +1483,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 347, 218))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 414, 218))
         self.scrollAreaWidgetContents.setStyleSheet(u" QScrollBar:vertical {\n"
 "	border: none;\n"
 "    background: rgb(52, 59, 72);\n"
@@ -1886,7 +1886,7 @@ class Ui_MainWindow(object):
 
         self.extraRightBox = QFrame(self.content)
         self.extraRightBox.setObjectName(u"extraRightBox")
-        self.extraRightBox.setMinimumSize(QSize(0, 0))
+        self.extraRightBox.setMinimumSize(QSize(300, 0))
         self.extraRightBox.setMaximumSize(QSize(0, 16777215))
         self.extraRightBox.setFrameShape(QFrame.NoFrame)
         self.extraRightBox.setFrameShadow(QFrame.Raised)
@@ -1896,6 +1896,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_7.setContentsMargins(0, 0, 0, 0)
         self.themeSettingsTopDetail = QFrame(self.extraRightBox)
         self.themeSettingsTopDetail.setObjectName(u"themeSettingsTopDetail")
+        self.themeSettingsTopDetail.setMinimumSize(QSize(0, 0))
         self.themeSettingsTopDetail.setMaximumSize(QSize(16777215, 3))
         self.themeSettingsTopDetail.setFrameShape(QFrame.NoFrame)
         self.themeSettingsTopDetail.setFrameShadow(QFrame.Raised)
@@ -1907,18 +1908,15 @@ class Ui_MainWindow(object):
         self.contentSettings.setFrameShape(QFrame.NoFrame)
         self.contentSettings.setFrameShadow(QFrame.Raised)
         self.verticalLayout_13 = QVBoxLayout(self.contentSettings)
-        self.verticalLayout_13.setSpacing(0)
         self.verticalLayout_13.setObjectName(u"verticalLayout_13")
-        self.verticalLayout_13.setContentsMargins(9, 0, 9, 9)
-        self.topMenus = QFrame(self.contentSettings)
-        self.topMenus.setObjectName(u"topMenus")
-        self.topMenus.setFrameShape(QFrame.NoFrame)
-        self.topMenus.setFrameShadow(QFrame.Raised)
-        self.verticalLayout_14 = QVBoxLayout(self.topMenus)
-        self.verticalLayout_14.setSpacing(0)
-        self.verticalLayout_14.setObjectName(u"verticalLayout_14")
-        self.verticalLayout_14.setContentsMargins(0, 0, 0, 0)
-        self.btn_save_logs = QPushButton(self.topMenus)
+        self.scannerSettigns = QFrame(self.contentSettings)
+        self.scannerSettigns.setObjectName(u"scannerSettigns")
+        self.scannerSettigns.setFrameShape(QFrame.NoFrame)
+        self.scannerSettigns.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_31 = QVBoxLayout(self.scannerSettigns)
+        self.verticalLayout_31.setSpacing(0)
+        self.verticalLayout_31.setObjectName(u"verticalLayout_31")
+        self.btn_save_logs = QPushButton(self.scannerSettigns)
         self.btn_save_logs.setObjectName(u"btn_save_logs")
         sizePolicy.setHeightForWidth(self.btn_save_logs.sizePolicy().hasHeightForWidth())
         self.btn_save_logs.setSizePolicy(sizePolicy)
@@ -1928,9 +1926,9 @@ class Ui_MainWindow(object):
         self.btn_save_logs.setLayoutDirection(Qt.LeftToRight)
         self.btn_save_logs.setStyleSheet(u"background-image: url(:/icons/images/icons/cil-save.png);")
 
-        self.verticalLayout_14.addWidget(self.btn_save_logs)
+        self.verticalLayout_31.addWidget(self.btn_save_logs)
 
-        self.btn_clear_logs = QPushButton(self.topMenus)
+        self.btn_clear_logs = QPushButton(self.scannerSettigns)
         self.btn_clear_logs.setObjectName(u"btn_clear_logs")
         sizePolicy.setHeightForWidth(self.btn_clear_logs.sizePolicy().hasHeightForWidth())
         self.btn_clear_logs.setSizePolicy(sizePolicy)
@@ -1940,24 +1938,20 @@ class Ui_MainWindow(object):
         self.btn_clear_logs.setLayoutDirection(Qt.LeftToRight)
         self.btn_clear_logs.setStyleSheet(u"background-image: url(:/icons/images/icons/cil-remove.png);")
 
-        self.verticalLayout_14.addWidget(self.btn_clear_logs)
+        self.verticalLayout_31.addWidget(self.btn_clear_logs)
 
-        self.verticalLayout_14.setStretch(0, 1)
-        self.verticalLayout_14.setStretch(1, 1)
-
-        self.verticalLayout_13.addWidget(self.topMenus, 0, Qt.AlignTop)
-
-        self.options_frame = QFrame(self.contentSettings)
+        self.options_frame = QFrame(self.scannerSettigns)
         self.options_frame.setObjectName(u"options_frame")
         self.options_frame.setMinimumSize(QSize(0, 40))
+        self.options_frame.setMaximumSize(QSize(16777215, 45))
         self.options_frame.setStyleSheet(u" border: 2px solid rgb(52, 59, 72);\n"
 "	border-radius: 5px;	\n"
 "")
         self.options_frame.setFrameShape(QFrame.StyledPanel)
         self.options_frame.setFrameShadow(QFrame.Raised)
-        self.verticalLayout_29 = QVBoxLayout(self.options_frame)
-        self.verticalLayout_29.setObjectName(u"verticalLayout_29")
-        self.verticalLayout_29.setContentsMargins(-1, 9, -1, -1)
+        self.verticalLayout_14 = QVBoxLayout(self.options_frame)
+        self.verticalLayout_14.setObjectName(u"verticalLayout_14")
+        self.verticalLayout_14.setContentsMargins(20, -1, -1, -1)
         self.check_scroll_to_bottom = QCheckBox(self.options_frame)
         self.check_scroll_to_bottom.setObjectName(u"check_scroll_to_bottom")
         self.check_scroll_to_bottom.setStyleSheet(u" border: 0px solid rgb(52, 59, 72);\n"
@@ -1965,12 +1959,90 @@ class Ui_MainWindow(object):
 "")
         self.check_scroll_to_bottom.setChecked(True)
 
-        self.verticalLayout_29.addWidget(self.check_scroll_to_bottom)
+        self.verticalLayout_14.addWidget(self.check_scroll_to_bottom)
 
 
-        self.verticalLayout_13.addWidget(self.options_frame)
+        self.verticalLayout_31.addWidget(self.options_frame)
+
+        self.verticalSpacer_3 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+
+        self.verticalLayout_31.addItem(self.verticalSpacer_3)
+
+        self.verticalLayout_31.setStretch(0, 1)
+        self.verticalLayout_31.setStretch(1, 1)
+        self.verticalLayout_31.setStretch(2, 1)
+
+        self.verticalLayout_13.addWidget(self.scannerSettigns)
+
+        self.elfSettings = QFrame(self.contentSettings)
+        self.elfSettings.setObjectName(u"elfSettings")
+        self.elfSettings.setFrameShape(QFrame.NoFrame)
+        self.elfSettings.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_30 = QVBoxLayout(self.elfSettings)
+        self.verticalLayout_30.setSpacing(0)
+        self.verticalLayout_30.setObjectName(u"verticalLayout_30")
+        self.btn_save_logs_2 = QPushButton(self.elfSettings)
+        self.btn_save_logs_2.setObjectName(u"btn_save_logs_2")
+        sizePolicy.setHeightForWidth(self.btn_save_logs_2.sizePolicy().hasHeightForWidth())
+        self.btn_save_logs_2.setSizePolicy(sizePolicy)
+        self.btn_save_logs_2.setMinimumSize(QSize(0, 45))
+        self.btn_save_logs_2.setFont(font)
+        self.btn_save_logs_2.setCursor(QCursor(Qt.PointingHandCursor))
+        self.btn_save_logs_2.setLayoutDirection(Qt.LeftToRight)
+        self.btn_save_logs_2.setStyleSheet(u"background-image: url(:/icons/images/icons/cil-save.png);")
+
+        self.verticalLayout_30.addWidget(self.btn_save_logs_2)
+
+        self.btn_clear_logs_2 = QPushButton(self.elfSettings)
+        self.btn_clear_logs_2.setObjectName(u"btn_clear_logs_2")
+        sizePolicy.setHeightForWidth(self.btn_clear_logs_2.sizePolicy().hasHeightForWidth())
+        self.btn_clear_logs_2.setSizePolicy(sizePolicy)
+        self.btn_clear_logs_2.setMinimumSize(QSize(0, 45))
+        self.btn_clear_logs_2.setFont(font)
+        self.btn_clear_logs_2.setCursor(QCursor(Qt.PointingHandCursor))
+        self.btn_clear_logs_2.setLayoutDirection(Qt.LeftToRight)
+        self.btn_clear_logs_2.setStyleSheet(u"background-image: url(:/icons/images/icons/cil-remove.png);")
+
+        self.verticalLayout_30.addWidget(self.btn_clear_logs_2)
+
+        self.options_frame_2 = QFrame(self.elfSettings)
+        self.options_frame_2.setObjectName(u"options_frame_2")
+        self.options_frame_2.setMinimumSize(QSize(0, 40))
+        self.options_frame_2.setMaximumSize(QSize(16777215, 45))
+        self.options_frame_2.setStyleSheet(u" border: 2px solid rgb(52, 59, 72);\n"
+"	border-radius: 5px;	\n"
+"")
+        self.options_frame_2.setFrameShape(QFrame.StyledPanel)
+        self.options_frame_2.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_29 = QVBoxLayout(self.options_frame_2)
+        self.verticalLayout_29.setObjectName(u"verticalLayout_29")
+        self.verticalLayout_29.setContentsMargins(20, -1, -1, -1)
+        self.check_scroll_to_bottom_2 = QCheckBox(self.options_frame_2)
+        self.check_scroll_to_bottom_2.setObjectName(u"check_scroll_to_bottom_2")
+        self.check_scroll_to_bottom_2.setStyleSheet(u" border: 0px solid rgb(52, 59, 72);\n"
+"	border-radius: 5px;	\n"
+"")
+        self.check_scroll_to_bottom_2.setChecked(True)
+
+        self.verticalLayout_29.addWidget(self.check_scroll_to_bottom_2)
+
+
+        self.verticalLayout_30.addWidget(self.options_frame_2)
+
+        self.verticalSpacer_4 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+
+        self.verticalLayout_30.addItem(self.verticalSpacer_4)
+
+
+        self.verticalLayout_13.addWidget(self.elfSettings)
+
+        self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+
+        self.verticalLayout_13.addItem(self.verticalSpacer)
 
         self.verticalLayout_13.setStretch(0, 1)
+        self.verticalLayout_13.setStretch(1, 1)
+        self.verticalLayout_13.setStretch(2, 1)
 
         self.verticalLayout_7.addWidget(self.contentSettings)
 
@@ -2034,7 +2106,7 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
         self.scanSlider.valueChanged.connect(self.label_scan_timeout_value.setNum)
 
-        self.stackedWidget.setCurrentIndex(1)
+        self.stackedWidget.setCurrentIndex(3)
         self.rssi_gatt_expolrer.setCurrentIndex(0)
 
 
@@ -2184,9 +2256,12 @@ class Ui_MainWindow(object):
         ___qtreewidgetitem = self.gatt_treeView.headerItem()
         ___qtreewidgetitem.setText(0, QCoreApplication.translate("MainWindow", u"Gatt Tree", None));
         self.btn_disconnect.setText(QCoreApplication.translate("MainWindow", u"Disconnect", None))
-        self.btn_save_logs.setText(QCoreApplication.translate("MainWindow", u"Save Advtertisement logs", None))
-        self.btn_clear_logs.setText(QCoreApplication.translate("MainWindow", u"Clear logs and RSSI", None))
-        self.check_scroll_to_bottom.setText(QCoreApplication.translate("MainWindow", u"Auto scroll tabe to bottom", None))
+        self.btn_save_logs.setText(QCoreApplication.translate("MainWindow", u"Save  logs", None))
+        self.btn_clear_logs.setText(QCoreApplication.translate("MainWindow", u"Clear logs & graph", None))
+        self.check_scroll_to_bottom.setText(QCoreApplication.translate("MainWindow", u"Auto scroll table", None))
+        self.btn_save_logs_2.setText(QCoreApplication.translate("MainWindow", u"Elf Save", None))
+        self.btn_clear_logs_2.setText(QCoreApplication.translate("MainWindow", u"Elf Clear", None))
+        self.check_scroll_to_bottom_2.setText(QCoreApplication.translate("MainWindow", u"ELf button", None))
         self.creditsLabel.setText(QCoreApplication.translate("MainWindow", u"By: Edwin Amaya", None))
         self.version.setText(QCoreApplication.translate("MainWindow", u"v2.0.0", None))
     # retranslateUi

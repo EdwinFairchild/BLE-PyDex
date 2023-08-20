@@ -92,7 +92,6 @@ def btn_connect(interface):
         try:
             # if it is, disconnect it
             interface.connectedDevice.is_connected = False
-            logger.info("Disconnecting 1")
             #interface.stop_connection()
         except Exception as err:
             logger.setLevel(logging.WARNING)
@@ -121,6 +120,7 @@ def btn_connect(interface):
         interface.connectedDevice.ble_address = interface.device_address
         # start the connect thread
         interface.connectedDevice.start()
+        interface.connectedDevice.setPriority(QThread.TimeCriticalPriority)
         # set the text of the connect button to disconnect
         interface.ui.btn_connect.setText("Disconnect")
         # set the background color of the connect button to rgba(33, 37, 43, 180)

@@ -62,7 +62,6 @@ def clear_graph_history(interface):
     interface.device_data_sets.clear()
 
 
-
 def timed_scanning_stoped(interface):
     interface.stop_scanner()
 
