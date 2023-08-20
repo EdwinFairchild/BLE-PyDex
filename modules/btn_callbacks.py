@@ -219,7 +219,6 @@ def handle_checkbox_state_change(state, var_name, address, address_dict, main_wi
     if state == Qt.Checked:
         logger.info(f"Added {var_name} to watch list")
 
-
         # Add the var_name to the tbl_vars_watched table
         watched_row_position = main_window.ui.tbl_vars_watched.rowCount()
         main_window.ui.tbl_vars_watched.insertRow(watched_row_position)
@@ -237,6 +236,7 @@ def handle_checkbox_state_change(state, var_name, address, address_dict, main_wi
         for row in range(main_window.ui.tbl_vars_watched.rowCount()):
             if main_window.ui.tbl_vars_watched.item(row, 0).text() == var_name:
                 main_window.ui.tbl_vars_watched.removeRow(row)
+                logger.info(f"Removed {var_name} from watch list")
                 break
    
 
@@ -249,7 +249,7 @@ def remove_watched_var(var_name, row, main_window):
     for row_index in range(main_window.ui.tbl_vars.rowCount()):
         item = main_window.ui.tbl_vars.item(row_index, 0) # Assuming var_name is in column 0
         if item and item.text() == var_name:
-            checkbox_widget = main_window.ui.tbl_vars.cellWidget(row_index, 3) # Assuming checkbox is in column 3
+            checkbox_widget = main_window.ui.tbl_vars.cellWidget(row_index, 2) # Assuming checkbox is in column 3
             if checkbox_widget:
                 checkbox = checkbox_widget.findChild(QCheckBox)
                 if checkbox:
@@ -271,6 +271,8 @@ def load_elf(main_window):
     if not filename:
         logger.info("No file selected")
         return
+    # clear table
+    main_window.ui.tbl_vars.setRowCount(0)
     #filename = '/home/eddie/projects/ADI-Insight/BLE_dats/build/max32655.elf'
     table_widget = main_window.ui.tbl_vars
     elf_file_path = '/home/eddie/projects/ADI-Insight/BLE_dats/build/max32655.elf'
@@ -280,12 +282,11 @@ def load_elf(main_window):
     elf_file_path = '/home/eddie/projects/ADI-Insight/BLE_dats/build/max32655.elf'
 
     # Slot method to handle symbol extracted
-    def handle_symbol_extracted(name, address, section):
+    def handle_symbol_extracted(name, address):
         row_position = main_window.ui.tbl_vars.rowCount()
         main_window.ui.tbl_vars.insertRow(row_position)
         main_window.ui.tbl_vars.setItem(row_position, 0, QTableWidgetItem(name))
-        main_window.ui.tbl_vars.setItem(row_position, 1, QTableWidgetItem(section)) # Added section info here
-        main_window.ui.tbl_vars.setItem(row_position, 2, QTableWidgetItem(hex(address)))
+        main_window.ui.tbl_vars.setItem(row_position, 1, QTableWidgetItem(hex(address)))
 
         # Create a checkbox
         checkbox = QCheckBox()
@@ -297,7 +298,7 @@ def load_elf(main_window):
         layout.setAlignment(Qt.AlignCenter)
         layout.setContentsMargins(0, 0, 0, 0)
         widget.setLayout(layout)
-        main_window.ui.tbl_vars.setCellWidget(row_position, 3, widget) # Changed to column 3
+        main_window.ui.tbl_vars.setCellWidget(row_position, 2, widget) # Changed to column 3
 
     # Start the thread
     main_window.elf_parser.filename = filename
@@ -305,11 +306,15 @@ def load_elf(main_window):
     logger.info("Starting elf parser thread")
     main_window.elf_parser.ramStart = int(main_window.ui.txtRamStart.text() , 16)
     main_window.elf_parser.ramEnd = int(main_window.ui.txtRamEnd.text() , 16)
-    print(main_window.elf_parser.ramStart)  # Outputs: 2097407
     main_window.elf_parser.start()
 
 def start_monitoring(main_window):
-    main_window.var_watcher.start()
+    if main_window.var_watcher.isRunning():
+        main_window.var_watcher.exit_early = True
+        main_window.ui.btn_monitor.setText("Start Monitoring")
+    else:
+        main_window.var_watcher.start()
+        main_window.ui.btn_monitor.setText("Stop Monitoring")
 
 def register_button_callbacks(main_window):
     logger = logging.getLogger("PDexLogger")

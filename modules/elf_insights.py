@@ -10,27 +10,24 @@ from PySide6.QtCore import QThread
 
 class ExtractGlobalVariablesThread(QThread):
     logger = logging.getLogger("PDexLogger")
-    symbol_extracted = Signal(str, int , str)  # Define a signal to emit the variable name and address
+    symbol_extracted = Signal(str, int )  # Define a signal to emit the variable name and address
     exit_early = False
     ramStart = None
     ramEnd = None
     def __init__(self, filename, table_widget):
         super().__init__()
         self.filename = filename
-       
-
-    def handle_checkbox_state_change(self, state, var_name, address):
-        if state == Qt.Checked:
-            self.address_dict[var_name] = address
-        else:
-            self.address_dict.pop(var_name, None)
 
     def run(self):
         with open(self.filename, 'rb') as file:
             elffile = ELFFile(file)
+            # for futuree development
+            # if elffile.has_dwarf_info():
+            #     dwarfinfo = elffile.get_dwarf_info()
+            #     print("has drawf info")
             section = elffile.get_section_by_name('.symtab')
             if not section:
-                print("Symbol table not found")
+                self.logger.info("Symbol table not found")
                 return
 
             for symbol in section.iter_symbols():
@@ -45,8 +42,8 @@ class ExtractGlobalVariablesThread(QThread):
                     
                     name = symbol.name
                     address = symbol['st_value']
-                    #if self.ramStart <= address <= self.ramEnd:
-                    self.symbol_extracted.emit(name, address, section_name)
+                    if self.ramStart <= address <= self.ramEnd:
+                        self.symbol_extracted.emit(name, address)
                     # if exit_early is true then exit the thread
                     if self.exit_early:
                         return
@@ -110,15 +107,14 @@ class MonitoringThread(QThread):
         # [...] Implementation here
 
     def monitor_variables(self, target, addresses):
-        previous_values = {key: None for key in addresses}
+        
         try:
             while self.exit_early is False:
                 for var_name, details in list(addresses.items()):
                     address = details['address']
                     value = target.read32(address)
-                    if value != previous_values[var_name]:
-                        previous_values[var_name] = value
-                        self.signal_update_variable.emit(var_name, value)  # Emitting the signal with the variable name and value
+                    
+                    self.signal_update_variable.emit(var_name, value)  # Emitting the signal with the variable name and value
                 time.sleep(0.010)  # Adjust the refresh rate as needed
         except Exception as e:
             self.logger.setLevel(logging.WARNING)
@@ -132,13 +128,10 @@ class MonitoringThread(QThread):
             self.exit_early = False
             monitor_active = False
             
-        # [...] Implementation here
-
+        
     def mass_erase(self):
         pass
-        # [...] Implementation here
 
-    # Add any additional methods here, as needed
 
 class LoggerStream:
     def __init__(self, logger):
