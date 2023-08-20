@@ -57,6 +57,7 @@ class MonitoringThread(QThread):
     monitor_active = False
     exit_early = False
     logger = logging.getLogger("PDexLogger")
+    getCoreRegs = False
 
     def __init__(self, address_dict):
         super().__init__()
@@ -102,13 +103,26 @@ class MonitoringThread(QThread):
            
 
     def print_core_registers(self, target):
-        pass
         # Define the list of core registers you want to read
-        # [...] Implementation here
+        reg_list = ['r0', 'r1', 'r2', 'r3', 'r4', 'r5', 'r6', 'r7', 'r8', 'r9', 'r10', 'r11', 'r12', 'sp', 'lr', 'pc', 'xpsr']
+
+        #halt tagert
+        target.halt()
+        # Get the core registers
+        core_registers = target.read_core_registers_raw(reg_list)
+        #resume target
+        target.resume()
+        
+        # Print the core registers
+        print("Core Registers:")
+        for reg, value in zip(reg_list, core_registers):
+            print(f"{reg}: {value:08x}")
+        
 
     def monitor_variables(self, target, addresses):
         
         try:
+            ###########| Main Loop |###########
             while self.exit_early is False:
                 for var_name, details in list(addresses.items()):
                     address = details['address']
