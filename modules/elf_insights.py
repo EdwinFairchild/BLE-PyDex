@@ -58,6 +58,7 @@ class MonitoringThread(QThread):
     exit_early = False
     logger = logging.getLogger("PDexLogger")
     getCoreRegs = False
+    core_regs_tuple = Signal(zip)
 
     def __init__(self, address_dict):
         super().__init__()
@@ -113,10 +114,10 @@ class MonitoringThread(QThread):
         #resume target
         target.resume()
         
-        # Print the core registers
-        print("Core Registers:")
-        for reg, value in zip(reg_list, core_registers):
-            print(f"{reg}: {value:08x}")
+        # emite core registers
+        regs_tuple = zip(reg_list, core_registers)
+        self.core_regs_tuple.emit(regs_tuple)
+ 
         
 
     def monitor_variables(self, target, addresses):
@@ -129,6 +130,9 @@ class MonitoringThread(QThread):
                     value = target.read32(address)
                     
                     self.signal_update_variable.emit(var_name, value)  # Emitting the signal with the variable name and value
+                if self.getCoreRegs is True:
+                    self.print_core_registers(target)
+                    self.getCoreRegs = False
                 time.sleep(0.010)  # Adjust the refresh rate as needed
         except Exception as e:
             self.logger.setLevel(logging.WARNING)

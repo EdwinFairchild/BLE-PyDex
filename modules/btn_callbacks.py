@@ -265,9 +265,9 @@ def remove_watched_var(var_name, row, main_window):
 def load_elf(main_window):
     logger = logging.getLogger("PDexLogger")
     # # Open a file dialog to select the ELF file
-    # options = QFileDialog.Options()
-    # filename, _ = QFileDialog.getOpenFileName(main_window, "Open ELF File", "", "ELF Files (*.elf);;All Files (*)", options=options)
-    filename = '/home/eddie/projects/ADI-Insight/BLE_dats/build/max32655.elf'
+    options = QFileDialog.Options()
+    filename, _ = QFileDialog.getOpenFileName(main_window, "Open ELF File", "", "ELF Files (*.elf);;All Files (*)", options=options)
+    #filename = '/home/eddie/projects/ADI-Insight/BLE_dats/build/max32655.elf'
     if not filename:
         logger.info("No file selected")
         return
@@ -315,6 +315,12 @@ def start_monitoring(main_window):
     else:
         main_window.var_watcher.start()
         main_window.ui.btn_monitor.setText("Stop Monitoring")
+def get_core_regs(main_window):
+    logger = logging.getLogger("PDexLogger")
+    try:
+        main_window.var_watcher.getCoreRegs = True
+    except Exception as err:
+        logger.info("Error getting core regs: {err}")
 
 def register_button_callbacks(main_window):
     logger = logging.getLogger("PDexLogger")
@@ -328,6 +334,9 @@ def register_button_callbacks(main_window):
         main_window.ui.btn_load_elf.clicked.connect(lambda: load_elf(main_window))  
         main_window.ui.btn_monitor.clicked.connect(lambda: start_monitoring(main_window))
 
+        # get core regs
+        main_window.var_watcher.core_regs_tuple.connect(main_window.get_core_regs_handler)
+        main_window.ui.btn_refreshCoreRegs.clicked.connect(lambda: get_core_regs(main_window))
         # graphing checkbox callbacks
         main_window.ui.graph_enabled.stateChanged.connect(lambda: disable_graphing(main_window))        
 
