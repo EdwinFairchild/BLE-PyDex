@@ -265,9 +265,9 @@ def remove_watched_var(var_name, row, main_window):
 def load_elf(main_window):
     logger = logging.getLogger("PDexLogger")
     # # Open a file dialog to select the ELF file
-    # options = QFileDialog.Options()
-    # filename, _ = QFileDialog.getOpenFileName(main_window, "Open ELF File", "", "ELF Files (*.elf);;All Files (*)", options=options)
-    filename = '/home/eddie/projects/ADI-Insight/BLE_dats/build/max32655.elf'
+    options = QFileDialog.Options()
+    filename, _ = QFileDialog.getOpenFileName(main_window, "Open ELF File", "", "ELF Files (*.elf);;All Files (*)", options=options)
+    #filename = '/home/eddie/projects/ADI-Insight/BLE_dats/build/max32655.elf'
     if not filename:
         logger.info("No file selected")
         return

@@ -107,8 +107,9 @@ class MainWindow(QMainWindow):
         self.ui.tbl_vars.setColumnWidth(3, 50)
 
         # TOGGLE MENU
+        
         self.ui.toggleButton.clicked.connect(lambda: UIFunctions.toggleMenu(self, True))
-        UIFunctions.toggleMenu(self, True)
+        self.ui.elfSettings.hide()
 
         # SET UI DEFINITIONS
         UIFunctions.uiDefinitions(self)

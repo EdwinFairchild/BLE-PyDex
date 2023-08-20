@@ -2715,7 +2715,7 @@ QHeaderView::section:vertical
                                 <rect>
                                  <x>0</x>
                                  <y>0</y>
-                                 <width>289</width>
+                                 <width>218</width>
                                  <height>218</height>
                                 </rect>
                                </property>
@@ -3771,8 +3771,8 @@ QHeaderView::section:vertical
                                <rect>
                                 <x>0</x>
                                 <y>0</y>
-                                <width>553</width>
-                                <height>511</height>
+                                <width>92</width>
+                                <height>30</height>
                                </rect>
                               </property>
                              </widget>
@@ -3812,7 +3812,7 @@ QHeaderView::section:vertical
                  <widget class="QFrame" name="extraRightBox">
                   <property name="minimumSize">
                    <size>
-                    <width>250</width>
+                    <width>0</width>
                     <height>0</height>
                    </size>
                   </property>
