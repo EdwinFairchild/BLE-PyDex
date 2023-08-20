@@ -38,3 +38,5 @@ from . btn_callbacks import *
 from . slots import *
 
 from . rssi_graph import *
+
+from . elf_insights import *

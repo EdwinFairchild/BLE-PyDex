@@ -1,4 +1,8 @@
 from main import *
+from elftools.elf.elffile import ELFFile
+from PySide6.QtWidgets import QFileDialog
+from PySide6.QtWidgets import QTableWidget, QTableWidgetItem, QCheckBox, QWidget, QHBoxLayout
+from PySide6.QtCore import Qt 
 
 def btn_scan(interface):
     logger = logging.getLogger("PDexLogger")
@@ -111,11 +115,12 @@ def btn_connect(interface):
 
     try:
         # get device address from selected item in list_widget_discovered, it is the first 18 characters of the string
-        device_address = interface.ui.list_widget_discovered.currentItem().text()[0:17]
+        interface.device_address = interface.ui.list_widget_discovered.currentItem().text()[0:17]
         
-        interface.connectedDevice.ble_address = device_address
+        interface.connectedDevice.ble_address = interface.device_address
         # start the connect thread
         interface.connectedDevice.start()
+        interface.connectedDevice.setPriority(QThread.TimeCriticalPriority)
         # set the text of the connect button to disconnect
         interface.ui.btn_connect.setText("Disconnect")
         # set the background color of the connect button to rgba(33, 37, 43, 180)
@@ -125,13 +130,14 @@ def btn_connect(interface):
     except Exception as err:
         logger = logging.getLogger("PDexLogger")
         # User has not selected an item in the list_widget_discovered
-        if device_address == None:
+        if interface.device_address == None:
             logger.info("No device selected to connect to")
         else:
             # some other error
             logger.info("Error connecting to device: {}".format(err))
         # kicks off disocnnection events
         interface.connectedDevice.is_connected = False
+        logger.info("Disconnecting 2")
 
 
 def clear_logs(interface):
@@ -191,6 +197,7 @@ def btn_disconnect(interface):
         try:
             # if it is, disconnect it
             interface.connectedDevice.is_connected = False
+            logger.info("Disconnecting 3")
             #interface.stop_connection()
         except Exception as err:
             logger.setLevel(logging.WARNING)
@@ -206,6 +213,109 @@ def disable_graphing(main_window):
     else:
         main_window.stop_graphing()
 
+def handle_checkbox_state_change(state, var_name, address, address_dict, main_window):
+    logger = logging.getLogger("PDexLogger")
+   
+    if state == Qt.Checked:
+        logger.info(f"Added {var_name} to watch list")
+
+        # Add the var_name to the tbl_vars_watched table
+        watched_row_position = main_window.ui.tbl_vars_watched.rowCount()
+        main_window.ui.tbl_vars_watched.insertRow(watched_row_position)
+        main_window.ui.tbl_vars_watched.setItem(watched_row_position, 0, QTableWidgetItem(var_name))
+
+        address_dict[var_name] = {"address": address,"watched_row_position" : watched_row_position }
+        # Add a button to remove the row
+        btn_remove = QPushButton("Remove")
+        btn_remove.clicked.connect(lambda: remove_watched_var(var_name, watched_row_position, main_window))
+        main_window.ui.tbl_vars_watched.setCellWidget(watched_row_position, 2, btn_remove)
+
+    else:
+        address_dict.pop(var_name, None)
+        # Find and remove the row from tbl_vars_watched
+        for row in range(main_window.ui.tbl_vars_watched.rowCount()):
+            if main_window.ui.tbl_vars_watched.item(row, 0).text() == var_name:
+                main_window.ui.tbl_vars_watched.removeRow(row)
+                logger.info(f"Removed {var_name} from watch list")
+                break
+   
+
+# Function to handle removing a watched variable
+
+def remove_watched_var(var_name, row, main_window):
+    main_window.ui.tbl_vars_watched.removeRow(row)
+
+    # Find the corresponding checkbox in tbl_vars by var_name
+    for row_index in range(main_window.ui.tbl_vars.rowCount()):
+        item = main_window.ui.tbl_vars.item(row_index, 0) # Assuming var_name is in column 0
+        if item and item.text() == var_name:
+            checkbox_widget = main_window.ui.tbl_vars.cellWidget(row_index, 2) # Assuming checkbox is in column 3
+            if checkbox_widget:
+                checkbox = checkbox_widget.findChild(QCheckBox)
+                if checkbox:
+                    checkbox.setChecked(False)
+                    break
+    
+    main_window.vars_watched_dict.pop(var_name, None)
+
+    # If there are no more rows, explicitly set the row count to 0
+    if main_window.ui.tbl_vars_watched.rowCount() == 0:
+        main_window.ui.tbl_vars_watched.setRowCount(0)
+        
+def load_elf(main_window):
+    logger = logging.getLogger("PDexLogger")
+    # # Open a file dialog to select the ELF file
+    # options = QFileDialog.Options()
+    # filename, _ = QFileDialog.getOpenFileName(main_window, "Open ELF File", "", "ELF Files (*.elf);;All Files (*)", options=options)
+    filename = '/home/eddie/projects/ADI-Insight/BLE_dats/build/max32655.elf'
+    if not filename:
+        logger.info("No file selected")
+        return
+    # clear table
+    main_window.ui.tbl_vars.setRowCount(0)
+    #filename = '/home/eddie/projects/ADI-Insight/BLE_dats/build/max32655.elf'
+    table_widget = main_window.ui.tbl_vars
+    elf_file_path = '/home/eddie/projects/ADI-Insight/BLE_dats/build/max32655.elf'
+    table_widget = main_window.ui.tbl_vars # Replace with the actual table widget object
+    table_widget.setColumnWidth(3, 50)
+
+    elf_file_path = '/home/eddie/projects/ADI-Insight/BLE_dats/build/max32655.elf'
+
+    # Slot method to handle symbol extracted
+    def handle_symbol_extracted(name, address):
+        row_position = main_window.ui.tbl_vars.rowCount()
+        main_window.ui.tbl_vars.insertRow(row_position)
+        main_window.ui.tbl_vars.setItem(row_position, 0, QTableWidgetItem(name))
+        main_window.ui.tbl_vars.setItem(row_position, 1, QTableWidgetItem(hex(address)))
+
+        # Create a checkbox
+        checkbox = QCheckBox()
+        checkbox.stateChanged.connect(lambda state, name=name, address=address: handle_checkbox_state_change(state, name, address, main_window.vars_watched_dict, main_window))
+
+        widget = QWidget()
+        layout = QHBoxLayout(widget)
+        layout.addWidget(checkbox)
+        layout.setAlignment(Qt.AlignCenter)
+        layout.setContentsMargins(0, 0, 0, 0)
+        widget.setLayout(layout)
+        main_window.ui.tbl_vars.setCellWidget(row_position, 2, widget) # Changed to column 3
+
+    # Start the thread
+    main_window.elf_parser.filename = filename
+    main_window.elf_parser.symbol_extracted.connect(handle_symbol_extracted) 
+    logger.info("Starting elf parser thread")
+    main_window.elf_parser.ramStart = int(main_window.ui.txtRamStart.text() , 16)
+    main_window.elf_parser.ramEnd = int(main_window.ui.txtRamEnd.text() , 16)
+    main_window.elf_parser.start()
+
+def start_monitoring(main_window):
+    if main_window.var_watcher.isRunning():
+        main_window.var_watcher.exit_early = True
+        main_window.ui.btn_monitor.setText("Start Monitoring")
+    else:
+        main_window.var_watcher.start()
+        main_window.ui.btn_monitor.setText("Stop Monitoring")
+
 def register_button_callbacks(main_window):
     logger = logging.getLogger("PDexLogger")
     try:
@@ -215,6 +325,8 @@ def register_button_callbacks(main_window):
         main_window.ui.btn_connect.clicked.connect(lambda: btn_connect(main_window))
         main_window.ui.btn_share.clicked.connect(lambda: btn_github(main_window))
         main_window.ui.btn_disconnect.clicked.connect(lambda: btn_disconnect(main_window))  
+        main_window.ui.btn_load_elf.clicked.connect(lambda: load_elf(main_window))  
+        main_window.ui.btn_monitor.clicked.connect(lambda: start_monitoring(main_window))
 
         # graphing checkbox callbacks
         main_window.ui.graph_enabled.stateChanged.connect(lambda: disable_graphing(main_window))        

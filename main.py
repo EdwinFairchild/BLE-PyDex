@@ -21,7 +21,8 @@ from PySide6 import QtUiTools, QtWidgets, QtGui
 from PySide6.QtWidgets import QMessageBox, QTableWidget, QMenu, QApplication
 from PySide6.QtGui import QCursor, QAction, QClipboard
 from PySide6.QtCore import QThread, Signal, QMutex, QMutexLocker, Qt
-
+from PySide6.QtWidgets import QTableWidget, QTableWidgetItem, QCheckBox, QWidget, QHBoxLayout
+from PySide6.QtCore import Qt 
 
 os.environ["QT_FONT_DPI"] = Settings.HIGH_DPI_DISPLAY_FONT_DPI # FIX Problem for High DPI and Scale above 100%
 
@@ -40,6 +41,7 @@ class MainWindow(QMainWindow):
     service_dict = {}
     cleanUp = Signal(object)
     
+    
     def __init__(self):
         QMainWindow.__init__(self)
 
@@ -47,6 +49,8 @@ class MainWindow(QMainWindow):
         self.ui.setupUi(self)
         global widgets
         widgets = self.ui
+        self.vars_watched_dict={}
+        self.device_address = None
 
         # Graphing variables
         self.device_data_sets = {}
@@ -69,6 +73,7 @@ class MainWindow(QMainWindow):
 
         # connected mode variables
         self.connectedDevice = BLE_ConnectDevice()
+        
         self.update_thread = UpdateRSSIGraphThread(self)
         self.update_thread.dataUpdated.connect(self.update_graph)
         if self.ui.graph_enabled.isChecked():
@@ -85,6 +90,10 @@ class MainWindow(QMainWindow):
         # Global BLE objects
         self.bleScanner = ble_functions.BLE_DiscoverDevices()
 
+        # Global elf parser object
+        self.elf_parser = ExtractGlobalVariablesThread(None, self.ui.tbl_vars)
+        self.var_watcher = MonitoringThread(self.vars_watched_dict)
+        self.var_watcher.signal_update_variable.connect(self.update_variable_in_table)  # Assuming 'self.update_variable_in_table' is a method that handles the update
         # USE CUSTOM TITLE BAR | USE AS "False" FOR MAC OR LINUX
         Settings.ENABLE_CUSTOM_TITLE_BAR = False
 
@@ -94,6 +103,8 @@ class MainWindow(QMainWindow):
         # APPLY TEXTS
         self.setWindowTitle(title)
         self.ui.titleRightInfo.setText(description)
+
+        self.ui.tbl_vars.setColumnWidth(3, 50)
 
         # TOGGLE MENU
         self.ui.toggleButton.clicked.connect(lambda: UIFunctions.toggleMenu(self, True))
@@ -115,6 +126,7 @@ class MainWindow(QMainWindow):
         self.ui.btn_widgets.clicked.connect(self.buttonClick)
         self.ui.btn_new.clicked.connect(self.buttonClick)
         self.ui.btn_save.clicked.connect(self.buttonClick)
+        self.ui.btn_insights.clicked.connect(self.buttonClick)
 
         # Register signal handlers
         self.add_adv_table_item.connect(lambda data :self.add_table_item(data))
@@ -480,6 +492,9 @@ class MainWindow(QMainWindow):
             self.ui.stackedWidget.setCurrentWidget(self.ui.home)
             UIFunctions.resetStyle(self, btnName)
             btn.setStyleSheet(UIFunctions.selectMenu(btn.styleSheet()))
+            # hide elfSettings frame
+            self.ui.elfSettings.hide()
+            self.ui.scannerSettigns.show()
 
         # SHOW WIDGETS PAGE
         if btnName == "btn_widgets":
@@ -495,6 +510,14 @@ class MainWindow(QMainWindow):
 
         if btnName == "btn_save":
             pass
+        
+        if btnName == "btn_insights":
+            self.ui.stackedWidget.setCurrentWidget(self.ui.insights)
+            UIFunctions.resetStyle(self, btnName) # RESET ANOTHERS BUTTONS SELECTED
+            btn.setStyleSheet(UIFunctions.selectMenu(btn.styleSheet())) # SELECT MENU
+            self.ui.scannerSettigns.hide()
+            self.ui.elfSettings.show()
+
             #print("Save BTN clicked!")
         # PRINT BTN NAME
         #print(f'Button "{btnName}" pressed!')
@@ -513,10 +536,17 @@ class MainWindow(QMainWindow):
         if event.buttons() == Qt.RightButton:
             pass
             #print('Mouse click: RIGHT CLICK')
-    
+    def update_variable_in_table(self, var_name, value):
+         # Check if the variable name is in the dictionary
+        if var_name in self.vars_watched_dict:
+            # Get the row index from the dictionary
+            row_index = self.vars_watched_dict[var_name]["watched_row_position"]
+            # Create a new item with the updated value
+            value_item = QTableWidgetItem(str(value))
+            # Update the value in column 3 (0-indexed)
+            self.ui.tbl_vars_watched.setItem(row_index, 1, value_item)
+
     def clean_up(self, widgets):
-        # Clear the scroll area
-        # Clear the scroll area
         try:
             container = self.ui.scrollArea_2.widget()
             layout = container.layout()
@@ -547,6 +577,8 @@ class MainWindow(QMainWindow):
         self.stop_graphing()
         self.stop_scanner()
         self.stop_connection()
+        self.stop_elf_parser()
+        self.stop_monitoringThread()
 
         event.accept()  # Accept the close event and let the window close
 
@@ -571,6 +603,19 @@ class MainWindow(QMainWindow):
         self.update_thread.GraphActive = False  # Request the thread to stop
         self.update_thread.quit()  # Request the thread to stop
         self.update_thread.wait()  # Wait until the thread has actually stopped
+
+    def stop_elf_parser(self):
+        self.elf_parser.exit_early = True
+        self.elf_parser.quit()
+        self.elf_parser.wait()
+    
+    def stop_monitoringThread(self):
+        self.var_watcher.exit_early = True
+        if self.var_watcher.monitor_active is True:
+            while self.var_watcher.exit_early is True:
+                pass
+        self.var_watcher.quit()
+        self.var_watcher.wait()
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
