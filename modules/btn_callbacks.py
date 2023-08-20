@@ -303,6 +303,9 @@ def load_elf(main_window):
     main_window.elf_parser.filename = filename
     main_window.elf_parser.symbol_extracted.connect(handle_symbol_extracted) 
     logger.info("Starting elf parser thread")
+    main_window.elf_parser.ramStart = int(main_window.ui.txtRamStart.text() , 16)
+    main_window.elf_parser.ramEnd = int(main_window.ui.txtRamEnd.text() , 16)
+    print(main_window.elf_parser.ramStart)  # Outputs: 2097407
     main_window.elf_parser.start()
 
 def start_monitoring(main_window):

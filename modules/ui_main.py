@@ -1686,9 +1686,6 @@ class Ui_MainWindow(object):
         self.stackedWidget.addWidget(self.widgets)
         self.insights = QWidget()
         self.insights.setObjectName(u"insights")
-        self.btn_load_elf = QPushButton(self.insights)
-        self.btn_load_elf.setObjectName(u"btn_load_elf")
-        self.btn_load_elf.setGeometry(QRect(730, 150, 89, 25))
         self.btn_monitor = QPushButton(self.insights)
         self.btn_monitor.setObjectName(u"btn_monitor")
         self.btn_monitor.setGeometry(QRect(730, 180, 89, 25))
@@ -1723,7 +1720,7 @@ class Ui_MainWindow(object):
 
         self.frame_4 = QFrame(self.insights)
         self.frame_4.setObjectName(u"frame_4")
-        self.frame_4.setGeometry(QRect(20, 0, 541, 301))
+        self.frame_4.setGeometry(QRect(20, 0, 481, 301))
         self.frame_4.setStyleSheet(u" border: 2px solid rgb(52, 59, 72);\n"
 "	border-radius: 5px;	\n"
 "")
@@ -1793,7 +1790,7 @@ class Ui_MainWindow(object):
         self.tbl_vars.setShowGrid(True)
         self.tbl_vars.setGridStyle(Qt.SolidLine)
         self.tbl_vars.setSortingEnabled(True)
-        self.tbl_vars.horizontalHeader().setVisible(False)
+        self.tbl_vars.horizontalHeader().setVisible(True)
         self.tbl_vars.horizontalHeader().setCascadingSectionResizes(False)
         self.tbl_vars.horizontalHeader().setDefaultSectionSize(120)
         self.tbl_vars.horizontalHeader().setHighlightSections(True)
@@ -1886,7 +1883,7 @@ class Ui_MainWindow(object):
 
         self.extraRightBox = QFrame(self.content)
         self.extraRightBox.setObjectName(u"extraRightBox")
-        self.extraRightBox.setMinimumSize(QSize(300, 0))
+        self.extraRightBox.setMinimumSize(QSize(250, 0))
         self.extraRightBox.setMaximumSize(QSize(0, 16777215))
         self.extraRightBox.setFrameShape(QFrame.NoFrame)
         self.extraRightBox.setFrameShadow(QFrame.Raised)
@@ -1946,7 +1943,9 @@ class Ui_MainWindow(object):
         self.options_frame.setMaximumSize(QSize(16777215, 45))
         self.options_frame.setStyleSheet(u" border: 2px solid rgb(52, 59, 72);\n"
 "	border-radius: 5px;	\n"
-"")
+"text-align: center;\n"
+"padding: 0px;\n"
+"margin: 0px;")
         self.options_frame.setFrameShape(QFrame.StyledPanel)
         self.options_frame.setFrameShadow(QFrame.Raised)
         self.verticalLayout_14 = QVBoxLayout(self.options_frame)
@@ -1976,13 +1975,13 @@ class Ui_MainWindow(object):
 
         self.elfSettings = QFrame(self.contentSettings)
         self.elfSettings.setObjectName(u"elfSettings")
+        self.elfSettings.setMinimumSize(QSize(0, 300))
+        self.elfSettings.setStyleSheet(u"text-align: center;")
         self.elfSettings.setFrameShape(QFrame.NoFrame)
         self.elfSettings.setFrameShadow(QFrame.Raised)
-        self.verticalLayout_30 = QVBoxLayout(self.elfSettings)
-        self.verticalLayout_30.setSpacing(0)
-        self.verticalLayout_30.setObjectName(u"verticalLayout_30")
         self.btn_save_logs_2 = QPushButton(self.elfSettings)
         self.btn_save_logs_2.setObjectName(u"btn_save_logs_2")
+        self.btn_save_logs_2.setGeometry(QRect(30, 180, 110, 45))
         sizePolicy.setHeightForWidth(self.btn_save_logs_2.sizePolicy().hasHeightForWidth())
         self.btn_save_logs_2.setSizePolicy(sizePolicy)
         self.btn_save_logs_2.setMinimumSize(QSize(0, 45))
@@ -1990,28 +1989,16 @@ class Ui_MainWindow(object):
         self.btn_save_logs_2.setCursor(QCursor(Qt.PointingHandCursor))
         self.btn_save_logs_2.setLayoutDirection(Qt.LeftToRight)
         self.btn_save_logs_2.setStyleSheet(u"background-image: url(:/icons/images/icons/cil-save.png);")
-
-        self.verticalLayout_30.addWidget(self.btn_save_logs_2)
-
-        self.btn_clear_logs_2 = QPushButton(self.elfSettings)
-        self.btn_clear_logs_2.setObjectName(u"btn_clear_logs_2")
-        sizePolicy.setHeightForWidth(self.btn_clear_logs_2.sizePolicy().hasHeightForWidth())
-        self.btn_clear_logs_2.setSizePolicy(sizePolicy)
-        self.btn_clear_logs_2.setMinimumSize(QSize(0, 45))
-        self.btn_clear_logs_2.setFont(font)
-        self.btn_clear_logs_2.setCursor(QCursor(Qt.PointingHandCursor))
-        self.btn_clear_logs_2.setLayoutDirection(Qt.LeftToRight)
-        self.btn_clear_logs_2.setStyleSheet(u"background-image: url(:/icons/images/icons/cil-remove.png);")
-
-        self.verticalLayout_30.addWidget(self.btn_clear_logs_2)
-
         self.options_frame_2 = QFrame(self.elfSettings)
         self.options_frame_2.setObjectName(u"options_frame_2")
+        self.options_frame_2.setGeometry(QRect(40, 230, 120, 43))
         self.options_frame_2.setMinimumSize(QSize(0, 40))
         self.options_frame_2.setMaximumSize(QSize(16777215, 45))
         self.options_frame_2.setStyleSheet(u" border: 2px solid rgb(52, 59, 72);\n"
 "	border-radius: 5px;	\n"
-"")
+"text-align: center;\n"
+"padding: 0px;\n"
+"margin: 0px;")
         self.options_frame_2.setFrameShape(QFrame.StyledPanel)
         self.options_frame_2.setFrameShadow(QFrame.Raised)
         self.verticalLayout_29 = QVBoxLayout(self.options_frame_2)
@@ -2026,13 +2013,65 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_29.addWidget(self.check_scroll_to_bottom_2)
 
+        self.frame_5 = QFrame(self.elfSettings)
+        self.frame_5.setObjectName(u"frame_5")
+        self.frame_5.setGeometry(QRect(10, 10, 210, 41))
+        self.frame_5.setStyleSheet(u" border: 0px solid rgb(52, 59, 72);\n"
+"	border-radius: 0px;	\n"
+"")
+        self.frame_5.setFrameShape(QFrame.StyledPanel)
+        self.frame_5.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_15 = QHBoxLayout(self.frame_5)
+        self.horizontalLayout_15.setObjectName(u"horizontalLayout_15")
+        self.label = QLabel(self.frame_5)
+        self.label.setObjectName(u"label")
+        self.label.setStyleSheet(u" border: 0px solid rgb(52, 59, 72);\n"
+"")
 
-        self.verticalLayout_30.addWidget(self.options_frame_2)
+        self.horizontalLayout_15.addWidget(self.label)
 
-        self.verticalSpacer_4 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.txtRamStart = QLineEdit(self.frame_5)
+        self.txtRamStart.setObjectName(u"txtRamStart")
+        self.txtRamStart.setStyleSheet(u" border: 2px solid rgb(52, 59, 72);\n"
+"	border-radius: 5px;	\n"
+"")
 
-        self.verticalLayout_30.addItem(self.verticalSpacer_4)
+        self.horizontalLayout_15.addWidget(self.txtRamStart)
 
+        self.frame_6 = QFrame(self.elfSettings)
+        self.frame_6.setObjectName(u"frame_6")
+        self.frame_6.setGeometry(QRect(10, 60, 210, 41))
+        self.frame_6.setStyleSheet(u" border: 0px solid rgb(52, 59, 72);\n"
+"	border-radius: 0px;	\n"
+"")
+        self.frame_6.setFrameShape(QFrame.StyledPanel)
+        self.frame_6.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_16 = QHBoxLayout(self.frame_6)
+        self.horizontalLayout_16.setObjectName(u"horizontalLayout_16")
+        self.label_3 = QLabel(self.frame_6)
+        self.label_3.setObjectName(u"label_3")
+        self.label_3.setStyleSheet(u" border: 0px solid rgb(52, 59, 72);\n"
+"")
+
+        self.horizontalLayout_16.addWidget(self.label_3)
+
+        self.txtRamEnd = QLineEdit(self.frame_6)
+        self.txtRamEnd.setObjectName(u"txtRamEnd")
+        self.txtRamEnd.setStyleSheet(u" border: 2px solid rgb(52, 59, 72);\n"
+"	border-radius: 5px;	\n"
+"")
+
+        self.horizontalLayout_16.addWidget(self.txtRamEnd)
+
+        self.btn_load_elf = QPushButton(self.elfSettings)
+        self.btn_load_elf.setObjectName(u"btn_load_elf")
+        self.btn_load_elf.setGeometry(QRect(10, 110, 201, 25))
+        self.btn_load_elf.setFocusPolicy(Qt.NoFocus)
+        self.btn_load_elf.setStyleSheet(u" border: 2px solid rgb(52, 59, 72);\n"
+"	border-radius: 5px;	\n"
+"text-align: center;\n"
+"padding: 0px;\n"
+"margin: 0px;")
 
         self.verticalLayout_13.addWidget(self.elfSettings)
 
@@ -2106,8 +2145,8 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
         self.scanSlider.valueChanged.connect(self.label_scan_timeout_value.setNum)
 
-        self.stackedWidget.setCurrentIndex(3)
-        self.rssi_gatt_expolrer.setCurrentIndex(0)
+        self.stackedWidget.setCurrentIndex(2)
+        self.rssi_gatt_expolrer.setCurrentIndex(1)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -2239,7 +2278,6 @@ class Ui_MainWindow(object):
         ___qtablewidgetitem23.setText(QCoreApplication.translate("MainWindow", u"Line", None));
         self.tableWidget.setSortingEnabled(__sortingEnabled)
 
-        self.btn_load_elf.setText(QCoreApplication.translate("MainWindow", u"Load Elf", None))
         self.btn_monitor.setText(QCoreApplication.translate("MainWindow", u"Monitor", None))
         ___qtablewidgetitem24 = self.tbl_vars_watched.horizontalHeaderItem(0)
         ___qtablewidgetitem24.setText(QCoreApplication.translate("MainWindow", u"Name", None));
@@ -2260,8 +2298,12 @@ class Ui_MainWindow(object):
         self.btn_clear_logs.setText(QCoreApplication.translate("MainWindow", u"Clear logs & graph", None))
         self.check_scroll_to_bottom.setText(QCoreApplication.translate("MainWindow", u"Auto scroll table", None))
         self.btn_save_logs_2.setText(QCoreApplication.translate("MainWindow", u"Elf Save", None))
-        self.btn_clear_logs_2.setText(QCoreApplication.translate("MainWindow", u"Elf Clear", None))
         self.check_scroll_to_bottom_2.setText(QCoreApplication.translate("MainWindow", u"ELf button", None))
+        self.label.setText(QCoreApplication.translate("MainWindow", u"Ram Start :", None))
+        self.txtRamStart.setText(QCoreApplication.translate("MainWindow", u"0x20000000", None))
+        self.label_3.setText(QCoreApplication.translate("MainWindow", u"Ram End :", None))
+        self.txtRamEnd.setText(QCoreApplication.translate("MainWindow", u"0x2001FFFF ", None))
+        self.btn_load_elf.setText(QCoreApplication.translate("MainWindow", u"Load Elf", None))
         self.creditsLabel.setText(QCoreApplication.translate("MainWindow", u"By: Edwin Amaya", None))
         self.version.setText(QCoreApplication.translate("MainWindow", u"v2.0.0", None))
     # retranslateUi

@@ -12,6 +12,8 @@ class ExtractGlobalVariablesThread(QThread):
     logger = logging.getLogger("PDexLogger")
     symbol_extracted = Signal(str, int , str)  # Define a signal to emit the variable name and address
     exit_early = False
+    ramStart = None
+    ramEnd = None
     def __init__(self, filename, table_widget):
         super().__init__()
         self.filename = filename
@@ -43,6 +45,7 @@ class ExtractGlobalVariablesThread(QThread):
                     
                     name = symbol.name
                     address = symbol['st_value']
+                    #if self.ramStart <= address <= self.ramEnd:
                     self.symbol_extracted.emit(name, address, section_name)
                     # if exit_early is true then exit the thread
                     if self.exit_early:
