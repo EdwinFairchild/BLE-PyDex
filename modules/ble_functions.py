@@ -116,22 +116,25 @@ class BLE_ConnectDevice(QThread):
             for service in client.services:
                 # find services and emit signal with list of services,char,desc , second value is the level of the tree
                 # EMIT SERVICE
-                self.discovered_services.emit([f": {service}", 0])
+                PARENT = 0
+                CHILD = 1
+                GRANDCHILD = 2
+                self.discovered_services.emit([f": {service}", PARENT])
                 for char in service.characteristics:
                     # EMIT characteristics with read property
                     if "read" in char.properties:
                         try:
                             value = bytes(await client.read_gatt_char(char.uuid))
                             self.discovered_services.emit(
-                                [f"\t: {char} ({','.join(char.properties)}), Value: {value}", 1])
+                                [f"\t: {char} ({','.join(char.properties)}), Value: {value}", CHILD])
                         except Exception as e:
                             self.discovered_services.emit(
-                                [f"\t: {char} ({','.join(char.properties)}), Error: {e}", 1])
+                                [f"\t: {char} ({','.join(char.properties)}), Error: {e}", CHILD])
                     else:
                         # EMIT characteristics without  read property
                         value = None
                         self.discovered_services.emit(
-                            [f"\t: {char} ({','.join(char.properties)}), Value: {value}", 1])
+                            [f"\t: {char} ({','.join(char.properties)}), Value: {value}", CHILD])
                     for descriptor in char.descriptors:
                         # emit children of children
                         try:
@@ -139,7 +142,7 @@ class BLE_ConnectDevice(QThread):
                                 await client.read_gatt_descriptor(descriptor.handle)
                             )
                             self.discovered_services.emit(
-                                [f"\t\t: {descriptor}) | Value: {value}", 2])
+                                [f"\t\t: {descriptor}) | Value: {value}", GRANDCHILD])
                         except Exception as err:
                             self.logger.warning(f"Opps!:{err}")
                             

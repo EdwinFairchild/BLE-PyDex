@@ -367,6 +367,9 @@ class MainWindow(QMainWindow):
         #print(data)
     
     def discovered_services(self,data):
+        PARENT = 0
+        CHILD = 1
+        GRANDCHILD = 2
         ''' data[0]
             comes in looking like this:
             ['[Service] 00001801-0000-1000-8000-00805f9b34fb (Handle: 16): Generic Attribute Profile', 0]
@@ -381,13 +384,14 @@ class MainWindow(QMainWindow):
         item = item.replace("]", " : ")
 
         ''' data[1] 
-            is a level indicator for the tree widget
-            0 = service 
-            1 = characteristic
-            2 = descriptor
+            is a level indicator for the tree widget, this is emited by 
+            modules->ble_functions->discover_device_services
+            0 = PARENT = service 
+            1 = CHILD = characteristic
+            2 = GRANDCHILD = descriptor
         '''    
         level = data[1]
-        if level == 0:
+        if level == PARENT:
             # data[0] looks like this: 00001801-0000-1000-8000-00805f9b34fb (Handle: 16): Generic Attribute Profile 
             # extract the UUID from the string which is this: 00001801-0000-1000-8000-00805f9b34fb
 
@@ -401,7 +405,7 @@ class MainWindow(QMainWindow):
             icon.addPixmap(QPixmap("char_s.png"), QIcon.Normal, QIcon.On)
             self.toplevel.setIcon(0, icon)
             self.ui.gatt_treeView.addTopLevelItem(self.toplevel)
-        elif level == 1 and self.toplevel != None:
+        elif level == CHILD and self.toplevel != None:
              # check if UUID exist in ble numbers
             svc_uuid = self.extract_uuid_name(item)
             self.child = QTreeWidgetItem([str(svc_uuid)])
@@ -412,7 +416,7 @@ class MainWindow(QMainWindow):
             self.toplevel.addChild(self.child)
            
            
-        elif level == 2 and self.child != None:
+        elif level == GRANDCHILD and self.child != None:
              # check if UUID exist in ble numbers
             svc_uuid = self.extract_uuid_name(item)
             self.subchild = QTreeWidgetItem([str(svc_uuid)])
@@ -438,7 +442,6 @@ class MainWindow(QMainWindow):
                 pass
         if found_match == False:
             # TODO check if UUID exist in user_uuids.json
-
             pass
 
         return data

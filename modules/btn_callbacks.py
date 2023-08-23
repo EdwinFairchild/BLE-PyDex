@@ -207,7 +207,6 @@ def btn_disconnect(interface):
         #nothing else todo, return
         return
 
-
 def disable_graphing(main_window):
     # check checkbox state
     if main_window.ui.graph_enabled.isChecked():
