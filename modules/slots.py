@@ -86,6 +86,7 @@ def init_signals_and_slots(interface):
     interface.bleScanner.scanning_stoped.connect(lambda : timed_scanning_stoped(interface))
      #register slot/signal for disconnecting from device
     interface.connectedDevice.device_disconnected.connect(lambda: device_disconnected_cb(interface))
+    # show Gatt explorer when connected
     interface.connectedDevice.connection_established.connect(lambda: interface.stacked_widget_show_connected())
 
 

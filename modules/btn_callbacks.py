@@ -104,6 +104,7 @@ def btn_connect(interface):
     if interface.bleScanner.is_scanning == True:
         try:
             interface.stop_scanner()
+            interface.stop_graphing()
             # interface.bleScanner.is_scanning = False
             # interface.bleScanner.quit()
             interface.ui.btn_scan.setText("Scan")
@@ -205,6 +206,8 @@ def btn_disconnect(interface):
             logger.setLevel(logging.INFO)
         #nothing else todo, return
         return
+
+
 def disable_graphing(main_window):
     # check checkbox state
     if main_window.ui.graph_enabled.isChecked():
