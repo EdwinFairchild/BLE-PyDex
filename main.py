@@ -450,25 +450,36 @@ class MainWindow(QMainWindow):
                 # Add widget to Main Scroll Area
         scroll = QScrollArea()  # Scroll Area which contains the widgets, set as the centralWidget
         widget = QWidget()           # Widget that contains the collection of Vertical Box
-
+       
         tempWidget = QtWidgets.QWidget()
         uiwidget = Ui_service_widget()
+
+
         tempWidget.setMinimumHeight(400)
         uiwidget.setupUi(tempWidget)
         uiwidget.hello_btn.clicked.connect(lambda state : self.service_btn_click(svc_uuid))
         uiwidget.uuid_label.setText(str(svc_uuid))
         widget.setLayout(self.vbox)
-        # widget.setStyleSheet("""
+        widget.setStyleSheet("""
         
-        #  border: 2px solid rgb(52, 59, 72);
-	    #     border-radius: 5px;	""")
+         border: 0px solid rgb(52, 59, 72);
+	        border-radius: 5px;	
+            margin: 0px;
+        padding: 0px;""")
 
         # add to vertical layout row,column
         self.vbox.addWidget(tempWidget,self.serviceCount,0)
+        self.vbox.setSpacing(0)
         self.vbox.setContentsMargins(QMargins(20, 0, 0, 0))
+
         self.serviceCount += 1
 
+        self.ui.scrollArea_2.setStyleSheet("""
         
+         border: 0px solid rgb(52, 59, 72);
+	        border-radius: 0px;	
+            margin: 0px;
+        padding: 0px;""")
         self.ui.scrollArea_2.setVerticalScrollBarPolicy(Qt.ScrollBarAsNeeded)
         self.ui.scrollArea_2.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         self.ui.scrollArea_2.setWidgetResizable(True)

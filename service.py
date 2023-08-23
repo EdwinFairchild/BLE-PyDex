@@ -16,30 +16,56 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QApplication, QFrame, QLabel, QPushButton,
-    QSizePolicy, QVBoxLayout, QWidget)
+    QSizePolicy, QSpacerItem, QVBoxLayout, QWidget)
 
 class Ui_service_widget(object):
     def setupUi(self, service_widget):
         if not service_widget.objectName():
             service_widget.setObjectName(u"service_widget")
-        service_widget.resize(400, 300)
+        service_widget.resize(493, 348)
         self.verticalLayout = QVBoxLayout(service_widget)
         self.verticalLayout.setObjectName(u"verticalLayout")
+        self.verticalLayout.setContentsMargins(0, 0, 0, 0)
         self.frame = QFrame(service_widget)
         self.frame.setObjectName(u"frame")
-        self.frame.setStyleSheet(u"border: 2px solid rgb(52, 59, 72);\n"
+        self.frame.setStyleSheet(u"border: 1px solid rgb(52, 59, 72);\n"
 "border-radius: 5px;")
         self.frame.setFrameShape(QFrame.StyledPanel)
         self.frame.setFrameShadow(QFrame.Raised)
-        self.service_label = QLabel(self.frame)
-        self.service_label.setObjectName(u"service_label")
-        self.service_label.setGeometry(QRect(10, 10, 61, 17))
+        self.verticalLayout_2 = QVBoxLayout(self.frame)
+        self.verticalLayout_2.setObjectName(u"verticalLayout_2")
         self.uuid_label = QLabel(self.frame)
         self.uuid_label.setObjectName(u"uuid_label")
-        self.uuid_label.setGeometry(QRect(70, 10, 291, 17))
+
+        self.verticalLayout_2.addWidget(self.uuid_label)
+
+        self.service_label = QLabel(self.frame)
+        self.service_label.setObjectName(u"service_label")
+
+        self.verticalLayout_2.addWidget(self.service_label)
+
         self.hello_btn = QPushButton(self.frame)
         self.hello_btn.setObjectName(u"hello_btn")
-        self.hello_btn.setGeometry(QRect(20, 40, 89, 25))
+
+        self.verticalLayout_2.addWidget(self.hello_btn)
+
+        self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+
+        self.verticalLayout_2.addItem(self.verticalSpacer)
+
+        self.line = QFrame(self.frame)
+        self.line.setObjectName(u"line")
+        font = QFont()
+        font.setBold(True)
+        self.line.setFont(font)
+        self.line.setStyleSheet(u"color: rgb(98, 160, 234);\n"
+"background-color: rgb(153, 193, 241);")
+        self.line.setLineWidth(3)
+        self.line.setFrameShape(QFrame.HLine)
+        self.line.setFrameShadow(QFrame.Sunken)
+
+        self.verticalLayout_2.addWidget(self.line)
+
 
         self.verticalLayout.addWidget(self.frame)
 
@@ -51,8 +77,8 @@ class Ui_service_widget(object):
 
     def retranslateUi(self, service_widget):
         service_widget.setWindowTitle(QCoreApplication.translate("service_widget", u"Form", None))
-        self.service_label.setText(QCoreApplication.translate("service_widget", u"Service:", None))
         self.uuid_label.setText(QCoreApplication.translate("service_widget", u"TextLabel", None))
+        self.service_label.setText(QCoreApplication.translate("service_widget", u"Service:", None))
         self.hello_btn.setText(QCoreApplication.translate("service_widget", u"PushButton", None))
     # retranslateUi
 

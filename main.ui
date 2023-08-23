@@ -8,7 +8,7 @@
     <x>0</x>
     <y>0</y>
     <width>1451</width>
-    <height>901</height>
+    <height>1034</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -1833,7 +1833,7 @@ p, li { white-space: pre-wrap; }
                       <string notr="true">background: transparent;</string>
                      </property>
                      <property name="currentIndex">
-                      <number>2</number>
+                      <number>3</number>
                      </property>
                      <widget class="QWidget" name="home">
                       <property name="styleSheet">
@@ -2715,7 +2715,7 @@ QHeaderView::section:vertical
                                 <rect>
                                  <x>0</x>
                                  <y>0</y>
-                                 <width>218</width>
+                                 <width>371</width>
                                  <height>218</height>
                                 </rect>
                                </property>
@@ -3303,7 +3303,7 @@ QHeaderView::section:vertical
 </string>
                                </property>
                                <attribute name="horizontalHeaderVisible">
-                                <bool>true</bool>
+                                <bool>false</bool>
                                </attribute>
                                <attribute name="horizontalHeaderCascadingSectionResizes">
                                 <bool>true</bool>
@@ -3658,7 +3658,7 @@ margin-left: 10px;  /* Add 10 pixels of margin to the left of the button */
                                    <bool>true</bool>
                                   </property>
                                   <attribute name="horizontalHeaderVisible">
-                                   <bool>true</bool>
+                                   <bool>false</bool>
                                   </attribute>
                                   <attribute name="horizontalHeaderCascadingSectionResizes">
                                    <bool>false</bool>
@@ -3741,7 +3741,7 @@ margin-left: 10px;  /* Add 10 pixels of margin to the left of the button */
 </string>
                                   </property>
                                   <attribute name="horizontalHeaderVisible">
-                                   <bool>true</bool>
+                                   <bool>false</bool>
                                   </attribute>
                                   <attribute name="horizontalHeaderCascadingSectionResizes">
                                    <bool>true</bool>
@@ -3871,11 +3871,13 @@ margin-left: 10px;  /* Add 10 pixels of margin to the left of the button */
                             <x>530</x>
                             <y>10</y>
                             <width>581</width>
-                            <height>531</height>
+                            <height>611</height>
                            </rect>
                           </property>
                           <property name="styleSheet">
-                           <string notr="true"/>
+                           <string notr="true"> border: 2px solid rgb(52, 59, 72);
+	border-radius: 5px;	
+</string>
                           </property>
                           <property name="frameShape">
                            <enum>QFrame::StyledPanel</enum>
@@ -3884,6 +3886,21 @@ margin-left: 10px;  /* Add 10 pixels of margin to the left of the button */
                            <enum>QFrame::Raised</enum>
                           </property>
                           <layout class="QVBoxLayout" name="verticalLayout_28">
+                           <property name="spacing">
+                            <number>0</number>
+                           </property>
+                           <property name="leftMargin">
+                            <number>0</number>
+                           </property>
+                           <property name="topMargin">
+                            <number>0</number>
+                           </property>
+                           <property name="rightMargin">
+                            <number>0</number>
+                           </property>
+                           <property name="bottomMargin">
+                            <number>0</number>
+                           </property>
                            <item>
                             <widget class="QScrollArea" name="scrollArea_2">
                              <property name="sizePolicy">
@@ -3909,8 +3926,8 @@ margin-left: 10px;  /* Add 10 pixels of margin to the left of the button */
                                <rect>
                                 <x>0</x>
                                 <y>0</y>
-                                <width>553</width>
-                                <height>511</height>
+                                <width>569</width>
+                                <height>607</height>
                                </rect>
                               </property>
                              </widget>
