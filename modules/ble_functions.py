@@ -89,7 +89,9 @@ class BLE_ConnectDevice(QThread):
                 while self.is_connected == True:
                     # send the conenctions established singal only once
                     if self.connection_esablished_signal_sent == False:
+                        # triggers stacked widget to show Gatt Explorere screen
                         self.connection_established.emit()
+                        # just a flag used to send the signal only once
                         self.connection_esablished_signal_sent = True
 
                     # async sleep, give time for other threads to run
@@ -97,6 +99,7 @@ class BLE_ConnectDevice(QThread):
                     #pass
                 try:
                     await self.disconnect_device(client)
+                    self.connection_esablished_signal_sent = False
                 except Exception as err:
                     self.logger.warning(err)
         except Exception as err:

@@ -78,7 +78,7 @@ class MainWindow(QMainWindow):
         self.update_thread.dataUpdated.connect(self.update_graph)
         if self.ui.graph_enabled.isChecked():
             self.update_thread.GraphActive = True
-            self.update_thread.start()
+            #self.update_thread.start()
 
 
         # Generate some log messages for testing
