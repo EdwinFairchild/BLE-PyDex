@@ -1,6 +1,6 @@
 #!/bin/bash
 pyside6-uic  main.ui -o ui_main.py
-pyside6-uic  service.ui -o service.py
+pyside6-uic  char.ui -o char.py
 # Variables
 string1="import resources_rc"
 string2="from . resources_rc import *"

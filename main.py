@@ -29,7 +29,7 @@ os.environ["QT_FONT_DPI"] = Settings.HIGH_DPI_DISPLAY_FONT_DPI # FIX Problem for
 # SET AS GLOBAL WIDGETS
 widgets = None
 
-from service import Ui_service_widget
+from char import Ui_char_widget
 
 # TODO :  Move a lot of these functions to their related modules
 class MainWindow(QMainWindow):
@@ -367,6 +367,7 @@ class MainWindow(QMainWindow):
         #print(data)
     
     def discovered_services(self,data):
+        
         PARENT = 0
         CHILD = 1
         GRANDCHILD = 2
@@ -391,6 +392,8 @@ class MainWindow(QMainWindow):
             2 = GRANDCHILD = descriptor
         '''    
         level = data[1]
+        permissions = data[2]
+        print(permissions)
         if level == PARENT:
             # data[0] looks like this: 00001801-0000-1000-8000-00805f9b34fb (Handle: 16): Generic Attribute Profile 
             # extract the UUID from the string which is this: 00001801-0000-1000-8000-00805f9b34fb
@@ -398,7 +401,6 @@ class MainWindow(QMainWindow):
             # check if UUID exist in ble numbers
             svc_uuid = self.extract_uuid_name(item)
             self.logger.info("Adding service widget for UUID: " + str(svc_uuid))
-            self.add_service_widget(str(svc_uuid))
             self.toplevel = QTreeWidgetItem([str(svc_uuid)])
             # Set the icon for the top-level item.
             icon = QIcon()
@@ -425,6 +427,9 @@ class MainWindow(QMainWindow):
             icon.addPixmap(QPixmap("char_d.png"), QIcon.Normal, QIcon.On)
             self.subchild.setIcon(0, icon)
             self.child.addChild(self.subchild)
+        # adds new widget to scroll area only for characteristics
+        if permissions is not None:
+            self.add_service_widget(str(svc_uuid))
     
     def extract_uuid_name(self, data):
         # data[0] looks like this: 00001801-0000-1000-8000-00805f9b34fb (Handle: 16): Generic Attribute Profile 
@@ -452,7 +457,7 @@ class MainWindow(QMainWindow):
         widget = QWidget()           # Widget that contains the collection of Vertical Box
        
         tempWidget = QtWidgets.QWidget()
-        uiwidget = Ui_service_widget()
+        uiwidget = Ui_char_widget()
 
 
         tempWidget.setMinimumHeight(400)
@@ -469,7 +474,7 @@ class MainWindow(QMainWindow):
 
         # add to vertical layout row,column
         self.vbox.addWidget(tempWidget,self.serviceCount,0)
-        self.vbox.setSpacing(0)
+        self.vbox.setSpacing(10)
         self.vbox.setContentsMargins(QMargins(20, 0, 0, 0))
 
         self.serviceCount += 1

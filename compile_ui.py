@@ -4,6 +4,7 @@ import subprocess
 
 # Command to generate ui_main.py from main.ui
 subprocess.run(["pyside6-uic", "main.ui", "-o", "ui_main.py"])
+subprocess.run(["pyside6-uic", "char.ui", "-o", "char.py"])
 
 # Variables
 string1 = "import resources_rc"
