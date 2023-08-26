@@ -2715,7 +2715,7 @@ QHeaderView::section:vertical
                                 <rect>
                                  <x>0</x>
                                  <y>0</y>
-                                 <width>371</width>
+                                 <width>319</width>
                                  <height>218</height>
                                 </rect>
                                </property>
@@ -3803,7 +3803,10 @@ margin-left: 10px;  /* Add 10 pixels of margin to the left of the button */
                          <property name="frameShadow">
                           <enum>QFrame::Raised</enum>
                          </property>
-                         <layout class="QHBoxLayout" name="horizontalLayout_18" stretch="4,5">
+                         <layout class="QHBoxLayout" name="horizontalLayout_18" stretch="3,5">
+                          <property name="spacing">
+                           <number>0</number>
+                          </property>
                           <property name="topMargin">
                            <number>0</number>
                           </property>
@@ -3820,6 +3823,9 @@ margin-left: 10px;  /* Add 10 pixels of margin to the left of the button */
                             </property>
                             <layout class="QVBoxLayout" name="verticalLayout_35">
                              <property name="topMargin">
+                              <number>0</number>
+                             </property>
+                             <property name="rightMargin">
                               <number>0</number>
                              </property>
                              <item>
@@ -3908,7 +3914,7 @@ margin-left: 10px;  /* Add 10 pixels of margin to the left of the button */
                             </property>
                             <layout class="QVBoxLayout" name="verticalLayout_28">
                              <property name="spacing">
-                              <number>6</number>
+                              <number>10</number>
                              </property>
                              <property name="leftMargin">
                               <number>0</number>
@@ -3947,7 +3953,7 @@ margin-left: 10px;  /* Add 10 pixels of margin to the left of the button */
                                  <rect>
                                   <x>0</x>
                                   <y>0</y>
-                                  <width>583</width>
+                                  <width>661</width>
                                   <height>581</height>
                                  </rect>
                                 </property>

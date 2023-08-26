@@ -29,8 +29,10 @@
    <item>
     <widget class="QFrame" name="frame">
      <property name="styleSheet">
-      <string notr="true">border: 1px solid rgb(52, 59, 72);
-border-radius: 5px;</string>
+      <string notr="true">border: 2px solid rgb(52, 59, 72);
+border-radius: 5px;
+
+background-color: rgb(45, 49, 57);</string>
      </property>
      <property name="frameShape">
       <enum>QFrame::StyledPanel</enum>
@@ -38,7 +40,7 @@ border-radius: 5px;</string>
      <property name="frameShadow">
       <enum>QFrame::Raised</enum>
      </property>
-     <layout class="QVBoxLayout" name="verticalLayout_2" stretch="3,1,4,3">
+     <layout class="QVBoxLayout" name="verticalLayout_2" stretch="2,1,4,3">
       <item>
        <widget class="QFrame" name="frame_4">
         <property name="frameShape">
@@ -91,7 +93,7 @@ border-radius: 5px;</string>
         <property name="frameShadow">
          <enum>QFrame::Raised</enum>
         </property>
-        <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <layout class="QVBoxLayout" name="verticalLayout_3">
          <property name="leftMargin">
           <number>0</number>
          </property>
@@ -109,8 +111,12 @@ border-radius: 5px;</string>
            <property name="minimumSize">
             <size>
              <width>200</width>
-             <height>40</height>
+             <height>50</height>
             </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">border: 0px solid rgb(52, 59, 72);
+border-radius: 5px;</string>
            </property>
            <property name="frameShape">
             <enum>QFrame::StyledPanel</enum>
@@ -119,22 +125,18 @@ border-radius: 5px;</string>
             <enum>QFrame::Raised</enum>
            </property>
            <layout class="QHBoxLayout" name="horizontalLayout">
-            <property name="leftMargin">
-             <number>0</number>
-            </property>
             <property name="topMargin">
-             <number>0</number>
-            </property>
-            <property name="rightMargin">
              <number>0</number>
             </property>
             <property name="bottomMargin">
              <number>0</number>
             </property>
             <item>
-             <widget class="QPushButton" name="pushButton">
+             <widget class="QPushButton" name="permission_read">
               <property name="styleSheet">
-               <string notr="true">background-color: rgb(153, 193, 241);</string>
+               <string notr="true">background-color: rgb(153, 193, 241);
+padding:5px;
+color: rgb(0, 0, 0);</string>
               </property>
               <property name="text">
                <string>read</string>
@@ -142,9 +144,11 @@ border-radius: 5px;</string>
              </widget>
             </item>
             <item>
-             <widget class="QPushButton" name="pushButton_2">
+             <widget class="QPushButton" name="permission_write">
               <property name="styleSheet">
-               <string notr="true">background-color: rgb(143, 240, 164);</string>
+               <string notr="true">background-color: rgb(153, 193, 241);
+padding:5px;
+color: rgb(0, 0, 0);</string>
               </property>
               <property name="text">
                <string>write</string>
@@ -152,33 +156,49 @@ border-radius: 5px;</string>
              </widget>
             </item>
             <item>
-             <widget class="QPushButton" name="pushButton_3">
+             <widget class="QPushButton" name="permission_notify">
               <property name="enabled">
                <bool>true</bool>
               </property>
               <property name="styleSheet">
-               <string notr="true">background-color: rgb(246, 97, 81);</string>
+               <string notr="true">background-color: rgb(153, 193, 241);
+padding:5px;
+color: rgb(0, 0, 0);</string>
               </property>
               <property name="text">
                <string>notify</string>
               </property>
              </widget>
             </item>
+            <item>
+             <widget class="QPushButton" name="permission_indicate">
+              <property name="enabled">
+               <bool>true</bool>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">background-color: rgb(153, 193, 241);
+padding:5px;
+color: rgb(0, 0, 0);</string>
+              </property>
+              <property name="text">
+               <string>indicate</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="permission_write_wo_resp">
+              <property name="styleSheet">
+               <string notr="true">background-color: rgb(153, 193, 241);
+padding:5px;
+color: rgb(0, 0, 0);</string>
+              </property>
+              <property name="text">
+               <string>write-without-response</string>
+              </property>
+             </widget>
+            </item>
            </layout>
           </widget>
-         </item>
-         <item>
-          <spacer name="horizontalSpacer">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>40</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
          </item>
         </layout>
        </widget>
@@ -191,7 +211,7 @@ border-radius: 5px;</string>
         <property name="frameShadow">
          <enum>QFrame::Raised</enum>
         </property>
-        <widget class="QPushButton" name="hello_btn">
+        <widget class="QPushButton" name="char_read_btn">
          <property name="geometry">
           <rect>
            <x>360</x>
@@ -204,12 +224,12 @@ border-radius: 5px;</string>
           <string>PushButton</string>
          </property>
         </widget>
-        <widget class="AnimatedToggle" name="graph_enabled">
+        <widget class="AnimatedToggle" name="notify_toggle">
          <property name="geometry">
           <rect>
            <x>10</x>
            <y>10</y>
-           <width>101</width>
+           <width>51</width>
            <height>32</height>
           </rect>
          </property>
@@ -234,6 +254,19 @@ border-radius: 5px;</string>
            <width>201</width>
            <height>41</height>
           </rect>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="char_write_btn">
+         <property name="geometry">
+          <rect>
+           <x>360</x>
+           <y>50</y>
+           <width>83</width>
+           <height>19</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>PushButton</string>
          </property>
         </widget>
        </widget>

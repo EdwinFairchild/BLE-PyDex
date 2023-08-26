@@ -1483,7 +1483,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 371, 218))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 319, 218))
         self.scrollAreaWidgetContents.setStyleSheet(u" QScrollBar:vertical {\n"
 "	border: none;\n"
 "    background: rgb(52, 59, 72);\n"
@@ -1895,6 +1895,7 @@ class Ui_MainWindow(object):
         self.connections_main_frame.setFrameShape(QFrame.StyledPanel)
         self.connections_main_frame.setFrameShadow(QFrame.Raised)
         self.horizontalLayout_18 = QHBoxLayout(self.connections_main_frame)
+        self.horizontalLayout_18.setSpacing(0)
         self.horizontalLayout_18.setObjectName(u"horizontalLayout_18")
         self.horizontalLayout_18.setContentsMargins(-1, 0, -1, 0)
         self.frame_10 = QFrame(self.connections_main_frame)
@@ -1903,7 +1904,7 @@ class Ui_MainWindow(object):
         self.frame_10.setFrameShadow(QFrame.Raised)
         self.verticalLayout_35 = QVBoxLayout(self.frame_10)
         self.verticalLayout_35.setObjectName(u"verticalLayout_35")
-        self.verticalLayout_35.setContentsMargins(-1, 0, -1, -1)
+        self.verticalLayout_35.setContentsMargins(-1, 0, 0, -1)
         self.gatt_tree_frame = QFrame(self.frame_10)
         self.gatt_tree_frame.setObjectName(u"gatt_tree_frame")
         self.gatt_tree_frame.setStyleSheet(u" border: 2px solid rgb(52, 59, 72);\n"
@@ -1952,7 +1953,7 @@ class Ui_MainWindow(object):
         self.scroll_Area_2_frame.setFrameShape(QFrame.StyledPanel)
         self.scroll_Area_2_frame.setFrameShadow(QFrame.Raised)
         self.verticalLayout_28 = QVBoxLayout(self.scroll_Area_2_frame)
-        self.verticalLayout_28.setSpacing(6)
+        self.verticalLayout_28.setSpacing(10)
         self.verticalLayout_28.setObjectName(u"verticalLayout_28")
         self.verticalLayout_28.setContentsMargins(0, 0, 0, 9)
         self.scrollArea_2 = QScrollArea(self.scroll_Area_2_frame)
@@ -1967,7 +1968,7 @@ class Ui_MainWindow(object):
         self.scrollArea_2.setWidgetResizable(True)
         self.scrollAreaWidgetContents_2 = QWidget()
         self.scrollAreaWidgetContents_2.setObjectName(u"scrollAreaWidgetContents_2")
-        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 583, 581))
+        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 661, 581))
         self.scrollArea_2.setWidget(self.scrollAreaWidgetContents_2)
 
         self.verticalLayout_28.addWidget(self.scrollArea_2)
@@ -1975,7 +1976,7 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_18.addWidget(self.scroll_Area_2_frame)
 
-        self.horizontalLayout_18.setStretch(0, 4)
+        self.horizontalLayout_18.setStretch(0, 3)
         self.horizontalLayout_18.setStretch(1, 5)
 
         self.verticalLayout_20.addWidget(self.connections_main_frame)

@@ -16,8 +16,8 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QApplication, QFrame, QHBoxLayout, QLabel,
-    QLineEdit, QPushButton, QSizePolicy, QSpacerItem,
-    QTextEdit, QVBoxLayout, QWidget)
+    QLineEdit, QPushButton, QSizePolicy, QTextEdit,
+    QVBoxLayout, QWidget)
 
 from toggle import AnimatedToggle
 
@@ -31,8 +31,10 @@ class Ui_char_widget(object):
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
         self.frame = QFrame(char_widget)
         self.frame.setObjectName(u"frame")
-        self.frame.setStyleSheet(u"border: 1px solid rgb(52, 59, 72);\n"
-"border-radius: 5px;")
+        self.frame.setStyleSheet(u"border: 2px solid rgb(52, 59, 72);\n"
+"border-radius: 5px;\n"
+"\n"
+"background-color: rgb(45, 49, 57);")
         self.frame.setFrameShape(QFrame.StyledPanel)
         self.frame.setFrameShadow(QFrame.Raised)
         self.verticalLayout_2 = QVBoxLayout(self.frame)
@@ -58,42 +60,63 @@ class Ui_char_widget(object):
         self.frame_3.setObjectName(u"frame_3")
         self.frame_3.setFrameShape(QFrame.StyledPanel)
         self.frame_3.setFrameShadow(QFrame.Raised)
-        self.horizontalLayout_2 = QHBoxLayout(self.frame_3)
-        self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
-        self.horizontalLayout_2.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout_3 = QVBoxLayout(self.frame_3)
+        self.verticalLayout_3.setObjectName(u"verticalLayout_3")
+        self.verticalLayout_3.setContentsMargins(0, 0, 0, 0)
         self.frame_2 = QFrame(self.frame_3)
         self.frame_2.setObjectName(u"frame_2")
-        self.frame_2.setMinimumSize(QSize(200, 40))
+        self.frame_2.setMinimumSize(QSize(200, 50))
+        self.frame_2.setStyleSheet(u"border: 0px solid rgb(52, 59, 72);\n"
+"border-radius: 5px;")
         self.frame_2.setFrameShape(QFrame.StyledPanel)
         self.frame_2.setFrameShadow(QFrame.Raised)
         self.horizontalLayout = QHBoxLayout(self.frame_2)
         self.horizontalLayout.setObjectName(u"horizontalLayout")
-        self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
-        self.pushButton = QPushButton(self.frame_2)
-        self.pushButton.setObjectName(u"pushButton")
-        self.pushButton.setStyleSheet(u"background-color: rgb(153, 193, 241);")
+        self.horizontalLayout.setContentsMargins(-1, 0, -1, 0)
+        self.permission_read = QPushButton(self.frame_2)
+        self.permission_read.setObjectName(u"permission_read")
+        self.permission_read.setStyleSheet(u"background-color: rgb(153, 193, 241);\n"
+"padding:5px;\n"
+"color: rgb(0, 0, 0);")
 
-        self.horizontalLayout.addWidget(self.pushButton)
+        self.horizontalLayout.addWidget(self.permission_read)
 
-        self.pushButton_2 = QPushButton(self.frame_2)
-        self.pushButton_2.setObjectName(u"pushButton_2")
-        self.pushButton_2.setStyleSheet(u"background-color: rgb(143, 240, 164);")
+        self.permission_write = QPushButton(self.frame_2)
+        self.permission_write.setObjectName(u"permission_write")
+        self.permission_write.setStyleSheet(u"background-color: rgb(153, 193, 241);\n"
+"padding:5px;\n"
+"color: rgb(0, 0, 0);")
 
-        self.horizontalLayout.addWidget(self.pushButton_2)
+        self.horizontalLayout.addWidget(self.permission_write)
 
-        self.pushButton_3 = QPushButton(self.frame_2)
-        self.pushButton_3.setObjectName(u"pushButton_3")
-        self.pushButton_3.setEnabled(True)
-        self.pushButton_3.setStyleSheet(u"background-color: rgb(246, 97, 81);")
+        self.permission_notify = QPushButton(self.frame_2)
+        self.permission_notify.setObjectName(u"permission_notify")
+        self.permission_notify.setEnabled(True)
+        self.permission_notify.setStyleSheet(u"background-color: rgb(153, 193, 241);\n"
+"padding:5px;\n"
+"color: rgb(0, 0, 0);")
 
-        self.horizontalLayout.addWidget(self.pushButton_3)
+        self.horizontalLayout.addWidget(self.permission_notify)
+
+        self.permission_indicate = QPushButton(self.frame_2)
+        self.permission_indicate.setObjectName(u"permission_indicate")
+        self.permission_indicate.setEnabled(True)
+        self.permission_indicate.setStyleSheet(u"background-color: rgb(153, 193, 241);\n"
+"padding:5px;\n"
+"color: rgb(0, 0, 0);")
+
+        self.horizontalLayout.addWidget(self.permission_indicate)
+
+        self.permission_write_wo_resp = QPushButton(self.frame_2)
+        self.permission_write_wo_resp.setObjectName(u"permission_write_wo_resp")
+        self.permission_write_wo_resp.setStyleSheet(u"background-color: rgb(153, 193, 241);\n"
+"padding:5px;\n"
+"color: rgb(0, 0, 0);")
+
+        self.horizontalLayout.addWidget(self.permission_write_wo_resp)
 
 
-        self.horizontalLayout_2.addWidget(self.frame_2)
-
-        self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
-
-        self.horizontalLayout_2.addItem(self.horizontalSpacer)
+        self.verticalLayout_3.addWidget(self.frame_2)
 
 
         self.verticalLayout_2.addWidget(self.frame_3)
@@ -102,17 +125,20 @@ class Ui_char_widget(object):
         self.frame_5.setObjectName(u"frame_5")
         self.frame_5.setFrameShape(QFrame.StyledPanel)
         self.frame_5.setFrameShadow(QFrame.Raised)
-        self.hello_btn = QPushButton(self.frame_5)
-        self.hello_btn.setObjectName(u"hello_btn")
-        self.hello_btn.setGeometry(QRect(360, 20, 83, 19))
-        self.graph_enabled = AnimatedToggle(self.frame_5)
-        self.graph_enabled.setObjectName(u"graph_enabled")
-        self.graph_enabled.setGeometry(QRect(10, 10, 101, 32))
-        self.graph_enabled.setMaximumSize(QSize(99999, 999999))
-        self.graph_enabled.setChecked(True)
+        self.char_read_btn = QPushButton(self.frame_5)
+        self.char_read_btn.setObjectName(u"char_read_btn")
+        self.char_read_btn.setGeometry(QRect(360, 20, 83, 19))
+        self.notify_toggle = AnimatedToggle(self.frame_5)
+        self.notify_toggle.setObjectName(u"notify_toggle")
+        self.notify_toggle.setGeometry(QRect(10, 10, 51, 32))
+        self.notify_toggle.setMaximumSize(QSize(99999, 999999))
+        self.notify_toggle.setChecked(True)
         self.lineEdit = QLineEdit(self.frame_5)
         self.lineEdit.setObjectName(u"lineEdit")
         self.lineEdit.setGeometry(QRect(140, 10, 201, 41))
+        self.char_write_btn = QPushButton(self.frame_5)
+        self.char_write_btn.setObjectName(u"char_write_btn")
+        self.char_write_btn.setGeometry(QRect(360, 50, 83, 19))
 
         self.verticalLayout_2.addWidget(self.frame_5)
 
@@ -124,7 +150,7 @@ class Ui_char_widget(object):
 
         self.verticalLayout_2.addWidget(self.textEdit)
 
-        self.verticalLayout_2.setStretch(0, 3)
+        self.verticalLayout_2.setStretch(0, 2)
         self.verticalLayout_2.setStretch(1, 1)
         self.verticalLayout_2.setStretch(2, 4)
         self.verticalLayout_2.setStretch(3, 3)
@@ -141,10 +167,13 @@ class Ui_char_widget(object):
         char_widget.setWindowTitle(QCoreApplication.translate("char_widget", u"Form", None))
         self.uuid_label.setText(QCoreApplication.translate("char_widget", u"UUID :", None))
         self.service_label.setText(QCoreApplication.translate("char_widget", u"Characteristic : ", None))
-        self.pushButton.setText(QCoreApplication.translate("char_widget", u"read", None))
-        self.pushButton_2.setText(QCoreApplication.translate("char_widget", u"write", None))
-        self.pushButton_3.setText(QCoreApplication.translate("char_widget", u"notify", None))
-        self.hello_btn.setText(QCoreApplication.translate("char_widget", u"PushButton", None))
-        self.graph_enabled.setText(QCoreApplication.translate("char_widget", u"CheckBox", None))
+        self.permission_read.setText(QCoreApplication.translate("char_widget", u"read", None))
+        self.permission_write.setText(QCoreApplication.translate("char_widget", u"write", None))
+        self.permission_notify.setText(QCoreApplication.translate("char_widget", u"notify", None))
+        self.permission_indicate.setText(QCoreApplication.translate("char_widget", u"indicate", None))
+        self.permission_write_wo_resp.setText(QCoreApplication.translate("char_widget", u"write-without-response", None))
+        self.char_read_btn.setText(QCoreApplication.translate("char_widget", u"PushButton", None))
+        self.notify_toggle.setText(QCoreApplication.translate("char_widget", u"CheckBox", None))
+        self.char_write_btn.setText(QCoreApplication.translate("char_widget", u"PushButton", None))
     # retranslateUi
 
