@@ -7,8 +7,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1451</width>
-    <height>901</height>
+    <width>1348</width>
+    <height>853</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -1833,7 +1833,7 @@ p, li { white-space: pre-wrap; }
                       <string notr="true">background: transparent;</string>
                      </property>
                      <property name="currentIndex">
-                      <number>2</number>
+                      <number>3</number>
                      </property>
                      <widget class="QWidget" name="home">
                       <property name="styleSheet">
@@ -2715,7 +2715,7 @@ QHeaderView::section:vertical
                                 <rect>
                                  <x>0</x>
                                  <y>0</y>
-                                 <width>218</width>
+                                 <width>319</width>
                                  <height>218</height>
                                 </rect>
                                </property>
@@ -3303,7 +3303,7 @@ QHeaderView::section:vertical
 </string>
                                </property>
                                <attribute name="horizontalHeaderVisible">
-                                <bool>true</bool>
+                                <bool>false</bool>
                                </attribute>
                                <attribute name="horizontalHeaderCascadingSectionResizes">
                                 <bool>true</bool>
@@ -3658,7 +3658,7 @@ margin-left: 10px;  /* Add 10 pixels of margin to the left of the button */
                                    <bool>true</bool>
                                   </property>
                                   <attribute name="horizontalHeaderVisible">
-                                   <bool>true</bool>
+                                   <bool>false</bool>
                                   </attribute>
                                   <attribute name="horizontalHeaderCascadingSectionResizes">
                                    <bool>false</bool>
@@ -3741,7 +3741,7 @@ margin-left: 10px;  /* Add 10 pixels of margin to the left of the button */
 </string>
                                   </property>
                                   <attribute name="horizontalHeaderVisible">
-                                   <bool>true</bool>
+                                   <bool>false</bool>
                                   </attribute>
                                   <attribute name="horizontalHeaderCascadingSectionResizes">
                                    <bool>true</bool>
@@ -3803,121 +3803,167 @@ margin-left: 10px;  /* Add 10 pixels of margin to the left of the button */
                          <property name="frameShadow">
                           <enum>QFrame::Raised</enum>
                          </property>
-                         <widget class="QFrame" name="gatt_tree_frame">
-                          <property name="geometry">
-                           <rect>
-                            <x>0</x>
-                            <y>10</y>
-                            <width>521</width>
-                            <height>331</height>
-                           </rect>
+                         <layout class="QHBoxLayout" name="horizontalLayout_18" stretch="3,5">
+                          <property name="spacing">
+                           <number>0</number>
                           </property>
-                          <property name="styleSheet">
-                           <string notr="true"> border: 2px solid rgb(52, 59, 72);
+                          <property name="topMargin">
+                           <number>0</number>
+                          </property>
+                          <property name="bottomMargin">
+                           <number>0</number>
+                          </property>
+                          <item>
+                           <widget class="QFrame" name="frame_10">
+                            <property name="frameShape">
+                             <enum>QFrame::StyledPanel</enum>
+                            </property>
+                            <property name="frameShadow">
+                             <enum>QFrame::Raised</enum>
+                            </property>
+                            <layout class="QVBoxLayout" name="verticalLayout_35">
+                             <property name="topMargin">
+                              <number>0</number>
+                             </property>
+                             <property name="rightMargin">
+                              <number>0</number>
+                             </property>
+                             <item>
+                              <widget class="QFrame" name="gatt_tree_frame">
+                               <property name="styleSheet">
+                                <string notr="true"> border: 2px solid rgb(52, 59, 72);
 	border-radius: 5px;	
 </string>
-                          </property>
-                          <property name="frameShape">
-                           <enum>QFrame::StyledPanel</enum>
-                          </property>
-                          <property name="frameShadow">
-                           <enum>QFrame::Raised</enum>
-                          </property>
-                          <layout class="QVBoxLayout" name="verticalLayout_27">
-                           <item>
-                            <widget class="QTreeWidget" name="gatt_treeView">
-                             <property name="font">
-                              <font>
-                               <family>Segoe UI</family>
-                               <pointsize>10</pointsize>
-                               <weight>50</weight>
-                               <italic>false</italic>
-                               <bold>false</bold>
-                              </font>
-                             </property>
-                             <property name="styleSheet">
-                              <string notr="true"> border: 0px solid rgb(52, 59, 72);
+                               </property>
+                               <property name="frameShape">
+                                <enum>QFrame::StyledPanel</enum>
+                               </property>
+                               <property name="frameShadow">
+                                <enum>QFrame::Raised</enum>
+                               </property>
+                               <layout class="QVBoxLayout" name="verticalLayout_27">
+                                <item>
+                                 <widget class="QTreeWidget" name="gatt_treeView">
+                                  <property name="font">
+                                   <font>
+                                    <family>Segoe UI</family>
+                                    <pointsize>10</pointsize>
+                                    <weight>50</weight>
+                                    <italic>false</italic>
+                                    <bold>false</bold>
+                                   </font>
+                                  </property>
+                                  <property name="styleSheet">
+                                   <string notr="true"> border: 0px solid rgb(52, 59, 72);
 	border-radius: 0px;	
 </string>
+                                  </property>
+                                  <attribute name="headerVisible">
+                                   <bool>false</bool>
+                                  </attribute>
+                                  <column>
+                                   <property name="text">
+                                    <string>Gatt Tree</string>
+                                   </property>
+                                  </column>
+                                 </widget>
+                                </item>
+                               </layout>
+                              </widget>
+                             </item>
+                             <item>
+                              <widget class="QFrame" name="frame_11">
+                               <property name="frameShape">
+                                <enum>QFrame::StyledPanel</enum>
+                               </property>
+                               <property name="frameShadow">
+                                <enum>QFrame::Raised</enum>
+                               </property>
+                               <layout class="QVBoxLayout" name="verticalLayout_34">
+                                <item>
+                                 <widget class="QPushButton" name="btn_disconnect">
+                                  <property name="minimumSize">
+                                   <size>
+                                    <width>0</width>
+                                    <height>50</height>
+                                   </size>
+                                  </property>
+                                  <property name="text">
+                                   <string>Disconnect</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                               </layout>
+                              </widget>
+                             </item>
+                            </layout>
+                           </widget>
+                          </item>
+                          <item>
+                           <widget class="QFrame" name="scroll_Area_2_frame">
+                            <property name="styleSheet">
+                             <string notr="true"> border: 0px solid rgb(52, 59, 72);
+	border-radius: 5px;	
+</string>
+                            </property>
+                            <property name="frameShape">
+                             <enum>QFrame::StyledPanel</enum>
+                            </property>
+                            <property name="frameShadow">
+                             <enum>QFrame::Raised</enum>
+                            </property>
+                            <layout class="QVBoxLayout" name="verticalLayout_28">
+                             <property name="spacing">
+                              <number>10</number>
                              </property>
-                             <attribute name="headerVisible">
-                              <bool>false</bool>
-                             </attribute>
-                             <column>
-                              <property name="text">
-                               <string>Gatt Tree</string>
-                              </property>
-                             </column>
-                            </widget>
-                           </item>
-                          </layout>
-                         </widget>
-                         <widget class="QPushButton" name="btn_disconnect">
-                          <property name="geometry">
-                           <rect>
-                            <x>0</x>
-                            <y>350</y>
-                            <width>111</width>
-                            <height>31</height>
-                           </rect>
-                          </property>
-                          <property name="text">
-                           <string>Disconnect</string>
-                          </property>
-                         </widget>
-                         <widget class="QFrame" name="scroll_Area_2_frame">
-                          <property name="geometry">
-                           <rect>
-                            <x>530</x>
-                            <y>10</y>
-                            <width>581</width>
-                            <height>531</height>
-                           </rect>
-                          </property>
-                          <property name="styleSheet">
-                           <string notr="true"/>
-                          </property>
-                          <property name="frameShape">
-                           <enum>QFrame::StyledPanel</enum>
-                          </property>
-                          <property name="frameShadow">
-                           <enum>QFrame::Raised</enum>
-                          </property>
-                          <layout class="QVBoxLayout" name="verticalLayout_28">
-                           <item>
-                            <widget class="QScrollArea" name="scrollArea_2">
-                             <property name="sizePolicy">
-                              <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-                               <horstretch>0</horstretch>
-                               <verstretch>0</verstretch>
-                              </sizepolicy>
+                             <property name="leftMargin">
+                              <number>0</number>
                              </property>
-                             <property name="styleSheet">
-                              <string notr="true">
+                             <property name="topMargin">
+                              <number>0</number>
+                             </property>
+                             <property name="rightMargin">
+                              <number>0</number>
+                             </property>
+                             <property name="bottomMargin">
+                              <number>9</number>
+                             </property>
+                             <item>
+                              <widget class="QScrollArea" name="scrollArea_2">
+                               <property name="sizePolicy">
+                                <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+                                 <horstretch>0</horstretch>
+                                 <verstretch>0</verstretch>
+                                </sizepolicy>
+                               </property>
+                               <property name="styleSheet">
+                                <string notr="true">
  border: 0px solid rgb(52, 59, 72);
 	border-radius: 5px;	
 </string>
-                             </property>
-                             <property name="verticalScrollBarPolicy">
-                              <enum>Qt::ScrollBarAlwaysOn</enum>
-                             </property>
-                             <property name="widgetResizable">
-                              <bool>true</bool>
-                             </property>
-                             <widget class="QWidget" name="scrollAreaWidgetContents_2">
-                              <property name="geometry">
-                               <rect>
-                                <x>0</x>
-                                <y>0</y>
-                                <width>553</width>
-                                <height>511</height>
-                               </rect>
-                              </property>
-                             </widget>
-                            </widget>
-                           </item>
-                          </layout>
-                         </widget>
+                               </property>
+                               <property name="verticalScrollBarPolicy">
+                                <enum>Qt::ScrollBarAlwaysOn</enum>
+                               </property>
+                               <property name="widgetResizable">
+                                <bool>true</bool>
+                               </property>
+                               <widget class="QWidget" name="scrollAreaWidgetContents_2">
+                                <property name="geometry">
+                                 <rect>
+                                  <x>0</x>
+                                  <y>0</y>
+                                  <width>661</width>
+                                  <height>581</height>
+                                 </rect>
+                                </property>
+                               </widget>
+                              </widget>
+                             </item>
+                            </layout>
+                           </widget>
+                          </item>
+                         </layout>
                         </widget>
                        </item>
                       </layout>

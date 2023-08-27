@@ -138,7 +138,6 @@ def btn_connect(interface):
             logger.info("Error connecting to device: {}".format(err))
         # kicks off disocnnection events
         interface.connectedDevice.is_connected = False
-        logger.info("Disconnecting 2")
 
 
 def clear_logs(interface):
@@ -191,14 +190,12 @@ def btn_disconnect(interface):
     # check if the connectedDevice is connected
     if interface.connectedDevice.is_connected == True:
         logger.info("Disconnecting...")
-        interface.ui.btn_disconnect.setText("disconnecting...")
         # disable btn_connect until device is disconnected
         interface.ui.btn_connect.setEnabled(False)
        
         try:
             # if it is, disconnect it
             interface.connectedDevice.is_connected = False
-            logger.info("Disconnecting 3")
             #interface.stop_connection()
         except Exception as err:
             logger.setLevel(logging.WARNING)

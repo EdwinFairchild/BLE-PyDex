@@ -23,13 +23,13 @@ from PySide6.QtGui import QCursor, QAction, QClipboard
 from PySide6.QtCore import QThread, Signal, QMutex, QMutexLocker, Qt
 from PySide6.QtWidgets import QTableWidget, QTableWidgetItem, QCheckBox, QWidget, QHBoxLayout
 from PySide6.QtCore import Qt 
-
+from PySide6 import QtCharts
 os.environ["QT_FONT_DPI"] = Settings.HIGH_DPI_DISPLAY_FONT_DPI # FIX Problem for High DPI and Scale above 100%
 
 # SET AS GLOBAL WIDGETS
 widgets = None
 
-from service import Ui_service_widget
+from char import Ui_char_widget
 
 # TODO :  Move a lot of these functions to their related modules
 class MainWindow(QMainWindow):
@@ -38,7 +38,7 @@ class MainWindow(QMainWindow):
     child = None
     vbox = QGridLayout()
     serviceCount= 1
-    service_dict = {}
+    char_dict = {}
     cleanUp = Signal(object)
     
     
@@ -132,6 +132,7 @@ class MainWindow(QMainWindow):
         # Register signal handlers
         self.add_adv_table_item.connect(lambda data :self.add_table_item(data))
         self.connectedDevice.discovered_services.connect(self.discovered_services)
+        self.ui.gatt_treeView.itemClicked.connect(self.gatt_tree_view_clicked)
 
         # Register none-UI button callbacks
         btn_callbacks.register_button_callbacks(self)
@@ -203,7 +204,7 @@ class MainWindow(QMainWindow):
         slots.init_signals_and_slots(self)
 
         # register cleanup callback and pass widgets object to it with lambda
-        self.cleanUp.connect(lambda: self.clean_up(widgets))
+        self.cleanUp.connect(lambda: self.clean_up())
 
         
         
@@ -367,6 +368,7 @@ class MainWindow(QMainWindow):
         #print(data)
     
     def discovered_services(self,data):
+        
         PARENT = 0
         CHILD = 1
         GRANDCHILD = 2
@@ -391,6 +393,8 @@ class MainWindow(QMainWindow):
             2 = GRANDCHILD = descriptor
         '''    
         level = data[1]
+        permissions = data[2]
+        
         if level == PARENT:
             # data[0] looks like this: 00001801-0000-1000-8000-00805f9b34fb (Handle: 16): Generic Attribute Profile 
             # extract the UUID from the string which is this: 00001801-0000-1000-8000-00805f9b34fb
@@ -398,7 +402,6 @@ class MainWindow(QMainWindow):
             # check if UUID exist in ble numbers
             svc_uuid = self.extract_uuid_name(item)
             self.logger.info("Adding service widget for UUID: " + str(svc_uuid))
-            self.add_service_widget(str(svc_uuid))
             self.toplevel = QTreeWidgetItem([str(svc_uuid)])
             # Set the icon for the top-level item.
             icon = QIcon()
@@ -425,6 +428,9 @@ class MainWindow(QMainWindow):
             icon.addPixmap(QPixmap("char_d.png"), QIcon.Normal, QIcon.On)
             self.subchild.setIcon(0, icon)
             self.child.addChild(self.subchild)
+        # adds new widget to scroll area only for characteristics
+        if permissions is not None:
+            self.add_char_widget(str(svc_uuid), permissions)
     
     def extract_uuid_name(self, data):
         # data[0] looks like this: 00001801-0000-1000-8000-00805f9b34fb (Handle: 16): Generic Attribute Profile 
@@ -445,40 +451,110 @@ class MainWindow(QMainWindow):
             pass
 
         return data
+    def gatt_tree_view_clicked(self,tree_item, column):
+        # extract UUID from tree_item.text(column) and check if it exist in char_dict
+        # if it does exist then scroll to that widget
+        uuid = self.extract_uuid_name(tree_item.text(column))
+        if uuid in self.char_dict:
+            # scroll to widget
+            self.ui.scrollArea_2.ensureWidgetVisible(self.char_dict[uuid]["widgetlocation"])
+           
             
-    def add_service_widget(self, svc_uuid):
+    def add_char_widget(self, svc_uuid, permissions):
                 # Add widget to Main Scroll Area
         scroll = QScrollArea()  # Scroll Area which contains the widgets, set as the centralWidget
         widget = QWidget()           # Widget that contains the collection of Vertical Box
-
+       
         tempWidget = QtWidgets.QWidget()
-        uiwidget = Ui_service_widget()
+        uiwidget = Ui_char_widget()
+
+        
         tempWidget.setMinimumHeight(400)
         uiwidget.setupUi(tempWidget)
-        uiwidget.hello_btn.clicked.connect(lambda state : self.service_btn_click(svc_uuid))
+
+        # At this point we can access ui elements of the new char widget, we also store a reference to it in service_dict
+        uiwidget.char_write_btn.clicked.connect(lambda state : self.service_btn_click(svc_uuid))
         uiwidget.uuid_label.setText(str(svc_uuid))
+        # check if permissions list ['write-without-response', 'write', 'notify' , 'read' ,indicate] adn enable disable buttons with same name
+        if "write-without-response" in permissions:
+            # regiter callback for write button
+            pass
+        else:
+            uiwidget.permission_write_wo_resp.setEnabled(False)
+            #change background color to light gray
+            uiwidget.permission_write_wo_resp.setStyleSheet("background-color: rgb(52, 59, 72);color:rgb(205,205,205);padding:5px;")
+            #make invisible
+            #uiwidget.permission_write_wo_resp.setVisible(False)
+        if "write" in permissions:
+            # regiter callback for write button
+            pass
+        else:
+            uiwidget.permission_write.setEnabled(False)
+            #change background color to light gray
+            uiwidget.permission_write.setStyleSheet("background-color: rgb(52, 59, 72);color:rgb(205,205,205);padding:5px;")
+            #make invisible
+            #uiwidget.permission_write.setVisible(False)
+        if "notify" in permissions:
+            # regiter callback for notifications
+            pass
+        else:
+            uiwidget.permission_notify.setEnabled(False)
+            #change background color to light gray
+            uiwidget.permission_notify.setStyleSheet("background-color: rgb(52, 59, 72);color:rgb(205,205,205);padding:5px;")
+            #make invisible
+            #uiwidget.permission_notify.setVisible(False)
+        if "read" in permissions:
+            # regiter callback for read button
+            pass
+        else:
+            uiwidget.permission_read.setEnabled(False)
+            #change background color to light gray
+            uiwidget.permission_read.setStyleSheet("background-color: rgb(52, 59, 72);color:rgb(205,205,205);padding:5px;")
+            #make invisible
+            #uiwidget.permission_read.setVisible(False)
+        if "indicate" in permissions:
+            # regiter callback for indications
+            pass
+        else:
+            uiwidget.permission_indicate.setEnabled(False)
+            #change background color to light gray
+            uiwidget.permission_indicate.setStyleSheet("background-color: rgb(52, 59, 72);color:rgb(205,205,205);padding:5px;")
+            #make invisible
+            #uiwidget.permission_indicate.setVisible(False)
+
         widget.setLayout(self.vbox)
-        # widget.setStyleSheet("""
-        
-        #  border: 2px solid rgb(52, 59, 72);
-	    #     border-radius: 5px;	""")
+        widget.setStyleSheet("""
+            border: 0px solid rgb(52, 59, 72);
+	        border-radius: 5px;	
+            margin: 0px;
+            padding: 0px;""")
 
         # add to vertical layout row,column
         self.vbox.addWidget(tempWidget,self.serviceCount,0)
+        self.vbox.setSpacing(10)
         self.vbox.setContentsMargins(QMargins(20, 0, 0, 0))
+
         self.serviceCount += 1
 
-        
+        self.ui.scrollArea_2.setStyleSheet("""
+            border: 0px solid rgb(52, 59, 72);
+	        border-radius: 0px;	
+            margin: 0px;
+            padding: 0px;""")
         self.ui.scrollArea_2.setVerticalScrollBarPolicy(Qt.ScrollBarAsNeeded)
         self.ui.scrollArea_2.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         self.ui.scrollArea_2.setWidgetResizable(True)
         self.ui.scrollArea_2.setWidget(widget)
 
-        # Storing widgets in dictionary for future reference
-        self.service_dict[UUID] = uiwidget 
-        #print(f"Widget {uiwidget} added to service_dict with key {UUID}")
+        # Storing widgets in dictionary for future reference, for accessing elements of the widget
+        # and removing it from the scroll area
+        self.char_dict[svc_uuid] = {"uiWidget":uiwidget,"widgetlocation":tempWidget , "permissions":permissions}
+        # to retreive a vlue from this dict
+        # mywidget = self.char_dict[UUID]["widget"] 
+        
+        # register callbacks for the uiwidget elements
 
-        #  store reference to widget in service_dict so we can access it later, use UUID as key
+        #  store reference to widget in char_dict so we can access it later, use UUID as key
     def stacked_widget_show_connected(self):
         # change stacked widget to connections page
         self.ui.btn_new.click()
@@ -560,7 +636,7 @@ class MainWindow(QMainWindow):
             self.ui.tbl_core_regs.setItem(row_position, 1, QTableWidgetItem(hex(value)))
 
 
-    def clean_up(self, widgets):
+    def clean_up(self):
         try:
             container = self.ui.scrollArea_2.widget()
             layout = container.layout()
@@ -575,8 +651,7 @@ class MainWindow(QMainWindow):
             pass
 
         # Clear the dictionary storing widget references
-        self.service_dict.clear()
-
+        self.char_dict.clear()
         # Clear treeview if required
         self.ui.gatt_treeView.clear()
 

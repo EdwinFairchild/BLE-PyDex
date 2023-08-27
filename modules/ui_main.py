@@ -32,7 +32,7 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(1451, 901)
+        MainWindow.resize(1348, 853)
         MainWindow.setMinimumSize(QSize(940, 560))
         self.styleSheet = QWidget(MainWindow)
         self.styleSheet.setObjectName(u"styleSheet")
@@ -1483,7 +1483,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 218, 218))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 319, 218))
         self.scrollAreaWidgetContents.setStyleSheet(u" QScrollBar:vertical {\n"
 "	border: none;\n"
 "    background: rgb(52, 59, 72);\n"
@@ -1715,7 +1715,7 @@ class Ui_MainWindow(object):
         self.tbl_core_regs.setStyleSheet(u" border: 0px solid rgb(52, 59, 72);\n"
 "	border-radius:0px;	\n"
 "")
-        self.tbl_core_regs.horizontalHeader().setVisible(True)
+        self.tbl_core_regs.horizontalHeader().setVisible(False)
         self.tbl_core_regs.horizontalHeader().setCascadingSectionResizes(True)
         self.tbl_core_regs.horizontalHeader().setMinimumSectionSize(25)
         self.tbl_core_regs.horizontalHeader().setDefaultSectionSize(40)
@@ -1821,7 +1821,7 @@ class Ui_MainWindow(object):
         self.tbl_vars.setShowGrid(True)
         self.tbl_vars.setGridStyle(Qt.SolidLine)
         self.tbl_vars.setSortingEnabled(True)
-        self.tbl_vars.horizontalHeader().setVisible(True)
+        self.tbl_vars.horizontalHeader().setVisible(False)
         self.tbl_vars.horizontalHeader().setCascadingSectionResizes(False)
         self.tbl_vars.horizontalHeader().setDefaultSectionSize(120)
         self.tbl_vars.horizontalHeader().setHighlightSections(True)
@@ -1860,7 +1860,7 @@ class Ui_MainWindow(object):
         self.tbl_vars_watched.setStyleSheet(u" border: 0px solid rgb(52, 59, 72);\n"
 "	border-radius:0px;	\n"
 "")
-        self.tbl_vars_watched.horizontalHeader().setVisible(True)
+        self.tbl_vars_watched.horizontalHeader().setVisible(False)
         self.tbl_vars_watched.horizontalHeader().setCascadingSectionResizes(True)
         self.tbl_vars_watched.horizontalHeader().setDefaultSectionSize(120)
         self.tbl_vars_watched.verticalHeader().setVisible(False)
@@ -1894,9 +1894,19 @@ class Ui_MainWindow(object):
         self.connections_main_frame.setObjectName(u"connections_main_frame")
         self.connections_main_frame.setFrameShape(QFrame.StyledPanel)
         self.connections_main_frame.setFrameShadow(QFrame.Raised)
-        self.gatt_tree_frame = QFrame(self.connections_main_frame)
+        self.horizontalLayout_18 = QHBoxLayout(self.connections_main_frame)
+        self.horizontalLayout_18.setSpacing(0)
+        self.horizontalLayout_18.setObjectName(u"horizontalLayout_18")
+        self.horizontalLayout_18.setContentsMargins(-1, 0, -1, 0)
+        self.frame_10 = QFrame(self.connections_main_frame)
+        self.frame_10.setObjectName(u"frame_10")
+        self.frame_10.setFrameShape(QFrame.StyledPanel)
+        self.frame_10.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_35 = QVBoxLayout(self.frame_10)
+        self.verticalLayout_35.setObjectName(u"verticalLayout_35")
+        self.verticalLayout_35.setContentsMargins(-1, 0, 0, -1)
+        self.gatt_tree_frame = QFrame(self.frame_10)
         self.gatt_tree_frame.setObjectName(u"gatt_tree_frame")
-        self.gatt_tree_frame.setGeometry(QRect(0, 10, 521, 331))
         self.gatt_tree_frame.setStyleSheet(u" border: 2px solid rgb(52, 59, 72);\n"
 "	border-radius: 5px;	\n"
 "")
@@ -1914,17 +1924,38 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_27.addWidget(self.gatt_treeView)
 
-        self.btn_disconnect = QPushButton(self.connections_main_frame)
+
+        self.verticalLayout_35.addWidget(self.gatt_tree_frame)
+
+        self.frame_11 = QFrame(self.frame_10)
+        self.frame_11.setObjectName(u"frame_11")
+        self.frame_11.setFrameShape(QFrame.StyledPanel)
+        self.frame_11.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_34 = QVBoxLayout(self.frame_11)
+        self.verticalLayout_34.setObjectName(u"verticalLayout_34")
+        self.btn_disconnect = QPushButton(self.frame_11)
         self.btn_disconnect.setObjectName(u"btn_disconnect")
-        self.btn_disconnect.setGeometry(QRect(0, 350, 111, 31))
+        self.btn_disconnect.setMinimumSize(QSize(0, 50))
+
+        self.verticalLayout_34.addWidget(self.btn_disconnect)
+
+
+        self.verticalLayout_35.addWidget(self.frame_11)
+
+
+        self.horizontalLayout_18.addWidget(self.frame_10)
+
         self.scroll_Area_2_frame = QFrame(self.connections_main_frame)
         self.scroll_Area_2_frame.setObjectName(u"scroll_Area_2_frame")
-        self.scroll_Area_2_frame.setGeometry(QRect(530, 10, 581, 531))
-        self.scroll_Area_2_frame.setStyleSheet(u"")
+        self.scroll_Area_2_frame.setStyleSheet(u" border: 0px solid rgb(52, 59, 72);\n"
+"	border-radius: 5px;	\n"
+"")
         self.scroll_Area_2_frame.setFrameShape(QFrame.StyledPanel)
         self.scroll_Area_2_frame.setFrameShadow(QFrame.Raised)
         self.verticalLayout_28 = QVBoxLayout(self.scroll_Area_2_frame)
+        self.verticalLayout_28.setSpacing(10)
         self.verticalLayout_28.setObjectName(u"verticalLayout_28")
+        self.verticalLayout_28.setContentsMargins(0, 0, 0, 9)
         self.scrollArea_2 = QScrollArea(self.scroll_Area_2_frame)
         self.scrollArea_2.setObjectName(u"scrollArea_2")
         sizePolicy1.setHeightForWidth(self.scrollArea_2.sizePolicy().hasHeightForWidth())
@@ -1937,11 +1968,16 @@ class Ui_MainWindow(object):
         self.scrollArea_2.setWidgetResizable(True)
         self.scrollAreaWidgetContents_2 = QWidget()
         self.scrollAreaWidgetContents_2.setObjectName(u"scrollAreaWidgetContents_2")
-        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 553, 511))
+        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 661, 581))
         self.scrollArea_2.setWidget(self.scrollAreaWidgetContents_2)
 
         self.verticalLayout_28.addWidget(self.scrollArea_2)
 
+
+        self.horizontalLayout_18.addWidget(self.scroll_Area_2_frame)
+
+        self.horizontalLayout_18.setStretch(0, 3)
+        self.horizontalLayout_18.setStretch(1, 5)
 
         self.verticalLayout_20.addWidget(self.connections_main_frame)
 
@@ -2229,7 +2265,7 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
         self.scanSlider.valueChanged.connect(self.label_scan_timeout_value.setNum)
 
-        self.stackedWidget.setCurrentIndex(2)
+        self.stackedWidget.setCurrentIndex(3)
         self.rssi_gatt_expolrer.setCurrentIndex(0)
 
 
