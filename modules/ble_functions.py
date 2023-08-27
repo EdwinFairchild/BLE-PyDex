@@ -187,7 +187,6 @@ class BLE_ConnectDevice(QThread):
         self.device_disconnected.emit()
         
     async def writeCharCallback(self, client: BleakClient,  uuid , data , rawbytes = False):
-        print(f"args received: {uuid} {data} {bytes}")
         try:
             if rawbytes == True:
                 await client.write_gatt_char(uuid, bytearray(data))
@@ -196,13 +195,19 @@ class BLE_ConnectDevice(QThread):
         except Exception as err:
             self.logger.setLevel(logging.WARNING)
             self.logger.warning(err)
-            self.logger.setLevel(logging.INFO)
+            self.logger.setLevel(logging.WARNING)
             self.logger.info("Write failed")
 
     #------------------------------| Event handlers |-------------------------------------------
 
     def handle_write(self, uuid, data, rawbytes = False):
         task = ("write_char", [uuid,data,rawbytes], {})
-        self.async_queue.put_nowait(task)
+        try:
+            self.async_queue.put_nowait(task)
+        except err:
+            self.logger.setLevel(logging.WARNING)
+            self.logger.warning("Queue is full: {err}")
+            self.logger.setLevel(logging.INFO)
+            pass
         
         

@@ -524,7 +524,7 @@ class MainWindow(QMainWindow):
             self.child.addChild(self.subchild)
         # adds new widget to scroll area only for characteristics
         if permissions is not None:
-            self.add_char_widget(str(char_uuid), permissions)
+            self.add_char_widget(item, permissions)
     
     def extract_uuid_name(self, data):
         # data[0] looks like this: 00001801-0000-1000-8000-00805f9b34fb (Handle: 16): Generic Attribute Profile 
@@ -559,7 +559,11 @@ class MainWindow(QMainWindow):
         if uuid in self.char_dict:
             # scroll to widget
             self.ui.scrollArea_2.ensureWidgetVisible(self.char_dict[uuid]["widgetlocation"])
-           
+        else:
+            for key, value in self.char_dict.items():
+                if uuid in value['char name']:
+                    self.ui.scrollArea_2.ensureWidgetVisible(self.char_dict[key]["widgetlocation"])
+            
             
     def add_char_widget(self, char_uuid, permissions):
                 # Add widget to Main Scroll Area
@@ -574,7 +578,7 @@ class MainWindow(QMainWindow):
 
         # At this point we can access ui elements of the new char widget, we also store a reference to it in service_dict
         uiwidget.char_write_btn.clicked.connect(lambda state : self.char_write_btn_handler(self.extract_uuid_hex(char_uuid)))
-        uiwidget.uuid_label.setText(str(char_uuid))
+        uiwidget.uuid_label.setText(self.extract_uuid_name(char_uuid))
         # check if permissions list ['write-without-response', 'write', 'notify' , 'read' ,indicate] adn enable disable buttons with same name
         if "write-without-response" in permissions:
             # regiter callback for write button
