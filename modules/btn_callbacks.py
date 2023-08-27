@@ -13,8 +13,12 @@ def btn_scan(interface):
 
     if interface.bleScanner.is_scanning == False:
         try:
-            # clear list_widget_discovered
+            # clear graph, device list, colors etc. except data logs, user might want to save them
             interface.ui.list_widget_discovered.clear()
+            interface.device_data_curves= {}
+            interface.device_original_colors = {}
+            interface.ui.list_widget_discovered.clearSelection()
+            
             # check if the checkbox check_no_timeout is checked and set the timeout to 0 if it is
             if interface.ui.check_no_timeout.isChecked():
                 interface.bleScanner.scan_timeout = 0
@@ -147,6 +151,7 @@ def clear_logs(interface):
         interface.ui.tableWidget_2.setRowCount(0)
         interface.device_data_curves= {}
         interface.device_original_colors = {}
+        interface.ui.list_widget_discovered.clearSelection()
         # Remove all series from the chart
         interface.ui.qtchart_widgetholder.chart().removeAllSeries()
         if interface.ui.graph_enabled.isChecked():
