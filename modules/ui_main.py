@@ -1054,105 +1054,6 @@ class Ui_MainWindow(object):
         self.frame_explorer_top.setFrameShadow(QFrame.Raised)
         self.horizontalLayout_8 = QHBoxLayout(self.frame_explorer_top)
         self.horizontalLayout_8.setObjectName(u"horizontalLayout_8")
-        self.frame_scan = QFrame(self.frame_explorer_top)
-        self.frame_scan.setObjectName(u"frame_scan")
-        self.frame_scan.setStyleSheet(u"")
-        self.frame_scan.setFrameShape(QFrame.StyledPanel)
-        self.frame_scan.setFrameShadow(QFrame.Raised)
-        self.verticalLayout_23 = QVBoxLayout(self.frame_scan)
-        self.verticalLayout_23.setSpacing(10)
-        self.verticalLayout_23.setObjectName(u"verticalLayout_23")
-        self.verticalLayout_23.setContentsMargins(-1, 5, -1, 0)
-        self.frame_scan_timeout = QFrame(self.frame_scan)
-        self.frame_scan_timeout.setObjectName(u"frame_scan_timeout")
-        self.frame_scan_timeout.setMinimumSize(QSize(0, 0))
-        self.frame_scan_timeout.setMaximumSize(QSize(16777215, 20))
-        self.frame_scan_timeout.setStyleSheet(u"border: 0px solid rgb(52, 59, 72);\n"
-"	border-radius: 5px;")
-        self.frame_scan_timeout.setFrameShape(QFrame.StyledPanel)
-        self.frame_scan_timeout.setFrameShadow(QFrame.Raised)
-        self.horizontalLayout_6 = QHBoxLayout(self.frame_scan_timeout)
-        self.horizontalLayout_6.setObjectName(u"horizontalLayout_6")
-        self.horizontalLayout_6.setContentsMargins(0, 0, -1, 0)
-        self.label_scan_timeout = QLabel(self.frame_scan_timeout)
-        self.label_scan_timeout.setObjectName(u"label_scan_timeout")
-        self.label_scan_timeout.setMaximumSize(QSize(16777215, 20))
-
-        self.horizontalLayout_6.addWidget(self.label_scan_timeout)
-
-        self.label_scan_timeout_value = QLabel(self.frame_scan_timeout)
-        self.label_scan_timeout_value.setObjectName(u"label_scan_timeout_value")
-        self.label_scan_timeout_value.setMaximumSize(QSize(16777215, 20))
-        self.label_scan_timeout_value.setAlignment(Qt.AlignCenter)
-
-        self.horizontalLayout_6.addWidget(self.label_scan_timeout_value)
-
-
-        self.verticalLayout_23.addWidget(self.frame_scan_timeout)
-
-        self.scanSlider = QSlider(self.frame_scan)
-        self.scanSlider.setObjectName(u"scanSlider")
-        self.scanSlider.setStyleSheet(u"border: 0px solid rgb(52, 59, 72);")
-        self.scanSlider.setMaximum(30)
-        self.scanSlider.setPageStep(1)
-        self.scanSlider.setValue(5)
-        self.scanSlider.setOrientation(Qt.Horizontal)
-
-        self.verticalLayout_23.addWidget(self.scanSlider)
-
-        self.check_no_timeout = QCheckBox(self.frame_scan)
-        self.check_no_timeout.setObjectName(u"check_no_timeout")
-        self.check_no_timeout.setStyleSheet(u"border: 0px solid rgb(52, 59, 72);")
-        self.check_no_timeout.setChecked(True)
-
-        self.verticalLayout_23.addWidget(self.check_no_timeout)
-
-        self.label_4 = QLabel(self.frame_scan)
-        self.label_4.setObjectName(u"label_4")
-        self.label_4.setMaximumSize(QSize(16777215, 20))
-        self.label_4.setFont(font)
-        self.label_4.setStyleSheet(u"border: 0px solid rgb(52, 59, 72);")
-
-        self.verticalLayout_23.addWidget(self.label_4)
-
-        self.logSelection = QRadioButton(self.frame_scan)
-        self.logSelection.setObjectName(u"logSelection")
-        self.logSelection.setStyleSheet(u"border: 0px solid rgb(52, 59, 72);")
-
-        self.verticalLayout_23.addWidget(self.logSelection)
-
-        self.logAll = QRadioButton(self.frame_scan)
-        self.logAll.setObjectName(u"logAll")
-        self.logAll.setStyleSheet(u"border: 0px solid rgb(52, 59, 72);")
-
-        self.verticalLayout_23.addWidget(self.logAll)
-
-        self.logNone = QRadioButton(self.frame_scan)
-        self.logNone.setObjectName(u"logNone")
-        self.logNone.setStyleSheet(u"border: 0px solid rgb(52, 59, 72);")
-        self.logNone.setChecked(True)
-
-        self.verticalLayout_23.addWidget(self.logNone)
-
-        self.btn_scan = QPushButton(self.frame_scan)
-        self.btn_scan.setObjectName(u"btn_scan")
-        self.btn_scan.setMinimumSize(QSize(0, 30))
-
-        self.verticalLayout_23.addWidget(self.btn_scan)
-
-        self.btn_connect = QPushButton(self.frame_scan)
-        self.btn_connect.setObjectName(u"btn_connect")
-        self.btn_connect.setMinimumSize(QSize(0, 30))
-
-        self.verticalLayout_23.addWidget(self.btn_connect)
-
-        self.verticalSpacer_2 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
-
-        self.verticalLayout_23.addItem(self.verticalSpacer_2)
-
-
-        self.horizontalLayout_8.addWidget(self.frame_scan)
-
         self.frame_scan_results = QFrame(self.frame_explorer_top)
         self.frame_scan_results.setObjectName(u"frame_scan_results")
         self.frame_scan_results.setStyleSheet(u"")
@@ -1212,41 +1113,11 @@ class Ui_MainWindow(object):
         self.verticalLayout_25.setSpacing(0)
         self.verticalLayout_25.setObjectName(u"verticalLayout_25")
         self.verticalLayout_25.setContentsMargins(-1, 0, -1, 0)
-        self.frame = QFrame(self.rssi_graph)
-        self.frame.setObjectName(u"frame")
-        self.frame.setMaximumSize(QSize(16777215, 43))
-        self.frame.setFrameShape(QFrame.StyledPanel)
-        self.frame.setFrameShadow(QFrame.Raised)
-        self.horizontalLayout_10 = QHBoxLayout(self.frame)
-        self.horizontalLayout_10.setObjectName(u"horizontalLayout_10")
-        self.horizontalLayout_10.setContentsMargins(-1, 0, -1, -1)
-        self.label_rssi_view = QLabel(self.frame)
-        self.label_rssi_view.setObjectName(u"label_rssi_view")
-        self.label_rssi_view.setMinimumSize(QSize(0, 30))
-        self.label_rssi_view.setMaximumSize(QSize(16777215, 40))
-
-        self.horizontalLayout_10.addWidget(self.label_rssi_view)
-
-        self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
-
-        self.horizontalLayout_10.addItem(self.horizontalSpacer)
-
-        self.graph_enabled = AnimatedToggle(self.frame)
-        self.graph_enabled.setObjectName(u"graph_enabled")
-        self.graph_enabled.setMaximumSize(QSize(99999, 999999))
-        self.graph_enabled.setChecked(True)
-
-        self.horizontalLayout_10.addWidget(self.graph_enabled)
-
-
-        self.verticalLayout_25.addWidget(self.frame)
-
         self.qtchart_widgetholder = QChartView(self.rssi_graph)
         self.qtchart_widgetholder.setObjectName(u"qtchart_widgetholder")
 
         self.verticalLayout_25.addWidget(self.qtchart_widgetholder)
 
-        self.verticalLayout_25.setStretch(0, 1)
         self.rssi_gatt_expolrer.addWidget(self.rssi_graph)
         self.gatt_view = QWidget()
         self.gatt_view.setObjectName(u"gatt_view")
@@ -1270,9 +1141,8 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_8.addWidget(self.rssi_gatt_expolrer)
 
-        self.horizontalLayout_8.setStretch(0, 1)
+        self.horizontalLayout_8.setStretch(0, 2)
         self.horizontalLayout_8.setStretch(1, 2)
-        self.horizontalLayout_8.setStretch(2, 2)
 
         self.verticalLayout_22.addWidget(self.frame_explorer_top)
 
@@ -1916,7 +1786,7 @@ class Ui_MainWindow(object):
         self.scannerSettigns.setFrameShape(QFrame.NoFrame)
         self.scannerSettigns.setFrameShadow(QFrame.Raised)
         self.verticalLayout_31 = QVBoxLayout(self.scannerSettigns)
-        self.verticalLayout_31.setSpacing(0)
+        self.verticalLayout_31.setSpacing(6)
         self.verticalLayout_31.setObjectName(u"verticalLayout_31")
         self.btn_save_logs = QPushButton(self.scannerSettigns)
         self.btn_save_logs.setObjectName(u"btn_save_logs")
@@ -1938,7 +1808,8 @@ class Ui_MainWindow(object):
         self.btn_clear_logs.setFont(font)
         self.btn_clear_logs.setCursor(QCursor(Qt.PointingHandCursor))
         self.btn_clear_logs.setLayoutDirection(Qt.LeftToRight)
-        self.btn_clear_logs.setStyleSheet(u"background-image: url(:/icons/images/icons/cil-remove.png);")
+        self.btn_clear_logs.setStyleSheet(u"background-image: url(:/icons/images/icons/cil-remove.png);\n"
+"")
 
         self.verticalLayout_31.addWidget(self.btn_clear_logs)
 
@@ -1967,6 +1838,133 @@ class Ui_MainWindow(object):
 
 
         self.verticalLayout_31.addWidget(self.options_frame)
+
+        self.frame_scan = QFrame(self.scannerSettigns)
+        self.frame_scan.setObjectName(u"frame_scan")
+        self.frame_scan.setStyleSheet(u" border: 0px solid rgb(52, 59, 72);\n"
+"	border-radius: 5px;	\n"
+"text-align: center;\n"
+"padding: 0px;\n"
+"margin: 0px;")
+        self.frame_scan.setFrameShape(QFrame.StyledPanel)
+        self.frame_scan.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_23 = QVBoxLayout(self.frame_scan)
+        self.verticalLayout_23.setSpacing(10)
+        self.verticalLayout_23.setObjectName(u"verticalLayout_23")
+        self.verticalLayout_23.setContentsMargins(-1, 5, -1, 0)
+        self.frame_scan_timeout = QFrame(self.frame_scan)
+        self.frame_scan_timeout.setObjectName(u"frame_scan_timeout")
+        self.frame_scan_timeout.setMinimumSize(QSize(0, 0))
+        self.frame_scan_timeout.setMaximumSize(QSize(16777215, 20))
+        self.frame_scan_timeout.setStyleSheet(u"border: 0px solid rgb(52, 59, 72);\n"
+"	border-radius: 5px;")
+        self.frame_scan_timeout.setFrameShape(QFrame.StyledPanel)
+        self.frame_scan_timeout.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_6 = QHBoxLayout(self.frame_scan_timeout)
+        self.horizontalLayout_6.setObjectName(u"horizontalLayout_6")
+        self.horizontalLayout_6.setContentsMargins(0, 0, -1, 0)
+        self.label_scan_timeout = QLabel(self.frame_scan_timeout)
+        self.label_scan_timeout.setObjectName(u"label_scan_timeout")
+        self.label_scan_timeout.setMaximumSize(QSize(16777215, 20))
+
+        self.horizontalLayout_6.addWidget(self.label_scan_timeout)
+
+        self.label_scan_timeout_value = QLabel(self.frame_scan_timeout)
+        self.label_scan_timeout_value.setObjectName(u"label_scan_timeout_value")
+        self.label_scan_timeout_value.setMaximumSize(QSize(16777215, 20))
+        self.label_scan_timeout_value.setAlignment(Qt.AlignCenter)
+
+        self.horizontalLayout_6.addWidget(self.label_scan_timeout_value)
+
+
+        self.verticalLayout_23.addWidget(self.frame_scan_timeout)
+
+        self.scanSlider = QSlider(self.frame_scan)
+        self.scanSlider.setObjectName(u"scanSlider")
+        self.scanSlider.setStyleSheet(u"border: 0px solid rgb(52, 59, 72);")
+        self.scanSlider.setMaximum(30)
+        self.scanSlider.setPageStep(1)
+        self.scanSlider.setValue(5)
+        self.scanSlider.setOrientation(Qt.Horizontal)
+
+        self.verticalLayout_23.addWidget(self.scanSlider)
+
+        self.check_no_timeout = QCheckBox(self.frame_scan)
+        self.check_no_timeout.setObjectName(u"check_no_timeout")
+        self.check_no_timeout.setStyleSheet(u"border: 0px solid rgb(52, 59, 72);")
+        self.check_no_timeout.setChecked(True)
+
+        self.verticalLayout_23.addWidget(self.check_no_timeout)
+
+        self.label_4 = QLabel(self.frame_scan)
+        self.label_4.setObjectName(u"label_4")
+        self.label_4.setMaximumSize(QSize(16777215, 20))
+        self.label_4.setFont(font)
+        self.label_4.setStyleSheet(u"border: 0px solid rgb(52, 59, 72);")
+
+        self.verticalLayout_23.addWidget(self.label_4)
+
+        self.logSelection = QRadioButton(self.frame_scan)
+        self.logSelection.setObjectName(u"logSelection")
+        self.logSelection.setStyleSheet(u"border: 0px solid rgb(52, 59, 72);")
+
+        self.verticalLayout_23.addWidget(self.logSelection)
+
+        self.logAll = QRadioButton(self.frame_scan)
+        self.logAll.setObjectName(u"logAll")
+        self.logAll.setStyleSheet(u"border: 0px solid rgb(52, 59, 72);")
+
+        self.verticalLayout_23.addWidget(self.logAll)
+
+        self.logNone = QRadioButton(self.frame_scan)
+        self.logNone.setObjectName(u"logNone")
+        self.logNone.setStyleSheet(u"border: 0px solid rgb(52, 59, 72);")
+        self.logNone.setChecked(True)
+
+        self.verticalLayout_23.addWidget(self.logNone)
+
+        self.frame = QFrame(self.frame_scan)
+        self.frame.setObjectName(u"frame")
+        self.frame.setMinimumSize(QSize(0, 50))
+        self.frame.setFrameShape(QFrame.StyledPanel)
+        self.frame.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_10 = QHBoxLayout(self.frame)
+        self.horizontalLayout_10.setObjectName(u"horizontalLayout_10")
+        self.label_5 = QLabel(self.frame)
+        self.label_5.setObjectName(u"label_5")
+
+        self.horizontalLayout_10.addWidget(self.label_5)
+
+        self.graph_enabled = AnimatedToggle(self.frame)
+        self.graph_enabled.setObjectName(u"graph_enabled")
+        self.graph_enabled.setMaximumSize(QSize(99999, 999999))
+        self.graph_enabled.setChecked(True)
+
+        self.horizontalLayout_10.addWidget(self.graph_enabled)
+
+        self.horizontalLayout_10.setStretch(0, 5)
+        self.horizontalLayout_10.setStretch(1, 2)
+
+        self.verticalLayout_23.addWidget(self.frame)
+
+        self.btn_scan = QPushButton(self.frame_scan)
+        self.btn_scan.setObjectName(u"btn_scan")
+        self.btn_scan.setMinimumSize(QSize(0, 30))
+
+        self.verticalLayout_23.addWidget(self.btn_scan)
+
+        self.btn_connect = QPushButton(self.frame_scan)
+        self.btn_connect.setObjectName(u"btn_connect")
+        self.btn_connect.setMinimumSize(QSize(0, 30))
+
+        self.verticalLayout_23.addWidget(self.btn_connect)
+
+        self.verticalSpacer_2 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+
+        self.verticalLayout_23.addItem(self.verticalSpacer_2)
+
+
+        self.verticalLayout_31.addWidget(self.frame_scan)
 
         self.verticalSpacer_3 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
 
@@ -2082,13 +2080,8 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_13.addWidget(self.elfSettings)
 
-        self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
-
-        self.verticalLayout_13.addItem(self.verticalSpacer)
-
         self.verticalLayout_13.setStretch(0, 1)
         self.verticalLayout_13.setStretch(1, 1)
-        self.verticalLayout_13.setStretch(2, 1)
 
         self.verticalLayout_7.addWidget(self.contentSettings)
 
@@ -2204,20 +2197,9 @@ class Ui_MainWindow(object):
         self.closeAppBtn.setToolTip(QCoreApplication.translate("MainWindow", u"Close", None))
 #endif // QT_CONFIG(tooltip)
         self.closeAppBtn.setText("")
-        self.label_scan_timeout.setText(QCoreApplication.translate("MainWindow", u"Scan timeout (s):", None))
-        self.label_scan_timeout_value.setText(QCoreApplication.translate("MainWindow", u"5", None))
-        self.check_no_timeout.setText(QCoreApplication.translate("MainWindow", u"No timeout", None))
-        self.label_4.setText(QCoreApplication.translate("MainWindow", u"Advertisement data logging :", None))
-        self.logSelection.setText(QCoreApplication.translate("MainWindow", u"Selection", None))
-        self.logAll.setText(QCoreApplication.translate("MainWindow", u"Log all data", None))
-        self.logNone.setText(QCoreApplication.translate("MainWindow", u"Do not log", None))
-        self.btn_scan.setText(QCoreApplication.translate("MainWindow", u"Scan", None))
-        self.btn_connect.setText(QCoreApplication.translate("MainWindow", u"Connect", None))
         self.label_scan_filter.setText(QCoreApplication.translate("MainWindow", u"Filter scan results:", None))
         self.txt_scan_filter.setText("")
         self.txt_scan_filter.setPlaceholderText(QCoreApplication.translate("MainWindow", u"filter text", None))
-        self.label_rssi_view.setText(QCoreApplication.translate("MainWindow", u"RSSI graph enable:", None))
-        self.graph_enabled.setText(QCoreApplication.translate("MainWindow", u"CheckBox", None))
         self.label_2.setText(QCoreApplication.translate("MainWindow", u"GATT view:", None))
         self.labelBoxBlenderInstalation.setText(QCoreApplication.translate("MainWindow", u"FILE BOX", None))
         self.lineEdit.setText("")
@@ -2254,6 +2236,17 @@ class Ui_MainWindow(object):
         self.btn_save_logs.setText(QCoreApplication.translate("MainWindow", u"Save  logs", None))
         self.btn_clear_logs.setText(QCoreApplication.translate("MainWindow", u"Clear logs & graph", None))
         self.check_scroll_to_bottom.setText(QCoreApplication.translate("MainWindow", u"Auto scroll table", None))
+        self.label_scan_timeout.setText(QCoreApplication.translate("MainWindow", u"Scan timeout (s):", None))
+        self.label_scan_timeout_value.setText(QCoreApplication.translate("MainWindow", u"5", None))
+        self.check_no_timeout.setText(QCoreApplication.translate("MainWindow", u"No timeout", None))
+        self.label_4.setText(QCoreApplication.translate("MainWindow", u"Advertisement data logging :", None))
+        self.logSelection.setText(QCoreApplication.translate("MainWindow", u"Selection", None))
+        self.logAll.setText(QCoreApplication.translate("MainWindow", u"Log all data", None))
+        self.logNone.setText(QCoreApplication.translate("MainWindow", u"Do not log", None))
+        self.label_5.setText(QCoreApplication.translate("MainWindow", u"RSSI graph :", None))
+        self.graph_enabled.setText(QCoreApplication.translate("MainWindow", u"CheckBox", None))
+        self.btn_scan.setText(QCoreApplication.translate("MainWindow", u"Scan", None))
+        self.btn_connect.setText(QCoreApplication.translate("MainWindow", u"Connect", None))
         self.label.setText(QCoreApplication.translate("MainWindow", u"Ram Start :", None))
         self.txtRamStart.setText(QCoreApplication.translate("MainWindow", u"0x20000000", None))
         self.label_3.setText(QCoreApplication.translate("MainWindow", u"Ram End :", None))

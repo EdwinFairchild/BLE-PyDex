@@ -276,6 +276,10 @@ class MainWindow(QMainWindow):
         # change axis label colors to rgb(255, 255, 255)
         self.ui.qtchart_widgetholder.chart().axisX().setLabelsColor(QColor(52, 59, 72))
         self.ui.qtchart_widgetholder.chart().axisY().setLabelsColor(QColor(52, 59, 72))
+        # hide legend
+        self.ui.qtchart_widgetholder.chart().legend().hide()
+        # set chart title
+        self.ui.qtchart_widgetholder.chart().setTitle("RSSI (dBm)")
         # Create a QPen object for the main axis lines
         pen = QPen(QColor(52, 59, 72))  # Change the color to whatever you want
         pen.setWidth(2)      # Change the width to your desired size
@@ -338,17 +342,19 @@ class MainWindow(QMainWindow):
         # Trigger a redraw (you might not need this line, depending on your setup)
         self.ui.qtchart_widgetholder.chart().update()
     def update_graph(self,device_name,rssi_value,current_time):
-        MAX_DEVICES = 10  # Maximum number of devices to display
+        MAX_DEVICES = 50  # Maximum number of devices to display
 
         # Initialize start time and max duration
         if self.start_time is None:
             self.start_time = current_time
 
-        max_duration = 10  # Maximum duration to display (in seconds)
+        max_duration = 5  # Maximum duration to display (in seconds)
         time_delta = current_time - self.start_time
 
         if time_delta > max_duration:
             self.start_time = current_time - max_duration
+            self.axisX.setRange(self.start_time, current_time)
+        else:
             self.axisX.setRange(self.start_time, current_time)
 
         if device_name in self.device_data_curves:

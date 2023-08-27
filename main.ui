@@ -1863,226 +1863,7 @@ p, li { white-space: pre-wrap; }
                          <property name="frameShadow">
                           <enum>QFrame::Raised</enum>
                          </property>
-                         <layout class="QHBoxLayout" name="horizontalLayout_8" stretch="1,2,2">
-                          <item>
-                           <widget class="QFrame" name="frame_scan">
-                            <property name="styleSheet">
-                             <string notr="true"/>
-                            </property>
-                            <property name="frameShape">
-                             <enum>QFrame::StyledPanel</enum>
-                            </property>
-                            <property name="frameShadow">
-                             <enum>QFrame::Raised</enum>
-                            </property>
-                            <layout class="QVBoxLayout" name="verticalLayout_23">
-                             <property name="spacing">
-                              <number>10</number>
-                             </property>
-                             <property name="topMargin">
-                              <number>5</number>
-                             </property>
-                             <property name="bottomMargin">
-                              <number>0</number>
-                             </property>
-                             <item>
-                              <widget class="QFrame" name="frame_scan_timeout">
-                               <property name="minimumSize">
-                                <size>
-                                 <width>0</width>
-                                 <height>0</height>
-                                </size>
-                               </property>
-                               <property name="maximumSize">
-                                <size>
-                                 <width>16777215</width>
-                                 <height>20</height>
-                                </size>
-                               </property>
-                               <property name="styleSheet">
-                                <string notr="true">border: 0px solid rgb(52, 59, 72);
-	border-radius: 5px;</string>
-                               </property>
-                               <property name="frameShape">
-                                <enum>QFrame::StyledPanel</enum>
-                               </property>
-                               <property name="frameShadow">
-                                <enum>QFrame::Raised</enum>
-                               </property>
-                               <layout class="QHBoxLayout" name="horizontalLayout_6">
-                                <property name="leftMargin">
-                                 <number>0</number>
-                                </property>
-                                <property name="topMargin">
-                                 <number>0</number>
-                                </property>
-                                <property name="bottomMargin">
-                                 <number>0</number>
-                                </property>
-                                <item>
-                                 <widget class="QLabel" name="label_scan_timeout">
-                                  <property name="maximumSize">
-                                   <size>
-                                    <width>16777215</width>
-                                    <height>20</height>
-                                   </size>
-                                  </property>
-                                  <property name="text">
-                                   <string>Scan timeout (s):</string>
-                                  </property>
-                                 </widget>
-                                </item>
-                                <item>
-                                 <widget class="QLabel" name="label_scan_timeout_value">
-                                  <property name="maximumSize">
-                                   <size>
-                                    <width>16777215</width>
-                                    <height>20</height>
-                                   </size>
-                                  </property>
-                                  <property name="text">
-                                   <string>5</string>
-                                  </property>
-                                  <property name="alignment">
-                                   <set>Qt::AlignCenter</set>
-                                  </property>
-                                 </widget>
-                                </item>
-                               </layout>
-                              </widget>
-                             </item>
-                             <item>
-                              <widget class="QSlider" name="scanSlider">
-                               <property name="styleSheet">
-                                <string notr="true">border: 0px solid rgb(52, 59, 72);</string>
-                               </property>
-                               <property name="maximum">
-                                <number>30</number>
-                               </property>
-                               <property name="pageStep">
-                                <number>1</number>
-                               </property>
-                               <property name="value">
-                                <number>5</number>
-                               </property>
-                               <property name="orientation">
-                                <enum>Qt::Horizontal</enum>
-                               </property>
-                              </widget>
-                             </item>
-                             <item>
-                              <widget class="QCheckBox" name="check_no_timeout">
-                               <property name="styleSheet">
-                                <string notr="true">border: 0px solid rgb(52, 59, 72);</string>
-                               </property>
-                               <property name="text">
-                                <string>No timeout</string>
-                               </property>
-                               <property name="checked">
-                                <bool>true</bool>
-                               </property>
-                              </widget>
-                             </item>
-                             <item>
-                              <widget class="QLabel" name="label_4">
-                               <property name="maximumSize">
-                                <size>
-                                 <width>16777215</width>
-                                 <height>20</height>
-                                </size>
-                               </property>
-                               <property name="font">
-                                <font>
-                                 <family>Segoe UI</family>
-                                 <pointsize>10</pointsize>
-                                 <weight>50</weight>
-                                 <italic>false</italic>
-                                 <bold>false</bold>
-                                </font>
-                               </property>
-                               <property name="styleSheet">
-                                <string notr="true">border: 0px solid rgb(52, 59, 72);</string>
-                               </property>
-                               <property name="text">
-                                <string>Advertisement data logging :</string>
-                               </property>
-                              </widget>
-                             </item>
-                             <item>
-                              <widget class="QRadioButton" name="logSelection">
-                               <property name="styleSheet">
-                                <string notr="true">border: 0px solid rgb(52, 59, 72);</string>
-                               </property>
-                               <property name="text">
-                                <string>Selection</string>
-                               </property>
-                              </widget>
-                             </item>
-                             <item>
-                              <widget class="QRadioButton" name="logAll">
-                               <property name="styleSheet">
-                                <string notr="true">border: 0px solid rgb(52, 59, 72);</string>
-                               </property>
-                               <property name="text">
-                                <string>Log all data</string>
-                               </property>
-                              </widget>
-                             </item>
-                             <item>
-                              <widget class="QRadioButton" name="logNone">
-                               <property name="styleSheet">
-                                <string notr="true">border: 0px solid rgb(52, 59, 72);</string>
-                               </property>
-                               <property name="text">
-                                <string>Do not log</string>
-                               </property>
-                               <property name="checked">
-                                <bool>true</bool>
-                               </property>
-                              </widget>
-                             </item>
-                             <item>
-                              <widget class="QPushButton" name="btn_scan">
-                               <property name="minimumSize">
-                                <size>
-                                 <width>0</width>
-                                 <height>30</height>
-                                </size>
-                               </property>
-                               <property name="text">
-                                <string>Scan</string>
-                               </property>
-                              </widget>
-                             </item>
-                             <item>
-                              <widget class="QPushButton" name="btn_connect">
-                               <property name="minimumSize">
-                                <size>
-                                 <width>0</width>
-                                 <height>30</height>
-                                </size>
-                               </property>
-                               <property name="text">
-                                <string>Connect</string>
-                               </property>
-                              </widget>
-                             </item>
-                             <item>
-                              <spacer name="verticalSpacer_2">
-                               <property name="orientation">
-                                <enum>Qt::Vertical</enum>
-                               </property>
-                               <property name="sizeHint" stdset="0">
-                                <size>
-                                 <width>20</width>
-                                 <height>40</height>
-                                </size>
-                               </property>
-                              </spacer>
-                             </item>
-                            </layout>
-                           </widget>
-                          </item>
+                         <layout class="QHBoxLayout" name="horizontalLayout_8" stretch="2,2">
                           <item>
                            <widget class="QFrame" name="frame_scan_results">
                             <property name="styleSheet">
@@ -2223,7 +2004,7 @@ p, li { white-space: pre-wrap; }
                              <number>0</number>
                             </property>
                             <widget class="QWidget" name="rssi_graph">
-                             <layout class="QVBoxLayout" name="verticalLayout_25" stretch="1,0">
+                             <layout class="QVBoxLayout" name="verticalLayout_25" stretch="0">
                               <property name="spacing">
                                <number>0</number>
                               </property>
@@ -2233,75 +2014,6 @@ p, li { white-space: pre-wrap; }
                               <property name="bottomMargin">
                                <number>0</number>
                               </property>
-                              <item>
-                               <widget class="QFrame" name="frame">
-                                <property name="maximumSize">
-                                 <size>
-                                  <width>16777215</width>
-                                  <height>43</height>
-                                 </size>
-                                </property>
-                                <property name="frameShape">
-                                 <enum>QFrame::StyledPanel</enum>
-                                </property>
-                                <property name="frameShadow">
-                                 <enum>QFrame::Raised</enum>
-                                </property>
-                                <layout class="QHBoxLayout" name="horizontalLayout_10">
-                                 <property name="topMargin">
-                                  <number>0</number>
-                                 </property>
-                                 <item>
-                                  <widget class="QLabel" name="label_rssi_view">
-                                   <property name="minimumSize">
-                                    <size>
-                                     <width>0</width>
-                                     <height>30</height>
-                                    </size>
-                                   </property>
-                                   <property name="maximumSize">
-                                    <size>
-                                     <width>16777215</width>
-                                     <height>40</height>
-                                    </size>
-                                   </property>
-                                   <property name="text">
-                                    <string>RSSI graph enable:</string>
-                                   </property>
-                                  </widget>
-                                 </item>
-                                 <item>
-                                  <spacer name="horizontalSpacer">
-                                   <property name="orientation">
-                                    <enum>Qt::Horizontal</enum>
-                                   </property>
-                                   <property name="sizeHint" stdset="0">
-                                    <size>
-                                     <width>40</width>
-                                     <height>20</height>
-                                    </size>
-                                   </property>
-                                  </spacer>
-                                 </item>
-                                 <item>
-                                  <widget class="AnimatedToggle" name="graph_enabled">
-                                   <property name="maximumSize">
-                                    <size>
-                                     <width>99999</width>
-                                     <height>999999</height>
-                                    </size>
-                                   </property>
-                                   <property name="text">
-                                    <string>CheckBox</string>
-                                   </property>
-                                   <property name="checked">
-                                    <bool>true</bool>
-                                   </property>
-                                  </widget>
-                                 </item>
-                                </layout>
-                               </widget>
-                              </item>
                               <item>
                                <widget class="QChartView" name="qtchart_widgetholder" native="true"/>
                               </item>
@@ -3670,7 +3382,7 @@ margin-left: 10px;  /* Add 10 pixels of margin to the left of the button */
                      <property name="frameShadow">
                       <enum>QFrame::Raised</enum>
                      </property>
-                     <layout class="QVBoxLayout" name="verticalLayout_13" stretch="1,1,1">
+                     <layout class="QVBoxLayout" name="verticalLayout_13" stretch="1,1">
                       <item>
                        <widget class="QFrame" name="scannerSettigns">
                         <property name="frameShape">
@@ -3679,9 +3391,9 @@ margin-left: 10px;  /* Add 10 pixels of margin to the left of the button */
                         <property name="frameShadow">
                          <enum>QFrame::Raised</enum>
                         </property>
-                        <layout class="QVBoxLayout" name="verticalLayout_31" stretch="1,1,1,0">
+                        <layout class="QVBoxLayout" name="verticalLayout_31" stretch="1,1,1,0,0">
                          <property name="spacing">
-                          <number>0</number>
+                          <number>6</number>
                          </property>
                          <item>
                           <widget class="QPushButton" name="btn_save_logs">
@@ -3750,7 +3462,8 @@ margin-left: 10px;  /* Add 10 pixels of margin to the left of the button */
                             <enum>Qt::LeftToRight</enum>
                            </property>
                            <property name="styleSheet">
-                            <string notr="true">background-image: url(:/icons/images/icons/cil-remove.png);</string>
+                            <string notr="true">background-image: url(:/icons/images/icons/cil-remove.png);
+</string>
                            </property>
                            <property name="text">
                             <string>Clear logs &amp; graph</string>
@@ -3802,6 +3515,270 @@ margin: 0px;</string>
                                <bool>true</bool>
                               </property>
                              </widget>
+                            </item>
+                           </layout>
+                          </widget>
+                         </item>
+                         <item>
+                          <widget class="QFrame" name="frame_scan">
+                           <property name="styleSheet">
+                            <string notr="true"> border: 0px solid rgb(52, 59, 72);
+	border-radius: 5px;	
+text-align: center;
+padding: 0px;
+margin: 0px;</string>
+                           </property>
+                           <property name="frameShape">
+                            <enum>QFrame::StyledPanel</enum>
+                           </property>
+                           <property name="frameShadow">
+                            <enum>QFrame::Raised</enum>
+                           </property>
+                           <layout class="QVBoxLayout" name="verticalLayout_23">
+                            <property name="spacing">
+                             <number>10</number>
+                            </property>
+                            <property name="topMargin">
+                             <number>5</number>
+                            </property>
+                            <property name="bottomMargin">
+                             <number>0</number>
+                            </property>
+                            <item>
+                             <widget class="QFrame" name="frame_scan_timeout">
+                              <property name="minimumSize">
+                               <size>
+                                <width>0</width>
+                                <height>0</height>
+                               </size>
+                              </property>
+                              <property name="maximumSize">
+                               <size>
+                                <width>16777215</width>
+                                <height>20</height>
+                               </size>
+                              </property>
+                              <property name="styleSheet">
+                               <string notr="true">border: 0px solid rgb(52, 59, 72);
+	border-radius: 5px;</string>
+                              </property>
+                              <property name="frameShape">
+                               <enum>QFrame::StyledPanel</enum>
+                              </property>
+                              <property name="frameShadow">
+                               <enum>QFrame::Raised</enum>
+                              </property>
+                              <layout class="QHBoxLayout" name="horizontalLayout_6">
+                               <property name="leftMargin">
+                                <number>0</number>
+                               </property>
+                               <property name="topMargin">
+                                <number>0</number>
+                               </property>
+                               <property name="bottomMargin">
+                                <number>0</number>
+                               </property>
+                               <item>
+                                <widget class="QLabel" name="label_scan_timeout">
+                                 <property name="maximumSize">
+                                  <size>
+                                   <width>16777215</width>
+                                   <height>20</height>
+                                  </size>
+                                 </property>
+                                 <property name="text">
+                                  <string>Scan timeout (s):</string>
+                                 </property>
+                                </widget>
+                               </item>
+                               <item>
+                                <widget class="QLabel" name="label_scan_timeout_value">
+                                 <property name="maximumSize">
+                                  <size>
+                                   <width>16777215</width>
+                                   <height>20</height>
+                                  </size>
+                                 </property>
+                                 <property name="text">
+                                  <string>5</string>
+                                 </property>
+                                 <property name="alignment">
+                                  <set>Qt::AlignCenter</set>
+                                 </property>
+                                </widget>
+                               </item>
+                              </layout>
+                             </widget>
+                            </item>
+                            <item>
+                             <widget class="QSlider" name="scanSlider">
+                              <property name="styleSheet">
+                               <string notr="true">border: 0px solid rgb(52, 59, 72);</string>
+                              </property>
+                              <property name="maximum">
+                               <number>30</number>
+                              </property>
+                              <property name="pageStep">
+                               <number>1</number>
+                              </property>
+                              <property name="value">
+                               <number>5</number>
+                              </property>
+                              <property name="orientation">
+                               <enum>Qt::Horizontal</enum>
+                              </property>
+                             </widget>
+                            </item>
+                            <item>
+                             <widget class="QCheckBox" name="check_no_timeout">
+                              <property name="styleSheet">
+                               <string notr="true">border: 0px solid rgb(52, 59, 72);</string>
+                              </property>
+                              <property name="text">
+                               <string>No timeout</string>
+                              </property>
+                              <property name="checked">
+                               <bool>true</bool>
+                              </property>
+                             </widget>
+                            </item>
+                            <item>
+                             <widget class="QLabel" name="label_4">
+                              <property name="maximumSize">
+                               <size>
+                                <width>16777215</width>
+                                <height>20</height>
+                               </size>
+                              </property>
+                              <property name="font">
+                               <font>
+                                <family>Segoe UI</family>
+                                <pointsize>10</pointsize>
+                                <weight>50</weight>
+                                <italic>false</italic>
+                                <bold>false</bold>
+                               </font>
+                              </property>
+                              <property name="styleSheet">
+                               <string notr="true">border: 0px solid rgb(52, 59, 72);</string>
+                              </property>
+                              <property name="text">
+                               <string>Advertisement data logging :</string>
+                              </property>
+                             </widget>
+                            </item>
+                            <item>
+                             <widget class="QRadioButton" name="logSelection">
+                              <property name="styleSheet">
+                               <string notr="true">border: 0px solid rgb(52, 59, 72);</string>
+                              </property>
+                              <property name="text">
+                               <string>Selection</string>
+                              </property>
+                             </widget>
+                            </item>
+                            <item>
+                             <widget class="QRadioButton" name="logAll">
+                              <property name="styleSheet">
+                               <string notr="true">border: 0px solid rgb(52, 59, 72);</string>
+                              </property>
+                              <property name="text">
+                               <string>Log all data</string>
+                              </property>
+                             </widget>
+                            </item>
+                            <item>
+                             <widget class="QRadioButton" name="logNone">
+                              <property name="styleSheet">
+                               <string notr="true">border: 0px solid rgb(52, 59, 72);</string>
+                              </property>
+                              <property name="text">
+                               <string>Do not log</string>
+                              </property>
+                              <property name="checked">
+                               <bool>true</bool>
+                              </property>
+                             </widget>
+                            </item>
+                            <item>
+                             <widget class="QFrame" name="frame">
+                              <property name="minimumSize">
+                               <size>
+                                <width>0</width>
+                                <height>50</height>
+                               </size>
+                              </property>
+                              <property name="frameShape">
+                               <enum>QFrame::StyledPanel</enum>
+                              </property>
+                              <property name="frameShadow">
+                               <enum>QFrame::Raised</enum>
+                              </property>
+                              <layout class="QHBoxLayout" name="horizontalLayout_10" stretch="5,2">
+                               <item>
+                                <widget class="QLabel" name="label_5">
+                                 <property name="text">
+                                  <string>RSSI graph :</string>
+                                 </property>
+                                </widget>
+                               </item>
+                               <item>
+                                <widget class="AnimatedToggle" name="graph_enabled">
+                                 <property name="maximumSize">
+                                  <size>
+                                   <width>99999</width>
+                                   <height>999999</height>
+                                  </size>
+                                 </property>
+                                 <property name="text">
+                                  <string>CheckBox</string>
+                                 </property>
+                                 <property name="checked">
+                                  <bool>true</bool>
+                                 </property>
+                                </widget>
+                               </item>
+                              </layout>
+                             </widget>
+                            </item>
+                            <item>
+                             <widget class="QPushButton" name="btn_scan">
+                              <property name="minimumSize">
+                               <size>
+                                <width>0</width>
+                                <height>30</height>
+                               </size>
+                              </property>
+                              <property name="text">
+                               <string>Scan</string>
+                              </property>
+                             </widget>
+                            </item>
+                            <item>
+                             <widget class="QPushButton" name="btn_connect">
+                              <property name="minimumSize">
+                               <size>
+                                <width>0</width>
+                                <height>30</height>
+                               </size>
+                              </property>
+                              <property name="text">
+                               <string>Connect</string>
+                              </property>
+                             </widget>
+                            </item>
+                            <item>
+                             <spacer name="verticalSpacer_2">
+                              <property name="orientation">
+                               <enum>Qt::Vertical</enum>
+                              </property>
+                              <property name="sizeHint" stdset="0">
+                               <size>
+                                <width>20</width>
+                                <height>40</height>
+                               </size>
+                              </property>
+                             </spacer>
                             </item>
                            </layout>
                           </widget>
@@ -4001,19 +3978,6 @@ margin: 0px;</string>
                          </item>
                         </layout>
                        </widget>
-                      </item>
-                      <item>
-                       <spacer name="verticalSpacer">
-                        <property name="orientation">
-                         <enum>Qt::Vertical</enum>
-                        </property>
-                        <property name="sizeHint" stdset="0">
-                         <size>
-                          <width>20</width>
-                          <height>40</height>
-                         </size>
-                        </property>
-                       </spacer>
                       </item>
                      </layout>
                     </widget>
