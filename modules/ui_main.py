@@ -1349,7 +1349,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 319, 218))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 218, 218))
         self.scrollAreaWidgetContents.setStyleSheet(u" QScrollBar:vertical {\n"
 "	border: none;\n"
 "    background: rgb(52, 59, 72);\n"
@@ -1950,12 +1950,22 @@ class Ui_MainWindow(object):
         self.btn_scan = QPushButton(self.frame_scan)
         self.btn_scan.setObjectName(u"btn_scan")
         self.btn_scan.setMinimumSize(QSize(0, 30))
+        self.btn_scan.setStyleSheet(u" border: 2px solid rgb(52, 59, 72);\n"
+"	border-radius: 5px;	\n"
+"text-align: center;\n"
+"padding: 0px;\n"
+"margin: 0px;")
 
         self.verticalLayout_23.addWidget(self.btn_scan)
 
         self.btn_connect = QPushButton(self.frame_scan)
         self.btn_connect.setObjectName(u"btn_connect")
         self.btn_connect.setMinimumSize(QSize(0, 30))
+        self.btn_connect.setStyleSheet(u" border: 2px solid rgb(52, 59, 72);\n"
+"	border-radius: 5px;	\n"
+"text-align: center;\n"
+"padding: 0px;\n"
+"margin: 0px;")
 
         self.verticalLayout_23.addWidget(self.btn_connect)
 

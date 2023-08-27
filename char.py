@@ -16,8 +16,8 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QApplication, QFrame, QHBoxLayout, QLabel,
-    QLineEdit, QPushButton, QSizePolicy, QTextEdit,
-    QVBoxLayout, QWidget)
+    QPushButton, QSizePolicy, QTextEdit, QVBoxLayout,
+    QWidget)
 
 from toggle import AnimatedToggle
 
@@ -133,12 +133,12 @@ class Ui_char_widget(object):
         self.notify_toggle.setGeometry(QRect(10, 10, 51, 32))
         self.notify_toggle.setMaximumSize(QSize(99999, 999999))
         self.notify_toggle.setChecked(True)
-        self.lineEdit = QLineEdit(self.frame_5)
-        self.lineEdit.setObjectName(u"lineEdit")
-        self.lineEdit.setGeometry(QRect(140, 10, 201, 41))
         self.char_write_btn = QPushButton(self.frame_5)
         self.char_write_btn.setObjectName(u"char_write_btn")
         self.char_write_btn.setGeometry(QRect(360, 50, 83, 19))
+        self.char_write_txt = QTextEdit(self.frame_5)
+        self.char_write_txt.setObjectName(u"char_write_txt")
+        self.char_write_txt.setGeometry(QRect(130, 10, 171, 41))
 
         self.verticalLayout_2.addWidget(self.frame_5)
 
@@ -174,6 +174,6 @@ class Ui_char_widget(object):
         self.permission_write_wo_resp.setText(QCoreApplication.translate("char_widget", u"write-without-response", None))
         self.char_read_btn.setText(QCoreApplication.translate("char_widget", u"PushButton", None))
         self.notify_toggle.setText(QCoreApplication.translate("char_widget", u"CheckBox", None))
-        self.char_write_btn.setText(QCoreApplication.translate("char_widget", u"PushButton", None))
+        self.char_write_btn.setText(QCoreApplication.translate("char_widget", u"write", None))
     # retranslateUi
 
