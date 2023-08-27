@@ -82,7 +82,6 @@ class BLE_ConnectDevice(QThread):
 
         asyncio.run(self.BLE_connectDevice())
     # ----------------------------| BLE connection |--------------------------------------------
-
     async def BLE_connectDevice(self):
         try:
             self.logger.info("Connecting to device with address: " + self.ble_address)

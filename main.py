@@ -524,6 +524,7 @@ class MainWindow(QMainWindow):
             self.child.addChild(self.subchild)
         # adds new widget to scroll area only for characteristics
         if permissions is not None:
+            # send full item text to add char widget because it needs the name and uuid
             self.add_char_widget(item, permissions)
     
     def extract_uuid_name(self, data):
@@ -552,21 +553,35 @@ class MainWindow(QMainWindow):
         return raw_uuid
 
     def gatt_tree_view_clicked(self,tree_item, column):
-        # extract UUID from tree_item.text(column) and check if it exist in char_dict
+        # when user clicks on a tree item, check if it exists in char_dict
         # if it does exist then scroll to that widget
-        uuid = self.extract_uuid_hex(tree_item.text(column))
-        print(uuid)
-        if uuid in self.char_dict:
-            # scroll to widget
-            self.ui.scrollArea_2.ensureWidgetVisible(self.char_dict[uuid]["widgetlocation"])
-        else:
-            for key, value in self.char_dict.items():
-                if uuid in value['char name']:
-                    self.ui.scrollArea_2.ensureWidgetVisible(self.char_dict[key]["widgetlocation"])
-            
-            
+        uuid = self.extract_uuid_hex(tree_item.text(column))   
+        for key, value in self.char_dict.items():
+            if uuid in value['char name']:
+                self.ui.scrollArea_2.ensureWidgetVisible(self.char_dict[key]["widgetlocation"])
+        
+        
     def add_char_widget(self, char_uuid, permissions):
-                # Add widget to Main Scroll Area
+        """
+        Adds a new widget representing a Bluetooth Low Energy (BLE) characteristic to the main scroll area. 
+        This widget is loaded from a generic compiled UI file (`char.py`) and displays buttons and labels corresponding 
+        to different characteristic properties like 'write', 'read', 'notify', etc. It also sets up necessary UI elements 
+        and hooks for handling interactions with those properties.
+
+        Parameters:
+        - char_uuid (str): The UUID of the BLE characteristic to be displayed. This string must be parsed
+          it comes in looking like this: 00001801-0000-1000-8000-00805f9b34fb (Handle: 16): Generic Attribute Profile
+        - permissions (list): List of permissions associated with the characteristic. 
+        Possible values include 'write-without-response', 'write', 'notify', 'read', and 'indicate'.
+
+        Notes:
+        1. The method registers callbacks for different characteristic properties like 'write', 'read', etc.
+        based on the permissions list.
+        2. Updates the main scroll area to include this newly created widget.
+        3. Enabled/Disables different UI elements based on the permissions list.
+        4. Stores a reference to this widget in 'char_dict' for future interactions.
+        """
+        # Add widget to Main Scroll Area
         scroll = QScrollArea()  # Scroll Area which contains the widgets, set as the centralWidget
         widget = QWidget()           # Widget that contains the collection of Vertical Box
        
@@ -816,12 +831,10 @@ class MainWindow(QMainWindow):
         self.var_watcher.quit()
         self.var_watcher.wait()
     def addToLineChart(self):
-      
         self.ui.qtchart_widgetholder.chart().addAxis(self.axisX, Qt.AlignBottom)
         self.ui.qtchart_widgetholder.chart().addAxis(self.axisY, Qt.AlignLeft)
         self.line_series.attachAxis(self.axisX)
         self.line_series.attachAxis(self.axisY)
-
         # Create a QTimer instance and connect it to the update function
         self.timer = QTimer(self)
         self.timer.timeout.connect(self.update_graph)
