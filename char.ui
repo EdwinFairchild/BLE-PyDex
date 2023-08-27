@@ -246,16 +246,6 @@ color: rgb(0, 0, 0);</string>
           <bool>true</bool>
          </property>
         </widget>
-        <widget class="QLineEdit" name="lineEdit">
-         <property name="geometry">
-          <rect>
-           <x>140</x>
-           <y>10</y>
-           <width>201</width>
-           <height>41</height>
-          </rect>
-         </property>
-        </widget>
         <widget class="QPushButton" name="char_write_btn">
          <property name="geometry">
           <rect>
@@ -266,7 +256,17 @@ color: rgb(0, 0, 0);</string>
           </rect>
          </property>
          <property name="text">
-          <string>PushButton</string>
+          <string>write</string>
+         </property>
+        </widget>
+        <widget class="QTextEdit" name="char_write_txt">
+         <property name="geometry">
+          <rect>
+           <x>130</x>
+           <y>10</y>
+           <width>171</width>
+           <height>41</height>
+          </rect>
          </property>
         </widget>
        </widget>

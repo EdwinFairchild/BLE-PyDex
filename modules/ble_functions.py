@@ -1,9 +1,9 @@
 from main import *
 import bleak
 import asyncio
+from asyncio import Queue
 from bleak import BleakScanner
 from bleak import *
-
 class BLE_DiscoverDevices(QThread):
     ble_address = 0
     scan_timeout = 0
@@ -59,17 +59,29 @@ class BLE_DiscoverDevices(QThread):
        
 #make a class for connecting to a device using bleak, the device connection must be done in a separate thread in order to not block the UI
 class BLE_ConnectDevice(QThread):
+    logger = logging.getLogger("PDexLogger")
     ble_address = "1C:90:FF:EA:C4:8A"
     is_connected = False
     device_disconnected = Signal()
-    logger = logging.getLogger("PDexLogger")
     discovered_services = Signal(list)
     connection_established = Signal()
     connection_esablished_signal_sent = False
+
+
+    # signals to kickstart queue based event handling
+    device_char_write = Signal(str, str, bool) # UUID, value
+
+    def __init__(self, *args, **kwargs):
+        super(BLE_ConnectDevice, self).__init__(*args, **kwargs)
+        self.async_queue = Queue()
+        # Connect signals to slots
+        self.device_char_write.connect(self.handle_write)
+        
     
     def run(self):
+
         asyncio.run(self.BLE_connectDevice())
-    # ------------------------------------------------------------------------
+    # ----------------------------| BLE connection |--------------------------------------------
 
     async def BLE_connectDevice(self):
         try:
@@ -93,6 +105,13 @@ class BLE_ConnectDevice(QThread):
                         self.connection_established.emit()
                         # just a flag used to send the signal only once
                         self.connection_esablished_signal_sent = True
+                    # check if there is anything in the queue
+                    if not self.async_queue.empty():
+                        task, args, kwargs = await self.async_queue.get()  # This will wait until something is available
+                        if task == "write_char":
+                            await self.writeCharCallback(client, *args, **kwargs)
+
+                            
 
                     # async sleep, give time for other threads to run
                     await asyncio.sleep(0.05)
@@ -153,7 +172,6 @@ class BLE_ConnectDevice(QThread):
         except Exception as err:
             self.logger.warning(err)
 
-
     async def disconnect_device(self, client: BleakClient):
         try:
             await client.disconnect()
@@ -161,11 +179,30 @@ class BLE_ConnectDevice(QThread):
         except Exception as err:
             self.logger.warning(err)
           
-
     def handle_disconnect(self, _: BleakClient):
         # This gets called internally by Bleak when the device disconnects
         self.is_connected = False
         self.logger.info("Disconnected")
         # reset the text of the connect button
         self.device_disconnected.emit()
+        
+    async def writeCharCallback(self, client: BleakClient,  uuid , data , rawbytes = False):
+        print(f"args received: {uuid} {data} {bytes}")
+        try:
+            if rawbytes == True:
+                await client.write_gatt_char(uuid, bytearray(data))
+            else:
+                await client.write_gatt_char(uuid, bytes(data, 'utf-8'))
+        except Exception as err:
+            self.logger.setLevel(logging.WARNING)
+            self.logger.warning(err)
+            self.logger.setLevel(logging.INFO)
+            self.logger.info("Write failed")
+
+    #------------------------------| Event handlers |-------------------------------------------
+
+    def handle_write(self, uuid, data, rawbytes = False):
+        task = ("write_char", [uuid,data,rawbytes], {})
+        self.async_queue.put_nowait(task)
+        
         

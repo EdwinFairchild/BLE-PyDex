@@ -2421,7 +2421,7 @@ QHeaderView::section:vertical
                                 <rect>
                                  <x>0</x>
                                  <y>0</y>
-                                 <width>319</width>
+                                 <width>218</width>
                                  <height>218</height>
                                 </rect>
                                </property>
@@ -3749,6 +3749,13 @@ margin: 0px;</string>
                                 <height>30</height>
                                </size>
                               </property>
+                              <property name="styleSheet">
+                               <string notr="true"> border: 2px solid rgb(52, 59, 72);
+	border-radius: 5px;	
+text-align: center;
+padding: 0px;
+margin: 0px;</string>
+                              </property>
                               <property name="text">
                                <string>Scan</string>
                               </property>
@@ -3761,6 +3768,13 @@ margin: 0px;</string>
                                 <width>0</width>
                                 <height>30</height>
                                </size>
+                              </property>
+                              <property name="styleSheet">
+                               <string notr="true"> border: 2px solid rgb(52, 59, 72);
+	border-radius: 5px;	
+text-align: center;
+padding: 0px;
+margin: 0px;</string>
                               </property>
                               <property name="text">
                                <string>Connect</string>

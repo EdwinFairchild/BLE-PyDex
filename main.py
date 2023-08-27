@@ -430,7 +430,6 @@ class MainWindow(QMainWindow):
                 #replace the manufacturer ID with the company name in data string
                 data = data.replace(str(manufacturer_id),str(companyID))
             except Exception as e:
-                print(e)
                 companyID = "Unknown"
 
 
@@ -495,9 +494,9 @@ class MainWindow(QMainWindow):
             # extract the UUID from the string which is this: 00001801-0000-1000-8000-00805f9b34fb
 
             # check if UUID exist in ble numbers
-            svc_uuid = self.extract_uuid_name(item)
-            self.logger.info("Adding service widget for UUID: " + str(svc_uuid))
-            self.toplevel = QTreeWidgetItem([str(svc_uuid)])
+            char_uuid = self.extract_uuid_name(item)
+            self.logger.info("Adding service widget for UUID: " + str(char_uuid))
+            self.toplevel = QTreeWidgetItem([str(char_uuid)])
             # Set the icon for the top-level item.
             icon = QIcon()
             icon.addPixmap(QPixmap("char_s.png"), QIcon.Normal, QIcon.On)
@@ -505,8 +504,8 @@ class MainWindow(QMainWindow):
             self.ui.gatt_treeView.addTopLevelItem(self.toplevel)
         elif level == CHILD and self.toplevel != None:
              # check if UUID exist in ble numbers
-            svc_uuid = self.extract_uuid_name(item)
-            self.child = QTreeWidgetItem([str(svc_uuid)])
+            char_uuid = self.extract_uuid_name(item)
+            self.child = QTreeWidgetItem([str(char_uuid)])
             # Set the icon for the top-level item.
             icon = QIcon()
             icon.addPixmap(QPixmap("char_c.png"), QIcon.Normal, QIcon.On)
@@ -516,8 +515,8 @@ class MainWindow(QMainWindow):
            
         elif level == GRANDCHILD and self.child != None:
              # check if UUID exist in ble numbers
-            svc_uuid = self.extract_uuid_name(item)
-            self.subchild = QTreeWidgetItem([str(svc_uuid)])
+            char_uuid = self.extract_uuid_name(item)
+            self.subchild = QTreeWidgetItem([str(char_uuid)])
             # Set the icon for the top-level item.
             icon = QIcon()
             icon.addPixmap(QPixmap("char_d.png"), QIcon.Normal, QIcon.On)
@@ -525,19 +524,18 @@ class MainWindow(QMainWindow):
             self.child.addChild(self.subchild)
         # adds new widget to scroll area only for characteristics
         if permissions is not None:
-            self.add_char_widget(str(svc_uuid), permissions)
+            self.add_char_widget(str(char_uuid), permissions)
     
     def extract_uuid_name(self, data):
         # data[0] looks like this: 00001801-0000-1000-8000-00805f9b34fb (Handle: 16): Generic Attribute Profile 
-        # extract the UUID from the string which is this: 00001801-0000-1000-8000-00805f9b34fb
-        svc_uuid = data.split(":")[1].split("(")[0].strip()
+        char_uuid = self.extract_uuid_hex(data)
         found_match = False
         # check if UUID exist in ble numbers
         for uuid_type in [ble_uuid.service, ble_uuid.characteristic, ble_uuid.descriptor]:
             try:
-                svc_uuid = uuid_type[UUID(svc_uuid)]
+                char_uuid = uuid_type[UUID(char_uuid)]
                 # replace the UUID with the name in item
-                data = data.replace(data.split(":")[1].split("(")[0].strip(), svc_uuid)
+                data = data.replace(data.split(":")[1].split("(")[0].strip(), char_uuid)
                 found_match = True
             except:
                 pass
@@ -546,30 +544,37 @@ class MainWindow(QMainWindow):
             pass
 
         return data
+
+    def extract_uuid_hex(self, data):
+        # data[0] looks like this: 00001801-0000-1000-8000-00805f9b34fb (Handle: 16): Generic Attribute Profile 
+        # extract the UUID from the string which is this: 00001801-0000-1000-8000-00805f9b34fb
+        raw_uuid = data.split(":")[1].split("(")[0].strip()
+        return raw_uuid
+
     def gatt_tree_view_clicked(self,tree_item, column):
         # extract UUID from tree_item.text(column) and check if it exist in char_dict
         # if it does exist then scroll to that widget
-        uuid = self.extract_uuid_name(tree_item.text(column))
+        uuid = self.extract_uuid_hex(tree_item.text(column))
+        print(uuid)
         if uuid in self.char_dict:
             # scroll to widget
             self.ui.scrollArea_2.ensureWidgetVisible(self.char_dict[uuid]["widgetlocation"])
            
             
-    def add_char_widget(self, svc_uuid, permissions):
+    def add_char_widget(self, char_uuid, permissions):
                 # Add widget to Main Scroll Area
         scroll = QScrollArea()  # Scroll Area which contains the widgets, set as the centralWidget
         widget = QWidget()           # Widget that contains the collection of Vertical Box
        
         tempWidget = QtWidgets.QWidget()
         uiwidget = Ui_char_widget()
-
         
         tempWidget.setMinimumHeight(400)
         uiwidget.setupUi(tempWidget)
 
         # At this point we can access ui elements of the new char widget, we also store a reference to it in service_dict
-        uiwidget.char_write_btn.clicked.connect(lambda state : self.service_btn_click(svc_uuid))
-        uiwidget.uuid_label.setText(str(svc_uuid))
+        uiwidget.char_write_btn.clicked.connect(lambda state : self.char_write_btn_handler(self.extract_uuid_hex(char_uuid)))
+        uiwidget.uuid_label.setText(str(char_uuid))
         # check if permissions list ['write-without-response', 'write', 'notify' , 'read' ,indicate] adn enable disable buttons with same name
         if "write-without-response" in permissions:
             # regiter callback for write button
@@ -641,9 +646,14 @@ class MainWindow(QMainWindow):
         self.ui.scrollArea_2.setWidgetResizable(True)
         self.ui.scrollArea_2.setWidget(widget)
 
-        # Storing widgets in dictionary for future reference, for accessing elements of the widget
+        # Storing widgetsin dictionary for future reference, for accessing elements of the widget
         # and removing it from the scroll area
-        self.char_dict[svc_uuid] = {"uiWidget":uiwidget,"widgetlocation":tempWidget , "permissions":permissions}
+        uuid_raw = self.extract_uuid_hex(char_uuid)
+        self.char_dict[uuid_raw] = {
+            "char name":char_uuid,
+            "uiWidget":uiwidget,
+            "widgetlocation":tempWidget, 
+            "permissions":permissions}
         # to retreive a vlue from this dict
         # mywidget = self.char_dict[UUID]["widget"] 
         
@@ -654,8 +664,10 @@ class MainWindow(QMainWindow):
         # change stacked widget to connections page
         self.ui.btn_new.click()
         
-    def service_btn_click(self, UUID):
+    def char_write_btn_handler(self, UUID):
         self.logger.info(f"My UUID is {UUID}")
+        data_to_write = self.char_dict[UUID]["uiWidget"].char_write_txt.toPlainText()
+        self.connectedDevice.device_char_write.emit(UUID,data_to_write,False)
 
     def buttonClick(self):
         # GET BUTTON CLICKED
@@ -693,7 +705,7 @@ class MainWindow(QMainWindow):
             self.ui.scannerSettigns.hide()
             self.ui.elfSettings.show()
 
-            #print("Save BTN clicked!")
+            
         # PRINT BTN NAME
         #print(f'Button "{btnName}" pressed!')
 
@@ -724,7 +736,6 @@ class MainWindow(QMainWindow):
         # Clear the table
         self.ui.tbl_core_regs.setRowCount(0)
         for reg, value in regs:
-            print(f"{reg}: {value:08x}")
             row_position = self.ui.tbl_core_regs.rowCount()
             self.ui.tbl_core_regs.insertRow(row_position)
             self.ui.tbl_core_regs.setItem(row_position, 0, QTableWidgetItem(reg))
