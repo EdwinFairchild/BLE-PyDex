@@ -146,7 +146,9 @@ def clear_logs(interface):
         interface.ui.tableWidget_2.clearContents()
         interface.ui.tableWidget_2.setRowCount(0)
         interface.device_data_curves= {}
-        interface.ui.widget_rssi_graph.clear()
+        interface.device_original_colors = {}
+        # Remove all series from the chart
+        interface.ui.qtchart_widgetholder.chart().removeAllSeries()
         if interface.ui.graph_enabled.isChecked():
             interface.update_thread.GraphActive = True
             interface.update_thread.start()
