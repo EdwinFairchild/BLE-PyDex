@@ -19,11 +19,13 @@ import pyqtgraph as pg
 
 from PySide6 import QtUiTools, QtWidgets, QtGui
 from PySide6.QtWidgets import QMessageBox, QTableWidget, QMenu, QApplication
-from PySide6.QtGui import QCursor, QAction, QClipboard
-from PySide6.QtCore import QThread, Signal, QMutex, QMutexLocker, Qt
+from PySide6.QtGui import QCursor, QAction, QClipboard , QPen , QBrush , QColor
+from PySide6.QtCore import QThread, Signal, QMutex, QMutexLocker, Qt , QTimer
 from PySide6.QtWidgets import QTableWidget, QTableWidgetItem, QCheckBox, QWidget, QHBoxLayout
 from PySide6.QtCore import Qt 
 from PySide6 import QtCharts
+from PySide6.QtCharts import QLineSeries
+from math import sin, pi
 os.environ["QT_FONT_DPI"] = Settings.HIGH_DPI_DISPLAY_FONT_DPI # FIX Problem for High DPI and Scale above 100%
 
 # SET AS GLOBAL WIDGETS
@@ -40,7 +42,11 @@ class MainWindow(QMainWindow):
     serviceCount= 1
     char_dict = {}
     cleanUp = Signal(object)
-    
+    axisX = QtCharts.QValueAxis()
+    axisY = QtCharts.QValueAxis()
+    axisX.setRange(0, 10)
+    axisY.setRange(-1, 1)
+
     
     def __init__(self):
         QMainWindow.__init__(self)
@@ -55,12 +61,12 @@ class MainWindow(QMainWindow):
         # Graphing variables
         self.device_data_sets = {}
         self.device_data_curves = {}
-        self.device_colors = {}
-        self.start_time = time.time()
+        self.device_original_colors = {}
+        self.start_time = None #time.time()
         self.current_time = time.time()
         self.plot_colors = ['b', 'g', 'r', 'c', 'm', 'y', 'k']
-        self.ui.widget_rssi_graph.setBackground((40, 44, 52)) 
-        self.ui.widget_rssi_graph.getPlotItem().getAxis('bottom').setStyle(showValues=False)
+        # self.ui.widget_rssi_graph.setBackground((40, 44, 52)) 
+        # self.ui.widget_rssi_graph.getPlotItem().getAxis('bottom').setStyle(showValues=False)
         
         # Initialize logging
         console = logging.getLogger("PDexLogger")
@@ -115,7 +121,7 @@ class MainWindow(QMainWindow):
         UIFunctions.uiDefinitions(self)
 
         # QTableWidget PARAMETERS
-        self.ui.tableWidget.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
+        #self.ui.tableWidget.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
         header = self.ui.tableWidget_2.verticalHeader()
         header.setDefaultAlignment(Qt.AlignCenter)
         self.ui.tableWidget_2.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
@@ -244,6 +250,46 @@ class MainWindow(QMainWindow):
         # SHOW APP
         self.show()
 
+
+        # Set up the axes (assuming the chart is already set up in the .ui file)
+        self.axisX = QtCharts.QValueAxis()
+        self.axisY = QtCharts.QValueAxis()
+        self.axisX.setRange(0, 10)
+        self.axisY.setRange(-130, 0)
+
+        self.ui.qtchart_widgetholder.chart().addAxis(self.axisX, Qt.AlignBottom)
+        self.ui.qtchart_widgetholder.chart().addAxis(self.axisY, Qt.AlignLeft)
+        self.ui.qtchart_widgetholder.chart().layout().setContentsMargins(0, 0, 0, 0)
+        self.ui.qtchart_widgetholder.chart().setMargins(QMargins(0, 0, 0, 0))
+        # change background color to rgb(40, 44, 52)
+       # Create a QColor object with the desired background color
+        background_color = QColor(33, 37,43)
+
+        # Create a QBrush object with the QColor object
+        background_brush = QBrush(background_color)
+
+        # Set the background brush of the QChart
+        self.ui.qtchart_widgetholder.chart().setBackgroundBrush(background_brush)
+        # change grideline colors to rgb(52, 59, 72)
+        self.ui.qtchart_widgetholder.chart().axisX().setGridLineColor(QColor(52, 59, 72))
+        self.ui.qtchart_widgetholder.chart().axisY().setGridLineColor(QColor(52, 59, 72))
+        # change axis label colors to rgb(255, 255, 255)
+        self.ui.qtchart_widgetholder.chart().axisX().setLabelsColor(QColor(52, 59, 72))
+        self.ui.qtchart_widgetholder.chart().axisY().setLabelsColor(QColor(52, 59, 72))
+        # Create a QPen object for the main axis lines
+        pen = QPen(QColor(52, 59, 72))  # Change the color to whatever you want
+        pen.setWidth(2)      # Change the width to your desired size
+
+        # Apply the pen to the axis
+        self.axisX.setLinePen(pen)
+        self.axisY.setLinePen(pen)
+
+        self.ui.list_widget_discovered.itemClicked.connect(self.highlight_selected_device)
+        
+
+                
+
+
         # SET CUSTOM THEME
         useCustomTheme = True
         themeFile = "themes/py_dracula_dark.qss"
@@ -258,55 +304,98 @@ class MainWindow(QMainWindow):
         # SET HOME PAGE AND SELECT MENU
         self.ui.stackedWidget.setCurrentWidget(self.ui.home)
         self.ui.btn_home.setStyleSheet(UIFunctions.selectMenu(self.ui.btn_home.styleSheet()))
+    def highlight_selected_device(self, item):
+        selected_device = item.text()
+        light_gray = QColor(52, 59, 72)  # Light gray color
+        light_gray_pen = QPen(light_gray)
+        light_gray_pen.setWidth(2)
 
+        # Temporarily store the series for the selected device
+        selected_device_series = None
+
+        # Loop through all device_data_curves to update their color
+        for device_name, device_series in self.device_data_curves.items():
+            if device_name == selected_device:
+                # This is the selected device, so keep its original color
+                original_color_pen = QPen(self.device_original_colors[device_name])
+                original_color_pen.setWidth(2)
+                device_series.setPen(original_color_pen)
+
+                # Store the series for adding it again later to bring it to the front
+                selected_device_series = device_series
+
+            else:
+                # Change color to light gray for non-selected devices
+                device_series.setPen(light_gray_pen)
+
+        # Remove and add the series again to bring it to the front
+        if selected_device_series:
+            self.ui.qtchart_widgetholder.chart().removeSeries(selected_device_series)
+            self.ui.qtchart_widgetholder.chart().addSeries(selected_device_series)
+            selected_device_series.attachAxis(self.axisX)
+            selected_device_series.attachAxis(self.axisY)
+
+        # Trigger a redraw (you might not need this line, depending on your setup)
+        self.ui.qtchart_widgetholder.chart().update()
     def update_graph(self,device_name,rssi_value,current_time):
-        # TODO : possibly make this a slider for the user to configure
-        MAX_DEVICES = 100
+        MAX_DEVICES = 10  # Maximum number of devices to display
+
         # Initialize start time and max duration
-        if "start_time" not in self.__dict__:
+        if self.start_time is None:
             self.start_time = current_time
+
         max_duration = 10  # Maximum duration to display (in seconds)
-
-        # Calculate time delta and check if data should scroll
         time_delta = current_time - self.start_time
-        if time_delta > max_duration:
-            # Calculate the new start time
-            self.start_time = current_time - max_duration
 
-            # Update the x-axis range to enable scrolling
-            self.ui.widget_rssi_graph.setXRange(self.start_time, current_time)
+        if time_delta > max_duration:
+            self.start_time = current_time - max_duration
+            self.axisX.setRange(self.start_time, current_time)
 
         if device_name in self.device_data_curves:
-            # Get the device's curve and data
-            device_curve = self.device_data_curves[device_name]
-            device_data_x, device_data_y = device_curve.getData()
+            # Retrieve the existing QLineSeries for the device
+            device_series = self.device_data_curves[device_name]
 
-            # Append the new RSSI value and time to the existing data.
+            # Convert QLineSeries to numpy arrays for easy manipulation
+            old_data = [(point.x(), point.y()) for point in device_series.pointsVector()]
+            device_data_x, device_data_y = np.array(old_data).T
+
+            # Append new data and update QLineSeries
             device_data_x = np.append(device_data_x, current_time)
             device_data_y = np.append(device_data_y, rssi_value)
+            # Create a list of QPointF objects
+            points = [QPointF(x, y) for x, y in zip(device_data_x, device_data_y)]
 
-            # Update the curve with the new data.
-            device_curve.setData(device_data_x, device_data_y)
+            device_series.replace(points)
 
         else:
-             # Check if maximum number of devices has been reached
             if len(self.device_data_curves) >= MAX_DEVICES:
-                # Here you can decide what to do if max is reached,
-                # you can drop the oldest device or ignore the new one
-                return
-            # The device is not in the dictionary
-            # Generate a random color for the device
-            device_color = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
+                return  # Ignore new device if max is reached
 
-            # Create a new PlotCurveItem for the device
-            device_curve = pg.PlotCurveItem(pen=pg.mkPen(color=device_color, width=1))
+            # Generate a random color for the new device
+            random_color = random.randint(0, 0xFFFFFF)
+            pen = QPen((random_color))
+            pen.setWidth(2)
+            # Create a new QLineSeries for the device
+            new_device_series = QLineSeries()
+            new_device_series.setPen(pen)
+            new_device_series.append(current_time, rssi_value)
+            # # Update color of QListWidgetItem to match the line color
+            # for i in range(self.ui.list_widget_discovered.count()):
+            #     item = self.ui.list_widget_discovered.item(i)
+            #     if item.text() == device_name:
+            #         item.setForeground(QBrush(random_color))
+            #         break
 
-            # Set the curve's data
-            device_curve.setData(np.array([current_time]), np.array([rssi_value]))
+            # Add to chart and attach axes
+            self.ui.qtchart_widgetholder.chart().addSeries(new_device_series)
+            new_device_series.attachAxis(self.axisX)
+            new_device_series.attachAxis(self.axisY)
 
-            # Add the curve to the graph and the dictionary
-            self.ui.widget_rssi_graph.addItem(device_curve)
-            self.device_data_curves[device_name] = device_curve
+            # Store the new series in the dictionary
+            self.device_data_curves[device_name] = new_device_series
+            # Save the original color in the new dictionary
+            self.device_original_colors[device_name] = random_color
+        
    
     def stop_rssi_thread(self):
             # the RSSI thread
@@ -705,6 +794,19 @@ class MainWindow(QMainWindow):
                 pass
         self.var_watcher.quit()
         self.var_watcher.wait()
+    def addToLineChart(self):
+      
+        self.ui.qtchart_widgetholder.chart().addAxis(self.axisX, Qt.AlignBottom)
+        self.ui.qtchart_widgetholder.chart().addAxis(self.axisY, Qt.AlignLeft)
+        self.line_series.attachAxis(self.axisX)
+        self.line_series.attachAxis(self.axisY)
+
+        # Create a QTimer instance and connect it to the update function
+        self.timer = QTimer(self)
+        self.timer.timeout.connect(self.update_graph)
+        self.timer.start(25)  # Timer triggers every 0.1 seconds (100 milliseconds)
+
+
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
