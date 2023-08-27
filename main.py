@@ -23,7 +23,7 @@ from PySide6.QtGui import QCursor, QAction, QClipboard
 from PySide6.QtCore import QThread, Signal, QMutex, QMutexLocker, Qt
 from PySide6.QtWidgets import QTableWidget, QTableWidgetItem, QCheckBox, QWidget, QHBoxLayout
 from PySide6.QtCore import Qt 
-
+from PySide6 import QtCharts
 os.environ["QT_FONT_DPI"] = Settings.HIGH_DPI_DISPLAY_FONT_DPI # FIX Problem for High DPI and Scale above 100%
 
 # SET AS GLOBAL WIDGETS
@@ -204,7 +204,7 @@ class MainWindow(QMainWindow):
         slots.init_signals_and_slots(self)
 
         # register cleanup callback and pass widgets object to it with lambda
-        self.cleanUp.connect(lambda: self.clean_up(widgets))
+        self.cleanUp.connect(lambda: self.clean_up())
 
         
         
@@ -430,7 +430,7 @@ class MainWindow(QMainWindow):
             self.child.addChild(self.subchild)
         # adds new widget to scroll area only for characteristics
         if permissions is not None:
-            self.add_service_widget(str(svc_uuid), permissions)
+            self.add_char_widget(str(svc_uuid), permissions)
     
     def extract_uuid_name(self, data):
         # data[0] looks like this: 00001801-0000-1000-8000-00805f9b34fb (Handle: 16): Generic Attribute Profile 
@@ -457,10 +457,10 @@ class MainWindow(QMainWindow):
         uuid = self.extract_uuid_name(tree_item.text(column))
         if uuid in self.char_dict:
             # scroll to widget
-            self.ui.scrollArea_2.ensureWidgetVisible(self.char_dict[uuid]["widget"])
+            self.ui.scrollArea_2.ensureWidgetVisible(self.char_dict[uuid]["widgetlocation"])
            
             
-    def add_service_widget(self, svc_uuid, permissions):
+    def add_char_widget(self, svc_uuid, permissions):
                 # Add widget to Main Scroll Area
         scroll = QScrollArea()  # Scroll Area which contains the widgets, set as the centralWidget
         widget = QWidget()           # Widget that contains the collection of Vertical Box
@@ -477,7 +477,8 @@ class MainWindow(QMainWindow):
         uiwidget.uuid_label.setText(str(svc_uuid))
         # check if permissions list ['write-without-response', 'write', 'notify' , 'read' ,indicate] adn enable disable buttons with same name
         if "write-without-response" in permissions:
-            uiwidget.permission_write_wo_resp.setEnabled(True)
+            # regiter callback for write button
+            pass
         else:
             uiwidget.permission_write_wo_resp.setEnabled(False)
             #change background color to light gray
@@ -485,7 +486,8 @@ class MainWindow(QMainWindow):
             #make invisible
             #uiwidget.permission_write_wo_resp.setVisible(False)
         if "write" in permissions:
-            uiwidget.permission_write.setEnabled(True)
+            # regiter callback for write button
+            pass
         else:
             uiwidget.permission_write.setEnabled(False)
             #change background color to light gray
@@ -493,7 +495,8 @@ class MainWindow(QMainWindow):
             #make invisible
             #uiwidget.permission_write.setVisible(False)
         if "notify" in permissions:
-            uiwidget.permission_notify.setEnabled(True)
+            # regiter callback for notifications
+            pass
         else:
             uiwidget.permission_notify.setEnabled(False)
             #change background color to light gray
@@ -501,7 +504,8 @@ class MainWindow(QMainWindow):
             #make invisible
             #uiwidget.permission_notify.setVisible(False)
         if "read" in permissions:
-            uiwidget.permission_read.setEnabled(True)
+            # regiter callback for read button
+            pass
         else:
             uiwidget.permission_read.setEnabled(False)
             #change background color to light gray
@@ -509,7 +513,8 @@ class MainWindow(QMainWindow):
             #make invisible
             #uiwidget.permission_read.setVisible(False)
         if "indicate" in permissions:
-            uiwidget.permission_indicate.setEnabled(True)
+            # regiter callback for indications
+            pass
         else:
             uiwidget.permission_indicate.setEnabled(False)
             #change background color to light gray
@@ -543,10 +548,11 @@ class MainWindow(QMainWindow):
 
         # Storing widgets in dictionary for future reference, for accessing elements of the widget
         # and removing it from the scroll area
-        self.char_dict[svc_uuid] = {"uiWidget":uiwidget,"widget":tempWidget}
+        self.char_dict[svc_uuid] = {"uiWidget":uiwidget,"widgetlocation":tempWidget , "permissions":permissions}
         # to retreive a vlue from this dict
         # mywidget = self.char_dict[UUID]["widget"] 
-        #print(f"Widget {uiwidget} added to char_dict with key {UUID}")
+        
+        # register callbacks for the uiwidget elements
 
         #  store reference to widget in char_dict so we can access it later, use UUID as key
     def stacked_widget_show_connected(self):
@@ -630,7 +636,7 @@ class MainWindow(QMainWindow):
             self.ui.tbl_core_regs.setItem(row_position, 1, QTableWidgetItem(hex(value)))
 
 
-    def clean_up(self, widgets):
+    def clean_up(self):
         try:
             container = self.ui.scrollArea_2.widget()
             layout = container.layout()
