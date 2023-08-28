@@ -608,15 +608,16 @@ class MainWindow(QMainWindow):
         
         # check if permissions list ['write-without-response', 'write', 'notify' , 'read' ,indicate] adn enable disable buttons with same name
         if "write-without-response" in permissions:
-            # regiter callback for write button
+            uiwidget.char_write_btn.clicked.connect(lambda state : self.char_write_btn_handler(self.extract_uuid_hex(char_uuid),False))
             pass
         else:
             uiwidget.permission_write_wo_resp.setEnabled(False)
             #change background color of permissons label 
             uiwidget.permission_write_wo_resp.setStyleSheet("background-color: rgb(52, 59, 72);color:rgb(205,205,205);padding:5px;")
            
-        if "write" in permissions:
-            uiwidget.char_write_btn.clicked.connect(lambda state : self.char_write_btn_handler(self.extract_uuid_hex(char_uuid)))
+        if "write" in permissions: # this is write with response
+            uiwidget.char_write_btn.clicked.connect(lambda state : self.char_write_btn_handler(self.extract_uuid_hex(char_uuid),True))
+            pass
         else:
             
             uiwidget.char_write_txt.setMaximumWidth(0)
@@ -700,10 +701,11 @@ class MainWindow(QMainWindow):
         # change stacked widget to connections page
         self.ui.btn_new.click()
         
-    def char_write_btn_handler(self, UUID):
+    def char_write_btn_handler(self, UUID , resp: bool = False):
+           
         self.logger.info(f"My UUID is {UUID}")
         data_to_write = self.char_dict[UUID]["uiWidget"].char_write_txt.toPlainText()
-        self.connectedDevice.device_char_write.emit(UUID,data_to_write,False)
+        self.connectedDevice.device_char_write.emit(UUID,data_to_write,resp,False)
 
     def buttonClick(self):
         # GET BUTTON CLICKED

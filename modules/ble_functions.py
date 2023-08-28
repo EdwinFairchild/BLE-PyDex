@@ -69,7 +69,7 @@ class BLE_ConnectDevice(QThread):
 
 
     # signals to kickstart queue based event handling
-    device_char_write = Signal(str, str, bool) # UUID, value
+    device_char_write = Signal(str, str, bool, bool) # UUID, value
 
     def __init__(self, *args, **kwargs):
         super(BLE_ConnectDevice, self).__init__(*args, **kwargs)
@@ -108,7 +108,7 @@ class BLE_ConnectDevice(QThread):
                     if not self.async_queue.empty():
                         task, args, kwargs = await self.async_queue.get()  # This will wait until something is available
                         if task == "write_char":
-                            await self.writeCharCallback(client, *args, **kwargs)
+                            await self.writeWithoutRespCallback(client, *args, **kwargs)
 
                             
 
@@ -185,22 +185,44 @@ class BLE_ConnectDevice(QThread):
         # reset the text of the connect button
         self.device_disconnected.emit()
         
-    async def writeCharCallback(self, client: BleakClient,  uuid , data , rawbytes = False):
-        try:
-            if rawbytes == True:
-                await client.write_gatt_char(uuid, bytearray(data))
-            else:
-                await client.write_gatt_char(uuid, bytes(data, 'utf-8'))
-        except Exception as err:
-            self.logger.setLevel(logging.WARNING)
-            self.logger.warning(err)
-            self.logger.setLevel(logging.WARNING)
-            self.logger.info("Write failed")
+    async def writeWithoutRespCallback(self, client: BleakClient,  uuid , data , response , rawbytes = False):
+        if response == True:
+            try:
+                if rawbytes == True:
+                    value = await client.write_gatt_char(uuid, bytearray(data), response=True)
+                    if value == None:
+                        self.logger.info(f"Successfully wrote data to characteristic with UUID: {uuid}. Write type: With Response. Response received.")
+                else:
+                    value = await client.write_gatt_char(uuid, bytes(data, 'utf-8'), response=True)
+                    if value == None:
+                        self.logger.info(f"Successfully wrote data to characteristic with UUID: {uuid}. Write type: With Response. Response received.")
+
+            except Exception as err:
+                self.logger.setLevel(logging.WARNING)
+                self.logger.warning(err)
+                self.logger.setLevel(logging.WARNING)
+                self.logger.info("Write failed")
+        else:    
+            try:
+                if rawbytes == True:
+                    await client.write_gatt_char(uuid, bytearray(data))
+                    self.logger.info(f"Successfully wrote data to characteristic with UUID: {uuid}. Write type: Without Response.")
+
+                else:
+                    await client.write_gatt_char(uuid, bytes(data, 'utf-8'))
+                    self.logger.info(f"Successfully wrote data to characteristic with UUID: {uuid}. Write type: Without Response.")
+
+            except Exception as err:
+                self.logger.setLevel(logging.WARNING)
+                self.logger.warning(err)
+                self.logger.setLevel(logging.WARNING)
+                self.logger.info("Write failed")
 
     #------------------------------| Event handlers |-------------------------------------------
 
-    def handle_write(self, uuid, data, rawbytes = False):
-        task = ("write_char", [uuid,data,rawbytes], {})
+    def handle_write(self, uuid, data, response: bool=False,rawbytes: bool=False):
+       
+        task = ("write_char", [uuid,data, response, rawbytes], {})
         try:
             self.async_queue.put_nowait(task)
         except err:
