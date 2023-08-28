@@ -79,6 +79,7 @@ class MainWindow(QMainWindow):
 
         # connected mode variables
         self.connectedDevice = BLE_ConnectDevice()
+        self.connectedDevice.device_notification_recevied.connect(self.char_notification_handler)
         
         self.update_thread = UpdateRSSIGraphThread(self)
         self.update_thread.dataUpdated.connect(self.update_graph)
@@ -459,7 +460,7 @@ class MainWindow(QMainWindow):
 
     def logToTextbox(self, data):
         self.ui.console.append(data)
-        #print(data)
+
     
     def discovered_services(self,data):
         
@@ -548,15 +549,14 @@ class MainWindow(QMainWindow):
         return data
 
     def extract_uuid_hex(self, data):
-        # data[0] looks like this  ":00001801-0000-1000-8000-00805f9b34fb (Handle: 16): Generic Attribute Profile" 
+        # data[0] looks like this  "00001801-0000-1000-8000-00805f9b34fb (Handle: 16): Generic Attribute Profile" 
         # extract the UUID from the string which is this  "00001801-0000-1000-8000-00805f9b34fb"
-        raw_uuid = data.split(":")[1].split("(")[0].strip() # this leaves the first ":" which is not needed
+        raw_uuid = data.split("(")[0].strip()
         return raw_uuid
     def extract_handle(self, data):
-        # data[0] looks like this  ":00001801-0000-1000-8000-00805f9b34fb (Handle: 16): Generic Attribute Profile" 
+        # data[0] looks like this  "00001801-0000-1000-8000-00805f9b34fb (Handle: 16): Generic Attribute Profile" 
         # extract the handle value, not handle text, from the string which is this  "16"
-        handle_value = data.split(":")[2].split(")")[0].strip() # this leaves the first ":" which is not needed
-        print(handle_value)
+        handle_value = data.split("(")[1].split(")")[0].split(":")[1].strip()
         return handle_value
 
     def gatt_tree_view_clicked(self,tree_item, column):
@@ -595,7 +595,7 @@ class MainWindow(QMainWindow):
         tempWidget = QtWidgets.QWidget()
         uiwidget = Ui_char_widget()
         
-        tempWidget.setMinimumHeight(400)
+        tempWidget.setMinimumHeight(500)
         uiwidget.setupUi(tempWidget)
 
         # At this point we can access ui elements of the new char widget, we also store a reference to it in service_dict
@@ -628,7 +628,8 @@ class MainWindow(QMainWindow):
             uiwidget.permission_write.setStyleSheet("background-color: rgb(52, 59, 72);color:rgb(205,205,205);padding:5px;")
 
         if "notify" in permissions:
-            # regiter callback for notifications
+            # regiter callback for notification toggle "notify_toggle" state change in uiwidget
+            uiwidget.notify_toggle.stateChanged.connect(lambda state : self.notify_toggle_handler(self.extract_uuid_hex(char_uuid),state))
             pass
         else:
             uiwidget.notify_toggle.setEnabled(False)
@@ -702,10 +703,16 @@ class MainWindow(QMainWindow):
         self.ui.btn_new.click()
         
     def char_write_btn_handler(self, UUID , resp: bool = False):
-           
-        self.logger.info(f"My UUID is {UUID}")
         data_to_write = self.char_dict[UUID]["uiWidget"].char_write_txt.toPlainText()
         self.connectedDevice.device_char_write.emit(UUID,data_to_write,resp,False)
+    def notify_toggle_handler(self, UUID, state):
+        self.connectedDevice.device_char_notify.emit(UUID,state)
+
+    def char_notification_handler(self, uuid, payload):
+        char_uuid = self.extract_uuid_hex(uuid)
+        # find uuid in char dict and update the uiwidget, append text to char_read_txt
+        self.char_dict[char_uuid]["uiWidget"].char_read_txt.append(payload)
+        
 
     def buttonClick(self):
         # GET BUTTON CLICKED

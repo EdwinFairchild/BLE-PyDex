@@ -70,12 +70,15 @@ class BLE_ConnectDevice(QThread):
 
     # signals to kickstart queue based event handling
     device_char_write = Signal(str, str, bool, bool) # UUID, value
+    device_char_notify = Signal(str, bool) # UUID, enable/disable
+    device_notification_recevied = Signal(str, str) # sender, value
 
     def __init__(self, *args, **kwargs):
         super(BLE_ConnectDevice, self).__init__(*args, **kwargs)
         self.async_queue = Queue()
         # Connect signals to slots
         self.device_char_write.connect(self.handle_write)
+        self.device_char_notify.connect(self.handle_notify)
         
     
     def run(self):
@@ -109,7 +112,8 @@ class BLE_ConnectDevice(QThread):
                         task, args, kwargs = await self.async_queue.get()  # This will wait until something is available
                         if task == "write_char":
                             await self.writeWithoutRespCallback(client, *args, **kwargs)
-
+                        if task == "notify_char":
+                            await self.notifyCallback(client, *args, **kwargs)
                             
 
                     # async sleep, give time for other threads to run
@@ -137,7 +141,7 @@ class BLE_ConnectDevice(QThread):
                 PARENT = 0
                 CHILD = 1
                 GRANDCHILD = 2
-                self.discovered_services.emit([f": {service}", PARENT,None])
+                self.discovered_services.emit([f"{service}", PARENT,None])
                 for char in service.characteristics:
                     # EMIT characteristics with read property
                     if "read" in char.properties:
@@ -146,16 +150,16 @@ class BLE_ConnectDevice(QThread):
                             
                             value = bytes(await client.read_gatt_char(char.uuid))
                             self.discovered_services.emit(
-                                [f"\t: {char}, Value: {value}", CHILD,char.properties])
+                                [f"{char}, Value: {value}", CHILD,char.properties])
                         except Exception as e:
                             self.discovered_services.emit(
-                                [f"\t: {char}, Error: {e}", CHILD,char.properties])
+                                [f"{char}, Error: {e}", CHILD,char.properties])
                     else:
                         # EMIT characteristics without  read property
                         value = None
                         
                         self.discovered_services.emit(
-                            [f"\t: {char}, Value: {value}", CHILD,char.properties])
+                            [f"{char}, Value: {value}", CHILD,char.properties])
                     for descriptor in char.descriptors:
                         # emit children of children
                         try:
@@ -163,7 +167,7 @@ class BLE_ConnectDevice(QThread):
                                 await client.read_gatt_descriptor(descriptor.handle)
                             )
                             self.discovered_services.emit(
-                                [f"\t\t: {descriptor}) | Value: {value}", GRANDCHILD, None])
+                                [f"{descriptor}) | Value: {value}", GRANDCHILD, None])
                         except Exception as err:
                             self.logger.warning(f"Opps!:{err}")
                             
@@ -217,7 +221,41 @@ class BLE_ConnectDevice(QThread):
                 self.logger.warning(err)
                 self.logger.setLevel(logging.WARNING)
                 self.logger.info("Write failed")
+   
+    async def notifyCallback(self, client: BleakClient, uuid, enable):
+        if enable == True:
+            try:
+                await client.start_notify(uuid, self.notification_handler)
+                self.logger.info(f"Successfully enabled notifications for characteristic with UUID: {uuid}")
+            except Exception as err:
+                self.logger.setLevel(logging.WARNING)
+                self.logger.warning(err)
+                self.logger.setLevel(logging.WARNING)
+                self.logger.info("Notification failed")
+        else:
+            try:
+                await client.stop_notify(uuid)
+                self.logger.info(f"Successfully disabled notifications for characteristic with UUID: {uuid}")
+            except Exception as err:
+                self.logger.setLevel(logging.WARNING)
+                self.logger.warning(err)
+                self.logger.setLevel(logging.WARNING)
+                self.logger.info("Notification failed")
+    
+    def notification_handler(self, sender, data):
+        self.logger.info(f"Notification received")
+        self.logger.info(f"Sender: {sender}")
+        self.logger.info(f"Data: {data}")
+        try:
+            self.device_notification_recevied.emit(str(sender), str(data))
+        except Exception as err:
+            self.logger.setLevel(logging.WARNING)
+            self.logger.warning(err)
+            self.logger.setLevel(logging.INFO)
+            self.logger.info("Notification failed")
+            pass
 
+ 
     #------------------------------| Event handlers |-------------------------------------------
 
     def handle_write(self, uuid, data, response: bool=False,rawbytes: bool=False):
@@ -229,6 +267,16 @@ class BLE_ConnectDevice(QThread):
             self.logger.setLevel(logging.WARNING)
             self.logger.warning("Queue is full: {err}")
             self.logger.setLevel(logging.INFO)
+            self.logger.info("Write failed")
             pass
         
-        
+    def handle_notify(self, uuid, enable: bool):
+        task = ("notify_char", [uuid,enable], {})
+        try:
+            self.async_queue.put_nowait(task)
+        except err:
+            self.logger.setLevel(logging.WARNING)
+            self.logger.warning("Queue is full: {err}")
+            self.logger.setLevel(logging.INFO)
+            self.logger.info("Notification failed")
+            pass
