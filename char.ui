@@ -283,7 +283,7 @@ color: rgb(255, 255, 255);</string>
                <string>CheckBox</string>
               </property>
               <property name="checked">
-               <bool>true</bool>
+               <bool>false</bool>
               </property>
              </widget>
             </item>

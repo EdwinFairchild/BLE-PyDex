@@ -173,7 +173,7 @@ class Ui_char_widget(object):
         self.notify_toggle = AnimatedToggle(self.frame_notifications)
         self.notify_toggle.setObjectName(u"notify_toggle")
         self.notify_toggle.setMaximumSize(QSize(99999, 999999))
-        self.notify_toggle.setChecked(True)
+        self.notify_toggle.setChecked(False)
 
         self.horizontalLayout_2.addWidget(self.notify_toggle)
 

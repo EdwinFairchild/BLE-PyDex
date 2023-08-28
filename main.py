@@ -552,6 +552,12 @@ class MainWindow(QMainWindow):
         # extract the UUID from the string which is this  "00001801-0000-1000-8000-00805f9b34fb"
         raw_uuid = data.split(":")[1].split("(")[0].strip() # this leaves the first ":" which is not needed
         return raw_uuid
+    def extract_handle(self, data):
+        # data[0] looks like this  ":00001801-0000-1000-8000-00805f9b34fb (Handle: 16): Generic Attribute Profile" 
+        # extract the handle value, not handle text, from the string which is this  "16"
+        handle_value = data.split(":")[2].split(")")[0].strip() # this leaves the first ":" which is not needed
+        print(handle_value)
+        return handle_value
 
     def gatt_tree_view_clicked(self,tree_item, column):
         # when user clicks on a tree item, check if it exists in char_dict
@@ -598,6 +604,7 @@ class MainWindow(QMainWindow):
             char_name = "Unknown"
         uiwidget.characteristic_name_lbl.setText(f"characteristic : {char_name}")
         uiwidget.uuid_lbl.setText(f"UUID : {self.extract_uuid_hex(char_uuid)}")
+        uiwidget.handle_lbl.setText(f"Handle : {self.extract_handle(char_uuid)}")
         
         # check if permissions list ['write-without-response', 'write', 'notify' , 'read' ,indicate] adn enable disable buttons with same name
         if "write-without-response" in permissions:
@@ -623,7 +630,7 @@ class MainWindow(QMainWindow):
             # regiter callback for notifications
             pass
         else:
-            uiwidget.permission_notify.setEnabled(False)
+            uiwidget.notify_toggle.setEnabled(False)
             #change background color of permissons label 
             uiwidget.permission_notify.setStyleSheet("background-color: rgb(52, 59, 72);color:rgb(205,205,205);padding:5px;")
             #make invisible
