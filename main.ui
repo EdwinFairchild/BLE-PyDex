@@ -1877,7 +1877,7 @@ p, li { white-space: pre-wrap; }
                             </property>
                             <layout class="QVBoxLayout" name="verticalLayout_24">
                              <property name="spacing">
-                              <number>0</number>
+                              <number>6</number>
                              </property>
                              <property name="topMargin">
                               <number>0</number>
@@ -1961,7 +1961,8 @@ p, li { white-space: pre-wrap; }
                                    </size>
                                   </property>
                                   <property name="styleSheet">
-                                   <string notr="true">background-color: rgb(33, 37, 43);</string>
+                                   <string notr="true">background-color: rgb(33, 37, 43);
+color: rgb(255, 255, 255);</string>
                                   </property>
                                   <property name="text">
                                    <string/>
@@ -1993,6 +1994,78 @@ p, li { white-space: pre-wrap; }
                                <property name="selectionMode">
                                 <enum>QAbstractItemView::SingleSelection</enum>
                                </property>
+                              </widget>
+                             </item>
+                             <item>
+                              <widget class="QFrame" name="frame_12">
+                               <property name="minimumSize">
+                                <size>
+                                 <width>0</width>
+                                 <height>0</height>
+                                </size>
+                               </property>
+                               <property name="styleSheet">
+                                <string notr="true"> border: 0px solid rgb(52, 59, 72);
+	border-radius: 5px;	
+</string>
+                               </property>
+                               <property name="frameShape">
+                                <enum>QFrame::StyledPanel</enum>
+                               </property>
+                               <property name="frameShadow">
+                                <enum>QFrame::Raised</enum>
+                               </property>
+                               <layout class="QHBoxLayout" name="horizontalLayout_19">
+                                <property name="leftMargin">
+                                 <number>0</number>
+                                </property>
+                                <property name="topMargin">
+                                 <number>6</number>
+                                </property>
+                                <property name="rightMargin">
+                                 <number>0</number>
+                                </property>
+                                <item>
+                                 <widget class="QPushButton" name="btn_scan">
+                                  <property name="minimumSize">
+                                   <size>
+                                    <width>0</width>
+                                    <height>30</height>
+                                   </size>
+                                  </property>
+                                  <property name="styleSheet">
+                                   <string notr="true"> border: 2px solid rgb(52, 59, 72);
+	border-radius: 5px;	
+text-align: center;
+padding: 0px;
+margin: 0px;</string>
+                                  </property>
+                                  <property name="text">
+                                   <string>Scan</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item>
+                                 <widget class="QPushButton" name="btn_connect">
+                                  <property name="minimumSize">
+                                   <size>
+                                    <width>0</width>
+                                    <height>30</height>
+                                   </size>
+                                  </property>
+                                  <property name="styleSheet">
+                                   <string notr="true"> border: 2px solid rgb(52, 59, 72);
+border-radius: 5px;	
+text-align: center;
+padding: 0px;
+margin: 0px;</string>
+                                  </property>
+                                  <property name="text">
+                                   <string>Connect</string>
+                                  </property>
+                                 </widget>
+                                </item>
+                               </layout>
                               </widget>
                              </item>
                             </layout>
@@ -2421,7 +2494,7 @@ QHeaderView::section:vertical
                                 <rect>
                                  <x>0</x>
                                  <y>0</y>
-                                 <width>218</width>
+                                 <width>319</width>
                                  <height>218</height>
                                 </rect>
                                </property>
@@ -3238,7 +3311,7 @@ margin-left: 10px;  /* Add 10 pixels of margin to the left of the button */
                             </property>
                             <layout class="QVBoxLayout" name="verticalLayout_28">
                              <property name="spacing">
-                              <number>10</number>
+                              <number>15</number>
                              </property>
                              <property name="leftMargin">
                               <number>0</number>
@@ -3521,6 +3594,9 @@ margin: 0px;</string>
                          </item>
                          <item>
                           <widget class="QFrame" name="frame_scan">
+                           <property name="enabled">
+                            <bool>true</bool>
+                           </property>
                            <property name="styleSheet">
                             <string notr="true"> border: 0px solid rgb(52, 59, 72);
 	border-radius: 5px;	
@@ -3739,46 +3815,6 @@ margin: 0px;</string>
                                 </widget>
                                </item>
                               </layout>
-                             </widget>
-                            </item>
-                            <item>
-                             <widget class="QPushButton" name="btn_scan">
-                              <property name="minimumSize">
-                               <size>
-                                <width>0</width>
-                                <height>30</height>
-                               </size>
-                              </property>
-                              <property name="styleSheet">
-                               <string notr="true"> border: 2px solid rgb(52, 59, 72);
-	border-radius: 5px;	
-text-align: center;
-padding: 0px;
-margin: 0px;</string>
-                              </property>
-                              <property name="text">
-                               <string>Scan</string>
-                              </property>
-                             </widget>
-                            </item>
-                            <item>
-                             <widget class="QPushButton" name="btn_connect">
-                              <property name="minimumSize">
-                               <size>
-                                <width>0</width>
-                                <height>30</height>
-                               </size>
-                              </property>
-                              <property name="styleSheet">
-                               <string notr="true"> border: 2px solid rgb(52, 59, 72);
-	border-radius: 5px;	
-text-align: center;
-padding: 0px;
-margin: 0px;</string>
-                              </property>
-                              <property name="text">
-                               <string>Connect</string>
-                              </property>
                              </widget>
                             </item>
                             <item>

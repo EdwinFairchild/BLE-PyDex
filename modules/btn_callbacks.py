@@ -32,7 +32,7 @@ def btn_scan(interface):
             # Update text of this button to "Stop"
             interface.ui.btn_scan.setText("Stop")
             # Change background color of this button to rgba(33, 37, 43, 180)
-            interface.ui.btn_scan.setStyleSheet("background-color: rgba(33, 37, 43, 180);")
+            interface.ui.btn_scan.setStyleSheet("background-color: rgba(33, 37, 43, 180); border: 2px solid rgb(52, 59, 72);border-radius: 5px;")
 
             #restart rssi gaph update thread because it could have been stopped by stop button
             if interface.ui.graph_enabled.isChecked():
@@ -112,7 +112,7 @@ def btn_connect(interface):
             # interface.bleScanner.is_scanning = False
             # interface.bleScanner.quit()
             interface.ui.btn_scan.setText("Scan")
-            interface.ui.btn_scan.setStyleSheet("")
+            interface.ui.btn_scan.setStyleSheet("background-color:rgba(40, 44, 52,180);border: 2px solid rgb(52, 59, 72);border-radius: 5px;")
         except Exception as err:
             logger.setLevel(logging.WARNING)
             logger.warning(err)
@@ -129,7 +129,7 @@ def btn_connect(interface):
         # set the text of the connect button to disconnect
         interface.ui.btn_connect.setText("Disconnect")
         # set the background color of the connect button to rgba(33, 37, 43, 180)
-        interface.ui.btn_connect.setStyleSheet("background-color: rgba(33, 37, 43, 180);")
+        interface.ui.btn_connect.setStyleSheet("background-color: rgba(33, 37, 43, 180);border: 2px solid rgb(52, 59, 72);border-radius: 5px;")
         
        # interface.ui.stackedWidget.setCurrentWidget(interface.ui.connections_page)
     except Exception as err:

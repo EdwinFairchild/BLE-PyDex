@@ -16,8 +16,8 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QApplication, QFrame, QHBoxLayout, QLabel,
-    QPushButton, QSizePolicy, QTextEdit, QVBoxLayout,
-    QWidget)
+    QPushButton, QSizePolicy, QSpacerItem, QTextEdit,
+    QVBoxLayout, QWidget)
 
 from toggle import AnimatedToggle
 
@@ -25,7 +25,7 @@ class Ui_char_widget(object):
     def setupUi(self, char_widget):
         if not char_widget.objectName():
             char_widget.setObjectName(u"char_widget")
-        char_widget.resize(519, 343)
+        char_widget.resize(547, 474)
         self.verticalLayout = QVBoxLayout(char_widget)
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
@@ -43,16 +43,36 @@ class Ui_char_widget(object):
         self.frame_4.setObjectName(u"frame_4")
         self.frame_4.setFrameShape(QFrame.StyledPanel)
         self.frame_4.setFrameShadow(QFrame.Raised)
-        self.uuid_label = QLabel(self.frame_4)
-        self.uuid_label.setObjectName(u"uuid_label")
-        self.uuid_label.setGeometry(QRect(10, 30, 471, 17))
-        self.uuid_label.setStyleSheet(u"border: 0px solid rgb(52, 59, 72);\n"
-"border-radius: 5px;")
-        self.service_label = QLabel(self.frame_4)
-        self.service_label.setObjectName(u"service_label")
-        self.service_label.setGeometry(QRect(10, 10, 461, 17))
-        self.service_label.setStyleSheet(u"border: 0px solid rgb(52, 59, 72);\n"
-"border-radius: 5px;")
+        self.verticalLayout_5 = QVBoxLayout(self.frame_4)
+        self.verticalLayout_5.setObjectName(u"verticalLayout_5")
+        self.characteristic_name_lbl = QLabel(self.frame_4)
+        self.characteristic_name_lbl.setObjectName(u"characteristic_name_lbl")
+        self.characteristic_name_lbl.setStyleSheet(u"border: 0px solid rgb(52, 59, 72);\n"
+"border-radius: 5px;\n"
+"color: rgb(255, 255, 255);")
+
+        self.verticalLayout_5.addWidget(self.characteristic_name_lbl)
+
+        self.uuid_lbl = QLabel(self.frame_4)
+        self.uuid_lbl.setObjectName(u"uuid_lbl")
+        self.uuid_lbl.setStyleSheet(u"border: 0px solid rgb(52, 59, 72);\n"
+"border-radius: 5px;\n"
+"color: rgb(255, 255, 255);")
+
+        self.verticalLayout_5.addWidget(self.uuid_lbl)
+
+        self.handle_lbl = QLabel(self.frame_4)
+        self.handle_lbl.setObjectName(u"handle_lbl")
+        self.handle_lbl.setStyleSheet(u"border: 0px solid rgb(52, 59, 72);\n"
+"border-radius: 5px;\n"
+"color: rgb(255, 255, 255);")
+
+        self.verticalLayout_5.addWidget(self.handle_lbl)
+
+        self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+
+        self.verticalLayout_5.addItem(self.verticalSpacer)
+
 
         self.verticalLayout_2.addWidget(self.frame_4)
 
@@ -121,39 +141,121 @@ class Ui_char_widget(object):
 
         self.verticalLayout_2.addWidget(self.frame_3)
 
-        self.frame_5 = QFrame(self.frame)
-        self.frame_5.setObjectName(u"frame_5")
-        self.frame_5.setFrameShape(QFrame.StyledPanel)
-        self.frame_5.setFrameShadow(QFrame.Raised)
-        self.char_read_btn = QPushButton(self.frame_5)
-        self.char_read_btn.setObjectName(u"char_read_btn")
-        self.char_read_btn.setGeometry(QRect(360, 20, 83, 19))
-        self.notify_toggle = AnimatedToggle(self.frame_5)
+        self.char_controls_frame = QFrame(self.frame)
+        self.char_controls_frame.setObjectName(u"char_controls_frame")
+        self.char_controls_frame.setFrameShape(QFrame.StyledPanel)
+        self.char_controls_frame.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_4 = QVBoxLayout(self.char_controls_frame)
+        self.verticalLayout_4.setObjectName(u"verticalLayout_4")
+        self.frame_notifications = QFrame(self.char_controls_frame)
+        self.frame_notifications.setObjectName(u"frame_notifications")
+        self.frame_notifications.setMaximumSize(QSize(16777215, 50))
+        self.frame_notifications.setStyleSheet(u"border: 0px solid rgb(52, 59, 72);\n"
+"border-radius: 5px;	\n"
+"color: rgb(255, 255, 255);\n"
+"")
+        self.frame_notifications.setFrameShape(QFrame.StyledPanel)
+        self.frame_notifications.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_2 = QHBoxLayout(self.frame_notifications)
+        self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
+        self.label = QLabel(self.frame_notifications)
+        self.label.setObjectName(u"label")
+        self.label.setMinimumSize(QSize(0, 20))
+        self.label.setStyleSheet(u" border: 0px solid rgb(52, 59, 72);\n"
+"border-radius: 5px;	\n"
+"text-align: center;\n"
+"padding: 0px;\n"
+"margin: 0px;\n"
+"color: rgb(255, 255, 255);")
+
+        self.horizontalLayout_2.addWidget(self.label)
+
+        self.notify_toggle = AnimatedToggle(self.frame_notifications)
         self.notify_toggle.setObjectName(u"notify_toggle")
-        self.notify_toggle.setGeometry(QRect(10, 10, 51, 32))
         self.notify_toggle.setMaximumSize(QSize(99999, 999999))
         self.notify_toggle.setChecked(True)
-        self.char_write_btn = QPushButton(self.frame_5)
-        self.char_write_btn.setObjectName(u"char_write_btn")
-        self.char_write_btn.setGeometry(QRect(360, 50, 83, 19))
-        self.char_write_txt = QTextEdit(self.frame_5)
+
+        self.horizontalLayout_2.addWidget(self.notify_toggle)
+
+        self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.horizontalLayout_2.addItem(self.horizontalSpacer)
+
+
+        self.verticalLayout_4.addWidget(self.frame_notifications)
+
+        self.read_write_frame = QFrame(self.char_controls_frame)
+        self.read_write_frame.setObjectName(u"read_write_frame")
+        self.read_write_frame.setMaximumSize(QSize(16777215, 50))
+        self.read_write_frame.setStyleSheet(u"border: 0px solid rgb(52, 59, 72);\n"
+"border-radius: 5px;\n"
+"\n"
+"background-color: rgb(45, 49, 57);")
+        self.read_write_frame.setFrameShape(QFrame.StyledPanel)
+        self.read_write_frame.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_4 = QHBoxLayout(self.read_write_frame)
+        self.horizontalLayout_4.setSpacing(6)
+        self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
+        self.horizontalLayout_4.setContentsMargins(0, 9, 0, -1)
+        self.char_write_txt = QTextEdit(self.read_write_frame)
         self.char_write_txt.setObjectName(u"char_write_txt")
-        self.char_write_txt.setGeometry(QRect(130, 10, 171, 41))
+        self.char_write_txt.setMaximumSize(QSize(16777215, 999))
+        self.char_write_txt.setStyleSheet(u"background-color: rgb(33, 37, 43);\n"
+"color: rgb(255, 255, 255);")
 
-        self.verticalLayout_2.addWidget(self.frame_5)
+        self.horizontalLayout_4.addWidget(self.char_write_txt)
 
-        self.textEdit = QTextEdit(self.frame)
-        self.textEdit.setObjectName(u"textEdit")
-        self.textEdit.setStyleSheet(u"border: 2px solid rgb(52, 59, 72);\n"
+        self.char_write_btn = QPushButton(self.read_write_frame)
+        self.char_write_btn.setObjectName(u"char_write_btn")
+        self.char_write_btn.setMinimumSize(QSize(0, 0))
+        self.char_write_btn.setMaximumSize(QSize(16777215, 9999))
+        self.char_write_btn.setStyleSheet(u" border: 2px solid rgb(52, 59, 72);\n"
+"color: rgb(255, 255, 255);\n"
 "border-radius: 5px;	\n"
-"background-color: rgba(33, 37, 43, 180);")
+"text-align: center;\n"
+"padding: 0px;\n"
+"margin: 0px;")
 
-        self.verticalLayout_2.addWidget(self.textEdit)
+        self.horizontalLayout_4.addWidget(self.char_write_btn)
+
+        self.char_read_btn = QPushButton(self.read_write_frame)
+        self.char_read_btn.setObjectName(u"char_read_btn")
+        self.char_read_btn.setMinimumSize(QSize(0, 0))
+        self.char_read_btn.setMaximumSize(QSize(16777215, 9999))
+        self.char_read_btn.setStyleSheet(u" border: 2px solid rgb(52, 59, 72);\n"
+"color: rgb(255, 255, 255);\n"
+"border-radius: 5px;	\n"
+"text-align: center;\n"
+"padding: 0px;\n"
+"margin: 0px;")
+
+        self.horizontalLayout_4.addWidget(self.char_read_btn)
+
+        self.horizontalLayout_4.setStretch(0, 4)
+        self.horizontalLayout_4.setStretch(1, 1)
+        self.horizontalLayout_4.setStretch(2, 1)
+
+        self.verticalLayout_4.addWidget(self.read_write_frame)
+
+        self.char_read_txt = QTextEdit(self.char_controls_frame)
+        self.char_read_txt.setObjectName(u"char_read_txt")
+        self.char_read_txt.setMinimumSize(QSize(0, 0))
+        self.char_read_txt.setStyleSheet(u"\n"
+"background-color: rgb(33, 37, 43);\n"
+"color: rgb(255, 255, 255);")
+
+        self.verticalLayout_4.addWidget(self.char_read_txt)
+
+        self.verticalSpacer_2 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+
+        self.verticalLayout_4.addItem(self.verticalSpacer_2)
+
+
+        self.verticalLayout_2.addWidget(self.char_controls_frame)
 
         self.verticalLayout_2.setStretch(0, 2)
         self.verticalLayout_2.setStretch(1, 1)
         self.verticalLayout_2.setStretch(2, 4)
-        self.verticalLayout_2.setStretch(3, 3)
 
         self.verticalLayout.addWidget(self.frame)
 
@@ -165,15 +267,24 @@ class Ui_char_widget(object):
 
     def retranslateUi(self, char_widget):
         char_widget.setWindowTitle(QCoreApplication.translate("char_widget", u"Form", None))
-        self.uuid_label.setText(QCoreApplication.translate("char_widget", u"UUID :", None))
-        self.service_label.setText(QCoreApplication.translate("char_widget", u"Characteristic : ", None))
+        self.characteristic_name_lbl.setText(QCoreApplication.translate("char_widget", u"Characteristic : ", None))
+        self.uuid_lbl.setText(QCoreApplication.translate("char_widget", u"UUID :", None))
+        self.handle_lbl.setText(QCoreApplication.translate("char_widget", u"Handle", None))
         self.permission_read.setText(QCoreApplication.translate("char_widget", u"read", None))
         self.permission_write.setText(QCoreApplication.translate("char_widget", u"write", None))
         self.permission_notify.setText(QCoreApplication.translate("char_widget", u"notify", None))
         self.permission_indicate.setText(QCoreApplication.translate("char_widget", u"indicate", None))
         self.permission_write_wo_resp.setText(QCoreApplication.translate("char_widget", u"write-without-response", None))
-        self.char_read_btn.setText(QCoreApplication.translate("char_widget", u"PushButton", None))
+        self.label.setText(QCoreApplication.translate("char_widget", u"Notification", None))
         self.notify_toggle.setText(QCoreApplication.translate("char_widget", u"CheckBox", None))
+        self.char_write_txt.setMarkdown("")
+        self.char_write_txt.setHtml(QCoreApplication.translate("char_widget", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'Ubuntu'; font-size:11pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>", None))
+        self.char_write_txt.setPlaceholderText(QCoreApplication.translate("char_widget", u"hello char", None))
         self.char_write_btn.setText(QCoreApplication.translate("char_widget", u"write", None))
+        self.char_read_btn.setText(QCoreApplication.translate("char_widget", u"read", None))
     # retranslateUi
 

@@ -39,7 +39,7 @@ class MainWindow(QMainWindow):
     toplevel = None
     child = None
     vbox = QGridLayout()
-    serviceCount= 1
+    charCount= 1
     char_dict = {}
     cleanUp = Signal(object)
     axisX = QtCharts.QValueAxis()
@@ -536,8 +536,9 @@ class MainWindow(QMainWindow):
             try:
                 char_uuid = uuid_type[UUID(char_uuid)]
                 # replace the UUID with the name in item
-                data = data.replace(data.split(":")[1].split("(")[0].strip(), char_uuid)
+                data = char_uuid
                 found_match = True
+                
             except:
                 pass
         if found_match == False:
@@ -547,17 +548,17 @@ class MainWindow(QMainWindow):
         return data
 
     def extract_uuid_hex(self, data):
-        # data[0] looks like this: 00001801-0000-1000-8000-00805f9b34fb (Handle: 16): Generic Attribute Profile 
-        # extract the UUID from the string which is this: 00001801-0000-1000-8000-00805f9b34fb
-        raw_uuid = data.split(":")[1].split("(")[0].strip()
+        # data[0] looks like this  ":00001801-0000-1000-8000-00805f9b34fb (Handle: 16): Generic Attribute Profile" 
+        # extract the UUID from the string which is this  "00001801-0000-1000-8000-00805f9b34fb"
+        raw_uuid = data.split(":")[1].split("(")[0].strip() # this leaves the first ":" which is not needed
         return raw_uuid
 
     def gatt_tree_view_clicked(self,tree_item, column):
         # when user clicks on a tree item, check if it exists in char_dict
         # if it does exist then scroll to that widget
-        uuid = self.extract_uuid_hex(tree_item.text(column))   
+#        uuid = self.extract_uuid_hex(tree_item.text(column))   
         for key, value in self.char_dict.items():
-            if uuid in value['char name']:
+            if tree_item.text(column) in value['char name']:
                 self.ui.scrollArea_2.ensureWidgetVisible(self.char_dict[key]["widgetlocation"])
         
         
@@ -592,33 +593,38 @@ class MainWindow(QMainWindow):
         uiwidget.setupUi(tempWidget)
 
         # At this point we can access ui elements of the new char widget, we also store a reference to it in service_dict
-        uiwidget.char_write_btn.clicked.connect(lambda state : self.char_write_btn_handler(self.extract_uuid_hex(char_uuid)))
-        uiwidget.uuid_label.setText(self.extract_uuid_name(char_uuid))
+        char_name = self.extract_uuid_name(char_uuid)
+        if char_name == char_uuid:
+            char_name = "Unknown"
+        uiwidget.characteristic_name_lbl.setText(f"characteristic : {char_name}")
+        uiwidget.uuid_lbl.setText(f"UUID : {self.extract_uuid_hex(char_uuid)}")
+        
         # check if permissions list ['write-without-response', 'write', 'notify' , 'read' ,indicate] adn enable disable buttons with same name
         if "write-without-response" in permissions:
             # regiter callback for write button
             pass
         else:
             uiwidget.permission_write_wo_resp.setEnabled(False)
-            #change background color to light gray
+            #change background color of permissons label 
             uiwidget.permission_write_wo_resp.setStyleSheet("background-color: rgb(52, 59, 72);color:rgb(205,205,205);padding:5px;")
-            #make invisible
-            #uiwidget.permission_write_wo_resp.setVisible(False)
+           
         if "write" in permissions:
-            # regiter callback for write button
-            pass
+            uiwidget.char_write_btn.clicked.connect(lambda state : self.char_write_btn_handler(self.extract_uuid_hex(char_uuid)))
         else:
-            uiwidget.permission_write.setEnabled(False)
-            #change background color to light gray
+            
+            uiwidget.char_write_txt.setMaximumWidth(0)
+            uiwidget.char_write_txt.setMinimumWidth(0)
+            uiwidget.char_write_btn.setMaximumWidth(0)
+            uiwidget.char_write_btn.setMinimumWidth(0)
+            #change background color of permissons label 
             uiwidget.permission_write.setStyleSheet("background-color: rgb(52, 59, 72);color:rgb(205,205,205);padding:5px;")
-            #make invisible
-            #uiwidget.permission_write.setVisible(False)
+
         if "notify" in permissions:
             # regiter callback for notifications
             pass
         else:
             uiwidget.permission_notify.setEnabled(False)
-            #change background color to light gray
+            #change background color of permissons label 
             uiwidget.permission_notify.setStyleSheet("background-color: rgb(52, 59, 72);color:rgb(205,205,205);padding:5px;")
             #make invisible
             #uiwidget.permission_notify.setVisible(False)
@@ -626,11 +632,11 @@ class MainWindow(QMainWindow):
             # regiter callback for read button
             pass
         else:
-            uiwidget.permission_read.setEnabled(False)
-            #change background color to light gray
+            uiwidget.char_read_btn.setMaximumWidth(0)
+            uiwidget.char_read_btn.setMinimumWidth(0)
+            #change background color of permissons label 
             uiwidget.permission_read.setStyleSheet("background-color: rgb(52, 59, 72);color:rgb(205,205,205);padding:5px;")
-            #make invisible
-            #uiwidget.permission_read.setVisible(False)
+ 
         if "indicate" in permissions:
             # regiter callback for indications
             pass
@@ -640,6 +646,10 @@ class MainWindow(QMainWindow):
             uiwidget.permission_indicate.setStyleSheet("background-color: rgb(52, 59, 72);color:rgb(205,205,205);padding:5px;")
             #make invisible
             #uiwidget.permission_indicate.setVisible(False)
+        # if no read and no write or write without response then hide read_write_frame
+        if "read" not in permissions and "write" not in permissions and "write-without-response" not in permissions:
+            uiwidget.read_write_frame.setMaximumHeight(0)
+            uiwidget.read_write_frame.setMinimumHeight(0) 
 
         widget.setLayout(self.vbox)
         widget.setStyleSheet("""
@@ -649,11 +659,11 @@ class MainWindow(QMainWindow):
             padding: 0px;""")
 
         # add to vertical layout row,column
-        self.vbox.addWidget(tempWidget,self.serviceCount,0)
+        self.vbox.addWidget(tempWidget,self.charCount,0)
         self.vbox.setSpacing(10)
         self.vbox.setContentsMargins(QMargins(20, 0, 0, 0))
 
-        self.serviceCount += 1
+        self.charCount += 1
 
         self.ui.scrollArea_2.setStyleSheet("""
             border: 0px solid rgb(52, 59, 72);
@@ -798,15 +808,20 @@ class MainWindow(QMainWindow):
 
     def stop_scanner(self):
         self.ui.btn_scan.setText("Scan")
-        self.ui.btn_scan.setStyleSheet("")
+        #self.ui.btn_scan.setStyleSheet("background-color: rgba(33, 37, 43, 180); border: 4px solid rgb(255, 59, 72);border-radius: 5px;")
+
+        self.ui.btn_scan.setStyleSheet(" border: 2px solid rgb(52, 59, 72);border-radius: 5px;text-align: center;padding: 0px;margin: 0px;")
+
+       # self.ui.btn_scan.setStyleSheet("")
         self.bleScanner.is_scanning = False
         self.bleScanner.quit()
         self.bleScanner.wait()
+        self.stop_graphing()
     
     def stop_connection(self):
         self.ui.btn_connect.setText("Connect")
         self.ui.btn_disconnect.setText("Disconnect")
-        self.ui.btn_connect.setStyleSheet("")
+        self.ui.btn_connect.setStyleSheet(" border: 2px solid rgb(52, 59, 72);border-radius: 5px;text-align: center;padding: 0px;margin: 0px;")
         self.connectedDevice.is_connected = False
         self.connectedDevice.ble_address = None
         self.connectedDevice.quit()

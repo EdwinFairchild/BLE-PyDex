@@ -1060,7 +1060,7 @@ class Ui_MainWindow(object):
         self.frame_scan_results.setFrameShape(QFrame.StyledPanel)
         self.frame_scan_results.setFrameShadow(QFrame.Raised)
         self.verticalLayout_24 = QVBoxLayout(self.frame_scan_results)
-        self.verticalLayout_24.setSpacing(0)
+        self.verticalLayout_24.setSpacing(6)
         self.verticalLayout_24.setObjectName(u"verticalLayout_24")
         self.verticalLayout_24.setContentsMargins(-1, 0, -1, 0)
         self.frame_3 = QFrame(self.frame_scan_results)
@@ -1085,7 +1085,8 @@ class Ui_MainWindow(object):
         self.txt_scan_filter.setObjectName(u"txt_scan_filter")
         self.txt_scan_filter.setMinimumSize(QSize(0, 30))
         self.txt_scan_filter.setMaximumSize(QSize(16777215, 35))
-        self.txt_scan_filter.setStyleSheet(u"background-color: rgb(33, 37, 43);")
+        self.txt_scan_filter.setStyleSheet(u"background-color: rgb(33, 37, 43);\n"
+"color: rgb(255, 255, 255);")
 
         self.horizontalLayout_7.addWidget(self.txt_scan_filter)
 
@@ -1101,6 +1102,42 @@ class Ui_MainWindow(object):
         self.list_widget_discovered.setSelectionMode(QAbstractItemView.SingleSelection)
 
         self.verticalLayout_24.addWidget(self.list_widget_discovered)
+
+        self.frame_12 = QFrame(self.frame_scan_results)
+        self.frame_12.setObjectName(u"frame_12")
+        self.frame_12.setMinimumSize(QSize(0, 0))
+        self.frame_12.setStyleSheet(u" border: 0px solid rgb(52, 59, 72);\n"
+"	border-radius: 5px;	\n"
+"")
+        self.frame_12.setFrameShape(QFrame.StyledPanel)
+        self.frame_12.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_19 = QHBoxLayout(self.frame_12)
+        self.horizontalLayout_19.setObjectName(u"horizontalLayout_19")
+        self.horizontalLayout_19.setContentsMargins(0, 6, 0, -1)
+        self.btn_scan = QPushButton(self.frame_12)
+        self.btn_scan.setObjectName(u"btn_scan")
+        self.btn_scan.setMinimumSize(QSize(0, 30))
+        self.btn_scan.setStyleSheet(u" border: 2px solid rgb(52, 59, 72);\n"
+"	border-radius: 5px;	\n"
+"text-align: center;\n"
+"padding: 0px;\n"
+"margin: 0px;")
+
+        self.horizontalLayout_19.addWidget(self.btn_scan)
+
+        self.btn_connect = QPushButton(self.frame_12)
+        self.btn_connect.setObjectName(u"btn_connect")
+        self.btn_connect.setMinimumSize(QSize(0, 30))
+        self.btn_connect.setStyleSheet(u" border: 2px solid rgb(52, 59, 72);\n"
+"border-radius: 5px;	\n"
+"text-align: center;\n"
+"padding: 0px;\n"
+"margin: 0px;")
+
+        self.horizontalLayout_19.addWidget(self.btn_connect)
+
+
+        self.verticalLayout_24.addWidget(self.frame_12)
 
 
         self.horizontalLayout_8.addWidget(self.frame_scan_results)
@@ -1349,7 +1386,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 218, 218))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 319, 218))
         self.scrollAreaWidgetContents.setStyleSheet(u" QScrollBar:vertical {\n"
 "	border: none;\n"
 "    background: rgb(52, 59, 72);\n"
@@ -1710,7 +1747,7 @@ class Ui_MainWindow(object):
         self.scroll_Area_2_frame.setFrameShape(QFrame.StyledPanel)
         self.scroll_Area_2_frame.setFrameShadow(QFrame.Raised)
         self.verticalLayout_28 = QVBoxLayout(self.scroll_Area_2_frame)
-        self.verticalLayout_28.setSpacing(10)
+        self.verticalLayout_28.setSpacing(15)
         self.verticalLayout_28.setObjectName(u"verticalLayout_28")
         self.verticalLayout_28.setContentsMargins(0, 0, 0, 9)
         self.scrollArea_2 = QScrollArea(self.scroll_Area_2_frame)
@@ -1841,6 +1878,7 @@ class Ui_MainWindow(object):
 
         self.frame_scan = QFrame(self.scannerSettigns)
         self.frame_scan.setObjectName(u"frame_scan")
+        self.frame_scan.setEnabled(True)
         self.frame_scan.setStyleSheet(u" border: 0px solid rgb(52, 59, 72);\n"
 "	border-radius: 5px;	\n"
 "text-align: center;\n"
@@ -1946,28 +1984,6 @@ class Ui_MainWindow(object):
         self.horizontalLayout_10.setStretch(1, 2)
 
         self.verticalLayout_23.addWidget(self.frame)
-
-        self.btn_scan = QPushButton(self.frame_scan)
-        self.btn_scan.setObjectName(u"btn_scan")
-        self.btn_scan.setMinimumSize(QSize(0, 30))
-        self.btn_scan.setStyleSheet(u" border: 2px solid rgb(52, 59, 72);\n"
-"	border-radius: 5px;	\n"
-"text-align: center;\n"
-"padding: 0px;\n"
-"margin: 0px;")
-
-        self.verticalLayout_23.addWidget(self.btn_scan)
-
-        self.btn_connect = QPushButton(self.frame_scan)
-        self.btn_connect.setObjectName(u"btn_connect")
-        self.btn_connect.setMinimumSize(QSize(0, 30))
-        self.btn_connect.setStyleSheet(u" border: 2px solid rgb(52, 59, 72);\n"
-"	border-radius: 5px;	\n"
-"text-align: center;\n"
-"padding: 0px;\n"
-"margin: 0px;")
-
-        self.verticalLayout_23.addWidget(self.btn_connect)
 
         self.verticalSpacer_2 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
 
@@ -2210,6 +2226,8 @@ class Ui_MainWindow(object):
         self.label_scan_filter.setText(QCoreApplication.translate("MainWindow", u"Filter scan results:", None))
         self.txt_scan_filter.setText("")
         self.txt_scan_filter.setPlaceholderText(QCoreApplication.translate("MainWindow", u"filter text", None))
+        self.btn_scan.setText(QCoreApplication.translate("MainWindow", u"Scan", None))
+        self.btn_connect.setText(QCoreApplication.translate("MainWindow", u"Connect", None))
         self.label_2.setText(QCoreApplication.translate("MainWindow", u"GATT view:", None))
         self.labelBoxBlenderInstalation.setText(QCoreApplication.translate("MainWindow", u"FILE BOX", None))
         self.lineEdit.setText("")
@@ -2255,8 +2273,6 @@ class Ui_MainWindow(object):
         self.logNone.setText(QCoreApplication.translate("MainWindow", u"Do not log", None))
         self.label_5.setText(QCoreApplication.translate("MainWindow", u"RSSI graph :", None))
         self.graph_enabled.setText(QCoreApplication.translate("MainWindow", u"CheckBox", None))
-        self.btn_scan.setText(QCoreApplication.translate("MainWindow", u"Scan", None))
-        self.btn_connect.setText(QCoreApplication.translate("MainWindow", u"Connect", None))
         self.label.setText(QCoreApplication.translate("MainWindow", u"Ram Start :", None))
         self.txtRamStart.setText(QCoreApplication.translate("MainWindow", u"0x20000000", None))
         self.label_3.setText(QCoreApplication.translate("MainWindow", u"Ram End :", None))
