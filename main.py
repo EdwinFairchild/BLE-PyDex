@@ -606,26 +606,36 @@ class MainWindow(QMainWindow):
         uiwidget.uuid_lbl.setText(f"UUID : {self.extract_uuid_hex(char_uuid)}")
         uiwidget.handle_lbl.setText(f"Handle : {self.extract_handle(char_uuid)}")
         
-        # check if permissions list ['write-without-response', 'write', 'notify' , 'read' ,indicate] adn enable disable buttons with same name
-        if "write-without-response" in permissions:
-            uiwidget.char_write_btn.clicked.connect(lambda state : self.char_write_btn_handler(self.extract_uuid_hex(char_uuid),False))
-            pass
-        else:
-            uiwidget.permission_write_wo_resp.setEnabled(False)
-            #change background color of permissons label 
-            uiwidget.permission_write_wo_resp.setStyleSheet("background-color: rgb(52, 59, 72);color:rgb(205,205,205);padding:5px;")
-           
-        if "write" in permissions: # this is write with response
+        #check if both write and write without response are in permissions list
+        if "write-without-response" in permissions and "write" in permissions:
+            uiwidget.write_no_resp_toggle.setVisible(True)
+            uiwidget.write_no_resp_lbl.setVisible(True)
+            # set the toggle button to visible and only register one callback for both
             uiwidget.char_write_btn.clicked.connect(lambda state : self.char_write_btn_handler(self.extract_uuid_hex(char_uuid),True))
-            pass
-        else:
+        else: #check if at least one of them is in permissions list
+        # check if permissions list ['write-without-response', 'write', 'notify' , 'read' ,indicate] adn enable disable buttons with same name
+            uiwidget.write_no_resp_toggle.setVisible(False)
+            uiwidget.write_no_resp_lbl.setVisible(False)
+
+            if "write-without-response" in permissions:
+                uiwidget.char_write_btn.clicked.connect(lambda state : self.char_write_btn_handler(self.extract_uuid_hex(char_uuid), False))
+                pass
+            else:
+                uiwidget.permission_write_wo_resp.setEnabled(False)
+                #change background color of permissons label 
+                uiwidget.permission_write_wo_resp.setStyleSheet("background-color: rgb(52, 59, 72);color:rgb(205,205,205);padding:5px;")
             
-            uiwidget.char_write_txt.setMaximumWidth(0)
-            uiwidget.char_write_txt.setMinimumWidth(0)
-            uiwidget.char_write_btn.setMaximumWidth(0)
-            uiwidget.char_write_btn.setMinimumWidth(0)
-            #change background color of permissons label 
-            uiwidget.permission_write.setStyleSheet("background-color: rgb(52, 59, 72);color:rgb(205,205,205);padding:5px;")
+            if "write" in permissions: # this is write with response
+                uiwidget.char_write_btn.clicked.connect(lambda state : self.char_write_btn_handler(self.extract_uuid_hex(char_uuid),True))
+                pass
+            else:
+                
+                uiwidget.char_write_txt.setMaximumWidth(0)
+                uiwidget.char_write_txt.setMinimumWidth(0)
+                uiwidget.char_write_btn.setMaximumWidth(0)
+                uiwidget.char_write_btn.setMinimumWidth(0)
+                #change background color of permissons label 
+                uiwidget.permission_write.setStyleSheet("background-color: rgb(52, 59, 72);color:rgb(205,205,205);padding:5px;")
 
         if "notify" in permissions:
             # regiter callback for notification toggle "notify_toggle" state change in uiwidget
@@ -702,8 +712,17 @@ class MainWindow(QMainWindow):
         # change stacked widget to connections page
         self.ui.btn_new.click()
         
-    def char_write_btn_handler(self, UUID , resp: bool = False):
+    def char_write_btn_handler(self, UUID , resp : bool = False ):
         data_to_write = self.char_dict[UUID]["uiWidget"].char_write_txt.toPlainText()
+        # get this widget from char_dict
+        # check if write with response or write without response by checking toggle state
+        # only if the toggle button is visible otherwise it is disabled, dont override rap
+        if self.char_dict[UUID]["uiWidget"].write_no_resp_toggle.isVisible():
+            if self.char_dict[UUID]["uiWidget"].write_no_resp_toggle.isChecked():
+                resp = False
+            else:
+                resp = True
+
         self.connectedDevice.device_char_write.emit(UUID,data_to_write,resp,False)
     def notify_toggle_handler(self, UUID, state):
         self.connectedDevice.device_char_notify.emit(UUID,state)

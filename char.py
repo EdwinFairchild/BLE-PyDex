@@ -25,7 +25,7 @@ class Ui_char_widget(object):
     def setupUi(self, char_widget):
         if not char_widget.objectName():
             char_widget.setObjectName(u"char_widget")
-        char_widget.resize(547, 474)
+        char_widget.resize(547, 500)
         self.verticalLayout = QVBoxLayout(char_widget)
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
@@ -177,6 +177,18 @@ class Ui_char_widget(object):
 
         self.horizontalLayout_2.addWidget(self.notify_toggle)
 
+        self.write_no_resp_lbl = QLabel(self.frame_notifications)
+        self.write_no_resp_lbl.setObjectName(u"write_no_resp_lbl")
+
+        self.horizontalLayout_2.addWidget(self.write_no_resp_lbl)
+
+        self.write_no_resp_toggle = AnimatedToggle(self.frame_notifications)
+        self.write_no_resp_toggle.setObjectName(u"write_no_resp_toggle")
+        self.write_no_resp_toggle.setMaximumSize(QSize(99999, 999999))
+        self.write_no_resp_toggle.setChecked(False)
+
+        self.horizontalLayout_2.addWidget(self.write_no_resp_toggle)
+
         self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
 
         self.horizontalLayout_2.addItem(self.horizontalSpacer)
@@ -277,6 +289,8 @@ class Ui_char_widget(object):
         self.permission_write_wo_resp.setText(QCoreApplication.translate("char_widget", u"write-without-response", None))
         self.label.setText(QCoreApplication.translate("char_widget", u"Notification", None))
         self.notify_toggle.setText(QCoreApplication.translate("char_widget", u"CheckBox", None))
+        self.write_no_resp_lbl.setText(QCoreApplication.translate("char_widget", u"Write without response", None))
+        self.write_no_resp_toggle.setText(QCoreApplication.translate("char_widget", u"CheckBox", None))
         self.char_write_txt.setMarkdown("")
         self.char_write_txt.setHtml(QCoreApplication.translate("char_widget", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"

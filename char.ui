@@ -288,6 +288,29 @@ color: rgb(255, 255, 255);</string>
              </widget>
             </item>
             <item>
+             <widget class="QLabel" name="write_no_resp_lbl">
+              <property name="text">
+               <string>Write without response</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="AnimatedToggle" name="write_no_resp_toggle">
+              <property name="maximumSize">
+               <size>
+                <width>99999</width>
+                <height>999999</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>CheckBox</string>
+              </property>
+              <property name="checked">
+               <bool>false</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
              <spacer name="horizontalSpacer">
               <property name="orientation">
                <enum>Qt::Horizontal</enum>
