@@ -147,6 +147,10 @@ class MainWindow(QMainWindow):
         
         #self.ui.tableWidget_2.reset()
 
+        # stylesheets
+        self.btn_stylesheet = open("button_stylesheet.txt", "r").read()
+        self.scroll_area_stylesheet = open("scroll_area_stylesheet.txt", "r").read()
+        
         self.ui.scrollArea_2.setStyleSheet("""
 
         /* VERTICAL */
@@ -220,33 +224,7 @@ class MainWindow(QMainWindow):
         self.ui.scrollArea_2.setVerticalScrollBarPolicy(Qt.ScrollBarAsNeeded)
         self.ui.scrollArea_2.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         self.ui.scrollArea_2.setWidgetResizable(True)
-        self.ui.scrollArea_2.setStyleSheet("""
-    QScrollArea {
-        background: transparent;
-    }
-    QScrollBar:vertical {
-        width: 15px;
-        ;
-    }
-    QScrollBar::handle:vertical {
-        background: #999999;
-        min-height: 20px;
-    }
-    QScrollBar::add-line:vertical {
-        height: 0px;
-        subcontrol-position: bottom;
-        subcontrol-origin: margin;
-    }
-    QScrollBar::sub-line:vertical {
-        height: 0 px;
-        subcontrol-position: top;
-    }
-    QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical {
-        width: 0px;
-        height: 0px;
-        ;
-    }
-""")
+        self.ui.scrollArea_2.setStyleSheet(self.scroll_area_stylesheet)
 
 
         # SHOW APP
@@ -814,7 +792,7 @@ class MainWindow(QMainWindow):
             self.ui.tbl_core_regs.setItem(row_position, 0, QTableWidgetItem(reg))
             self.ui.tbl_core_regs.setItem(row_position, 1, QTableWidgetItem(hex(value)))
 
-
+    #------------------------ clean up fuctions ------------------------
     def clean_up(self):
         try:
             container = self.ui.scrollArea_2.widget()
@@ -854,7 +832,7 @@ class MainWindow(QMainWindow):
         self.ui.btn_scan.setText("Scan")
         #self.ui.btn_scan.setStyleSheet("background-color: rgba(33, 37, 43, 180); border: 4px solid rgb(255, 59, 72);border-radius: 5px;")
 
-        self.ui.btn_scan.setStyleSheet("QPushButton{margin-left: 10px;margin-right: 10px;background-color: rgb(40, 44, 52);border: 2px solid rgb(52, 59, 72);color: rgb(255, 255, 255);border-radius: 5px;text-align: center;padding: 0px;margin: 0px;}QPushButton:hover{color: rgb(28, 28, 28);background-color: rgb(153, 193, 241);}QPushButton:pressed{color: rgb(28, 28, 28);background-color: rgb(110,140,255);}")
+        self.ui.btn_scan.setStyleSheet(self.btn_stylesheet)
 
        # self.ui.btn_scan.setStyleSheet("")
         self.bleScanner.is_scanning = False
@@ -865,7 +843,7 @@ class MainWindow(QMainWindow):
     def stop_connection(self):
         self.ui.btn_connect.setText("Connect")
         self.ui.btn_disconnect.setText("Disconnect")
-        self.ui.btn_connect.setStyleSheet("QPushButton{margin-left: 10px;margin-right: 10px;background-color: rgb(40, 44, 52);border: 2px solid rgb(52, 59, 72);color: rgb(255, 255, 255);border-radius: 5px;text-align: center;padding: 0px;margin: 0px;}QPushButton:hover{color: rgb(28, 28, 28);background-color: rgb(153, 193, 241);}QPushButton:pressed{color: rgb(28, 28, 28);background-color: rgb(110,140,255);}")
+        self.ui.btn_connect.setStyleSheet(self.btn_stylesheet)
 
         self.connectedDevice.is_connected = False
         self.connectedDevice.ble_address = None

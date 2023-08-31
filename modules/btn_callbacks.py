@@ -112,7 +112,7 @@ def btn_connect(interface):
             # interface.bleScanner.is_scanning = False
             # interface.bleScanner.quit()
             interface.ui.btn_scan.setText("Scan")
-            interface.ui.btn_scan.setStyleSheet("background-color:rgba(40, 44, 52,180);border: 2px solid rgb(52, 59, 72);border-radius: 5px;")
+            interface.ui.btn_scan.setStyleSheet(interface.btn_stylesheet)
         except Exception as err:
             logger.setLevel(logging.WARNING)
             logger.warning(err)
