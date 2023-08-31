@@ -80,6 +80,7 @@ class MainWindow(QMainWindow):
         # connected mode variables
         self.connectedDevice = BLE_ConnectDevice()
         self.connectedDevice.device_notification_recevied.connect(self.char_notification_handler)
+        self.connectedDevice.device_char_read_response.connect(self.char_read_response_handler)
         
         self.update_thread = UpdateRSSIGraphThread(self)
         self.update_thread.dataUpdated.connect(self.update_graph)
@@ -649,6 +650,7 @@ class MainWindow(QMainWindow):
             #uiwidget.permission_notify.setVisible(False)
         if "read" in permissions:
             # regiter callback for read button
+            uiwidget.char_read_btn.clicked.connect(lambda state : self.char_read_btn_handler(self.extract_uuid_hex(char_uuid)))
             pass
         else:
             uiwidget.char_read_btn.setMaximumWidth(0)
@@ -721,9 +723,12 @@ class MainWindow(QMainWindow):
             if self.char_dict[UUID]["uiWidget"].write_no_resp_toggle.isChecked():
                 resp = False
             else:
-                resp = True
-
+                resp = True    
         self.connectedDevice.device_char_write.emit(UUID,data_to_write,resp,False)
+        
+    def char_read_btn_handler(self, UUID):
+        # get this widget from char_dict
+        self.connectedDevice.device_char_read.emit(UUID)
     def notify_toggle_handler(self, UUID, state):
         self.connectedDevice.device_char_notify.emit(UUID,state)
 
@@ -731,7 +736,11 @@ class MainWindow(QMainWindow):
         char_uuid = self.extract_uuid_hex(uuid)
         # find uuid in char dict and update the uiwidget, append text to char_read_txt
         self.char_dict[char_uuid]["uiWidget"].char_read_txt.append(payload)
-        
+
+    def char_read_response_handler(self, uuid, payload):
+        char_uuid = self.extract_uuid_hex(uuid)
+        # find uuid in char dict and update the uiwidget, append text to char_read_txt
+        self.char_dict[char_uuid]["uiWidget"].char_read_txt.append(payload)    
 
     def buttonClick(self):
         # GET BUTTON CLICKED

@@ -69,9 +69,14 @@ class BLE_ConnectDevice(QThread):
 
 
     # signals to kickstart queue based event handling
+    #these are emitted from main.py but the handlers live here
     device_char_write = Signal(str, str, bool, bool) # UUID, value
     device_char_notify = Signal(str, bool) # UUID, enable/disable
+    device_char_read = Signal(str) # UUID
+
+    #these are emitted from here and the handlers live in main.py
     device_notification_recevied = Signal(str, str) # sender, value
+    device_char_read_response = Signal(str, str) # UUID, value
 
     def __init__(self, *args, **kwargs):
         super(BLE_ConnectDevice, self).__init__(*args, **kwargs)
@@ -79,6 +84,7 @@ class BLE_ConnectDevice(QThread):
         # Connect signals to slots
         self.device_char_write.connect(self.handle_write)
         self.device_char_notify.connect(self.handle_notify)
+        self.device_char_read.connect(self.handle_read)
         
     
     def run(self):
@@ -114,6 +120,8 @@ class BLE_ConnectDevice(QThread):
                             await self.writeWithoutRespCallback(client, *args, **kwargs)
                         if task == "notify_char":
                             await self.notifyCallback(client, *args, **kwargs)
+                        if task == "read_char":
+                            await self.readCallback(client, *args, **kwargs)
                             
 
                     # async sleep, give time for other threads to run
@@ -255,7 +263,18 @@ class BLE_ConnectDevice(QThread):
             self.logger.info("Notification failed")
             pass
 
- 
+    async def readCallback(self, client: BleakClient, uuid):
+        try:
+            value = bytes(await client.read_gatt_char(uuid))
+            self.logger.info(f"Successfully read data from characteristic with UUID: {uuid}. Value: {value}")
+            #emit signal with value
+            self.device_char_read_response.emit(str(uuid), str(value))
+        except Exception as err:
+            self.logger.setLevel(logging.WARNING)
+            self.logger.warning(err)
+            self.logger.setLevel(logging.INFO)
+            self.logger.info("Read failed")
+            pass
     #------------------------------| Event handlers |-------------------------------------------
 
     def handle_write(self, uuid, data, response: bool=False,rawbytes: bool=False):
@@ -279,4 +298,14 @@ class BLE_ConnectDevice(QThread):
             self.logger.warning("Queue is full: {err}")
             self.logger.setLevel(logging.INFO)
             self.logger.info("Notification failed")
+            pass
+    def handle_read(self, uuid):
+        task = ("read_char", [uuid], {})
+        try:
+            self.async_queue.put_nowait(task)
+        except err:
+            self.logger.setLevel(logging.WARNING)
+            self.logger.warning("Queue is full: {err}")
+            self.logger.setLevel(logging.INFO)
+            self.logger.info("Read failed")
             pass
