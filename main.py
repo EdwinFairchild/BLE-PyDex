@@ -624,7 +624,7 @@ class MainWindow(QMainWindow):
             else:
                 uiwidget.permission_write_wo_resp.setEnabled(False)
                 #change background color of permissons label 
-                uiwidget.permission_write_wo_resp.setStyleSheet("background-color: rgb(52, 59, 72);color:rgb(205,205,205);padding:5px;")
+                uiwidget.permission_write_wo_resp.setStyleSheet("background-color: rgb(52, 59, 72);color:rgb(205,205,205);padding:5px;border-radius: 12px;")
             
             if "write" in permissions: # this is write with response
                 uiwidget.char_write_btn.clicked.connect(lambda state : self.char_write_btn_handler(self.extract_uuid_hex(char_uuid),True))
@@ -636,7 +636,7 @@ class MainWindow(QMainWindow):
                 uiwidget.char_write_btn.setMaximumWidth(0)
                 uiwidget.char_write_btn.setMinimumWidth(0)
                 #change background color of permissons label 
-                uiwidget.permission_write.setStyleSheet("background-color: rgb(52, 59, 72);color:rgb(205,205,205);padding:5px;")
+                uiwidget.permission_write.setStyleSheet("background-color: rgb(52, 59, 72);color:rgb(205,205,205);padding:5px;border-radius: 12px;")
 
         if "notify" in permissions:
             # regiter callback for notification toggle "notify_toggle" state change in uiwidget
@@ -645,7 +645,7 @@ class MainWindow(QMainWindow):
         else:
             uiwidget.notify_toggle.setEnabled(False)
             #change background color of permissons label 
-            uiwidget.permission_notify.setStyleSheet("background-color: rgb(52, 59, 72);color:rgb(205,205,205);padding:5px;")
+            uiwidget.permission_notify.setStyleSheet("background-color: rgb(52, 59, 72);color:rgb(205,205,205);padding:5px;border-radius: 12px;")
             #make invisible
             #uiwidget.permission_notify.setVisible(False)
         if "read" in permissions:
@@ -656,7 +656,7 @@ class MainWindow(QMainWindow):
             uiwidget.char_read_btn.setMaximumWidth(0)
             uiwidget.char_read_btn.setMinimumWidth(0)
             #change background color of permissons label 
-            uiwidget.permission_read.setStyleSheet("background-color: rgb(52, 59, 72);color:rgb(205,205,205);padding:5px;")
+            uiwidget.permission_read.setStyleSheet("background-color: rgb(52, 59, 72);color:rgb(205,205,205);padding:5px;border-radius: 12px;")
  
         if "indicate" in permissions:
             # regiter callback for indications
@@ -664,7 +664,7 @@ class MainWindow(QMainWindow):
         else:
             uiwidget.permission_indicate.setEnabled(False)
             #change background color to light gray
-            uiwidget.permission_indicate.setStyleSheet("background-color: rgb(52, 59, 72);color:rgb(205,205,205);padding:5px;")
+            uiwidget.permission_indicate.setStyleSheet("background-color: rgb(52, 59, 72);color:rgb(205,205,205);padding:5px;border-radius: 12px;")
             #make invisible
             #uiwidget.permission_indicate.setVisible(False)
         # if no read and no write or write without response then hide read_write_frame
@@ -725,7 +725,7 @@ class MainWindow(QMainWindow):
             else:
                 resp = True    
         self.connectedDevice.device_char_write.emit(UUID,data_to_write,resp,False)
-        
+
     def char_read_btn_handler(self, UUID):
         # get this widget from char_dict
         self.connectedDevice.device_char_read.emit(UUID)
@@ -854,7 +854,7 @@ class MainWindow(QMainWindow):
         self.ui.btn_scan.setText("Scan")
         #self.ui.btn_scan.setStyleSheet("background-color: rgba(33, 37, 43, 180); border: 4px solid rgb(255, 59, 72);border-radius: 5px;")
 
-        self.ui.btn_scan.setStyleSheet(" border: 2px solid rgb(52, 59, 72);border-radius: 5px;text-align: center;padding: 0px;margin: 0px;")
+        self.ui.btn_scan.setStyleSheet("QPushButton{margin-left: 10px;margin-right: 10px;background-color: rgb(40, 44, 52);border: 2px solid rgb(52, 59, 72);color: rgb(255, 255, 255);border-radius: 5px;text-align: center;padding: 0px;margin: 0px;}QPushButton:hover{color: rgb(28, 28, 28);background-color: rgb(153, 193, 241);}QPushButton:pressed{color: rgb(28, 28, 28);background-color: rgb(110,140,255);}")
 
        # self.ui.btn_scan.setStyleSheet("")
         self.bleScanner.is_scanning = False
@@ -865,7 +865,8 @@ class MainWindow(QMainWindow):
     def stop_connection(self):
         self.ui.btn_connect.setText("Connect")
         self.ui.btn_disconnect.setText("Disconnect")
-        self.ui.btn_connect.setStyleSheet(" border: 2px solid rgb(52, 59, 72);border-radius: 5px;text-align: center;padding: 0px;margin: 0px;")
+        self.ui.btn_connect.setStyleSheet("QPushButton{margin-left: 10px;margin-right: 10px;background-color: rgb(40, 44, 52);border: 2px solid rgb(52, 59, 72);color: rgb(255, 255, 255);border-radius: 5px;text-align: center;padding: 0px;margin: 0px;}QPushButton:hover{color: rgb(28, 28, 28);background-color: rgb(153, 193, 241);}QPushButton:pressed{color: rgb(28, 28, 28);background-color: rgb(110,140,255);}")
+
         self.connectedDevice.is_connected = False
         self.connectedDevice.ble_address = None
         self.connectedDevice.quit()

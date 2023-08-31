@@ -32,7 +32,7 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(1348, 853)
+        MainWindow.resize(1459, 853)
         MainWindow.setMinimumSize(QSize(940, 560))
         self.styleSheet = QWidget(MainWindow)
         self.styleSheet.setObjectName(u"styleSheet")
@@ -1117,22 +1117,58 @@ class Ui_MainWindow(object):
         self.btn_scan = QPushButton(self.frame_12)
         self.btn_scan.setObjectName(u"btn_scan")
         self.btn_scan.setMinimumSize(QSize(0, 30))
-        self.btn_scan.setStyleSheet(u" border: 2px solid rgb(52, 59, 72);\n"
-"	border-radius: 5px;	\n"
+        self.btn_scan.setStyleSheet(u"QPushButton{\n"
+"\n"
+"	background-color: rgb(40, 44, 52);\n"
+" border: 2px solid rgb(52, 59, 72);\n"
+"color: rgb(255, 255, 255);\n"
+"border-radius: 5px;	\n"
 "text-align: center;\n"
 "padding: 0px;\n"
-"margin: 0px;")
+"margin: 0px;\n"
+"\n"
+"}\n"
+"\n"
+"QPushButton:hover{\n"
+"	color: rgb(28, 28, 28);\n"
+"background-color: rgb(153, 193, 241);\n"
+"\n"
+"}\n"
+"\n"
+"QPushButton:pressed{\n"
+"	\n"
+"		color: rgb(28, 28, 28);\n"
+"	background-color: rgb(110,140,255);\n"
+"}")
 
         self.horizontalLayout_19.addWidget(self.btn_scan)
 
         self.btn_connect = QPushButton(self.frame_12)
         self.btn_connect.setObjectName(u"btn_connect")
         self.btn_connect.setMinimumSize(QSize(0, 30))
-        self.btn_connect.setStyleSheet(u" border: 2px solid rgb(52, 59, 72);\n"
+        self.btn_connect.setStyleSheet(u"QPushButton{\n"
+"\n"
+"	background-color: rgb(40, 44, 52);\n"
+" border: 2px solid rgb(52, 59, 72);\n"
+"color: rgb(255, 255, 255);\n"
 "border-radius: 5px;	\n"
 "text-align: center;\n"
 "padding: 0px;\n"
-"margin: 0px;")
+"margin: 0px;\n"
+"\n"
+"}\n"
+"\n"
+"QPushButton:hover{\n"
+"	color: rgb(28, 28, 28);\n"
+"background-color: rgb(153, 193, 241);\n"
+"\n"
+"}\n"
+"\n"
+"QPushButton:pressed{\n"
+"	\n"
+"		color: rgb(28, 28, 28);\n"
+"	background-color: rgb(110,140,255);\n"
+"}")
 
         self.horizontalLayout_19.addWidget(self.btn_connect)
 
@@ -1386,7 +1422,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 319, 218))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 375, 218))
         self.scrollAreaWidgetContents.setStyleSheet(u" QScrollBar:vertical {\n"
 "	border: none;\n"
 "    background: rgb(52, 59, 72);\n"
@@ -1514,18 +1550,60 @@ class Ui_MainWindow(object):
         self.btn_refreshCoreRegs = QPushButton(self.frame_7)
         self.btn_refreshCoreRegs.setObjectName(u"btn_refreshCoreRegs")
         self.btn_refreshCoreRegs.setMinimumSize(QSize(0, 41))
-        self.btn_refreshCoreRegs.setStyleSheet(u"\n"
-"margin-left: 10px;  /* Add 10 pixels of margin to the left of the button */\n"
-"    margin-right: 10px; /* Add 10 pixels of margin to the right of the ")
+        self.btn_refreshCoreRegs.setStyleSheet(u"QPushButton{\n"
+"margin-left: 10px; \n"
+"    margin-right: 10px;\n"
+"	background-color: rgb(40, 44, 52);\n"
+" border: 2px solid rgb(52, 59, 72);\n"
+"color: rgb(255, 255, 255);\n"
+"border-radius: 5px;	\n"
+"text-align: center;\n"
+"padding: 0px;\n"
+"margin: 0px;\n"
+"\n"
+"}\n"
+"\n"
+"QPushButton:hover{\n"
+"	color: rgb(28, 28, 28);\n"
+"background-color: rgb(153, 193, 241);\n"
+"\n"
+"}\n"
+"\n"
+"QPushButton:pressed{\n"
+"	\n"
+"		color: rgb(28, 28, 28);\n"
+"	background-color: rgb(110,140,255);\n"
+"}")
 
         self.verticalLayout_32.addWidget(self.btn_refreshCoreRegs)
 
         self.btn_hideCoreRegs = QPushButton(self.frame_7)
         self.btn_hideCoreRegs.setObjectName(u"btn_hideCoreRegs")
         self.btn_hideCoreRegs.setMinimumSize(QSize(0, 41))
-        self.btn_hideCoreRegs.setStyleSheet(u"\n"
-"margin-left: 10px;  /* Add 10 pixels of margin to the left of the button */\n"
-"    margin-right: 10px; /* Add 10 pixels of margin to the right of the ")
+        self.btn_hideCoreRegs.setStyleSheet(u"QPushButton{\n"
+"margin-left: 10px; \n"
+"    margin-right: 10px;\n"
+"	background-color: rgb(40, 44, 52);\n"
+" border: 2px solid rgb(52, 59, 72);\n"
+"color: rgb(255, 255, 255);\n"
+"border-radius: 5px;	\n"
+"text-align: center;\n"
+"padding: 0px;\n"
+"margin: 0px;\n"
+"\n"
+"}\n"
+"\n"
+"QPushButton:hover{\n"
+"	color: rgb(28, 28, 28);\n"
+"background-color: rgb(153, 193, 241);\n"
+"\n"
+"}\n"
+"\n"
+"QPushButton:pressed{\n"
+"	\n"
+"		color: rgb(28, 28, 28);\n"
+"	background-color: rgb(110,140,255);\n"
+"}")
 
         self.verticalLayout_32.addWidget(self.btn_hideCoreRegs)
 
@@ -1727,9 +1805,34 @@ class Ui_MainWindow(object):
         self.frame_11.setFrameShadow(QFrame.Raised)
         self.verticalLayout_34 = QVBoxLayout(self.frame_11)
         self.verticalLayout_34.setObjectName(u"verticalLayout_34")
+        self.verticalLayout_34.setContentsMargins(0, 9, 0, -1)
         self.btn_disconnect = QPushButton(self.frame_11)
         self.btn_disconnect.setObjectName(u"btn_disconnect")
         self.btn_disconnect.setMinimumSize(QSize(0, 50))
+        self.btn_disconnect.setStyleSheet(u"QPushButton{\n"
+"margin-left: 10px; \n"
+"    margin-right: 10px;\n"
+"	background-color: rgb(40, 44, 52);\n"
+" border: 2px solid rgb(52, 59, 72);\n"
+"color: rgb(255, 255, 255);\n"
+"border-radius: 5px;	\n"
+"text-align: center;\n"
+"padding: 0px;\n"
+"margin: 0px;\n"
+"\n"
+"}\n"
+"\n"
+"QPushButton:hover{\n"
+"	color: rgb(28, 28, 28);\n"
+"background-color: rgb(153, 193, 241);\n"
+"\n"
+"}\n"
+"\n"
+"QPushButton:pressed{\n"
+"	\n"
+"		color: rgb(28, 28, 28);\n"
+"	background-color: rgb(110,140,255);\n"
+"}")
 
         self.verticalLayout_34.addWidget(self.btn_disconnect)
 
@@ -1762,7 +1865,7 @@ class Ui_MainWindow(object):
         self.scrollArea_2.setWidgetResizable(True)
         self.scrollAreaWidgetContents_2 = QWidget()
         self.scrollAreaWidgetContents_2.setObjectName(u"scrollAreaWidgetContents_2")
-        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 661, 581))
+        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 730, 581))
         self.scrollArea_2.setWidget(self.scrollAreaWidgetContents_2)
 
         self.verticalLayout_28.addWidget(self.scrollArea_2)
@@ -2171,7 +2274,7 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
         self.scanSlider.valueChanged.connect(self.label_scan_timeout_value.setNum)
 
-        self.stackedWidget.setCurrentIndex(0)
+        self.stackedWidget.setCurrentIndex(2)
         self.rssi_gatt_expolrer.setCurrentIndex(0)
 
 

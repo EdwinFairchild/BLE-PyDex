@@ -7,7 +7,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1348</width>
+    <width>1459</width>
     <height>853</height>
    </rect>
   </property>
@@ -1833,7 +1833,7 @@ p, li { white-space: pre-wrap; }
                       <string notr="true">background: transparent;</string>
                      </property>
                      <property name="currentIndex">
-                      <number>0</number>
+                      <number>2</number>
                      </property>
                      <widget class="QWidget" name="home">
                       <property name="styleSheet">
@@ -2034,11 +2034,29 @@ color: rgb(255, 255, 255);</string>
                                    </size>
                                   </property>
                                   <property name="styleSheet">
-                                   <string notr="true"> border: 2px solid rgb(52, 59, 72);
-	border-radius: 5px;	
+                                   <string notr="true">QPushButton{
+
+	background-color: rgb(40, 44, 52);
+ border: 2px solid rgb(52, 59, 72);
+color: rgb(255, 255, 255);
+border-radius: 5px;	
 text-align: center;
 padding: 0px;
-margin: 0px;</string>
+margin: 0px;
+
+}
+
+QPushButton:hover{
+	color: rgb(28, 28, 28);
+background-color: rgb(153, 193, 241);
+
+}
+
+QPushButton:pressed{
+	
+		color: rgb(28, 28, 28);
+	background-color: rgb(110,140,255);
+}</string>
                                   </property>
                                   <property name="text">
                                    <string>Scan</string>
@@ -2054,11 +2072,29 @@ margin: 0px;</string>
                                    </size>
                                   </property>
                                   <property name="styleSheet">
-                                   <string notr="true"> border: 2px solid rgb(52, 59, 72);
+                                   <string notr="true">QPushButton{
+
+	background-color: rgb(40, 44, 52);
+ border: 2px solid rgb(52, 59, 72);
+color: rgb(255, 255, 255);
 border-radius: 5px;	
 text-align: center;
 padding: 0px;
-margin: 0px;</string>
+margin: 0px;
+
+}
+
+QPushButton:hover{
+	color: rgb(28, 28, 28);
+background-color: rgb(153, 193, 241);
+
+}
+
+QPushButton:pressed{
+	
+		color: rgb(28, 28, 28);
+	background-color: rgb(110,140,255);
+}</string>
                                   </property>
                                   <property name="text">
                                    <string>Connect</string>
@@ -2494,7 +2530,7 @@ QHeaderView::section:vertical
                                 <rect>
                                  <x>0</x>
                                  <y>0</y>
-                                 <width>319</width>
+                                 <width>375</width>
                                  <height>218</height>
                                 </rect>
                                </property>
@@ -2738,9 +2774,30 @@ QHeaderView::section:vertical
                                 </size>
                                </property>
                                <property name="styleSheet">
-                                <string notr="true">
-margin-left: 10px;  /* Add 10 pixels of margin to the left of the button */
-    margin-right: 10px; /* Add 10 pixels of margin to the right of the </string>
+                                <string notr="true">QPushButton{
+margin-left: 10px; 
+    margin-right: 10px;
+	background-color: rgb(40, 44, 52);
+ border: 2px solid rgb(52, 59, 72);
+color: rgb(255, 255, 255);
+border-radius: 5px;	
+text-align: center;
+padding: 0px;
+margin: 0px;
+
+}
+
+QPushButton:hover{
+	color: rgb(28, 28, 28);
+background-color: rgb(153, 193, 241);
+
+}
+
+QPushButton:pressed{
+	
+		color: rgb(28, 28, 28);
+	background-color: rgb(110,140,255);
+}</string>
                                </property>
                                <property name="text">
                                 <string>Refresh</string>
@@ -2756,9 +2813,30 @@ margin-left: 10px;  /* Add 10 pixels of margin to the left of the button */
                                 </size>
                                </property>
                                <property name="styleSheet">
-                                <string notr="true">
-margin-left: 10px;  /* Add 10 pixels of margin to the left of the button */
-    margin-right: 10px; /* Add 10 pixels of margin to the right of the </string>
+                                <string notr="true">QPushButton{
+margin-left: 10px; 
+    margin-right: 10px;
+	background-color: rgb(40, 44, 52);
+ border: 2px solid rgb(52, 59, 72);
+color: rgb(255, 255, 255);
+border-radius: 5px;	
+text-align: center;
+padding: 0px;
+margin: 0px;
+
+}
+
+QPushButton:hover{
+	color: rgb(28, 28, 28);
+background-color: rgb(153, 193, 241);
+
+}
+
+QPushButton:pressed{
+	
+		color: rgb(28, 28, 28);
+	background-color: rgb(110,140,255);
+}</string>
                                </property>
                                <property name="text">
                                 <string>Hide</string>
@@ -3277,6 +3355,15 @@ margin-left: 10px;  /* Add 10 pixels of margin to the left of the button */
                                 <enum>QFrame::Raised</enum>
                                </property>
                                <layout class="QVBoxLayout" name="verticalLayout_34">
+                                <property name="leftMargin">
+                                 <number>0</number>
+                                </property>
+                                <property name="topMargin">
+                                 <number>9</number>
+                                </property>
+                                <property name="rightMargin">
+                                 <number>0</number>
+                                </property>
                                 <item>
                                  <widget class="QPushButton" name="btn_disconnect">
                                   <property name="minimumSize">
@@ -3284,6 +3371,32 @@ margin-left: 10px;  /* Add 10 pixels of margin to the left of the button */
                                     <width>0</width>
                                     <height>50</height>
                                    </size>
+                                  </property>
+                                  <property name="styleSheet">
+                                   <string notr="true">QPushButton{
+margin-left: 10px; 
+    margin-right: 10px;
+	background-color: rgb(40, 44, 52);
+ border: 2px solid rgb(52, 59, 72);
+color: rgb(255, 255, 255);
+border-radius: 5px;	
+text-align: center;
+padding: 0px;
+margin: 0px;
+
+}
+
+QPushButton:hover{
+	color: rgb(28, 28, 28);
+background-color: rgb(153, 193, 241);
+
+}
+
+QPushButton:pressed{
+	
+		color: rgb(28, 28, 28);
+	background-color: rgb(110,140,255);
+}</string>
                                   </property>
                                   <property name="text">
                                    <string>Disconnect</string>
@@ -3350,7 +3463,7 @@ margin-left: 10px;  /* Add 10 pixels of margin to the left of the button */
                                  <rect>
                                   <x>0</x>
                                   <y>0</y>
-                                  <width>661</width>
+                                  <width>730</width>
                                   <height>581</height>
                                  </rect>
                                 </property>

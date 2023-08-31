@@ -97,7 +97,8 @@ class Ui_char_widget(object):
         self.permission_read.setObjectName(u"permission_read")
         self.permission_read.setStyleSheet(u"background-color: rgb(153, 193, 241);\n"
 "padding:5px;\n"
-"color: rgb(0, 0, 0);")
+"color: rgb(0, 0, 0);\n"
+"border-radius: 12px;	")
 
         self.horizontalLayout.addWidget(self.permission_read)
 
@@ -105,7 +106,8 @@ class Ui_char_widget(object):
         self.permission_write.setObjectName(u"permission_write")
         self.permission_write.setStyleSheet(u"background-color: rgb(153, 193, 241);\n"
 "padding:5px;\n"
-"color: rgb(0, 0, 0);")
+"color: rgb(0, 0, 0);\n"
+"border-radius: 12px;	")
 
         self.horizontalLayout.addWidget(self.permission_write)
 
@@ -114,7 +116,8 @@ class Ui_char_widget(object):
         self.permission_notify.setEnabled(True)
         self.permission_notify.setStyleSheet(u"background-color: rgb(153, 193, 241);\n"
 "padding:5px;\n"
-"color: rgb(0, 0, 0);")
+"color: rgb(0, 0, 0);\n"
+"border-radius: 12px;	")
 
         self.horizontalLayout.addWidget(self.permission_notify)
 
@@ -123,7 +126,8 @@ class Ui_char_widget(object):
         self.permission_indicate.setEnabled(True)
         self.permission_indicate.setStyleSheet(u"background-color: rgb(153, 193, 241);\n"
 "padding:5px;\n"
-"color: rgb(0, 0, 0);")
+"color: rgb(0, 0, 0);\n"
+"border-radius: 12px;	")
 
         self.horizontalLayout.addWidget(self.permission_indicate)
 
@@ -131,7 +135,8 @@ class Ui_char_widget(object):
         self.permission_write_wo_resp.setObjectName(u"permission_write_wo_resp")
         self.permission_write_wo_resp.setStyleSheet(u"background-color: rgb(153, 193, 241);\n"
 "padding:5px;\n"
-"color: rgb(0, 0, 0);")
+"color: rgb(0, 0, 0);\n"
+"border-radius: 12px;	")
 
         self.horizontalLayout.addWidget(self.permission_write_wo_resp)
 
@@ -221,12 +226,31 @@ class Ui_char_widget(object):
         self.char_write_btn.setObjectName(u"char_write_btn")
         self.char_write_btn.setMinimumSize(QSize(0, 0))
         self.char_write_btn.setMaximumSize(QSize(16777215, 9999))
-        self.char_write_btn.setStyleSheet(u" border: 2px solid rgb(52, 59, 72);\n"
+        self.char_write_btn.setStyleSheet(u"\n"
+"\n"
+"QPushButton{\n"
+"\n"
+"	background-color: rgb(40, 44, 52);\n"
+" border: 2px solid rgb(52, 59, 72);\n"
 "color: rgb(255, 255, 255);\n"
 "border-radius: 5px;	\n"
 "text-align: center;\n"
 "padding: 0px;\n"
-"margin: 0px;")
+"margin: 0px;\n"
+"\n"
+"}\n"
+"\n"
+"QPushButton:hover{\n"
+"	color: rgb(28, 28, 28);\n"
+"		background-color: rgb(140,170,255);\n"
+"\n"
+"}\n"
+"\n"
+"QPushButton:pressed{\n"
+"	\n"
+"		color: rgb(28, 28, 28);\n"
+"	background-color: rgb(110,140,255);\n"
+"}")
 
         self.horizontalLayout_4.addWidget(self.char_write_btn)
 
@@ -234,12 +258,29 @@ class Ui_char_widget(object):
         self.char_read_btn.setObjectName(u"char_read_btn")
         self.char_read_btn.setMinimumSize(QSize(0, 0))
         self.char_read_btn.setMaximumSize(QSize(16777215, 9999))
-        self.char_read_btn.setStyleSheet(u" border: 2px solid rgb(52, 59, 72);\n"
+        self.char_read_btn.setStyleSheet(u"QPushButton{\n"
+"\n"
+"	background-color: rgb(40, 44, 52);\n"
+" border: 2px solid rgb(52, 59, 72);\n"
 "color: rgb(255, 255, 255);\n"
 "border-radius: 5px;	\n"
 "text-align: center;\n"
 "padding: 0px;\n"
-"margin: 0px;")
+"margin: 0px;\n"
+"\n"
+"}\n"
+"\n"
+"QPushButton:hover{\n"
+"	color: rgb(28, 28, 28);\n"
+"		background-color: rgb(140,170,255);\n"
+"\n"
+"}\n"
+"\n"
+"QPushButton:pressed{\n"
+"	\n"
+"		color: rgb(28, 28, 28);\n"
+"	background-color: rgb(110,140,255);\n"
+"}")
 
         self.horizontalLayout_4.addWidget(self.char_read_btn)
 
