@@ -14,7 +14,6 @@ class BLE_DiscoverDevices(QThread):
     logger = logging.getLogger("PDexLogger")
     scanning_stoped = Signal()
 
-
     def run(self):
         asyncio.run(self.BLE_discoverDevices())
     # ------------------------------------------------------------------------
@@ -67,7 +66,6 @@ class BLE_ConnectDevice(QThread):
     connection_established = Signal()
     connection_esablished_signal_sent = False
 
-
     # signals to kickstart queue based event handling
     #these are emitted from main.py but the handlers live here
     device_char_write = Signal(str, str, bool, bool) # UUID, value
@@ -82,9 +80,9 @@ class BLE_ConnectDevice(QThread):
         super(BLE_ConnectDevice, self).__init__(*args, **kwargs)
         self.async_queue = Queue()
         # Connect signals to slots
-        self.device_char_write.connect(self.handle_write)
-        self.device_char_notify.connect(self.handle_notify)
-        self.device_char_read.connect(self.handle_read)
+        self.device_char_write.connect(self.BLE_task_enqueue_write)
+        self.device_char_notify.connect(self.BLE_task_enqueue_notify)
+        self.device_char_read.connect(self.BLE_task_enqueue_read)
         
     
     def run(self):
@@ -98,13 +96,8 @@ class BLE_ConnectDevice(QThread):
             async with BleakClient(self.ble_address, disconnected_callback=self.handle_disconnect) as client:
                 self.is_connected = True
                 self.logger.info("Connected to device with address: " + self.ble_address)
-                 # TODO : stop the RSSI graph thread, need a signal for that
                 
-                    # TODO : handle notifications add/remove
-                    # TODO : handle characteristics read/write
-                    # TODO : handle services explore
                 await self.discover_device_services(client)
-
                  
                 while self.is_connected == True:
                     # send the conenctions established singal only once
@@ -190,7 +183,8 @@ class BLE_ConnectDevice(QThread):
         except Exception as err:
             self.logger.warning(err)
           
-        
+    #------------------------------| BLE event handlers |-------------------------------------------
+    
     async def writeWithoutRespCallback(self, client: BleakClient,  uuid , data , response , rawbytes = False):
         if response == True:
             try:
@@ -256,8 +250,7 @@ class BLE_ConnectDevice(QThread):
             self.logger.setLevel(logging.INFO)
             self.logger.info("Read failed")
             pass
-    #------------------------------| Event handlers |-------------------------------------------
-
+    
     def handle_notification(self, sender, data):
         self.logger.info(f"Notification received")
         self.logger.info(f"Sender: {sender}")
@@ -269,15 +262,17 @@ class BLE_ConnectDevice(QThread):
             self.logger.warning(err)
             self.logger.setLevel(logging.INFO)
             self.logger.info("Notification failed")
-
+    
     def handle_disconnect(self, _: BleakClient):
         # This gets called internally by Bleak when the device disconnects
         self.is_connected = False
         self.logger.info("Disconnected")
         # reset the text of the connect button
         self.device_disconnected.emit()
+    
+    #------------------------------| BLE task enqueuers |-------------------------------------------
 
-    def handle_write(self, uuid, data, response: bool=False,rawbytes: bool=False):
+    def BLE_task_enqueue_write(self, uuid, data, response: bool=False,rawbytes: bool=False):
        
         task = ("write_char", [uuid,data, response, rawbytes], {})
         try:
@@ -289,7 +284,7 @@ class BLE_ConnectDevice(QThread):
             self.logger.info("Write failed")
             pass
         
-    def handle_notify(self, uuid, enable: bool):
+    def BLE_task_enqueue_notify(self, uuid, enable: bool):
         task = ("notify_char", [uuid,enable], {})
         try:
             self.async_queue.put_nowait(task)
@@ -300,7 +295,7 @@ class BLE_ConnectDevice(QThread):
             self.logger.info("Notification failed")
             pass
 
-    def handle_read(self, uuid):
+    def BLE_task_enqueue_read(self, uuid):
         task = ("read_char", [uuid], {})
         try:
             self.async_queue.put_nowait(task)
