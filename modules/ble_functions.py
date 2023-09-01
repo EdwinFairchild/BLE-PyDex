@@ -190,12 +190,6 @@ class BLE_ConnectDevice(QThread):
         except Exception as err:
             self.logger.warning(err)
           
-    def handle_disconnect(self, _: BleakClient):
-        # This gets called internally by Bleak when the device disconnects
-        self.is_connected = False
-        self.logger.info("Disconnected")
-        # reset the text of the connect button
-        self.device_disconnected.emit()
         
     async def writeWithoutRespCallback(self, client: BleakClient,  uuid , data , response , rawbytes = False):
         if response == True:
@@ -233,7 +227,7 @@ class BLE_ConnectDevice(QThread):
     async def notifyCallback(self, client: BleakClient, uuid, enable):
         if enable == True:
             try:
-                await client.start_notify(uuid, self.notification_handler)
+                await client.start_notify(uuid, self.handle_notification)
                 self.logger.info(f"Successfully enabled notifications for characteristic with UUID: {uuid}")
             except Exception as err:
                 self.logger.setLevel(logging.WARNING)
@@ -250,19 +244,6 @@ class BLE_ConnectDevice(QThread):
                 self.logger.setLevel(logging.WARNING)
                 self.logger.info("Notification failed")
     
-    def notification_handler(self, sender, data):
-        self.logger.info(f"Notification received")
-        self.logger.info(f"Sender: {sender}")
-        self.logger.info(f"Data: {data}")
-        try:
-            self.device_notification_recevied.emit(str(sender), str(data))
-        except Exception as err:
-            self.logger.setLevel(logging.WARNING)
-            self.logger.warning(err)
-            self.logger.setLevel(logging.INFO)
-            self.logger.info("Notification failed")
-            pass
-
     async def readCallback(self, client: BleakClient, uuid):
         try:
             value = bytes(await client.read_gatt_char(uuid))
@@ -276,6 +257,25 @@ class BLE_ConnectDevice(QThread):
             self.logger.info("Read failed")
             pass
     #------------------------------| Event handlers |-------------------------------------------
+
+    def handle_notification(self, sender, data):
+        self.logger.info(f"Notification received")
+        self.logger.info(f"Sender: {sender}")
+        self.logger.info(f"Data: {data}")
+        try:
+            self.device_notification_recevied.emit(str(sender), str(data))
+        except Exception as err:
+            self.logger.setLevel(logging.WARNING)
+            self.logger.warning(err)
+            self.logger.setLevel(logging.INFO)
+            self.logger.info("Notification failed")
+
+    def handle_disconnect(self, _: BleakClient):
+        # This gets called internally by Bleak when the device disconnects
+        self.is_connected = False
+        self.logger.info("Disconnected")
+        # reset the text of the connect button
+        self.device_disconnected.emit()
 
     def handle_write(self, uuid, data, response: bool=False,rawbytes: bool=False):
        
@@ -299,6 +299,7 @@ class BLE_ConnectDevice(QThread):
             self.logger.setLevel(logging.INFO)
             self.logger.info("Notification failed")
             pass
+
     def handle_read(self, uuid):
         task = ("read_char", [uuid], {})
         try:
