@@ -3463,7 +3463,7 @@ QPushButton:pressed{
                                  <rect>
                                   <x>0</x>
                                   <y>0</y>
-                                  <width>543</width>
+                                  <width>730</width>
                                   <height>581</height>
                                  </rect>
                                 </property>
@@ -3506,7 +3506,7 @@ QPushButton:pressed{
                  <widget class="QFrame" name="extraRightBox">
                   <property name="minimumSize">
                    <size>
-                    <width>300</width>
+                    <width>0</width>
                     <height>0</height>
                    </size>
                   </property>

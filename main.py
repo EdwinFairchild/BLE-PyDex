@@ -729,6 +729,8 @@ class MainWindow(QMainWindow):
             UIFunctions.resetStyle(self, btnName)
             btn.setStyleSheet(UIFunctions.selectMenu(btn.styleSheet()))
             # hide elfSettings frame
+            self.ui.ota_frame.hide()
+            self.ui.ota_frame.setMaximumHeight(0)
             self.ui.elfSettings.hide()
             self.ui.elfSettings.setMaximumHeight(0)
             self.ui.scannerSettigns.setMaximumHeight(1000000)
@@ -749,6 +751,8 @@ class MainWindow(QMainWindow):
             self.ui.elfSettings.setMaximumHeight(0)
             self.ui.scannerSettigns.setMaximumHeight(0)
             self.ui.scannerSettigns.hide()
+            self.ui.ota_frame.show()
+            self.ui.ota_frame.setMaximumHeight(1000000)
 
 
         if btnName == "btn_save":
@@ -760,6 +764,8 @@ class MainWindow(QMainWindow):
             btn.setStyleSheet(UIFunctions.selectMenu(btn.styleSheet())) # SELECT MENU
             self.ui.scannerSettigns.hide()
             self.ui.scannerSettigns.setMaximumHeight(0)
+            self.ui.ota_frame.hide()
+            self.ui.ota_frame.setMaximumHeight(0)
             self.ui.elfSettings.setMaximumHeight(1000000)
             self.ui.elfSettings.show()
 
