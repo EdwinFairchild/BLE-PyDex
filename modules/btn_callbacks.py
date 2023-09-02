@@ -224,7 +224,7 @@ def disable_graphing(main_window):
         logger.setLevel(logging.WARNING)
         logger.warning(err)
         logger.setLevel(logging.INFO)
-        
+
 def handle_checkbox_state_change(state, var_name, address, address_dict, main_window):
     logger = logging.getLogger("PDexLogger")
    
@@ -327,6 +327,7 @@ def start_monitoring(main_window):
     else:
         main_window.var_watcher.start()
         main_window.ui.btn_monitor.setText("Stop Monitoring")
+        
 def get_core_regs(main_window):
     logger = logging.getLogger("PDexLogger")
     try:

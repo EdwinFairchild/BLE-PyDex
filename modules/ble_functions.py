@@ -87,9 +87,9 @@ class BLE_ConnectDevice(QThread):
     
     def run(self):
 
-        asyncio.run(self.BLE_connectDevice())
+        asyncio.run(self.BLE_connectionLoop())
     # ----------------------------| BLE connection |--------------------------------------------
-    async def BLE_connectDevice(self):
+    async def BLE_connectionLoop(self):
         try:
             self.logger.info("Connecting to device with address: " + self.ble_address)
             # start connection and pass disconnection handler
@@ -282,7 +282,7 @@ class BLE_ConnectDevice(QThread):
             self.logger.warning("Queue is full: {err}")
             self.logger.setLevel(logging.INFO)
             self.logger.info("Write failed")
-            pass
+            
         
     def BLE_task_enqueue_notify(self, uuid, enable: bool):
         task = ("notify_char", [uuid,enable], {})
@@ -293,7 +293,7 @@ class BLE_ConnectDevice(QThread):
             self.logger.warning("Queue is full: {err}")
             self.logger.setLevel(logging.INFO)
             self.logger.info("Notification failed")
-            pass
+            
 
     def BLE_task_enqueue_read(self, uuid):
         task = ("read_char", [uuid], {})
@@ -304,4 +304,15 @@ class BLE_ConnectDevice(QThread):
             self.logger.warning("Queue is full: {err}")
             self.logger.setLevel(logging.INFO)
             self.logger.info("Read failed")
-            pass
+            
+
+    def BLE_task_enqueue_max32xxx_ota(self, fileLen, crc32):
+        task = ("max32xxx_ota", [fileLen,crc32], {})
+        try:
+            self.async_queue.put_nowait(task)
+        except err:
+            self.logger.setLevel(logging.WARNING)
+            self.logger.warning("Queue is full: {err}")
+            self.logger.setLevel(logging.INFO)
+            self.logger.info("OTA failed")
+            
