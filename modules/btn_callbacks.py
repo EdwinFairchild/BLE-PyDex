@@ -212,13 +212,19 @@ def btn_disconnect(interface):
         return
 
 def disable_graphing(main_window):
+    logger = logging.getLogger("PDexLogger")
     # check checkbox state
-    if main_window.ui.graph_enabled.isChecked():
-        main_window.update_thread.GraphActive = True
-        main_window.update_thread.start()
-    else:
-        main_window.stop_graphing()
-
+    try:
+        if main_window.ui.graph_enabled.isChecked():
+            main_window.update_thread.GraphActive = True
+            main_window.update_thread.start()
+        else:
+            main_window.stop_graphing()
+    except Exception as err:
+        logger.setLevel(logging.WARNING)
+        logger.warning(err)
+        logger.setLevel(logging.INFO)
+        
 def handle_checkbox_state_change(state, var_name, address, address_dict, main_window):
     logger = logging.getLogger("PDexLogger")
    
