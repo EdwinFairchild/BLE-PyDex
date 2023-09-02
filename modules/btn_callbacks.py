@@ -340,12 +340,17 @@ def load_bin(main_window):
         fname = QFileDialog.getOpenFileName(main_window, "Open firmware binary", "", "*.bin")
         if fname:
             #get crc32 of the file using method in max32xxx_ota.py module
-            crc32,fileLen = max32xxx_ota.get_crc32(fname[0])
-            fileName = fname[0]
-            main_window.fileName = fileName
-            main_window.fileLen = fileLen
-            main_window.fileCrc32 = crc32
-           
+            try:
+                crc32,fileLen = max32xxx_ota.get_crc32(fname[0])
+                fileName = fname[0]
+                main_window.fileName = fileName
+                main_window.fileLen = fileLen
+                main_window.fileCrc32 = crc32
+                logger.info("file length: " + str(fileLen))
+                logger.info("crc32: 0x" + format(crc32, '08x'))
+            except Exception as err:
+                logger.info(f"Error getting crc32: {err}")
+            
     except Exception as err:
         logger.info(f"Error loading binary: {err}")
 

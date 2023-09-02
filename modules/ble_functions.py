@@ -1,4 +1,5 @@
 from main import *
+from . import max32xxx_ota
 import bleak
 import asyncio
 from asyncio import Queue
@@ -72,8 +73,10 @@ class BLE_ConnectDevice(QThread):
     device_char_write = Signal(str, str, bool, bool) # UUID, value
     device_char_notify = Signal(str, bool) # UUID, enable/disable
     device_char_read = Signal(str) # UUID
+    # ota related signals
     device_ota_update = Signal(str, int, ctypes.c_uint32) # fileName, fileLen, crc32
-
+    # erase complete flag
+    ota_erase_complete = False
     #these are emitted from here and the handlers live in main.py
     device_notification_recevied = Signal(str, str) # sender, value
     device_char_read_response = Signal(str, str) # UUID, value
@@ -119,8 +122,7 @@ class BLE_ConnectDevice(QThread):
                         if task == "read_char":
                             await self.readCallback(client, *args, **kwargs)
                         if task == "max32xxx_ota":
-                            print("Sent ota update task")
-                            #await max32xxx_ota.ota_update(client, *args, **kwargs)
+                            await max32xxx_ota.ota_update(self, client, *args, **kwargs)
                             
 
                     # async sleep, give time for other threads to run
@@ -263,6 +265,9 @@ class BLE_ConnectDevice(QThread):
         self.logger.info(f"Data: {data}")
         try:
             self.device_notification_recevied.emit(str(sender), str(data))
+            #used to monitor erase progress for max32xxx ota
+            if "Handle: 580" in str(sender) and self.ota_erase_complete == False:
+                self.ota_erase_complete = True
         except Exception as err:
             self.logger.setLevel(logging.WARNING)
             self.logger.warning(err)
@@ -289,7 +294,6 @@ class BLE_ConnectDevice(QThread):
             self.logger.setLevel(logging.INFO)
             self.logger.info("Write failed")
             
-        
     def BLE_task_enqueue_notify(self, uuid, enable: bool):
         task = ("notify_char", [uuid,enable], {})
         try:
@@ -311,7 +315,7 @@ class BLE_ConnectDevice(QThread):
             self.logger.info("Read failed")
             
     def BLE_task_enqueue_max32xxx_ota(self,fileName, fileLen, crc32):
-        task = ("max32xxx_ota", [fileName,fileLen, crc32], {})
+        task = ("max32xxx_ota", [fileName,fileLen,crc32], {})
         try:
             self.async_queue.put_nowait(task)
         except Exception as err:
@@ -320,3 +324,4 @@ class BLE_ConnectDevice(QThread):
             self.logger.setLevel(logging.INFO)
             self.logger.info("OTA failed")
             
+    
