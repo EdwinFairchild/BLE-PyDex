@@ -4,6 +4,7 @@ import asyncio
 from asyncio import Queue
 from bleak import BleakScanner
 from bleak import *
+import ctypes
 class BLE_DiscoverDevices(QThread):
     ble_address = 0
     scan_timeout = 0
@@ -71,7 +72,7 @@ class BLE_ConnectDevice(QThread):
     device_char_write = Signal(str, str, bool, bool) # UUID, value
     device_char_notify = Signal(str, bool) # UUID, enable/disable
     device_char_read = Signal(str) # UUID
-    device_ota_update = Signal(str, str) # fileName, fileLen
+    device_ota_update = Signal(str, int, ctypes.c_uint32) # fileName, fileLen, crc32
 
     #these are emitted from here and the handlers live in main.py
     device_notification_recevied = Signal(str, str) # sender, value
@@ -118,7 +119,8 @@ class BLE_ConnectDevice(QThread):
                         if task == "read_char":
                             await self.readCallback(client, *args, **kwargs)
                         if task == "max32xxx_ota":
-                            await max32xxx_ota.ota_update(client, *args, **kwargs)
+                            print("Sent ota update task")
+                            #await max32xxx_ota.ota_update(client, *args, **kwargs)
                             
 
                     # async sleep, give time for other threads to run
@@ -308,13 +310,13 @@ class BLE_ConnectDevice(QThread):
             self.logger.setLevel(logging.INFO)
             self.logger.info("Read failed")
             
-    def BLE_task_enqueue_max32xxx_ota(self, fileLen, crc32):
-        task = ("max32xxx_ota", [fileName,fileLen], {})
+    def BLE_task_enqueue_max32xxx_ota(self,fileName, fileLen, crc32):
+        task = ("max32xxx_ota", [fileName,fileLen, crc32], {})
         try:
             self.async_queue.put_nowait(task)
-        except err:
+        except Exception as err:
             self.logger.setLevel(logging.WARNING)
-            self.logger.warning("Queue is full: {err}")
+            self.logger.warning(f"Queue is full: {err}")
             self.logger.setLevel(logging.INFO)
             self.logger.info("OTA failed")
             
