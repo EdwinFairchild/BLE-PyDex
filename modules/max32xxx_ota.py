@@ -136,7 +136,7 @@ async def ota_update( self, client,fileName, fileLen,crc32):
                     rawBytes = f.read(blocksize)
                     tempLen = tempLen - len(rawBytes)
                     percent =int((1-(tempLen / fileLen))*100)
-                    #self.otas_progress_value.emit(percent)
+                    self.otas_progress_value.emit(percent)
                     if not rawBytes:
                         break
                     nextAddress=(address).to_bytes(4,byteorder='little',signed=False)

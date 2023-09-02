@@ -20,10 +20,10 @@ from PySide6.QtWidgets import (QAbstractItemView, QAbstractScrollArea, QApplicat
     QComboBox, QCommandLinkButton, QFrame, QGridLayout,
     QHBoxLayout, QHeaderView, QLabel, QLineEdit,
     QListWidget, QListWidgetItem, QMainWindow, QPlainTextEdit,
-    QPushButton, QRadioButton, QScrollArea, QScrollBar,
-    QSizePolicy, QSlider, QSpacerItem, QStackedWidget,
-    QTableWidget, QTableWidgetItem, QTextEdit, QTreeWidget,
-    QTreeWidgetItem, QVBoxLayout, QWidget)
+    QProgressBar, QPushButton, QRadioButton, QScrollArea,
+    QScrollBar, QSizePolicy, QSlider, QSpacerItem,
+    QStackedWidget, QTableWidget, QTableWidgetItem, QTextEdit,
+    QTreeWidget, QTreeWidgetItem, QVBoxLayout, QWidget)
 
 from toggle import AnimatedToggle
 from . resources_rc import *
@@ -1929,9 +1929,16 @@ class Ui_MainWindow(object):
 "")
         self.ota_frame.setFrameShape(QFrame.StyledPanel)
         self.ota_frame.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_36 = QVBoxLayout(self.ota_frame)
+        self.verticalLayout_36.setObjectName(u"verticalLayout_36")
+        self.label_6 = QLabel(self.ota_frame)
+        self.label_6.setObjectName(u"label_6")
+
+        self.verticalLayout_36.addWidget(self.label_6)
+
         self.btn_load_bin = QPushButton(self.ota_frame)
         self.btn_load_bin.setObjectName(u"btn_load_bin")
-        self.btn_load_bin.setGeometry(QRect(60, 190, 171, 25))
+        self.btn_load_bin.setMinimumSize(QSize(0, 40))
         self.btn_load_bin.setStyleSheet(u"QPushButton{\n"
 "margin-left: 10px; \n"
 "    margin-right: 10px;\n"
@@ -1956,9 +1963,12 @@ class Ui_MainWindow(object):
 "		color: rgb(28, 28, 28);\n"
 "	background-color: rgb(110,140,255);\n"
 "}")
+
+        self.verticalLayout_36.addWidget(self.btn_load_bin)
+
         self.btn_start_ota = QPushButton(self.ota_frame)
         self.btn_start_ota.setObjectName(u"btn_start_ota")
-        self.btn_start_ota.setGeometry(QRect(60, 220, 171, 25))
+        self.btn_start_ota.setMinimumSize(QSize(0, 40))
         self.btn_start_ota.setStyleSheet(u"QPushButton{\n"
 "margin-left: 10px; \n"
 "    margin-right: 10px;\n"
@@ -1983,6 +1993,29 @@ class Ui_MainWindow(object):
 "		color: rgb(28, 28, 28);\n"
 "	background-color: rgb(110,140,255);\n"
 "}")
+
+        self.verticalLayout_36.addWidget(self.btn_start_ota)
+
+        self.frame_13 = QFrame(self.ota_frame)
+        self.frame_13.setObjectName(u"frame_13")
+        self.frame_13.setFrameShape(QFrame.StyledPanel)
+        self.frame_13.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_20 = QHBoxLayout(self.frame_13)
+        self.horizontalLayout_20.setObjectName(u"horizontalLayout_20")
+        self.otasProgress = QProgressBar(self.frame_13)
+        self.otasProgress.setObjectName(u"otasProgress")
+        self.otasProgress.setValue(0)
+        self.otasProgress.setAlignment(Qt.AlignCenter)
+
+        self.horizontalLayout_20.addWidget(self.otasProgress)
+
+
+        self.verticalLayout_36.addWidget(self.frame_13)
+
+        self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+
+        self.verticalLayout_36.addItem(self.verticalSpacer)
+
 
         self.verticalLayout_13.addWidget(self.ota_frame)
 
@@ -2484,7 +2517,8 @@ class Ui_MainWindow(object):
         ___qtreewidgetitem = self.gatt_treeView.headerItem()
         ___qtreewidgetitem.setText(0, QCoreApplication.translate("MainWindow", u"Gatt Tree", None));
         self.btn_disconnect.setText(QCoreApplication.translate("MainWindow", u"Disconnect", None))
-        self.btn_load_bin.setText(QCoreApplication.translate("MainWindow", u"Load bin", None))
+        self.label_6.setText(QCoreApplication.translate("MainWindow", u"MAX32xxx BLE OTA update", None))
+        self.btn_load_bin.setText(QCoreApplication.translate("MainWindow", u"Open binary", None))
         self.btn_start_ota.setText(QCoreApplication.translate("MainWindow", u"Start update", None))
         self.btn_save_logs.setText(QCoreApplication.translate("MainWindow", u"Save  logs", None))
         self.btn_clear_logs.setText(QCoreApplication.translate("MainWindow", u"Clear logs & graph", None))

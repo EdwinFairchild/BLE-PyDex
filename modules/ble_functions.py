@@ -75,6 +75,7 @@ class BLE_ConnectDevice(QThread):
     device_char_read = Signal(str) # UUID
     # ota related signals
     device_ota_update = Signal(str, int, ctypes.c_uint32) # fileName, fileLen, crc32
+    otas_progress_value = Signal(int)
     # erase complete flag
     ota_erase_complete = False
     #these are emitted from here and the handlers live in main.py
@@ -280,6 +281,9 @@ class BLE_ConnectDevice(QThread):
         self.logger.info("Disconnected")
         # reset the text of the connect button
         self.device_disconnected.emit()
+
+        # max32xxx ota related
+        self.otas_progress_value.emit(0)
     
     #------------------------------| BLE task enqueuers |-------------------------------------------
 

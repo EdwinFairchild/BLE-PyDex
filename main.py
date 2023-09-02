@@ -73,6 +73,7 @@ class MainWindow(QMainWindow):
         self.fileLen = None
         self.fileCrc32 = None
         
+        
         # Initialize logging
         console = logging.getLogger("PDexLogger")
         handler = QLogHandler(self.ui.console)
@@ -86,6 +87,12 @@ class MainWindow(QMainWindow):
         self.connectedDevice = BLE_ConnectDevice()
         self.connectedDevice.device_notification_recevied.connect(self.char_notification_handler)
         self.connectedDevice.device_char_read_response.connect(self.char_read_response_handler)
+
+        #OTA related 
+        self.connectedDevice.otas_progress_value.connect(
+                    lambda value: self.otas_progress_update(value))
+          
+
         
         self.update_rssi_thread = UpdateRSSIGraphThread(self)
         self.update_rssi_thread.dataUpdated.connect(self.update_graph)
@@ -227,6 +234,13 @@ class MainWindow(QMainWindow):
 
         # SHOW APP
         self.show()
+        # right box visible content initially hide all execept scanner settings
+        self.ui.ota_frame.hide()
+        self.ui.ota_frame.setMaximumHeight(0)
+        self.ui.elfSettings.hide()
+        self.ui.elfSettings.setMaximumHeight(0)
+        self.ui.scannerSettigns.setMaximumHeight(1000000)
+        self.ui.scannerSettigns.show()
 
 
         # Set up the axes (assuming the chart is already set up in the .ui file)
@@ -804,6 +818,9 @@ class MainWindow(QMainWindow):
             self.ui.tbl_core_regs.insertRow(row_position)
             self.ui.tbl_core_regs.setItem(row_position, 0, QTableWidgetItem(reg))
             self.ui.tbl_core_regs.setItem(row_position, 1, QTableWidgetItem(hex(value)))
+    
+    def otas_progress_update(self,value):    
+        self.ui.otasProgress.setValue(value)
 
     #------------------------ clean up fuctions ------------------------
     def clean_up(self):
