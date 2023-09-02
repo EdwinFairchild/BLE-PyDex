@@ -1,4 +1,5 @@
 from main import *
+from modules import max32xxx_ota
 from elftools.elf.elffile import ELFFile
 from PySide6.QtWidgets import QFileDialog
 from PySide6.QtWidgets import QTableWidget, QTableWidgetItem, QCheckBox, QWidget, QHBoxLayout
@@ -36,8 +37,8 @@ def btn_scan(interface):
 
             #restart rssi gaph update thread because it could have been stopped by stop button
             if interface.ui.graph_enabled.isChecked():
-                interface.update_thread.GraphActive = True
-                interface.update_thread.start()
+                interface.update_rssi_thread.GraphActive = True
+                interface.update_rssi_thread.start()
         except Exception as err:
             logger.setLevel(logging.WARNING)
             logger.warning(err)
@@ -143,7 +144,6 @@ def btn_connect(interface):
         # kicks off disocnnection events
         interface.connectedDevice.is_connected = False
 
-
 def clear_logs(interface):
     logger = logging.getLogger("PDexLogger")
     try:
@@ -155,8 +155,8 @@ def clear_logs(interface):
         # Remove all series from the chart
         interface.ui.qtchart_widgetholder.chart().removeAllSeries()
         if interface.ui.graph_enabled.isChecked():
-            interface.update_thread.GraphActive = True
-            interface.update_thread.start()
+            interface.update_rssi_thread.GraphActive = True
+            interface.update_rssi_thread.start()
         logger.info("Cleared logs")
     except Exception as err:
         logger.setLevel(logging.WARNING)
@@ -192,6 +192,7 @@ def btn_github(interface):
         logger.setLevel(logging.WARNING)
         logger.warning(err)
         logger.setLevel(logging.INFO)
+
 def btn_disconnect(interface):
     logger = logging.getLogger("PDexLogger")
     # check if the connectedDevice is connected
@@ -216,8 +217,8 @@ def disable_graphing(main_window):
     # check checkbox state
     try:
         if main_window.ui.graph_enabled.isChecked():
-            main_window.update_thread.GraphActive = True
-            main_window.update_thread.start()
+            main_window.update_rssi_thread.GraphActive = True
+            main_window.update_rssi_thread.start()
         else:
             main_window.stop_graphing()
     except Exception as err:
@@ -251,9 +252,7 @@ def handle_checkbox_state_change(state, var_name, address, address_dict, main_wi
                 logger.info(f"Removed {var_name} from watch list")
                 break
    
-
 # Function to handle removing a watched variable
-
 def remove_watched_var(var_name, row, main_window):
     main_window.ui.tbl_vars_watched.removeRow(row)
 
@@ -335,6 +334,20 @@ def get_core_regs(main_window):
     except Exception as err:
         logger.info("Error getting core regs: {err}")
 
+def load_bin(main_window):
+    logger = logging.getLogger("PDexLogger")
+    try:
+        fname = QFileDialog.getOpenFileName(main_window, "Open firmware binary", "", "*.bin")
+        if fname:
+           
+            #get crc32 of the file using method in max32xxx_ota.py module
+            crc32,fileLen = max32xxx_ota.get_crc32(fname[0])
+            fileName = fname[0]
+
+    except Exception as err:
+        logger.info(f"Error loading binary: {err}")
+
+
 def register_button_callbacks(main_window):
     logger = logging.getLogger("PDexLogger")
     try:
@@ -356,6 +369,9 @@ def register_button_callbacks(main_window):
         #register slot/signal for disconnecting from device
         main_window.ui.btn_clear_logs.clicked.connect(lambda: clear_logs(main_window))
         main_window.ui.btn_save_logs.clicked.connect(lambda: save_adv_logs(main_window))
+
+        #register button callbacks for OTA
+        main_window.ui.btn_load_bin.clicked.connect(lambda :load_bin(main_window))
     except Exception as err:
         logger.setLevel(logging.WARNING)
         logger.warning(err)

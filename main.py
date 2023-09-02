@@ -67,6 +67,11 @@ class MainWindow(QMainWindow):
         self.plot_colors = ['b', 'g', 'r', 'c', 'm', 'y', 'k']
         # self.ui.widget_rssi_graph.setBackground((40, 44, 52)) 
         # self.ui.widget_rssi_graph.getPlotItem().getAxis('bottom').setStyle(showValues=False)
+
+        # OTA variables
+        self.fileName = None
+        self.fileLen = None
+        self.fileCrc32 = None
         
         # Initialize logging
         console = logging.getLogger("PDexLogger")
@@ -82,18 +87,11 @@ class MainWindow(QMainWindow):
         self.connectedDevice.device_notification_recevied.connect(self.char_notification_handler)
         self.connectedDevice.device_char_read_response.connect(self.char_read_response_handler)
         
-        self.update_thread = UpdateRSSIGraphThread(self)
-        self.update_thread.dataUpdated.connect(self.update_graph)
+        self.update_rssi_thread = UpdateRSSIGraphThread(self)
+        self.update_rssi_thread.dataUpdated.connect(self.update_graph)
         if self.ui.graph_enabled.isChecked():
-            self.update_thread.GraphActive = True
-            #self.update_thread.start()
-
-
-        # Generate some log messages for testing
-        # console.debug('Debug message.')
-        # console.info('Info message.')
-        # console.warning('Warning message.')
-        # console.error('Error message.')
+            self.update_rssi_thread.GraphActive = True
+            #self.update_rssi_thread.start()
 
         # Global BLE objects
         self.bleScanner = ble_functions.BLE_DiscoverDevices()
@@ -133,7 +131,7 @@ class MainWindow(QMainWindow):
         # LEFT MENUS
         self.ui.btn_home.clicked.connect(self.buttonClick)
         self.ui.btn_widgets.clicked.connect(self.buttonClick)
-        self.ui.btn_new.clicked.connect(self.buttonClick)
+        self.ui.btn_gatt_explorer.clicked.connect(self.buttonClick)
         self.ui.btn_save.clicked.connect(self.buttonClick)
         self.ui.btn_insights.clicked.connect(self.buttonClick)
 
@@ -385,10 +383,10 @@ class MainWindow(QMainWindow):
    
     def stop_rssi_thread(self):
             # the RSSI thread
-        if self.update_thread.GraphActive == True:    
-            self.update_thread.GraphActive = False  # Request the thread to stop
-            self.update_thread.quit()  # Request the thread to stop
-            self.update_thread.wait()  # Wait until the thread has actually stopped
+        if self.update_rssi_thread.GraphActive == True:    
+            self.update_rssi_thread.GraphActive = False  # Request the thread to stop
+            self.update_rssi_thread.quit()  # Request the thread to stop
+            self.update_rssi_thread.wait()  # Wait until the thread has actually stopped
             self.logger.info("RSSI thread stopped")
                   
     def add_table_item(self, data):
@@ -690,7 +688,7 @@ class MainWindow(QMainWindow):
         #  store reference to widget in char_dict so we can access it later, use UUID as key
     def stacked_widget_show_connected(self):
         # change stacked widget to connections page
-        self.ui.btn_new.click()
+        self.ui.btn_gatt_explorer.click()
         
     def char_write_btn_handler(self, UUID , resp : bool = False ):
         data_to_write = self.char_dict[UUID]["uiWidget"].char_write_txt.toPlainText()
@@ -732,6 +730,8 @@ class MainWindow(QMainWindow):
             btn.setStyleSheet(UIFunctions.selectMenu(btn.styleSheet()))
             # hide elfSettings frame
             self.ui.elfSettings.hide()
+            self.ui.elfSettings.setMaximumHeight(0)
+            self.ui.scannerSettigns.setMaximumHeight(1000000)
             self.ui.scannerSettigns.show()
 
         # SHOW WIDGETS PAGE
@@ -741,10 +741,15 @@ class MainWindow(QMainWindow):
             btn.setStyleSheet(UIFunctions.selectMenu(btn.styleSheet()))
 
         # SHOW NEW PAGE
-        if btnName == "btn_new":
+        if btnName == "btn_gatt_explorer":
             self.ui.stackedWidget.setCurrentWidget(self.ui.connections_page) # SET PAGE
             UIFunctions.resetStyle(self, btnName) # RESET ANOTHERS BUTTONS SELECTED
             btn.setStyleSheet(UIFunctions.selectMenu(btn.styleSheet())) # SELECT MENU
+            self.ui.elfSettings.hide()
+            self.ui.elfSettings.setMaximumHeight(0)
+            self.ui.scannerSettigns.setMaximumHeight(0)
+            self.ui.scannerSettigns.hide()
+
 
         if btnName == "btn_save":
             pass
@@ -754,6 +759,8 @@ class MainWindow(QMainWindow):
             UIFunctions.resetStyle(self, btnName) # RESET ANOTHERS BUTTONS SELECTED
             btn.setStyleSheet(UIFunctions.selectMenu(btn.styleSheet())) # SELECT MENU
             self.ui.scannerSettigns.hide()
+            self.ui.scannerSettigns.setMaximumHeight(0)
+            self.ui.elfSettings.setMaximumHeight(1000000)
             self.ui.elfSettings.show()
 
             
@@ -816,9 +823,9 @@ class MainWindow(QMainWindow):
     
     def closeEvent(self, event):
         # Kill on going threads
-        self.update_thread.GraphActive = False  # Request the thread to stop
-        self.update_thread.quit()  # Request the thread to stop
-        self.update_thread.wait()  # Wait until the thread has actually stopped
+        self.update_rssi_thread.GraphActive = False  # Request the thread to stop
+        self.update_rssi_thread.quit()  # Request the thread to stop
+        self.update_rssi_thread.wait()  # Wait until the thread has actually stopped
 
         self.stop_graphing()
         self.stop_scanner()
@@ -852,9 +859,9 @@ class MainWindow(QMainWindow):
         self.ui.btn_connect.setEnabled(True)
     
     def stop_graphing(self):
-        self.update_thread.GraphActive = False  # Request the thread to stop
-        self.update_thread.quit()  # Request the thread to stop
-        self.update_thread.wait()  # Wait until the thread has actually stopped
+        self.update_rssi_thread.GraphActive = False  # Request the thread to stop
+        self.update_rssi_thread.quit()  # Request the thread to stop
+        self.update_rssi_thread.wait()  # Wait until the thread has actually stopped
 
     def stop_elf_parser(self):
         self.elf_parser.exit_early = True

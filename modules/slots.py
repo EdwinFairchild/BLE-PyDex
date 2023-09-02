@@ -30,7 +30,7 @@ def update_discovered_devices(interface, device):
     def update_rssi_graph():
         # TODO possibly add a checkbox to disable graphing,
         # the checkbox could be considred here to see if we graph or not
-        interface.update_thread.updateDeviceData(device, time.time())
+        interface.update_rssi_thread.updateDeviceData(device, time.time())
 
 
     # check if the filter is empty

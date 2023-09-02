@@ -678,17 +678,17 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_8.addWidget(self.btn_home)
 
-        self.btn_new = QPushButton(self.topMenu)
-        self.btn_new.setObjectName(u"btn_new")
-        sizePolicy.setHeightForWidth(self.btn_new.sizePolicy().hasHeightForWidth())
-        self.btn_new.setSizePolicy(sizePolicy)
-        self.btn_new.setMinimumSize(QSize(0, 45))
-        self.btn_new.setFont(font)
-        self.btn_new.setCursor(QCursor(Qt.PointingHandCursor))
-        self.btn_new.setLayoutDirection(Qt.LeftToRight)
-        self.btn_new.setStyleSheet(u"background-image: url(:/icons/images/icons/cil-map.png);")
+        self.btn_gatt_explorer = QPushButton(self.topMenu)
+        self.btn_gatt_explorer.setObjectName(u"btn_gatt_explorer")
+        sizePolicy.setHeightForWidth(self.btn_gatt_explorer.sizePolicy().hasHeightForWidth())
+        self.btn_gatt_explorer.setSizePolicy(sizePolicy)
+        self.btn_gatt_explorer.setMinimumSize(QSize(0, 45))
+        self.btn_gatt_explorer.setFont(font)
+        self.btn_gatt_explorer.setCursor(QCursor(Qt.PointingHandCursor))
+        self.btn_gatt_explorer.setLayoutDirection(Qt.LeftToRight)
+        self.btn_gatt_explorer.setStyleSheet(u"background-image: url(:/icons/images/icons/cil-map.png);")
 
-        self.verticalLayout_8.addWidget(self.btn_new)
+        self.verticalLayout_8.addWidget(self.btn_gatt_explorer)
 
         self.btn_insights = QPushButton(self.topMenu)
         self.btn_insights.setObjectName(u"btn_insights")
@@ -1422,7 +1422,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 375, 218))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 218, 218))
         self.scrollAreaWidgetContents.setStyleSheet(u" QScrollBar:vertical {\n"
 "	border: none;\n"
 "    background: rgb(52, 59, 72);\n"
@@ -1865,7 +1865,7 @@ class Ui_MainWindow(object):
         self.scrollArea_2.setWidgetResizable(True)
         self.scrollAreaWidgetContents_2 = QWidget()
         self.scrollAreaWidgetContents_2.setObjectName(u"scrollAreaWidgetContents_2")
-        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 730, 581))
+        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 543, 581))
         self.scrollArea_2.setWidget(self.scrollAreaWidgetContents_2)
 
         self.verticalLayout_28.addWidget(self.scrollArea_2)
@@ -1898,7 +1898,7 @@ class Ui_MainWindow(object):
 
         self.extraRightBox = QFrame(self.content)
         self.extraRightBox.setObjectName(u"extraRightBox")
-        self.extraRightBox.setMinimumSize(QSize(0, 0))
+        self.extraRightBox.setMinimumSize(QSize(300, 0))
         self.extraRightBox.setMaximumSize(QSize(0, 16777215))
         self.extraRightBox.setFrameShape(QFrame.NoFrame)
         self.extraRightBox.setFrameShadow(QFrame.Raised)
@@ -1921,8 +1921,74 @@ class Ui_MainWindow(object):
         self.contentSettings.setFrameShadow(QFrame.Raised)
         self.verticalLayout_13 = QVBoxLayout(self.contentSettings)
         self.verticalLayout_13.setObjectName(u"verticalLayout_13")
+        self.ota_frame = QFrame(self.contentSettings)
+        self.ota_frame.setObjectName(u"ota_frame")
+        self.ota_frame.setMaximumSize(QSize(16777215, 99999))
+        self.ota_frame.setStyleSheet(u" border: 0px solid rgb(52, 59, 72);\n"
+"	border-radius: 5px;	\n"
+"")
+        self.ota_frame.setFrameShape(QFrame.StyledPanel)
+        self.ota_frame.setFrameShadow(QFrame.Raised)
+        self.btn_load_bin = QPushButton(self.ota_frame)
+        self.btn_load_bin.setObjectName(u"btn_load_bin")
+        self.btn_load_bin.setGeometry(QRect(60, 190, 171, 25))
+        self.btn_load_bin.setStyleSheet(u"QPushButton{\n"
+"margin-left: 10px; \n"
+"    margin-right: 10px;\n"
+"	background-color: rgb(40, 44, 52);\n"
+" border: 2px solid rgb(52, 59, 72);\n"
+"color: rgb(255, 255, 255);\n"
+"border-radius: 5px;	\n"
+"text-align: center;\n"
+"padding: 0px;\n"
+"margin: 0px;\n"
+"\n"
+"}\n"
+"\n"
+"QPushButton:hover{\n"
+"	color: rgb(28, 28, 28);\n"
+"background-color: rgb(153, 193, 241);\n"
+"\n"
+"}\n"
+"\n"
+"QPushButton:pressed{\n"
+"	\n"
+"		color: rgb(28, 28, 28);\n"
+"	background-color: rgb(110,140,255);\n"
+"}")
+        self.btn_start_ota = QPushButton(self.ota_frame)
+        self.btn_start_ota.setObjectName(u"btn_start_ota")
+        self.btn_start_ota.setGeometry(QRect(60, 220, 171, 25))
+        self.btn_start_ota.setStyleSheet(u"QPushButton{\n"
+"margin-left: 10px; \n"
+"    margin-right: 10px;\n"
+"	background-color: rgb(40, 44, 52);\n"
+" border: 2px solid rgb(52, 59, 72);\n"
+"color: rgb(255, 255, 255);\n"
+"border-radius: 5px;	\n"
+"text-align: center;\n"
+"padding: 0px;\n"
+"margin: 0px;\n"
+"\n"
+"}\n"
+"\n"
+"QPushButton:hover{\n"
+"	color: rgb(28, 28, 28);\n"
+"background-color: rgb(153, 193, 241);\n"
+"\n"
+"}\n"
+"\n"
+"QPushButton:pressed{\n"
+"	\n"
+"		color: rgb(28, 28, 28);\n"
+"	background-color: rgb(110,140,255);\n"
+"}")
+
+        self.verticalLayout_13.addWidget(self.ota_frame)
+
         self.scannerSettigns = QFrame(self.contentSettings)
         self.scannerSettigns.setObjectName(u"scannerSettigns")
+        self.scannerSettigns.setMaximumSize(QSize(16777215, 0))
         self.scannerSettigns.setFrameShape(QFrame.NoFrame)
         self.scannerSettigns.setFrameShadow(QFrame.Raised)
         self.verticalLayout_31 = QVBoxLayout(self.scannerSettigns)
@@ -1936,7 +2002,8 @@ class Ui_MainWindow(object):
         self.btn_save_logs.setFont(font)
         self.btn_save_logs.setCursor(QCursor(Qt.PointingHandCursor))
         self.btn_save_logs.setLayoutDirection(Qt.LeftToRight)
-        self.btn_save_logs.setStyleSheet(u"background-image: url(:/icons/images/icons/cil-save.png);")
+        self.btn_save_logs.setStyleSheet(u"background-image: url(:/icons/images/icons/cil-save.png);\n"
+"")
 
         self.verticalLayout_31.addWidget(self.btn_save_logs)
 
@@ -2107,7 +2174,8 @@ class Ui_MainWindow(object):
 
         self.elfSettings = QFrame(self.contentSettings)
         self.elfSettings.setObjectName(u"elfSettings")
-        self.elfSettings.setMinimumSize(QSize(0, 300))
+        self.elfSettings.setMinimumSize(QSize(0, 0))
+        self.elfSettings.setMaximumSize(QSize(16777215, 0))
         self.elfSettings.setStyleSheet(u"text-align: center;")
         self.elfSettings.setFrameShape(QFrame.NoFrame)
         self.elfSettings.setFrameShadow(QFrame.Raised)
@@ -2172,33 +2240,85 @@ class Ui_MainWindow(object):
         self.btn_load_elf.setObjectName(u"btn_load_elf")
         self.btn_load_elf.setMinimumSize(QSize(0, 41))
         self.btn_load_elf.setFocusPolicy(Qt.NoFocus)
-        self.btn_load_elf.setStyleSheet(u" border: 2px solid rgb(52, 59, 72);\n"
-"	border-radius: 5px;	\n"
+        self.btn_load_elf.setStyleSheet(u"\n"
+"QPushButton{\n"
+"margin-left: 10px; \n"
+"    margin-right: 10px;\n"
+"	background-color: rgb(40, 44, 52);\n"
+" border: 2px solid rgb(52, 59, 72);\n"
+"color: rgb(255, 255, 255);\n"
+"border-radius: 5px;	\n"
 "text-align: center;\n"
 "padding: 0px;\n"
-"margin: 0px;")
+"margin: 0px;\n"
+"\n"
+"}\n"
+"\n"
+"QPushButton:hover{\n"
+"	color: rgb(28, 28, 28);\n"
+"background-color: rgb(153, 193, 241);\n"
+"\n"
+"}\n"
+"\n"
+"QPushButton:pressed{\n"
+"	\n"
+"		color: rgb(28, 28, 28);\n"
+"	background-color: rgb(110,140,255);\n"
+"}")
 
         self.verticalLayout_29.addWidget(self.btn_load_elf)
 
         self.btn_monitor = QPushButton(self.elfSettings)
         self.btn_monitor.setObjectName(u"btn_monitor")
         self.btn_monitor.setMinimumSize(QSize(0, 41))
-        self.btn_monitor.setStyleSheet(u" border: 2px solid rgb(52, 59, 72);\n"
+        self.btn_monitor.setStyleSheet(u"QPushButton{\n"
+"	margin-left: 10px; \n"
+"    margin-right: 10px;\n"
+"	background-color: rgb(40, 44, 52);\n"
+" 	border: 2px solid rgb(52, 59, 72);\n"
+"	color: rgb(255, 255, 255);\n"
 "	border-radius: 5px;	\n"
-"text-align: center;\n"
-"padding: 0px;\n"
-"margin: 0px;")
+"	text-align: center;\n"
+"	padding: 0px;\n"
+"	margin: 0px;\n"
+"}\n"
+"\n"
+"QPushButton:hover{\n"
+"	color: rgb(28, 28, 28);\n"
+"	background-color: rgb(153, 193, 241);\n"
+"}\n"
+"\n"
+"QPushButton:pressed{\n"
+"		color: rgb(28, 28, 28);\n"
+"		background-color: rgb(110,140,255);\n"
+"}")
 
         self.verticalLayout_29.addWidget(self.btn_monitor)
 
         self.btn_showCoreRegs = QPushButton(self.elfSettings)
         self.btn_showCoreRegs.setObjectName(u"btn_showCoreRegs")
         self.btn_showCoreRegs.setMinimumSize(QSize(0, 41))
-        self.btn_showCoreRegs.setStyleSheet(u" border: 2px solid rgb(52, 59, 72);\n"
+        self.btn_showCoreRegs.setStyleSheet(u"QPushButton{\n"
+"	margin-left: 10px; \n"
+"    margin-right: 10px;\n"
+"	background-color: rgb(40, 44, 52);\n"
+" 	border: 2px solid rgb(52, 59, 72);\n"
+"	color: rgb(255, 255, 255);\n"
 "	border-radius: 5px;	\n"
-"text-align: center;\n"
-"padding: 0px;\n"
-"margin: 0px;")
+"	text-align: center;\n"
+"	padding: 0px;\n"
+"	margin: 0px;\n"
+"}\n"
+"\n"
+"QPushButton:hover{\n"
+"	color: rgb(28, 28, 28);\n"
+"	background-color: rgb(153, 193, 241);\n"
+"}\n"
+"\n"
+"QPushButton:pressed{\n"
+"		color: rgb(28, 28, 28);\n"
+"		background-color: rgb(110,140,255);\n"
+"}")
 
         self.verticalLayout_29.addWidget(self.btn_showCoreRegs)
 
@@ -2209,8 +2329,8 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_13.addWidget(self.elfSettings)
 
-        self.verticalLayout_13.setStretch(0, 1)
         self.verticalLayout_13.setStretch(1, 1)
+        self.verticalLayout_13.setStretch(2, 1)
 
         self.verticalLayout_7.addWidget(self.contentSettings)
 
@@ -2274,7 +2394,7 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
         self.scanSlider.valueChanged.connect(self.label_scan_timeout_value.setNum)
 
-        self.stackedWidget.setCurrentIndex(2)
+        self.stackedWidget.setCurrentIndex(3)
         self.rssi_gatt_expolrer.setCurrentIndex(0)
 
 
@@ -2287,7 +2407,7 @@ class Ui_MainWindow(object):
         self.titleLeftDescription.setText("")
         self.toggleButton.setText(QCoreApplication.translate("MainWindow", u"Hide", None))
         self.btn_home.setText(QCoreApplication.translate("MainWindow", u"Scanner", None))
-        self.btn_new.setText(QCoreApplication.translate("MainWindow", u"Gatt Explorer", None))
+        self.btn_gatt_explorer.setText(QCoreApplication.translate("MainWindow", u"Gatt Explorer", None))
         self.btn_insights.setText(QCoreApplication.translate("MainWindow", u"Insights", None))
         self.btn_widgets.setText(QCoreApplication.translate("MainWindow", u"Server", None))
         self.btn_save.setText(QCoreApplication.translate("MainWindow", u"Save", None))
@@ -2364,6 +2484,8 @@ class Ui_MainWindow(object):
         ___qtreewidgetitem = self.gatt_treeView.headerItem()
         ___qtreewidgetitem.setText(0, QCoreApplication.translate("MainWindow", u"Gatt Tree", None));
         self.btn_disconnect.setText(QCoreApplication.translate("MainWindow", u"Disconnect", None))
+        self.btn_load_bin.setText(QCoreApplication.translate("MainWindow", u"Load bin", None))
+        self.btn_start_ota.setText(QCoreApplication.translate("MainWindow", u"Start update", None))
         self.btn_save_logs.setText(QCoreApplication.translate("MainWindow", u"Save  logs", None))
         self.btn_clear_logs.setText(QCoreApplication.translate("MainWindow", u"Clear logs & graph", None))
         self.check_scroll_to_bottom.setText(QCoreApplication.translate("MainWindow", u"Auto scroll table", None))
