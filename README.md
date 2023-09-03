@@ -1,8 +1,8 @@
 
 ## BLE-PyDex | Bluetooth Low Energy Python Device Exporer
 ![pylint workflow](https://github.com/EdwinFairchild/BLE-PyDex/actions/workflows/pylint.yml/badge.svg)
-<br>
-![BLE-PyDex-v2](https://github.com/EdwinFairchild/BLE-PyDex/assets/62710807/1ff34f59-dc1f-4e71-8089-7a13c3afb4d3)
+
+![showcase](https://github.com/EdwinFairchild/BLE-PyDex/assets/62710807/3c764386-8397-4312-ace2-e29b7626c253)
 
 ### Hardware requirements
 - Computer with Bluetooth (USB dongle or integrated) for client applications
