@@ -33,12 +33,31 @@ Then move the new python file into the modules folder
 
 ### User interface
 
-# Interface into
+# Interface intro
+- Left navigation pannel is to switch to a different BLE-PyDex mode
+- Middle area displays content of the chosen mode
+- Right pannel displays settings related to chosen mode
+- Bottom area logs application events,errors,warnings
+  
 https://github.com/EdwinFairchild/BLE-PyDex/assets/62710807/9e2f1b7b-410c-423c-a16e-a6bc245bfbed
 # Scanner
+In scanner mode you can:
+- Scan for nearby advertising devices
+- Scanning can be infinite (no timeout) or timed
+- Device list can be filtered
+- Advertising pakcets can be logged
+  -  Log all data : logs all advertising packets as they are received from all devices
+  -  Selection : logs packets on from selected device on the device list
+  -  Do not log : logs nothing.
+- RSSI graphing.
+- Save logs to csv format
+  
 https://github.com/EdwinFairchild/BLE-PyDex/assets/62710807/692d8903-7f98-4ee6-9dce-a3f330b75a96
 # Connection
 https://github.com/EdwinFairchild/BLE-PyDex/assets/62710807/8ec57651-135a-46a5-8fa7-497cb985c875
+# Over the air update
+https://github.com/EdwinFairchild/BLE-PyDex/assets/62710807/58568ff8-6087-4c9a-abd8-2d1a2fe4c67f
+
 
 
 
