@@ -9,6 +9,9 @@ class Settings():
 
     HIGH_DPI_DISPLAY_FONT_DPI = "100"
 
+    RSSI_RANGE_TOP = -30
+    RSS_RANGE_BOTTOM = -90
+
     # BTNS LEFT AND RIGHT BOX COLORS
     BTN_LEFT_BOX_COLOR = "background-color: rgb(44, 49, 58);"
     BTN_RIGHT_BOX_COLOR = "background-color: #ff79c6;"

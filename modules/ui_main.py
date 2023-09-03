@@ -32,7 +32,7 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(1459, 853)
+        MainWindow.resize(1448, 831)
         MainWindow.setMinimumSize(QSize(940, 560))
         self.styleSheet = QWidget(MainWindow)
         self.styleSheet.setObjectName(u"styleSheet")
@@ -1865,7 +1865,7 @@ class Ui_MainWindow(object):
         self.scrollArea_2.setWidgetResizable(True)
         self.scrollAreaWidgetContents_2 = QWidget()
         self.scrollAreaWidgetContents_2.setObjectName(u"scrollAreaWidgetContents_2")
-        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 730, 581))
+        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 723, 563))
         self.scrollArea_2.setWidget(self.scrollAreaWidgetContents_2)
 
         self.verticalLayout_28.addWidget(self.scrollArea_2)
@@ -1923,7 +1923,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_13.setObjectName(u"verticalLayout_13")
         self.ota_frame = QFrame(self.contentSettings)
         self.ota_frame.setObjectName(u"ota_frame")
-        self.ota_frame.setMaximumSize(QSize(16777215, 99999))
+        self.ota_frame.setMaximumSize(QSize(16777215, 0))
         self.ota_frame.setStyleSheet(u" border: 0px solid rgb(52, 59, 72);\n"
 "	border-radius: 5px;	\n"
 "")
@@ -2021,6 +2021,7 @@ class Ui_MainWindow(object):
 
         self.scannerSettigns = QFrame(self.contentSettings)
         self.scannerSettigns.setObjectName(u"scannerSettigns")
+        self.scannerSettigns.setMinimumSize(QSize(0, 0))
         self.scannerSettigns.setMaximumSize(QSize(16777215, 0))
         self.scannerSettigns.setFrameShape(QFrame.NoFrame)
         self.scannerSettigns.setFrameShadow(QFrame.Raised)
@@ -2154,13 +2155,14 @@ class Ui_MainWindow(object):
         self.logAll = QRadioButton(self.frame_scan)
         self.logAll.setObjectName(u"logAll")
         self.logAll.setStyleSheet(u"border: 0px solid rgb(52, 59, 72);")
+        self.logAll.setChecked(True)
 
         self.verticalLayout_23.addWidget(self.logAll)
 
         self.logNone = QRadioButton(self.frame_scan)
         self.logNone.setObjectName(u"logNone")
         self.logNone.setStyleSheet(u"border: 0px solid rgb(52, 59, 72);")
-        self.logNone.setChecked(True)
+        self.logNone.setChecked(False)
 
         self.verticalLayout_23.addWidget(self.logNone)
 

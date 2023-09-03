@@ -7,8 +7,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1459</width>
-    <height>853</height>
+    <width>1448</width>
+    <height>831</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -3463,8 +3463,8 @@ QPushButton:pressed{
                                  <rect>
                                   <x>0</x>
                                   <y>0</y>
-                                  <width>730</width>
-                                  <height>581</height>
+                                  <width>723</width>
+                                  <height>563</height>
                                  </rect>
                                 </property>
                                </widget>
@@ -3574,7 +3574,7 @@ QPushButton:pressed{
                         <property name="maximumSize">
                          <size>
                           <width>16777215</width>
-                          <height>99999</height>
+                          <height>0</height>
                          </size>
                         </property>
                         <property name="styleSheet">
@@ -3714,6 +3714,12 @@ QPushButton:pressed{
                       </item>
                       <item>
                        <widget class="QFrame" name="scannerSettigns">
+                        <property name="minimumSize">
+                         <size>
+                          <width>0</width>
+                          <height>0</height>
+                         </size>
+                        </property>
                         <property name="maximumSize">
                          <size>
                           <width>16777215</width>
@@ -4024,6 +4030,9 @@ margin: 0px;</string>
                               <property name="text">
                                <string>Log all data</string>
                               </property>
+                              <property name="checked">
+                               <bool>true</bool>
+                              </property>
                              </widget>
                             </item>
                             <item>
@@ -4035,7 +4044,7 @@ margin: 0px;</string>
                                <string>Do not log</string>
                               </property>
                               <property name="checked">
-                               <bool>true</bool>
+                               <bool>false</bool>
                               </property>
                              </widget>
                             </item>

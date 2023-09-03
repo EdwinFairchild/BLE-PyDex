@@ -247,7 +247,7 @@ class MainWindow(QMainWindow):
         self.axisX = QtCharts.QValueAxis()
         self.axisY = QtCharts.QValueAxis()
         self.axisX.setRange(0, 10)
-        self.axisY.setRange(-130, 0)
+        self.axisY.setRange(Settings.RSS_RANGE_BOTTOM, Settings.RSSI_RANGE_TOP)
 
         self.ui.qtchart_widgetholder.chart().addAxis(self.axisX, Qt.AlignBottom)
         self.ui.qtchart_widgetholder.chart().addAxis(self.axisY, Qt.AlignLeft)
