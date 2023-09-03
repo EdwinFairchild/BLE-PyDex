@@ -54,6 +54,16 @@ In scanner mode you can:
   
 https://github.com/EdwinFairchild/BLE-PyDex/assets/62710807/692d8903-7f98-4ee6-9dce-a3f330b75a96
 # Connection
+When a connection with a device is established PyDex will switch to Gatt Explorer mode.
+-  Gatt Treeview wil display with Gatt server on the connected device.
+-  A 'char-window' will be generated for every characteristic found on the peer device.
+-  The char window is devided into 3 sections:
+  - Characteristic unique information such as handle and UUID, if the characteristic is a Bluetooth Sig
+    standard one then its name will be displayed, otherwise it will be named 'Uknown'
+  - Permissios lables will be blue when that permission is enabled for that particular charateristic.
+  - Controls section will allow you to execute the enabled permissions such as read,write etc.. Any recevied
+    data from that particular charatersitic is displayed in the text box.
+    
 https://github.com/EdwinFairchild/BLE-PyDex/assets/62710807/8ec57651-135a-46a5-8fa7-497cb985c875
 # Over the air update
 https://github.com/EdwinFairchild/BLE-PyDex/assets/62710807/58568ff8-6087-4c9a-abd8-2d1a2fe4c67f
