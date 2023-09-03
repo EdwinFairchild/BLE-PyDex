@@ -30,3 +30,9 @@ Then move the new python file into the modules folder
 ### BLE-PyDex v1
 - The original BLE-PyDex with the white interface exists as a branch `BLE-PyDex-v1
 ` I will continue to fix and update that version per request only
+
+### User interface
+
+
+https://github.com/EdwinFairchild/BLE-PyDex/assets/62710807/9e2f1b7b-410c-423c-a16e-a6bc245bfbed
+
