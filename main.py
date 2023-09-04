@@ -42,6 +42,7 @@ class MainWindow(QMainWindow):
     charCount= 1
     char_dict = {}
     cleanUp = Signal(object)
+    # RSSI graph variables
     axisX = QtCharts.QValueAxis()
     axisY = QtCharts.QValueAxis()
     axisX.setRange(0, 10)
@@ -156,54 +157,7 @@ class MainWindow(QMainWindow):
         self.btn_stylesheet = open("button_stylesheet.txt", "r").read()
         self.scroll_area_stylesheet = open("scroll_area_stylesheet.txt", "r").read()
         
-        self.ui.scrollArea_2.setStyleSheet("""
-
-        /* VERTICAL */
-        QScrollBar:vertical {
-            border: none;
-            background: rgb(39, 52, 105);
-            width: 10px;
-            margin: 10px 0px 10px 0px;
-           
-        }
-
-        QScrollBar::handle:vertical {
-            background: rgb(170,200,255);
-            min-height: 26px;
-            
-        }
-
-        QScrollBar::add-line:vertical {
-            background: none;
-            height: 26px;
-            subcontrol-position: bottom;
-            subcontrol-origin: margin;
-            
-        }
-
-        QScrollBar::sub-line:vertical {
-            background: none;
-            height: 26px;
-            subcontrol-position: top left;
-            subcontrol-origin: margin;
-            position: absolute;
-            
-        }
-
-        QScrollBar:up-arrow:vertical, QScrollBar::down-arrow:vertical {
-            width: 26px;
-            height: 20px;
-            background: white;
-            
-            
-        }
-
-        QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
-            background: none;
-            
-        }
-
-    """)
+        self.ui.scrollArea_2.setStyleSheet(self.scroll_area_stylesheet)
 
         
         # EXTRA LEFT BOX
@@ -808,8 +762,36 @@ class MainWindow(QMainWindow):
             row_index = self.vars_watched_dict[var_name]["watched_row_position"]
             # Create a new item with the updated value
             value_item = QTableWidgetItem(str(value))
+            # Time window to display (e.g., last 10 seconds)
+            time_window = 10.0  # or however long you want the window to be
+
             # Update the value in column 3 (0-indexed)
             self.ui.tbl_vars_watched.setItem(row_index, 1, value_item)
+            
+             # Update the series if it's being graphed
+            if self.vars_watched_dict[var_name].get('graphed', False):
+                series = self.vars_watched_dict[var_name]['series']
+                chart = self.vars_watched_dict[var_name]['chart']
+                axisX = self.vars_watched_dict[var_name]['axisX']
+                start_time = self.vars_watched_dict[var_name]['start_time']
+
+                # Assuming you're just appending new values, find the x value for the new point
+                if series.count() > 0:
+                     # Calculate the elapsed time
+                    elapsed_time = time.time() - start_time
+
+                    # Append the new point to the series
+                    series.append(elapsed_time, value)
+                    
+                     # Update the axis range to create a scrolling effect
+                    if elapsed_time > time_window:
+                        axisX.setRange(elapsed_time - time_window, elapsed_time)
+                    else:
+                        axisX.setRange(0, time_window)
+                else:
+                    # This is the first point, so just append it
+                    series.append(0, value)
+
     def get_core_regs_handler(self, regs):
         # Clear the table
         self.ui.tbl_core_regs.setRowCount(0)

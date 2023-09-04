@@ -32,7 +32,7 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(1448, 831)
+        MainWindow.resize(1588, 857)
         MainWindow.setMinimumSize(QSize(940, 560))
         self.styleSheet = QWidget(MainWindow)
         self.styleSheet.setObjectName(u"styleSheet")
@@ -1617,17 +1617,17 @@ class Ui_MainWindow(object):
         self.verticalLayout_33 = QVBoxLayout(self.frame_9)
         self.verticalLayout_33.setObjectName(u"verticalLayout_33")
         self.verticalLayout_33.setContentsMargins(0, 0, 0, 0)
-        self.frame_4 = QFrame(self.frame_9)
-        self.frame_4.setObjectName(u"frame_4")
-        self.frame_4.setStyleSheet(u" border: 2px solid rgb(52, 59, 72);\n"
+        self.symbols_frame = QFrame(self.frame_9)
+        self.symbols_frame.setObjectName(u"symbols_frame")
+        self.symbols_frame.setStyleSheet(u" border: 2px solid rgb(52, 59, 72);\n"
 "	border-radius: 5px;	\n"
 "")
-        self.frame_4.setFrameShape(QFrame.StyledPanel)
-        self.frame_4.setFrameShadow(QFrame.Raised)
-        self.verticalLayout_30 = QVBoxLayout(self.frame_4)
+        self.symbols_frame.setFrameShape(QFrame.StyledPanel)
+        self.symbols_frame.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_30 = QVBoxLayout(self.symbols_frame)
         self.verticalLayout_30.setObjectName(u"verticalLayout_30")
         self.verticalLayout_30.setContentsMargins(0, 0, 0, 0)
-        self.tbl_vars = QTableWidget(self.frame_4)
+        self.tbl_vars = QTableWidget(self.symbols_frame)
         if (self.tbl_vars.columnCount() < 3):
             self.tbl_vars.setColumnCount(3)
         __qtablewidgetitem2 = QTableWidgetItem()
@@ -1707,27 +1707,29 @@ class Ui_MainWindow(object):
         self.verticalLayout_30.addWidget(self.tbl_vars)
 
 
-        self.verticalLayout_33.addWidget(self.frame_4)
+        self.verticalLayout_33.addWidget(self.symbols_frame)
 
-        self.frame_2 = QFrame(self.frame_9)
-        self.frame_2.setObjectName(u"frame_2")
-        self.frame_2.setStyleSheet(u" border: 2px solid rgb(52, 59, 72);\n"
+        self.watched_frame = QFrame(self.frame_9)
+        self.watched_frame.setObjectName(u"watched_frame")
+        self.watched_frame.setStyleSheet(u" border: 2px solid rgb(52, 59, 72);\n"
 "	border-radius: 5px;	\n"
 "")
-        self.frame_2.setFrameShape(QFrame.StyledPanel)
-        self.frame_2.setFrameShadow(QFrame.Raised)
-        self.horizontalLayout_13 = QHBoxLayout(self.frame_2)
+        self.watched_frame.setFrameShape(QFrame.StyledPanel)
+        self.watched_frame.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_13 = QHBoxLayout(self.watched_frame)
         self.horizontalLayout_13.setObjectName(u"horizontalLayout_13")
         self.horizontalLayout_13.setContentsMargins(0, 0, 0, 0)
-        self.tbl_vars_watched = QTableWidget(self.frame_2)
-        if (self.tbl_vars_watched.columnCount() < 3):
-            self.tbl_vars_watched.setColumnCount(3)
+        self.tbl_vars_watched = QTableWidget(self.watched_frame)
+        if (self.tbl_vars_watched.columnCount() < 4):
+            self.tbl_vars_watched.setColumnCount(4)
         __qtablewidgetitem5 = QTableWidgetItem()
         self.tbl_vars_watched.setHorizontalHeaderItem(0, __qtablewidgetitem5)
         __qtablewidgetitem6 = QTableWidgetItem()
         self.tbl_vars_watched.setHorizontalHeaderItem(1, __qtablewidgetitem6)
         __qtablewidgetitem7 = QTableWidgetItem()
         self.tbl_vars_watched.setHorizontalHeaderItem(2, __qtablewidgetitem7)
+        __qtablewidgetitem8 = QTableWidgetItem()
+        self.tbl_vars_watched.setHorizontalHeaderItem(3, __qtablewidgetitem8)
         self.tbl_vars_watched.setObjectName(u"tbl_vars_watched")
         self.tbl_vars_watched.setStyleSheet(u" border: 0px solid rgb(52, 59, 72);\n"
 "	border-radius:0px;	\n"
@@ -1740,20 +1742,36 @@ class Ui_MainWindow(object):
         self.horizontalLayout_13.addWidget(self.tbl_vars_watched)
 
 
-        self.verticalLayout_33.addWidget(self.frame_2)
+        self.verticalLayout_33.addWidget(self.watched_frame)
 
         self.verticalLayout_33.setStretch(0, 1)
         self.verticalLayout_33.setStretch(1, 1)
 
         self.horizontalLayout_14.addWidget(self.frame_9)
 
-        self.horizontalSpacer_2 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.insights_graphing_frame = QFrame(self.frame_8)
+        self.insights_graphing_frame.setObjectName(u"insights_graphing_frame")
+        self.insights_graphing_frame.setMinimumSize(QSize(300, 0))
+        self.insights_graphing_frame.setFrameShape(QFrame.StyledPanel)
+        self.insights_graphing_frame.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_37 = QVBoxLayout(self.insights_graphing_frame)
+        self.verticalLayout_37.setObjectName(u"verticalLayout_37")
+        self.insights_scroll_area = QScrollArea(self.insights_graphing_frame)
+        self.insights_scroll_area.setObjectName(u"insights_scroll_area")
+        self.insights_scroll_area.setWidgetResizable(True)
+        self.scrollAreaWidgetContents_3 = QWidget()
+        self.scrollAreaWidgetContents_3.setObjectName(u"scrollAreaWidgetContents_3")
+        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 572, 571))
+        self.insights_scroll_area.setWidget(self.scrollAreaWidgetContents_3)
 
-        self.horizontalLayout_14.addItem(self.horizontalSpacer_2)
+        self.verticalLayout_37.addWidget(self.insights_scroll_area)
+
+
+        self.horizontalLayout_14.addWidget(self.insights_graphing_frame)
 
         self.horizontalLayout_14.setStretch(0, 2)
-        self.horizontalLayout_14.setStretch(1, 5)
-        self.horizontalLayout_14.setStretch(2, 7)
+        self.horizontalLayout_14.setStretch(1, 4)
+        self.horizontalLayout_14.setStretch(2, 5)
 
         self.horizontalLayout_17.addWidget(self.frame_8)
 
@@ -1865,7 +1883,7 @@ class Ui_MainWindow(object):
         self.scrollArea_2.setWidgetResizable(True)
         self.scrollAreaWidgetContents_2 = QWidget()
         self.scrollAreaWidgetContents_2.setObjectName(u"scrollAreaWidgetContents_2")
-        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 723, 563))
+        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 92, 30))
         self.scrollArea_2.setWidget(self.scrollAreaWidgetContents_2)
 
         self.verticalLayout_28.addWidget(self.scrollArea_2)
@@ -2429,7 +2447,7 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
         self.scanSlider.valueChanged.connect(self.label_scan_timeout_value.setNum)
 
-        self.stackedWidget.setCurrentIndex(3)
+        self.stackedWidget.setCurrentIndex(2)
         self.rssi_gatt_expolrer.setCurrentIndex(0)
 
 

@@ -47,6 +47,7 @@ class ExtractGlobalVariablesThread(QThread):
                     # if exit_early is true then exit the thread
                     if self.exit_early:
                         return
+                    # TODO make this a user setting, possibly slider to select sample rate
                     time.sleep(0.005)
             self.logger.info("Finished extracting global variables")
 
@@ -62,7 +63,7 @@ class MonitoringThread(QThread):
 
     def __init__(self, address_dict):
         super().__init__()
-        self.address_dict = address_dict
+        self.address_dict = address_dict #vars_watched_dict from main.py
 
 
     def run(self):
@@ -78,6 +79,7 @@ class MonitoringThread(QThread):
         # Connect to the probe
         try:
             # Replace stdout with a custom stream that logs messages
+            # this is needed becasue pyocd prints to stdout
             logger_stream = LoggerStream(self.logger)
             sys.stdout = logger_stream
             sys.stderr = logger_stream

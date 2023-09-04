@@ -4,6 +4,9 @@ from elftools.elf.elffile import ELFFile
 from PySide6.QtWidgets import QFileDialog
 from PySide6.QtWidgets import QTableWidget, QTableWidgetItem, QCheckBox, QWidget, QHBoxLayout
 from PySide6.QtCore import Qt 
+from PySide6.QtCharts import QLineSeries
+from PySide6.QtCharts import QChart, QChartView, QLineSeries
+
 
 def btn_scan(interface):
     logger = logging.getLogger("PDexLogger")
@@ -225,7 +228,8 @@ def disable_graphing(main_window):
         logger.setLevel(logging.WARNING)
         logger.warning(err)
         logger.setLevel(logging.INFO)
-
+# TODO move this to a separate file 
+#-------------- Insights  --------------------------------------------------------------------
 def handle_checkbox_state_change(state, var_name, address, address_dict, main_window):
     logger = logging.getLogger("PDexLogger")
    
@@ -237,11 +241,18 @@ def handle_checkbox_state_change(state, var_name, address, address_dict, main_wi
         main_window.ui.tbl_vars_watched.insertRow(watched_row_position)
         main_window.ui.tbl_vars_watched.setItem(watched_row_position, 0, QTableWidgetItem(var_name))
 
-        address_dict[var_name] = {"address": address,"watched_row_position" : watched_row_position }
+        
         # Add a button to remove the row
         btn_remove = QPushButton("Remove")
         btn_remove.clicked.connect(lambda: remove_watched_var(var_name, watched_row_position, main_window))
         main_window.ui.tbl_vars_watched.setCellWidget(watched_row_position, 2, btn_remove)
+
+        # Add a button to remove the row
+        btn_graph = QPushButton("Graph")
+        btn_graph.clicked.connect(lambda: btn_graph_clicked( main_window,var_name))
+        main_window.ui.tbl_vars_watched.setCellWidget(watched_row_position, 3, btn_graph)
+
+        address_dict[var_name] = {"address": address, "watched_row_position": watched_row_position, "graphed": False}
 
     else:
         address_dict.pop(var_name, None)
@@ -251,7 +262,52 @@ def handle_checkbox_state_change(state, var_name, address, address_dict, main_wi
                 main_window.ui.tbl_vars_watched.removeRow(row)
                 logger.info(f"Removed {var_name} from watch list")
                 break
-   
+def btn_graph_clicked( main_window, var_name):
+    logger = logging.getLogger("PDexLogger")
+    logger.info(f"Graphing {var_name}") 
+
+    # Create a new QLineSeries object and initialize it
+    series = QLineSeries()
+    main_window.vars_watched_dict[var_name]['series'] = series
+    main_window.vars_watched_dict[var_name]['graphed'] = True
+
+    # Create a QChart object and add the series to it
+    chart = QChart()
+    chart.setTitle(f"Graph for {var_name}")
+    chart.addSeries(series)
+    main_window.vars_watched_dict[var_name]['chart'] = chart
+
+    axisX = QtCharts.QValueAxis()
+    axisY = QtCharts.QValueAxis()
+    chart.addAxis(axisX, Qt.AlignBottom)
+    chart.addAxis(axisY, Qt.AlignLeft)
+    series.attachAxis(axisX)
+    series.attachAxis(axisY)
+    axisX.setRange(0, 5)  # replace 100 with whatever max value makes sense for your x-axis
+    axisY.setRange(0, 30)  # replace 100 with whatever max value makes sense for your y-axis
+
+    # Create a QChartView object
+    chart_view = QChartView(chart)
+    chart_view.setRenderHint(QPainter.Antialiasing)
+    chart_view.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+
+    # Create a QWidget object and set its layout to QVBoxLayout
+    chart_widget = QWidget()
+    layout = QVBoxLayout()
+    layout.addWidget(chart_view)
+    chart_widget.setLayout(layout)
+
+    # commenting  out below to debug    
+    # # Add chart_widget to your scroll area
+    main_window.ui.insights_scroll_area.setWidget(chart_widget)
+
+    # # save refrence to it
+    main_window.vars_watched_dict[var_name]['chart_widget'] = chart_widget
+    # store refrences to axisX and axisY in dict
+    main_window.vars_watched_dict[var_name]['axisX'] = axisX
+    main_window.vars_watched_dict[var_name]['axisY'] = axisY
+    main_window.vars_watched_dict[var_name]['start_time'] = time.time()
+
 # Function to handle removing a watched variable
 def remove_watched_var(var_name, row, main_window):
     main_window.ui.tbl_vars_watched.removeRow(row)
