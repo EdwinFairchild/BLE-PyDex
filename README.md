@@ -70,7 +70,7 @@ The intent here is to show that it is possible and one would have to port their 
 into PyDex. How to guide coming eventaully....
 
 https://github.com/EdwinFairchild/BLE-PyDex/assets/62710807/58568ff8-6087-4c9a-abd8-2d1a2fe4c67f
-# Live variable watch (WIP)
+# Insights (WIP)
 currently a work in progress as an experemental branch is the ability to load and elf file
 thats has been compiled with debug symbols. You will be able to graph any varaible stored in ram.
 Possibly also the ability to define a struct and added it to the live watch.
