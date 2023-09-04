@@ -231,7 +231,11 @@ def disable_graphing(main_window):
 # TODO move this to a separate file 
 #-------------- Insights  --------------------------------------------------------------------
 def handle_checkbox_state_change(state, var_name, address, address_dict, main_window):
+
     logger = logging.getLogger("PDexLogger")
+    graph_btn_column = 3
+    remove_btn_column = 2
+
    
     if state == Qt.Checked:
         logger.info(f"Added {var_name} to watch list")
@@ -241,16 +245,30 @@ def handle_checkbox_state_change(state, var_name, address, address_dict, main_wi
         main_window.ui.tbl_vars_watched.insertRow(watched_row_position)
         main_window.ui.tbl_vars_watched.setItem(watched_row_position, 0, QTableWidgetItem(var_name))
 
-        
+        #icon_close.png
         # Add a button to remove the row
-        btn_remove = QPushButton("Remove")
+        btn_remove = QPushButton("")
+        icon = QIcon()
+        icon.addPixmap(QPixmap("images/icons/icon_close.png"), QIcon.Normal, QIcon.On)
         btn_remove.clicked.connect(lambda: remove_watched_var(var_name, watched_row_position, main_window))
-        main_window.ui.tbl_vars_watched.setCellWidget(watched_row_position, 2, btn_remove)
+        btn_remove.setIcon(icon)
+        btn_remove.setIconSize(QSize(20, 20))
+        btn_remove.setMaximumWidth(30)
+        # change table colum width to match button width
+        main_window.ui.tbl_vars_watched.setColumnWidth(remove_btn_column, 50)
+        main_window.ui.tbl_vars_watched.setCellWidget(watched_row_position, remove_btn_column, btn_remove)
 
         # Add a button to remove the row
-        btn_graph = QPushButton("Graph")
-        btn_graph.clicked.connect(lambda: btn_graph_clicked( main_window,var_name))
-        main_window.ui.tbl_vars_watched.setCellWidget(watched_row_position, 3, btn_graph)
+        btn_graph = QPushButton("")
+        icon = QIcon()
+        icon.addPixmap(QPixmap("images/icons/bar-chart.png"), QIcon.Normal, QIcon.On)
+        btn_graph.setIcon(icon)
+        btn_graph.setIconSize(QSize(20, 20))
+        btn_graph.setMaximumWidth(30)
+        # change table colum width to match button width
+        main_window.ui.tbl_vars_watched.setColumnWidth(graph_btn_column, 50)
+        btn_graph.clicked.connect(lambda: btn_graph_clicked( main_window,var_name, btn_graph))
+        main_window.ui.tbl_vars_watched.setCellWidget(watched_row_position, graph_btn_column, btn_graph)
 
         address_dict[var_name] = {"address": address, "watched_row_position": watched_row_position, "graphed": False}
 
@@ -266,56 +284,112 @@ def handle_checkbox_state_change(state, var_name, address, address_dict, main_wi
                 main_window.ui.tbl_vars_watched.removeRow(row)
                 logger.info(f"Removed {var_name} from watch list")
                 break
-def btn_graph_clicked( main_window, var_name):
+
+def btn_graph_clicked( main_window, var_name, button):
     logger = logging.getLogger("PDexLogger")
     logger.info(f"Graphing {var_name}") 
+    if main_window.vars_watched_dict[var_name].get('graphed', False):
+        logger.info(f"Removing graph for {var_name}")
+        
+        # Remove the widget from the layout
+        chart_widget = main_window.vars_watched_dict[var_name]['chart_widget']
+        chart_widget.deleteLater()
+        
+        # Update the dictionary to indicate the variable is no longer being graphed
+        main_window.vars_watched_dict[var_name]['graphed'] = False
+        # Change button color to indicate it's not graphing anymore
+        button.setStyleSheet("background-color: none")
+        
+    else:
+        # Create a new QLineSeries object and initialize it
+        series = QLineSeries()
+        main_window.vars_watched_dict[var_name]['series'] = series
+        main_window.vars_watched_dict[var_name]['graphed'] = True
 
-    # Create a new QLineSeries object and initialize it
-    series = QLineSeries()
-    main_window.vars_watched_dict[var_name]['series'] = series
-    main_window.vars_watched_dict[var_name]['graphed'] = True
+        # Create a QChart object and add the series to it
+        chart = QChart()
+        chart.setTitle(f"Graph for {var_name}")
 
-    # Create a QChart object and add the series to it
-    chart = QChart()
-    chart.setTitle(f"Graph for {var_name}")
-    chart.addSeries(series)
-    main_window.vars_watched_dict[var_name]['chart'] = chart
+        chart.addSeries(series)
+        main_window.vars_watched_dict[var_name]['chart'] = chart
 
-    axisX = QtCharts.QValueAxis()
-    axisY = QtCharts.QValueAxis()
-    chart.addAxis(axisX, Qt.AlignBottom)
-    chart.addAxis(axisY, Qt.AlignLeft)
-    series.attachAxis(axisX)
-    series.attachAxis(axisY)
-    axisX.setRange(0, 5)  # replace 100 with whatever max value makes sense for your x-axis
-    axisY.setRange(0, 30)  # replace 100 with whatever max value makes sense for your y-axis
+        axisX = QtCharts.QValueAxis()
+        axisY = QtCharts.QValueAxis()
+        chart.addAxis(axisX, Qt.AlignBottom)
+        chart.addAxis(axisY, Qt.AlignLeft)
+        series.attachAxis(axisX)
+        series.attachAxis(axisY)
+        axisX.setRange(0, 5)  # replace 100 with whatever max value makes sense for your x-axis
+        axisY.setRange(0, 30)  # replace 100 with whatever max value makes sense for your y-axis
 
-    # Create a QChartView object
-    chart_view = QChartView(chart)
-    chart_view.setRenderHint(QPainter.Antialiasing)
-    chart_view.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+        # customize the chart
+        background_color = QColor(33, 37,43)
 
-    # Create a QWidget object and set its layout to QVBoxLayout
-    chart_widget = QWidget()
-    layout = QVBoxLayout()
-    layout.addWidget(chart_view)
-    chart_widget.setLayout(layout)
+        # Create a QBrush object with the QColor object
+        background_brush = QBrush(background_color)
 
-    # commenting  out below to debug    
-    # # Add chart_widget to your scroll area
-    main_window.ui.insights_scroll_area.setWidget(chart_widget)
+        # Set the background brush of the QChart
+        chart.setBackgroundBrush(background_brush)
+        # change grideline colors to rgb(52, 59, 72)
+        chart.axisX().setGridLineColor(QColor(52, 59, 72))
+        chart.axisY().setGridLineColor(QColor(52, 59, 72))
+        # change axis label colors to rgb(255, 255, 255)
+        chart.axisX().setLabelsColor(QColor(52, 59, 72))
+        chart.axisY().setLabelsColor(QColor(52, 59, 72))
+        # hide legend
+        chart.legend().hide()
+        # Create a QChartView object
+        chart_view = QChartView(chart)
+        chart_view.setMinimumHeight(300) 
+        chart_view.setRenderHint(QPainter.Antialiasing)
+        chart_view.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
 
-    # # save refrence to it
-    main_window.vars_watched_dict[var_name]['chart_widget'] = chart_widget
-    # store refrences to axisX and axisY in dict
-    main_window.vars_watched_dict[var_name]['axisX'] = axisX
-    main_window.vars_watched_dict[var_name]['axisY'] = axisY
-    main_window.vars_watched_dict[var_name]['start_time'] = time.time()
+        # Create a QWidget object and set its layout to QVBoxLayout
+        chart_widget = QWidget()
+        layout = QVBoxLayout()
+        layout.addWidget(chart_view)
+        chart_widget.setLayout(layout)
+        chart_widget.setMinimumHeight(300)  # adjust as necessary
+
+
+        # commenting  out below to debug    
+        # # Add chart_widget to your scroll area
+    # main_window.ui.insights_scroll_area.setWidget(chart_widget)
+        main_window.watch_vars_chart_layout.addWidget(chart_widget)
+
+        # # save refrence to it
+        main_window.vars_watched_dict[var_name]['chart_widget'] = chart_widget
+        # store refrences to axisX and axisY in dict
+        main_window.vars_watched_dict[var_name]['axisX'] = axisX
+        main_window.vars_watched_dict[var_name]['axisY'] = axisY
+        main_window.vars_watched_dict[var_name]['start_time'] = time.time()
+        # Change button color to indicate it's not graphing anymore
+        button.setStyleSheet("background-color: rgb(153, 193, 241);")
     
 # Function to handle removing a watched variable
 def remove_watched_var(var_name, row, main_window):
+    logger = logging.getLogger("PDexLogger")
+    logger.info(f"Graphing {var_name}") 
+    # Debug line to print all keys in vars_watched_dict
+    logger.info(f"Keys in vars_watched_dict: {main_window.vars_watched_dict.keys()}")
+
     main_window.ui.tbl_vars_watched.removeRow(row)
 
+    
+    logger.info(f"Keys in vars_watched_dict: {main_window.vars_watched_dict.keys()}")
+    # If there are no more rows, explicitly set the row count to 0
+    if main_window.ui.tbl_vars_watched.rowCount() == 0:
+        main_window.ui.tbl_vars_watched.setRowCount(0)
+    logger.info(f"Keys in vars_watched_dict: {main_window.vars_watched_dict.keys()}")
+    if var_name in main_window.vars_watched_dict:
+        if main_window.vars_watched_dict[var_name].get('graphed', False):
+            logger.info(f"Removing graph for {var_name}")
+            
+            # Remove the widget from the layout
+            chart_widget = main_window.vars_watched_dict[var_name]['chart_widget']
+            chart_widget.deleteLater()
+ 
+        
     # Find the corresponding checkbox in tbl_vars by var_name
     for row_index in range(main_window.ui.tbl_vars.rowCount()):
         item = main_window.ui.tbl_vars.item(row_index, 0) # Assuming var_name is in column 0
@@ -326,12 +400,8 @@ def remove_watched_var(var_name, row, main_window):
                 if checkbox:
                     checkbox.setChecked(False)
                     break
-    
-    main_window.vars_watched_dict.pop(var_name, None)
-
-    # If there are no more rows, explicitly set the row count to 0
-    if main_window.ui.tbl_vars_watched.rowCount() == 0:
-        main_window.ui.tbl_vars_watched.setRowCount(0)
+    # no need to pop the value because the checkbox state change handler will do it                
+    #main_window.vars_watched_dict.pop(var_name, None)
         
 def load_elf(main_window):
     logger = logging.getLogger("PDexLogger")

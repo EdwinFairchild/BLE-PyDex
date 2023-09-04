@@ -1862,7 +1862,7 @@ class Ui_MainWindow(object):
 
         self.scroll_Area_2_frame = QFrame(self.connections_main_frame)
         self.scroll_Area_2_frame.setObjectName(u"scroll_Area_2_frame")
-        self.scroll_Area_2_frame.setStyleSheet(u" border: 0px solid rgb(52, 59, 72);\n"
+        self.scroll_Area_2_frame.setStyleSheet(u" border: 2px solid rgb(52, 59, 72);\n"
 "	border-radius: 5px;	\n"
 "")
         self.scroll_Area_2_frame.setFrameShape(QFrame.StyledPanel)
@@ -1883,7 +1883,7 @@ class Ui_MainWindow(object):
         self.scrollArea_2.setWidgetResizable(True)
         self.scrollAreaWidgetContents_2 = QWidget()
         self.scrollAreaWidgetContents_2.setObjectName(u"scrollAreaWidgetContents_2")
-        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 92, 30))
+        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 807, 580))
         self.scrollArea_2.setWidget(self.scrollAreaWidgetContents_2)
 
         self.verticalLayout_28.addWidget(self.scrollArea_2)
@@ -2447,7 +2447,7 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
         self.scanSlider.valueChanged.connect(self.label_scan_timeout_value.setNum)
 
-        self.stackedWidget.setCurrentIndex(2)
+        self.stackedWidget.setCurrentIndex(3)
         self.rssi_gatt_expolrer.setCurrentIndex(0)
 
 
