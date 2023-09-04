@@ -800,7 +800,7 @@ class MainWindow(QMainWindow):
     def update_watched_var_graph(self, var_name, value):
          # Time window to display (e.g., last 10 seconds)
          # TODO make this a user setting like a slider
-        MAX_POINTS = 1000  # Set a limit to the maximum number of points
+        MAX_POINTS = 500  # Set a limit to the maximum number of points
         time_window = 3.0  # or however long you want the window to be
         series = self.vars_watched_dict[var_name]['series']
         chart = self.vars_watched_dict[var_name]['chart']
