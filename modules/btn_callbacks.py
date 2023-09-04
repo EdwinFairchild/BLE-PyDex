@@ -254,6 +254,10 @@ def handle_checkbox_state_change(state, var_name, address, address_dict, main_wi
 
         address_dict[var_name] = {"address": address, "watched_row_position": watched_row_position, "graphed": False}
 
+        # TODO make user chose from a drop down
+        address_dict[var_name]['var_type'] = 'float'
+
+
     else:
         address_dict.pop(var_name, None)
         # Find and remove the row from tbl_vars_watched
@@ -307,7 +311,7 @@ def btn_graph_clicked( main_window, var_name):
     main_window.vars_watched_dict[var_name]['axisX'] = axisX
     main_window.vars_watched_dict[var_name]['axisY'] = axisY
     main_window.vars_watched_dict[var_name]['start_time'] = time.time()
-
+    
 # Function to handle removing a watched variable
 def remove_watched_var(var_name, row, main_window):
     main_window.ui.tbl_vars_watched.removeRow(row)

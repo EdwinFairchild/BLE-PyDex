@@ -54,7 +54,7 @@ class ExtractGlobalVariablesThread(QThread):
 
 
 class MonitoringThread(QThread):
-    signal_update_variable = Signal(str, int)  # Signal to update the variable value
+    signal_update_variable = Signal(str, object)  # Signal to update the variable value
     monitor_active = False
     exit_early = False
     logger = logging.getLogger("PDexLogger")

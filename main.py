@@ -14,7 +14,7 @@ from pyqtgraph import PlotDataItem
 import bluetooth_numbers as ble_uuid
 from bluetooth_numbers import service
 from uuid import UUID
-
+from ctypes import *
 import pyqtgraph as pg
 
 from PySide6 import QtUiTools, QtWidgets, QtGui
@@ -760,6 +760,17 @@ class MainWindow(QMainWindow):
         if var_name in self.vars_watched_dict:
             # Get the row index from the dictionary
             row_index = self.vars_watched_dict[var_name]["watched_row_position"]
+            var_type = self.vars_watched_dict[var_name]["var_type"]
+            # Convert or manipulate the value based on its type
+            if var_type == 'float':
+                value_as_bytes = value.to_bytes(4, 'little')
+                value = c_float.from_buffer_copy(value_as_bytes).value
+    
+            elif var_type == 'uint32_t':
+                value = int(value)  # Assuming 32-bit unsigned
+            elif var_type == 'uint8_t':
+                value = int(value)  # Assuming 8-bit unsigned
+
             # Create a new item with the updated value
             value_item = QTableWidgetItem(str(value))
             # Time window to display (e.g., last 10 seconds)
@@ -774,6 +785,7 @@ class MainWindow(QMainWindow):
                 chart = self.vars_watched_dict[var_name]['chart']
                 axisX = self.vars_watched_dict[var_name]['axisX']
                 start_time = self.vars_watched_dict[var_name]['start_time']
+                
 
                 # Assuming you're just appending new values, find the x value for the new point
                 if series.count() > 0:
