@@ -83,7 +83,7 @@ class MonitoringThread(QThread):
             logger_stream = LoggerStream(self.logger)
             sys.stdout = logger_stream
             sys.stderr = logger_stream
-            probe = ConnectHelper.session_with_chosen_probe(return_first=True, target_override="MAX32655", session_options=session_options)
+            probe = ConnectHelper.session_with_chosen_probe(blocking= False,return_first=True, target_override="MAX32655", session_options=session_options)
         except Exception as e:
             self.logger.setLevel(logging.WARNING)
             self.logger.warning("Error while connecting to the probe: %s", e)
@@ -95,6 +95,10 @@ class MonitoringThread(QThread):
             sys.stderr = original_stderr
         if probe is None:
             self.logger.info("No probe found!")
+            self.logger.info("Monitoring variables ended")
+            self.exit_early = False
+            monitor_active = False
+            # TODO emit signal to update UI monitoring button
             return
 
         with probe:

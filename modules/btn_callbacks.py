@@ -313,9 +313,9 @@ def handle_checkbox_state_change(state, var_name, address, address_dict, main_wi
             
 def btn_var_type_clicked( main_window, var_name, button,pos):
     print("hello")
-    show_type_dialog(main_window,var_name, button, pos)
+    show_var_type_dialog(main_window,var_name, button, pos)
 
-def show_type_dialog(main_window,var_name, btn,cursor_pos):
+def show_var_type_dialog(main_window,var_name, btn,cursor_pos):
     # Close the current popup if it exists, so that only one popup is open at a time
     if main_window.current_popup:
         main_window.current_popup.close()
@@ -330,6 +330,21 @@ def show_type_dialog(main_window,var_name, btn,cursor_pos):
     palette.setColor(widget.backgroundRole(), QColor(33, 37, 43))
     widget.setPalette(palette)
     widget.setAutoFillBackground(True)
+
+    # Create a new layout that will be the outer layout
+    outer_layout = QHBoxLayout()
+
+    # Create horizontal spacers
+    horizontal_spacer_left = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+    horizontal_spacer_right = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+    # Add spacers and layout to the outer layout
+    outer_layout.addItem(horizontal_spacer_left)
+    outer_layout.addLayout(layout)  # Add your existing QVBoxLayout
+    outer_layout.addItem(horizontal_spacer_right)
+
+    # Attach the outer layout to the widget
+    widget.setLayout(outer_layout)
 
     
     with open("themes/py_dracula_dark.qss", "r") as fh:
@@ -346,7 +361,7 @@ def show_type_dialog(main_window,var_name, btn,cursor_pos):
 
 
     # Radio buttons for C types
-    types = ['float', 'uint32_t', 'uint8_t']
+    types = ['float', 'uint32_t', 'uint16_t', 'uint8_t', 'int32_t', 'int16_t', 'int8_t']
     radio_buttons = {}
     for t in types:
         radio_buttons[t] = QRadioButton(t)
@@ -360,11 +375,14 @@ def show_type_dialog(main_window,var_name, btn,cursor_pos):
                             """
         radio_buttons[t].setStyleSheet(radio_btn_stylesheet)
         layout.addWidget(radio_buttons[t])
-
+       
     # Confirm button
     confirm_btn = QPushButton('Confirm')
     # set button stylesheet
     confirm_btn.setStyleSheet(main_window.btn_stylesheet)
+    # set button width
+    confirm_btn.setMaximumWidth(100)
+    confirm_btn.setMaximumHeight(40)
     confirm_btn.clicked.connect(widget.close)  # or whatever function you need
     layout.addWidget(confirm_btn)
 
@@ -375,7 +393,7 @@ def show_type_dialog(main_window,var_name, btn,cursor_pos):
     # print x y
     print(f"pos.x() = {pos.x()}, pos.y() = {pos.y()}")
    # widget.move(pos.x(), pos.y())
-    widget.setGeometry(local.x() , local.y()+ (btn.height() * 2 ), 200, 200)
+    widget.setGeometry(local.x() -3 , local.y()+ (btn.height() * 2 ), 150, 280)
     # Connect the confirm button to something useful
     confirm_btn.clicked.connect(lambda: handle_type_selection(btn,radio_buttons, var_name))
 
@@ -586,6 +604,7 @@ def start_monitoring(main_window):
     if main_window.var_watcher.isRunning():
         main_window.var_watcher.exit_early = True
         main_window.ui.btn_monitor.setText("Start Monitoring")
+        main_window.stop_monitoringThread()
     else:
         main_window.var_watcher.start()
         main_window.ui.btn_monitor.setText("Stop Monitoring")
