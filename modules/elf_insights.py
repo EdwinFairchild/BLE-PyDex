@@ -22,9 +22,9 @@ class ExtractGlobalVariablesThread(QThread):
         with open(self.filename, 'rb') as file:
             elffile = ELFFile(file)
             # for futuree development
-            # if elffile.has_dwarf_info():
-            #     dwarfinfo = elffile.get_dwarf_info()
-            #     print("has drawf info")
+            if elffile.has_dwarf_info():
+                dwarfinfo = elffile.get_dwarf_info()
+                
             section = elffile.get_section_by_name('.symtab')
             if not section:
                 self.logger.info("Symbol table not found")

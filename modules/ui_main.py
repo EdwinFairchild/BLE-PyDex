@@ -32,8 +32,9 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(1588, 857)
+        MainWindow.resize(1558, 857)
         MainWindow.setMinimumSize(QSize(940, 560))
+        MainWindow.setMouseTracking(True)
         self.styleSheet = QWidget(MainWindow)
         self.styleSheet.setObjectName(u"styleSheet")
         font = QFont()
@@ -1422,7 +1423,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 218, 218))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 424, 218))
         self.scrollAreaWidgetContents.setStyleSheet(u" QScrollBar:vertical {\n"
 "	border: none;\n"
 "    background: rgb(52, 59, 72);\n"
@@ -1693,7 +1694,7 @@ class Ui_MainWindow(object):
         self.tbl_vars.setShowGrid(True)
         self.tbl_vars.setGridStyle(Qt.SolidLine)
         self.tbl_vars.setSortingEnabled(True)
-        self.tbl_vars.horizontalHeader().setVisible(False)
+        self.tbl_vars.horizontalHeader().setVisible(True)
         self.tbl_vars.horizontalHeader().setCascadingSectionResizes(False)
         self.tbl_vars.horizontalHeader().setDefaultSectionSize(120)
         self.tbl_vars.horizontalHeader().setHighlightSections(True)
@@ -1720,8 +1721,8 @@ class Ui_MainWindow(object):
         self.horizontalLayout_13.setObjectName(u"horizontalLayout_13")
         self.horizontalLayout_13.setContentsMargins(0, 0, 0, 0)
         self.tbl_vars_watched = QTableWidget(self.watched_frame)
-        if (self.tbl_vars_watched.columnCount() < 4):
-            self.tbl_vars_watched.setColumnCount(4)
+        if (self.tbl_vars_watched.columnCount() < 5):
+            self.tbl_vars_watched.setColumnCount(5)
         __qtablewidgetitem5 = QTableWidgetItem()
         self.tbl_vars_watched.setHorizontalHeaderItem(0, __qtablewidgetitem5)
         __qtablewidgetitem6 = QTableWidgetItem()
@@ -1730,10 +1731,14 @@ class Ui_MainWindow(object):
         self.tbl_vars_watched.setHorizontalHeaderItem(2, __qtablewidgetitem7)
         __qtablewidgetitem8 = QTableWidgetItem()
         self.tbl_vars_watched.setHorizontalHeaderItem(3, __qtablewidgetitem8)
+        __qtablewidgetitem9 = QTableWidgetItem()
+        self.tbl_vars_watched.setHorizontalHeaderItem(4, __qtablewidgetitem9)
         self.tbl_vars_watched.setObjectName(u"tbl_vars_watched")
         self.tbl_vars_watched.setStyleSheet(u" border: 0px solid rgb(52, 59, 72);\n"
 "	border-radius:0px;	\n"
+"\n"
 "")
+        self.tbl_vars_watched.setSortingEnabled(False)
         self.tbl_vars_watched.horizontalHeader().setVisible(False)
         self.tbl_vars_watched.horizontalHeader().setCascadingSectionResizes(True)
         self.tbl_vars_watched.horizontalHeader().setDefaultSectionSize(120)
@@ -1761,7 +1766,7 @@ class Ui_MainWindow(object):
         self.insights_scroll_area.setWidgetResizable(True)
         self.scrollAreaWidgetContents_3 = QWidget()
         self.scrollAreaWidgetContents_3.setObjectName(u"scrollAreaWidgetContents_3")
-        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 572, 571))
+        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 558, 571))
         self.insights_scroll_area.setWidget(self.scrollAreaWidgetContents_3)
 
         self.verticalLayout_37.addWidget(self.insights_scroll_area)
@@ -1883,7 +1888,7 @@ class Ui_MainWindow(object):
         self.scrollArea_2.setWidgetResizable(True)
         self.scrollAreaWidgetContents_2 = QWidget()
         self.scrollAreaWidgetContents_2.setObjectName(u"scrollAreaWidgetContents_2")
-        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 807, 580))
+        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 788, 580))
         self.scrollArea_2.setWidget(self.scrollAreaWidgetContents_2)
 
         self.verticalLayout_28.addWidget(self.scrollArea_2)
@@ -2228,7 +2233,7 @@ class Ui_MainWindow(object):
         self.elfSettings = QFrame(self.contentSettings)
         self.elfSettings.setObjectName(u"elfSettings")
         self.elfSettings.setMinimumSize(QSize(0, 0))
-        self.elfSettings.setMaximumSize(QSize(16777215, 0))
+        self.elfSettings.setMaximumSize(QSize(16777215, 9999))
         self.elfSettings.setStyleSheet(u"text-align: center;")
         self.elfSettings.setFrameShape(QFrame.NoFrame)
         self.elfSettings.setFrameShadow(QFrame.Raised)
@@ -2288,6 +2293,38 @@ class Ui_MainWindow(object):
 
 
         self.verticalLayout_29.addWidget(self.frame_6)
+
+        self.frame_2 = QFrame(self.elfSettings)
+        self.frame_2.setObjectName(u"frame_2")
+        self.frame_2.setMinimumSize(QSize(0, 80))
+        self.frame_2.setStyleSheet(u" border: 2px solid rgb(52, 59, 72);\n"
+"	border-radius: 5px;	\n"
+"")
+        self.frame_2.setFrameShape(QFrame.StyledPanel)
+        self.frame_2.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_38 = QVBoxLayout(self.frame_2)
+        self.verticalLayout_38.setObjectName(u"verticalLayout_38")
+        self.label_7 = QLabel(self.frame_2)
+        self.label_7.setObjectName(u"label_7")
+        self.label_7.setStyleSheet(u" border: 0px solid rgb(52, 59, 72);\n"
+"	border-radius: 5px;	\n"
+"")
+
+        self.verticalLayout_38.addWidget(self.label_7)
+
+        self.horizontalSlider_2 = QSlider(self.frame_2)
+        self.horizontalSlider_2.setObjectName(u"horizontalSlider_2")
+        self.horizontalSlider_2.setStyleSheet(u" border: 0px solid rgb(52, 59, 72);\n"
+"	border-radius: 5px;	\n"
+"")
+        self.horizontalSlider_2.setMaximum(500)
+        self.horizontalSlider_2.setValue(200)
+        self.horizontalSlider_2.setOrientation(Qt.Horizontal)
+
+        self.verticalLayout_38.addWidget(self.horizontalSlider_2)
+
+
+        self.verticalLayout_29.addWidget(self.frame_2)
 
         self.btn_load_elf = QPushButton(self.elfSettings)
         self.btn_load_elf.setObjectName(u"btn_load_elf")
@@ -2447,7 +2484,7 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
         self.scanSlider.valueChanged.connect(self.label_scan_timeout_value.setNum)
 
-        self.stackedWidget.setCurrentIndex(3)
+        self.stackedWidget.setCurrentIndex(2)
         self.rssi_gatt_expolrer.setCurrentIndex(0)
 
 
@@ -2556,6 +2593,7 @@ class Ui_MainWindow(object):
         self.txtRamStart.setText(QCoreApplication.translate("MainWindow", u"0x20000000", None))
         self.label_3.setText(QCoreApplication.translate("MainWindow", u"Ram End :", None))
         self.txtRamEnd.setText(QCoreApplication.translate("MainWindow", u"0x2001FFFF ", None))
+        self.label_7.setText(QCoreApplication.translate("MainWindow", u"Max history values:", None))
         self.btn_load_elf.setText(QCoreApplication.translate("MainWindow", u"Load Elf", None))
         self.btn_monitor.setText(QCoreApplication.translate("MainWindow", u"Start Monitoring", None))
         self.btn_showCoreRegs.setText(QCoreApplication.translate("MainWindow", u"Show Core Regs", None))

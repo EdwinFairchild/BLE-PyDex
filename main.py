@@ -57,6 +57,8 @@ class MainWindow(QMainWindow):
         self.ui.setupUi(self)
         global widgets
         widgets = self.ui
+        # Install the event filter
+        self.installEventFilter(self)
         self.vars_watched_dict={}
         self.device_address = None
 
@@ -111,6 +113,8 @@ class MainWindow(QMainWindow):
         self.var_watcher.signal_update_variable.connect(self.update_variable_in_table)  # Assuming 'self.update_variable_in_table' is a method that handles the update
         # USE CUSTOM TITLE BAR | USE AS "False" FOR MAC OR LINUX
         Settings.ENABLE_CUSTOM_TITLE_BAR = False
+        # used to store the current popup window when selecting var type
+        self.current_popup = None
 
         # APP NAME
         title = "BLE-PyDex"
@@ -157,7 +161,7 @@ class MainWindow(QMainWindow):
         # stylesheets
         self.btn_stylesheet = open("button_stylesheet.txt", "r").read()
         self.scroll_area_stylesheet = open("scroll_area_stylesheet.txt", "r").read()
-        
+        self.comboBox_stylesheet = open("combobox_stylesheet.txt", "r").read()
         self.ui.scrollArea_2.setStyleSheet(self.scroll_area_stylesheet)
 
         
@@ -268,6 +272,7 @@ class MainWindow(QMainWindow):
         # SET HOME PAGE AND SELECT MENU
         self.ui.stackedWidget.setCurrentWidget(self.ui.home)
         self.ui.btn_home.setStyleSheet(UIFunctions.selectMenu(self.ui.btn_home.styleSheet()))
+
     def highlight_selected_device(self, item):
         selected_device = item.text()
         light_gray = QColor(52, 59, 72)  # Light gray color
