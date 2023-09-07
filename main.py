@@ -783,6 +783,7 @@ class MainWindow(QMainWindow):
                 var_type = self.vars_watched_dict[var_name]["var_type"]
                 # Convert or manipulate the value based on its type
                 if var_type == 'float':
+                    self.logger.info("Var is float")
                     value_as_bytes = value.to_bytes(4, 'little')
                     value = c_float.from_buffer_copy(value_as_bytes).value
         

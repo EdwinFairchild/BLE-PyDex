@@ -312,7 +312,6 @@ def handle_checkbox_state_change(state, var_name, address, address_dict, main_wi
             
             
 def btn_var_type_clicked( main_window, var_name, button,pos):
-    print("hello")
     show_var_type_dialog(main_window,var_name, button, pos)
 
 def show_var_type_dialog(main_window,var_name, btn,cursor_pos):
@@ -390,9 +389,7 @@ def show_var_type_dialog(main_window,var_name, btn,cursor_pos):
 
     pos = get_global_position(btn)
     local = main_window.mapFromGlobal(pos)
-    # print x y
-    print(f"pos.x() = {pos.x()}, pos.y() = {pos.y()}")
-   # widget.move(pos.x(), pos.y())
+
     widget.setGeometry(local.x() -3 , local.y()+ (btn.height() * 2 ), 150, 280)
     # Connect the confirm button to something useful
     confirm_btn.clicked.connect(lambda: handle_type_selection(btn,radio_buttons, var_name))
@@ -520,17 +517,14 @@ def btn_graph_clicked( main_window, var_name, button):
 def remove_watched_var(var_name, row, main_window):
     logger = logging.getLogger("PDexLogger")
     logger.info(f"Graphing {var_name}") 
-    # Debug line to print all keys in vars_watched_dict
-    logger.info(f"Keys in vars_watched_dict: {main_window.vars_watched_dict.keys()}")
+    
 
     main_window.ui.tbl_vars_watched.removeRow(row)
 
-    
-    logger.info(f"Keys in vars_watched_dict: {main_window.vars_watched_dict.keys()}")
     # If there are no more rows, explicitly set the row count to 0
     if main_window.ui.tbl_vars_watched.rowCount() == 0:
         main_window.ui.tbl_vars_watched.setRowCount(0)
-    logger.info(f"Keys in vars_watched_dict: {main_window.vars_watched_dict.keys()}")
+    
     if var_name in main_window.vars_watched_dict:
         if main_window.vars_watched_dict[var_name].get('graphed', False):
             logger.info(f"Removing graph for {var_name}")
@@ -557,15 +551,16 @@ def load_elf(main_window):
     logger = logging.getLogger("PDexLogger")
     # # Open a file dialog to select the ELF file
     options = QFileDialog.Options()
-    #filename, _ = QFileDialog.getOpenFileName(main_window, "Open ELF File", "", "ELF Files (*.elf);;All Files (*)", options=options)
-    filename = '/home/eddie/projects/ADI-Insight/BLE_dats/build/max32655.elf'
-    # if not filename:
-    #     logger.info("No file selected")
-    #     return
-    # clear table
-    print("using hard coded elf filename")
-    main_window.ui.tbl_vars.setRowCount(0)
+    filename, _ = QFileDialog.getOpenFileName(main_window, "Open ELF File", "", "ELF Files (*.elf);;All Files (*)", options=options)
+    # for faster debugging
     #filename = '/home/eddie/projects/ADI-Insight/BLE_dats/build/max32655.elf'
+    #print("using hard coded elf filename")
+    if not filename:
+        logger.info("No file selected")
+        return
+    # clear table
+    main_window.ui.tbl_vars.setRowCount(0)
+   
     table_widget = main_window.ui.tbl_vars
     elf_file_path = '/home/eddie/projects/ADI-Insight/BLE_dats/build/max32655.elf'
     table_widget = main_window.ui.tbl_vars # Replace with the actual table widget object

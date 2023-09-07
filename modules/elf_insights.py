@@ -83,6 +83,7 @@ class MonitoringThread(QThread):
             logger_stream = LoggerStream(self.logger)
             sys.stdout = logger_stream
             sys.stderr = logger_stream
+            # TODO port MAX32655 to pyocd
             probe = ConnectHelper.session_with_chosen_probe(blocking= False,return_first=True, target_override="MAX32655", session_options=session_options)
         except Exception as e:
             self.logger.setLevel(logging.WARNING)
