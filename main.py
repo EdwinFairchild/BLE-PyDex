@@ -14,7 +14,7 @@ from pyqtgraph import PlotDataItem
 import bluetooth_numbers as ble_uuid
 from bluetooth_numbers import service
 from uuid import UUID
-
+from ctypes import *
 import pyqtgraph as pg
 
 from PySide6 import QtUiTools, QtWidgets, QtGui
@@ -38,10 +38,12 @@ class MainWindow(QMainWindow):
     add_adv_table_item = Signal(str)
     toplevel = None
     child = None
-    vbox = QGridLayout()
+    chars_vbox = QGridLayout()
+    watched_vars_vbox = QGridLayout()
     charCount= 1
     char_dict = {}
     cleanUp = Signal(object)
+    # RSSI graph variables
     axisX = QtCharts.QValueAxis()
     axisY = QtCharts.QValueAxis()
     axisX.setRange(0, 10)
@@ -55,6 +57,8 @@ class MainWindow(QMainWindow):
         self.ui.setupUi(self)
         global widgets
         widgets = self.ui
+        # Install the event filter
+        self.installEventFilter(self)
         self.vars_watched_dict={}
         self.device_address = None
 
@@ -109,6 +113,8 @@ class MainWindow(QMainWindow):
         self.var_watcher.signal_update_variable.connect(self.update_variable_in_table)  # Assuming 'self.update_variable_in_table' is a method that handles the update
         # USE CUSTOM TITLE BAR | USE AS "False" FOR MAC OR LINUX
         Settings.ENABLE_CUSTOM_TITLE_BAR = False
+        # used to store the current popup window when selecting var type
+        self.current_popup = None
 
         # APP NAME
         title = "BLE-PyDex"
@@ -155,55 +161,8 @@ class MainWindow(QMainWindow):
         # stylesheets
         self.btn_stylesheet = open("button_stylesheet.txt", "r").read()
         self.scroll_area_stylesheet = open("scroll_area_stylesheet.txt", "r").read()
-        
-        self.ui.scrollArea_2.setStyleSheet("""
-
-        /* VERTICAL */
-        QScrollBar:vertical {
-            border: none;
-            background: rgb(39, 52, 105);
-            width: 10px;
-            margin: 10px 0px 10px 0px;
-           
-        }
-
-        QScrollBar::handle:vertical {
-            background: rgb(170,200,255);
-            min-height: 26px;
-            
-        }
-
-        QScrollBar::add-line:vertical {
-            background: none;
-            height: 26px;
-            subcontrol-position: bottom;
-            subcontrol-origin: margin;
-            
-        }
-
-        QScrollBar::sub-line:vertical {
-            background: none;
-            height: 26px;
-            subcontrol-position: top left;
-            subcontrol-origin: margin;
-            position: absolute;
-            
-        }
-
-        QScrollBar:up-arrow:vertical, QScrollBar::down-arrow:vertical {
-            width: 26px;
-            height: 20px;
-            background: white;
-            
-            
-        }
-
-        QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
-            background: none;
-            
-        }
-
-    """)
+        self.comboBox_stylesheet = open("combobox_stylesheet.txt", "r").read()
+        self.ui.scrollArea_2.setStyleSheet(self.scroll_area_stylesheet)
 
         
         # EXTRA LEFT BOX
@@ -224,12 +183,25 @@ class MainWindow(QMainWindow):
         self.cleanUp.connect(lambda: self.clean_up())
 
         
-        
-        self.ui.scrollArea_2.setLayout(self.vbox)
+        self.ui.scrollArea_2.setLayout(self.chars_vbox)
         self.ui.scrollArea_2.setVerticalScrollBarPolicy(Qt.ScrollBarAsNeeded)
         self.ui.scrollArea_2.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         self.ui.scrollArea_2.setWidgetResizable(True)
         self.ui.scrollArea_2.setStyleSheet(self.scroll_area_stylesheet)
+        
+        
+        self.ui.insights_scroll_area.setLayout(self.watched_vars_vbox)
+        self.ui.insights_scroll_area.setVerticalScrollBarPolicy(Qt.ScrollBarAsNeeded)
+        self.ui.insights_scroll_area.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+        self.ui.insights_scroll_area.setWidgetResizable(True)
+        #self.ui.insights_scroll_area.setStyleSheet(self.scroll_area_stylesheet)
+        
+        # Initialize a container widget for the watched vars chart
+        self.watch_vars_chart_container = QWidget()
+        self.watch_vars_chart_layout = QVBoxLayout()
+        self.watch_vars_chart_container.setLayout(self.watch_vars_chart_layout)
+        self.ui.insights_scroll_area.setWidget(self.watch_vars_chart_container)
+
 
 
         # SHOW APP
@@ -300,6 +272,7 @@ class MainWindow(QMainWindow):
         # SET HOME PAGE AND SELECT MENU
         self.ui.stackedWidget.setCurrentWidget(self.ui.home)
         self.ui.btn_home.setStyleSheet(UIFunctions.selectMenu(self.ui.btn_home.styleSheet()))
+
     def highlight_selected_device(self, item):
         selected_device = item.text()
         light_gray = QColor(52, 59, 72)  # Light gray color
@@ -662,7 +635,7 @@ class MainWindow(QMainWindow):
             uiwidget.read_write_frame.setMaximumHeight(0)
             uiwidget.read_write_frame.setMinimumHeight(0) 
 
-        widget.setLayout(self.vbox)
+        widget.setLayout(self.chars_vbox)
         widget.setStyleSheet("""
             border: 0px solid rgb(52, 59, 72);
 	        border-radius: 5px;	
@@ -670,9 +643,9 @@ class MainWindow(QMainWindow):
             padding: 0px;""")
 
         # add to vertical layout row,column
-        self.vbox.addWidget(tempWidget,self.charCount,0)
-        self.vbox.setSpacing(10)
-        self.vbox.setContentsMargins(QMargins(20, 0, 0, 0))
+        self.chars_vbox.addWidget(tempWidget,self.charCount,0)
+        self.chars_vbox.setSpacing(10)
+        self.chars_vbox.setContentsMargins(QMargins(20, 0, 0, 0))
 
         self.charCount += 1
 
@@ -804,12 +777,64 @@ class MainWindow(QMainWindow):
     def update_variable_in_table(self, var_name, value):
          # Check if the variable name is in the dictionary
         if var_name in self.vars_watched_dict:
-            # Get the row index from the dictionary
-            row_index = self.vars_watched_dict[var_name]["watched_row_position"]
-            # Create a new item with the updated value
-            value_item = QTableWidgetItem(str(value))
-            # Update the value in column 3 (0-indexed)
-            self.ui.tbl_vars_watched.setItem(row_index, 1, value_item)
+            try:
+                # Get the row index from the dictionary
+                row_index = self.vars_watched_dict[var_name]["watched_row_position"]
+                var_type = self.vars_watched_dict[var_name]["var_type"]
+                # Convert or manipulate the value based on its type
+                if var_type == 'float':
+                    self.logger.info("Var is float")
+                    value_as_bytes = value.to_bytes(4, 'little')
+                    value = c_float.from_buffer_copy(value_as_bytes).value
+        
+                elif var_type == 'uint32_t':
+                    value = int(value)  # Assuming 32-bit unsigned
+                elif var_type == 'uint8_t':
+                    value = int(value)  # Assuming 8-bit unsigned
+
+                # Create a new item with the updated value
+                value_item = QTableWidgetItem(str(value))
+               
+                # Update the value in column 1 (0-indexed)
+                self.ui.tbl_vars_watched.setItem(row_index, 1, value_item)
+                
+                # Update the series if it's being graphed
+                if self.vars_watched_dict[var_name].get('graphed', False):
+                    self.update_watched_var_graph(var_name, value)
+            except Exception as e:
+                self.logger.error(f"Error updating variable in table: {str(e)}")
+    def update_watched_var_graph(self, var_name, value):
+         # Time window to display (e.g., last 10 seconds)
+         # TODO make this a user setting like a slider
+        MAX_POINTS = 500  # Set a limit to the maximum number of points
+        time_window = 3.0  # or however long you want the window to be
+        series = self.vars_watched_dict[var_name]['series']
+        chart = self.vars_watched_dict[var_name]['chart']
+        axisX = self.vars_watched_dict[var_name]['axisX']
+        start_time = self.vars_watched_dict[var_name]['start_time']
+        
+
+        # Assuming you're just appending new values, find the x value for the new point
+        if series.count() > 0:
+            # Calculate the elapsed time
+            elapsed_time = time.time() - start_time
+
+            # Append the new point to the series
+            series.append(elapsed_time, value)
+            # Remove the oldest point if series size exceeds the limit
+            if series.count() > MAX_POINTS:
+                series.remove(0)  # Assuming the oldest point is at index 0
+        
+            
+            # Update the axis range to create a scrolling effect
+            if elapsed_time > time_window:
+                axisX.setRange(elapsed_time - time_window, elapsed_time)
+            else:
+                axisX.setRange(0, time_window)
+        else:
+            # This is the first point, so just append it
+            series.append(0, value)
+
     def get_core_regs_handler(self, regs):
         # Clear the table
         self.ui.tbl_core_regs.setRowCount(0)

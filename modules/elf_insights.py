@@ -22,9 +22,9 @@ class ExtractGlobalVariablesThread(QThread):
         with open(self.filename, 'rb') as file:
             elffile = ELFFile(file)
             # for futuree development
-            # if elffile.has_dwarf_info():
-            #     dwarfinfo = elffile.get_dwarf_info()
-            #     print("has drawf info")
+            if elffile.has_dwarf_info():
+                dwarfinfo = elffile.get_dwarf_info()
+                
             section = elffile.get_section_by_name('.symtab')
             if not section:
                 self.logger.info("Symbol table not found")
@@ -47,13 +47,14 @@ class ExtractGlobalVariablesThread(QThread):
                     # if exit_early is true then exit the thread
                     if self.exit_early:
                         return
+                    # TODO make this a user setting, possibly slider to select sample rate
                     time.sleep(0.005)
             self.logger.info("Finished extracting global variables")
 
 
 
 class MonitoringThread(QThread):
-    signal_update_variable = Signal(str, int)  # Signal to update the variable value
+    signal_update_variable = Signal(str, object)  # Signal to update the variable value
     monitor_active = False
     exit_early = False
     logger = logging.getLogger("PDexLogger")
@@ -62,7 +63,7 @@ class MonitoringThread(QThread):
 
     def __init__(self, address_dict):
         super().__init__()
-        self.address_dict = address_dict
+        self.address_dict = address_dict #vars_watched_dict from main.py
 
 
     def run(self):
@@ -78,10 +79,12 @@ class MonitoringThread(QThread):
         # Connect to the probe
         try:
             # Replace stdout with a custom stream that logs messages
+            # this is needed becasue pyocd prints to stdout
             logger_stream = LoggerStream(self.logger)
             sys.stdout = logger_stream
             sys.stderr = logger_stream
-            probe = ConnectHelper.session_with_chosen_probe(return_first=True, target_override="MAX32655", session_options=session_options)
+            # TODO port MAX32655 to pyocd
+            probe = ConnectHelper.session_with_chosen_probe(blocking= False,return_first=True, target_override="MAX32655", session_options=session_options)
         except Exception as e:
             self.logger.setLevel(logging.WARNING)
             self.logger.warning("Error while connecting to the probe: %s", e)
@@ -93,6 +96,10 @@ class MonitoringThread(QThread):
             sys.stderr = original_stderr
         if probe is None:
             self.logger.info("No probe found!")
+            self.logger.info("Monitoring variables ended")
+            self.exit_early = False
+            monitor_active = False
+            # TODO emit signal to update UI monitoring button
             return
 
         with probe:
