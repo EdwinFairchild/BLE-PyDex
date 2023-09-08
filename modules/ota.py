@@ -4,9 +4,13 @@ import asyncio
 import time
 import zlib
 
+blocksize = 0
+delayTime = 0.005
 
-async def ota_update( self, client,fileName, fileLen,crc32):       
-    
+#--------------------| Start OTA Update   |---------------------------------------------------------------
+async def ota_update_start( self, client,fileName, fileLen,crc32):       
+    global blocksize
+    global delayTime
     svc = client.services.get_service(max32xxx_ota.WDX_SERVICE)
     if svc == None:
         self.logger.info("WDX service not found")
@@ -25,7 +29,7 @@ async def ota_update( self, client,fileName, fileLen,crc32):
     self.logger.info(f"blocksize: {blocksize}")
     
     try:
-        delayTime = 0.005
+        
         resp = 1
         #--------------------| Enable required notifications directly|---------------------
         # cant enqueue a task from within a task
@@ -70,14 +74,22 @@ async def ota_update( self, client,fileName, fileLen,crc32):
                         + max32xxx_ota.WDX_FILE_TYPE
         self.logger.info("sent put req: " + str(list(packet_to_send)))  
         
-        self.erase_complete = False
         await client.write_gatt_char(max32xxx_ota.WDX_File_Transfer_Control_Characteristic, bytearray(packet_to_send))
-        
+    except Exception as err:
+        self.logger.setLevel(logging.WARNING)
+        self.logger.warning(err)
+        self.logger.setLevel(logging.INFO)
+        self.otasUpdate = False
+        self.writeChar = False
         # stop wait for erase complete signal
-        while self.ota_erase_complete == False :
-            await asyncio.sleep(delayTime)
-        self.logger.info("erase complete")
-        #--------------------| send file   |---------------------
+
+
+#--------------------| send file   |---------------------------------------------------------------
+async def ota_update_send_file( self, client,fileName, fileLen):      
+    global blocksize
+    global delayTime
+    try:    
+        self.ota_file_write_complete = False
         tempLen = fileLen
         self.logger.info("Start of sending file")
         address = 0x00000000  
@@ -106,6 +118,17 @@ async def ota_update( self, client,fileName, fileLen,crc32):
         self.otasUpdate = False
         self.logger.info("End of sending file")  
         time.sleep(1)
+
+    except Exception as err:
+        self.logger.setLevel(logging.WARNING)
+        self.logger.warning(err)
+        self.logger.setLevel(logging.INFO)
+        self.otasUpdate = False
+        self.writeChar = False
+
+async def ota_update_verify_file( self, client):
+    global delayTime
+    try:
         #--------------------| send verify file request   |---------------------
         #assemble packet and send
         #file handle is incremented
@@ -115,7 +138,15 @@ async def ota_update( self, client,fileName, fileLen,crc32):
         resp = await client.write_gatt_char(max32xxx_ota.WDX_File_Transfer_Control_Characteristic, bytearray(packet_to_send))
         while resp != None:
             await asyncio.sleep(delayTime)
-        
+    except Exception as err:
+        self.logger.setLevel(logging.WARNING)
+        self.logger.warning(err)
+        self.logger.setLevel(logging.INFO)
+        self.otasUpdate = False
+    self.writeChar = False
+async def ota_update_reset_device( self, client):
+    global delayTime
+    try: 
         #--------------------| send reset request   |---------------------
         # assemble packet and send
         packet_to_send = max32xxx_ota.WDX_DC_OP_SET + max32xxx_ota.WDX_DC_ID_DISCONNECT_AND_RESET 
