@@ -78,6 +78,7 @@ class MainWindow(QMainWindow):
         self.fileCrc32 = None
         
         
+        
         # Initialize logging
         console = logging.getLogger("PDexLogger")
         handler = QLogHandler(self.ui.console)
@@ -91,6 +92,7 @@ class MainWindow(QMainWindow):
         self.connectedDevice = BLE_ConnectDevice()
         self.connectedDevice.device_notification_recevied.connect(self.char_notification_handler)
         self.connectedDevice.device_char_read_response.connect(self.char_read_response_handler)
+        self.connectedDevice.device_ota_update_reset.connect(self.ota_reset)
 
         #OTA related 
         self.connectedDevice.otas_progress_value.connect(
@@ -846,6 +848,10 @@ class MainWindow(QMainWindow):
     
     def otas_progress_update(self,value):    
         self.ui.otasProgress.setValue(value)
+    def ota_reset(self):
+        self.fileName = None
+        self.fileLen = None
+        self.fileCrc32 = None
 
     #------------------------ clean up fuctions ------------------------
     def clean_up(self):
