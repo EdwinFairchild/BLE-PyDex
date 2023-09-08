@@ -1,5 +1,6 @@
 from main import *
 from . import max32xxx_ota
+from . import ota 
 import bleak
 import asyncio
 from asyncio import Queue
@@ -75,6 +76,8 @@ class BLE_ConnectDevice(QThread):
     device_char_read = Signal(str) # UUID
     # ota related signals
     device_ota_update = Signal(str, int, ctypes.c_uint32) # fileName, fileLen, crc32
+    ota_in_progress = False
+    ota_device_erase_complete = Signal(bool)
     otas_progress_value = Signal(int)
     # erase complete flag
     ota_erase_complete = False
@@ -90,7 +93,9 @@ class BLE_ConnectDevice(QThread):
         self.device_char_notify.connect(self.BLE_task_enqueue_notify)
         self.device_char_read.connect(self.BLE_task_enqueue_read)
         self.device_ota_update.connect(self.BLE_task_enqueue_max32xxx_ota)
-        
+
+        # Connect OTA signals to slots
+        self.ota_device_erase_complete.connect(lambda: ota.ota_device_erase_complete_handler(self))
     
     def run(self):
 
@@ -123,7 +128,7 @@ class BLE_ConnectDevice(QThread):
                         if task == "read_char":
                             await self.readCallback(client, *args, **kwargs)
                         if task == "max32xxx_ota":
-                            await max32xxx_ota.ota_update(self, client, *args, **kwargs)
+                            await ota.ota_update(self, client, *args, **kwargs)
                             
 
                     # async sleep, give time for other threads to run
@@ -267,8 +272,8 @@ class BLE_ConnectDevice(QThread):
         try:
             self.device_notification_recevied.emit(str(sender), str(data))
             #used to monitor erase progress for max32xxx ota
-            if "Handle: 580" in str(sender) and self.ota_erase_complete == False:
-                self.ota_erase_complete = True
+            if "Handle: 580" in str(sender) and self.ota_erase_complete == False and self.ota_in_progress == True:
+                self.ota_device_erase_complete.emit(True)
         except Exception as err:
             self.logger.setLevel(logging.WARNING)
             self.logger.warning(err)

@@ -41,4 +41,4 @@ from . rssi_graph import *
 
 from . elf_insights import *
 
-from . max32xxx_ota import *
+from . ota import *

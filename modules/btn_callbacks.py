@@ -1,5 +1,5 @@
 from main import *
-from modules import max32xxx_ota
+from modules import ota
 from elftools.elf.elffile import ELFFile
 from PySide6.QtWidgets import QFileDialog
 from PySide6.QtWidgets import QTableWidget, QTableWidgetItem, QCheckBox, QWidget, QHBoxLayout
@@ -618,7 +618,7 @@ def load_bin(main_window):
         if fname:
             #get crc32 of the file using method in max32xxx_ota.py module
             try:
-                crc32,fileLen = max32xxx_ota.get_crc32(fname[0])
+                crc32,fileLen = ota.get_crc32(fname[0])
                 fileName = fname[0]
                 main_window.fileName = fileName
                 main_window.fileLen = fileLen
