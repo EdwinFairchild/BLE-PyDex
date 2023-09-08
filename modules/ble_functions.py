@@ -75,7 +75,7 @@ class BLE_ConnectDevice(QThread):
     device_char_notify = Signal(str, bool) # UUID, enable/disable
     device_char_read = Signal(str) # UUID
     #these are emitted from here and the handlers live in main.py
-    device_notification_recevied = Signal(str, str) # sender, value
+    device_notification_recevied = Signal(str, bytes) # sender, value
     device_char_read_response = Signal(str, str) # UUID, value
    
     #-----------| ota related signals and varaibles |---------------------------
@@ -290,36 +290,38 @@ class BLE_ConnectDevice(QThread):
         self.logger.info(f"Sender: {sender}")
         self.logger.info(f"Data: {data}")
         try:
-            self.device_notification_recevied.emit(str(sender), str(data))
+            self.device_notification_recevied.emit(str(sender), data)
+            #print lefgfnth of data
+            self.logger.info(f"Data length: {len(data)}")
             # if we have started the ota update and we get a notification from the WDX_File_Transfer_Control_Characteristic
             # this means that the erase is complete
             # we can now start sending the file
-            if "Handle: 580" in str(sender) and self.ota_erase_complete == False and self.ota_in_progress == True:
-                self.ota_device_erase_complete.emit(True) # might not need this
-                #start to send file
-                self.device_ota_update_send_file.emit(self.ota_file_name, self.ota_file_len)
+            # if "Handle: 580" in str(sender) and self.ota_erase_complete == False and self.ota_in_progress == True:
+            #     self.ota_device_erase_complete.emit(True) # might not need this
+            #     #start to send file
+            #     self.device_ota_update_send_file.emit(self.ota_file_name, self.ota_file_len)
 
-            # if we have started the ota update and we get a notification from the WDX_File_Transfer_Control_Characteristic
-            # and the erase is complete that means now the file write is complete
-            # we can now send the verify request
-            elif "Handle: 580" in str(sender) and self.ota_erase_complete == True and self.ota_in_progress == True and self.ota_file_write_complete == False:
-                # send verify request
-                self.ota_file_write_complete = True
-                self.device_ota_update_verify_file.emit()
-            elif "Handle: 580" in str(sender) and self.ota_erase_complete == True and self.ota_in_progress == True and self.ota_file_write_complete == True:
-                # at this point the ota update is complete and a verify quest was send,
-                # we need to check if the return value is 0x00 (verified OK) or 0x05 (Verification failed)
-                expected_data = bytearray(b'\x08\x01\x00\x00')
-                if data == expected_data:
-                    # emit reset
-                    self.device_ota_update_reset_device.emit()
-                    self.logger.info("File is verified.")
-                else:
-                    self.logger.info("File verification failed")
-                    self.logger.info("OTA update failed")
+            # # if we have started the ota update and we get a notification from the WDX_File_Transfer_Control_Characteristic
+            # # and the erase is complete that means now the file write is complete
+            # # we can now send the verify request
+            # elif "Handle: 580" in str(sender) and self.ota_erase_complete == True and self.ota_in_progress == True and self.ota_file_write_complete == False:
+            #     # send verify request
+            #     self.ota_file_write_complete = True
+            #     self.device_ota_update_verify_file.emit()
+            # elif "Handle: 580" in str(sender) and self.ota_erase_complete == True and self.ota_in_progress == True and self.ota_file_write_complete == True:
+            #     # at this point the ota update is complete and a verify quest was send,
+            #     # we need to check if the return value is 0x00 (verified OK) or 0x05 (Verification failed)
+            #     expected_data = bytearray(b'\x08\x01\x00\x00')
+            #     if data == expected_data:
+            #         # emit reset
+            #         self.device_ota_update_reset_device.emit()
+            #         self.logger.info("File is verified.")
+            #     else:
+            #         self.logger.info("File verification failed")
+            #         self.logger.info("OTA update failed")
                     
                 
-                self.ota_reset_state_handler()
+            #     self.ota_reset_state_handler()
 
                             
 

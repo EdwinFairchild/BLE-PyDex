@@ -7,7 +7,7 @@ import random
 import time
 import numpy as np
 import webbrowser
-
+import struct
 from modules import *
 from widgets import *
 from pyqtgraph import PlotDataItem
@@ -204,7 +204,11 @@ class MainWindow(QMainWindow):
         self.watch_vars_chart_container.setLayout(self.watch_vars_chart_layout)
         self.ui.insights_scroll_area.setWidget(self.watch_vars_chart_container)
 
-
+        # Initialize a container widget for the watched vars chart
+        self.voyager_chart_container = QWidget()
+        self.voyager_chart_layout = QVBoxLayout()
+        self.voyager_chart_container.setLayout(self.voyager_chart_layout)
+        self.ui.voyagerScrollArea.setWidget(self.voyager_chart_container)
 
         # SHOW APP
         self.show()
@@ -220,7 +224,7 @@ class MainWindow(QMainWindow):
         # Set up the axes (assuming the chart is already set up in the .ui file)
         self.axisX = QtCharts.QValueAxis()
         self.axisY = QtCharts.QValueAxis()
-        self.axisX.setRange(0, 10)
+        self.axisX.setRange(0, 500)
         self.axisY.setRange(Settings.RSS_RANGE_BOTTOM, Settings.RSSI_RANGE_TOP)
 
         self.ui.qtchart_widgetholder.chart().addAxis(self.axisX, Qt.AlignBottom)
@@ -700,7 +704,19 @@ class MainWindow(QMainWindow):
     def char_notification_handler(self, uuid, payload):
         char_uuid = self.extract_uuid_hex(uuid)
         # find uuid in char dict and update the uiwidget, append text to char_read_txt
-        self.char_dict[char_uuid]["uiWidget"].char_read_txt.append(payload)
+        # self.char_dict[char_uuid]["uiWidget"].char_read_txt.append(payload)
+
+        # the paylaod is 128 floats (4bytes) packed into a byte array of 512 bytes
+        # unapck the byte array into a list of floats and append to the series in watched_vars dict
+        #payload = bytes.fromhex(payload)
+        # unpack the payload
+        payload = struct.unpack('f'*50, payload)
+        # append to the series
+        #self.update_watched_var_graph("graphing", payload)
+        # send each of the 128 values to graph update function one by one
+        for i in range(0,50):
+            self.update_watched_var_graph("graphing", payload[i])
+        # update the plot
 
     def char_read_response_handler(self, uuid, payload):
         char_uuid = self.extract_uuid_hex(uuid)
@@ -806,36 +822,29 @@ class MainWindow(QMainWindow):
             except Exception as e:
                 self.logger.error(f"Error updating variable in table: {str(e)}")
     def update_watched_var_graph(self, var_name, value):
-         # Time window to display (e.g., last 10 seconds)
-         # TODO make this a user setting like a slider
-        MAX_POINTS = 500  # Set a limit to the maximum number of points
-        time_window = 3.0  # or however long you want the window to be
+        MAX_POINTS = 1000  # Max number of points in memory
+        TIME_WINDOW = 2.0  # 10 seconds window
         series = self.vars_watched_dict[var_name]['series']
-        chart = self.vars_watched_dict[var_name]['chart']
         axisX = self.vars_watched_dict[var_name]['axisX']
         start_time = self.vars_watched_dict[var_name]['start_time']
-        
 
-        # Assuming you're just appending new values, find the x value for the new point
-        if series.count() > 0:
-            # Calculate the elapsed time
-            elapsed_time = time.time() - start_time
-
-            # Append the new point to the series
-            series.append(elapsed_time, value)
-            # Remove the oldest point if series size exceeds the limit
-            if series.count() > MAX_POINTS:
-                series.remove(0)  # Assuming the oldest point is at index 0
+        current_time = time.time() - start_time
         
+        # Append the new data point
+        series.append(current_time, value)
+        
+        # Remove points that are outside of the visible time window
+        while series.at(0).x() < (current_time - TIME_WINDOW):
+            series.removePoints(0, 1)
+
+        # If we have more points than MAX_POINTS, start removing the oldest ones
+        if series.count() > MAX_POINTS:
+            remove_count = series.count() - MAX_POINTS
+            series.removePoints(0, remove_count)
             
-            # Update the axis range to create a scrolling effect
-            if elapsed_time > time_window:
-                axisX.setRange(elapsed_time - time_window, elapsed_time)
-            else:
-                axisX.setRange(0, time_window)
-        else:
-            # This is the first point, so just append it
-            series.append(0, value)
+        # Update the x-axis range to show only the last TIME_WINDOW seconds
+        axisX.setRange(current_time - TIME_WINDOW, current_time)
+
 
     def get_core_regs_handler(self, regs):
         # Clear the table

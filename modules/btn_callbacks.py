@@ -634,6 +634,91 @@ def load_bin(main_window):
 def start_ota(main_window):
     main_window.connectedDevice.device_ota_update_start.emit(main_window.fileName, main_window.fileLen, main_window.fileCrc32)
 
+
+def btn_start_voyager_clicked( main_window):
+    #----------------- Load QtChart into scroll area -----------------
+    #check if already "graphing" already exists in dict
+    if "graphing" not in main_window.vars_watched_dict:
+        var_name = "graphing"
+        #add var name to dict
+        main_window.vars_watched_dict[var_name] = {"address": 00, "watched_row_position": 00, "graphed": False}
+        logger = logging.getLogger("PDexLogger")
+        logger.info(f"Graphing {var_name}") 
+        # if clicked and already graphinh it then remove it
+        
+        
+        # Create a new QLineSeries object and initialize it
+        series = QLineSeries()
+        main_window.vars_watched_dict[var_name]['series'] = series
+        main_window.vars_watched_dict[var_name]['graphed'] = True
+
+        # Create a QChart object and add the series to it
+        chart = QChart()
+        chart.setTitle(f"Graph for {var_name}")
+
+        chart.addSeries(series)
+        main_window.vars_watched_dict[var_name]['chart'] = chart
+
+        axisX = QtCharts.QValueAxis()
+        axisY = QtCharts.QValueAxis()
+        chart.addAxis(axisX, Qt.AlignBottom)
+        chart.addAxis(axisY, Qt.AlignLeft)
+        series.attachAxis(axisX)
+        series.attachAxis(axisY)
+        axisX.setRange(0, 1)  # replace 100 with whatever max value makes sense for your x-axis
+        axisY.setRange(0, 30)  # replace 100 with whatever max value makes sense for your y-axis
+
+        # customize the chart
+        background_color = QColor(33, 37,43)
+
+        # Create a QBrush object with the QColor object
+        background_brush = QBrush(background_color)
+
+        # Set the background brush of the QChart
+        chart.setBackgroundBrush(background_brush)
+        # change grideline colors to rgb(52, 59, 72)
+        chart.axisX().setGridLineColor(QColor(52, 59, 72))
+        chart.axisY().setGridLineColor(QColor(52, 59, 72))
+        # change axis label colors to rgb(255, 255, 255)
+        chart.axisX().setLabelsColor(QColor(52, 59, 72))
+        chart.axisY().setLabelsColor(QColor(52, 59, 72))
+        # hide legend
+        chart.legend().hide()
+        # Create a QChartView object
+        chart_view = QChartView(chart)
+        chart_view.setMinimumHeight(300) 
+        chart_view.setRenderHint(QPainter.Antialiasing)
+        chart_view.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+
+        # Create a QWidget object and set its layout to QVBoxLayout
+        chart_widget = QWidget()
+        layout = QVBoxLayout()
+        layout.addWidget(chart_view)
+        chart_widget.setLayout(layout)
+        chart_widget.setMinimumHeight(300)  # adjust as necessary
+        logger.info("Chart added")
+
+        main_window.voyager_chart_layout.addWidget(chart_widget)
+
+        # # save refrence to it
+        main_window.vars_watched_dict[var_name]['chart_widget'] = chart_widget
+        # store refrences to axisX and axisY in dict
+        main_window.vars_watched_dict[var_name]['axisX'] = axisX
+        main_window.vars_watched_dict[var_name]['axisY'] = axisY
+        main_window.vars_watched_dict[var_name]['start_time'] = time.time()
+
+    #----------| Send notification to device to start sending data |----------
+    try:
+        ARM_Propietary_Data_Characteristic ="e0262760-08c2-11e1-9073-0e8ac72e0001"
+        data_to_write = "Go!"
+        # get this widget from char_dict
+        # check if write with response or write without response by checking toggle state
+        # only if the toggle button is visible otherwise it is disabled, dont override rap
+        main_window.connectedDevice.device_char_write.emit(ARM_Propietary_Data_Characteristic,data_to_write,True,False)
+
+    except Exception as err:
+        logger.info(f"Error writing to device: {err}")
+
 def register_button_callbacks(main_window):
     logger = logging.getLogger("PDexLogger")
     try:
@@ -659,6 +744,7 @@ def register_button_callbacks(main_window):
         #register button callbacks for OTA
         main_window.ui.btn_load_bin.clicked.connect(lambda :load_bin(main_window))
         main_window.ui.btn_start_ota.clicked.connect(lambda:start_ota(main_window))
+        main_window.ui.btn_start_voyager.clicked.connect(lambda:btn_start_voyager_clicked(main_window))
     except Exception as err:
         logger.setLevel(logging.WARNING)
         logger.warning(err)
