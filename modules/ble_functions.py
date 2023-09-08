@@ -88,7 +88,7 @@ class BLE_ConnectDevice(QThread):
     device_ota_update_send_file = Signal(str, int) # fileName, fileLen
     device_ota_update_verify_file = Signal()
     device_ota_update_reset_device = Signal()
-    device_ota_update_failed = Signal()
+    device_ota_update_failed = Signal() # connected to a slot in main.py
     ota_device_erase_complete = Signal(bool)
     otas_progress_value = Signal(int)
     
@@ -107,7 +107,7 @@ class BLE_ConnectDevice(QThread):
         self.ota_device_erase_complete.connect(lambda: ota.ota_device_erase_complete_handler(self))
         self.device_ota_update_verify_file.connect(self.BLE_task_enqueue_max32xxx_ota_verify_file)
         self.device_ota_update_reset_device.connect(self.BLE_task_enqueue_max32xxx_ota_reset_device)
-        self.device_ota_update_failed.connect(self.ota_failed_handler)
+
     
     def run(self):
 
@@ -318,7 +318,7 @@ class BLE_ConnectDevice(QThread):
                     self.logger.info("File verification failed")
                     self.logger.info("OTA update failed")
                     # emit failed signal
-                    self.device_ota_update_failed.emit()
+                    self.ota_failed_handler()
 
                             
 
@@ -374,7 +374,6 @@ class BLE_ConnectDevice(QThread):
     #------------------------------| MAX32xxx OTA Update task enqueuers |-------------------------------------------
 
     def BLE_task_enqueue_max32xxx_ota_start(self,fileName, fileLen, crc32):
-        print(f"filename: {fileName} : fileLen: {fileLen} : crc32: {crc32}")
         if fileLen == 0 or crc32 == 0:
             self.logger.setLevel(logging.WARNING)
             self.logger.warning("File length or CRC32 is 0, you must select a file first")
@@ -458,3 +457,4 @@ class BLE_ConnectDevice(QThread):
         self.ota_file_len = 0
         self.ota_file_name = None
         self.otas_progress_value.emit(0)
+        self.device_ota_update_failed.emit()
