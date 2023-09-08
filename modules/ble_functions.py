@@ -324,6 +324,16 @@ class BLE_ConnectDevice(QThread):
             self.logger.info("Read failed")
             
     def BLE_task_enqueue_max32xxx_ota(self,fileName, fileLen, crc32):
+        if fileLen == 0 or crc32 == 0:
+            self.logger.setLevel(logging.WARNING)
+            self.logger.warning("File length or CRC32 is 0, you must select a file first")
+            self.logger.setLevel(logging.INFO)
+            return
+        elif self.is_connected == False:
+            self.logger.setLevel(logging.WARNING)
+            self.logger.warning("You must connect to a device first")
+            self.logger.setLevel(logging.INFO)
+            return
         task = ("max32xxx_ota", [fileName,fileLen,crc32], {})
         try:
             self.async_queue.put_nowait(task)
