@@ -1836,7 +1836,7 @@ p, li { white-space: pre-wrap; }
                       <string notr="true">background: transparent;</string>
                      </property>
                      <property name="currentIndex">
-                      <number>2</number>
+                      <number>3</number>
                      </property>
                      <widget class="QWidget" name="home">
                       <property name="styleSheet">
@@ -3136,7 +3136,7 @@ QPushButton:pressed{
                                    <bool>true</bool>
                                   </property>
                                   <attribute name="horizontalHeaderVisible">
-                                   <bool>true</bool>
+                                   <bool>false</bool>
                                   </attribute>
                                   <attribute name="horizontalHeaderCascadingSectionResizes">
                                    <bool>false</bool>
@@ -3451,7 +3451,7 @@ QPushButton:pressed{
                           <item>
                            <widget class="QFrame" name="scroll_Area_2_frame">
                             <property name="styleSheet">
-                             <string notr="true"> border: 2px solid rgb(52, 59, 72);
+                             <string notr="true"> border: 0px solid rgb(52, 59, 72);
 	border-radius: 5px;	
 </string>
                             </property>
@@ -3502,8 +3502,8 @@ QPushButton:pressed{
                                  <rect>
                                   <x>0</x>
                                   <y>0</y>
-                                  <width>788</width>
-                                  <height>580</height>
+                                  <width>792</width>
+                                  <height>584</height>
                                  </rect>
                                 </property>
                                </widget>
