@@ -88,7 +88,7 @@ class BLE_ConnectDevice(QThread):
     device_ota_update_send_file = Signal(str, int) # fileName, fileLen
     device_ota_update_verify_file = Signal()
     device_ota_update_reset_device = Signal()
-    device_ota_update_failed = Signal() # connected to a slot in main.py
+    device_ota_update_reset = Signal() # connected to a slot in main.py
     ota_device_erase_complete = Signal(bool)
     otas_progress_value = Signal(int)
     
@@ -317,8 +317,9 @@ class BLE_ConnectDevice(QThread):
                 else:
                     self.logger.info("File verification failed")
                     self.logger.info("OTA update failed")
-                    # emit failed signal
-                    self.ota_failed_handler()
+                    
+                
+                self.ota_reset_state_handler()
 
                             
 
@@ -449,7 +450,7 @@ class BLE_ConnectDevice(QThread):
             self.logger.setLevel(logging.INFO)
             self.logger.info("OTA failed")
 
-    def ota_failed_handler(self):
+    def ota_reset_state_handler(self):
         self.logger.info("OTA update state reset")
         self.ota_in_progress = False
         self.ota_erase_complete = False
@@ -457,4 +458,5 @@ class BLE_ConnectDevice(QThread):
         self.ota_file_len = 0
         self.ota_file_name = None
         self.otas_progress_value.emit(0)
-        self.device_ota_update_failed.emit()
+        # failed signal simply resets the variable in main.py
+        self.device_ota_update_reset.emit()
