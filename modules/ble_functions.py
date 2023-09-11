@@ -291,6 +291,12 @@ class BLE_ConnectDevice(QThread):
         self.logger.info(f"Data: {data}")
         try:
             self.device_notification_recevied.emit(str(sender), str(data))
+            self.logger.info(f"Notification received")
+            self.logger.info(f"Sender: {sender}")
+            self.logger.info(f"Data Len: {len(data)}")
+            #self.logger.info(f"Data: {data}") # this will print in the chars window
+            #----------------- MAX32xxx OTA UPDATE -----------------
+            # TODO move this to a seperate class in another file
             # if we have started the ota update and we get a notification from the WDX_File_Transfer_Control_Characteristic
             # this means that the erase is complete
             # we can now start sending the file
