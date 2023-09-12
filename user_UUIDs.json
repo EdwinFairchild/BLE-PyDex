@@ -1,0 +1,10 @@
+{
+
+    "005f0002-2ff2-4ed5-b045-4c7463617865": "WDX Device Configuration Characteristic",
+    "005f0003-2ff2-4ed5-b045-4c7463617865": "WDX File Transfer Control Characteristic",
+    "005f0004-2ff2-4ed5-b045-4c7463617865": "WDX File Transfer Data Characteristic",
+    "005f0005-2ff2-4ed5-b045-4c7463617865": "WDX Authentication Characteristic",
+    "e0262760-08c2-11e1-9073-0e8ac72e1001": "ARM Prop. Data Service",
+    "e0262760-08c2-11e1-9073-0e8ac72e0001": "ARM Prop. Data Characteristic"
+
+}

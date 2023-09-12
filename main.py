@@ -7,7 +7,7 @@ import random
 import time
 import numpy as np
 import webbrowser
-
+import json 
 from modules import *
 from widgets import *
 from pyqtgraph import PlotDataItem
@@ -495,23 +495,32 @@ class MainWindow(QMainWindow):
             self.add_char_widget(item, permissions)
     
     def extract_uuid_name(self, data):
-        # data[0] looks like this: 00001801-0000-1000-8000-00805f9b34fb (Handle: 16): Generic Attribute Profile 
         char_uuid = self.extract_uuid_hex(data)
         found_match = False
-        # check if UUID exist in ble numbers
+
+        with open("user_UUIDs.json", "r") as f:
+            json_data = json.load(f)
+
         for uuid_type in [ble_uuid.service, ble_uuid.characteristic, ble_uuid.descriptor]:
             try:
-                char_uuid = uuid_type[UUID(char_uuid)]
-                # replace the UUID with the name in item
-                data = char_uuid
-                found_match = True
+                temp = uuid_type[UUID(char_uuid)]
                 
-            except:
-                pass
-        if found_match == False:
-            # TODO check if UUID exist in user_uuids.json
-            pass
+                if temp != char_uuid:
+                    data = temp
+                    found_match = True
+                    
+                    break  # Exit the loop if a match is found
 
+            except Exception as e:
+                pass
+                #print(f"Exception occurred: {e}")  # Debug print
+
+        if not found_match:
+            search_uuid = char_uuid
+            
+            if search_uuid in json_data:
+                data = json_data[search_uuid]
+                
         return data
 
     def extract_uuid_hex(self, data):
