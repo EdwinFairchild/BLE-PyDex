@@ -52,6 +52,37 @@ async def max32xxx_ota_task_list(self,task ,client, *args, **kwargs):
     if task == "max32xxx_ota_reset_device":
         await ota.ota_update_reset_device(self, client, *args, **kwargs)
 
+def max32xxx_ota_notification_handler(self,sender,data):
+    # TODO move this to a seperate class in another file
+    # if we have started the ota update and we get a notification from the WDX_File_Transfer_Control_Characteristic
+    # this means that the erase is complete
+    # we can now start sending the file
+    if "Handle: 580" in str(sender) and self.ota_erase_complete == False and self.ota_in_progress == True:
+        self.ota_device_erase_complete.emit(True) # might not need this
+        #start to send file
+        self.device_ota_update_send_file.emit(self, self.ota_file_name, self.ota_file_len)
+
+    # if we have started the ota update and we get a notification from the WDX_File_Transfer_Control_Characteristic
+    # and the erase is complete that means now the file write is complete
+    # we can now send the verify request
+    elif "Handle: 580" in str(sender) and self.ota_erase_complete == True and self.ota_in_progress == True and self.ota_file_write_complete == False:
+        # send verify request
+        self.ota_file_write_complete = True
+        self.device_ota_update_verify_file.emit(self)
+    elif "Handle: 580" in str(sender) and self.ota_erase_complete == True and self.ota_in_progress == True and self.ota_file_write_complete == True:
+        # at this point the ota update is complete and a verify quest was send,
+        # we need to check if the return value is 0x00 (verified OK) or 0x05 (Verification failed)
+        expected_data = bytearray(b'\x08\x01\x00\x00')
+        if data == expected_data:
+            # emit reset
+            self.device_ota_update_reset_device.emit(self)
+            self.logger.info("File is verified.")
+        else:
+            self.logger.info("File verification failed")
+            self.logger.info("OTA update failed")
+            
+        ota_reset_state_handler(self)
+
 def BLE_task_enqueue_max32xxx_ota_start(self,fileName, fileLen, crc32):
     if fileLen == 0 or crc32 == 0:
         self.logger.setLevel(logging.WARNING)
