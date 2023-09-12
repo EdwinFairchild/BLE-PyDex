@@ -84,11 +84,11 @@ class BLE_ConnectDevice(QThread):
     ota_in_progress = False
     ota_erase_complete = False
     ota_file_write_complete = False
-    device_ota_update_start = Signal(str, int, ctypes.c_uint32) # fileName, fileLen, crc32
-    device_ota_update_send_file = Signal(str, int) # fileName, fileLen
-    device_ota_update_verify_file = Signal()
-    device_ota_update_reset_device = Signal()
-    device_ota_update_reset = Signal() # connected to a slot in main.py
+    device_ota_update_start = Signal(object,str, int, ctypes.c_uint32) # fileName, fileLen, crc32
+    device_ota_update_send_file = Signal(object,str, int) # fileName, fileLen
+    device_ota_update_verify_file = Signal(object)
+    device_ota_update_reset_device = Signal(object)
+    device_ota_update_reset = Signal(object) # connected to a slot in main.py
     ota_device_erase_complete = Signal(bool)
     otas_progress_value = Signal(int)
     
@@ -102,11 +102,11 @@ class BLE_ConnectDevice(QThread):
         self.device_char_read.connect(self.BLE_task_enqueue_read)
 
         #-----------| ota related Signal connections |---------------------------
-        self.device_ota_update_start.connect(self.BLE_task_enqueue_max32xxx_ota_start)
-        self.device_ota_update_send_file.connect(self.BLE_task_enqueue_max32xxx_ota_send_file)
+        self.device_ota_update_start.connect(max32xxx_ota.BLE_task_enqueue_max32xxx_ota_start)
+        self.device_ota_update_send_file.connect(max32xxx_ota.BLE_task_enqueue_max32xxx_ota_send_file)
         self.ota_device_erase_complete.connect(lambda: ota.ota_device_erase_complete_handler(self))
-        self.device_ota_update_verify_file.connect(self.BLE_task_enqueue_max32xxx_ota_verify_file)
-        self.device_ota_update_reset_device.connect(self.BLE_task_enqueue_max32xxx_ota_reset_device)
+        self.device_ota_update_verify_file.connect(max32xxx_ota.BLE_task_enqueue_max32xxx_ota_verify_file)
+        self.device_ota_update_reset_device.connect(max32xxx_ota.BLE_task_enqueue_max32xxx_ota_reset_device)
 
     
     def run(self):
@@ -141,14 +141,15 @@ class BLE_ConnectDevice(QThread):
                             await self.readCallback(client, *args, **kwargs)
 
                         #-----------| ota related task handlers |---------------------------    
-                        if task == "max32xxx_ota_start":
-                            await ota.ota_update_start(self, client, *args, **kwargs)
-                        if task == "max32xxx_ota_send_file":
-                            await ota.ota_update_send_file(self, client, *args, **kwargs)
-                        if task == "max32xxx_ota_verify_file":
-                            await ota.ota_update_verify_file(self, client, *args, **kwargs)
-                        if task == "max32xxx_ota_reset_device":
-                            await ota.ota_update_reset_device(self, client, *args, **kwargs)
+                        await max32xxx_ota.max32xxx_ota_task_list(self,task ,client, *args, **kwargs)
+                        # if task == "max32xxx_ota_start":
+                        #     await ota.ota_update_start(self, client, *args, **kwargs)
+                        # if task == "max32xxx_ota_send_file":
+                        #     await ota.ota_update_send_file(self, client, *args, **kwargs)
+                        # if task == "max32xxx_ota_verify_file":
+                        #     await ota.ota_update_verify_file(self, client, *args, **kwargs)
+                        # if task == "max32xxx_ota_reset_device":
+                        #     await ota.ota_update_reset_device(self, client, *args, **kwargs)
                             
 
                     # async sleep, give time for other threads to run
@@ -303,7 +304,7 @@ class BLE_ConnectDevice(QThread):
             if "Handle: 580" in str(sender) and self.ota_erase_complete == False and self.ota_in_progress == True:
                 self.ota_device_erase_complete.emit(True) # might not need this
                 #start to send file
-                self.device_ota_update_send_file.emit(self.ota_file_name, self.ota_file_len)
+                self.device_ota_update_send_file.emit(self, self.ota_file_name, self.ota_file_len)
 
             # if we have started the ota update and we get a notification from the WDX_File_Transfer_Control_Characteristic
             # and the erase is complete that means now the file write is complete
@@ -311,14 +312,14 @@ class BLE_ConnectDevice(QThread):
             elif "Handle: 580" in str(sender) and self.ota_erase_complete == True and self.ota_in_progress == True and self.ota_file_write_complete == False:
                 # send verify request
                 self.ota_file_write_complete = True
-                self.device_ota_update_verify_file.emit()
+                self.device_ota_update_verify_file.emit(self)
             elif "Handle: 580" in str(sender) and self.ota_erase_complete == True and self.ota_in_progress == True and self.ota_file_write_complete == True:
                 # at this point the ota update is complete and a verify quest was send,
                 # we need to check if the return value is 0x00 (verified OK) or 0x05 (Verification failed)
                 expected_data = bytearray(b'\x08\x01\x00\x00')
                 if data == expected_data:
                     # emit reset
-                    self.device_ota_update_reset_device.emit()
+                    self.device_ota_update_reset_device.emit(self)
                     self.logger.info("File is verified.")
                 else:
                     self.logger.info("File verification failed")
@@ -378,91 +379,6 @@ class BLE_ConnectDevice(QThread):
             self.logger.setLevel(logging.INFO)
             self.logger.info("Read failed")
             
-    #------------------------------| MAX32xxx OTA Update task enqueuers |-------------------------------------------
 
-    def BLE_task_enqueue_max32xxx_ota_start(self,fileName, fileLen, crc32):
-        if fileLen == 0 or crc32 == 0:
-            self.logger.setLevel(logging.WARNING)
-            self.logger.warning("File length or CRC32 is 0, you must select a file first")
-            self.logger.setLevel(logging.INFO)
-            return
-        elif self.is_connected == False:
-            self.logger.setLevel(logging.WARNING)
-            self.logger.warning("You must connect to a device first")
-            self.logger.setLevel(logging.INFO)
-            return
-        self.ota_file_len = fileLen
-        self.ota_file_name = fileName
-        task = ("max32xxx_ota_start", [fileName,fileLen,crc32], {})
-        try:
-            self.async_queue.put_nowait(task)
-        except Exception as err:
-            self.logger.setLevel(logging.WARNING)
-            self.logger.warning(f"Queue is full: {err}")
-            self.logger.setLevel(logging.INFO)
-            self.logger.info("OTA failed")
-            
-    def BLE_task_enqueue_max32xxx_ota_send_file(self,fileName, fileLen):
-        if fileLen == 0 or fileName == None:
-            self.logger.setLevel(logging.WARNING)
-            self.logger.warning("File length is 0, you must select a file first")
-            self.logger.setLevel(logging.INFO)
-            return
-        elif self.is_connected == False:
-            self.logger.setLevel(logging.WARNING)
-            self.logger.warning("You must connect to a device first")
-            self.logger.setLevel(logging.INFO)
-            return
-        self.ota_file_len = fileLen
-        self.ota_file_name = fileName
-        task = ("max32xxx_ota_send_file", [fileName,fileLen], {})
-        try:
-            self.async_queue.put_nowait(task)
-        except Exception as err:
-            self.logger.setLevel(logging.WARNING)
-            self.logger.warning(f"Queue is full: {err}")
-            self.logger.setLevel(logging.INFO)
-            self.logger.info("OTA failed")
 
-    def BLE_task_enqueue_max32xxx_ota_verify_file(self):
-        if self.is_connected == False:
-            self.logger.setLevel(logging.WARNING)
-            self.logger.warning("Connection lost")
-            self.logger.setLevel(logging.INFO)
-            return
-
-        task = ("max32xxx_ota_verify_file",[], {})
-        try:
-            self.async_queue.put_nowait(task)
-        except Exception as err:
-            self.logger.setLevel(logging.WARNING)
-            self.logger.warning(f"Queue is full: {err}")
-            self.logger.setLevel(logging.INFO)
-            self.logger.info("OTA failed")
-    
-    def BLE_task_enqueue_max32xxx_ota_reset_device(self):
-        if self.is_connected == False:
-            self.logger.setLevel(logging.WARNING)
-            self.logger.warning("Connection lost")
-            self.logger.setLevel(logging.INFO)
-            return
-
-        task = ("max32xxx_ota_reset_device",[], {})
-        try:
-            self.async_queue.put_nowait(task)
-        except Exception as err:
-            self.logger.setLevel(logging.WARNING)
-            self.logger.warning(f"Queue is full: {err}")
-            self.logger.setLevel(logging.INFO)
-            self.logger.info("OTA failed")
-
-    def ota_reset_state_handler(self):
-        self.logger.info("OTA update state reset")
-        self.ota_in_progress = False
-        self.ota_erase_complete = False
-        self.ota_file_write_complete = False
-        self.ota_file_len = 0
-        self.ota_file_name = None
-        self.otas_progress_value.emit(0)
-        # failed signal simply resets the variable in main.py
-        self.device_ota_update_reset.emit()
+ 

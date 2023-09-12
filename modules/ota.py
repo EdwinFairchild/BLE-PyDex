@@ -94,7 +94,7 @@ async def ota_update_send_file( self, client,fileName, fileLen):
         self.logger.info("Start of sending file")
         address = 0x00000000  
         with open(fileName, 'rb') as f:
-            while True:
+            while client.is_connected:
                 try:
                     rawBytes = f.read(blocksize)
                     tempLen = tempLen - len(rawBytes)
@@ -130,14 +130,15 @@ async def ota_update_verify_file( self, client):
     global delayTime
     try:
         #--------------------| send verify file request   |---------------------
-        #assemble packet and send
-        #file handle is incremented
-        new_WDX_FILE_HANDLE = (1).to_bytes(2,byteorder='little',signed = False)
-        packet_to_send = max32xxx_ota.WDX_FTC_OP_VERIFY_REQ +  new_WDX_FILE_HANDLE
-        self.logger.info("sent verify req: " + str(list(packet_to_send)))   
-        resp = await client.write_gatt_char(max32xxx_ota.WDX_File_Transfer_Control_Characteristic, bytearray(packet_to_send))
-        while resp != None:
-            await asyncio.sleep(delayTime)
+        if client.is_connected :
+            #assemble packet and send
+            #file handle is incremented
+            new_WDX_FILE_HANDLE = (1).to_bytes(2,byteorder='little',signed = False)
+            packet_to_send = max32xxx_ota.WDX_FTC_OP_VERIFY_REQ +  new_WDX_FILE_HANDLE
+            self.logger.info("sent verify req: " + str(list(packet_to_send)))   
+            resp = await client.write_gatt_char(max32xxx_ota.WDX_File_Transfer_Control_Characteristic, bytearray(packet_to_send))
+            while resp != None:
+                await asyncio.sleep(delayTime)
     except Exception as err:
         self.logger.setLevel(logging.WARNING)
         self.logger.warning(err)
@@ -148,22 +149,23 @@ async def ota_update_reset_device( self, client):
     global delayTime
     try: 
         #--------------------| send reset request   |---------------------
-        # assemble packet and send
-        packet_to_send = max32xxx_ota.WDX_DC_OP_SET + max32xxx_ota.WDX_DC_ID_DISCONNECT_AND_RESET 
-        self.logger.info("sent reset req: " + str(list(packet_to_send))) 
-        resp = 1  
-        resp = await client.write_gatt_char(max32xxx_ota.WDX_Device_Configuration_Characteristic, bytearray(packet_to_send))
-        while resp != None:
-            print("waiting")
+        if client.is_connected :
+            # assemble packet and send
+            packet_to_send = max32xxx_ota.WDX_DC_OP_SET + max32xxx_ota.WDX_DC_ID_DISCONNECT_AND_RESET 
+            self.logger.info("sent reset req: " + str(list(packet_to_send))) 
+            resp = 1  
+            resp = await client.write_gatt_char(max32xxx_ota.WDX_Device_Configuration_Characteristic, bytearray(packet_to_send))
+            while resp != None:
+                print("waiting")
+                await asyncio.sleep(delayTime)
+            
             await asyncio.sleep(delayTime)
-        
-        await asyncio.sleep(delayTime)
-        
-        self.logger.info("File sent. Firmware update done")
-        ## TODO see what is going on with indications 
+            
+            self.logger.info("File sent. Firmware update done")
+            ## TODO see what is going on with indications 
 
-        self.disconnect_triggered = True
-        # TODO make gui clean up method/signal for disconnect event
+            self.disconnect_triggered = True
+            # TODO make gui clean up method/signal for disconnect event
 
     except Exception as err:
         self.logger.setLevel(logging.WARNING)
