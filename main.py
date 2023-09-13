@@ -460,19 +460,19 @@ class MainWindow(QMainWindow):
             # data[0] looks like this: 00001801-0000-1000-8000-00805f9b34fb (Handle: 16): Generic Attribute Profile 
             # extract the UUID from the string which is this: 00001801-0000-1000-8000-00805f9b34fb
 
-            # check if UUID exist in ble numbers
-            char_uuid = self.extract_uuid_name(item)
-            self.logger.info("Adding service widget for UUID: " + str(char_uuid))
-            self.toplevel = QTreeWidgetItem([str(char_uuid)])
+            # check if UUID exist in ble numbers to get a name  for this UUI
+            char_name = self.extract_uuid_name(item)
+            self.logger.info("Adding service widget for UUID: " + str(char_name))
+            self.toplevel = QTreeWidgetItem([str(char_name)])
             # Set the icon for the top-level item.
             icon = QIcon()
             icon.addPixmap(QPixmap("char_s.png"), QIcon.Normal, QIcon.On)
             self.toplevel.setIcon(0, icon)
             self.ui.gatt_treeView.addTopLevelItem(self.toplevel)
         elif level == CHILD and self.toplevel != None:
-             # check if UUID exist in ble numbers
-            char_uuid = self.extract_uuid_name(item)
-            self.child = QTreeWidgetItem([str(char_uuid)])
+            # check if UUID exist in ble numbers to get a name  for this UUID
+            char_name = self.extract_uuid_name(item)
+            self.child = QTreeWidgetItem([str(char_name)])
             # Set the icon for the top-level item.
             icon = QIcon()
             icon.addPixmap(QPixmap("char_c.png"), QIcon.Normal, QIcon.On)
@@ -481,9 +481,9 @@ class MainWindow(QMainWindow):
            
            
         elif level == GRANDCHILD and self.child != None:
-             # check if UUID exist in ble numbers
-            char_uuid = self.extract_uuid_name(item)
-            self.subchild = QTreeWidgetItem([str(char_uuid)])
+            # check if UUID exist in ble numbers to get a name  for this UUI
+            char_name = self.extract_uuid_name(item)
+            self.subchild = QTreeWidgetItem([str(char_name)])
             # Set the icon for the top-level item.
             icon = QIcon()
             icon.addPixmap(QPixmap("char_d.png"), QIcon.Normal, QIcon.On)
@@ -520,7 +520,13 @@ class MainWindow(QMainWindow):
             
             if search_uuid in json_data:
                 data = json_data[search_uuid]
-                
+                found_match = True
+        if not found_match:
+            # 00001801-0000-1000-8000-00805f9b34fb (Handle: 16): Generic Attribute Profile
+            # extract the UUID from the string which is this 00001801-0000-1000-8000-00805f9b34fb
+            #if not match is found for UUID then make char name the UUID
+            data = self.extract_uuid_hex(data)
+
         return data
 
     def extract_uuid_hex(self, data):
@@ -539,8 +545,10 @@ class MainWindow(QMainWindow):
         # if it does exist then scroll to that widget
 #        uuid = self.extract_uuid_hex(tree_item.text(column))   
         for key, value in self.char_dict.items():
-            if tree_item.text(column) in value['char name']:
+            # check if text  exist in char_name or key itself
+            if tree_item.text(column) in value['char name'] or tree_item.text(column) in key:
                 self.ui.scrollArea_2.ensureWidgetVisible(self.char_dict[key]["widgetlocation"])
+           
         
         
     def add_char_widget(self, char_uuid, permissions):
@@ -678,12 +686,7 @@ class MainWindow(QMainWindow):
             "uiWidget":uiwidget,
             "widgetlocation":tempWidget, 
             "permissions":permissions}
-        # to retreive a vlue from this dict
-        # mywidget = self.char_dict[UUID]["widget"] 
         
-        # register callbacks for the uiwidget elements
-
-        #  store reference to widget in char_dict so we can access it later, use UUID as key
     def stacked_widget_show_connected(self):
         # change stacked widget to connections page
         self.ui.btn_gatt_explorer.click()
