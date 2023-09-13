@@ -674,7 +674,7 @@ class MainWindow(QMainWindow):
         # and removing it from the scroll area
         uuid_raw = self.extract_uuid_hex(char_uuid)
         self.char_dict[uuid_raw] = {
-            "char name":char_uuid,
+            "char name":char_name,
             "uiWidget":uiwidget,
             "widgetlocation":tempWidget, 
             "permissions":permissions}

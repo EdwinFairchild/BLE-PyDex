@@ -41,8 +41,7 @@ maxFileRecordLength = ((WDX_FLIST_RECORD_SIZE * DATC_WDXC_MAX_FILES) \
 
 
 #------------------------------| MAX32xxx OTA Update task enqueuers |-------------------------------------------
-async def max32xxx_ota_task_list(self,task ,client, *args, **kwargs):
-    print(f"task: {task}")  
+async def max32xxx_ota_task_list(self,task ,client, *args, **kwargs): 
     if task == "max32xxx_ota_start":
         await ota.ota_update_start(self, client, *args, **kwargs)
     if task == "max32xxx_ota_send_file":
