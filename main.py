@@ -255,11 +255,7 @@ class MainWindow(QMainWindow):
         self.axisY.setLinePen(pen)
 
         self.ui.list_widget_discovered.itemClicked.connect(self.highlight_selected_device)
-        
-
-                
-
-
+    
         # SET CUSTOM THEME
         useCustomTheme = True
         themeFile = "themes/py_dracula_dark.qss"
@@ -276,10 +272,11 @@ class MainWindow(QMainWindow):
         self.ui.btn_home.setStyleSheet(UIFunctions.selectMenu(self.ui.btn_home.styleSheet()))
 
     def highlight_selected_device(self, item):
+        
         selected_device = item.text()
-        light_gray = QColor(52, 59, 72)  # Light gray color
-        light_gray_pen = QPen(light_gray)
-        light_gray_pen.setWidth(2)
+        blue_color = QColor(153, 193, 241)  # Light gray color
+        blue_pen = QPen(blue_color)
+        blue_pen.setWidth(2)
 
         # Temporarily store the series for the selected device
         selected_device_series = None
@@ -287,26 +284,26 @@ class MainWindow(QMainWindow):
         # Loop through all device_data_curves to update their color
         for device_name, device_series in self.device_data_curves.items():
             if device_name == selected_device:
-                # This is the selected device, so keep its original color
+                # This is the selected device, so change its color
+                device_series.setPen(blue_pen)
+
+                # Store the series for adding it again later to bring it to the front
+                selected_device_series = device_series
+            else:
                 original_color_pen = QPen(self.device_original_colors[device_name])
                 original_color_pen.setWidth(2)
                 device_series.setPen(original_color_pen)
 
-                # Store the series for adding it again later to bring it to the front
-                selected_device_series = device_series
-
-            else:
-                # Change color to light gray for non-selected devices
-                device_series.setPen(light_gray_pen)
-
         # Remove and add the series again to bring it to the front
+        # This is  a workarouund for the fact that QChart doesn't have a "bring to front" method
+        # and it will redraw other series on top of the selected one
         if selected_device_series:
             self.ui.qtchart_widgetholder.chart().removeSeries(selected_device_series)
             self.ui.qtchart_widgetholder.chart().addSeries(selected_device_series)
             selected_device_series.attachAxis(self.axisX)
             selected_device_series.attachAxis(self.axisY)
 
-        # Trigger a redraw (you might not need this line, depending on your setup)
+        # Trigger a redraw 
         self.ui.qtchart_widgetholder.chart().update()
     def update_graph(self,device_name,rssi_value,current_time):
         MAX_DEVICES = 50  # Maximum number of devices to display
@@ -337,22 +334,25 @@ class MainWindow(QMainWindow):
             device_data_y = np.append(device_data_y, rssi_value)
             # Create a list of QPointF objects
             points = [QPointF(x, y) for x, y in zip(device_data_x, device_data_y)]
-
+            # we have more than 50 points so we remove the first one
+            if len(points) > 50:
+                points.pop(0)
             device_series.replace(points)
+            
 
         else:
             if len(self.device_data_curves) >= MAX_DEVICES:
                 return  # Ignore new device if max is reached
 
             # Generate a random color for the new device
-            random_color = random.randint(0, 0xFFFFFF)
-            pen = QPen((random_color))
+            light_gray = QColor(72, 79, 92)  # Light gray color
+            pen = QPen((light_gray))
             pen.setWidth(2)
             # Create a new QLineSeries for the device
             new_device_series = QLineSeries()
             new_device_series.setPen(pen)
             new_device_series.append(current_time, rssi_value)
-            # # Update color of QListWidgetItem to match the line color
+            # Update color of QListWidgetItem to match the line color
             # for i in range(self.ui.list_widget_discovered.count()):
             #     item = self.ui.list_widget_discovered.item(i)
             #     if item.text() == device_name:
@@ -367,7 +367,7 @@ class MainWindow(QMainWindow):
             # Store the new series in the dictionary
             self.device_data_curves[device_name] = new_device_series
             # Save the original color in the new dictionary
-            self.device_original_colors[device_name] = random_color
+            self.device_original_colors[device_name] = light_gray
         
    
     def stop_rssi_thread(self):

@@ -1,4 +1,3 @@
-
 from main import *
 
 class UpdateRSSIGraphThread(QThread):
