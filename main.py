@@ -216,6 +216,11 @@ class MainWindow(QMainWindow):
         self.ui.scannerSettigns.setMaximumHeight(1000000)
         self.ui.scannerSettigns.show()
 
+        #hide unfinished sections
+        self.ui.btn_exit.hide()
+        self.ui.btn_save.hide()
+        self.ui.btn_widgets.hide()
+
 
         # Set up the axes (assuming the chart is already set up in the .ui file)
         self.axisX = QtCharts.QValueAxis()

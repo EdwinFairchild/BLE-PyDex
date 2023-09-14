@@ -632,6 +632,10 @@ def load_bin(main_window):
         logger.info(f"Error loading binary: {err}")
 
 def start_ota(main_window):
+    logger = logging.getLogger("PDexLogger")
+    if main_window.connectedDevice.is_connected == False:
+        logger.info("No device connected")
+        return
     main_window.connectedDevice.device_ota_update_start.emit(main_window.connectedDevice , main_window.fileName, main_window.fileLen, main_window.fileCrc32)
 
 def register_button_callbacks(main_window):
