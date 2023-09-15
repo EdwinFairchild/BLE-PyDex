@@ -598,11 +598,10 @@ def load_elf(main_window):
 def start_monitoring(main_window):
     if main_window.var_watcher.isRunning():
         main_window.var_watcher.exit_early = True
-        main_window.ui.btn_monitor.setText("Start Monitoring")
         main_window.stop_monitoringThread()
     else:
         main_window.var_watcher.start()
-        main_window.ui.btn_monitor.setText("Stop Monitoring")
+       
         
 def get_core_regs(main_window):
     logger = logging.getLogger("PDexLogger")

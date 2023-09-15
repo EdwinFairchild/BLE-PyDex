@@ -55,6 +55,7 @@ class ExtractGlobalVariablesThread(QThread):
 
 class MonitoringThread(QThread):
     signal_update_variable = Signal(str, object)  # Signal to update the variable value
+    var_monitor_active = Signal(bool)
     monitor_active = False
     exit_early = False
     logger = logging.getLogger("PDexLogger")
@@ -99,6 +100,7 @@ class MonitoringThread(QThread):
             self.logger.info("Monitoring variables ended")
             self.exit_early = False
             monitor_active = False
+            self.var_monitor_active.emit(False)
             # TODO emit signal to update UI monitoring button
             return
 
@@ -106,6 +108,7 @@ class MonitoringThread(QThread):
             monitor_active = True
             target = probe.target
             target.resume()
+            self.var_monitor_active.emit(True)
             self.print_core_registers(target)
             self.monitor_variables(target, self.address_dict)
            
@@ -150,6 +153,7 @@ class MonitoringThread(QThread):
             #target.close()  # Replace this with the appropriate method to close the connection to the target
             # You can also add any other cleanup code that needs to be executed here
             self.logger.info("Monitoring variables ended")
+            self.var_monitor_active.emit(False)
             self.exit_early = False
             monitor_active = False
             

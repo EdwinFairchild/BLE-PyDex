@@ -113,6 +113,7 @@ class MainWindow(QMainWindow):
         self.elf_parser = ExtractGlobalVariablesThread(None, self.ui.tbl_vars)
         self.var_watcher = MonitoringThread(self.vars_watched_dict)
         self.var_watcher.signal_update_variable.connect(self.update_variable_in_table)  # Assuming 'self.update_variable_in_table' is a method that handles the update
+        self.var_watcher.var_monitor_active.connect(self.update_var_monitor_active)
         # USE CUSTOM TITLE BAR | USE AS "False" FOR MAC OR LINUX
         Settings.ENABLE_CUSTOM_TITLE_BAR = False
         # used to store the current popup window when selecting var type
@@ -793,6 +794,14 @@ class MainWindow(QMainWindow):
         if event.buttons() == Qt.RightButton:
             pass
             #print('Mouse click: RIGHT CLICK')
+    def update_var_monitor_active(self, state):
+        if state == False:
+            # change button text to start
+            self.ui.btn_monitor.setText.setText("Start")
+        else:
+            # change button text to stop
+            self.ui.btn_monitor.setText.setText("Stop")
+
     def update_variable_in_table(self, var_name, value):
          # Check if the variable name is in the dictionary
         if var_name in self.vars_watched_dict:
