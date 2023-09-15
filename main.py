@@ -797,10 +797,10 @@ class MainWindow(QMainWindow):
     def update_var_monitor_active(self, state):
         if state == False:
             # change button text to start
-            self.ui.btn_monitor.setText.setText("Start")
+            self.ui.btn_monitor.setText("Start")
         else:
             # change button text to stop
-            self.ui.btn_monitor.setText.setText("Stop")
+            self.ui.btn_monitor.setText("Stop")
 
     def update_variable_in_table(self, var_name, value):
          # Check if the variable name is in the dictionary
