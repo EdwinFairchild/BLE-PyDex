@@ -87,7 +87,7 @@ def update_connection_stats(interface, stats):
     interface.ui.lbl_tx_data_count.setText("TX Data Count: " + str(stats[3]))
     interface.ui.lbl_tx_data_err.setText("TX Data Error: " + str(stats[4]))
     interface.ui.lbl_PER.setText("PER: " + str(stats[5]) + "%")
-   
+    interface.update_variable_in_table('bbConnStats',(stats[5]))
 
 
 

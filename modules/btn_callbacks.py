@@ -290,7 +290,7 @@ def handle_checkbox_state_change(state, var_name, address, address_dict, main_wi
         address_dict[var_name] = {"address": address, "watched_row_position": watched_row_position, "graphed": False}
 
         # TODO make user chose from a drop down
-        address_dict[var_name]['var_type'] = 'None'
+        address_dict[var_name]['var_type'] = 'float'
 
 
     else:
@@ -552,6 +552,8 @@ def load_elf(main_window):
     # # Open a file dialog to select the ELF file
     options = QFileDialog.Options()
     filename, _ = QFileDialog.getOpenFileName(main_window, "Open ELF File", "", "ELF Files (*.elf);;All Files (*)", options=options)
+    main_window.var_watcher.elfFilePath = filename
+
     # for faster debugging
     #filename = '/home/eddie/projects/ADI-Insight/BLE_dats/build/max32655.elf'
     #print("using hard coded elf filename")
@@ -646,6 +648,7 @@ def enable_connection_stats(main_window):
         main_window.var_watcher.getConnStats = True
         main_window.ui.stats_frame.show()
         logger.info("Getting connection stats")
+        handle_checkbox_state_change(Qt.Checked, 'bbConnStats', 0, main_window.vars_watched_dict, main_window)
     else:
         main_window.var_watcher.getConnStats = False
         logger.info("Not getting connection stats")
