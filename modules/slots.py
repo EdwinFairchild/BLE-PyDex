@@ -80,6 +80,16 @@ def device_disconnected_cb(interface):
     
     # clean up gui elements
     interface.cleanUp.emit("dummy data")
+def update_connection_stats(interface, stats):
+    interface.ui.lbl_rx_data_count.setText("RX Data Count: " + str(stats[0]))
+    interface.ui.lbl_rx_data_crc_err.setText("RX Data CRC Error: " + str(stats[1]))
+    interface.ui.lbl_rx_data_timeout.setText("RX Data Timeout: " + str(stats[2]))
+    interface.ui.lbl_tx_data_count.setText("TX Data Count: " + str(stats[3]))
+    interface.ui.lbl_tx_data_err.setText("TX Data Error: " + str(stats[4]))
+    interface.ui.lbl_PER.setText("PER: " + str(stats[5]) + "%")
+   
+
+
 
 def init_signals_and_slots(interface):
     interface.bleScanner.discovered_devices.connect(lambda device : update_discovered_devices(interface,device))
@@ -88,6 +98,9 @@ def init_signals_and_slots(interface):
     interface.connectedDevice.device_disconnected.connect(lambda: device_disconnected_cb(interface))
     # show Gatt explorer when connected
     interface.connectedDevice.connection_established.connect(lambda: interface.stacked_widget_show_connected())
+
+    #singal/slot for connection stats
+    interface.var_watcher.connStatValues.connect(lambda stats: update_connection_stats(interface, stats))
 
 
 
