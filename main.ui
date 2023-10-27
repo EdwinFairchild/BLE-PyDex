@@ -3407,7 +3407,7 @@ border-radius: 5px;
                                    <item>
                                     <widget class="QLabel" name="lbl_PER">
                                      <property name="styleSheet">
-                                      <string notr="true">font: 75 15pt &quot;Ubuntu&quot;;</string>
+                                      <string notr="true"/>
                                      </property>
                                      <property name="text">
                                       <string>PER : </string>
