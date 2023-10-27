@@ -1824,7 +1824,7 @@ class Ui_MainWindow(object):
 
         self.lbl_PER = QLabel(self.frame_15)
         self.lbl_PER.setObjectName(u"lbl_PER")
-        self.lbl_PER.setStyleSheet(u"font: 75 15pt \"Ubuntu\";")
+        self.lbl_PER.setStyleSheet(u"")
 
         self.verticalLayout_40.addWidget(self.lbl_PER)
 
