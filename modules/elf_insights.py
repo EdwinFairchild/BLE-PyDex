@@ -5,7 +5,7 @@ import subprocess
 import logging
 import time
 import sys
-
+import struct
 from PySide6.QtCore import QThread
 
 class ExtractGlobalVariablesThread(QThread):
@@ -56,13 +56,17 @@ class ExtractGlobalVariablesThread(QThread):
 class MonitoringThread(QThread):
     signal_update_variable = Signal(str, object)  # Signal to update the variable value
     var_monitor_active = Signal(bool)
+
     monitor_active = False
     exit_early = False
     logger = logging.getLogger("PDexLogger")
     getCoreRegs = False
     core_regs_tuple = Signal(zip)
     symbolName = None
-
+    getConnStats = False
+    connStatsAddress = None
+    #make a signal to update the connection stats as list
+    connStatValues = Signal(list)
     def __init__(self, address_dict):
         super().__init__()
         self.address_dict = address_dict #vars_watched_dict from main.py
@@ -144,10 +148,70 @@ class MonitoringThread(QThread):
                 if self.getCoreRegs is True:
                     self.print_core_registers(target)
                     self.getCoreRegs = False
+
+                if self.getConnStats is True:
+                    if self.connStatsAddress is None:
+                        try:
+                            self.connStatsAddress = self.get_symbol_address_from_elf('/home/eddie/projects/BLE-PyDex/max32655.elf', 'bbConnStats')
+                        except Exception as e:
+                            self.logger.setLevel(logging.WARNING)
+                            self.logger.warning("Error while monitoring variables: %s", e)
+                            self.logger.setLevel(logging.INFO)
+                    if self.connStatsAddress is not None:
+                        #print address in hex
+                        # print("0x{:08x}".format(address))
+                        data = self.read_struct_from_memory(target,self.connStatsAddress, 20)
+                        # Define the format string for the struct
+                        # The format string corresponds to the data types and order in the struct
+                        format_string = '<IIIII'  # Use '<' for little-endian byte order
+
+                        # Unpack the binary data into a tuple
+                        struct_byes = bytes(data)
+                        struct_data = struct.unpack(format_string, struct_byes)
+
+                        # Now, struct_data contains the values according to the struct's meaning
+                        rxData, rxDataCrc, rxDataTimeout, txData, errData= struct_data
+                        # check for division by zero
+                        if (rxDataCrc + rxDataTimeout) != 0 and (rxData +rxDataCrc + rxDataTimeout) != 0:
+                            #if none of the stats are zero then we are connected
+                            per = (rxDataCrc + rxDataTimeout) / (rxData +rxDataCrc + rxDataTimeout)
+                        else:
+                            per = 0
+                        #conver PER to percent
+                        per = per * 100
+                        #only 2 decimal places
+                        per = round(per, 2)
+                        
+                        self.connStatValues.emit([rxData, rxDataCrc, rxDataTimeout, txData, errData, per])
+
+                        
+                        
                 if self.symbolName is not None:
                     address = self.get_symbol_address_from_elf('/home/eddie/projects/BLE-PyDex/max32655.elf', self.symbolName)
                     if address is not None:
-                        print(address)
+                        #print address in hex
+                        # print("0x{:08x}".format(address))
+                        data = self.read_struct_from_memory(target,address, 20)
+                        # Define the format string for the struct
+                        # The format string corresponds to the data types and order in the struct
+                        format_string = '<IIIIIHHHH'  # Use '<' for little-endian byte order
+
+                        # Unpack the binary data into a tuple
+                        struct_byes = bytes(data)
+                        struct_data = struct.unpack(format_string, struct_byes)
+
+                        # Now, struct_data contains the values according to the struct's meaning
+                        rxData, rxDataCrc, rxDataTimeout, txData, errData= struct_data
+
+                        # Print the values
+                        print(f"rxData: {rxData}")
+                        print(f"rxDataCrc: {rxDataCrc}")
+                        print(f"rxDataTimeout: {rxDataTimeout}")
+                        print(f"txData: {txData}")
+                        print(f"errData: {errData}")
+                        
+                     
+                        print(data)
                     else:
                         self.logger.warning("Symbol '%s' not found in ELF file.", self.symbolName)
                     self.symbolName = None
@@ -178,6 +242,13 @@ class MonitoringThread(QThread):
                                 return symbol['st_value']
         except Exception as e:
             self.logger.warning("Error while getting symbol address from ELF: %s", e)
+        return None
+    def read_struct_from_memory(self, target, address, struct_size):
+        try:
+            data = target.read_memory_block8(address, struct_size)
+            return data
+        except Exception as e:
+            self.logger.warning("Error while reading struct from memory: %s", e)
         return None
     def mass_erase(self):
         pass

@@ -290,7 +290,7 @@ def handle_checkbox_state_change(state, var_name, address, address_dict, main_wi
         address_dict[var_name] = {"address": address, "watched_row_position": watched_row_position, "graphed": False}
 
         # TODO make user chose from a drop down
-        address_dict[var_name]['var_type'] = 'float'
+        address_dict[var_name]['var_type'] = 'None'
 
 
     else:
@@ -637,6 +637,19 @@ def start_ota(main_window):
         return
     main_window.connectedDevice.device_ota_update_start.emit(main_window.connectedDevice , main_window.fileName, main_window.fileLen, main_window.fileCrc32)
 
+def btn_hide_core_regs(main_window):
+    main_window.var_watcher.symbolName = 'bbConnStats'
+
+def enable_connection_stats(main_window):
+    logger = logging.getLogger("PDexLogger")
+    if main_window.ui.connection_stats_enable.isChecked():
+        main_window.var_watcher.getConnStats = True
+        logger.info("Getting connection stats")
+    else:
+        main_window.var_watcher.getConnStats = False
+        logger.info("Not getting connection stats")
+
+        
 def register_button_callbacks(main_window):
     logger = logging.getLogger("PDexLogger")
     try:
@@ -653,7 +666,9 @@ def register_button_callbacks(main_window):
         main_window.var_watcher.core_regs_tuple.connect(main_window.get_core_regs_handler)
         main_window.ui.btn_refreshCoreRegs.clicked.connect(lambda: get_core_regs(main_window))
         # graphing checkbox callbacks
-        main_window.ui.graph_enabled.stateChanged.connect(lambda: disable_graphing(main_window))        
+        main_window.ui.graph_enabled.stateChanged.connect(lambda: disable_graphing(main_window))
+        main_window.ui.btn_hideCoreRegs.clicked.connect(lambda: btn_hide_core_regs(main_window))   
+        main_window.ui.connection_stats_enable.stateChanged.connect(lambda: enable_connection_stats(main_window))  
 
         #register slot/signal for disconnecting from device
         main_window.ui.btn_clear_logs.clicked.connect(lambda: clear_logs(main_window))
