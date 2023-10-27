@@ -644,12 +644,14 @@ def enable_connection_stats(main_window):
     logger = logging.getLogger("PDexLogger")
     if main_window.ui.connection_stats_enable.isChecked():
         main_window.var_watcher.getConnStats = True
+        main_window.ui.stats_frame.show()
         logger.info("Getting connection stats")
     else:
         main_window.var_watcher.getConnStats = False
         logger.info("Not getting connection stats")
+        main_window.ui.stats_frame.hide()
 
-        
+
 def register_button_callbacks(main_window):
     logger = logging.getLogger("PDexLogger")
     try:

@@ -3443,7 +3443,7 @@ border-radius: 5px;
                                  <rect>
                                   <x>0</x>
                                   <y>0</y>
-                                  <width>397</width>
+                                  <width>533</width>
                                   <height>286</height>
                                  </rect>
                                 </property>
@@ -3696,7 +3696,7 @@ QPushButton:pressed{
                  <widget class="QFrame" name="extraRightBox">
                   <property name="minimumSize">
                    <size>
-                    <width>300</width>
+                    <width>0</width>
                     <height>0</height>
                    </size>
                   </property>
@@ -4655,7 +4655,7 @@ border-radius: 5px;	</string>
                                <string/>
                               </property>
                               <property name="checked">
-                               <bool>true</bool>
+                               <bool>false</bool>
                               </property>
                              </widget>
                             </item>

@@ -1845,7 +1845,7 @@ class Ui_MainWindow(object):
         self.insights_scroll_area.setWidgetResizable(True)
         self.scrollAreaWidgetContents_3 = QWidget()
         self.scrollAreaWidgetContents_3.setObjectName(u"scrollAreaWidgetContents_3")
-        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 397, 286))
+        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 533, 286))
         self.insights_scroll_area.setWidget(self.scrollAreaWidgetContents_3)
 
         self.verticalLayout_37.addWidget(self.insights_scroll_area)
@@ -2001,7 +2001,7 @@ class Ui_MainWindow(object):
 
         self.extraRightBox = QFrame(self.content)
         self.extraRightBox.setObjectName(u"extraRightBox")
-        self.extraRightBox.setMinimumSize(QSize(300, 0))
+        self.extraRightBox.setMinimumSize(QSize(0, 0))
         self.extraRightBox.setMaximumSize(QSize(0, 16777215))
         self.extraRightBox.setFrameShape(QFrame.NoFrame)
         self.extraRightBox.setFrameShadow(QFrame.Raised)
@@ -2519,7 +2519,7 @@ class Ui_MainWindow(object):
         self.connection_stats_enable.setMaximumSize(QSize(84, 999999))
         self.connection_stats_enable.setStyleSheet(u"border: 0px solid rgb(52, 59, 72);\n"
 "")
-        self.connection_stats_enable.setChecked(True)
+        self.connection_stats_enable.setChecked(False)
 
         self.horizontalLayout_21.addWidget(self.connection_stats_enable)
 

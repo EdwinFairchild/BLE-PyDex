@@ -205,7 +205,7 @@ class MainWindow(QMainWindow):
         self.watch_vars_chart_container.setLayout(self.watch_vars_chart_layout)
         self.ui.insights_scroll_area.setWidget(self.watch_vars_chart_container)
 
-
+        self.ui.stats_frame.hide()
 
         # SHOW APP
         self.show()
