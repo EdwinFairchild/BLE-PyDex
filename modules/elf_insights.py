@@ -47,8 +47,8 @@ class ExtractGlobalVariablesThread(QThread):
                     # if exit_early is true then exit the thread
                     if self.exit_early:
                         return
-                    # TODO make this a user setting, possibly slider to select sample rate
-                    time.sleep(0.005)
+                    
+                    time.sleep(0.001)
             self.logger.info("Finished extracting global variables")
 
 
@@ -61,6 +61,7 @@ class MonitoringThread(QThread):
     logger = logging.getLogger("PDexLogger")
     getCoreRegs = False
     core_regs_tuple = Signal(zip)
+    symbolName = None
 
     def __init__(self, address_dict):
         super().__init__()
@@ -143,6 +144,14 @@ class MonitoringThread(QThread):
                 if self.getCoreRegs is True:
                     self.print_core_registers(target)
                     self.getCoreRegs = False
+                if self.symbolName is not None:
+                    address = self.get_symbol_address_from_elf('/home/eddie/projects/BLE-PyDex/max32655.elf', self.symbolName)
+                    if address is not None:
+                        print(address)
+                    else:
+                        self.logger.warning("Symbol '%s' not found in ELF file.", self.symbolName)
+                    self.symbolName = None
+                # TODO make this use the slider value
                 time.sleep(0.010)  # Adjust the refresh rate as needed
         except Exception as e:
             self.logger.setLevel(logging.WARNING)
@@ -157,7 +166,19 @@ class MonitoringThread(QThread):
             self.exit_early = False
             monitor_active = False
             
-        
+    def get_symbol_address_from_elf(self, elf_path, symbol_name):
+        try:
+            with open(elf_path, 'rb') as elf_file:
+                elf = ELFFile(elf_file)
+                for section in elf.iter_sections():
+                    if section.name == '.symtab':
+                        symbol_table = section
+                        for symbol in symbol_table.iter_symbols():
+                            if symbol.name == symbol_name:
+                                return symbol['st_value']
+        except Exception as e:
+            self.logger.warning("Error while getting symbol address from ELF: %s", e)
+        return None
     def mass_erase(self):
         pass
 
