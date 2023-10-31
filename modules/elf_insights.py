@@ -65,6 +65,7 @@ class MonitoringThread(QThread):
     symbolName = None
     getConnStats = False
     connStatsAddress = None
+    elfFilePath = None
     #make a signal to update the connection stats as list
     connStatValues = Signal(list)
     def __init__(self, address_dict):
@@ -143,8 +144,8 @@ class MonitoringThread(QThread):
                 for var_name, details in list(addresses.items()):
                     address = details['address']
                     value = target.read32(address)
-                    
-                    self.signal_update_variable.emit(var_name, value)  # Emitting the signal with the variable name and value
+                    if address != 0:
+                        self.signal_update_variable.emit(var_name, value)  # Emitting the signal with the variable name and value
                 if self.getCoreRegs is True:
                     self.print_core_registers(target)
                     self.getCoreRegs = False
@@ -152,7 +153,7 @@ class MonitoringThread(QThread):
                 if self.getConnStats is True:
                     if self.connStatsAddress is None:
                         try:
-                            self.connStatsAddress = self.get_symbol_address_from_elf('/home/eddie/projects/BLE-PyDex/max32655.elf', 'bbConnStats')
+                            self.connStatsAddress = self.get_symbol_address_from_elf(self.elfFilePath, 'bbConnStats')
                         except Exception as e:
                             self.logger.setLevel(logging.WARNING)
                             self.logger.warning("Error while monitoring variables: %s", e)
@@ -185,33 +186,33 @@ class MonitoringThread(QThread):
                         self.connStatValues.emit([rxData, rxDataCrc, rxDataTimeout, txData, errData, per])
 
                         
-                        
-                if self.symbolName is not None:
-                    address = self.get_symbol_address_from_elf('/home/eddie/projects/BLE-PyDex/max32655.elf', self.symbolName)
-                    if address is not None:
-                        #print address in hex
-                        # print("0x{:08x}".format(address))
-                        data = self.read_struct_from_memory(target,address, 20)
-                        # Define the format string for the struct
-                        # The format string corresponds to the data types and order in the struct
-                        format_string = '<IIIIIHHHH'  # Use '<' for little-endian byte order
+                
+                # if self.symbolName is not None:
+                #     address = self.get_symbol_address_from_elf(self.elfFilePath, self.symbolName)
+                #     if address is not None:
+                #         #print address in hex
+                #         # print("0x{:08x}".format(address))
+                #         data = self.read_struct_from_memory(target,address, 20)
+                #         # Define the format string for the struct
+                #         # The format string corresponds to the data types and order in the struct
+                #         format_string = '<IIIIIHHHH'  # Use '<' for little-endian byte order
 
-                        # Unpack the binary data into a tuple
-                        struct_byes = bytes(data)
-                        struct_data = struct.unpack(format_string, struct_byes)
+                #         # Unpack the binary data into a tuple
+                #         struct_byes = bytes(data)
+                #         struct_data = struct.unpack(format_string, struct_byes)
 
-                        # Now, struct_data contains the values according to the struct's meaning
-                        rxData, rxDataCrc, rxDataTimeout, txData, errData= struct_data
+                #         # Now, struct_data contains the values according to the struct's meaning
+                #         rxData, rxDataCrc, rxDataTimeout, txData, errData= struct_data
 
-                        # Print the values
-                        print(f"rxData: {rxData}")
-                        print(f"rxDataCrc: {rxDataCrc}")
-                        print(f"rxDataTimeout: {rxDataTimeout}")
-                        print(f"txData: {txData}")
-                        print(f"errData: {errData}")
+                #         # Print the values
+                #         print(f"rxData: {rxData}")
+                #         print(f"rxDataCrc: {rxDataCrc}")
+                #         print(f"rxDataTimeout: {rxDataTimeout}")
+                #         print(f"txData: {txData}")
+                #         print(f"errData: {errData}")
                         
                      
-                        print(data)
+                #       print(data)
                     else:
                         self.logger.warning("Symbol '%s' not found in ELF file.", self.symbolName)
                     self.symbolName = None

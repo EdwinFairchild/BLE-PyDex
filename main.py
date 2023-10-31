@@ -48,7 +48,7 @@ class MainWindow(QMainWindow):
     axisY = QtCharts.QValueAxis()
     axisX.setRange(0, 10)
     axisY.setRange(-1, 1)
-
+    elfFilePath = None
     
     def __init__(self):
         QMainWindow.__init__(self)
@@ -77,8 +77,6 @@ class MainWindow(QMainWindow):
         self.fileLen = None
         self.fileCrc32 = None
         
-        
-        
         # Initialize logging
         console = logging.getLogger("PDexLogger")
         handler = QLogHandler(self.ui.console)
@@ -98,8 +96,6 @@ class MainWindow(QMainWindow):
         self.connectedDevice.otas_progress_value.connect(
                     lambda value: self.otas_progress_update(value))
           
-
-        
         self.update_rssi_thread = UpdateRSSIGraphThread(self)
         self.update_rssi_thread.dataUpdated.connect(self.update_graph)
         if self.ui.graph_enabled.isChecked():
@@ -812,9 +808,10 @@ class MainWindow(QMainWindow):
                 # Convert or manipulate the value based on its type
                 if var_type == 'float':
                     self.logger.info("Var is float")
-                    value_as_bytes = value.to_bytes(4, 'little')
-                    value = c_float.from_buffer_copy(value_as_bytes).value
-        
+                    if var_name != 'bbConnStats':
+                        value_as_bytes = value.to_bytes(4, 'little')
+                        value = c_float.from_buffer_copy(value_as_bytes).value
+            
                 elif var_type == 'uint32_t':
                     value = int(value)  # Assuming 32-bit unsigned
                 elif var_type == 'uint8_t':
