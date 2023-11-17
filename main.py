@@ -105,11 +105,6 @@ class MainWindow(QMainWindow):
         # Global BLE objects
         self.bleScanner = ble_functions.BLE_DiscoverDevices()
 
-        # Global elf parser object
-        self.elf_parser = ExtractGlobalVariablesThread(None, self.ui.tbl_vars)
-        self.var_watcher = MonitoringThread(self.vars_watched_dict)
-        self.var_watcher.signal_update_variable.connect(self.update_variable_in_table)  # Assuming 'self.update_variable_in_table' is a method that handles the update
-        self.var_watcher.var_monitor_active.connect(self.update_var_monitor_active)
         # USE CUSTOM TITLE BAR | USE AS "False" FOR MAC OR LINUX
         Settings.ENABLE_CUSTOM_TITLE_BAR = False
         # used to store the current popup window when selecting var type
@@ -260,7 +255,7 @@ class MainWindow(QMainWindow):
     
         # SET CUSTOM THEME
         useCustomTheme = True
-        themeFile = "themes/py_dracula_dark.qss"
+        themeFile = "themes/py_dracula_light.qss"
 
         # SET THEME AND HACKS
         if useCustomTheme:
@@ -273,8 +268,7 @@ class MainWindow(QMainWindow):
         self.ui.stackedWidget.setCurrentWidget(self.ui.home)
         self.ui.btn_home.setStyleSheet(UIFunctions.selectMenu(self.ui.btn_home.styleSheet()))
 
-    def highlight_selected_device(self, item):
-        
+    def highlight_selected_device(self, item): 
         selected_device = item.text()
         blue_color = QColor(153, 193, 241)  # Light gray color
         blue_pen = QPen(blue_color)
@@ -907,8 +901,7 @@ class MainWindow(QMainWindow):
         self.stop_graphing()
         self.stop_scanner()
         self.stop_connection()
-        self.stop_elf_parser()
-        self.stop_monitoringThread()
+
 
         event.accept()  # Accept the close event and let the window close
 
@@ -939,19 +932,7 @@ class MainWindow(QMainWindow):
         self.update_rssi_thread.GraphActive = False  # Request the thread to stop
         self.update_rssi_thread.quit()  # Request the thread to stop
         self.update_rssi_thread.wait()  # Wait until the thread has actually stopped
-
-    def stop_elf_parser(self):
-        self.elf_parser.exit_early = True
-        self.elf_parser.quit()
-        self.elf_parser.wait()
     
-    def stop_monitoringThread(self):
-        self.var_watcher.exit_early = True
-        if self.var_watcher.monitor_active is True:
-            while self.var_watcher.exit_early is True:
-                pass
-        self.var_watcher.quit()
-        self.var_watcher.wait()
     def addToLineChart(self):
         self.ui.qtchart_widgetholder.chart().addAxis(self.axisX, Qt.AlignBottom)
         self.ui.qtchart_widgetholder.chart().addAxis(self.axisY, Qt.AlignLeft)
