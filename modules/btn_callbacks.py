@@ -1,6 +1,5 @@
 from main import *
 from modules import ota
-from elftools.elf.elffile import ELFFile
 from PySide6.QtWidgets import QFileDialog
 from PySide6.QtWidgets import QTableWidget, QTableWidgetItem, QCheckBox, QWidget, QHBoxLayout
 from PySide6.QtCore import Qt 
