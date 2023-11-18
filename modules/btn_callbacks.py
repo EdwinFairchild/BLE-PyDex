@@ -14,7 +14,6 @@ def btn_scan(interface):
     if interface.connectedDevice.is_connected == True:
         interface.stop_connection()
 
-
     if interface.bleScanner.is_scanning == False:
         try:
             # clear graph, device list, colors etc. except data logs, user might want to save them
