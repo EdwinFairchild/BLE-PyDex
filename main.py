@@ -39,7 +39,6 @@ class MainWindow(QMainWindow):
     toplevel = None
     child = None
     chars_vbox = QGridLayout()
-    watched_vars_vbox = QGridLayout()
     charCount= 1
     char_dict = {}
     cleanUp = Signal(object)
@@ -105,11 +104,6 @@ class MainWindow(QMainWindow):
         # Global BLE objects
         self.bleScanner = ble_functions.BLE_DiscoverDevices()
 
-        # Global elf parser object
-        self.elf_parser = ExtractGlobalVariablesThread(None, self.ui.tbl_vars)
-        self.var_watcher = MonitoringThread(self.vars_watched_dict)
-        self.var_watcher.signal_update_variable.connect(self.update_variable_in_table)  # Assuming 'self.update_variable_in_table' is a method that handles the update
-        self.var_watcher.var_monitor_active.connect(self.update_var_monitor_active)
         # USE CUSTOM TITLE BAR | USE AS "False" FOR MAC OR LINUX
         Settings.ENABLE_CUSTOM_TITLE_BAR = False
         # used to store the current popup window when selecting var type
@@ -145,8 +139,6 @@ class MainWindow(QMainWindow):
         self.ui.btn_widgets.clicked.connect(self.buttonClick)
         self.ui.btn_gatt_explorer.clicked.connect(self.buttonClick)
         self.ui.btn_save.clicked.connect(self.buttonClick)
-        self.ui.btn_insights.clicked.connect(self.buttonClick)
-
         # Register signal handlers
         self.add_adv_table_item.connect(lambda data :self.add_table_item(data))
         self.connectedDevice.discovered_services.connect(self.discovered_services)
@@ -180,28 +172,6 @@ class MainWindow(QMainWindow):
 
         # register cleanup callback and pass widgets object to it with lambda
         self.cleanUp.connect(lambda: self.clean_up())
-
-        
-        self.ui.scrollArea_2.setLayout(self.chars_vbox)
-        self.ui.scrollArea_2.setVerticalScrollBarPolicy(Qt.ScrollBarAsNeeded)
-        self.ui.scrollArea_2.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
-        self.ui.scrollArea_2.setWidgetResizable(True)
-        self.ui.scrollArea_2.setStyleSheet(self.scroll_area_stylesheet)
-        
-        
-        self.ui.insights_scroll_area.setLayout(self.watched_vars_vbox)
-        self.ui.insights_scroll_area.setVerticalScrollBarPolicy(Qt.ScrollBarAsNeeded)
-        self.ui.insights_scroll_area.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
-        self.ui.insights_scroll_area.setWidgetResizable(True)
-        #self.ui.insights_scroll_area.setStyleSheet(self.scroll_area_stylesheet)
-        
-        # Initialize a container widget for the watched vars chart
-        self.watch_vars_chart_container = QWidget()
-        self.watch_vars_chart_layout = QVBoxLayout()
-        self.watch_vars_chart_container.setLayout(self.watch_vars_chart_layout)
-        self.ui.insights_scroll_area.setWidget(self.watch_vars_chart_container)
-
-        self.ui.stats_frame.hide()
 
         # SHOW APP
         self.show()
@@ -239,11 +209,21 @@ class MainWindow(QMainWindow):
         # Set the background brush of the QChart
         self.ui.qtchart_widgetholder.chart().setBackgroundBrush(background_brush)
         # change grideline colors to rgb(52, 59, 72)
-        self.ui.qtchart_widgetholder.chart().axisX().setGridLineColor(QColor(52, 59, 72))
-        self.ui.qtchart_widgetholder.chart().axisY().setGridLineColor(QColor(52, 59, 72))
+        axes = self.ui.qtchart_widgetholder.chart().axes(Qt.Horizontal)
+        if axes:
+            axes[0].setGridLineColor(QColor(52, 59, 72))
+
+        axes = self.ui.qtchart_widgetholder.chart().axes(Qt.Vertical)
+        if axes:
+            axes[0].setGridLineColor(QColor(52, 59, 72))
         # change axis label colors to rgb(255, 255, 255)
-        self.ui.qtchart_widgetholder.chart().axisX().setLabelsColor(QColor(52, 59, 72))
-        self.ui.qtchart_widgetholder.chart().axisY().setLabelsColor(QColor(52, 59, 72))
+        axes_x = self.ui.qtchart_widgetholder.chart().axes(Qt.Horizontal)
+        if axes_x:
+            axes_x[0].setLabelsColor(QColor(52, 59, 72))
+
+        axes_y = self.ui.qtchart_widgetholder.chart().axes(Qt.Vertical)
+        if axes_y:
+            axes_y[0].setLabelsColor(QColor(52, 59, 72))
         # hide legend
         self.ui.qtchart_widgetholder.chart().legend().hide()
         # set chart title
@@ -273,8 +253,7 @@ class MainWindow(QMainWindow):
         self.ui.stackedWidget.setCurrentWidget(self.ui.home)
         self.ui.btn_home.setStyleSheet(UIFunctions.selectMenu(self.ui.btn_home.styleSheet()))
 
-    def highlight_selected_device(self, item):
-        
+    def highlight_selected_device(self, item): 
         selected_device = item.text()
         blue_color = QColor(153, 193, 241)  # Light gray color
         blue_pen = QPen(blue_color)
@@ -307,6 +286,7 @@ class MainWindow(QMainWindow):
 
         # Trigger a redraw 
         self.ui.qtchart_widgetholder.chart().update()
+    
     def update_graph(self,device_name,rssi_value,current_time):
         MAX_DEVICES = 50  # Maximum number of devices to display
 
@@ -328,7 +308,7 @@ class MainWindow(QMainWindow):
             device_series = self.device_data_curves[device_name]
 
             # Convert QLineSeries to numpy arrays for easy manipulation
-            old_data = [(point.x(), point.y()) for point in device_series.pointsVector()]
+            old_data = [(point.x(), point.y()) for point in device_series.points()]
             device_data_x, device_data_y = np.array(old_data).T
 
             # Append new data and update QLineSeries
@@ -370,8 +350,7 @@ class MainWindow(QMainWindow):
             self.device_data_curves[device_name] = new_device_series
             # Save the original color in the new dictionary
             self.device_original_colors[device_name] = light_gray
-        
-   
+         
     def stop_rssi_thread(self):
             # the RSSI thread
         if self.update_rssi_thread.GraphActive == True:    
@@ -429,7 +408,6 @@ class MainWindow(QMainWindow):
     def logToTextbox(self, data):
         self.ui.console.append(data)
 
-    
     def discovered_services(self,data):
         
         PARENT = 0
@@ -495,7 +473,16 @@ class MainWindow(QMainWindow):
         if permissions is not None:
             # send full item text to add char widget because it needs the name and uuid
             self.add_char_widget(item, permissions)
-    
+    def mousePressEvent(self, event):
+       # SET DRAG POS WINDOW
+
+        pass
+           #print('Mouse click: RIGHT CLICK')
+    def mouseMoveEvent(self, event):
+        # Get the mouse cursor position in scene coordinates
+        pass
+
+
     def extract_uuid_name(self, data):
         char_uuid = self.extract_uuid_hex(data)
         found_match = False
@@ -536,6 +523,7 @@ class MainWindow(QMainWindow):
         # extract the UUID from the string which is this  "00001801-0000-1000-8000-00805f9b34fb"
         raw_uuid = data.split("(")[0].strip()
         return raw_uuid
+    
     def extract_handle(self, data):
         # data[0] looks like this  "00001801-0000-1000-8000-00805f9b34fb (Handle: 16): Generic Attribute Profile" 
         # extract the handle value, not handle text, from the string which is this  "16"
@@ -545,14 +533,12 @@ class MainWindow(QMainWindow):
     def gatt_tree_view_clicked(self,tree_item, column):
         # when user clicks on a tree item, check if it exists in char_dict
         # if it does exist then scroll to that widget
-#        uuid = self.extract_uuid_hex(tree_item.text(column))   
+        #  uuid = self.extract_uuid_hex(tree_item.text(column))   
         for key, value in self.char_dict.items():
             # check if text  exist in char_name or key itself
             if tree_item.text(column) in value['char name'] or tree_item.text(column) in key:
                 self.ui.scrollArea_2.ensureWidgetVisible(self.char_dict[key]["widgetlocation"])
-           
-        
-        
+                       
     def add_char_widget(self, char_uuid, permissions):
         """
         Adds a new widget representing a Bluetooth Low Energy (BLE) characteristic to the main scroll area. 
@@ -708,6 +694,7 @@ class MainWindow(QMainWindow):
     def char_read_btn_handler(self, UUID):
         # get this widget from char_dict
         self.connectedDevice.device_char_read.emit(UUID)
+    
     def notify_toggle_handler(self, UUID, state):
         self.connectedDevice.device_char_notify.emit(UUID,state)
 
@@ -779,98 +766,10 @@ class MainWindow(QMainWindow):
     def resizeEvent(self, event):
         # Update Size Grips
         UIFunctions.resize_grips(self)
-
-    def mousePressEvent(self, event):
-        # SET DRAG POS WINDOW
-        self.dragPos = event.globalPosition().toPoint()
-        # PRINT MOUSE EVENTS
-        if event.buttons() == Qt.LeftButton:
-            pass
-            #print('Mouse click: LEFT CLICK')
-        if event.buttons() == Qt.RightButton:
-            pass
-            #print('Mouse click: RIGHT CLICK')
-    def update_var_monitor_active(self, state):
-        if state == False:
-            # change button text to start
-            self.ui.btn_monitor.setText("Start")
-        else:
-            # change button text to stop
-            self.ui.btn_monitor.setText("Stop")
-
-    def update_variable_in_table(self, var_name, value):
-         # Check if the variable name is in the dictionary
-        if var_name in self.vars_watched_dict:
-            try:
-                # Get the row index from the dictionary
-                row_index = self.vars_watched_dict[var_name]["watched_row_position"]
-                var_type = self.vars_watched_dict[var_name]["var_type"]
-                # Convert or manipulate the value based on its type
-                if var_type == 'float':
-                    self.logger.info("Var is float")
-                    if var_name != 'bbConnStats':
-                        value_as_bytes = value.to_bytes(4, 'little')
-                        value = c_float.from_buffer_copy(value_as_bytes).value
-            
-                elif var_type == 'uint32_t':
-                    value = int(value)  # Assuming 32-bit unsigned
-                elif var_type == 'uint8_t':
-                    value = int(value)  # Assuming 8-bit unsigned
-
-                # Create a new item with the updated value
-                value_item = QTableWidgetItem(str(value))
-               
-                # Update the value in column 1 (0-indexed)
-                self.ui.tbl_vars_watched.setItem(row_index, 1, value_item)
-                
-                # Update the series if it's being graphed
-                if self.vars_watched_dict[var_name].get('graphed', False):
-                    self.update_watched_var_graph(var_name, value)
-            except Exception as e:
-                self.logger.error(f"Error updating variable in table: {str(e)}")
-    def update_watched_var_graph(self, var_name, value):
-         # Time window to display (e.g., last 10 seconds)
-         # TODO make this a user setting like a slider
-        MAX_POINTS = 500  # Set a limit to the maximum number of points
-        time_window = 3.0  # or however long you want the window to be
-        series = self.vars_watched_dict[var_name]['series']
-        chart = self.vars_watched_dict[var_name]['chart']
-        axisX = self.vars_watched_dict[var_name]['axisX']
-        start_time = self.vars_watched_dict[var_name]['start_time']
-        
-
-        # Assuming you're just appending new values, find the x value for the new point
-        if series.count() > 0:
-            # Calculate the elapsed time
-            elapsed_time = time.time() - start_time
-
-            # Append the new point to the series
-            series.append(elapsed_time, value)
-            # Remove the oldest point if series size exceeds the limit
-            if series.count() > MAX_POINTS:
-                series.remove(0)  # Assuming the oldest point is at index 0
-        
-            
-            # Update the axis range to create a scrolling effect
-            if elapsed_time > time_window:
-                axisX.setRange(elapsed_time - time_window, elapsed_time)
-            else:
-                axisX.setRange(0, time_window)
-        else:
-            # This is the first point, so just append it
-            series.append(0, value)
-
-    def get_core_regs_handler(self, regs):
-        # Clear the table
-        self.ui.tbl_core_regs.setRowCount(0)
-        for reg, value in regs:
-            row_position = self.ui.tbl_core_regs.rowCount()
-            self.ui.tbl_core_regs.insertRow(row_position)
-            self.ui.tbl_core_regs.setItem(row_position, 0, QTableWidgetItem(reg))
-            self.ui.tbl_core_regs.setItem(row_position, 1, QTableWidgetItem(hex(value)))
-    
+ 
     def otas_progress_update(self,value):    
         self.ui.otasProgress.setValue(value)
+   
     def ota_reset(self):
         self.fileName = None
         self.fileLen = None
@@ -907,8 +806,7 @@ class MainWindow(QMainWindow):
         self.stop_graphing()
         self.stop_scanner()
         self.stop_connection()
-        self.stop_elf_parser()
-        self.stop_monitoringThread()
+
 
         event.accept()  # Accept the close event and let the window close
 
@@ -939,29 +837,6 @@ class MainWindow(QMainWindow):
         self.update_rssi_thread.GraphActive = False  # Request the thread to stop
         self.update_rssi_thread.quit()  # Request the thread to stop
         self.update_rssi_thread.wait()  # Wait until the thread has actually stopped
-
-    def stop_elf_parser(self):
-        self.elf_parser.exit_early = True
-        self.elf_parser.quit()
-        self.elf_parser.wait()
-    
-    def stop_monitoringThread(self):
-        self.var_watcher.exit_early = True
-        if self.var_watcher.monitor_active is True:
-            while self.var_watcher.exit_early is True:
-                pass
-        self.var_watcher.quit()
-        self.var_watcher.wait()
-    def addToLineChart(self):
-        self.ui.qtchart_widgetholder.chart().addAxis(self.axisX, Qt.AlignBottom)
-        self.ui.qtchart_widgetholder.chart().addAxis(self.axisY, Qt.AlignLeft)
-        self.line_series.attachAxis(self.axisX)
-        self.line_series.attachAxis(self.axisY)
-        # Create a QTimer instance and connect it to the update function
-        self.timer = QTimer(self)
-        self.timer.timeout.connect(self.update_graph)
-        self.timer.start(25)  # Timer triggers every 0.1 seconds (100 milliseconds)
-
 
 
 if __name__ == "__main__":

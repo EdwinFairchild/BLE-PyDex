@@ -100,7 +100,6 @@ def init_signals_and_slots(interface):
     interface.connectedDevice.connection_established.connect(lambda: interface.stacked_widget_show_connected())
 
     #singal/slot for connection stats
-    interface.var_watcher.connStatValues.connect(lambda stats: update_connection_stats(interface, stats))
 
 
 
