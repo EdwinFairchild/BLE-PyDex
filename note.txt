@@ -27,3 +27,5 @@ QPushButton:pressed{
 		color: rgb(28, 28, 28);
 	background-color: rgb(110,140,255);
 }
+
+TODO : use stylesheet for switching theme colors on the fly
