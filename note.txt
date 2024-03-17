@@ -29,4 +29,3 @@ QPushButton:pressed{
 }
 
 TODO : use stylesheet for switching theme colors on the fly
-
