@@ -65,7 +65,7 @@ When a connection with a device is established PyDex will switch to Gatt Explore
 https://github.com/EdwinFairchild/BLE-PyDex/assets/62710807/8ec57651-135a-46a5-8fa7-497cb985c875
 # Over the air update
 There is not standar Bluetooth way to perform over the air updates. The example show here is very specific 
-to MAX32665/666//665/690 BLE microcontrollers. This will undoubtably not succeed with any other OTA out there.
+to MAX32665/666//665/690 BLE microcontrollers soon to support STM32WB series. This will undoubtably not succeed with any other OTA out there.
 The intent here is to show that it is possible and one would have to port their application specific BLE OTA
 into PyDex. How to guide coming eventaully....
 
